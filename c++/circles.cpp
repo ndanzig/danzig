@@ -1,0 +1,72 @@
+//May 2010  n. Danzig
+
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+
+    class circle
+    {
+    protected:
+      double radius;
+      float x;
+      float y;
+    public:
+      static const double pi;
+
+      circle(float x, float y, double radius);
+      double getArea(){return (pi*radius*radius);}
+      double getCirc() {return (2*pi*radius);}
+      virtual double getSurfaceArea() {return 0;}
+    };
+
+circle::circle(float x, float y, double radius):x(x),y(y),radius(radius)
+{
+  /* this->x = x;
+  this->y = y;
+  this->radius = radius;               */
+}
+
+class sphere: public circle
+{
+protected:
+  float z;
+public:
+  sphere(float x, float y, float z, double radius);
+  double getSurfaceArea() {return (4*pi*radius*radius);}
+  double getVolume() {return ((4/3)*pi*radius*radius*radius);}
+};
+
+
+
+sphere::sphere(float x, float y, float z, double radius) : circle(x,y,radius)
+{
+  this->z = z;
+}
+
+class cylinder:public sphere
+{
+  double height;
+public:
+  cylinder(float x, float y, float z, double radius, double height);
+  double getVolume() {return (getArea()*height);}
+  double getSurfaceArea() { return (getCirc()*(radius + height));}
+};
+
+cylinder::cylinder(float x, float y, float z, double radius, double height) : sphere(x,y,z,radius)
+{
+  this->height = height;
+}
+
+const double circle::pi = 3.14159;
+        
+int main(int argc, char *argv[])
+{
+        
+  circle *ptr;
+  ptr = new cylinder(1, 2, 3, 4, 5);
+  cout<<"surface area of cylinder is "<<ptr->getSurfaceArea()<<endl;
+  ptr = new circle(1, 2, 3);
+  cout<<"surface area of circle is "<<ptr->getSurfaceArea()<<endl;
+  cout<<"Area of circle is "<<ptr->getArea()<<endl;
+}

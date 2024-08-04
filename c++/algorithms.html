@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+<head>
+<TITLE>C++ Programming - Introduction to Algorithms</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Introduction to Computing Algorithms</H3></CENTER>
+
+<blockquote>
+The American Heritage Science Dictionary - <b>algorithm</b> : <i>   
+A finite set of unambiguous instructions performed in a prescribed sequence
+ to achieve a goal, especially a mathematical rule or procedure used to compute
+ a desired result. Algorithms are the basis for most computer programming.
+</i>
+</blockquote>
+
+<p>
+In this chapter we will introduce some basic computing algorthms.
+The most basic problems involve searching for things in arrays and sorting arrays.
+This field of inquiry is very much alive.  For example, this is the main
+work that Google  and Wikipedia do.  Coming up with more efficient methods of
+searching and sorting arrays can mean real money in the business world.
+This chapter will focus on some basic searching and sorting algorithms. 
+<h3>Linear Search</h3>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+
+Linear searching is a way to find if a certain element (number , string , etc. ) is in 
+a specified array.  The array can be in any order, or be completely
+jumbled and this search will find the element if it is there. If the element is found we
+ can return the <b> index</b> 
+where the element is located in the array.  If the element is not found we can return -1.  We can
+assume no array will ever have an negative number as an index. (indexes are always positive
+integers.)
+Our approach will be to check every element in the array to see if it is
+what we are looking for.  We will use a loop to cycle through the array.
+Here goes:
+<xmp>
+int findElement(int yourArray[], int tobefound, int length)// method to find index of specified element
+{
+     int notfound = -1;
+     int counter;
+     for( counter = 0; counter < length; counter++ )
+          {
+	  if(tobefound == yourArray[counter])//check if we found the number we are looking for
+	       { return counter;  }
+	  }//end for loop
+     //if we got this far we must not have found the number
+     return notfound; 
+}
+
+</xmp>
+
+
+<h3>Binary Search</h3>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+If we have a sorted array we do not need to check every element to find out if the
+array contains the element we are looking for.  We can try to narrow down the 
+search, by  making the area of the array we check smaller each time.
+If we can divide the array in half each time we search it, we 
+have improved the speed of our search exponentially.
+
+<p> When trying to guess a number you might ask, "Is it smaller than 5000 ?"
+If you receive a positive response you might ask, "Is it larger than 0 ?"
+If you again receive a positive response, what would you ask?
+You should ask, "Is it larger than 2500 ?".
+What ever response you get, you will have reduced the possible numbers by half.
+If you received a negative response you should ask, "Is it larger than 1250 ?".
+By continuing in this way you reduce the possiblities by half each time.
+You will quickly close-in on the correct number.
+Since you are dividing the possible numbers by 2 each time, this is called
+a <b>binary search</b>.  Since you are cutting the problem down in size each time,
+this is also a type of <a href="http://www.csc.liv.ac.uk/~ped/teachadmin/algor/d_and_c.html" > divide and conquer </a> algorithm.
+
+<p>To perform a binary search on  an array, the array must be is some order.
+For example the array must start at the smallest value and end with the 
+largest value.  We also need to know the number of elements in the array.
+For example, if the array was declared of size 1000, but only 500 elements
+actually have values in them, then we need to know the number of elements, 500.
+Once we have these two pieces of information, 
+can make our first guess as to where the element we are looking for is.
+We will guess that our element is in the middle (at index 250) of the array.  
+If we are right we are done.  And we simply return the value of the index of the element
+(250). But if it is not there, then the element in the middle of the array
+is either larger or smaller than the element we are looking for.
+If it is larger than the element we are looking for, then we know 
+our desired element is in the lower index region of the array (i.e. from
+0 to 249).  If on the other hand  it is smaller than the element we are looking for,
+then we know that the element we seek is in hte higher index region of the 
+array (i.e. from 251 to 499).
+
+<p>Assuming that the middle element is smaller than the number we are looking for,
+we will seek our number in hte lower region.  We can now repeat this process by selecting the
+middle of the new lower region. I.e., we will guess that our number
+is in location 125.  We can then repeat the above process until either we find our element or
+the region we are searching has zero elements in it.
+
+<p>Implementing this algorithm using loops (iteration) is not simple and takes some thought
+to solve.
+
+
+A function to do a binary search on a given array can be written recursively.
+The base case would be an array of size 1.  
+In such a case, if the one number in the array is the number you are looking
+for, send back its index, otherwise send back <i>null</i>.
+All arrays larger than 1
+can be solved by passing one half of the array into the function recursively a second time, 
+and so on.
+The choice of which half to send back into the function 
+will be made by checking if the number to-be-found is larger than the 
+element in the <b>middle</b> of the array.
+If it is larger, then send the upper half of the array,
+if it is not larger, then, if it is not equal to the middle value,
+send the lower part of the array back into the function.
+If it is equal, simple return the middle index.
+
+--->
+
+<p>
+
+<H3>Sorting Algorithms</H3>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+If we have an array of numbers in no particular order, we might want to 
+sort them into ascending or descending order.  This is called sorting.
+The most basic sorting algorithm is called <b>Select Sort</b>.  The principle
+of the Select Sort is to traverse the array and find the index
+of the largest value.  Then place the largest value at the end of the array.
+The array is repeatedly traversed, each time stopping one index sooner.
+Each traversal sorts one more number into its final position.
+The array will need to be traversed <b>n</b> times where  <b>n</b> is the number of 
+elements in the array.
+Here is one version of Select Sort:
+
+<pre>
+
+void swap( short sorting_array[], short i, short j );
+void sortArray(short vect[], short len);
+
+int main()
+{
+
+short array[]={4,6,7,2,67,8,2,44,1,2,7};
+ int i;
+ for(i=0; i &lt; 11; i++)
+   cout &lt;&lt; array[i] &lt;&lt; ", ";
+ cout &lt;&lt;  endl;
+
+ sortArray(array, 11);
+
+ for(i=0; i &lt; 11; i++)
+   cout &lt;&lt; array[i] &lt;&lt; ", ";
+ cout &lt;&lt;  endl;
+
+}
+
+void sortArray(short vect[], short len)
+{
+  short biggest,i,j;
+  for(j=0; j &lt; len ; j++)
+    {
+      biggest=0; //we will assume the biggest value is at array index 0
+      for(i=0; i &lt; len-j; i++) /*each round one largest number is placed in 
+			     it correct position at end
+			     therefore stop at len-j*/
+        if(vect[i] &gt;  vect[biggest] )
+	  biggest=i;
+      swap(vect,biggest,i-1);
+    }
+}
+
+
+void swap( short sorting_array[], short i, short j )
+{
+  short hold = sorting_array[i];
+  sorting_array[i] = sorting_array[j];
+  sorting_array[j] = hold;
+  return;
+}
+</pre>
+
+
+
+<b>Bubble Sort</b> is another basic sorting algorithm. It gets its name from it 
+property of bubbling up larger numbers to the end of the array.  The basic
+idea is to compare each number to its neighbor, the larger of the two being 
+placed to the index of the higher position (or lower if a descending
+sort is desired). Thus, each traversal may move several 
+element in the array.  And these movements will
+improve the position of these elements.  The is repeated <b> n <sup>2</sup></b> times.
+In this sort algorithm, if the elements are only slightly
+out of order, the array may get sorted sooner since in one
+traversal many elements get adjusted.
+
+Here is a code example :
+<p>
+
+<pre>
+#define SIZE 10
+void main( )
+ {
+   int my_array[SIZE] = { 2, 6, 4, 8, 10, 12, 89, 68, 45, 37 };
+   bool there_was_a_swap;
+
+   showArray( my_array, SIZE );
+   for ( int c=0; c &lt;  SIZE ; c++ )
+      {
+      there_was_a_swap = false;
+      for ( int element = 0 ; element &lt;  SIZE-1 ; element++ )
+         {
+         if ( my_array[element] &gt;  my_array[element + 1] )
+             {  
+             swap( my_array, element, element + 1 );
+             there_was_a_swap = true;
+             }
+         }//end inner for loop
+
+      if ( there_was_a_swap == false )
+          {
+          break;
+          }
+      }//end outer for loop, end sorting algorithm
+   showArray( my_array,SIZE );
+     }//end main
+
+ void showArray( int array[], int size )
+ {
+  for ( int c = 0 ; c &lt;  size ; c++ )
+  {
+   cout &lt;&lt; array[c] &lt;&lt; ", " ;
+  }
+   cout&lt;&lt;endl ;
+  return;
+ }
+ 
+void swap( int sorting_array[], int i, int j )
+ {
+  int hold = sorting_array[i];
+  sorting_array[i] = sorting_array[j];
+  sorting_array[j] = hold;
+  return;
+ }
+</pre>
+
+<p>
+This is called bubble sort because the correct values bubble up to the surface.
+After each traversal, not only is the largest number placed at the end,
+but other numbers along the way have been adjusted so as to improve their location
+in the array.  In some circumstances this may cause the array to
+be in correct order sooner. In general,
+we must traverse n numbers n times, or n <sup>2</sup>  times. 
+But if the array becomes sorted sooner we can stop earlier.  We test this possibility by 
+checking if we have traversed the array without making any swaps.  If we made
+no swaps then we know the array is sorted already.
+We can also improve the efficiency a bit by noticing that we do not need to check the 
+last element which was put into its correct place. In my version, I check all the values
+every traversal.  You can try to improve the above program by having it
+check only the as yet unsorted elements.
+
+<p><b>Insertion Sort</b>
+  <xmp>
+    void  insertionSort(char array[], int size){
+    int i,j, temp;
+    for(i=1; i< size; i++){
+		for(j=i; j > 0; j--){
+                     if (array[j]<array[j-1])
+		     {
+		        temp = array[j];
+		        array[j]= array[j-1];
+		        array[j-1]=temp;
+		     }
+		 }//end inner for
+	}//end outer for
+    }	     
+
+  
+  </xmp>
+
+<h3>Exercises</h3>
+<ol>
+<li>Write an improved version of Bubble Sort which does not check that part of
+the array which is already sorted.
+<li>Write Select Sort in such a way that it sorts descending instead of ascending.
+<li>Write a Select Sort which takes a 2 dimensional array and sorts each row
+in ascending order.  You do not need to sort the rows among themselves.
+<li>Write a Select Sort which takes a 2 dimensional array and sorts each row
+in ascending order.  You should then  sort the rows among themselves.
+<li>Write Binary Search for an array of floats.
+<li>Write a select sort which can sort an array of strings.  Note that
+you will be using a double pointer of type char. You may find it
+convenient to use the stringCompare function you wrote in a previous exercise.
+<li>Write  a program which can sort either ascendingly or descendingly using either 
+bubble sort or select sort.  The program should have a function bubble sort and a function 
+select sort.  It should also have functions descending and ascending which accept two ints as parameters 
+and return a bool value depending on which is larger.  A fifth function should be passed pointers to the
+appropriate functions depending on what the user wants to do.
+
+</ol>
+
+
+<p>
+&copy Nachum Danzig December 2003 - January 2007
+
+</body>
+</html>
+

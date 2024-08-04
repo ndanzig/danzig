@@ -1,0 +1,364 @@
+
+
+
+
+Chapter 9
+1.const pointers
+2. pointers and arrays
+3. void pointers
+4. static variables
+5. using sizeof
+6. pointers to functions
+7. dynamic memory allocation
+8. pointers to pointers
+9. passing paramets to the main() function using argv etc.
+10. linked lists
+11. function overloading
+12. passing a 2 dimentional array as a parameter
+13. functions with default values
+14. functions that return references
+15. functions with an undetermined number of parameters
+16. common errors when passing parameters
+17. enumeration type
+18. preprocessor directives like define and macros
+
+
+
+1. const pointers
+A. Fixing the size of the area pointed to.
+ex.
+const char* string = "abcdefg";
+once this has been so defined, the following command is illegal:
+string[0] = 'b';
+and also its equivalent:
+*string = 'b';
+this is because string is permanently assigned the value abcdefg.
+it is possible to change the value of the pointer (pointer manipulation):
+string++;
+This tool is useful when we want to not change a the values 
+of a specific area.
+
+B. Fixing the value of the pointer.
+ex.
+char* const string = "abcdef";
+here "string" always point to the beginning of the array, 'a' in this case.
+once this has been so defined, the following command is _legal_:
+string[0] = 'b';
+and also its equivalent is legal:
+*string = 'b';
+But now it is illegal to change the pointer's value:
+string++;
+This is used when we want a pointer to always point at the same memory spot.
+i.e. we do not want to change the value of the pointer.
+
+C. Fixing the value of the pointer and of the area pointed to.
+const char* const string = "abcdefg";
+once this has been so defined, the following command is illegal:
+string[0] = 'b';
+and also its equivalent:
+*string = 'b';
+it is also illegal to change the pointer's value:
+string++;
+This is used, obviously, when we do not want to change the value of the
+pointer nor change the values of the specific area pointed to.
+ 
+2. pointers and arrays
+when we define an array, the name of the array is a const pointer, as we 
+have discussed(B.).  In the following example, compare and contrast the address
+of an array, and the address of a pointer.  (in the example, the pointer
+points also to the same array!)
+#include <iostream.h>
+main()
+{
+int v[10];
+cout <<endl;
+cout << "v="<<v<<endl;
+cout << "&v[0]="<<&v[0]<<endl;
+
+cout << "&v="<<&v<<endl;
+cout << endl<< "now with a real pointer"<<endl;
+int *t = v;
+cout << "t="<<t<<endl;
+cout << "&t[0]="<<&t[0]<<endl;
+cout <<"&t="<<&t;
+}
+output:
+v=0x23b30fe8
+&v[0]=0x23b30fe8
+&v=0x23b30fe8
+now with a real pointer
+t=0x23b30fe8
+&t[0]=0x23b30fe8
+&t=23b30ffc
+
+main points of the program: 
+cout << "v="<<v<<endl; // address of name of array
+cout << "&v[0]="<<&v[0]<<endl;//address of 1st element of array
+cout << "&v="<<&v<<endl;// and the address of the whole array
+// are all equivalent.
+
+cout << "t="<<t<<endl;// pointer t contains the address of the first 
+// element of the array
+cout << "&t[0]="<<&t[0]<<endl;//  address of the first element of the array is
+//equivalent to what is in the pointer variable t
+cout <<"&t="<<&t;// unlike cout << "&v="<<&v<<endl;, here pointer t has its 
+//own address, which is not a const, and therefore can be changed.
+
+Since the name of the array is a const pointer, we can't change the value of
+the name of the array, therefore a command like v++; is illegal.  Despite
+this fact, that the name of the array is a const pointer, when we pass an
+array as a parameter to a function, then the formal parameter turns into
+a regular pointer.
+
+ex.
+#include <iostream.h>
+int average(int a[], int index)//equiv. to int *a
+{
+for (int sum =0, i=0; i<index;sum+=*a++, i++) //a++ is illegal in main()
+//where we'd have to do its equiv.  sum+=a[i++]
+
+return (sum/index)
+} 
+main()
+{
+int Ar[5]={1,2,3,4,5};
+cout << "The average is:  "<< average(Ar,5);
+}
+points of note:
+the formal parameter(i.e. the parameter in the function declaration)
+a[] is a pointer which contains the address of the array Ar.
+
+the action *a++ is legal since the variable a is a pointer.  However, in main
+we could not do Ar++ since Ar is the name of an array which therefore acts
+as a const pointer.
+
+another example.
+#include <iostream.h>
+main()
+{
+int Ar[3]={1,2,3}, *ArPtr;
+ArPtr=Ar;//ArPtr gets the address of the first element of array Ar 
+ArPtr++;//now ArPtr has the  address of the second element of array Ar
+cout << "Ar[0] is: "<<Ar[0]<<endl;//Ar[0] still has the first element of array
+cout << "ArPtr[0] is: "<<ArPtr[0]<<endl;//ArPtr[0] has second element of array
+}
+
+The outputAr[0] is: 1
+ArPtr[0] is: 2
+------------------------------------------------------
+3. VOID pointer
+when declaring any pointer, C requires one to define what type object it is 
+meant to point to.  In certain circumstances there is a need too declare a 
+pointer when it is not ahead of time what type object it will point to.
+In order to implement this the void pointer was created.
+
+
+
+--------------------------------------------------
+6. pointer to a function
+When a function is defined it is possible to receive the address of the
+function.  this technique is useful when we want to pass a function as 
+a parameter to another function. 
+
+in order to call any function using a pointer one must create initially phase
+a pointer to a function.  The following example demonstrates how to call
+a function by means of a pointer. 
+
+#include <iostream.h>
+void ErrorMsg (char * msg)
+{
+cout << msg << endl;
+}
+void (*funptr)(char*); // pointer to function
+main()
+{
+funptr=&ErrorMsg;// funptr points to Error
+(*funptr)("Error"); //call ErrorMsg through funptr
+funptr=ErrorMsg; // equiv. to :  funptr=&ErrorMsg
+funptr("Error"); //equiv. to :  (*funptr)("Error")
+}
+key points:
+1.here we created a pointer to to a function with the name funptr.
+void (*funptr)(char*);
+this pointer can only point at a function which returns void and
+takes-in one parameter of type char*.
+
+2. in this line
+funptr=&ErrorMsg;
+the pointer funptr takes-in the address of the function ErrorMsg.
+
+3. this line: (*funptr)("Error"); is a call to the function ErrorMsg
+by means of the pointer funptr.
+
+4. the command funptr=ErrorMsg is euiv. to funptr=&ErrorMsg;
+5. calling the function by funptr("Error"); is the same as (*funptr)("Error").
+
+ex.
+char f1(char*);
+int  f2(char*);
+char f3(float);
+char (*funptr)(char*);
+
+void f()
+{
+funptr=&f1;//ok
+funptr=&f2;//error, bad return type
+funptr=&f3;//error, bad argument type
+
+ (*funptr)("ErrorMessage");//ok
+(*funptr)(100);// error,bad argument type
+}
+
+It is possible to create an array of pointers to functions in the 
+following way:
+ //Assigns the symbol FP to the function type definition
+typedef void (*FP)();
+FP edit[]={&Undo, &Redo, &Cut, &Copy};
+FP *Button = edit;
+(*Button[2])();// call cut function
+
+line 1:  Declare a new type "FP".  Using this type we can declare 
+variables which point to a function that returns void but does not 
+receive any parameters.
+
+line 2: the variable edit is the name of an array of pointers to
+functions of the type FP.  The first element of the array will contain
+a pointer to the function Undo, the second element will contain a pointer
+to the function Redo, etc.
+
+line 3: Creates a function pointer with the name Button, which will get
+the address of the array edit.
+
+line 4: call to the function Cut by means of the third pointer in the 
+array edit.
+
+7. Dynamic Memory allocation
+Until till now we dealt with two types of variables: static objects
+and automatic objects.  The life span and the scope of recognition of static 
+objects (variables) is the same as the lifespan of the program.  The area of
+memory allocated to the object is in the data segment.
+
+The life span and the scope of recognition of automatic objects starts at 
+the time of its declaration and ends with the closure of the block in
+which it is declared.  The area of memory allocated to the object is in the 
+stack segment.
+
+There is a third type of variable which we can declare.  These exist from 
+when it was defined until it is "freed".  The area of memory allocated to the
+object is in the heap.
+
+We declare this type of object with the command "new".  New allocates an
+area of memory for the object.  "Delete" frees the memory which was allocated
+for the object.
+
+Suppose we have a pointer
+type *pointer;
+
+At this stage we have a variable capable of pointing to an object of type
+"type". (But, the pointer still has no value).
+
+Following is format of operator "new":
+
+pointer = new pointer_type;
+
+This does two things: allocate space in  memory (using the operating system)
+and , giving a value (the address that was assigned) to the variable pointer.
+
+Following is format of operator "delete":
+
+delete pointer;
+
+We can order space for an array of N elements of typy "type":
+type *variable-name=new type [N];
+
+the pointer var will point to this array.
+
+
+---------------------------------------------------------
+10. Linked Lists
+A Linked Lists is a group of objects linked together such that the head of 
+the list points to the first object in the list, and within the first object
+there is a pointer to the second object.  Within the second object is a pointer
+to the third object, and so on. Until we reach the last object, which points
+to NULL. Adding data (objects) to the list is done via dynamic memory 
+allocation.
+
+Example:
+In the example on page 13 one can see the basic techniques of linked lists.
+(It is not neccessarilly an elegant or useful program.)
+#include <iostream.h>
+struct car	//declare a struct with 2 fields: model and 
+		// a pointer to a struct
+{
+	char model[10];
+	car *next;
+
+};
+void main()
+{
+car *head = NULL;	//define 3 pointers to our struct and assigning
+car *temp=NULL, *last=NULL;//them initial values.
+head = new car;// requesting space for a variable "head"
+cout<<"model: "<<endl;
+cin>>head -> model;//inputting datum for head's model.
+//since head is a pointer to a struct, the reference to its fields is done 
+//via "->".  this is the standard way to access fields.
+head -> next = NULL;//zeroing out the pointer field
+temp = new car;
+cout <<"model: "<<endl;
+cin>> (*temp).model; //equiv. to  cin>>temp -> model; 
+(*temp).next = NULL;
+head -> next = temp;//linking two structs.  the pointer field of head gets
+			//the value of the pointer temp.
+temp -> next = new(car);//request a new struct in the middle of linking.
+		// this request is done for the field "next" of the previous
+		//element in the list.
+cout <<"model: "<<endl;
+cin >> temp -> next ->model;//it is possible to access a field which is pointed
+// to by another field. If we would have put line 23 before this line, we
+// could have avoided this clumsiness.  
+temp ->next -> next = NULL;
+/*line 23*/last = temp -> next;
+cout << (*head).model <<endl;//printing the data
+cout << temp -> model <<endl; 
+temp = temp -> next;// we advance temp, this advances us along our linked list
+cout << temp -> model <<endl;//and we print out the next element.
+}
+---------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

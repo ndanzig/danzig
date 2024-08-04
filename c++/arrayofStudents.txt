@@ -1,0 +1,130 @@
+#include "iostream.h"
+
+class student
+{
+private:
+  char* name;
+public:
+  int age;
+  student();
+  student(char * theName, int theAge);
+  void copy( student other);
+  char * getName();
+    void assignName(char * name);
+};
+
+
+student::student()
+{ 
+  age=0;
+  name=NULL;
+}
+
+char * student::getName()
+{
+  return name;
+}
+void student::assignName(char * theName)
+{
+
+  if(name!=NULL)
+    delete [] name;
+  int len=strlen(theName);
+  name = new char[len+1];
+  strcpy(name, theName);
+
+}
+
+void student::copy( student  other)
+{
+  if(name!=NULL)
+    delete [] name;
+  int len=strlen(other.getName());
+  name = new char[len+1];
+  strcpy(name, other.getName());
+  age=other.age;
+
+
+
+}
+
+
+student::student(char * theName, int theAge)
+
+{
+  age=theAge;
+  int len=strlen(theName);
+  name = new char[len+1];
+  strcpy(name, theName);
+
+}
+
+void printArray(student * array);
+void sort(student * array);
+
+void  swap ( student * array, int a, int b)
+{
+  student hold;
+  hold.copy(array[a]);
+  array[a].copy(array[b]);  
+  array[b].copy(hold);
+}
+
+
+
+int main()
+{
+
+
+
+
+  student myArray[1000];
+  char name[100];
+  int flag=false;
+  int i =0,age;
+  while(!flag)
+    {
+      cout<<"enter name";
+      cin>>name;
+      myArray[i].assignName(name);
+      cout<<"enter age";
+      cin>>myArray[i].age;
+      cout<<"enter 0 to continue";
+      cin>>flag;
+      i++;
+    }
+  
+  printArray(myArray);
+  sort(myArray);
+  printArray(myArray);
+
+}
+
+void printArray(student * array)
+{
+  int i =0;
+  while ( (array[i].getName())!=NULL)
+    {
+      cout<<array[i].getName()<<endl;
+      cout<<array[i].age<<endl;
+      i++;
+   }
+
+
+}
+
+
+void sort(student * array)
+{
+  int i =0;
+  while ( (array[i+1].getName())!=NULL)
+    {
+      for( int j=0;(array[j+1].getName())!=NULL;j++)
+	{
+	  if( strcmp(array[j].getName(),array[j+1].getName())>0)
+	    swap(array, j, j+1);
+	} 
+      i++;
+    }
+  
+}

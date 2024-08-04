@@ -1,0 +1,157 @@
+#include "stdafx.h"
+#pragma once
+//-----------------------------------------------------------------
+//  class Node
+//      a single Node from a binary tree
+//-----------------------------------------------------------------
+template <class T>
+struct Node
+{
+public:
+    Node * left;
+    Node * right;
+    T value;
+    Node   (T value);
+    Node   (T value, Node * left, Node * right);
+	void Print();
+};
+//  class Node implementation
+template <class T>
+Node<T>::Node(T val)
+    : value(val), left(NULL), right(NULL)
+{
+    // no further initialization
+}
+template <class T> 
+Node<T>::Node(T val, Node<T> * l, Node<T> * r)
+    : value(val), left(l), right(r)
+{
+}
+
+template <class T>
+void Node<T>::Print()
+{
+	cout << this->value;
+}
+
+//-----------------------------------------------------------------
+//  class Tree      Binary Trees
+//      can process all nodes in Pre/In/Post  order
+//-----------------------------------------------------------------
+template <class T>
+class Tree
+{
+protected:
+    Node<T> * root;   
+public:
+          Tree();
+         ~Tree();
+    int   IsEmpty() const;
+    void  Clear() { Clear(root); root=NULL;}
+    void  PreOrder() { PreOrder(root); }
+    void  InOrder() { InOrder(root); }
+    void  PostOrder() { PostOrder(root); }
+	virtual void Process(T val) {cout<<val<<" "; }
+	void Print() { Print(root); }
+private:
+    void  Clear(Node<T> * current);
+    void  PreOrder(Node<T> * current);
+    void  InOrder(Node<T> * current);
+    void  PostOrder(Node<T> * current);
+	void  PrintLNR(Node<T> *header,int count);
+	void Print(Node<T> * current);
+};
+//  class Tree implementation
+template <class T>
+Tree<T>::Tree()  // initialize tree
+{    
+    root = NULL;
+}
+template <class T>
+Tree<T>::~Tree() // deallocate tree
+{
+    if (root != NULL)
+		Clear(root);
+}
+template <class T>
+int Tree<T>::IsEmpty() const
+{
+    return  root==NULL;
+}
+template <class T> 
+void Tree<T>::Clear(Node<T> * current)
+{
+  if(current)
+  {
+    // Release memory associated with children
+    if (current->left)
+      Clear(current->left);
+    if (current->right)
+      Clear(current->right);
+    delete current;
+  }
+}
+// PreOrder Processing of tree rooted at current
+template <class T> 
+void Tree<T>::PreOrder(Node<T> * current)
+{
+    // visit Node, left child, right child
+    if (current)
+    {
+        // Process current Node
+        Process(current->value);
+        // then visit children
+        PreOrder(current->left);
+        PreOrder(current->right);
+    }
+}
+// InOrder Processing of tree rooted at current
+template <class T> 
+void Tree<T>::InOrder(Node<T> * current)
+{
+    // visit left child, Node, right child
+    if (current)
+    {
+        InOrder(current->left);
+        Process(current->value);
+        InOrder(current->right);
+    }
+}
+// PostOrder Processing of tree rooted at current
+template <class T>
+void Tree<T>::PostOrder(Node<T> * current)
+{
+    // visit left child, right child, node
+    if (current)
+    {
+        PostOrder(current->left);
+        PostOrder(current->right);
+        Process(current->value);
+    }
+}
+
+
+
+
+//To FIX by YOU guys !!!
+template <class T>
+void Tree<T>::PrintLNR(Node<T> *header,int count)
+{
+  if(header==NULL) return;
+  PrintLNR(header->right,count+1);
+  for (int i=1 ; i<3*count ; cout<<' ',i++);
+  Process(*header);
+  PrintLNR(header->left,count+1);
+}
+
+template <class T>
+void Tree<T>::Print(Node<T> * current)
+{
+	if(current)
+	{
+		Print(current->left);
+		current->Print();
+		cout << endl;
+		Print(current->right);
+	}
+}

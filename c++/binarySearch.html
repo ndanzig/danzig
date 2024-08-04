@@ -1,0 +1,53 @@
+<head>
+<TITLE>Programming - Binary Search</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Binary Search</H3></CENTER>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+If we have a sorted array we do not need to check every element to find out if the
+array contains the element we are looking for.  We can try to narrow down the 
+search, by  making the area of the array we check smaller each time.
+If we can divide the array in half each time we search it, we 
+have improved the speed of our search exponentially.
+
+<p> When trying to guess a number you might ask, "Is it smaller than 5000 ?"
+If you receive a positive response you might ask, "Is it larger than 0 ?"
+If you again receive a positive response, what would you ask?
+You should ask, "Is it larger than 2500 ?".
+What ever response you get, you will have reduced the possible numbers by half.
+If you received a negative response you should ask, "Is it larger than 1250 ?".
+By continuing in this way you reduce the possiblities by half each time.
+You will quickly close-in on the correct number.
+Since you are dividing the possible numbers by 2 each time, this is called
+a binary search.  Since you are cutting the problem down in size each time,
+this is also a type of <a href="http://www.csc.liv.ac.uk/~ped/teachadmin/algor/d_and_c.html" > divide and conquer </a> algorithm.
+
+<p>
+A method to do a binary search on a given array can be written recursively.
+The base case would be an array of size 1.  
+In such a case, if the one number in the array is the number you are looking
+for, send back its index, otherwise send back <i>null</i>.
+All arrays larger than 1
+can be solved by passing one half of the array into the method recursively a second time, 
+and so on.
+The choice of which half to send back into the method 
+will be made by checking if the number to-be-found is larger than the 
+element in the <b>middle</b> of the array.
+If it is larger, then send the upper half of the array,
+if it is not larger, then, if it is not equal to the middle value,
+send the lower part of the array back into the method.
+If it is equal, simple return the middle index.
+
+
+
+<p>
+See also <a href="http://www.cis.ohio-state.edu/~gurari/course/cis680/cis680Ch18.html">here </a>
+for more on 
+Divide-and-Conquer Algorithms and sorting.
+
+<p>
+&copy Nachum Danzig December 2003 - July 2005
+
+</body>
+</html>

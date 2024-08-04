@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+<head>
+<TITLE>Programming &#151; Using New in a function &#151; part two</TITLE>
+</head>
+<BODY BGCOLOR="#ffffff" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Using New in a function</H3></CENTER>
+You might want a function to get a pointer and for the function to create an array that that pointer will point to. To do this, the function  must receive a reference to a pointer (or a pointer to a pointer). This is so that any changes made to the pointer in the function will affect the real pointer and not merely the copy of the pointer.  The following first attempt is close but won't work.
+
+<pre><code>
+      #include<iostream>
+      using namespace std;
+
+
+      void foo(  char ** vec) {
+      *vec = new char[10];
+      *vec[0] = 'a';
+      *vec[1] = 0;
+      }
+
+      int main()
+      {
+      char * ptr;
+      foo(&ptr);
+      cout << ptr;
+      system("pause");
+      return 0;
+      }
+  </code>
+</pre>
+
+There's an order of operator issue here on the dereferencing of *vec[] .  Surround *vec with parenthesis and it will work.  Below is a modified version with a couple of other minor changes too.   See precedence table <a href="https://en.cppreference.com/w/c/language/operator_precedence">here</a> where array subscripting is at level 1 and dereference is at level 2.
+<p>
+Here is a fix:
+
+
+<pre><code>
+
+      #include<iostream>
+      using namespace std;
+
+
+      void foo(  char ** vec) {
+      *vec = new char[10];
+      (*vec)[0] = 'a';
+      (*vec)[1] = 0;
+      }
+
+      int main(int argc, char** argv)
+      {
+      char * ptr;
+      foo(&ptr);
+      cout << ptr << endl;
+      system("pause");
+      return 0;
+      }
+		      
+  </code>
+</pre>
+But this is ugly. We can make the code cleaner and clearer to read and 
+do ourself (or whoever) a favor by creating a new pointer in cases like this.
+We spare ourself - and anyone who reads your code - the confusion.
+
+<p>Here is a better version of the function:
+<pre><code>
+void foo(  char ** vec) {
+*vec = new char[10];
+char* str = *vec;
+str[0] = 'a';
+str[1] = 0;
+}
+
+
+  </code>
+  </pre>
+
+
+
+</body>
+</html>

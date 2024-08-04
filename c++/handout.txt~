@@ -1,0 +1,162 @@
+#include <iostream.h>
+
+main()
+{
+  int num, counter=2;
+  cout<<"enter a positive number greater than one ";
+  cin>>num;
+  while(counter < num)
+       {
+	if (num % counter == 0)
+	  {
+	    cout<<"number is not prime. It divides by " <<counter;
+	  break;
+	  }
+	counter++;
+   }
+  if(counter==num)
+    cout<<"number is prime";
+  cout<<endl;
+
+  counter=2;
+  cout<<"enter any number ";
+  cin>>num;
+  if (num<0)
+    num=num*-1;
+  if(num==0||num==1)
+    	    cout<<"number is not prime.";
+  else
+    {
+      while(counter < num)
+	{
+	  if (num % counter == 0)
+	    {
+	      cout<<"number is not prime. It divides by " <<counter;
+	      break;
+	    }
+	  counter++;
+	}
+      if(counter==num)
+	cout<<"number is prime.";
+    }
+  cout<<endl;
+}
+#include <iostream.h>
+#define MAX 12
+main()
+{
+int column, row=1, prod;
+
+ while (row<=MAX)
+   {
+     column=1;
+     while(column<=MAX)
+       {
+	 prod=column*row;
+	 cout<<prod<<' ';
+	 prod<10?cout<<" ":cout<<"";
+	 prod<100?cout<<" ":cout<<"";
+	 column++;
+       }
+     cout<<endl;
+     row++;
+
+   }
+
+
+
+}
+//program to muliply two numbers without using 
+//the multiplication operator *
+//by Nachum Danzig
+
+#include <iostream.h>
+main()
+{
+  int num1, num2, sum;
+  while(true)
+    {
+      cout<<"enter first number or 0 to quit ";
+      cin>>num1;
+      if(!num1)
+	break;
+      cout<<"enter second number ";
+      cin>>num2;
+      sum=0;
+       while (  num2) 
+	{
+	  sum=sum+num1;
+	  num2--;
+	  
+	}
+       cout<< endl<<"the product is "<<sum<<endl;
+     }
+}
+#include "iostream.h"
+
+main()
+{
+
+  int base;
+  int power;
+  int  hold, fred,powerIterations,mul;
+  while(true){
+    
+    cout<<endl<<"enter the base, or 0 to quit ";
+    cin>>base;                                      //2
+    if (base == 0)
+      break;
+    cout<<"enter the power ";                       //4
+    cin>>power;
+    hold=base;                                     //hold=2
+    fred=base;                                     //fred=2  
+    powerIterations=0;
+    while( power-1 > powerIterations)    //4-1>0: 4-1>1 : 4-1>2: 4-1!>3, end 
+      {
+	mul=0;
+	while (  fred-1> mul)    //2-1>0 //2-1 !>1,end: 2-1>0: 2-1!>1,end: 2-1>0:2-1!>1,end      
+	{
+	  base+=hold;//base=base+hold; //base=2+2:base=4+4 :base=8+8
+	  mul++;//mul=mul+1;   // mul=0+1 :mul=0+1: mul=0+1
+	  
+	}
+	hold=base;        //hold=4:hold=8: hold=16
+	powerIterations++; //pI=0+1:pI=1+1 :pI=2+1
+	// powerIterations=powerIterations+1;
+      }
+    cout<< base;
+  }
+}
+
+
+
+#include <iostream.h>
+int  main()
+{
+  int digit;
+  int num, storage;
+  long num2;
+  cout<<"tell me a number"<<endl;
+  cin>>num;
+  int sum=0;
+  while(num)
+    {
+      storage=num;
+      num=num/10;
+      sum=sum+(storage-num*10);
+
+    }
+  cout<<sum;
+
+  cout<<"tell me a number"<<endl;
+  cin>>num2;
+  sum=0;
+  while(num2)
+    {
+      digit=num2 % 10;
+      sum=sum+digit;
+      num2=num2/10;
+    }
+  cout<<sum;
+  return 0;
+}

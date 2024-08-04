@@ -1,0 +1,233 @@
+<head>
+<TITLE>Programming - Multi-dimensional  Arrays</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Multi-dimensional  Arrays</H3></CENTER>
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+So far we have had examples of array which are sets of variables.
+In these examples there has been one index for each element.
+If we would represent these arrays graphically they would be 
+could be drawn as a row of numbers in boxes, like this:
+<table>
+<tr>
+<td>
+<table>
+  <tr><td>index</td></tr>
+  <tr><td>
+    <table border="0" cellpadding="2" cellpadding="2">
+    <tr><td>0</td></tr>
+    <tr><td>1</td></tr>
+    <tr><td>2</td></tr>
+    <tr><td>3</td></tr>
+    <tr><td>4</td></tr>
+    <tr><td>5</td></tr>
+    <tr><td>6</td></tr>
+    <tr><td>7</td></tr>
+    <tr><td>8</td></tr>
+    <tr><td>9</td></tr>
+    </table></td>
+  </tr>
+</table>
+</td>
+<td>
+<table>
+  <tr><td>values</td></tr>
+  <tr>
+    <td><table border="2">
+    <tr><td>20</td></tr>
+    <tr><td>17</td></tr>
+    <tr><td>2</td></tr>
+    <tr><td>34</td></tr>
+    <tr><td>61</td></tr>
+    <tr><td>2</td></tr>
+    <tr><td>75</td></tr>
+    <tr><td>93</td></tr>
+    <tr><td>32</td></tr>
+    <tr><td>8</td></tr>
+    </table></td>
+  </tr>
+</table>
+</td>
+</tr>
+</table>
+
+<br>
+Such and array is called one dimensional because it can be
+drawn in a linear or one-dimensional fashion.
+There also exists the possibility of making 2 or more dimensional arrays.
+These are also called multi-indexed or multi-subscripted arrays.
+
+<p>
+For example, a two dimensional array could be declared in the following way:
+<p><tt> int myArray[10][3]; </tt> <p>
+This will create an array of size 10 by 3 int's - a total of
+30 int's will be created.  
+I chose a 10 by 3 array.  You can make an array of any size you like simply by
+ changing the numbers you use in the array declaration.  You could make an 
+array of 3 by 10 or an array of 100 by 2 or 100 by 100, and so on.
+<p>
+When arrays are created,
+their elements are not assigned any  initial values. Therefore we can't know
+what is in each cell of the array.  It will likely be zero, but we can be sure.
+We will call this content junk since it is meaningless data.  I indicate
+this junk with the question mark.
+The above array could be drawn like this:
+<br>
+<table>
+<tr>
+<td>
+<table>
+  <tr><td>index</td></tr>
+  <tr><td>
+    <table border="0" cellpadding="2">
+    <tr><td>0</td><tr>
+    <tr><td>1</td><tr>
+    <tr><td>2</td><tr>
+    <tr><td>3</td><tr>
+    <tr><td>4</td><tr>
+    <tr><td>5</td><tr>
+    <tr><td>6</td><tr>
+    <tr><td>7</td><tr>
+    <tr><td>8</td><tr>
+    <tr><td>9</td><tr>
+    </table></td>
+  </tr>
+</table>
+</td>
+
+<td>
+<table cellpadding="3">
+<tr>
+<td>0</td><td>1</td><td>2</td>
+</tr>
+
+
+<tr>
+<td colspan="3"> 
+  <table border="2">
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  </table>
+</td>
+</tr>
+</table>
+</td></tr>
+</table>
+<p>
+We can access any element of this array by using 2 indexes.
+For example, if we wanted to assign the value 18 to
+the element at position 4 down and 2 across
+we would write something like this (remember, indexes
+start with 0 so the 4th row is index number 3):
+<p><tt>  myArray [3][1] = 18; </tt> <p>
+
+This would change the array in the following way:
+<br>
+<table>
+<tr>
+<td>
+<table>
+  <tr><td>index</td></tr>
+  <tr><td>
+    <table border="0" cellpadding="2">
+    <tr><td>0</td><tr>
+    <tr><td>1</td><tr>
+    <tr><td>2</td><tr>
+    <tr><td>3</td><tr>
+    <tr><td>4</td><tr>
+    <tr><td>5</td><tr>
+    <tr><td>6</td><tr>
+    <tr><td>7</td><tr>
+    <tr><td>8</td><tr>
+    <tr><td>9</td><tr>
+    </table></td>
+  </tr>
+</table>
+</td>
+
+<td>
+<table cellpadding="3">
+<tr>
+<td>0</td><td>1</td><td>2</td>
+</tr>
+
+
+<tr>
+<td colspan="3"> 
+  <table border="2">
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>18</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  </table>
+</td>
+</tr>
+</table>
+</td></tr>
+</table>
+
+<p>Essentially, we now have a set of 30 integers which we can access
+(change or print-out etc.) by using two sets of
+indices. The name of the array ( myArray ) refers to this
+whole set of integers.
+
+<p>We can also make arrays of 3 or 4 dimensions though these are impossible
+to draw in two dimensions, and they are bit harder to imagine in your mind.
+To think of a 3 dimensional array imagine a 2 dimensional array
+and then think of each cell in that array itself containing many
+elements.  
+A three dimensional array is created in the following way:
+<p><tt> int myArray[10][10][3]; </tt> <p>
+This will create an array named myArray containing 300 integers.
+We can access any element of this array by using 3 indices.
+For example, if we wanted to assign the value 312 to
+the element at position 3 down and 7 across
+and 2 in, we would write something like this 
+<p><tt>  myArray [2][6][1] = 312; </tt> <p>
+
+
+Once you grasp this you might be then able to think one
+more step.  Imagine each element of your 3 dimensional array as containing
+not just one element, but a whole set of elements.
+It is quite hard to imagine anything more than 3 dimensions,
+but theoretically, you can have 5, 6, 7, etc. dimension arrays.
+In practice you should never use more than a 3 dimensional array 
+for three reasons: (1) They will use up a lot of memory even with relatively
+small indexed ( an even sided 4 dimension array of size 100 integers
+will have 100,000,000 integers in it, or 400 mb of data ) (2) You will make errors
+(3) You will confuse anyone trying to read your code.
+Even using 3 dimensional arrays is not really advisable.
+
+<p>
+&copy Nachum Danzig November 2003 - July 2005
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

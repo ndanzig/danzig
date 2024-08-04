@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+
+<head>
+<TITLE>Programming - Separating program flow</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Separating Program Flow Using "if"</H3></CENTER>
+
+<p>
+In life we often face conditions.  Our parents may have made conditions
+like, "If you don't come home on time, I won't 
+let you go on any more mountain climbing expeditions." 
+"If you take out the trash then I will give you some 
+strawberries and whipped cream."
+In school we may face conditions too; "If your grade point average is over 90
+you will be exempt from the final exam."
+A condition means that if a certain state of affairs occurs, then a 
+certain result will happen.  There can also be  negative conditions (like the 
+first one above): if something  does not occur, then a certain result will 
+happen.
+
+<p>In all of these statements there is the condition part  
+( "If you take out the trash" ) and the result part ( 
+"then I will give you some strawberries and whipped cream").
+When deciding whether the result should be brought about, we have to decide if 
+the condition has been met. In real world conditions we set up an
+expected state of affairs and then see if the actual reality conforms to that 
+expectation.  This is called testing whether reality conforms to our
+expectation. This same concept exists in computer science. We
+ say that we have to
+<b>test</b> if a condition
+has been met.  If it has been met then the condition is said to be
+ <b>true</b>. 
+If it has not been met  the condition is  <b>false</b>.
+For example, if you do take out the trash then
+ the condition is <b>true</b> and you get the strawberries. 
+But if you don't take out the trash, 
+the condition is  <b>false</b> and 
+you won't get the strawberries.
+
+We can generalize and say conditional statements are of the form 
+<p>
+<b>If </b> <i> some condition </i> is <b>true
+<br> then</b> <i>some result occurs</i>.
+
+<p> But whereas in the real world we compare 
+some real action or thing with some expected action or thing, in computer
+ science  we don't have real actions.  What we have are variables (containing
+numbers) and literals (actual numbers). So in order to create a  
+condition  we need to  compare one or more of these variables or 
+literals to another variable or literal.  This comparison relationship is
+our <b>test</b> condition. 
+
+
+
+<p>When comparing variables in C++ we use 3 basic comparison 
+or testing operators.  These are the <b>greater than</b>  operator
+ ( <b>&gt;</b> ),
+the <b>less than</b> operator ( <b>&lt;</b> ) and the <b>equals</b> operator
+( <b>==</b> ).  Note that
+we use two = symbols to distingush the equals operator from the 
+assignment operator which is one =  symbol. 
+
+<p> But how exactly do we set up the comparison so that 
+the  code we want  will be executed if the condition is true?
+To do this we use the keyword 
+<b>if</b>&nbsp;. With the help of the keyword <b>if</b>
+ we can write a line of code in which we say that if and only if  a certain 
+condition is
+ <b>true</b> 
+then execute the following commands.
+
+
+<p>If we wanted to test if some variable was larger than 10 
+we would write 
+<blockquote>
+if ( someVariable > 10 )
+</blockquote>
+
+If we wanted to test if it was smaller than 10 
+we would write 
+<blockquote>
+if ( someVariable < 10 )
+</blockquote>
+
+
+And if we wanted to test if some variable was equal to 10 
+we would write 
+<blockquote>
+if ( someVariable == 10 )
+</blockquote>
+
+In all of these example, we have an <b>if</b> followed by a condition
+which is inside a set of parenthesis ( ). But how do we tell the
+computer what to do when this condition is <b>true</b>?
+For this we use a set of braces { } immediately following the 
+<b>if</b>.
+  Such a  section of code inside braces is called a <b> block of 
+code</b> or a   <b> code block</b>.
+
+
+
+ For example,
+<blockquote>
+if ( someVariable == 10 )
+<br>
+{
+<br>
+cout &lt;&lt; "The number is 10!";
+<br>
+}
+</blockquote>
+
+In the above code segment, the line 
+cout &lt;&lt; "The number is 10!"; is a block of code.  In this example,
+if someVariable is
+equal to 10, then 
+the message <i> 
+The number is 10! </i> will be printed. 
+ I can also have multiple lines inside the  braces.
+In such a case, if the condition is true, all the lines will be executed.
+If the condition is not true, then the computer will skip the entire section 
+inside the braces and continue executing the program from after the close 
+brace }. 
+
+<p> Let's see another example of using <b>if</b>.
+
+<blockquote>
+int mySalary; <br>
+mySalary = 1200; <br>
+if (mySalary < 1000) <br>
+{ <br>
+ &nbsp; &nbsp;  &nbsp; &nbsp; cout &lt;&lt; "The salary is"; <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; "smaller than $1000. Give him a raise." &lt;&lt; endl; <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; mySalary = 2000; <br>
+} <br>
+cout &lt;&lt; "Now the salary is"; <br>
+cout  &lt;&lt;  "not smaller than $1000"; 
+
+</blockquote>
+
+Try asking yourself, What is  the condition?
+Is the condition true or not?  
+. . . .  The condition is "mySalary < 1000".  &nbsp; &nbsp;
+This translates into English as "Is the variable
+mySalary less than 1000."  If mySalary is less than
+1000, then the condition is true. But if mySalary is not 
+less than 1000, then we have to admit that the condition is not true.
+In our case, we initialized the variable mySalary to the value 1200.  
+  Is our testing condition true?   The condition
+is not true.  Since the condition is not
+true, the computer will skip over the lines inside the opening and closing
+braces &nbsp;  { &nbsp; } &nbsp;. &nbsp;
+Therefore the lines:
+
+
+<blockquote>
+
+ &nbsp; &nbsp;  &nbsp; &nbsp; cout &lt;&lt; "The salary is"; <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; "smaller than $1000. Give him a raise."; <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; mySalary = 2000; <br>
+</blockquote>
+
+
+will not be executed.   They will be skipped.
+So we see how the condition works. The condition causes us to skip or not skip
+ the print-out depending on whether the condition is false or true.
+
+<p>  The above example is really too simple to be 
+of any real interest.   Since mySalary will always be 1200,
+therefore the lines inside the braces will never be executed.
+Later we will see examples in which the variable will change its value and 
+therefore the condition will sometimes be true, and sometimes false.
+(Can you think of a way of combining what we have learned about user interfaces
+to allow mySalary to vary? Try it out.)
+
+<p>
+The two lines at the end, namely:
+<blockquote>
+cout<<"Now the salary is"; <br>
+cout<< "not smaller than $1000"; <br>
+
+</blockquote>
+will always execute (whether the condition is true or false).  
+Why is this?  The reason is that the only 
+section of code that is skipped is the section that lies between the braces.
+Since there is a closing brace before these two lines, they are not within the
+ condition and are therefore not skipped. 
+They will be executed regardless of whether the condition is true or false. 
+
+These lines will write 
+the words "Now the salary is not smaller than $1000"
+ onto
+the screen.   
+
+<p>Now we can ask does this program  make sense? Should we print 
+the words "Now the salary is not smaller than $1000" always?
+ In our example the variable is 1200 so it does make sense to
+ print "Now the number is not
+ smaller than 1000." since this is true. 
+But what if myNumber had a different value, say 50 ? 
+If the variable is smaller than 1000 then it would be wrong to write
+"Now the salary is not smaller than $1000"  on the screen.
+But if you look carefully at the example, you will see that if the 
+condition is true, then  mySalary gets
+a new value.  It gets the value 2000.
+So therefore, by the time the program  prints the sentence 
+"Now the salary is not smaller
+ than $1000"
+ on the
+screen, mySalary would actually be 2000, so the message <i>is</i> true
+no matter what mySalary is to start with. It would be nice if 
+salaries could be raised like this.
+
+<p> 
+Sometimes in life we have more complicated conditions. 
+We have two sided conditions.    For example I might say,
+"If today is rainy I will stay indoors, otherwise I will play football."
+   This statement means that only if today is
+rainy will I stay indoors, but if today is not rainy then I will play football.
+So, logically if the day is sunny I will play football.  
+But also if the day is not sunny, say it is  cloudy but not rainy, then also
+ I will play football. If the day is cold I will also play football.   Even
+ if the day is hailing and snowy I will
+play football.  My condition stated that only if the day is rainy will I 
+stay indoors and not play 
+football.   That is the meaning of otherwise.  Otherwise means, "in all other
+conditions" I will play football. In C++ we use the keyword
+<b>else</b> to mean otherwise (mostly because it is shorter).
+
+
+<p>  A simple  programming example in English of the <i>if 
+else</i> combination would be the following: 
+<blockquote>
+
+If variable is greater than 2,500,000,000  print "Number is too large", else 
+print "Number is an acceptable size."
+
+</blockquote>
+(The above English is also called  <b>pseudo-code</b> because it
+is English which resembles computer languages or codes, but is not  
+any specific computer language.) 
+<br>
+Let us see the above English translated into C++.  
+
+
+<blockquote>
+
+if (variable &gt; 2500000000)<br>
+{<br>
+&nbsp; &nbsp; &nbsp; &nbsp;cout&lt;&lt;"Number is too large."; <br>
+}<br>
+else<br>
+{<br>
+&nbsp; &nbsp; &nbsp; &nbsp;cout&lt;&lt;"Number is acceptable size."; <br>
+}
+
+</blockquote>
+Notice that the <b>else</b> also uses braces { &nbsp; } the same way the
+<b>if</b> uses them. In this example, only one of
+the two sentences will be printed.  Which sentence gets printed depends
+on whether the condition of the if is true.  If the condition is true, 
+then the first sentence will be printed, otherwise ( or <b>else</b> ) the
+second sentence will be printed. In any case, both sentences will
+never be printed in the same run of this test condition. The program has two
+ options of what to print
+and the option will be selected in accordance with the truth or falsehood of 
+the condition in the <b>if</b> statement. 
+<p>
+In C++ there is also a keyword <b>true</b> and a keyword <b>false</b>.
+The keyword <b>true</b> is always true in a condition statement and 
+<b>false</b> is always false in a condition statement.
+Further more <b>any non-zero value is considered true in a condition statement.</b> Zero is considered false but the numbers 7, -7, -514, 8900 and 1 are all 
+considered true.  
+ Therefore, 
+<br>
+<br>
+<tt>if(true)</tt>
+<br>
+is always a true condition.  And furthermore,
+<br>
+<br>
+<tt>if(1) </tt>
+<br>
+is also true.
+<p>You can also use the <b>not</b> operator ( ! ) to achieve the opposite 
+from the normal true/false results.  For example,
+<br>
+<br>
+<tt>if(!true)</tt>
+<br>
+will never be a true condition. And so too
+<br>
+<tt>if(!1) </tt>
+<br>
+is also not true. 
+
+<p>In addition to the primitive data types we have used already, there is a 
+primitive data type called <b>bool</b> which can be assigned true
+or false , or 0 or 1. 
+Bool is like int, but it cannot have thousands of different values, it can 
+only have two possible values: either 0 or 1 . Bool 
+  is useful as a variable in condition statements. 
+I can use a bool like this
+
+<blockquote>
+bool someVariable = 0;   &nbsp;  &nbsp; &nbsp;  &nbsp;   <b>Right!</b>
+<br>bool someVariable = 1;   &nbsp;  &nbsp; &nbsp;  &nbsp;   <b>Right!</b>
+<br>
+bool someVariable = true;   &nbsp;  &nbsp; &nbsp;  &nbsp;   <b>Right!</b>
+<br>
+bool someVariable = 2;   &nbsp;  &nbsp; &nbsp;  &nbsp;   <b>Wrong!</b> someVariable will get the value 1 instead of 2 since 1 is the maximum value a bool can hold.<br>
+bool someVariable = -1;   &nbsp;  &nbsp; &nbsp;  &nbsp;   <b>Wrong!</b>
+<br>if (someVariable) &nbsp;   &nbsp;&nbsp;  &nbsp; &nbsp;  &nbsp;&nbsp; 
+ &nbsp;    <b>Right!</b>
+<br>if (someVariable==true) &nbsp;   &nbsp; &nbsp;  &nbsp;   <b>Right!</b>
+</blockquote>
+
+<p>
+<b>If</b>s can be <b>nested</b> one in side the other. 
+For example, let's say that in order to get a driver's license in Israel you 
+must be over 18 years old and you must pass a test.  How would I express 
+this with an <b>if</b> ?  One <b>if</b>  is not enough since I have two 
+conditions. 
+(Later we will see that you can actually combine two conditions into one 
+<b>if</b>  statement)  Therefore, in our case I need to use two <b>if</b>s as
+ follows:
+<blockquote>
+<tt>
+int age = 16;<br>
+bool passTest = true;<br>
+ if(age > 17 ) <br>
+ &nbsp; &nbsp; &nbsp; &nbsp;{ <br>
+ &nbsp; &nbsp; &nbsp; &nbsp;if(passTest) <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+cout<<"Congratulations, you will get you license.";
+ <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} <br>
+ &nbsp; &nbsp; &nbsp; &nbsp;else <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+cout<<"Your are old enough, but you didn't pass the test. Sorry.";
+ <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} <br>
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br>
+ &nbsp; &nbsp; &nbsp; &nbsp; } <br>
+ else <br>
+ &nbsp; &nbsp; &nbsp; &nbsp;{ <br>
+ &nbsp; &nbsp; &nbsp; &nbsp;if(passTest) <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ <br>
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+cout<<"You passed the test, but you aren't old enough. Sorry.";
+<br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} <br>
+ &nbsp; &nbsp; &nbsp; &nbsp;else <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+cout<<"You didn't passed the test, and you aren't old enough. Sorry.";
+<br>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} <br>
+&nbsp; &nbsp; &nbsp; &nbsp;} <br></font>
+</tt>
+</blockquote>
+<p>
+Read the above example carefully.  The text lines outputted explain
+what each case is.
+Notice how I indented each time I made a new block of code.  I did this
+for better readability. You should always indent in this way.
+You can see graphically how there are if/else structures within each of the
+ outer if and else sections.
+
+Thus, in the if part of the outer  if/else there is a complete
+ if/else structure.  And in the outer else there is a complete 
+ if/else structure.  Since one set of
+if/elses is within another set, one is said to be nested within the other.
+(I believe the term nesting derives from the fact that bowls (or birds' nests)
+ can be placed one inside the other, provided the inner
+ones are a little bit smaller than the outer ones.)
+These are nested if/elses. 
+You should notice that there are four possible cases when we have two 
+conditions.  I have written the logical output for each case.  In my example, 
+the person passed the test but was too young. He will be told,
+<br>"You passed the test, but you aren't old enough. Sorry."
+
+
+<p> In addition to 
+&gt; and &lt; there is also the possibility of testing
+greater than or equal &gt;= to and less than or equal to &lt;=
+.  You can use these  when you want to include the equals possibility.
+For example, <xmp> if ( someVariable < 10 ) </xmp>
+will be true for all numbers smaller than 10 and that is all.
+
+However,  <xmp> if ( someVariable <= 10 ) </xmp>
+will be true for all numbers smaller than 10 and it will  also be true
+for the number 10.
+The same is the case with the &gt;= symbol.
+For example, <xmp> if ( someVariable > 10 ) </xmp>
+will be true for all numbers larger than 10 and that is all.
+
+However,  <xmp> if ( someVariable >= 10 ) </xmp>
+will be true for all numbers larger than 10 and it will  also be true
+for the number 10.
+
+<p>The not operator ( ! ) can also be used to express the idea 
+of two things not being equal.  For example, if
+I wanted to test if a certain variable is not equal to zero I could 
+write this:
+<pre>
+<tt>if(variable != 0) </tt>
+</pre>
+Notice that in this case I write only one = symbol, not ==.
+!== is incorrect. By the way, I could make the same condition by writing simply
+<pre>
+<tt>if(variable) </tt>
+</pre>
+ since all non-zero values are considered true, both these statements are 
+equivalent.  Both condition statements are true for values like 7, 8 and -300 
+(7 is not zero, and 7 is a true value).
+<p> I can also use the not operator in conjuction with entire conditions.
+For example, say I want to test for number greater than 10. 
+The best way to do this is by writing something like this:
+<pre>
+<tt>if(variable > 10) </tt>
+</pre>
+But I could also write 
+<pre>
+<tt>if (!(variable <= 10)) </tt>
+</pre>
+Notice how I put the ! in front of the condition. Read such a statement
+ as "if variable is not less than or equal to 10."  This can get 
+confusing, but with practice you can get used to it. In such a case you should
+just write the first version since it is clearer, but sometimes it is clearer
+if you negate some condition as in the second version.
+
+<p>Sometimes you may need to combine two or more conditions.
+Let's say you want to test if a certain variable is betweem 1 and
+100.  For this problem you need to make two tests: Is the variable
+greater than 1? And, is the variable less than 100?  Only if both conditions
+are true is the condition true. To combine two conditions in this way I need
+to use the <b>logical and</b> operator.  It works like this:
+<pre>
+<tt>if (variable > 1 && variable < 100) </tt>
+</pre>
+Notice how I use two and ( & ) symbols.  Using one would be a mistake. 
+One  and symbol is called the <b>bitwise and</b> operator and  we will
+ learn to use it in a later chapter. The above example should be read like this
+"if variable is greater than 1 and variable is also less than 100."
+For clarity's sake, you should group the two parts of the condition with 
+parenthesis like this:
+<pre>
+<tt>if ( (variable > 1 ) && (variable < 100) ) </tt>
+</pre>
+Not only is this more clear for you to read, it will also help prevent logical 
+errors.
+<p>
+I can use the && operator to combine  any conditions that I choose.
+Therefore, I can also combine conditions involving different variables.
+For example,  I may want to give a grade of 'A' to
+any student who has an average of 90% or more and 
+ attendence over 75%.  I would write this condition like this:
+<pre>
+<tt>if ( (average >= 90) && (attendence > 75) ) </tt>
+</pre>
+<p>
+Since there is a logical and operator, there is also a <b>logical or</b> 
+operator. It looks like this || . We use this when we want to combine two or more conditions
+and to check if any one of them is true.  Say for example, I need
+to check if a certain variable is either 1 or 7 or 14.  I would use the
+logical or operator  like this:
+<pre>
+<tt>if ( (variable == 1 ) || (variable == 7)  || (variable == 14)  ) </tt>
+</pre>
+<!--  
+The final operator used to combine conditions is the <b>exclusive or</b> 
+operator.
+This one looks like this ^^ . What it means is if one but not more than
+one of the conditions is true. For example lets say I want
+to give a cherry pie to anyone who shoveled the snow or who mowed the lawn.
+But anyone who did both gets nothing. (He's probably a liar since you can't 
+mow the lawn if it's coverd with snow!)
+I would test such a condition like this:
+
+<pre>
+<tt>if ( (snow == true ) ^^ (lawn == true) ) </tt>
+</pre --->
+<p>
+All of these operators can be combined in any number of ways.  You
+can use the not operator on all of them too.  Try to express
+your conditions in the simplest form.  The best condition statements
+can be read quickly by a normal person.  Do not try to 
+confuse your reader or yourself.
+
+As we have seen, we use conditions in C++ programming when there are 
+parts of our  program that should be
+ skipped in certain circumstances and not skipped in others.
+We previously learned that  computer programs execute operations in
+sequence. This means that the computer will execute
+one command after another, going down the page. 
+But when we want do to certain lines of code only
+if a certain condition holds true we set up a condition test.
+Skipping lines of code in this way is 
+called  <b>altering program flow</b>. It 
+is called altering program flow  because it allows a program  to have two 
+entirely different sequences, or program flows. 
+In one sequence, certain code is skipped over and  in the other sequence,
+ the code is not skipped.  
+Ultimately, this is the function of condition statements.
+
+<p>Here is a table of all the condition  operators and their meanings.
+
+<table>
+<tr><td>Operator</td><td>Meaning</td></tr>
+<tr><td> == </td><td> is equal to</td></tr>
+<tr><td> != </td><td> is not equal to</td></tr>
+<tr><td> > </td><td> greater than</td></tr>
+<tr><td> < </td><td> less than</td></tr>
+<tr><td> >= </td><td> greater than or equal to</td></tr>
+<tr><td> <= </td><td> less than or equal to</td></tr>
+<tr><td> && </td><td> and  </td></tr>
+<tr><td> || </td><td> or </td></tr>
+
+
+</table>
+
+
+
+
+
+<h3>Terms in this chapter </h3>
+ <b>condition, if, true, false,
+ pseudo-code, braces, block of code, test, else, bool, not, nesting, and , or,
+exclusive or </b>
+
+<h3>Exercises</h3>
+<ol>
+<li>Write a program to have the user guess a number stored in the program.
+If he guesses right, tell him so.  If he guesses wrong also tell him.
+<li>Write a program with a  user interface which allows the user to 
+enter 2 integers.  It should then give him the option of adding them, subtracting them, multiplying them or dividing them.  It should then print the result.
+<li>Write a program with a user interface to allow
+a user to enter a number and to tell him whether the number is even or odd.
+Use the truncating property of ints to do this.
+<li>Write a program to allow the user to enter a number.  If the number can be
+stored in a short, store it in a short.  Otherwise store it in a long.
+<li>Write a program with a  user interface which allows the user to 
+enter two numbers. Check if the first number is a multiple of 
+the second number.
+If it is tell the user; if it isn't tell him also.
+<li>Write a program in which the user inputs a letter and you
+print it back capitalized.  If the letter is already capital, 
+print it capital again for him.
+
+<li> Same a previous question, only this time if it is capital , print it lowercase.
+<li> Write a program where a user may enter 3 numbers.  Tell him if they are 
+pythagorian triples.  You must check all the possible permutations to determine your
+response.
+<li>Write a program where a user can enter 3 numbers and if the 
+numbers are an algebraic or geometric series, tell him the next number
+in the series.  If the numbers do not constitute a series, tell him they
+are not in series.
+<li>Let the user enter 3 numbers.  Print them back in sorted ascending order. If any
+number apears more than once, do not print it more than one time.
+
+
+</ol>
+
+<br>
+&copy Nachum Danzig July 2006 - 2012
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

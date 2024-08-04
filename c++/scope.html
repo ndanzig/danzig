@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+<head>
+<TITLE>Programming - Scope , Storage Classes</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Scope</H3></CENTER>
+<p>Scope is the area in a program where a variable or function (or any other identifier) is define and recognized.
+A variable or function declared outside of any function  (and outside the function main() ) 
+ is said to have file scope, i.e. it is recognized by all
+functions in the file. This is commonly referred to as a global variable.
+<p> Variables or functions (or any identifiers) declared inside a block ( a block is a pair of
+ braces like these {} ) are recognized within that block and within any nested blocks.
+For example, local variables declared in a function have block scope, i.e. their scope is within
+the function. The same is true for the parameters of the function which are essentially local variables.
+<p>
+For example, if I declare a variable inside a set of braces  and access it outside them , the compiler will
+throw an error and tell me the variable is not declared in the scope.
+
+
+<blockquote> <tt>
+<br>//after an if
+<br>if (true)
+<br>{
+<br> &nbsp;   &nbsp;  int p = 8;
+<br>}
+<br>p++;// out of scope error
+<br>
+<br>//after a generic block
+<br>{
+<br> &nbsp;   &nbsp; int q = 9;
+<br>}
+<br>q++;// out of scope error
+<br>
+<br>//after an implied block
+<br>if (true)
+<br> &nbsp;   &nbsp;   int R = 10;
+<br>R++;// out of scope error
+</tt></blockquote>
+
+<p>
+As I said, inner nested blocks do have access to variables declared in their parent block.
+But what if the nested block declares the variable again.  This will not cause a compiler error.
+What will happen is that the inner block will have its own local variable of the same name as the
+variable in the parent block.  The parent block's variable will be hidden to the inner block and any changes
+made in the inner block to the variable will not affect the variable in the outer block.
+The same is true where you declare a global variable and then make a variable of the same name 
+inside a function (or any block).
+ This is a confusing technique to use and therefore should be avoided.
+
+<p> Labels have a special scope behavior. Labels have file scope.  That means that you can goto a 
+label that inside another block, even outside the current block.  This is true of functions as well.
+You can junmp to a label in a different function. In general, doi9ng this is very bad style.
+
+
+
+
+
+
+
+<CENTER><H3>Storage Classes</H3></CENTER>
+<p>
+There are five storage class specifiers in C++: auto, register, extern, mutable, and static.
+
+<p>Declaring a variable to be register means we are telling the compiler we would like the 
+variable to be stored in one of the computers high-speed registers.  This request will not
+necessarily be fulfilled.  We does this for variables which we expect to be modifying 
+frequently and there want to save run time by keeping the variable in a register.
+The compiler may not be able to fulfill this request, if, for example, there are no free registers.
+
+
+
+<p>
+By default all variables are auto, which means they exist only when they are in scope.
+<p>
+
+You can also declare a variable to be static.  This means the variable exists even when it is out of scope. 
+For example, when a function exists, the local variables go out of scope and if they are of type auto (default)
+they are deleted.  But if they are of type static they continue to exist even though they are currently inaccessible.
+Next time the the function will be called they will again be accessible and <em>will retain their previous value</em>.
+
+This could be useful, for example, if I want my function to keep track of how many times it was called. I would then
+make a static int counter and increment it at each call.  Numeric variables of the static storage type are initialized
+to zero unless explicitly initialized otherwise by the programmer.
+
+
+<p>
+As we have said, when creating a global variable you declare it outside of any function in the file.
+What if another file wants to use that variable?  What you need to do then is to compile 
+the two files together.   And in the other file, where the global is not declared, you need to declare it with the
+the keyword extern.  
+
+
+<blockquote> <tt>
+extern int flag;
+</tt></blockquote>
+
+
+
+
+This tells the compiler to let the linker find this variable in another, external file.
+
+<p>
+There is one catch, if in the original file where the global was defined it was defined to be static
+then no external file can access it, not even if it uses the keyword extern.
+Such a static variable is said to have internal linkage, as opposed to external linkage. The same is true of functions.
+By default, global variables and functions have external linkage, i.e. they can be accessed by external files.  
+
+<p> 
+It is important to note that since the extern declaration file and the actual global variable file are compiled separately,
+ there is nothing to prevent the <em> type</em> in the extern from being different from the actual variable. 
+ This usually occurs when someone modifies the actual and is unaware of the extern.
+  The Linker will likely not catch this, depending on the linker and the exact type difference.
+  Bugs like this are difficult to find.
+
+
+<p>
+Type mutable is beyond the scope of this course.
+
+
+<p>
+&copy Nachum Danzig October 2011
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

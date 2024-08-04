@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+<head>
+<TITLE>Programming -  Exception Handling</TITLE>
+</head>
+<BODY BGCOLOR="#ffffff" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Comp Science - C++</H2></CENTER>
+<CENTER><H3> Exception Handling</H3></CENTER>
+
+
+
+
+<p>
+
+
+Exception Handling is a mechanism for dealing with exceptional circumstances or errors.
+When an exception occurs, control is transefered to a block of code called an exception handler.
+This system is especially useful for dealing with an error in a function. An alternate approach would
+be to have the function return -1 when an error occurs. But in some functions, -1 might be a legitimate
+return value.  In that case we would not know if an error occured or if our function returned -1 
+correctly.
+
+
+<p>
+The throwing and catching of exceptions solves this problem. 
+To catch exceptions we must place a portion of code under exception inspection. 
+This is done by enclosing that portion of code in a <b>try</b> block.
+ When an exceptional circumstance arises within that block, an exception is thrown that 
+transfers the control to the exception handler. If no exception is thrown, the code continues
+ normally and all handlers are ignored.
+<p>
+A exception is thrown by using the <b>throw</b> keyword from inside the try block.
+ Exception handlers are declared with the keyword <b>catch</b>,
+ which must be placed immediately after the try block. Here is an example of a simple 
+divide function which throws an exception if an attempt to divide by zero was made.
+
+<blockquote><pre>
+float divide(int a, int b )
+{
+if (b == 0)
+    throw -1;
+else
+    return (float)a/b;
+}
+
+
+int main()
+{
+try {
+     divide (7,0);
+    }
+catch (int error)
+    {
+     if (-1==error)
+          cout<<"Don't divide by zero!!";
+    }
+}
+</pre></blockquote>
+
+<p>Notice that in the main we do not simply run the function, but we <i>try</i> to run
+the function.  We then can catch an error if it occurs. The catch segment must be immediately after the try segment. It 
+is written similarly to a function.  In the parenthesis in the type and name of the exception you intend to 
+catch.  The name is arbitrary, but the type is significant.  If 
+you write the wrong type, the exception will not be caught.
+
+
+<p>In fact, you can have two catch statements after a try, each with diffferent parameter type.
+This allows you to throw differently typed exceptions.  Let's see an example:
+
+
+<blockquote><pre>
+float divide(int a, int b )
+{
+if (b == 0)
+    throw -1;
+if (b == 1)
+    throw 'a';
+return (float)a/b;
+}
+
+
+int main()
+{
+try {
+     divide (7,0);
+    }
+catch (int error)
+    {
+          cout<<"Don't divide by zero!!";
+    }
+catch (char error)
+    {
+          cout<<"Why are dividing by one? That won't do much!";
+    }
+}
+</pre></blockquote>
+
+
+<p>Notice that I have remove the else in the divide function.  That is because 
+it was unneccessary since one the exception is thrown, therest of the function will not execute.
+Also notice that I removed the if in the catch segments.  That is because since I am throwing just one 
+error for each type, there is not point to check the value.  The type is enough to distinguish the exceptions.
+If the type is int then I know it was a divide by zero. If the type was char then I know there was a divide by one, 
+which is not really an error, but I just wanted to demonstrate muliple error handling.
+
+<p> 
+I could achieve the same result with just one catch, but I would then need to check the value of the thrown 
+exception.  See this example:
+
+
+<blockquote><pre>
+float divide(int a, int b )
+{
+if (b == 0)
+    throw -1;
+if (b == 1)
+    throw -2;
+return (float)a/b;
+}
+
+
+int main()
+{
+try {
+     divide (7,0);
+    }
+catch (int error)
+    {
+     if (-1==error)
+          cout<<"Don't divide by zero!!";
+     if (-2==error)
+          cout<<"Why are dividing by one? That won't do much!";
+    }
+}
+</pre></blockquote>
+
+
+<p>
+If we use an ellipsis (...) as the parameter of catch, that handler will catch any exception no matter
+ what the type of the throw  exception is. This can be used as a 
+default handler that catches all exceptions not caught by other handlers if it is specified at last. If it is specified
+ first then all following catches will be ignored.  This is a logical error.
+
+<blockquote><pre>
+try {
+  // some code
+}
+
+catch (int error) { cout << "int exception"; }
+catch (char error) { cout << "char exception"; }
+catch (...) { cout << "default exception"; }
+</pre>
+</blockquote>
+
+
+In this case the last handler would catch any exception thrown with any parameter that is neither an int nor a char.
+
+After an exception has been caught the program execution resumes after all the relevant catch blocks.
+<p>
+In a command like  
+
+<blockquote><code> int a;
+<br> try {
+   <br>  a = divide (7,0);
+    <br>}
+</code>
+</blockquote>
+an exception will be thrown.  The variable "a" will not be asigned any value at all.
+
+<h4>Standard Exceptions</h4>
+<a name="standardException"></a>
+
+<p>Instead of throwing an int or a char or any other primitive data type, we can throw
+a class.  There is a standard class that is usually throw, it is called <i>exception</i> and it is found
+in the library called "exception". The class contains a virtual member function called
+ "what". This function returns a null-terminated character sequence (char *).
+You should create your own class that inherits from <i>exception</i>
+and provides a specific implementation for the function 
+what(). The function should return a string (char *) explaining what exception or error ocurred.
+Here is an example similar to the above examples:
+
+
+<blockquote><pre>
+#include &lt;iostream&gt;
+#include &lt;exception&gt;
+using namespace std;
+
+class myExcept: public exception
+{
+  virtual const char* what() const throw()
+  {
+    return "Divide by zero error!\n";
+  }
+};
+
+float divide(int a, int b )
+{
+  if (b == 0)
+    {
+      myExcept e;
+      throw e;
+    }
+  else
+    {
+      return (float)a /b;
+    }
+}
+
+
+int main()
+{
+  try {
+    divide (7,0);
+  }
+
+  catch (exception &error)
+    {
+      cout &lt;&lt; error.what() &lt;&lt; endl;
+    }
+  return 0;
+}
+
+</pre></blockquote>
+
+<p> Note that I must use the reference parameter in my catch,
+otherwise I will get a default exception, not the one I threw.
+Also notice the use <code><b> const throw()</b></code> after the function prototype.
+The <code>const</code> indicates that the function shall not change the instance 
+for which it was called.  The <code>throw()</code> indicates that the function <i>what</i> 
+is not permitted to itself throw any exceptions.
+
+
+
+
+
+<p>
+&copy; Nachum Danzig 2010
+</body>
+
+
+</html>
+

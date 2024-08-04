@@ -1,0 +1,125 @@
+<head>
+<TITLE>Programming - Constant Pointers</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<H3>Constant Pointers</H3>
+
+<p>You can declare constant variables. Here is an example:
+ <blockquote>
+    const int var = 9;
+ </blockquote>
+ 
+  You can also declare pointers which are constant.  But we must distinguish between two types of constant pointers.  <ol><li> a pointer that
+  points to a constant variable. (This pointer may be used to point to any number of constants in succession.)
+  <blockquote>
+    const a = 34;
+<br>    const int * ptr2Const;  //something which points to a constant!
+   <br> ptr2Const = &amp;a;
+  </blockquote>
+
+  </li><li>a pointer which can point to only one memory location ever. 
+  <blockquote>
+     int a = 34;
+     <br>int * const constPtr = &amp;a;
+  </blockquote>
+   <i>int * const constPtr </i> points to a single memory location, it can never be changed once it is assigned.
+</li></ol>
+<p> Let us remeber something about constants. When you create a regular constant you must inialize it at the time when you declare it.
+  If you try to initialize it later, you will get a compiler error. This is because the compiler has no way to know that
+  you are not attempting to change the value of a constant. You think you are setting the value for the first time, but the compiler
+  just sees that you are assigning it a new value, and that is not allowed.
+  
+<blockquote>
+  const int A;
+  <br>A = 10; //compiler error
+
+  <br>//rather you must do this
+  <br>const int A = 10;
+</blockquote>
+
+For the same reason, <b>you must initialize a constant pointer when you declare it</b>, as I did above.  Just like it would be pointles to create
+a constant variable and not initialize at the time of declaration because then you could never use it for anything, so too would it
+be pointles to create
+a constant pointer variable and not initialize it.
+  <blockquote>
+
+     <br>int * const constPtr;// pointless, constPtr can never serve any useful purpose
+  </blockquote>
+<p>
+
+Let's see some examples in code that are based on the above principles.
+
+<xmp>
+ const int F  =10;
+ int * Fptr = &F;// compiles but illegal -- you are trying to point to a constant with a variable pointer
+ (*Fptr) = 11; // compiles but crashes program -- if this would really work, you would be changing a const!
+ const int *  Fptr= &F;  // the right way to do it
+ (*Fptr)= 11;  //Now this won's compile, but that is good because you should not be changing constants
+
+ int c = 200;
+ int d = 300;
+ int * const C = &c;
+ int * const D ;  //compiles but never useful just as useless as const int G; you should give D a value.
+ const int * B;
+ const int * E;
+ E = &d; // a pointer to a const can point to a variable also
+ 
+ (*D) = 17; // compiles but you are accessing memory that does not belong to you. Don't do this!
+ (*C) = 17; // compiles but you are accessing memory that does not belong to you. Don't do this!
+
+ C = &d ;  or C = &c; // error because C is a read only variable, you can only assign C at time of declaration
+ B = &c;  //compiles but you cannot change c via B because B thinks he is pointing to a constant
+
+ (*B)++;// wont compile because B thinks he is pointing to a const int
+
+ (*B) =  17;  //error because B read only location, the location the B points to is suppose to be a constant
+</xmp>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+  <br>
+
+<xmp>
+  #include <iostream>
+  using namespace std;
+
+		       int main()
+		       {
+		       int a = 9;
+		       int b = 10;
+		       const int * ptr = &a;//the thing pointed to is constant
+		       int * const ptr1 = &a;// the address the pointer has is constant
+		       int const * ptr2 = &a; // ptr and ptr2 are the same kind of pointer, no difference
+
+		       //*ptr = 10;
+		       ptr = &b;
+
+		       //*ptr2 = 10;
+		       ptr2 = &b;
+
+		       //ptr1 = &b;
+		       *ptr1 = 11;
+
+
+		       int arr[10] = { 1,2,3 };
+		       //arr = &b;
+		       *arr = 12;
+
+		       system("pause");
+		       return 0;
+		       }
+</xmp>
+  
+&copy Nachum Danzig December 2017
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,150 @@
+<head>
+<TITLE>Programming - Strings</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Strings</H3></CENTER>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+Now that you have learned what an array is, it should be clear that 
+just as you can make an array of int's or float's, you can also make
+an array of char's.  The special thing about an array of char's though,
+is that an array of char's  is capable of storing words or sentences.
+If you make an array of characters and then put a NULL at the end,
+you have created a special array called a string.
+
+<p>cin and cout are built to work with strings.  Any set of 
+character literals inside quotation marks is automatically followed
+by a NULL, so it is a string.  Let's see an example of the power of 
+cin and cout.
+
+<blockquote>
+<tt>
+<br>int main()
+<br>{
+<br>
+<br>char ar[60]="greg";
+<br>cout&lt;&lt;ar;
+<br> ////  ar="hheeee"; //illegal
+<br> cin &gt;&gt;ar;
+<br> cout&lt;&lt;ar;
+<br>
+<br>  return 1;
+<br>}
+</tt>
+</blockquote>
+
+I can create an array of maximum 60 character (actually, while the array
+has 60 spaces, I can only use 59 of them for letters because
+I need one for a NULL)
+
+<p>
+Then I assign the array the literal string "greg".  (This can ONLY be done 
+when the array is declared, not afterward.)
+
+<p>Then I overwrite the array with whatever the user types in. (Note: If he types more than 59 character I will over-run my array.)
+
+<p> Then I can print out the array.  Notice how cin and cout are smart enough 
+to print the entire array when I give them the name of the array.
+This will not work with and int or float array.  It only works with a NULL
+terminated character array.
+<hr>
+<p>
+Ok, now we have a string.  But since the string is actually just an array of 
+characters I can mess around with it.  For example I can print the array 
+in backward order.  First I will show you how to print it in forward order.
+(This is actually what the function cout does when you give it an array name.
+
+
+
+<blockquote>
+<tt>
+<br>int printString( char* myString )
+<br>{
+<br> for (int i = 0; myString[i] != NULL; i++)
+<br>  &nbsp;  { cout&lt;&lt;myString[i];
+<br>  &nbsp;  }
+<br>  return 1;
+<br>}
+</tt>
+</blockquote>
+
+
+<p> This function starts at the beginning of the array it is passed and 
+keeps printing out one letter at a time till it reaches the end of the array.
+( remember string arrays always end with a NULL, so the NUll will be
+my clue when the array is over.)
+
+<p>To print the array backward I first have to find the end of the array.
+So I will count till I get the end of the array and then work backward.
+Let's see the example:
+
+
+
+<blockquote>
+<tt>
+<br>int reversePrintString( char* myString )
+<br>{
+<br> for (int i = 0; myString[i] != NULL; i++);
+<br> for (  ; i >= 0; --i)
+<br>  &nbsp;  { cout&lt;&lt;myString[i];
+<br>  &nbsp;  }
+<br>  return 1;
+
+
+<br>}
+</tt>
+</blockquote>
+
+Notice that first I do a loop that does nothing except increment i till
+it reaches the end of the array.  Then I in another loop I print the array
+backward. 
+
+<p>
+I can also do other things, like, for example, find the first 'p' in the 
+string. Or for example, <b>change</b> the original string by, say,
+taking any lowercase t's in the array and making them into capital T's.
+Let's see this example.
+
+<blockquote>
+<tt>
+<br>int t_to_T( char* myString )
+<br>{
+<br> for (int i = 0; myString[i] != NULL; i++)
+<br>  &nbsp;  {
+<br> &nbsp;   &nbsp;  if (myString[i]=='t')
+<br>   &nbsp;   &nbsp;  &nbsp;   &nbsp; { 
+<br>   &nbsp;   &nbsp;  &nbsp;   &nbsp;  myString[i]='T';
+<br>   &nbsp;   &nbsp;  &nbsp;   &nbsp; } 
+<br>  &nbsp;  }
+<br>  return 1;
+<br>}
+</tt>
+</blockquote>
+<p>
+As we explained in the section on arrays, the change made here will affect
+the original array in the calling function.
+And notice, I did not print out the string in the function.  I simply 
+changed the string.  If I would want to print out the array I would
+do that in the calling function, the main function for example:
+<blockquote>
+<tt>
+<br>int main()
+<br>{
+<br> char charlie[100]="this is a test string.";
+<br> t_to_T( charlie);
+<br> cout&lt;&lt;charlie;
+<br>  return 1;
+<br>}
+</tt>
+</blockquote>
+<p>
+Notice that when I called t_to_T  I passed the name of my string, charlie.
+I did not have to use the [ ] 's .
+Also notice that the strng is much larger than it needs to be. 
+This is ok, but I have wasted some 75 char's.
+
+<p>
+&copy Nachum Danzig December 2005
+
+</body>
+</html>

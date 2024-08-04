@@ -1,0 +1,188 @@
+<head>
+<TITLE>Programming - Using Arrays</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Using Arrays</H3></CENTER>
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+So far we have learned how to create variables to store information.
+But sometimes we need to store a lot of information. To do this
+we would need to create a lot of variables.  For example, 
+if we wanted to keep track of the total fees we charged cars for 
+parking in our garage we would need a variable for the fee for a given car. 
+ And  another varaible for 
+the total daily charges.  To do this we might write something like this.
+<br><tt>
+<br>bool quit = false;
+<br>double fee, total_fees;
+<br>while( ! quit )
+<br>&nbsp; &nbsp;{
+<br>&nbsp; &nbsp;fee = get_charges();
+<br>&nbsp; &nbsp;total_fees += fee;
+<br>&nbsp; &nbsp;}
+ </tt> <br>
+
+This seems fine. But what if after we were done computing all the fees and 
+the total fee we wanted to know what the 4th car had paid,  How could we recall
+this information?
+We would need to store each fee in a different variable.  We could make
+<br><tt>
+double fee1,fee2,fee3,fee4,fee5;
+</tt> <br>
+Then we would have to copy each fee into a different summing variable  
+each time.
+We would have to use a lot of if and else's to check which 
+iteration number we were on so we would know which fee number to assign.
+This would produce very messy code, but it could work.
+BUt it would only work for a maximum of 5 car fees. What if we wanted
+to keep track of a thousand cars? 
+To deal with problems like this one, arrays were created.
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+If we want to create a set of variable of the same type we can do this by creating an array.
+An array is a set of variables of one type all having the same name but with different index numbers (also called offsets or subscripts)
+We can declare an array like this:
+<br><tt>int a[12] ;   </tt> <br>
+This will create 12 integers located in contiguous spaces in memory, i.e. one 
+after the other where the identifier "a" points to the first int in the set. 
+By using the number 12 we have instructed the computer to find us 12 new integer 
+locations in memory.   In this 
+case we specified 12 int's.  If an int is 4 bytes then the computer will look 
+for 12 * 4 or 48 bytes of memory in adjacent places (without any gaps between them).
+If we ask for a very large space, the computer may fail to find the space and 
+the command will fail at run time. But usually you won't have this problem.
+The name of this array will be "a". "a" by itself holds the <b>address</b> in memory
+of the <b>first</b> int in the array called "a".  In otherwords, the name of the 
+array refers to the location in computer memory where the first element of the 
+array resides. To get the contents of this memory space, i.e. the actual int,
+you need to <b>de-reference<b/b> the space. De-referencing means finding the content
+of a specific place in memory.  We will discuss this more in the next chapter. 
+ For now just read on about how to actually do this de-referencing.
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+We can de-reference different parts of the array by using indexes, also called 
+offsets.  Here is how it is done.
+<br><tt>a[0] = 18 ;   </tt> <br>
+
+This finds the content of first or 0th element of the array and then
+assigns the element the value 18.
+
+Since we asked for 12 spaces, we got 12 spaces, but the indexes will 
+start with zero ( 0 ) and go until eleven ( 11 ). <b> This simple point can confuse people</b>.
+So to assign the last element in the array a value we would do the following.
+<br><tt>a[11] = 625 ;   </tt> <br>
+Code which uses space beyond the end of the array will compile! But it
+is <b>always</b> a logical error. So be careful!
+A command like <br><tt>a[12] = 625 ;   </tt> <br>
+or 
+<br><tt>a[45] = 9925 ;   </tt> <br>
+will compile, but we are then accessing a place in memory which we have no right 
+to access.  Our program will compile, but will probably crash at run time.
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+We can assign different values to the different elements in the array 
+inside of a loop.
+We can increment through all the indexes of the array by using a counter 
+as the index of the array.  Let's see the above example rewritten using an array.
+<br><tt>
+<br>double fee[ 12 ];
+<br>double total_fees;
+for(int counter =0; counter < 12; counter++ )
+<br>&nbsp; &nbsp;{
+<br>&nbsp; &nbsp;fee[ counter ]  = get_charges();
+<br>&nbsp; &nbsp;total_fees += fee [ counter ] ;
+<br>&nbsp; &nbsp;}
+ </tt> <br> 
+ 
+In this example counter will start with the value of 0 and increment upwards
+till it reaches 12 and then exit the loop. (Note: it will actually stop at 11
+so we won't have a problem of overrunning the end of our array.)
+  The first car will have its fee 
+stored in the variable
+fee [ 0 ] .  The second car will be in fee [ 1 ] , and so on until the last or 12th
+car will have its fee assigned to fee [11] .
+If at some later time I wish to recall the fee of the 4th car I can 
+access it by writing <tt> fee [ 3 ] </tt> .
+This provides a simple way to store a large set of data in an easilly
+accessible format.
+<h3>Arrays as Parameters of Functions (References)</h3>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; The name of the array in this case is "fee".
+What is the type of this name?  It is not simply a double. It is 
+a <b>reference</b> to a set of doubles.  If I want to <b>dereference</b>
+a particular element in the array I must specify which element.
+As we have seen I do this by using the braces [ ] and including a number
+inside them.  That number is called the index of the array, or the array 
+offset.
+If I were to pass an array to a funtion, what type would I write in the
+ function definition? I would specify that it is an array.  I would do this like this:
+
+<br><tt>
+<br>int myFunction ( double*  someName )
+<br>{
+<br>
+<br>}
+ </tt> <br>  
+
+This means that the function myFunction has a parameter which is an array
+of doubles.  This array can be of any size.
+<br>
+I would call the function like this:
+<br><tt>
+<br>{
+<br> myFunction ( fee );
+<br>}
+ </tt> <br>  
+The call will pass the whole array named fee to the function myFunction.
+Now the function can access all the element in the array.
+In the function myFunction the elements will be refered to by the new 
+name I gave the array, someName.  I.e. to print the 
+4th element in the array inside the function I would write
+<br><tt>
+<br> cout&lt;&lt; someName [ 3 ]&lt;&lt;endl;
+ </tt> <br>  
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; We have learned that in functions any 
+changes to the values that were passed as variables to the 
+function (through the parameters) if changed inside the function, do not affect
+the original variable in the calling mathod.  This is true because
+the variable itself is not passed to the function, but only the value of
+the variable is passed.  That value is then copied into 
+the variable which appears in the parameter list in the function defininition
+in the order it was written.
+Thus changes in the function variable do not affect the original variable.
+This is not true with arrays.  Since an array name is a reference to the 
+variables inside it, when a copy of this reference is made, the copy still 
+refers to the same variables.   So when I dereference the 
+elements of the function's array, they are the same variables as
+the calling function's array.  <font color="red">  Changes in the array 
+elements in a passed array will affect the array in the calling function. </font>
+If I give a hit-man an address of a person to be killed,
+even if  the hit-man  makes a copy of the address on a separate paper,
+when he goes to the house at the address on the copied paper and 
+kills the man inside that house, the man who lives in the house at the address
+on the original paper is also dead - <b> it 
+is the same man! </b>.  The paper is a copy, but the thing it refers to is 
+only one thing.
+
+<br>
+Try an example and see for yourself, but don't get killed.
+<br>
+<p>
+&copy Nachum Danzig November 2003 - July 2005
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

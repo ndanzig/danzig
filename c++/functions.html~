@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+
+<head>
+<TITLE>Introduction to Computer Science C++ - Functions</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2>    </CENTER>
+
+<center><H3>Functions</H3></CENTER>
+
+
+<h3>OVERVIEW</h3>
+<p>
+A Function  is a set of actions designed to be executed at various times.
+This set of actions is  defined inside braces { }. Before the set of braces
+there should be an identifier. The identifier works like the label we saw
+with goto.  It allows the computer to later refer to this set of actions so 
+you can tell it to do them. 
+Here is the general format of a function:
+
+<p><cc><i>return_type <font color=blue> identifier</font>( parameter_list )
+<br>{
+<br>various actions
+<br>} </i></cc> 
+
+<p>
+
+
+The identifier (in blue) is the name you give to your function. 
+It follows the saming naming conventions as variable names.  All 
+legal names are valid. The other elements of the above format will be explained as we go along. This format together is called the 
+<b><i>function definition</i></b>.
+
+<P>Where  are you supposed to write the function definition?  Everything
+ we have done up to now  has been written inside the braces that follow 
+ main().  The function definition is an exception.  You write it <b>before</b>
+the main() 
+<p>
+
+For example here is a function named print_hello.  Notice that we write it
+ before the main() section:
+<xmp>
+#include <iostream>
+using namespace std;
+
+void print_hello()
+{
+cout<<"hello "; 
+}
+
+int main()
+{
+
+int p;</xmp>
+<i>etc.</i>
+<xmp>return 1;
+}</xmp>
+
+
+This function, as its name suggests, writes hello on the monitor.
+For this function, the set of actions it does is actually just 
+one action, a <i>cout</i> command to print "hello".  
+
+ The set of parenthesis after the function's name
+indicates that this is a function. 
+Notice that the stucture of
+print_hello mimics the stucture of a program.  It has a set of () parenthesis 
+followed by a set of {} braces.  Inside the braces is a set of commands.
+This is just like the way a program is written. <i>Main</i> is actually the 
+name of a function, the main function of our program.
+<p>
+ This program may seem like it does not do
+anything special.  We could have just written our <i>cout</i> command
+in the main body of our program and not really needed to write the function. 
+ Well, this function is just to show how to write a function, not to do anything really useful. It just shows us the structure of a function.
+<p>
+
+If I wanted to use this function in a program I need to <b><i>call</i></b> the 
+function from the main.  He is an example to do just that.
+
+<pre>
+
+
+void print_hello()
+{
+cout<<"hello "; 
+}
+
+main()
+{
+<b>print_hello();</b>
+}
+</pre>
+<p>
+(Notice how the function is written before the braces which follow 
+the main.)
+<p>
+The line in <b>bold</b> above is called the <b><i>function call</i></b>.
+What it does is to tell the computer to jump over to the function named 
+print_hello and do the actions listed there. Upon completing this, the 
+computer returns to where it was in the main section of the program and
+continues executing whatever commands are there.
+Now that we have completed an overview of what a function is, we can examine 
+each element of a function in more detail.
+
+<h3> Parameters </h3>
+
+The function print_hello does something, it prints "hello". It does not
+need any information from the main to do this. 
+But functions sometimes do need information from the main.
+For example, I might want the main to tell me how many times to print hello.
+This information can be given to a function. This is called <i>passing</i> 
+values to the function.  When we pass values, these values are called
+parameters or arguments.
+
+<p>
+ 
+We saw in the function  format above something called the parameter list.
+Here it is again for you (in blue)
+<br><cc>return_type  identifier ( <font color=blue>  parameter_list</font> )
+</cc>
+<p>
+In the parameter list we list all the pieces of information we want our function to be given,
+ the parameters.
+Each parameter is written exactly like a variable declaration.  So
+if we wanted the function to get 2 integers, our parameter list would look 
+like this:
+<p>
+<cc>return_type  identifier ( <font color=blue>  int a, int b</font> )
+</cc>
+<p>
+Notice that each parameter is separated by a comma.  Also notice that even though I have two ints,  I still  need to write the word <i>int</i> twice:
+<br>
+<font color=red> <cc>return_type  identifier (   int a, b )
+</cc> WRONG! </font>
+<p>
+
+Let's see an implementation of my previously mentioned idea of printing "hello" as many times 
+as the function is told to. 
+
+<xmp>
+#include <iostream>
+using namespace std;
+
+void print_hello(int num_of_times)
+{
+for( int i=0; i <num_of_times; i++)
+    {    
+      cout<<"hello "; 
+    }      
+}
+
+int main()
+{
+
+int p;
+print_hello(16);
+return 1;
+}</xmp>
+
+You can see that this function now has a variable <i>num_of_times</i> defined in the
+parameter list.  When the function is called in the main, the number 16, 
+in this example, is sent to the function and the variable in the parameter list
+ (<i>num_of_times</i>) will be assigned that value.  Then the for loop will loop 
+16 times and print hello 16 times.
+<p>
+If a function has more than one parameter then when the function
+is called, as many values as there are parameters must be sent.
+Each parameter is assigned one value as determined by the order of the 
+variables.
+
+
+<h3>Return Values</h3>
+<p> We have seen that when we call a function we can pass values into 
+the function. We can also get a value back out of the function.
+This value we get back can be stored in a variable where the function is called.
+If a function returns some value when it is done, this is called a <i>return 
+value</i>.  Functions can return only one value.
+After the functions does its job, the value it returns will
+be placed exactly in the place where the function call is written.
+Thus, assuming we have a function called myAverageFunction, a statement like:
+<pre>
+int a = myAverageFunction ( 3,4,5);
+</pre>
+after the function finishes running will actually be translated to this:
+<pre>
+int a = 4;
+</pre>
+ The variable <i>a</i> will be assigned the value that 
+the function myAverageFunction() returns.
+
+In other words, the return value is sent back to the place where the 
+function was called.
+  If, for example, there was an assignment operator
+there then the variable being assigned will get the value the function returns.
+
+<br>For example:<br> <font  color="blue">float a = 
+myAverageFunction( 90, 75, 87  ) </font>.<br>
+In this example, "a" will be assigned the value myAverageFunction returns.
+
+<p>
+If you look at the definition of a function you will see that in the 
+general structure of a function there is something called the <i>
+return type</i>.  This is where you will define what type of value
+your function will return, if any. 
+ If you want your function to 
+return a value of type <i>int</i> then write <i>int</i> here. 
+ If you want your function to 
+return a value of type <i>float</i> then write <i>float</i> here, etc. 
+Here is an example of a function whose return type (in blue) is defined to
+ be a float:
+<br>
+<br><font  color="blue">float </font> myAverageFunction 
+(int  a, int b, int c )
+<br>{
+
+<br>float average; <br>
+
+<i>etc.</i>
+
+<br><font color=green>return average;</font>
+
+<br>}
+
+<p>
+Defining the function to return a specific type of value is just the first 
+step. Next you have to actually return that value in the body of the function.
+See the above line in green for where this function actually returns the 
+value it is defined to return.
+
+
+<p>
+When returning  a value, we use the key-word <font  color="green"> return  </font> followed by the value we wish to return.  This 
+statement occurs inside the function.  In addition to returning the value, 
+this return command also causes the function to exit
+(i.e. finish immediately). This is true even if there are statements written 
+after the return command.  For example,
+<br>
+<br><font  color="blue">float </font> myAverageFunction 
+(int  a, int b, int c )
+<br>{
+
+<br>float average; <br>
+
+<i>etc.</i>
+
+<br><font color=green>return average;</font>
+
+<br><font color=red>cout&lt;&lt; "hello"; // this line will not execute</font>
+
+<br>}
+
+<p>
+Even if a function returns a value, I can theoretically choose 
+not to store the returned value. I can let the value "drop".
+It is as though a player would throw the baseball back to the pitcher
+at the end of the play, but the pitcher would just watch it fall to the ground.
+He just lets the ball drop.  In the same way, a function can return a value
+to the caller, but the caller may or may not choose to store the value in a variable.
+For example I could call myAverageFunction like this:
+<pre>
+myAverageFunction(4,67,89);
+</pre>
+In this case the function will get run as usual, but the return value
+has no place to go.  It will be lost.  Generally it is a good idea to store the return value in a variable so that you can use it in the
+ future. But you can also choose not to store it and let it drop as
+ above. One occasion where it might make sense not to store the return value is when you need to print the return value once and then do
+ not need it any more.   To do this you could write something like
+ this:
+<pre>
+cout&lt;&lt;myAverageFunction(4,67,89);
+</pre>
+Here, although I do not store the return value, I am able to see what
+ it is.  But after that I have lost the value.
+
+
+<p> Functions can also return nothing. 
+ In this case we have the function return <b>void</b>.  If I want to write
+a function that does not return any value I must declare the 
+function like this:
+<pre>
+void myFunction (int a )
+{
+
+return;
+}
+</pre>
+
+Notice that the return type is <b>void</b>.  Also notice that the return 
+statement is not followed by any value. I simply write <tt>return;
+</tt>. 
+<p>If you want to write a function without any return value, write the 
+word <i>void> </i> in place of the  return type like this:
+<Pre>
+void myfunction()
+{
+cout&lt;&lt;"hello";
+return;
+}
+
+</pre>
+Notice that I used the word return to show the end of the program but did not follow
+it with any value.  This is because I am returning void, not an actual value.
+You may also choose to leave out the <i>return</i> line altogether.
+
+<p>
+When I call such a function in the main I cannot store the return 
+value since there is no return value.  I simply call the function:
+
+<pre>
+int main()
+{
+myFunction(7);
+
+}
+</pre>
+
+
+<h3>Function Definition</h3> 
+
+Let's take a more detailed look
+at the structure of the <i>function definition</i>. This will review what we have seen up till now.
+
+<p>
+
+Some functions are built-in ( like rand(), see below ), but the
+programmer may write his own functions (as I did in the above examples).  
+To do this, he must define the function.  That is, he must
+define what return value type he intends to return, what paramenters he can 
+accept, and of course what the function will actually do with the values it 
+receives when it is called.
+<p>  A function is defined according to the following format:
+<br>
+<tt>
+<pre>
+return-type functionName( type parameter1, type parameter2, ....)
+{
+statement;
+statement;
+statement;
+:
+:
+return return-type;
+}</pre>
+</tt>
+<p>
+The return-type is the <u>type</u> of the value that the function will return.
+It can be an int, a float, a char etc.  If the function has no return value, 
+then write <i>void</i> for the 
+return-type.
+
+
+The parameters  (parameter1, ...) are the data 
+inputs to the function.  There is only ever one returned value but there can be any 
+number of 
+inputs. If there are multiple parameters they are seperated by commas.
+Each parameter must be composed of a type and a valid identifier.
+If the function has no inputs, then leave the parameter list blank or write the word
+<i>void</i> between the parenthesis.
+Each parameter acts as a variable which can be used inside the function.
+It is as though I have defined several variables (in my parameter list) so that I 
+can then use them inside my function { }.
+
+
+<br>
+Here is an example of a  function definition:
+<br>
+<br><font  color="blue">float </font><font  color="green">myAverageFunction </font>
+(<font  color="blue">int </font><font  color="green"> a </font>, 
+<font  color="blue">int  </font><font  color="green">b </font>, <font  color="blue">int </font><font  color="green"> c</font> )
+<br>{
+<br><font  color="blue">float </font> <font  color="green">average</font>; <br>
+
+<font  color="green">average</font> = ( ( 
+<font  color="blue">float </font> ) <font  color="green">
+a </font> + ( <font  color="blue">float </font>) <font  color="green">
+b  </font> + (<font  color="blue">float </font> ) <font  color="green">c </font> /   3  );
+<br><font  color="blue">return </font>  <font  color="green">average</font>;
+
+<br>}
+
+
+<p>This function takes 3 parameters all of type int.  It then computes the
+average of the 3 numbers and returns that value to the caller as a float.
+<br>If the calling function had a line like this, for example:
+<br> 
+<font  color="blue">float a = myAverageFunction( 95, 80 , 80  ) </font>;<br>
+Then "a" would get the value 85 (the average of the 3 numbers).
+Once I have written the function definitition, I can then use the function to
+compute averages as many times as I wish.  Furthermore, I can use it without
+worrying how it does its job.  I can treat the function as a <i>black box</i>.
+
+
+<h3>Function Call</h3>
+
+<p>The function call is when 
+I try to run the function.  To do this I simply write the name of the function
+ followed by ( ). Inside the ( ) I place the list of values I want to 
+pass to the function parameters. This is called a function call.
+When I do this, the values I input are assigned to the variables in the 
+parameter list.  
+The order of the list determines which values are assigned to which variables.
+The function will then be able to access these values by using the variables
+defined in its parameter list.
+<br> When we call a function we <i>pass</i> values into the function. 
+
+
+<p> As I have stated, parameters are the list of comma deliniated variables
+which are used as inputs to the function. 
+ We can
+have as many parameters (inputs) as we want.  Although it is true that these variables are defined 
+locally ( i.e. within a function ) the <b>values</b> they get are equal to the values the 
+caller supplies in his argument list. 
+<p>
+For example:
+<p>
+<font color="green"> float myAverageFunction( int a, int b, int c )  </font><br> has three parameters. All three are ints. If I were to pass the values 1 , 2, and 7 in my call to the function like this
+<font color="green">myFunction( 1, 2, 7 )  </font> 
+then "a" would get the value 1, "b" would get the value 2, and "c" would
+get the value 7.  The order of the numbers determines which value is assigned to which variable.
+Furthermore, if my function is defined as using 3 parameters then I must pass it 3 
+values whenever I call the function.  I cannot ignore any of the required inputs.
+
+<h3>Function Proto-type</h3>
+<p>It is a good idea to write a function proto-type at the start of your 
+program for each function you plan to define.  A function proto-type is
+a way of telling the compiler what functions you plan to define later on.
+This is useful when you have one function using another function.  
+The funtion proto-type looks just like the first line of the function definition
+with the addition of a semi-colon ; at the end.
+<br>
+<tt>return-type functionName( type parameter1, type parameter2, ....);</tt>
+<br>
+So all you need to do is cut and paste the first line of your function definition
+to the top of your program file and then add a semi-colon.
+You are then permitted to write the functions <b>after</b>
+the main() function.  This syntax style is generally preferred.
+
+Here is an example of a trivial function with a proto-type, the function
+ proto-type  is in blue:
+
+<xmp>
+#include <iostream>
+using namespace std;</xmp>
+<font color=blue>void print_hello();</font>
+<xmp>
+int main()
+{
+print_hello();
+return 1;
+}
+
+void print_hello()
+{
+cout<<"hello "; 
+}
+</xmp>
+
+<h3>Scope of Variables</h3>
+<p>Ii is a general rule that variables are only recognized inside the block of
+ code where they are defined.  Thus, a variable defined within a nested block
+ of code is not known outside the inner nest.
+The same holds true for functions.  
+ Variables defined inside one function are not known to the code of other
+ functions. So too, the variables defined in the parameter list of a function
+are known to that function, but nowhere else. It is as though the parameters 
+were defined inside the function braces.  
+
+The variables defined by the function (inside the function) are
+ <b>not</b> known to the calling function and variables defined by the calling 
+function are not known to the called function.
+So how does the called function get data inputs if it does not know about the
+ calling  function's variables?  It does not know the variable names, but you
+ can pass the <b>values</b> of these variables in the parameter list. 
+  
+When I call a function, copies of the values of the
+variables I pass are sent to the function, not the original variables.
+For example, if I call a function like this
+<blockquote>
+ <font  color="blue">
+int num1 = 95; <br>
+int num2 = 80; <br>
+int num3 = 80; <br>
+float a; <br>
+a = myAverageFunction( num1, num2, num3  ) </font>;
+</blockquote>
+then the <b>values</b> of num1, num2, and num3 are passed, not the actual
+ variables.
+
+Practically what this means is that num1, num2, and num3 cannot be changed or
+affected in any way by the function. The function myAverageFunction will
+just get the values 95, 80 ,and 80 and assign them to its local 
+variables a, b, and c and work with them.  (Note: When we learn <i>pointers</i>
+we will learn how a function <b>can</b> affect the original variables it
+is passed. )
+
+<p>Let's see an example of a function which attempts to change a variable
+ outside
+ its scope. The function  will obviously not succeed at doing this.
+<pre>
+void changeMe(int a)
+{
+a++;
+return;
+}
+</pre>
+If this function were called in the main of a program like this
+<pre>
+int var =9;
+changeMe(var);
+</pre>
+ the variable (var) passed  to the function would not actually change
+(var will still be 9). This is becasue var was not passed to the function,
+only its value ( 9 ) was passed.  This value was then copied into the 
+function's variable "a", and then "a", not "var" was incremented.
+ "var" was never touched.
+
+
+<p>If I want to change the variable I will have to return a new value as an 
+output and then store it in the variable in main.  Here is an example
+of how I could really change the variable (notice, I changed the function name
+to more exactly describe its function):
+
+<pre>
+int returnLargerValue(int a)
+{
+return (a++);
+}
+
+int main()
+{
+int var=9;
+var=returnLargerValue(var);
+
+return 0;
+}
+
+</pre>
+The above example will actually increase var by 1.  Notice that I had to 
+return a new larger value and then use the assignment operator (=) to reset 
+var to this new value.
+
+<h3>Global Variables</h3>
+A way around the problem of scope is global variables.
+Global variables are defined outside the braces of the main function.
+They are therefore in the scope of all functions in the program.
+For various reasons, global variables are considered dangerous.
+Do not create or use global variables unless absolutely required by the
+program.  Here is an example of using a global variable.
+<pre>
+int global_a ;
+
+int changeme()
+{
+global_a++;
+}
+
+int main()
+{
+global_a=8;
+changeme();
+return 0;
+}
+</pre>
+
+The function changeme() will change the variable global_a (the name is not
+ significant) from 8 to 9.  Both the main() and the function changeme have 
+access to the variable global_a.
+
+<h3>Functions Calling Other Functions</h3>
+
+<p>
+One function may call another function.  To do this, simply call the desired 
+function from within your function, just as you would from within the main() 
+function.  In order for your new function to recognize the other funtion, the
+other function's definition or proto-type must precede it.
+
+
+<h3> Function Overloading</h3>
+<p>
+The computer distinguishes between different functions not only based on their 
+different names, but also based on their different parameter lists.
+This means that if you create two functions with the same name but 
+different parameters, the computer will consider these functions as being 
+different functions that just happen to have the same name. When you call the
+ function, the compiler will decide which function you mean by checking 
+how many and which parameters you passed.  Depending on these parameters, the
+compiler will decide which function to actually call.
+For example the functions defined by these two function proto-types
+are different even though they have the same name.
+<p>
+<tt>
+float findArea(float size);
+<br>float findArea(float size, float width ); </tt>
+<p>
+The first function has one parameter and the second function has two, so 
+they are different functions even though they have the same name.
+The inner working of the two functions can be as different as night and day,
+ or they can be quite similar.  This depends on what the programmer writes in the function
+definitions of the two (or more) functions.  Usually the functions will be written
+to have similar operations since, after all, the name is supposed to reflect what 
+the function does and they have the same name.  
+<p>
+When these functions are called, the compiler will choose the function
+definition that matches the parameters supplied.
+For example, if I write <tt>findArea(7.766, 3.456)</tt>  then the
+second function will be called since only the second function has two parameters.  When programmers write different functions with 
+the same name we call it <b>overloading</b> a function since the function
+seems to have two or more different ways of workings. 
+Despite the negative sound of the term, there is nothing wrong with function overloading.
+  </tt> 
+<h3> Default Parameters</h3>
+<p>
+Another interesting feature of functions is the possibility of providing 
+default parameters.  What this means is that if the call to the function is missing some parameters, then the function will provide its own values for the 
+missing parameters.
+
+
+Let me give an example.  Lets say I want to write a function to compute the 
+circumference
+of a circle given its radius.  We know the formula c = 2 * Pi * r
+<br>where c is cirumference, Pi is the value of Pi , about 3.14 and
+r is the radius.
+
+I can write the function like this: 
+<br>
+<br>float  circum(float radius, float Pi=3.14)
+<br>{
+<br>float total;
+<br>total = 2 * Pi * radius;
+<br>return total;
+<br>}
+<br>
+ 
+Now if I call the function with one parameter, it will assume that parameter
+is radius and will use the value 3.14 for Pi, but if I provide two parameters
+when I call the program it will use the second value for Pi in place of 3.14.
+This makes sense in this example since the person using my function may want 
+to compute the circumference of the circle using a more precise value for Pi.
+Here is an example of a complete program:
+<tt>
+<br>
+<br>#include&lt;iostream&gt;
+<br>using namespace std;
+<br>
+<br>float  circum(float radius, float Pi=3.14);
+<br>
+
+<br>int main()
+<br>{
+<br>float someFloat;
+<br>someFloat = circum (7.0);
+<br>cout &lt;&lt;"Circumference using Pi as 3.14 (default)" &lt;&lt;someFloat&lt;&lt;endl;
+<br>someFloat = circum (7.0, 3.1416);
+<br>cout&lt;&lt;"Circumference using Pi as 3.1416" &lt;&lt;someFloat&lt;&lt;endl;
+<br>
+<br>return 0;
+<br>}
+<br>
+<br>float circum(float radius, float Pi=3.14)
+<br>{
+<br>float total;
+<br>total = 2.0 * Pi * radius;
+<br>return total;
+<br>}
+<br>
+</tt>
+
+</p>
+
+<h3>Libraries</h3>
+<p> There are many functions already written by people which can be
+used.  These functions are grouped together and are stored in 
+what are called libraries.  These different libraries
+are groups of functions somehow related to each other.
+In the math.h library there are functions like pwr to raise something
+to a power, and sqrt to find a square root of a number. 
+There is also a standard library with many useful function.  This
+library is abreviated either stdlib or cstdlib.  One useful
+function in this library is  the rand function.  The rand function 
+produces a  random number. Use it like this:
+<pre>
+float a = rand();
+</pre>
+The function will return a random decimal number between 0 and 1.
+To get it to produce numbers within a certain range use the modulus
+ operator. Note that the remainder of a division operation
+will always be an integer between 0 and the number.  Thus if I want
+a random number between 1 and 100 I should write this:
+<pre>
+int a = rand()%100 + 1 ;
+</pre>
+
+You will notice that rand doesn't really produce random numbers.
+To get it to do so, you need to use the srand function which "seeds"
+the rand function so it will start at different points and produce
+ truly random values.  The rand function should be run only once in
+ the whole program.  Do not run it inside your functions since then
+ it will be run every time your function is called.
+Also, the srand function takes a parameter by which it seeds. 
+ You will want to give it different numbers each time.  
+The easiest way to do this is to use the time function.
+The time function is found in the time.h library. 
+ Here is how to use the srand with the rand function:
+
+<pre>
+#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;time.h&gt;
+using namespace std;
+int main()
+{
+int a;
+srand(time(0));
+a = rand()%100 + 1 ;
+a = rand()%100 + 1 ;
+a = rand()%100 + 1 ;
+
+return 1;
+}
+</pre>
+
+Notice that I included two libraries in addition to the normal
+iostream library. You should do the same when using the rand and
+the  time functions.
+
+<h3>Exercises
+</h3>
+
+<ol>
+<li> Write a function named "isOdd" which has as a parameter one integer and returns true or false.
+True if the integer supplied is odd and false if it is even.
+<li> Write a function named "printAster" which prints a number of astericks in a single line. 
+The number is determined by an integer parameter.
+
+<li> Write a function called "multiply" which accepts two integer parameters and returns their
+product.  The catch is that the function should only use the + operator and not the * operator.
+
+<li> Write a function called "power" which computes the value of one number raised to any 
+power.  The function should accept two integer parameters (one is the number and the other is the power by which it is raised) and returns the correct result. Use the previously defined function "multiply".
+ Do not use the * operator. 
+<li> Write a function called "LCM" which calculates the lowest common
+multiple  of two integers and returns the answer. The LCM is lowest
+muliple that the two numbers have in common. 
+<li>Write a function called "rollDie" which will simulate the rolling of a six
+sided die. One sixth of the time the function should return 1, one sixth of the time it
+should return 2, etc.  Use the rand function and the % operator.
+
+<li> Write a function called divide which divide two numbers.  Prevent division by zero.
+Do not use the / operator.  Use the - operator.
+<li> Write a function called factorial to compute and return the factorial of a number.
+Do not use the * operator.  Use the function multiply.
+
+<li> Write a function called roll2Dice which simulates the rolling of 2 dice.
+Use 2 calls to the function rollDie.
+<li>A perfect number is a number whose factors (including 1 but not 
+including the number itself) add up to the number 
+itself.  For example 6 is a perfect number since its factors ( 1, 2, 3)
+ add up to six.  Write a function which accepts as a parameter one
+number and returns true if the number is perfect, false if not.
+<li> A prime number is a number only divisible by 1 and itself.
+Write a function which accepts as a parameter an integer and returns
+true if the number is prime, false if it is not prime.
+
+<li>Write a function which accepts an integer and returns that integer
+ where the digits are in reversed order.  For example, if you give 
+it  the number 1234 it will return 4321. If you give it 1200 it
+will return 21 (leading zeroes will be lost automatically.)
+</ol>
+
+<xmp>
+
+int reverse( int i)
+
+{
+int sum=0;
+  while (i)
+    {
+      sum*=10;
+      sum = sum + i%10;
+      i/=10;
+
+}
+
+return sum;
+}
+</xmp>
+
+
+<p>
+
+
+<br>
+&copy Nachum Danzig November 2004 - November 2006
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

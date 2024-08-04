@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+<head>
+<TITLE>Programming - Reading Files</TITLE>
+</head>
+<BODY BGCOLOR="#ffffff" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Reading from a File</H3></CENTER>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+
+Here is a short program which reads from a file named "data.dat".
+To access the file we have to create an object of type ifstream.
+We have called this object ClientFile.
+Now we can use the &gt; &gt; operator which we recall from  cin.
+In cin this operator reads from the keyboard, here we are 
+using the same operator to read from our object ClientFile which
+represents the file "data.dat".
+</p>
+
+<xmp>
+#include <iostream>
+using std::cout;
+using std::cin;
+using std::ios;
+using std::cerr;
+using std::endl;
+#include <fstream>
+using std::ifstream;
+#include <cstdlib>
+
+
+
+int main()
+{
+  int account;
+  char name[40];
+  double balance;
+
+// 1. create object of type ifstream to be used to read the file.
+// Note that I give the object the file name and a flag ios::in which
+// means that the file is intended to be read.
+
+  ifstream ClientFile( "data.dat" , ios::in);
+
+  cout<< "now we read the file\n";
+
+// 2. we read from the file as represented by the 
+// object ClientFile  and use the >> operator 
+// like we used with cin where we read from the keyboard.
+
+  while (ClientFile >>account >> name >> balance)
+    {
+// 3. print the data
+      cout << "account number "<<account
+	   << " name " <<name <<" balance "<<balance<<endl;
+
+    }
+
+
+ return (1);
+}
+
+</xmp>
+<p>
+A file must be closed when you are finished reading/writing to it.
+This will be done automatically when the program exits, but you can do 
+it earlier if you need to by using the command
+<br> <tt>ClientFile.close();</tt>
+<br> This may be usefull if you finish with a file before the program exits.
+In fact, as long as you keep the file open for writing, other programs 
+running at the same time
+will not be able to open the file for writing.  So you may need to close your
+ file when you expect multiple programs to be running. In general, it is just
+cleaner to close files when you are done with them.
+
+</p>
+<h4>Some other flags for opening files</h4>
+<ul>
+<li> ios::app - append output to end of file 
+<li> ios::ate - append output to end of file but can use seek to  write anywhere in file 
+
+<li> ios::trunc - destroy file if it exists, then begin writing
+<li> ios::binary - open a file for binary input or output
+<li> ios::in - open file for reading
+<li> ios::out - open a file for writing 
+</ul>
+&copy; Nachum Danzig February 2006
+</body>
+</html>

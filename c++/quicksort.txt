@@ -1,0 +1,70 @@
+#include <time.h>
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+
+void swap(int sorting_array[], int i, int j)
+{
+  cout<<"swapping "<<sorting_array[i]<<" with "<<sorting_array[j]<<endl;
+  int hold = sorting_array[i];
+  sorting_array[i] = sorting_array[j];
+  sorting_array[j] = hold;
+  return;
+}
+
+void quickSort (int *arr, int size)
+{
+     if (size < 2)//////////////////////////added base case
+     return;
+     
+     int ran = rand()%size;
+     swap(arr, 0, ran);
+     
+     int partition = 0;
+     int lowp = partition + 1, highp = size - 1;
+     
+     while(1)
+     {
+            while ((arr[highp] > arr[partition]) && (highp >=lowp))
+                  highp--;
+            while ((arr[lowp] < arr[partition]) && (lowp < highp))
+                  lowp++;
+            if (highp <= lowp)//done//////added =
+               {
+                      if (partition != highp)
+                         {swap(arr, partition, highp);}
+                      break;
+               }
+            else 
+                {
+                    swap(arr, lowp, highp);
+                    highp--; lowp++;///added
+                }
+     }// end while true
+    for (int i = 0; i < size; i++)
+    {cout<<arr[i]<<", ";}
+    cout<<endl;
+     quickSort(arr, highp);
+     quickSort(arr + (highp + 1), size - highp - 1);
+     return;
+}//end qs
+
+int main(int argc, char *argv[])
+{
+    
+    srand(time(0));
+    int arr[10] = {20, 4, 8, 10, 12, 14, 16, 18, 2, 22};    
+    
+    for (int i = 0; i < 10; i++)
+    {cout<<arr[i]<<endl;}
+    
+    quickSort(arr, 10);
+    
+    for (int i = 0; i < 10; i++)
+    {cout<<arr[i]<<endl;}
+    
+    system("PAUSE");
+    return EXIT_SUCCESS;
+}
+

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+<head>
+<TITLE>Programming - Repeating actions</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Loops -  Repeating the same action more than once</H3></CENTER>
+
+<p> 
+
+
+We have seen that to get a computer to do what we want we must
+tell it every step, down to the last detail.
+This can be very tedious. &nbsp;  It is especially
+tedious when we want it to do the same action several times.
+&nbsp;   For example in the first chapter  we 
+wrote a recipe for a computer to mix a cake.
+  We wrote "stir contents of bowl with mixing spoon 10 times".
+Normally, to get the computer to do this we would need 10 
+instructions; one for each stir.
+Wouldn't it be nice if we could tell the computer
+to repeat the previous action 9 more times?  Then we could save some typing.
+This would be really useful especially if we had wanted the computer to
+ stir the bowl a
+hundred  times.
+
+
+<p>  So how do we tell the computer
+to repeat an action many times? 
+In the early days of computer programming, programmers would have the
+computer jump from place to place in the code.  If you remember, programs
+normally execute in a downward sequence.  Using the <b>goto</b> command 
+programmers could force the computer to go back up when needed. Programming in 
+this way was soon discovered to be confusing and inefficient.  This method 
+has since been replaced with a more structured method.  Nevertheless, I will 
+start by demonstrating the use of <b>goto</b>  before I go on to explain the 
+newer methods. So bear in mind that using <b>goto</b>  is strongly discouraged.
+
+<p>
+The <b>goto</b> command works together with a <b> label </b>which acts as a 
+bookmark.
+I first must label a certain place in my code and then I can <i>goto</i> that
+ place.
+Here is an example:<pre>
+top:
+    cout &lt;&lt; "Hello world!" &lt;&lt; endl;
+    goto top; </pre>
+
+The computer will begin reading these lines top down.  When it sees the line
+<xmp>top:</xmp>
+it will simply register the label called "top" as being at this point in the
+ code, but this line will have no other affect on the program.  Notice that 
+this line ends in a colon ( : ) not a semi-colon (;). The 
+label can be any valid identifier, not necessarily the word <i>top</i>!
+<p>After this line,
+the
+computer will go on to the next line and print <i>Hello world!</i>
+to the screen one time.
+Then the computer will read the line <xmp>goto top;</xmp>
+This will cause the computer to jump up to the line labeled <i>top:</i> 
+and continue reading down from there.  Obviously, this
+ will cause the computer to print Hello world! over 
+and over again infinitely. This could crash your computer, so don't try this
+example.  This example has created what is called an <b>infinite loop</b>.
+It is called a loop because the computer loops back to the top each time
+it finishes a certain section.  It is call inifinite because it never ends.
+Infinite loops should always be created with a built-in way to end them, 
+otherwise they will eat up all the processing power of your computer and may
+ cause
+a crash.
+
+
+
+<p>We can add a built-in method of ending the loop by adding a user
+ interface to this code segment.  The user interface will allow the 
+user to end the loop by entering an integer, for example 0.  Here is how I
+might do this:
+<pre>
+bool end = 1;
+top:
+    cout &lt;&lt; "Hello world!" &lt;&lt; endl;
+    cout &lt;&lt; "Press 0 to end loop, 1 to continue." &lt;&lt; endl;
+    cin &gt;&gt; end; 
+    if (end != 0)
+       { 
+       goto top;
+       } </pre>
+
+<p>Notice how I initialized the variable <i>end</i> with the value 1.  Then I 
+allow the user to change <i>end</i>'s value to 0 if he desires to end the loop.
+Then I check if <i>end</i> is not equal to 0. If it is not equal to 0, I 
+continue the loop by jumping or looping back to the top of the code section 
+where I want the loop to start.  Notice I do not loop over the initialization
+of <i>end</i> because I only need to do this line once.
+In addition to the initialization, the other essential part of the loop
+is the test condition or as it is properly called the <b>continue condition</b>.
+  It is the condition by which the loop will continue looping.
+In this case the continue condition is <xmp>if (end != 0)</xmp>
+Notice also that in this example if the user types any non-zero value, the loop will continue. 
+
+
+<p>In the previous example, we allowed the user to decide 
+when the loop will end, but sometimes we want to decide from the start
+how many times our loop will loop.  
+The way this is done in general is by setting a variable to count for us.
+We can then repeat our action until our counter reaches some limit of our
+choosing.  For example, if we want to do something 10 times we could
+set a counter to zero, and then do our action and up our counter by 1.
+Upping the counter by one is called <b>incrementing</b> the counter by one.
+It's called incrementing because we add the same small increment to the 
+variable each time we loop.
+<p>
+Once the counter reaches 10 we know it is time to quit.  You may notice
+that I decided to start the counter 
+at zero, not one. This is the usual way of doing things in C++, but you could
+also start your counter at 1. 
+Let's see this example first in pseudo-code and then in C++.
+
+<blockquote> make a variable and call it "counter" <br>
+assign the value "0" to the "counter"  <br>
+do the following 
+ 
+<blockquote> add "1" to counter <br>
+write this message to the screen "Hi mom!"
+<br>repeat as long as counter is less than "10"
+  </blockquote> 
+<br>
+  </blockquote> 
+In the above pseudo-code I  gave the name
+"counter" to the variable, but I could have given any other name just as well.
+ &nbsp;  I could have called it "George", but I like to give names that mean 
+what the variable is used for.  Since this variable is supposed to 
+count, I called it "counter."    In trying to understand the
+ logic of the above instructions
+ask yourself, How many times will the message "Hi mom!" get printed? 
+Now let's see how to implement the pseudo-code in C++.  Try to match up each line of
+pseudo-code  above with the C++ below.
+
+
+
+<blockquote>  
+int counter;<br>
+counter = 0;<br>
+startloop:<br>
+<br>
+
+counter = counter+1; <br>
+cout &lt;&lt; "Hi mom!" &lt;&lt; endl;<br> 
+if (counter &lt; 10)<br>
+ { <br>
+ goto startloop;<br>
+ }
+</blockquote> 
+
+<p> 
+Can you match up the two versions? &nbsp;  Try again! &nbsp; 
+OK, my turn to tackle this code.  One thing should confuse you, what does this line mean: 
+<br>"counter = counter+1;"?
+ &nbsp;  How can a variable equal the same variable plus 1?  &nbsp;
+ &nbsp;  That breaks the rules of algebra! &nbsp;  If counter is 1,
+well, 1 does not equal 1 + 1! &nbsp;   What is our mistake? &nbsp; 
+&nbsp; Our mistake is that we think = means equals, remember it means <b>
+assign the value on the right side to the left side</b>. &nbsp; 
+In our case that translates to assign the value 1 + 1 to counter. 
+&nbsp;  Counter had been 1, now it will be 2.
+Another way of thinking about what this line means is to translate it as 
+follows: "the new value of counter will now be what the old value of
+ counter was, plus one."   Think about this for a moment.
+In my experience many people forget this point (if they ever really 
+understood it in the first place.) In any case, this is how we<b> 
+increment </b>the counter, as I explained above.
+
+
+<p>
+
+
+<p>Using  <b>goto</b> is a good way to understand how looping works, but it
+can get confusing especially if you have several labels.  Instead of using 
+ <b>goto</b>  we
+will use structured loops to create loops.
+
+<p>The basic structured loop is the <b>while</b> loop.  The <b>while</b> loop is designed
+ to continue some action <i>while</i> some condition is true.  Once the condition is 
+no longer true the <i>while</i> loop stops repeating. In the above example, we created
+the looping affect by combining the <b>if</b> with the <b>goto</b> statement. 
+The <b>while</b> loop is a built-in way of combining the <b>if</b>
+with the <b>goto</b>. Here is the basic structure:
+<pre>while ( <i>continue condition </i>)
+{
+<i>block of code</i>
+
+}</pre>
+<p> 
+ As&nbsp; long as the continue condition is true, whatever is inside the braces 
+	will be repeated.&nbsp; As we learned earlier,&nbsp; I can write as many 
+	lines of code inside the braces and it will all be considered one block of 
+	code.&nbsp; Then this entire block of code will be repeated while the 
+	continue condition is true.&nbsp; Let's see the previous <b>goto</b>&nbsp; 
+	example rewritten as a <b>while</b> loop.<blockquote>  
+int counter;<br>
+counter = 0;<br>
+while ( counter &lt; 10 )<br>
+
+{ counter = counter+1; <br>
+cout &lt;&lt;"Hi mom!"&lt;&lt;endl;<br> 
+ }
+</blockquote> 
+
+<p> 
+ When the computer comes to the <b>while</b> keyword, it checks, is the 
+	condition true. If that condition is not true, then it skips over the block 
+	of code inside the braces, just like in an <b>if</b> statement, and 
+	continues to execute the code after the close brace } (in this example there 
+	is no code after the close brace, so the program would end).&nbsp; If, on 
+	the other hand, that condition <i>is</i> true then the computer begins to 
+	execute the code inside the braces { }.&nbsp;  After the computer executes the last line inside the braces, it then comes to  the 
+	closing brace }. When it sees the closing brace, it knows to  jump 
+back up to the continue condition inside the <b>while</b> 
+	statement.&nbsp; It then re-evaluates the condition and either skips or 
+	executes the block of code depending on whether the continue condition is 
+	false or true still. If the continue condition were always true, 
+then the loop would be an infinite loop and never end.
+To avoid this, make sure that 
+	a variable inside the block of code is changing on each execution of 
+the loop.  In this way, eventually, the condition will be false.    
+<p> 
+ In this example, the continue condition is true from the start but each 
+	subsequent loop brings <i>counter </i>closer to 10. When <i>counter </i> eventually reaches 10,  the condition will be false.&nbsp; At that point the computer will  skip 
+	the block of code and continue executing from after the close brace }. In 
+	this case, the program would finish at this point.
+<p> 
+ Some people confuse the<b> while</b> loop with the<b> if</b> statement.
+They are similar insofar as they both test a condition and either skip or 
+	execute the following block of code depending on whether the condition is 
+	false or true.&nbsp; But, the difference between <b>&nbsp;while</b> and<b> 
+	if</b> is that in and <b>if </b>statement the condition is evaluated only 
+	once and the block of code is executed at most one time.&nbsp; The while has 
+	the ability to repeat code by jumping up to the top again in a kind of 
+	looping effect.    
+
+
+
+
+<CENTER><H3>Incrementing with ++</H3></CENTER>
+
+<p> In the above example we used a variable called counter and we incremented 
+it (that is, we increased its value by one each time the loop executed).
+Incrementing counters or any variables is a common part of programming.  
+Therefore, the creator of C++ made a shorter way to increment variables.
+Instead of writing
+<pre>
+counter = counter +1;
+
+</pre>
+You can simply write:
+<pre>
+counter++;
+
+</pre>
+The ++ operator (called the increment operator) is used to increase the value of the variable by one.
+Some people get confused and try writing
+<pre>
+counter +1;
+
+</pre>
+This will in no way affect the value of counter.  It is an error.
+So remember, if you want to write counter=counter+1, just write counter++.
+<p>
+If you would want to increase your counter by, say, 2 for example, you
+would write
+<pre>
+counter = counter +2;
+
+</pre>
+But there is also a shorthand way to write this.  
+Just write:
+<pre>
+counter += 2;
+
+</pre>
+So too you can decrease or <i>decrement </i> your variable by one like this:
+<pre>
+counter--;
+
+</pre>
+The same sort of shorthand versions of incrementing exist for the other mathematical operators also.
+ 
+Here is a table of some examples of incrementing and decrementing possibilities:
+<br><table>
+<tr> <td>Long version</td>
+ <td>Short version</td>
+</tr>
+
+<tr><td>i=i+1 </td>
+ <td>i++</td>
+</tr>
+
+<tr><td>i=i+7 </td>
+ <td>i+=7</td>
+</tr>
+
+<tr><td>i=i-1 </td>
+ <td>i--</td>
+</tr>
+
+<tr><td>i=i-2 </td>
+ <td>i-=2</td>
+</tr>
+
+<tr><td>i=i*8 </td>
+ <td>i*=8</td>
+</tr>
+
+<tr><td>i=i/2 </td>
+ <td>i/=2</td>
+</tr>
+
+</table>
+<br>
+Note that in all these examples, the value of <b> i </b> is actually changed.
+<p>
+There is also an alternate version of the ++ and -- operators.
+What you have see thus far has been of the form 
+<pre>
+variable++;
+</pre>
+You can also increment or decrement by writing
+<pre>
+++variable;
+</pre>
+Or
+<pre>
+--variable;
+</pre>
+  
+How is this different from what we did previously?
+In the new version  the incrementing or decrementing happens sooner.  For example, the following code segment would print the number 8  
+<pre>
+int var1, var2;
+var1=8;
+var2=var1++;
+cout &lt;&lt;var2;
+</pre>
+This prints 8 and not 9 because the 
+assignment to var2 happens <i>before</i>
+the incrementation of var1.  If you want to force the incrememtation to happen first,
+ you must write it like this:
+<pre>
+int var1, var2;
+var1=8;
+var2=++var1;
+cout &lt;&lt;var2;
+</pre>
+The same is true for the -- operator.
+There is a simple way to remember this difference. If the ++ or -- operator
+appears before the variable, then the incrementation or decrementation happens
+before everything else.  If it appears after the variable, then the incrementation or decrementation happens afterward. 
+
+
+
+<CENTER><H3>More kinds of loops</H3></CENTER>
+<p>
+We have now seen the most basic type of loop, the <b>while</b> loop.
+In truth, if you need to create a loop, all you ever really have to use
+ is this loop.  But two other
+loop structures exist in C++ and they are designed to be used in certain common
+cases.
+<p>
+Sometimes you may want to do a loop once no matter what
+and only check the continue condition statement  afterward to decide whether 
+to do the loop a second time.  A classic example of this need, the  need 
+to skip the first-time condition check, is when 
+you are printing a menu for the user.  In  a classic menu you want to print
+a series of choices for the user and then check  what his response is. 
+So we need to do the action and then check the continue condition.
+
+
+<p>
+I will show you the basic structure of this kind of loop and then a menu 
+example.
+The loop is called a <b> do while </b> loop.  Here is the structure: 
+
+
+<pre>
+do {
+ <i>code block</i> 
+
+} while ( <i>continue condition</i> ) ;
+
+</pre
+
+
+<p>So you see it is rather like the <b>while</b> loop , but in this case,
+the word  <b>while</b>  comes at the end.
+Be careful to remember the semi-colon ;  at the end of the continue condition.
+What this structure does is execute the code block once and then test the 
+continue condition.  If the condition is true,  then the code block is executed
+a second time, and so on.
+<p>
+Now let's see an example.  Here is the menu example
+I promised:
+
+<blockquote>
+
+<tt>int input;
+<br>do {
+<br>cout &lt;&lt; "Please enter any positive integer, (-1 to quit)" &lt;&lt; endl;
+<br>cin &gt;&gt; input;
+<br>cout &lt;&lt; "You entered a " &lt;&lt; input &lt;&lt; endl;
+<br>}while(input != -1);
+
+</tt>
+</blockquote>
+<p> When this loop runs, it will output something like this
+
+<pre>
+<tt>
+Please enter any positive integer, (-1 to quit)
+5
+You entered a 5
+Please enter any positive integer, (-1 to quit)
+-1
+You entered a -1
+</tt>
+</pre> 
+<p>
+If I had used a while loop, I would have had to repeat code like 
+ this:
+<blockquote>
+<tt>int input;
+<br>cout &lt;&lt; "Please enter any positive integer, (-1 to quit)" &lt;&lt; endl;
+<br>cin &gt;&gt; input;
+<br>cout &lt;&lt; "You entered a " &lt;&lt; input &lt;&lt; endl;
+<br>while(input != -1)
+<br>{
+<br>cout &lt;&lt; "Please enter any positive integer, (-1 to quit)" &lt;&lt; endl;
+<br>cin &gt;&gt; input;
+<br>cout &lt;&lt; "You entered a " &lt;&lt; input &lt;&lt; endl;
+<br>}
+
+</tt>
+  
+
+
+</blockquote>
+
+<p> I think the <b> do while</b> version is more concise and more clear.
+It has also  saved me some typing and
+potential confusions.
+<p> There is another kind of loop, the <b> for loop</b>. It has the advantage
+ of compactly structuring the common commands needed for creating a 
+loop based on a counter. Use a <b>for loop</b> when you know ahead of time 
+exactly how many times you will be doing some set of actions.  You will  need to use and initialize a counter.  Here is the structure:
+
+<pre>
+for  ( <i>counter initialization</i> ; <i>continue condition</i> ; <i>counter incrementation</i> )
+{
+
+ <i>code block</i> 
+
+}
+</pre>
+<p> You will note that there are three sections inside the parenthesis
+of the <b>for</b> statement.  They are separated by semi-colons ; . The 
+<b>for loop</b> requires exactly two semicolons always.
+These two semicolons create three sections inside the parenthesis immediately 
+following the word <b>for</b>. Any and all of these sections can be left blank. 
+But more often you will write something in them. What you can write depends on
+which section you are writing in.  The first section is called the 
+<i>initialization</i> section.  It is for setting the counter(s) you plan to use.
+  You can also declare
+variables in the initalization section. The second section is called the
+  <i>continue condition</i> section.  It is use to set the condition by which the loop
+will either continue looping (iterating) or stop looping.  It is the same as the 
+continue condition of the <b> while</b> and  <b>do while</b>
+ loops.  The third section is called the  <i>incrementation</i> section.
+It is pretty much used  for incrementing the counter, for example you 
+may write  i++ or counter++, but
+actually you can do just about any command here.  In general, just use the
+incrementation section for incrememting your counter(s).
+
+<p>    If you want to do two or more initializations or incrementations, simply
+ separate them by 
+commas within the relevant section.  You cannot
+have more than one condition, but you can create complex conditions 
+just as you can 
+with  <b>if</b>.  So too, you can have complex conditions 
+in the  <b>while</b> and
+<b>do while</b> loops.
+
+
+
+
+Here is a basic example of a for loop (note the use of the three sections):
+
+<blockquote>
+<tt>for ( int i = 0; i &lt; 10 ; i++)
+<br>{
+<br>cout&lt;&lt;"5 times " &lt;&lt; i &lt;&lt;" is " &lt;&lt; i * 5&lt;&lt;endl;
+<br>}
+
+</tt>
+
+</blockquote>
+
+
+<p> The output of the above would be 
+<pre>
+5 times 0 is 0
+5 times 1 is 5
+5 times 2 is 10
+5 times 3 is 15
+5 times 4 is 20
+5 times 5 is 25
+5 times 6 is 30
+5 times 7 is 35
+5 times 8 is 40
+5 times 9 is 45
+</pre>
+
+<p> Some other <i>for</i> loop possibilities are:
+
+<tt><br> 
+for ( int i = 0, int j=10 ; i &lt; 10 &amp;&amp; j &lt; 100 ; i++ , j*=2) // two counters, double condition, double incrementation 
+<br>for ( i = 0, j=10 ; i &lt; 10 ; i++ , j--) // two counters, one condition 
+<br>for ( i = 0 ;;) //no condition, infinite loop
+<br>for (;;) // infinite loop
+</tt>
+<p>
+You can see that the <i>for</i> loop allows us to 
+include a lot of information in 
+a concise and clear format.  The <i>for</i> is a powerful type of 
+loop that you can use regularly. You can use the more simple <i>while</i> or 
+<i>do while</i> loops when you need to repeat some action an  indefinite
+number of times. 
+
+<CENTER><H3>Nested Loops</H3></CENTER>
+
+<p> We saw that <i>if</i> structures can be placed one inside the other. 
+We called this <i> nested ifs</i>.
+The same can be done with loops.  We can place a loop within another loop.
+We then have an inner loop and an outer loop. 
+Doing this we create what are called <i>nested loops</i>.  Many complex
+programming exercises require nesting loops.  For now I will stick to
+some simple examples.
+
+Here is an example:
+<pre>
+for (int i = 2 ; i < 4; i++)
+{
+  for (int j = 2; j < 7; j+=2 )
+     {
+     cout&lt;&lt;i&lt;&lt;'*'&lt;&lt;j&lt;&lt;'='&lt;&lt;i*j;
+     cout&lt;&lt;endl;   
+     }
+}
+</pre>
+This will produce the following results:
+<pre>
+2*2=4
+2*4=8
+2*6=12
+3*2=6
+3*4=12
+3*6=18
+
+</pre>
+
+
+<p>The following example will print this:
+<pre>
+1.  1,2,3
+2.  4,5,6
+3.  7,8,9
+</pre>
+
+Here is the example:
+<pre>
+int number = 1;
+for (int i =1; i < 4; i++)
+{
+  cout&lt;&lt;i&lt;&lt;'.';
+  for (int j =1; j < 4; j++ )
+     {
+     cout&lt;&lt;number&lt;&lt;',';
+     number++;
+     }
+  cout&lt;&lt;endl;   
+}
+</pre>
+<p>
+This example may take you some time to understand.  As you can see nested for loops can get pretty complicated.  What you need to do is sit with a pen and paper and write down all the variables and keep track of how they change as 
+the loops progress.  Trying to do this in your head is asking
+for trouble and even experienced programmers need to resort to pen and 
+paper when faced with complex problems such as these.
+
+<p>
+<a href=handout.txt>Some more example programs.</a>
+
+<h3>Flags </h3>
+<p> Sometimes I have a loop which can end for one of several reasons. 
+In such a case I can use flag to indicate why the loop ended. 
+<em>A flag is a variable whose whole purpose is to indicate if a certain event has happened.</em>
+A flag is a programming concept which can be implemented in any language. It is
+not specific to C++ nor is flag a reserved word. 
+One place where I could use a flag is when, for example,  I have a loop to let a
+ person try to guess a certain number.  The loop will end 
+after 5 guesses or if he guesses the right number, which ever comes first.
+So how will I know why the loop ended? I can set a flag for this purpose.
+<blockquote><pre>
+int number = 75;
+int guess;
+bool gotItRight = false; // this is my flag
+for (int i =0; i < 5; i++)
+{
+ cout&lt;&lt;"What number am I thinking of?" &lt;&lt;endl;
+ cin &gt;&gt; guess; 
+ if (guess == number)
+        {
+          break;
+	  gotItRight = true;
+	}
+}
+
+ if (gotItRight)
+     cout&lt;&lt;"You got it right!!" &lt;&lt;endl;
+ else
+     cout&lt;&lt;"No more guesses, better luck next time." &lt;&lt;endl;
+</pre>
+ </blockquote>
+<p>
+Notice that the flag "gotItRight" will only be true if he guessed the right number.
+If the loop ends without his guessing the number, goItRight will still be false.
+There are obviously other ways to accomplish this result but using a flag is one way.
+Probably no program ever needs a flag, but sometimes they are convenient.  But in general, try not to use flags.
+Never call a flag "flag".  Give a flag a meaningful name, usually composed of a verb and noun.
+
+<h3>Exercises:</h3>
+<ol>
+<li>Use goto to write a program in which the user must guess the
+ right number, as stored in a variable in the program.
+  If he guesses two low,
+tell him he guessed too low and give him another guess.
+  If he guesses two high,
+tell him he guessed too high and give him another guess.
+Repeat this until he has guessed the right number.
+<li> Write a calculator which allows for + - * / = and allows the
+user to enter 2 numbers and computes the result.  
+Use a while loop to permit him to continue using the calculator
+ until he types # to quit.
+<li>Write a while loop to print out the even numbers from 1 to 20 inclusive.
+<li>Use a while loop to allow a teacher to enter as many grades as he wants
+for a given student.  When the teacher finishes entering the grades, compute
+the arithmetic mean of the grades.
+<li>  Using only a cout&lt;&lt;'*';  a cout&lt;&lt;' '; and a cout&lt;&lt;endl; print
+a triangle made out of stars (*) in the following formats.
+ Allow the user to 
+tell you how many rows of stars to make. The stars should 
+create a triangle shape.  For example, if the user asked for 5 rows,
+ you should print this:
+
+<pre>
+    *      *****      *  *****       
+    **     ****      **   ****
+    ***    ***      ***    ***
+    ****   **      ****     **
+    *****  *      *****      *
+</pre>    
+<li>Use a set of nested while loops to print the 12 times tables.  Print it in a table form, i.e. rows and columns.
+
+
+<li>Use a for loop to create a list of the mulitples of 3 from 0 to 
+300.
+<li>Write a program with a  user interface which allows the user to
+enter a number. Then print for him all the factors (divisors) of that number.
+See <a href="http://en.wikipedia.org/wiki/Divisor">wikipedia.org</a> for an explanation of what a factor is.
+
+
+<li>Write a program for printing a check's numerical dollar amount in a 
+safeguarded format like this *****122.00  Maximally there can only be
+ 10 digits and a period. The user should input a floating point variable
+and your program should add following zeros or truncate extra decimal point values.  Also  any unoccupied leading places should be filled with asterisks.
+
+
+<li>Use nested for loops to compute pythagorian triples where the 
+third number remains less than 200.   Pythagorian triples
+are whole numbers where the sum of the squares of the first numbers equals the
+square of the third number.  For example, 3,4, and 5 are a pythagorian triple
+because 3<sup>2</sup> (9) + 4<sup>2</sup> (16) = 5<sup>2</sup>(25).
+<li>
+Write a calculater which is capable of multiplication division addition subtraction and powers but use only the + and - operators.  
+<b>Do not use the * and / operators</b>. You will need to use loops
+to calculate your answers.
+<li> ***
+Using only a cout&lt;&lt;'*';  a cout&lt;&lt;' '; and a cout&lt;&lt;endl; print
+a diamond made out of stars (*). Allow the user to 
+tell you how many rows of stars to make. The stars should create a diamond shape.  For example, if the user asked for 5 rows, you should print something 
+like this:
+
+<pre>
+      *
+     ***
+    *****
+     ***
+      *
+</pre>
+
+<li>Write a program which accepts a binary number ( an unsigned integer 
+containing only 0s and 1s) and prints its decimal equivalent.
+<li>Write a program which accepts an unsigned integer and prints it factorial.
+The factorial of a number, n  is written n! and is equal to n&nbsp;*&nbsp;(n-1)&nbsp;*&nbsp;(n-2)&nbsp;*...*1  
+<li>Write a program which accepts a six digit unsigned integer and  prints 
+"true" if the number is a palindrome or "false" if it is not. 
+A palindrome is a number which when read from
+left to right or right to left is the same.  For example 15551 is a palindrome.
+<li>Write a program which sums a sequence of integers. When the number 
+zero is entered it indicates that no more numbers are to be summed. Print out
+ the total sum.
+
+<li> write a program that finds the largest of several integers.  the first integer read indicates how many integers will be read. do not use the first
+integer as one of the numbers to be compared.
+
+<li>Write a program that reads 6 unsigned integers and produces
+rows of asterisks according to the numbers entered. For example if one of the numbers is a 7 then print *******.
+
+<li> Calculate the value of Pi from the infinite series
+
+<br>
+Pi = 4 - 4/3 + 4/5 - 4/7 + 4/9 - 4/11 + ...
+
+<br>
+Ask the user how many terms of the series he wants to use to calculate Pi
+and produce the correct result for him.
+
+
+</ol>
+<h3> Terms to remember</h3>
+<b> got , label , loop, infinite loop, incrementation, counter,
+ while, block of code, increment operator ++, decrement operator --,
+ do while, for  </b>
+<br>
+&nbsp;<p> 
+<a href="http://www.danzig.us/cpp/fibonacci.html"> fibonacci etc.  </a>
+<p>
+&copy Nachum Danzig September 2006
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+<head>
+<TITLE>Programming - User Interface</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Programming - User Interface</H3></CENTER>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+We have seen how to write a simple program.  We saw what commands and variables are.  We have seen how to assign a value to a variable.  But the 
+examples we have seen do not allow the person who runs (or executes) the
+ program to change any variables.  This person, called the 
+<i>user</i>, 
+&nbsp;would be the person who uses our program after we finish writing 
+ it.&nbsp; We may want to allow him to alter the way the program runs. 
+Remember, once we finish writing a program, we save it to disk and
+can run it any number of times in the future.  We may want these future runs of the program to change according to the desire of the user.
+
+Any time you buy a software product you are a user (also called an <i>end user</i>).   So how do we allow this end user to affect our program 
+when it is running ?
+<p>&nbsp; &nbsp; &nbsp; &nbsp; Before I answer this question I need to make one more point clear.  In our examples, all the values have been <i> hard coded </i>.  That means that once the program is running they cannot be changed. If we would want to change the values we would have to stop the program and start editing the lines of the program.
+ Carelessness in doing this could ruin our program. 
+ Therefore we must think of a way to provide for changes 
+while the program is running and in a way that prevents careless errors from
+getting in.  We achieve this goal by creating  a <i><b>user interface</b></i>.   Interface is a general term used
+to mean a method for using something.   For example we might 
+say that the buttons on a blender are the interface for the blender. 
+  No one would suggest opening up a blender to turn it on.   The manufacturer of the blender provides us with a safe interface to the inner workings of the blender.   Similarly, the floor pedals of a car are the 
+interface to the engine of the car.  They provide a simple, clean
+ and safe way to operate the car.  
+The user interface of a program is based on the same concept.   
+The user interface can be a set of choices displayed on 
+the screen in a menu for the user to select with key presses and a set of
+messages for him to view.
+
+
+
+The combined effect of
+ displaying information to the user and getting input from him is called 
+the <i>user interface</i>. This interface allows the end user to affect
+what the program/computer does.  The program will behave
+differently based on what the user does.  So basically the user interface is 
+what allows the user to use the program.
+<p> 
+    Whenever we 
+operate or run a program, although we may not think of it this way,  we are 
+in fact inputting data and viewing data output. Clicking a mouse or moving a 
+game device are actually two
+ of the ways we can input data.  The other basic method of inputting data
+is typing on the keyboard. 
+
+The mouse, game device or keyboard provide a physical interface to a program. 
+ They are called
+<i><b>input devices</b></i> because they provide the physical
+ means for inserting  data into a program.   It is up to 
+the programmer to decide what various inputs he wants to get from the 
+user and to decide  what they will signify.
+ Similarly, we might want to <i>show</i> the 
+user text messages or pictures on the screen (or monitor).  The screen is
+called an <b><i>output device</i></b> because it provides the physical 
+means for 
+displaying data to the user.  Again, the programmer has to decide what 
+data he wants to display on the output device. 
+
+
+<p>For example, let's say we want to create a
+simple calculator capable of adding any two numbers.  We want to
+allow the user to decide which numbers he wants to add. 
+So we need to ask him!  We'll have to ask him for
+two different numbers and then print the result.  
+<i>Input</i> is any information we get from the user.  <i>
+Output</i> is any information we provide to the user. 
+
+The two numbers he will  give us in this example  are the <i>input</i>, and the
+ sum we print is the <i>output</i>.
+
+
+<p>&nbsp; &nbsp;&nbsp; &nbsp;Regarding  our question of how to affect a program
+ while it is running we can say that we must provide a means for the user 
+to input data.  The way this is done in C++ is by using the 
+ <i><b>cin >> </b></i> operator.  If we declare a variable, cin >> knows how
+to  place the user input into the variable we specify. For example:
+
+<p>
+<tt>int a; <br>
+cin>>a; </tt>
+
+<p> Whatever the user types will
+be placed in  variable <i><b> a </b></i> by the program. 
+After this we can use the information stored in the variable. 
+The  <i><b>cin >> </b></i> operator is composed of two parts: the word cin
+and the &gt;&gt; symbol.  Think of cin as referring to the 
+keyboard key presses. The &gt;&gt; symbol is called the <b>stream-extraction
+ operator</b>.  It takes what is on its left (the keyboard key presses) and
+put it into the variable on the right.  This is how C++ allows you to
+get information from the user's key presses.
+
+
+<p>The way C++ allows you to put messages on to the screen is by using the
+the <i><b>cout &lt;&lt;</i></b> operator.  
+Any quoted text or unquoted variables
+following the cout&lt;&lt; operator will be written to the screen.
+The <i><b>cout &lt;&lt;</i></b> operator is also composed of two parts.  
+The first part is the word cout.  It refers to the screen.  The second part,
+the <i><b>&lt;&lt;</i></b>, is called the <b>stream-insertion operator</b>. 
+It takes the variable on its right and inserts it onto the object on the left,
+which is the screen in our examples. You can put a variable on the right of
+cout &lt;&lt; and it will print its value.  You can also put a quoted 
+string of letters, like a sentence on the right and it will also be
+printed to the screen.  
+Here is an example :
+<br>
+<tt>
+cout&lt;&lt;"Hello to the world.";
+</tt>
+<br>
+The above will cause <i>Hello to the world.</i> to be printed to the screen.
+Here is an example of writing the contents of a variable.
+In this case the number 8 will be written:
+<br>
+int number = 8;
+cout&lt;&lt;number;
+<br>
+You would see the number 8 on the screen in this example.
+<p>You can also print numbers directly to the screen without using 
+variables.  Here is an example of this. It prints the number 37
+to the screen.
+<br>
+<tt>
+cout&lt;&lt;37;
+</tt>
+<br>
+
+
+<p>You can also print several variables like this:
+
+<pre>
+short number1, number2, number3;
+number1=30;
+number2=210;
+number3=4;
+
+cout&lt;&lt;number1;
+cout&lt;&lt;number2;
+cout&lt;&lt;number3;
+</pre>
+
+<p>You can also print several variables in one line
+with one cout but several &lt;&lt; symbols.
+<pre>
+short number1, number2, number3;
+number1=30;
+number2=210;
+number3=4;
+
+cout &lt;&lt; number1 &lt;&lt; number2 &lt;&lt; number3;
+</pre>
+
+<p>
+This will print 302104 without any spaces between the numbers.  If you want spaces you would have to write 
+something like this:
+<pre>
+cout&lt;&lt;number1&lt;&lt;" "&lt;&lt;number2&lt;&lt;" "&lt;&lt;number3;
+</pre>
+
+
+You can also put the word <b>endl</b> on the right of 
+cout &lt;&lt; .  This will cause the next object printed to be one
+line lower on the screen, as if someone pressed the enter key.
+
+<p>
+We can also combine all these examples.  
+ In the following example I have made a simple
+ addition program which will combine all that we have seen so far.  &nbsp; 
+It asks the user for two integers
+and after he has provided them, it tells him their sum. 
+
+<pre>
+int a,b,c;
+cout<<"Please enter a number:  " << endl;
+cin>>a;
+cout<<"Please enter a second number:  " << endl;
+cin>>b;
+c=a+b;
+cout<<"Their sum is:  " << c << endl;
+</pre>
+<p>
+This mini-program has a user interface (when the program runs, the user can 
+affect what the program does.) The user is asked to supply two numbers
+and is then told the sum.  Here is a sample of what might happen when you run 
+this program.
+<pre>
+Please enter a number:  
+10
+Please enter a second number: 
+5
+Their sum is:  15
+</pre>
+
+<p> Now let's explain this program line by line.
+The first line declares three integer variables which will be used in future 
+lines of the program.
+The next four lines ask the user to supply two numbers and assigns
+each number to one of the variables already created.
+
+The word <b> endl</b> causes the cout&lt;&lt; operator
+to start a new line of text.
+You will note that before the <b>endl</b> I write another &lt;&lt; . This
+is needed between each  thing I want to print to 
+the screen.
+The third line causes a number typed by the user to be assigned to the 
+variable <b>a</b>.
+The fifth line causes a number typed by the user to be assigned to the 
+variable <b>b</b>.
+The sixth line computes the sum of the two numbers and assigns them to 
+the variable <b>c</b>.
+The last line prints a message and then prints  the variable<b> c </b>which 
+now stores the sum of the two numbers.
+
+<p>If you will try to run the program you will have some trouble.
+In order for the program to run, it needs a few extra lines.
+Here is the complete program (This is the first fully fledged program we 
+have seen!):
+<pre>
+<tt>
+<b> #include &lt;iostream&gt;
+ using namespace std;
+ int main()
+ {</b>
+ int a,b,c;
+ cout<<"Please enter a number:  " << endl;
+ cin>>a;
+ cout<<"Please enter a second number:  " << endl;
+ cin>>b;
+ c=a+b;
+ cout<<"Their sum is:  " << c << endl;
+<b> return 0;
+ }
+</b>
+</tt>
+</pre>
+
+<p> 
+The lines in bold which I have added I will not yet
+explain. You should just learn to copy them in every program you write. 
+They should be copied as is.  Then copy your program in between the 
+brace <b>{</b> and the <b> return 0;</b>. Try copying and running this
+program on your favorite neighborhood C++ tool.
+
+<h3>Comments </h3>
+<p>
+Comments are a way to write things in a program which will be ignored by the 
+computer.  Why would we want to do this?  Sometimes we want to make a note
+to ourselves in the program code.  We may want to describe what we are trying to do
+so that we will remember why we wrote the program.  We may simply
+want to put our name on the top of the program so that if we print
+the program onto paper to hand in to  our teacher, he or she will
+know who wrote the program.
+<p>There are two ways to make a comment.  The first is by using two slashes 
+like this
+<br>
+// some comment of mine
+<br>
+anything you write in your program from the two slashes to the end
+of the line will be ignored when the program runs.
+Here is a program with the  comment " my program to print 5 ".
+<pre>
+<tt>
+ #include &lt;iostream&gt;
+ using namespace std;
+ int main()
+ {
+ int a =5;  // my program to print 5
+ cout&lt;&lt;a &lt;&lt;  endl;
+
+ return 0;
+ }
+</tt>
+</pre>
+
+In this example, the computer will ignore the string of letters
+ "my program to print 5" .  They are meant as a comment to the person
+reading my program.
+
+<p>The second way to make a comment is intended for
+longer, multi-line comments.  In these cases we start our
+comments with the symbol /* and end them with */.
+Here is an example:
+<pre>
+<tt>
+ #include &lt;iostream&gt;
+ using namespace std;
+ int main()
+ {
+ /* my program to declare a variable named a
+ and initialize it to 5.  Then to print the value of 
+ a to the screen and then to print a return-line. */
+
+ int a =5;  
+ cout&lt;&lt;a &lt;&lt;  endl;
+ return 0;
+ }
+</tt>
+</pre>
+
+Notice how this comment is a multi-line comment.  I could achieve the same
+result with the first form of  comment, but it would require more typing.
+Here is how I would use the first type of comment for this example:
+<pre>
+<tt>
+ #include &lt;iostream&gt;
+ using namespace std;
+ int main()
+ {
+ // my program to declare a variable named a
+ // and initialize it to 5.  Then to print the value of 
+ // a to the screen and then to print a return-line. 
+
+ int a =5;  
+ cout&lt;&lt;a &lt;&lt;  endl;
+ return 0;
+ }
+</tt>
+</pre>
+
+Use which ever comment is reasonable for your needs.  
+<p>Comments are an  important part of a program.  Sometimes you 
+may want to describe in English what you plan to do and then
+write the C++ commands for it afterwards.  Used this way, comments can 
+help you gather your 
+thoughts and develop a course of action.  They also benefit anyone 
+else who may want to read your program and has trouble understanding
+what you are trying to do.  When writing comments, do not simply
+explain what each command does.  Assume the reader knows the C++ language.
+You should  try to  explain
+what the point of your program is, what are you trying to accomplish.
+For example, the comment I wrote above is not that useful to anyone
+who knows C++.
+<pre>
+ // my program declares a variable named a
+ // and initializes it to 5.  Then it prints the 
+ // variable the screen and then prints a return-line.
+</pre>
+A better comment would be 
+<pre>
+ // program demonstrating use of comments and cout
+</pre>
+Not only does this explain the point of the program, it
+does so in a third the space. When you write longer programs
+you may want to comment each section, but rarely will you need to
+comment  each line. 
+
+
+<h3>Exercises:</h3>
+<ol>
+<li>Describe what a computer user interface is.
+<li>Give an example of an input device.
+<li>Give an example of an output device.
+<li>What is the stream-insertion operator?
+<li>Write a program in which you attempt to store  a number too large for a
+ short in a short.  Then print the short. Then put the same number into a 
+long (it must fit in the long) and print it.  
+<li>Write a program in which you attempt to store  a positive number too 
+large for a
+ long but not too large for an unsigned long in a long.  Then print the long.
+ Then store the number in an unsigned long and print it.  
+<li>Write a complete program to print "Hi" and "mom." on two different lines. 
+<li>Print the following shape on the screen using cout&lt;&lt;:
+<pre>
+        ***
+        ***
+     **********
+     **********
+     **********
+        ***
+        ***
+</pre>
+<li>Write  a program which ask the user type a number. Print his
+number to the screen two times.
+<li>Write a program which allows the user to add, subtract, multiply and divide two long variables.
+<li>Write a program to convert miles to kilometers.  Assume 1 mile equals
+1.61 kilometers. Program should have a user interface.
+<li>Write a program which has the user enter a number of 
+seconds, minutes, hours and days and computes the total number of seconds
+it equals. It should then print the total seconds tally.
+<li> Write a program which allows the user to enter 4 numbers and computes
+the arithmatic mean (average).<li>Using two ints only take the quotient of two user inputted values and print the result with two decimal places of acuracy.
+<li>Let the user enter 3 numbers.  Print back all possible orders (permutations) of printing the numbers.
+</ol>
+
+
+
+<h3>Terms in this chapter:</h3>
+<b> 
+user, end-user, hard-coded,  execution, user interface, input,
+ input device, output, output device, cin, cout, 
+stream-extraction operator, stream-insertion operator, endl, comments </b> 
+
+<br>
+&copy Nachum Danzig September 2004 -2006
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

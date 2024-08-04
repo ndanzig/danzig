@@ -1,0 +1,178 @@
+<head>
+<TITLE>C++ - Introduction to Computer Science - Programming </TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+
+
+<h3>A C++ Tutorial</h3>
+<h4> The Online C++ Textbook I am writing</h4>
+<ol>
+<li> <a href="sequence.html">The Basics: What is an instruction?  &nbsp;  What is a variable?</a> 
+<li> <a href="user_io.html">User Interface:  How can my program communicate with a person? </a>
+<li> <a href="using_if.html">If Else: How do I alternate what my program does? &nbsp;  Separating program flow.</a> 
+<li> <a href="loops.html">Loops: Repeating the same action more than once.</a> 
+<li> <a href="functions.html">Functions:  What if I need to do the same actions but with different data? Or what if I want to do the same action in different parts of my program?</a>
+<li>  <a href="scope.html"> Scope, functions  and global variables, storage classes</a>
+<li> <a href="arrays.html">Arrays:  Let's create a whole set of variables.  </a>
+<li> <a href="strings.html">Strings, Pointers and More Arrays. </a> 
+<li> <a href="pointers.html">Const Pointers and Pointers to Constants. </a> 
+<li> <a href="algorithms.html">Introduction to Computing Algorithms: Search and Sort</a>
+<li> <a href="recursion.html">Recursion: Fancy stuff using methods - <i>recursion</i></a>
+<li> <a href="const.html"> Const with functions </a>
+
+<li><a href="algebra.html">Mathematical Operations: Let's do some algebra in my program.</a>
+<li> <a href="caseswitch.html">Switch Case:  More ways to alternate program flow </a>.
+<li> <a href="templates.html">Templates</a>.
+
+<li> <a href="readfile.html">File Reading: How can I read input from a file on disk? </a>
+<li> <a href="writefile.html">File Writing: O.K., now how can I write to a file? </a>
+<li> <a href="class.html">Classes:  Let me make my own class already! </a>
+<li> <a href="enum.html">Enum enumerations</a>
+<li> <a href="moreclass.html">Classes II: Now for some more details about classes. </a>
+<li> <a href="virtual.html">Virtual and Pure Virtual Classes</a>
+<li> <a href="enum.html">Enum enumerations</a>
+<li> <a href="quicksort.html">Quicksort</a>
+<li> <a href="expand_array_class.cpp">Example of an expanding array using classes</a>
+<li> <a href="stl.html">STL - vectors, list, iterators</a>
+<li> <a href="exceptions.html">Exception Handling</a>
+
+<li> <a href="operator_overloading.html">Operator Overloading</a>
+<ul>
+<li> 
+see also <a href="http://www.cs.caltech.edu/courses/cs11/material/cpp/donnie/cpp-ops.html">Operators</a>
+</li>
+</ul>
+</li>
+<li>Fifo implemented using an array of Nodes: <a href="lifoarray.txt"> fifoarray</a><li><a href="Tree-Template.txt">Tree built using Template  </a> 
+</ol>
+
+<a href="technical.html">Some language specifications </a>
+<br>
+<a href="principles.html">Principles of Good Programming, Good Programming Practices, General Tips</a>
+<br>
+An example of  <a href="inheritance_virtual_function.txt">inheritance and virtual functions. </a>
+
+<h3><a href="../syllabi">Syllabi for Computer Science Course</a></h3>
+<h3><a href="homework.html">Homework assignments</a></h3>
+<h3><a href="reviewquestions.html">Review Questions 2009</a></h3>
+<h3><a href="reviewtopics.html">Semester I: A Review of what you should know for the Exam</a></h3>
+<h3><a href="terms-oop.html">Semester II: A Review of Terms</a></h3>
+<hr>
+<h3>Course Description</h3>
+<p>  Introduction to Computer Science - C++ is a first year computer science 
+course designed to teach  the basic concepts of computer science and Object Oriented Programming.  
+A basic explanation of how a computer is built and runs is given.  Details of the syntax
+of the C++ programming language including most keywords and operators are taught.  Loops, array, and
+ functions are covered in depth. String manipulation functions are
+explained and re-implemented.  The course also  covers the 
+fundamentals of structured programming, functional programming, and object oriented 
+programming design. Reading and writing to files is taught.
+<!-- Operator overloading, function overloading,
+and template classes  are also taught and their benefits explored.
+Different class relationships are covered, including inheritance and composition. Class
+diagramming and software design are introduced.  
+Method writing, --> Sorting algorithms and recursion are strongly emphasized.  There 
+is an extensive accompanying lab which includes many serious projects and utilizes all subjects covered with practical examples. 
+
+<h3> Course Outline</h3>
+Week 1 Introduction to Computers and the Internet
+<br>Week 2 Introduction to C++ Applications
+<br>Week 3 Variables
+<br>Week 4 Input, output
+<br>Week 5 Control Structures in C++:  if else, switch case
+<br>Week 6 Loops: while, do while and for 
+<br>Week 7 Functions
+<br>Week 8 Scope, global variables
+<br>Week 9 Pointers
+<br>Week 10 Arrays
+<br>Week 11 Strings
+<br>Week 12 Advanced Functions:  Recursion
+<br>Week 13 Advanced String manipulation 
+<br>Week 14 Sorting Algorithms
+<br>Week 15 Object Oriented Programming
+
+<h3>Textbook</h3>
+<ul><li><a href="http://www.amazon.com/exec/obidos/tg/detail/-/0131857576/qid=1119458271/sr=8-1/ref=pd_bbs_1/102-4544069-3919347?v=glance&s=books&n=507846">
+C++ How to Program (5th Edition) (Deitel and Deitel)
+</a></li>
+</ul>
+
+
+
+<h4>Quotations about software writing </h4>
+<blockquote>
+"Computers do what you tell them to do, not what you want them to do."
+<br>
+"I hear and I forget, I see and I remember, I do and I understand."  - Chinese Proverb 
+<br>"Seldom is your first idea  a solution that works." -N.D.
+<br>"Seldom is the solution that works the best solution." -N.D.
+<br>"Debugging is twice as hard as writing the 
+code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it." - Brian W. Kernighan
+<br>"The compiler is your best teacher" -N.D.
+<br>"As long as you code doesn't compile, you can 
+easilly fix it.  Once it compiles, then the trouble starts" - N.D.
+<br>"Of course it works, Why should I compile it?" -J. Hoyland
+<br>"If it was hard to write, it should be hard to read." - anonymous sadist
+
+<br>"Always aim for the most readable code, not only for the next fortunate soul who claps eyes with your code,
+ but also for yourself. Have you ever looked at code and wondered, 'Who in their right mind wrote this stuff?!'
+ only to find it was you? I know I have." - Trey Nash (from <i>Accelerated C#</i>)
+<br>There are 10 kinds of people: Those who understand binary math and those that don't.
+
+
+</blockquote>
+
+
+<h4>Useful (and interesting?) Links </h4>
+<ul>
+<li><a href="http://www2.research.att.com/~bs/bs_faq2.html">Bjarne Stroustrup's C++ Style and Technique FAQ</a></li>
+
+<li> <a href="http://ifaq.wap.org/computers/realprogrammers.html">Real Programmers</a> (humorous)</li>
+<li><a href="http://www.cplusplus.com/doc/tutorial/"><b>cplusplus</b>'s well written C++ Tutorial </a> </li>
+<li><a href="http://www.thocp.net/"> The History of the Computer</a></li>
+<li><a href="http://www.cc.jct.ac.il/~komar/150005/">JCT's Lecture Notes</a></li>
+<li> <a href="http://www.cppreference.com/wiki/c/other/va_arg"> Elipses in functions</a></li>
+<li> <a href="chap9.txt"> Translation of chapter 9 of the old Hebrew booklets</a>
+</li>
+</ul>
+
+<p>Why programming concepts is better to learn  than cookbook style programming:
+<blockquote>
+"Ex-Professors Urge Return to Basics in Computer Science"
+Two former computer-science professors from New York University
+say education in their field is failing to teach basic skills.
+In an essay from The Journal of Defense Software Engineering,
+Robert B.K. Dewar and Edmond Schonberg, who are now in private
+industry, point to shrinking math requirements and "cookbook"
+approaches to programming that lead to a future of
+insufficiently trained professionals.  In particular, they
+mention the introduction of Java as students' first programming
+language:  "What we observed at New York University is that the
+Java programming courses did not prepare our students for the
+first course in systems, much less for more advanced ones," they
+write. The Java courses, they explain, teach the use of libraries
+and frameworks instead of important underlying processes.  They
+call for computer-science programs to teach a broader range of
+languages, giving students a better understanding of the
+programming process. --Hurley Goodall (January 2008)
+</blockquote>
+</p>
+
+
+
+<p> &copy Nachum Danzig
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

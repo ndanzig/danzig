@@ -1,0 +1,135 @@
+<html>
+<body>
+Fibonacci
+
+<p>Here is a simple solution to the fibonacci problem.  The case of element 0 and element 1 are special cases, i.e.
+ they get the whole series going and so they are dealt with in a special if.
+Then the while loop procedes and generates all elemnets in the series.
+</p>
+
+<Blockquote>
+<pre>
+int sum=1, term, term1=0, term2=1;
+
+cin &gt;&gt;term;
+if (term &lt; 2)
+   cout&lt;&lt;term;
+else
+{
+  //term--;
+  while (term &gt;1 )
+  {
+    sum = term1 + term2;
+    term1 = term2;
+    term2 = sum;
+    term--;
+  }
+
+cout &lt;&lt; sum;
+}
+</pre>
+</Blockquote>
+<p>
+This is a slightly different solution which solves the problem 
+without an if.  See if you can figure how it improves on the first solution.
+</p>
+
+<Blockquote>
+<pre>
+int main()
+unsigned long current = 0, prev=0, prevprev=1;
+int term;
+cout &lt;&lt; "enter term you want :";
+cin &gt;&gt; term;
+
+while (term)
+{
+current=prev+prevprev;
+prevprev=prev;
+prev=current;
+term--;
+}
+cout&lt;&lt;current;
+
+</pre>
+</Blockquote>
+
+<p> Here is a clever solution to the factorial problem.  Note that there is no such thing as a negative factorial, 
+but neverthless I have made this solution to solve both negative
+and possitive factorial questions and I did it without using an if. And it also works for zero.
+  How would you solve this problem had you not
+seen this solution?
+<p>
+
+<blockquote>
+<pre>
+
+int number, result =1;
+cin &gt;&gt; number;
+while (number&gt;1)
+{
+   result*=number;
+   number--;
+}
+while (number&lt;0)
+{
+   result*=number;
+   number++;
+}  
+cout &lt;&lt; result;
+</pre>
+</Blockquote>
+
+
+<p>
+Here is a solution to finding unique pythagorean triples.
+I think you will find that this is the most efficient solution to the problem, short
+of using fancy things like square roots and powers or for that matter Platos theorum.
+</p>
+
+<blockquote>
+<pre>
+#define MAX 200
+int main(int argc, char *argv[])
+{
+   unsigned long a, b, c, e, _2sides;
+   for (a=1; a&lt;MAX; a++)
+   {
+      for (b=a+1; b&lt;MAX; b++)
+         {
+	        _2sides=a+b;//No side of any triangle can ever be larger sum of 2 other sides
+                for (c=b+1; c&lt;_2sides; c++)
+                {
+                       if ((c*c)==(a*a)+(b*b))//found a triple
+                       {
+                          for (e=2; e&lt;a; e++)
+                          {
+                              if ((a%e)==0&&(b%e)==0&&(c%e)==0) // found reject
+                              {
+                                 break;
+                              }
+                          }
+                          if (e==a) // i have gone through entire loop and found no mults
+                          {
+                              cout&lt;&lt;a&lt;&lt;", "&lt;&lt;b&lt;&lt;", "&lt;&lt;c&lt;&lt;endl;
+                              break;//don't bother searching for any more c's since I already found one
+                          }
+                       }
+                }
+         }   
+   }
+}
+</pre>
+</Blockquote>
+ 
+
+
+
+
+
+&copy; Nachum Danzig 2010
+
+
+
+</body>
+</html>
