@@ -1,0 +1,17 @@
+#!/usr/local/bin/perl
+
+#open password file and print it
+
+$buff = '/etc/passwd';
+open(INFO, $buff);
+
+$a = 0;
+while ($line = <INFO>)
+{
+#3d  gives 3 leading zeros   
+
+ printf("%l03d %s", ++$a, $line);
+  
+}
+
+close(INFO);

@@ -1,0 +1,35 @@
+#!/usr/local/bin/perl
+
+#open file containing blank lines and print it
+#count only those lines containing word the
+
+$buff = '/usr/u/26stud/danzig/electricity.txt';
+open(INFO, $buff);
+
+$a = 0;
+while ($_ = <INFO>)
+{
+    if(/$ARGV[0]/){ 
+	    printf("%l03d ", ++$a);
+	    print "$`($&)$'";
+}
+	else{
+	    printf("    %s", $_);}
+}
+
+close(INFO);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

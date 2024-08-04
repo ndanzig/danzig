@@ -1,0 +1,232 @@
+#======================================================================
+# INITIALIZE VARIABLES
+#-------------------------------------------------------------
+use English;
+
+
+$adduser_dir    = '/usr/local/accounts/addusers';   # adduser dir
+$mailprog = "/usr/lib/sendmail";
+$ENV{PATH}      = $adduser_bindir . ':' .$ENV{PATH};  # add it to path
+
+$nis_dir     = '/var/yp';                           # NIS dir
+$nis_make    = 1;                                   # do an NIS make?
+$on_unix     = 1;                                   # change on UNIX
+$on_novell   = 1;                                   # change on Novell
+$mail_novell = 1;                                   # 1= yes, 0 = no
+
+# $pass_file IS THE FILE CONTAINING THE PASSWORDS TO BE CHANGED.  WE
+# ALSO DEFINE HERE THE NAMES OF BACKUP FILES.
+
+$pass_file      = $nis_dir . '/etc/security/passwd.adjunct';
+$pass_file_bak0 = $pass_file . '.bak.0';
+$pass_file_bak1 = $pass_file . '.bak.1';
+$pass_file_bak2 = $pass_file . '.bak.2';
+
+
+# $regex_pass IS THE REGULAR EXPRESSION USED TO CHECK IF THE
+# PASSWORD FIELD INDICATES THAT THE ACCOUNT IS CLOSED.
+
+$regex_pass = "/jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|\*/i";
+
+
+
+
+
+
+#-------------------------------------------------------------
+# CHECK COMMAND LINE
+#-------------------------------------------------------------
+
+# PROCESS THE OPTIONS
+
+while ( ($#ARGV >= 0) && ($ARGV[0] =~ /^-/) )
+{
+    if ($ARGV[0] eq "-p") {
+        if ($#ARGV < 1) {
+            die ("-p option requires an argument.\n" . $usage);
+        } else {
+            $given_password = $ARGV[1];
+            print (STDERR "Specified -p option, password = $given_password\n");
+            shift (@ARGV);
+            shift (@ARGV);
+
+            $temp_salt = `$gen_salt`;
+            $encrypted = `$cryptpass  $given_password  $temp_salt`;
+        }
+
+    } elsif ($ARGV[0] eq "-u") {                # -u: unix only
+        $on_unix   = 1;
+        $on_novell = 0;
+        shift(@ARGV);
+
+    } elsif ($ARGV[0] eq "-n") {        # -n: novell only
+        $on_unix   = 0;
+        $on_novell = 1;
+        shift(@ARGV);
+    
+    } elsif ($ARGV[0] eq "-a") {        # -a: all types of hosts
+        $on_unix   = 1;
+        $on_novell = 1;
+        shift(@ARGV);
+    
+    } elsif ($ARGV[0] eq "-m") {        # -m: do an NIS make
+        $nis_make  = 1;
+        shift(@ARGV);
+    
+    } elsif ($ARGV[0] eq "-nom") {      # -nom: do NOT do an NIS make
+        $nis_make  = 0;
+        shift(@ARGV);
+    }
+}
+
+
+
+# Make sure that a valid number of users is specified.  
+
+if ($#ARGV < 0)                 # if 0 args.  $#ARGV = index of last element
+{
+    die ("Must specify at least one user\n" . $usage);
+} elsif ( ($given_password) && ($#ARGV != 0) ) {
+    die ("With -p option, must specify exactly one user\n" . $usage);
+}
+
+@users = (@ARGV);
+
+# checking for root
+foreach $user (@users) {
+    if ($user eq "root") {
+        print "Can not work on root\n";
+        mail_unix_alert;
+        exit;
+    }
+}
+
+print ("Users: ", join (' ', @users), "\n");
+
+#-------------------------------------------------------------
+# COMPUTE OTHER VALUES FROM THE VALUES WE HAVE SO FAR
+#-------------------------------------------------------------
+
+($dayweek, $month, $daymonth, $rest) = split ( ' ', scalar(localtime()) );
+$suffix = "." . $month . "." . $daymonth;
+$report_file = $report_file  .  $suffix;
+
+if ($on_unix)
+{
+    if ($on_novell) {$logpass_state = "both_changed";}
+    else            {$logpass_state = "unix_changed";}
+}
+elsif ($on_novell)  {$logpass_state = "novell_changed";}
+else                {die ("SW error: Both on_unix and on-novell false!!!");}
+    
+
+###########################################
+    #-------------------------------------------------------
+    # FOR EACH ENTRY IN THE PASSWORD FILE, IF IT BELONGS TO ONE OF THE
+    # USERS WHOSE PASSWORDS WE ARE TO CHANGE, THEN CHANGE THE PASSWORD
+    # & APPEND TO THE APPROPRIATE REPORTS.
+    #-------------------------------------------------------
+
+    while ( $line = <PASSIN> )          # read line into $_, end loop on EOF
+    {
+        # EXTRACT THE USER NAME & PASSWORD FROM THE ENTRY
+
+       ($name, $pass, $rest) = split (/:/, $line); # extract name & password
+        # print ("Name = $name, password = $pass, rest =$rest\n");
+
+        # SEE IF THIS IS ONE OF THE USERS WE ARE SEEKING
+
+        $found = 0;
+        for ( $i = 0; ($i <= $#users) && (! $found);  $i++)
+        {
+            if ( $name eq $users[$i])  {$found = 1;}
+        }
+
+        #-------------------------------------------------------
+        # IF IT --IS-- ONE OF THE SPECIFIED USERS, DO THE FOLLOWING.  NOTE
+        # THAT THERE ARE OTHER TESTS TO MAKE BEFORE ACTUALLY CHANGING THE
+        # USER'S PASSWORD.
+        #-------------------------------------------------------
+
+        if ( $found )
+        {
+            print ("Found: $name $pass $rest\n");
+            $a_found{$name} = 1;        # remember that we found this user
+
+
+            # NOW WE WILL CHECK IF THE ACCOUNT IS CLOSED.  TO DO THIS, WE
+            # HAVE TO GET THE USER'S ENTRY FROM THE NIS PASSWD MAP.  WE'LL
+            # THEN SPLIT UP THE FIELDS.  IRONICALLY, THE VARIABLES FOR
+            # FIELDS FROM THIS MAP WILL HAVE THE SUFFIX "2" TO DISTINGUISH
+            # THEM FROM FIELDS FROM THE PASSWD ADJUNCT FILE.
+
+            # GET THE PASSWD ENTRY VIA THE ypmatch CMD.
+
+            open (PASSWD, "ypmatch $name passwd|") or
+                die ("Cannot open pipe to ypmatch cmd for user $name,",
+                     "stopped");
+            $passwd_entry = <PASSWD>;
+            close (PASSWD);
+            ($name2, $pass2, $uid2, $gid2, $full_name, $dir2, $shell2, $temp) =
+                split (':', $passwd_entry);
+            print (STDERR "passwd entry for $name:\n",
+                   "$name2, $uid2, $full_name, $dir2\n");
+
+            # MAKE SURE THAT THE USER NAME IN THE PASSWORD ENTRY (IF THERE
+            # IS ONE) MATCHES THE ONE IN THE PASSWORD ADJUNCT ENTRY.
+
+            if ($name ne $name2)
+            {
+                print (STDERR
+                       "Either $name NOT in NIS passwd map, or is different\n",
+                       $passwd_entry, "\n");
+                print (PASSOUT $line); # write to file unchanged
+                next;                  # go to next iteration of while loop
+            }
+
+            # SEE IF THE ACCOUNT IS CLOSED.  CHECK THE PASSWORD FIELD (IN
+            # BOTH REGULAR & ADJUNCT PASSWD ENTRIES) & THE SHELL
+
+            if ( ($pass =~ regex_pass) || ($pass2 =~ regex_pass) ||
+                ($shell2 !~ /sh$/) )
+            {
+                print (STDERR "Looks like a closed account:\n",
+                       "\t$line\n\t$passwd_entry\n");
+                print (PASSOUT $line); # write to file unchanged
+                next;
+            }
+
+            # IF GET THIS FAR, ASSUME THAT THE ACCOUNT IS --NOT--
+            # CLOSED.  NOW WE GET THE PASSWORD.
+            #
+            # IF A PASSWORD WAS SPECIFIED ON THE CMD LINE, USE THAT.
+            # ASSUME THAT WE'VE ALREADY GENERATED THE ENCRYPTED FORM.
+
+            if ($given_password)
+            {
+                $plain = $given_password;
+   #------------------------------------------------------
+    # CLOSE THE PASSWORD FILE(S)
+    #------------------------------------------------------
+
+    close (PASSIN);
+    close (PASSOUT);
+
+  #-------------------------------------------------------
+    # DO THE NIS MAKE, IF APPROPRIATE
+    #-------------------------------------------------------
+
+    if ( $nis_make )
+    {
+        print ("Doing an NIS make:\n");
+        system ("cd $nis_dir; make");
+   }
+    else
+    {
+        print ("NOT doing an NIS make.  Remember to do later!!!!!!!\n");
+    }
+
+    # print ("\n----- pretending to do an NIS make -----\n\n");
+
+}                       # if changing on UNIX
+

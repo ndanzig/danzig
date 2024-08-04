@@ -1,0 +1,9 @@
+#!/usr/local/bin/perl
+
+@food = ("apples","pears");
+push(@food, "eggs");
+print $#food;
+print "\n";
+print "@food\n";
+print @food . "\n";
+print @food . "";

@@ -1,0 +1,18 @@
+#!/usr/local/bin/perl
+
+#open file containing names of students, first names first
+#put it in the right format for user.list  
+        
+$buff = '/var/yp/etc/passwd';
+open(INFO, $buff);
+
+while ($_ = <INFO>)
+{
+    if(/([a-z]+)/){
+      
+           print " $1";
+	   print hello;
+       }
+
+}
+    close(INFO);

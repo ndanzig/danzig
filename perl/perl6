@@ -1,0 +1,33 @@
+#!/usr/local/bin/perl -w
+
+#open file containing blank lines and print it
+#count only those lines containing word the
+
+$buff = '/usr/u/jctstaff/danzig/public_html/blank.txt';
+open(INFO, $buff);
+
+$a = 0;
+while ($_ = <INFO>)
+{
+    if(/\b[tT]he\b/){ 
+	    printf("%03d %s", ++$a, $_);}
+	else{
+	    printf("    %s", $_);}
+}
+
+close(INFO);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

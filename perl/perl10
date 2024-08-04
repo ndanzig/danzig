@@ -1,0 +1,38 @@
+#!/usr/local/bin/perl
+@words = ("sesame","abracadabra","hocuspocus");
+print "what is your name? ";
+$name = <STDIN>;
+#remove last letter ('\n')
+chomp($name);
+if ($name eq "Randy")
+{
+    print "Welcome to our class, Randal. \n";
+} 
+else
+{
+print "Go away, $name, you aren't supposed to be here.\n";
+print "Try to get in anyway by guessing password. Guess:\n";
+$guess = <STDIN>;
+chomp($guess);
+$i =0; #compare with 1st word 1st
+$correct="maybe";
+while($correct eq "maybe")
+{
+if ($words[$i] eq $guess)
+ {
+     $correct="yes";
+ }
+elsif ($i <2)
+{
+    $i =$i +1;
+}
+else{
+    print "wrong. Guess:";
+    $guess = <STDIN>;
+    chomp($guess);
+    $i =0;
+    }
+
+}
+
+}

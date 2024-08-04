@@ -1,0 +1,14 @@
+#!/usr/local/bin/perl
+
+print "what is your name? ";
+$name = <STDIN>;
+#remove last letter ('\n')
+chomp($name);
+if ($name eq "Randy")
+{
+    print "Welcome to our class, Randal. \n";
+} 
+else
+{
+print "Go away, $name, you aren't supposed to be here.\n";
+}

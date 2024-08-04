@@ -1,0 +1,4 @@
+#!/usr/local/bin/perl
+
+$a = 'hello world.';
+print "$a\n";

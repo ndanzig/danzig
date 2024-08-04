@@ -1,0 +1,36 @@
+#!/usr/local/bin/perl
+
+#open file containing blank lines and print it
+
+$buff = '/usr/u/jctstaff/danzig/public_html/blank.txt';
+open(INFO, $buff);
+
+$a = 0;
+while ($line = <INFO>)
+{
+#l3d  gives spaces   0 tells it to fill in with 0's
+    if ($line ne "\n")
+     {
+     printf("%l03d %s", ++$a, $line);
+     }
+    else {
+	print $line;
+         }
+}
+
+close(INFO);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

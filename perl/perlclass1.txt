@@ -1,0 +1,17 @@
+beitza:~ % echo date > myscript
+beitza:~ % echo who >> myscript
+beitza:~ % cat myscript
+date
+who
+beitza:~ % chmod +x myscript
+beitza:~ % myscript
+Sun Feb 18 13:09:01 IST 2001
+lajcher  ttyp0   Feb 18 08:45	(p-lajcher.jct.ac)
+avraham  ttyp1   Feb 18 09:40	(p-avraham.jct.ac)
+nzinger  ttyp2   Feb 18 10:26	(video-lab.jct.ac)
+slifkin  ttyp3   Feb 18 12:00	(slifkin-pc.jct.a)
+avi      ttyp4   Feb 18 12:32	(avi-box.jct.ac.i)
+argamon  ttyp5   Feb 18 10:44	(p-argamon.jct.ac)
+wiseman  ttyp6   Feb 18 11:28	(sunlight.cs.biu.)
+danzig   ttyp8   Feb 18 13:00	(p-danzig.jct.ac.)
+danzig   ttyp9   Feb 18 13:00	(p-danzig.jct.ac.)

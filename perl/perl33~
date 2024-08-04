@@ -1,0 +1,31 @@
+#!/usr/local/bin/perl
+
+#open file containing names of students, first names first
+#put it in the right format for user.list  
+        
+$buff = '/usr/u/26stud/danzig/newstud.txt';
+open(INFO, $buff);
+
+while ($_ = <INFO>)
+{
+    if(tr/A-Z/a-z/){
+       #       1       2       3       4        5
+#	if(s/([a-z]+)([\t\s]+)([a-z]+)([\t\s]+)([a-z]+)/$3$4$5$2$1/)
+#{}
+	if(s/([a-z]+)([\t\s]+)([a-z]+)/$3$2$1/)
+{}
+
+
+    s/([a-z])[\t\s]/$1,/;
+	s/[\t\s]([0-9])/, - -, $1/;
+	s/\s//g;
+
+       
+	   
+	    chop $_;
+	    chop $_;
+	    print $_;
+	    print ", 97, 0000\n";
+}
+}
+    close(INFO);

@@ -1,0 +1,32 @@
+#!/usr/bin/perl -w
+
+$a=1;
+$b=2;
+$c=3;
+
+#Push adds to the end of a list (it is the unpop)
+
+push(@d,$a);
+print "List d is ",$#d+1," cells long. The cells contain: @d\n";
+
+push(@d,$b);
+print "List d is ",$#d+1," cells long. The cells contain: @d\n";
+
+push(@d,$c);
+print "List d is ",$#d+1," cells long. The cells contain: @d\n";
+
+
+#pop takes off the end of a list
+
+push(@e,pop(@d));
+print "List d is ",$#d+1," cells long. The cells contain: @d\n";
+print "List e is ",$#e+1," cells long. The cells contain: @e\n";
+
+push(@e,pop(@d));
+print "List d is ",$#d+1," cells long. The cells contain: @d\n";
+print "List e is ",$#e+1," cells long. The cells contain: @e\n";
+
+push(@e,pop(@d));
+print "List d is ",$#d+1," cells long. The cells contain: @d\n";
+print "List e is ",$#e+1," cells long. The cells contain: @e\n";
+

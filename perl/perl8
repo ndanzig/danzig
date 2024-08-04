@@ -1,0 +1,7 @@
+#!/usr/local/bin/perl
+
+print "what is your name? ";
+$name = <STDIN>;
+#remove last letter ('\n')
+chomp($name);
+print "hello, $name.\n";

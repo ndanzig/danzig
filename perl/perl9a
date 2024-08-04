@@ -1,0 +1,32 @@
+#!/usr/local/bin/perl
+
+print "what is your name?";
+$name = <STDIN>;
+#remove last letter ('\n')
+chomp($name);
+if ($name eq "Randy")
+{
+print "Welcome to our class, Randal. \n";
+open (myhandle, "<wrongnamelist");
+while($line = <myhandle>)
+{    print $line;}
+close (myhandle);
+
+
+}
+
+else
+{
+    print "go away, $name, you aren't welcome here.\n";
+    open(myhandle, ">>wrongnamelist");
+    print myhandle  "$name \n";
+
+close (myhandle);
+
+    
+      
+  
+}
+
+
+

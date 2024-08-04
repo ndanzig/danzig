@@ -1,0 +1,11 @@
+#!/usr/local/bin/perl
+
+#open password file and print it
+
+$buff = '/etc/passwd';
+open(INFO, $buff);
+@lines = <INFO>;
+close(INFO);
+
+print @lines . "\n";
+print " @lines \n";
