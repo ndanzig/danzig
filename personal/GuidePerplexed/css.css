@@ -1,0 +1,25 @@
+<STYLE TYPE-"text/css">
+
+<!--
+BODY.first {background: #FFFFFF}
+BODY.second {background: #FFFFFF}
+BODY.third {background: #FFFFFF}
+BODY.intro {background: #FFFFFF}
+
+A:link.first {color: #1E90FF}
+A:visited.first {color: #800080}
+A:link.second {color: #DC143C}
+A:visited.second {color: #800080}
+A:link.third {color: #00FF00}
+A:visited.third {color: #800080}
+A:link.intro {color: #FFA500}
+A:visited.intro {color: #800080}
+a:hover {text-decoration: none} 
+
+H3.first {font size:14pt; text-align: center; text-decoration: underline; color: #1E90FF}
+H3.second {font size:14pt; text-align: center; text-decoration: underline; color: #DC143C}
+H3.third {font size:14pt; text-align: center; text-decoration: underline; color: #00FF00}
+H3.intro {font size:14pt; text-align: center; text-decoration: underline; color: #FFA500}
+-->
+
+</STYLE> 
