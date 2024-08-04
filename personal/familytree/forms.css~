@@ -1,0 +1,24 @@
+/*forms*/
+/*body
+{
+bgcolor: #f2c09f;
+}
+*/
+textarea
+{
+   width: 80%;
+   height: 30%;
+   background-color: #ffee99;
+   border: 2px solid #ffcd00;
+   padding: 2px;
+}
+select
+{
+   background-color: #ffffff;
+}
+input
+{
+   background-color: #ffffff;
+   border: 1px solid #ffffff;
+   margin: 1px;
+}
