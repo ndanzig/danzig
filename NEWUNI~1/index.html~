@@ -1,0 +1,107 @@
+<html>
+<head><title>
+New UNIX Lab  
+</title></head>
+<body>
+<h2>New UNIX Lab  January 2004 </h2>
+
+<h3>All programs must be written in C,  not C++ (and, of course, compile with 
+gcc, not g++).<br>
+Also remember for files written in C, save them ending with .c (and if you
+would be able to write in C++ then you would end those programs with .cpp).
+</h3>
+
+<h3>
+Do all your work on the  hermonX (x=221...240)  machines, or the
+shanaX machines at Machon Lev. 
+It is forbidden to work on avot.</h3>
+
+
+<h2>The following is a list of the lectures slides which you may download. &copy; Erez Hadad </h2>
+
+<!-circle disk square are other types  -->
+
+<A href="homework.html"> Your Homework</a>.<br>
+<A href="manopsys.html"> Useful Man pages</a>.<br>
+<A href="../unix_class/"> In-Lab Course Work</a>.<br>
+
+
+
+<ul type="square">
+<li> A thorough linux site: <a href="http://www.linuxforum.com/"> linuxforum</a> and this <a href="http://www.linuxforum.com/linux-kernel-programming/x145.html"> site for kernel development</a>.
+<li> Our emacs <A href="./emacs/lin_prog0.html"> tutorial</a>.
+<li> This is <a href="http://www.haifux.org/newcomers/lectures/0/"> where </a> the above tutorial was copied from.
+<li> Some basic UNIX <a href = "../unix_class//unixCommands.html"> commands </a>. </li> 
+<li> A basic <a href = "../unix_class/emacsCommands.html"> emacs </a> tutorial. </li>  
+<li> A general <a href="http://grouchy.cs.indiana.edu/usr/local/www/linux/gs/chapter2.6.html"> tutorial </a> on linux. </li>
+<li> A kernel.org <a href="http://mirrors.kernel.org/LDP/LDP/lki/index.html"> book </a> on linux. </li>
+<li> A decent Hebrew <a href="http://www.linuxisrael.co.il/"> site. </a> 
+<li> Or here for basic <a href="http://www.linuxisrael.co.il/article.php?id=1&page=1">commands</a> explained in Hebrew and <a href="http://www.linuxisrael.co.il/article.php?id=2&page=1">here </a> for explanation of ownership and permissions. </li>
+
+<li>Local mirror of the above pages.<a href="../unix_class/hebcommands.html">commands</a>
+<a href="../unix_class/hebchmod.html">ownership</a>.
+</li>
+
+<li> A  <a href = "http://www.cs.cf.ac.uk/Dave/C/CE.html"> link </a> to another school. </li>
+
+<li>A sample program in C using printf and scanf: &nbsp; &nbsp; <a href = "../unix_class/hanoi.c">Towers of Hanoi </a> .  </li>
+
+<li>Source code for the <a href ="../unix_class/winos.html">Windows<sup>&copy;</sup></a>  (Longhorn<sup>&copy;</sup>) Operating System </li>
+
+</ul>
+
+<hr>
+
+<ul type="circle">
+
+
+<!-- li><a href="syllabus.doc">syllabus.doc</a -->
+<h3>Dr. Reif's Section </h3>
+<li><a href="01-pre.ppt">01-pre.ppt</a>
+<li><a href="02-process.ppt">02-process.ppt</a>
+<li><a href="03-scheduling.ppt">03-scheduling.ppt</a>
+<li><a href="04-threads[1].ppt">04-threads[1].ppt</a>
+<li><a href="05-synchA[1].ppt">05-synchA[1].ppt</a>
+<li><a href="06-synchB[1].ppt">06-synchB[1].ppt</a>
+<li><a href="07-deadlock[1].ppt">07-deadlock[1].ppt</a>
+<li><a href="08-interrupts[1].ppt">08-interrupts[1].ppt</a>
+<li><a href="09-memory[1].ppt">09-memory[1].ppt</a>
+<li><a href="10-fsInter[1].ppt">10-fsInter[1].ppt</a>
+<li><a href="11-fsImp[1].ppt">11-fsImp[1].ppt</a>
+<li><a href="12-NFS[1].ppt">12-NFS[1].ppt</a>
+<h3>Rav Danzig's Section</h3>
+
+<li><a href="r1_intro.ppt">r1_intro.ppt</a>
+<li><a href="r2_linux[1].ppt">r2_linux[1].ppt</a>
+<li><a href="r3_processes[1].ppt">r3_processes[1].ppt</a>
+<li><a href="r4_processes.ppt">r4_processes.ppt</a>
+<li><a href="r5_processes[1].ppt">r5_processes[1].ppt</a>
+<li><a href="r6_threads[1].ppt">r6_threads[1].ppt</a>
+See also this site about the  <A href="http://www.theorie.physik.uni-goettingen.de/~ostreich/clone-tools/Clone-Tools.html">clone() </a> system call.
+<li><a href="r7_ipc[1].ppt">r7_ipc[1].ppt</a>
+<li><a href="r8_synchronization[1].ppt">r8_synchronization[1].ppt</a>
+<li><a href="r9_interrupts_pre[1].ppt">r9_interrupts_pre[1].ppt</a>
+<li><a href="r10_virtmem_pre[1].ppt">r10_virtmem_pre[1].ppt</a>
+</ul>
+
+
+
+
+&copy Nachum Danzig 2003
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

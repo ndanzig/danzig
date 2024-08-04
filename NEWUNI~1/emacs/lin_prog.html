@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title></title>
+    
+</head>
+ <body>
+       
+<h1>programming under linux the basics:</h1>
+     
+<h4>    We are in this lecture going to cover what you need To know in order
+ to  start programming C/C++ under a linux environment.  we will cover the
+ following:&nbsp;</h4>
+   
+<ol>
+    <li>          
+    <h4>Why program under linux? (briefly)&nbsp;</h4>
+    </li>
+    <li>          
+    <h4>Use of gcc/g++&nbsp;</h4>
+    </li>
+    <li>          
+    <h4>Basic use of  the emacs editor.&nbsp;</h4>
+    </li>
+    <li>          
+    <h4>the gdb debugger.&nbsp;</h4>
+    </li>
+    <li>          
+    <h4>the ddd debugger.&nbsp;</h4>
+    </li>
+    <li>          
+    <h4>use of valgrind for detecting memmory errors.<br>
+      </h4>
+    </li>
+   
+</ol>
+   
+<h4><br>
+  </h4>
+   
+<h2>1)Why?&nbsp;</h2>
+  There  are many reasons, the most important IMHO are: <br>
+   
+<ul>
+    <li>Stable environment, makes  it hard to mess up too badly, </li>
+    <li>Good tools, ANSI compliant. work less get  more done. </li>
+    <li>Open source, environment.   </li>
+   
+</ul>
+   
+<h2>2) use of gcc/g++  </h2>
+  <br>
+  gcc is the GNU  compiler collection,  originally called GNU C compiler.<br>
+  gcc is commonly invoked  from the command line, like so:<br>
+   
+<h4>gcc [ option | filename ]...  </h4>
+  This is correct  but, probably means nothing to you, one would normally 
+use gcc like so:<br>
+   
+<h4>gcc [flags] file1 [file2 [file3 ...]] [-o output_file]  </h4>
+  where file1 file2 etc. are input files, either C source files or pre-compiled
+ object file.  <br>
+  The default executable output file is a.out. when  producing object files, 
+ the default output is .o suffix <br>
+  for each input file.  <br>
+  <br>
+   
+<h4><u>Important gcc flags:</u></h4>
+  &nbsp;-ansi  	&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+ : &nbsp;&nbsp; This flag tells the compiler to enforce ANSI C standards
+ <br>
+  -pedantic&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;:  &nbsp;&nbsp; Fill in
+good  definition.  <br>
+  -Wall	&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;
+ Show all reasonable warnings (there are  more).  <br>
+  -g	&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+ &nbsp; : &nbsp;&nbsp; Produce debugs information, necessary for debugging.
+  <br>
+  -llibrary&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; :  &nbsp;&nbsp;&nbsp; Load
+ library, finds a library, use "-lm" to load 	  a standsrd math library.
+  <br>
+  -c     	&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+ &nbsp; : &nbsp;&nbsp;&nbsp; Compile or assemble the source files,  but 
+do   not           link.  The compiler output is object files<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+ &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; corresponding  to each
+ source  file.  <br>
+  -S	&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+ &nbsp; : &nbsp;&nbsp;&nbsp; Compile only, output assembly code.  <br>
+  -E 	&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+ &nbsp; :&nbsp;&nbsp; &nbsp; Pre-process only output  pre-processed code.
+ <br>
+  -Dmacro	&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; : &nbsp;&nbsp;&nbsp; define a macro,
+ one can also use -Dmacro=val  	  in order to assign a value for the macro,
+ 	  <br>
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+ &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; this will be used
+ for preprocessing  all files.  <br>
+  <br>
+  when compiling I recommend (and Kimchi demands) compiling:<br>
+  <br>
+   
+<h3>&nbsp;gcc  -ansi -pedantic -Wall file1 [file2 [file3...]] -o output 
+</h3>
+   g++  is actually  a script which calls gcc with the appropriate options 
+in order to compile  C++, <br>
+  standard suffixes for C++ source files are: .C .cc .cxx .cpp or .c++. 
+<br>
+g++ in general uses the same flags as gcc, (some of them become meaningless).
+ <br>
+<br>
+<h2>3) The all  mighty  emacs,  </h2>
+emacs is my recommended editor, there are some who prefer VI, <br>
+IMHO  they tend to be masochistic.  <br>
+<br>
+first thing emacs like everything under linux  has good documentation, <br>
+when you run emacs type  C-h t (that is control+h  then t), <br>
+you will get to an emacs tutorial(can also be found in the help menu)  <br>
+<br>
+emacs usually allow moving around using the arrow keys  and page_up/down 
+keys <br>
+but it always allows another better way which does not involve moving  your
+fingers<br>
+from the normal typing position. It will take getting use to  but eventually
+will work much faster.  <br>
+<br>
+basic moving with arrow keys can be  replaced with:<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+Previous line,<big> C-p 				</big> <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+: 				  :    <br>
+Backward,<big> C-b</big>  .... Current cursor position .... Forward, <big>
+C-f</big> 				  <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+:  				  : 			    <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Next  line, <big>C-n</big>  <br>
+<br>
+one could also use<big> M-f</big> and<big> M-b</big> to move one word at
+a time  instead  of one character at a time. <br>
+<br>
+M is short for the Meta key, on your keyboard it will probably  be Alt. 
+<br>
+<br>
+page up is <big>M-v</big>,  page down is <big>C-v</big>.   <br>
+<br>
+end of line <big>C-e</big>, beginning of line <big>C-a</big>.  <br>
+<br>
+so much for moving around.  <br>
+<br>
+The most common method of copy&amp;paste  is by  cutting out using <big>C-k</big>
+. <br>
+<big>C-k</big> cuts until the end of line, typing C-k many times will cut
+many lines. <br>
+if you cut a few lines than move around and cut more lines<br>
+the first lines would be lost (not including possible undo).  <br>
+<br>
+in order to paste we will yank the text out of the buffer using <big>C-y</big>
+ <br>
+you can yank out however many times you want where ever you want.  <br>
+<br>
+One can also cut by words, <big>M-d</big> cuts forward one word at a time,
+<br>
+<big>M-backspace</big> cuts backwards one word at a time, this can also be
+yanked by <big>C-y</big>, <br>
+they use the same buffer as<big> C-k </big> <br>
+<br>
+At this point we should mention <big>C-x u</big> which is the undo option
+it will undo <br>
+the last act you can do several of these in a row, <br>
+notice there is a big difference between <big>C-x u</big> and <big>C-x C-u</big>
+ you most let go of the Ctrl key, <br>
+before hitting the u key.   <br>
+<br>
+opening a file is with <big>C-x C-f</big> you can use the tab to complete
+file names <br>
+as you can in the bash/tcsh command prompt.  <br>
+<br>
+When executing emacs from the command line you can give it a file name as
+a parameter, <br>
+in both cases should the file not exist emacs will create one.  <br>
+<br>
+Saving is done by <big>C-x C-s</big> which saves the current buffer(file)
+or <br>
+<big>C-x s</big> which will prompt to verify and save each and every open
+buffer.  <br>
+<br>
+one exits  emacs with <big>C-x c</big>.  <br>
+<br>
+basic search in emacs is with <big>C-s</big>.  <br>
+search and replace  is done with <big>M-%</big>.  <br>
+<br>
+emacs does syntax highlighting you can enable this easily  by selecting it
+in the Options menu.   <br>
+<br>
+emacs will align your source code  automatically, you can use the tab key
+ to re-align a specific line. <br>
+always  re align from top to bottom.  <br>
+<br>
+you can compile your code while inside emacs. type <big>M-x compile</big>
+. <br>
+a new buffer will open it will display compilation results  <br>
+you can go threw them easily having your cursor jump to where the errors
+are using <br>
+<big>C-x `</big> (back single quote upper left corner in qwerty)  <br>
+<br>
+to maximize  current buffer to cover all emacs use <big>C-x 1</big>, (<big>
+C-x 2</big> will split the buffer)   <big><br>
+&nbsp; <br>
+</big>we will look at a little example program we will edit&amp; compile
+with emacs.  4) the gdb debugger, this is the basic debugger, practically
+all linux debuggers are base on it, however it does not have a fancy GUI,
+it does do the trick.  In order to, use gdb one must use the -g flag when
+compiling!  executing gdb is simple gdb program_name  (it can be run differently
+but for that RTFM)  gdb has an excellent built in help you can type help
+from the command line and get a list of stuff to get help on, or type "help
+something", and get specific help on something either a command or a topic
+name.  basic gdb commands:   run	: executes the program from the beginning,
+	  you can use run &lt;&gt; file_out to redirect  	  input for the program
+being executed.  break 	: Used to set break points can be used in many ways,
+	  break line_number, 	  break function_name 	  when using many source files
+one would use 	  break  file_name:line_number  	  break class::method for
+c++  next	: process one  command line, do not enter function calls.  step
+	: proceed one command line,  step into function calls  	  if necessary.
+ cont	: continue until next breakpoint.   where	: display call stack.  print
+	: print a variable(expression), used  : "print expression"   up/down	: move
+up and down in the call stack allows  you 	  to examine local variables of
+previous functions.  and many more (see  help)   5) DDD data display debugger
+ This is a powerful tool which is a graphical  interface for an inferior
+debugger (usually gdb)  DDD can do everything your  favorite debugger does
+and much more, you can watch the code and execute it line by line, and examin
+data.  the speciality of DDD as name might suggest  is its ability to display
+your programs data graphically and comfortably,  in will allow you to display
+structures and dereference   pointers to create  a visualization of a linked
+list or a tree. DDD can also crate graphs out  of arrays.  DDD has a gdb
+command line, so any one who can use gdb can use  DDD and gradually learn
+it's special features.   6) valgrind, a good tool  to detect memory management
+problems:  valgrind can detect problems such as:  *   Use of uninitialized
+memory *   Reading/writing memory after it has been free'd *   Reading/writing
+off the end of malloc'd blocks *   Reading/writing  inappropriate areas on
+the stack *   Memory leaks -- where pointers to malloc'd  blocks are lost
+forever *   Passing of uninitialized and/or unaddressable  memory to system
+calls *   Mismatched use of malloc/new/new [] Vs free/delete/delete  [] *
+  Some abuses of the POSIX pthread API  valgrind is very easy use to  use.
+it has many optional flags you can learn about from the documentation,  of
+valgrind -h a useful flag is --num-callers=XXX which sets how far back  to
+ print the function call sequence when an error is detected, (some times 
+the error actually occurs in a function you didn't write called by another 
+ function you didn't...)  valgrind does not require special compilation, you
+ simple execute like so: valgrind --num-caller=15 progname it will run the
+ program progname, and intercept calls to malloc/free/new/delete and monitors
+ all memory uses, valgrind is good only for x86s running some Non-ancient 
+linux, this shouldn't be much of a problem.  valgrind will report several 
+types of errors:  * Illegal read / Illegal write errors. * Use of uninitialized
+  values. * Illegal frees. * inappropriate deallocation function. * Passing
+  system call parameters with inadequate read/write permissions.  valgrind
+ will when possible tell you where in your code relevant memory blocks were
+ allocated/freed.  valgrind is most probably not installed on the linux-box
+ you are working on, however installation is trivial and fairly quick, download,
+ unpack and then run one after another: ./configure make make install  valgrind
+ manual available in SUB_DIR/docs/index.html      
+</body>
+</html>

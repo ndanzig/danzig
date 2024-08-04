@@ -1,0 +1,40 @@
+<html>
+<head>
+  <title>linux for technion students, by haifux</title>
+    
+</head>
+ <body>
+<a href="lin_prog13.html"> next </a>
+<a href="lin_prog0.html"> index </a>
+<a href="lin_prog11.html"> prev </a><br>
+<h2>&nbsp;6) valgrind, a good tool  to detect memory management problems:
+ </h2>
+valgrind can detect problems such as:<br>
+<ul>
+  <li>Use of uninitialized memory </li>
+  <li>Reading/writing memory after it has been free'd</li>
+  <li>Reading/writing off the end of malloc'd blocks </li>
+  <li>Reading/writing  inappropriate areas on the stack </li>
+  <li>Memory leaks -- where pointers to malloc'd  blocks are lost forever
+  </li>
+  <li>Passing of uninitialized and/or unaddressable  memory to system calls
+  </li>
+  <li>Mismatched use of malloc/new/new [] Vs free/delete/delete  [] </li>
+  <li>Some abuses of the POSIX pthread API  </li>
+</ul>
+valgrind is very easy to use. it has many optional flags you can learn
+about from the documentation, valgrind -h<br>
+<br>
+A useful flag is --num-callers=XXX which sets how far back  to  print the
+function call sequence when an error is<br>
+detected, (Sometimes  the error actually occurs in a function you didn't
+write called by another   function you<br>
+didn't...) by default is num-callers=4.<br>
+
+<br>
+<a href="lin_prog13.html"> next </a>
+<a href="lin_prog0.html"> index </a>
+<a href="lin_prog11.html"> prev </a>
+ </body>
+
+</html>

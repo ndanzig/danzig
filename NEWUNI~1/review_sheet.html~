@@ -1,0 +1,64 @@
+<head>
+<TITLE>Review Sheet</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Operating Systems Homework </H2></CENTER>
+<h3>
+Review Sheet
+</h3>
+<table border="0" height="100%">
+<tr><td>1. What does the command "ps" show? (Include specific fields.)                     </td> </tr>
+<tr><td>2. What is the difference between "ls" and "ls -l"?                      </td> </tr>
+<tr><td>3. How do you use the command "kill" and what is its function?                      </td> </tr>
+<tr><td>4. If I run a command/program followed with the & symbol, what affect will there be? </td> </tr>
+<tr><td>5. Explain what file permissions are. How do I specify them?                      </td> </tr>
+
+<tr><td>
+6. What is the output? Explain.
+<pre> 
+include <sys/types.h>
+main()
+{       
+ int status, counter=1;
+ pid_t pid,child1;
+
+ while(counter <3)
+   {
+         counter++;
+     if(fork()==0)
+       {
+
+         printf("%d \n", counter);
+       }
+     else
+       {
+         wait(&status);   //father will wait here
+         printf("A child has terminated.\n");
+       }
+   }
+}
+</pre>
+</td> </tr>
+
+
+
+</table>
+Web site located here: http://danzig.jct.ac.il/newunix
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

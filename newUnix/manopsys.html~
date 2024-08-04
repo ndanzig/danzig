@@ -1,0 +1,415 @@
+<html>
+<head><title>
+Manual Pages relevent for Operating Systems
+</title></head>
+<body>
+<h2>Manual Pages relevent for Operating Systems </h2>
+
+
+<pre>
+<h3>vmstat</h3>
+NAME
+       vmstat - Report virtual memory statistics
+
+SYNOPSIS
+       vmstat [-n] [delay [ count]]
+       vmstat[-V]
+
+DESCRIPTION
+       vmstat  reports  information about processes, memory, paging, block IO,
+       traps, and cpu activity.
+
+       The first report produced gives averages since the last reboot. Additional
+       reports  give information on a sampling period of length delay.
+       The process and memory reports are instantaneous in either case.
+
+   Options
+       The -n switch  causes the header to be displayed only once rather  than
+       periodically.
+
+       delay  is  the delay between updates in seconds.  If no delay is specified,
+       only one report is printed with the average values since boot.
+
+       count is the number of updates.  If no count is specified and delay  is
+       defined, count defaults to infinity.
+
+       The -V switch results in displaying version information.
+
+FIELD DESCRIPTIONS
+   Procs
+       r: The number of processes waiting for run time.
+       b: The number of processes in uninterruptable sleep.
+       w: The number of processes swapped out but otherwise runnable.  This
+          field is calculated, but Linux never desperation swaps.
+
+   Memory
+       swpd: the amount of virtual memory used (kB).
+       free: the amount of idle memory (kB).
+       buff: the amount of memory used as buffers (kB).
+
+   Swap
+       si: Amount of memory swapped in from disk (kB/s).
+       so: Amount of memory swapped to disk (kB/s).
+
+   IO
+       bi: Blocks sent to a block device (blocks/s).
+       bo: Blocks received from a block device (blocks/s).
+
+   System
+       in: The number of interrupts per second, including the clock.
+       cs: The number of context switches per second.
+
+   CPU
+       These are percentages of total CPU time.
+       us: user time
+       sy: system time
+       id: idle time
+
+NOTES
+       vmstat does not require special permissions.
+
+       These  reports are intended to help identify system bottlenecks.  Linux
+       vmstat does not count itself as a running process.
+       All linux blocks are currently 1k, except for CD-ROM blocks  which  are
+       2k.
+
+FILES
+       /proc/meminfo
+       /proc/stat
+       /proc/*/stat
+
+SEE ALSO
+       ps(1), top(1), free(1)
+
+
+
+<h3>top</h3>
+NAME
+       top - display top CPU processes
+
+SYNOPSIS
+       top [-] [d delay] [p pid] [q] [c] [C] [S] [s] [i] [n iter] [b]
+
+DESCRIPTION
+       top  provides  an  ongoing look at processor activity in real time.  It
+       displays a listing of the most CPU-intensive tasks on the  system,  and
+       can  provide  an  interactive interface for manipulating processes.  It
+       can sort the tasks by CPU usage, memory usage and runtime.  Can be better
+       configured than the standard top from the procps suite.  Most features
+       can either be selected by an interactive command or by specifying
+       the  feature  in  the  personal  or system-wide configuration file. See
+       below for more information.
+
+COMMAND−LINE OPTIONS
+       d    Specifies the delay between screen updates.  You can  change  this
+            with the s interactive command.
+
+       p    Monitor  only  processes  with given process id.  This flag can be
+            given up to twenty times. This option is neither available interactively 
+	    nor can it be put into the configuration file.
+
+       q    This  causes  top  to refresh without any delay. If the caller has
+            superuser priviledges, top runs with the highest  possible  priority.
+
+       S    Specifies  cumulative  mode, where each process is listed with the
+            CPU time that it as well as its dead children has spent.  This  is
+            like  the  -S  flag  to  ps(1).  See the discussion below of the S
+            interactive command.
+
+       s    Tells top to run in secure mode.  This  disables  the  potentially
+            dangerous  of  the interactive commands (see below).  A secure top
+            is a nifty thing to leave running on a spare terminal.
+
+       i    Start top ignoring any idle or zombie processes. See the  interactive 
+            command i below.
+
+       C    Display  total  CPU  states  in  addition to individual CPUs. This
+            option only affects SMP systems.
+
+       c    display command line instead of the command name only. The default
+            behaviour has been changed as this seems to be more useful.
+
+       H    Show all threads for a processes.
+
+       n    Number  of iterations. Update the display this number of times and
+            then exit.
+
+       b    Batch mode. Useful for sending output from top to  other  programs
+            or  to  a  file.   In  this mode, top will not accept command line
+            input.  It  runs  until  it  produces  the  number  of  iterations
+            requested  with the n option or until killed. Output is plain text
+            suitable for display on a dumb terminal.
+
+FIELD DESCRIPTIONS
+       top displays a variety of information about the processor  state.   The
+       display  is updated every 5 seconds by default, but you can change that
+       with the d command-line option or the s interactive command.
+
+       uptime
+            This line displays the time the system has been up, and the three
+	    load  averages  for the system.  The load averages are the average
+            number of process ready to run during the last 1, 5  and  15  minutes.
+	    This line is just like the output of uptime(1).  The uptime
+            display may be toggled by the interactive l command.
+
+       processes
+            The total number of processes running at  the  time  of  the  last
+            update.   This  is also broken down into the number of tasks which
+            are running, sleeping,  stopped,  or  undead.  The  processes  and
+            states display may be toggled by the t interactive command.
+
+       CPU states
+            Shows  the percentage of CPU time in user mode, system mode, niced
+            tasks, and idle.  (Niced tasks are only those whose nice value  is
+            negative.)  Time spent in niced tasks will also be counted in system 
+	    and user time, so the total will be more than 100%.  The  processes
+	    and states display may be toggled by the t interactive command.
+
+       Mem  Statistics on memory usage, including total available memory, free
+            memory,  used  memory, shared memory, and memory used for buffers.
+            The display of memory information may be toggled by the m interactive 
+	    command.
+
+
+      Swap Statistics  on  swap  space, including total swap space, available
+            swap space, and used swap space.  This and Mem are just  like  the
+            output of free(1).
+
+       PID  The process ID of each task.
+
+       PPID The parent process ID each task.
+
+       UID  The user ID of the task’s owner.
+
+       USER The user name of the task’s owner.
+
+       PRI  The priority of the task.
+
+       NI   The  nice value of the task.  Negative nice values are higher priority.
+
+       SIZE The size of the task’s code plus data plus stack space,  in  kilobytes, 
+            is shown here.
+
+       TSIZE
+            The  code  size  of the task. This gives strange values for kernel
+            processes and is broken for ELF processes.
+
+       DSIZE
+            Data + Stack size. This is broken for ELF processes.
+
+       TRS  Text resident size.
+
+       SWAP Size of the swapped out part of the task.
+
+       D    Size of pages marked dirty.
+
+       LC   Last used processor.  (That this changes from time to time is  not
+            a  bug;  Linux intentionally uses weak affinity.  Also notice that
+            the very act of running top may break weak affinity and cause more
+            processes  to  change  current CPU more often because of the extra
+            demand for CPU time.)
+
+       RSS  The total amount of physical memory used by  the  task,  in  kilobytes,  
+            is  shown  here.  For ELF processes used library pages are
+            counted here, for a.out processes not.
+
+       SHARE
+            The amount of shared memory used by the task is shown in this column.
+
+       STAT The  state  of  the  task is shown here. The state is either S for
+            sleeping, D for uninterruptible sleep, R for running, Z  for zombies,
+	    or  T  for  stopped or traced. These states are modified by
+            trailing < for a process with negative nice value, N for a process
+            with  positive  nice value, W for a swapped out process (this does
+            not work correctly for kernel processes).
+
+       WCHAN
+            depending on the availablity of  either  /boot/psdatabase  or  the
+            kernel  link  map  /boot/System.map  this shows the address or the
+            name of the kernel function the task currently is sleeping in.
+
+       TIME Total CPU time the task has used since it started.  If  cumulative
+            mode  is on, this also includes the CPU time used by the process’s
+            children which have died.  You can set cumulative mode with the  S
+            command  line  option or toggle it with the interactive command S.
+            The header line will then be changed to CTIME.
+
+       %CPU The task’s share of the CPU time since  the  last  screen  update,
+            expressed as a percentage of total CPU time per processor.
+
+       %MEM The task’s share of the physical memory.
+
+       COMMAND
+            The task’s command name, which will be truncated if it is too long
+            to be displayed on one line.  Tasks in memory  will  have  a  full
+            command line, but swapped-out tasks will only have the name of the
+            program in parentheses (for example, "(getty)").
+
+       A , WP
+            these fields from the kmem top are not supported.
+
+INTERACTIVE COMMANDS
+       Several single-key commands are recognized while top is running.   Some
+       are disabled if the s option has been given on the command line.
+
+       space
+            Immediately updates the display.
+
+       ^L   Erases and redraws the screen.
+
+       h or ?
+            Displays a help screen giving a brief summary of commands, and the
+            status of secure and cumulative modes.
+
+       k    Kill a process.  You will be prompted for the PID of the task, and
+            the signal to send to it.  For a normal kill, send signal 15.  For
+            a sure, but rather abrupt, kill, send signal 9.  The default  signal,
+	    as with kill(1), is 15, SIGTERM.  This command is not available in 
+	    secure mode.
+
+       i    Ignore idle and zombie processes.  This is a toggle switch.
+
+       I    Toggle between Solaris (CPU percentage divided by total number  of
+            CPUs)  and  Irix  (CPU  percentage  calculated solely by amount of
+            time) views.  This is a toggle switch that affects only  SMP systems.
+
+       n or #
+            Change  the  number of processes to show.  You will be prompted to
+            enter the number.  This overrides automatic determination  of  the
+            number  of  processes  to show, which is based on window size
+	    measurement.  If 0 is specified, then top will show as many processes
+            as will fit on the screen; this is the default.
+
+       q    Quit.
+
+       r    Re-nice  a process.  You will be prompted for the PID of the task,
+            and the value to nice it to.  Entering a positve value will  cause
+            a  process  to be niced to negative values, and lose priority.  If
+           root is running top, a negative value can be  entered,  causing  a
+            process  to get a higher than normal priority.  The default re-nice
+            value is 10.  This command is not available in secure mode.
+
+       S    This toggles cumulative mode, the equivalent of ps -S, i.e.,  that
+            CPU  times  will  include  a process's defunct children.  For some
+            programs, such as compilers,  which  work  by  forking  into  many
+            seperate  tasks,  normal mode will make them appear less demanding
+            than they actually are.  For others, however, such as  shells  and
+            init,  this behavior is correct.  In any case, try cumulative mode
+            for an alternative view of CPU use.
+
+       s    Change the delay between updates.  You will be prompted  to  enter
+            the  delay  time,  in seconds, between updates.  Fractional values
+            are recognized down to microseconds.  Entering 0 causes continuous
+            updates.   The  default  value is 5 seconds.  Note that low values
+            cause nearly unreadably fast displays, and greatly raise the load.
+            This command is not available in secure mode.
+
+       f or F
+            Add fields to display or remove fields from the display. See below
+           for more information.
+
+       o or O
+            Change order of displayed fields. See below for more  information.
+
+       l    toggle display of load average and uptime information.
+
+       m    toggle display of memory information.
+
+       t    toggle display of processes and CPU states information.
+
+       c    toggle display of command name or full command line.
+
+       N    sort tasks by pid (numerically).
+
+       A    sort tasks by age (newest first).
+
+       P    sort tasks by CPU usage (default).
+
+       M    sort tasks by resident memory usage.
+
+       T    sort tasks by time / cumulative time.
+
+       W    Write  current  setup to ~/.toprc.  This is the recommended way to
+            write a top configuration file.
+
+The Field and Order Screens
+       After pressing f, F, o or O you will be shown a screen  specifying  the
+       field  order  on  the top line and short descriptions of the field contents
+       The field order string uses the following syntax: If the  letter in
+       the filed string corresponding to a  field is upper case, the field
+       will be displayed.  This is furthermore indicated  by  an  asterisk  in
+       front of the field description.  The order of the fields corresponds to
+       the order of the letters in the string.
+        From the field select screen you can toggle the display of a field  by
+       pressing the corresponding letter.
+        From the order screen you may move a field to the left by pressing the
+       corresponding upper case letter resp. to  the  right  by  pressing  the
+       lower case one.
+
+Configuration Files
+       Top  reads  it's  default  configuration from two files, /etc/toprc and
+       ~/.toprc.  The global configuration file may be used  to  restrict  the
+       usage  of  top to the secure mode for non-priviledged users. If this is
+       desired, the file should contain a 's' to specify  secure  mode  and  a
+       digit  d (2<=d<=9) for the default delay (in seconds) on a single line.
+       The personal configuration file contains two lines. The first line contains
+       lower and upper letters to specify which fields in what order are
+       to be displayed. The letters correspond to the letters in the Fields or
+       Order  screens  from top. As this is not very instructive, it is recommended
+       to select fields and order in a running top process and to  save this  using
+       the W interactive command.  The second line is more interesting
+       (and important). It contains information on the  other  options.
+       Most  important,  if you have saved a configuration in secure mode, you
+       will not get an insecure top without removing the lower  's'  from  the
+       second line of your ~/.toprc.  A digit specifies the delay time between
+       updates, a capital 'S' cumulative mode, a lower  'i'  no-idle  mode,  a
+       capital  'I'  Irix  view. As in interactive mode, a lower 'm', 'l', and
+       't' suppresses the display of memory,  uptime  resp.  process  and  CPU
+       state  information.   Currently  changing the default sorting order (by
+       CPU usage) is not supported.
+
+NOTES
+       This proc-based top works by reading the files in the proc  filesystem,
+      mounted on /proc.  If /proc is not mounted, top will not work.
+
+       %CPU  shows  the  cputime/realtime  percentage  in  the  period of time
+       between updates.  For the first update, a short delay is used, and  top
+       itself  dominates the CPU usage.  After that, top will drop back, and a
+       more reliable estimate of CPU usage is available.
+
+       The SIZE and RSS fields don't count the page tables and the task_struct
+       of  a  process; this is at least 12K of memory that is always resident.
+       SIZE is the virtual size of the process (code+data+stack).
+
+       Keep in mind that a process must die for its time to be recorded on its
+       parent  by  cumulative  mode.  Perhaps more useful behavior would be to
+       follow each process upwards, adding time, but that would be more expensive,
+       possibly  prohibitively  so.  In any case, that would make top's
+       behavior incompatible with ps.
+
+FILES
+       /etc/toprc The global configuration file.  ~/.toprc   The  personal
+       configuration file.
+
+SEE ALSO
+       ps(1), free(1), uptime(1), kill(1), renice(1).
+
+</pre>
+ Nachum Danzig 2003
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

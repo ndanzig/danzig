@@ -1,0 +1,61 @@
+<html>
+<body>
+<h2>Subjects to know for exam in MIPS </h2>
+
+
+<p>For the final exam, know these pages from book, 3rd edition revised. 
+* indicates more critical stuff
+
+<ul>
+
+
+<li>*chap. 2.2 -2.9  pp. 49-105
+<li>pp. 106 -120 are good too but less important
+<li>*pp.121 -130
+
+
+<li>*chap 3.2 - 3.6  pp. 160 - 213
+
+
+<li>*chap 4.1 - 4.2  pp. 240- 253
+
+
+
+<li>5.1 - 5.4  pp.284 - 317  necessary but less important
+<li>* 5.5   pp.  318  - 331
+
+
+<li>7.1 468- 472
+<li>*7.2 -7.3  473 - 510
+</ul>
+
+
+<ol>
+
+<li>What will be the value of a wire at one of the 5 stages in a multicycle datapath. 
+(Based on the YouTube video with Muhammad). p. 318 in the book.(3rd edition).
+<li> Improving performance (clock-cycle) problem. p. 247 in the book (3rd edition).
+<li> Write some type of a function, with a user interface (in Mars) using all the function rules
+ (store/load all the $s registers). An example of such a problem would be a function to find the
+ largest number in a series. p.79 in the book for explanation of functions in MIPS and p. A-43 
+for an intro to syscalls (needed to create a user interface). More information on syscalls
+ can be found in the Help (f1) section in the Mars program. When you open help, 
+there is a tab there "syscalls".
+<li> Represent a floating point number in a single or double precision floating point 
+representation. Know the bit breakdown for single and double precision commands. 
+(sign/exponent/significand)p. 191-197.
+<li>Know how to express the following MIPS commands in binary notation: sw (store word), lw (load word), add, j (jump),
+ beq/bne (branch if equal/not equal). And know how to read a binary set of 32 bits and be able to tell which 
+of those 5 commands it performs. p.60-68
+<li> Bits in a cache question. An example of this type of question that will be asked appears on p.479
+<li> Locating a block in the cache question. An example of this type of question appears on p.480.
+<li> Understand the difference and advantages/disadvantages of set-associative vs. fully-associative
+ vs. direct mapped caches. p.497.
+
+<li> Given one of the 5 commands that we have to know (sw, lw, add, j, beq) what will be the value 
+of a wire at one of the 5 stages in a multicycle datapath. (Based on the YouTube video with Muhammad).
+ p. 318 in the book. 
+
+</ol>
+</body>
+</html>

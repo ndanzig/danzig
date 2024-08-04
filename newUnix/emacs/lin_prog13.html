@@ -1,0 +1,43 @@
+<html>
+<head>
+  <title>linux for technion students, by haifux</title>
+    
+</head>
+ <body>
+<a href="lin_prog0.html"> next </a>
+<a href="lin_prog0.html"> index </a>
+<a href="lin_prog12.html"> prev </a><br>
+<h3><u>more valgrind</u></h3>
+valgrind does not require special compilation, you  simply execute like so:
+<big>valgrind --num-caller=15 progname<br>
+</big>it will run the  program progname, and intercept calls to malloc/free/new/delete
+and monitors  all memory uses,<br>
+<br>
+valgrind is good only for x86s running some Non-ancient  linux, this shouldn't
+be much of a problem.  <br>
+valgrind will report several  types of errors:  <br>
+* Illegal read / Illegal write errors. <br>
+* Use of uninitialized   values. <br>
+* Illegal frees. <br>
+* Inappropriate deallocation function. <br>
+* Passing   system call parameters with inadequate read/write permissions.
+ <br>
+<br>
+valgrind  will when possible tell you where in your code relevant memory
+blocks were  allocated/freed.  <br>
+valgrind is most probably not installed on the linux-box  you are working
+on, however installation is trivial and<br>
+fairly quick: download,  unpack and then run one after another:<br>
+&nbsp;./configure <br>
+make <br>
+make install  <br>
+<br>
+valgrind  manual available in SUB_DIR/docs/index.html       
+
+<br>
+<a href="lin_prog0.html"> next </a>
+<a href="lin_prog0.html"> index </a>
+<a href="lin_prog12.html"> prev </a>
+ </body>
+
+</html>

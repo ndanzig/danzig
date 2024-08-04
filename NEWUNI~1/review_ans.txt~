@@ -1,0 +1,49 @@
+1. ps shows process activity.
+It lists the owner of the process ( USER )  the serial number of the process 
+(PID) the amount of CPU it uses in per cent ( %CPU) the percent of memory it uses( %MEM)
+the status of the file [if the file is running, waiting, zombie, etc.]
+ ( STAT ), hte time the process started to run ( START )the amount of time
+the process has been running (TIME) and finally, the name of the process
+( COMMAND)
+
+2. ls list the names of files in a directory as specified by the last arguments.
+ls -l shows more detailed information on each file, including
+ownership, permission, size of file, and date modified.
+
+3.  One uses kill by typing the word kill on the command line , then 
+optionally one may type the signal he wished to send (if nothing is
+written the then the interrupt signal is sent (INT) ) followed by the PID of the process one wishes to signal.  The function of kill is to send a 
+signal to a process.
+
+4. the symbol & causes a process to be run in the background.  The practical 
+affect is that I can then continue to use the terminal to execute other commands.
+
+5. File permissions control the access to a file. The access can be limited to
+the owner of the file, the group of the owner of the file or allowed to 
+all users.  One can also allow eihter reading or writing or executing 
+permission for any of the above sets of users.
+permissions of a file are represented like this: -rwxrw-rw- 
+One can change persmissions by using the shell command chmod followed by the 
+desired permissions and the file or set of file one wished to change.
+Example: chmod 777 myFile.txt
+Example 2: chmod u+r myFile.txt
+
+
+6.
+the output is the following. 
+2 
+3 
+A child has terminated.
+A child has terminated.
+3 
+A child has terminated.
+
+Explanation:
+The counter starts at 1 and before any fork or print the counter
+increments to 2.
+At the first fork the son prints the counter (2) [his father waits for him to 
+finish].  The son then loops again, counter goes to 3, the son then creates
+another son [and waits] which will print counter (3) and die, thus the 
+first son will finish waiting and die. The original father finishes his 
+waiting and loops.  His counter goes to 3 he creates a son which prints 
+counter (3) and finishes, the first father then finishes.

@@ -1,0 +1,98 @@
+<head>
+<TITLE>Homework</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Operating Systems Homework </H2></CENTER>
+<h3>
+Homework Assignments 
+</h3>
+<ol>
+
+  <LI>Write a program in C  with a menu like this:
+  <br>(1) run "vmstat 1" via execv and fork
+  <br>(2) run "vmstat 1" via system
+  <br>(3) run "ping 147.161.16.10" via execv and fork
+  <br>(4) run "ping 147.161.16.10" via system
+  <br>(5) run "ps -aux " via system
+  <br>When the user make a selection, do the action he requested and then return and give him a menu again.
+
+
+<br><br>  <li>Demonstrate IPC <br> 
+  Write a program in C to do the following:
+  <br>open a text file (you'll have to create a text file using emacs or whatever)
+  <br>read the file into a buffer of size 200 bytes 
+  <br>write the buffer into a shared pipe 
+  <br>have a child process read from the pipe each packet and write it to a 
+<b>new</b> file.
+
+</li>
+<br><li><a href="review_sheet.html">Review Sheet</a>
+<br> <a href="review_ans.txt">Review Sheet Answers</a>
+<br><br><li>
+Create a parent process and two child processes. Have the child processes
+send messages to the father by writing strings to shared memory.  To prevent 
+the parent from getting two different childs' messages at the same time, 
+use a semaphore to control the childs' writing to the memory.
+Also, use some kind of random waiting method so that the children will write
+at random (and potentially conflicting) times.  The strings that the children write
+should be hard-coded in ( make an array of strings ) and can be of your 
+choosing.  However, they should indicate which child is writing and which time he 
+is writing (e.g. "child 1 first time", "child 1 second time", ....)
+
+<br><br><li>You are asked to create one pipe to be used as a communication exchange.
+A parent process creates 3 child processes. It will signal which child is
+to listen on the pipe at which time.  The parent process will allow the
+user to choose to which process he wants to send a message.  
+<p>
+The user will be able to send a text message to any son he wants through 
+the pipe common to all processes.  The user will be able to kill any child 
+he desires, and at any time.  The program will keep running until the user
+ kills all the 3 child processes.
+<p>
+If user types 'quit' you must kill all children before exiting (otherwise they
+ will not die until the system comes down).
+Do the same if the user types control-c (note: use a trap on control-c). 
+<p>
+Also the father may send signals other than -KILL (-9) to the children.
+Implement 3 such signals (in addition to INT) of your choice. 
+'man 7 signal'  will list for you all the signals.
+
+<p>
+<br>Sample input and output:
+<br>>
+<br>> 1 hello 
+<br>son 1: hello
+<br>> 3 hello
+<br>son 3: hello
+<br>> 1 kill -KILL
+<br>father: son 1 terminated.
+<br>> 1 hello
+<br>father: son 1 no longer alive.
+<br>> 3 hello
+<br>son 3: hello 
+<br>> 3 kill -KILL
+<br>father: son 3 terminated.   
+<br>> 2 kill -KILL
+<br>father: all sons died. Bye.
+<br>>
+<br>>   
+
+
+</ol>
+<a name="answer"><a href="../unix_class/exercise-alpha.c"> Partial answer to this problem. </a>
+<br>
+Nachum Danzig<sup>&copy;</sup>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

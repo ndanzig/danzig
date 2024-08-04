@@ -1,0 +1,241 @@
+<html>
+<head>
+
+<title>
+Computer Architecture and MIPS Assembly Language
+
+</title
+
+</head>
+<body>
+<p>
+slt set on less  slt $t0m $s3 ,$s4
+<br>slti immediate value
+
+<p>
+registers A0- A3 for arguments
+<br>v0-v1 return values
+<br>ra stores point of origin for returning
+
+<p>jump and link (jal) automatically sets ra to the <b>next</b> line of code after the current place the pc points to
+<br>jr $ra  goes back to point of origin
+<br>sp stack pointer
+<br>t0-t9 temporary registers, not stored
+<br>$s0 -$s7 saved registers.
+<br>addi $sp, $sp , -12   makes 3 words of space in the stack for storing s registers, etc.
+<br>fp points to start of frame, usefull for referencing local variables stored in stack
+
+
+<p>By convention (not part of mips architecture) these are the memory locations of mips programs.
+(see chart p. 87)
+
+<p>Stack pointer ($sp) is set to 7fff fffc<sub>hex</sub>  and goes down from there but cannot pass 1000 0000 <sub>hex</sub>
+<br>$gp (global pointer ) is set to 1000 8000 <sub>hex</sub>  and is used to access data from 1000 0000
+<br>until 1000 ffffe. It will be used when creating dynamic memory allocations. And could theoretically
+conflict with static data.
+
+
+<p>static data start at 1000 0000<sub>hex</sub>
+
+<p>text is located at  0040 0000<sub>hex</sub>
+<pre>
+.data
+
+myspacer:
+     .space 4
+myarray:
+      .byte 1,2,3,4 
+
+
+.text
+
+lui $1, 4097
+ori $t0, $1, 4 
+</pre>
+
+Avi Treistman's explanation of above code:<br>
+4097 is 1001 in hex. The data segment starts at 10010000.  The address of myarray is 10010004, because myspacer takes up 4 bytes, hense the ori $t0, $1, 4.
+
+<p> The only pseudo instructions you are allowed to use are la and li.
+
+<p>extra function parameters are stored above the fp frame pointer
+
+<br>lb loads byte from memory into low end of register
+<br>sb takes low byte from register and puts it into memory. Remember MIPS 
+keeps memory locations for every byte so therefore we can locate single bytes of memory
+<p>
+In a leaf procedure use t registers first so that you don't need to save s register values in
+the stack.
+
+<br>lh loads a half word from memory into low 16 bits of register.
+<br>sh reads low 16 bits of a register and puts into memory
+<br>lh $t0, 0($sp )  #read from memory into t0
+<br>sh $t0, 2($sp)   #write from register t0 into memory
+
+<br>lw and sw must be aligned to starts of words (4 byte intervals)
+
+
+<p>lui allows one to load immediate values that won't fit into 16bits. Normal li only allows one
+to load a value of 16bit length.  But a register can contain 32 bits.  Therefore we can load the high
+end 16bits first into a register using lui and then we can insert the lower end. 
+Lui also clears low bits to zero.
+<br> Example:
+
+<br>lui $s0, 87
+<br>ori $s0, $s0, 1212
+
+<br>now $s0 contains 87 followed by 1212
+
+<p> Use ori not addi to load the lower portion,
+  addi won't work because it copies the leftmost bit of the lower 16 bits into the 
+high section. ( I think this is the sign of the number)
+
+<p>When you do a command like lw you specify a memory location from which to get the value.  But how does the 
+MIPS chip get the whole (large) value at that memory location into memory?  The answer is it uses a temporary register <b> 
+$at</b>
+to assemble the full value (using lui and ori) and then copies that value into the register you specified in your
+lw.
+
+
+<p>
+
+The jump instruction has 6 bits for the command and 26 bits for the address
+but the bne instruction  which also has 2 register addresses has only 16 bits left for the address.
+In fact, bne jumps to the location $pc + the address given.  This makes sense since most conditional jumps are to 
+nearby code.  This is called PC-relative addressing.
+J and jal are likely to jump anywhere, therefore their address space is larger.  Furthermore we can get an
+effective 28 bits (instead of the actual 26) by assuming the address is in words not bytes (i.e. increments of 4).
+Obviously a jr can jump to the full 32 bit location since it is jumping to the location stored in a 32 bit register.
+To get bne to jump to a distant location simply place an uncontional  jump ( j or jr) at a label and use the bne 
+to jump there. 
+
+<p> see sort example on page 121
+
+<p> Arrays vs. Pointers
+
+
+<hr>
+
+<p>The official data segment in MIPS starts at 0x10000000, and this is what you will see in Patterson and Hennessey.
+In the MARS simulator, the default .data address is 0x10010000. 
+This is the address used for labels defined in the .data section of code. 
+However, this is NOT the start of the data segment, which is 0x10000000 as stated before. 
+The segment from 0x10000000 until 0x10010000 is reserved in MARS as .extern, 
+which is the data segment for global variables.
+ 
+<p>
+How can we demonstrate this ?
+ <p>
+MARS can compile more than one file at a time if they are in the same directory. 
+In order to do this, you need to set "Assemble all files in directory"
+ under "Settings" from the main menu. I also suggest that you turn on "Show Labels Window", 
+and "Initialize Program Counter" to "global main"
+
+<p> 
+Below are two files:
+ <pre>
+#Test.s
+ 
+.data
+mylocal:                      # this is a local variable at 10010000
+.byte 1,2,3,4
+.extern myspace 4  # this is a global variable 10000000
+.text
+.globl main               # declares main as global, PC is set to here based on Settings.
+main:
+la $t0, myspace
+li $t1, 0x1234
+sw $t1, 0($t0)          # write to global
+jal myproc               # jump to external routine
+li $v0, 9                    #heap allocation
+li $a0, 4
+syscall
+li $t0, 0x1234 
+sw $t0, 0($v0)
+li $v0, 10
+syscall
+
+
+
+#Test1.s
+ 
+.globl myproc    # this is a global procedure
+.data
+mylocal:               # this is a local variable at 10010004
+.byte 1,2,3,4
+.text
+myproc:
+li $t0, 4
+la $t1, myspace
+jr $ra
+ </pre>
+
+<p> 
+If you assemble both of these files in MARS (open both of them by File:Open, 
+while they are in the same directory),
+ in the Labels window you will see two global variables myproc and myspace, 
+and you will see two local variables, both named mylocal with different addresses.
+ 
+<p>
+Two additional options that are available are in .Memory Configuration. under Settings. 
+You can set either the code to start at 0x0, or the data and .data segment to start at 0x0
+ <p>
+The end of the code in test.s shows how to allocate on the heap, with the .heap segment at 0x10040000.
+<p> 
+One last note: If you define the same global variable in two different files, the definition will be 
+ignored in all of the files except the first in order of compilation.
+
+<p>What I have said about storing s registers in the stack before using them is a general rule, but if
+your code is short and you know that changing s registers will not have "side effects" then you don't need
+to  store them.  In fact, compiler optimation may discover this and also not store s registers.
+
+<p>Two's complement 
+<br>000000000000000000000000000001 = 1
+<br>011111111111111111111111111111 = 2,147,483,647
+<br>100000000000000000000000000000 = -2,147,483,648
+<br>100000000000000000000000000001 = -2,147,483,647
+<br>100000000000000000000000000010 = -2,147,483,646
+<br>111111111111111111111111111111 = -1
+<br>111111111111111111111111111110 = -2
+<br>111111111111111111111111111101 = -3
+<br> Thus leading ones indicate negative numbers.  Positive numbers 
+always have at least one leading zeros and are represented intuitively.
+This is better than representing magnitude and value seperately (we have no negative zero!).
+  The only disadvantage is
+that there is one more negative number than positive.
+
+<p>lb  treats byte as signed and therefore fills 24 msbits with appropriate values based on sign.
+lbu  does an unsigned copied and therefore does not affect the 24msb.
+lh and lhu work similarly.
+<p>"Set on less than unsigned" (sltu) for comparing unsigned integers like addresses.  And there is also
+lstiu. Regular slt assumes signed numbers.  (p. 165)
+<p>To negate a number simply invert every 0 and 1. and then add 1 to the result. When inserting a 16 bit number
+to a 32 bit version ( as when running li, si,add, slt) you need to represent it correctly, for example the MSB
+must be set.  What the mips does is called sign extension.  It takes the MSB for the 16 number and extends it all throught
+the upper 16 bits of the new word. LB does this also.
+There is also a shortcut to the effect that if you want to check if $a1 &lt; 0 or if $t2<= $a1 you can do it in one
+check. Simply use the set less than unsigned ( sltu $t0, $a1, $tu ) and then jump on the reverse condition.
+
+
+
+
+<p> Mips has no subtraction, simply change one sign to negative and perform addition. But infact, there is a command sub.
+ Overflow can occur when adding two possitive or two negative numbers. ( Or revese cases with subtraction.)  
+In such a case the sign bit will contain a value instead of the sign.
+If we perform an addition on two negative number and get a postive result, we know an overflow occured.  So
+too, if we perform an addition of two positive numbers and get a negative result, we know an overflow occured.
+(and reverse for subtraction)
+When adding unsigned numbers use addu, addiu  and subu.  These will not cause a exception on overflow.
+see example on p. 173
+<p> Multiplication:
+
+
+
+
+
+<a href="http://logos.cs.uic.edu/366/notes/mips%20quick%20tutorial.htm">
+mips tutorial
+</a>
+<Br>
+<a href="http://www.mrc.uidaho.edu/mrc/people/jff/digital/MIPSir.html"> another reference
+ </a>

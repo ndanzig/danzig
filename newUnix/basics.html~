@@ -1,0 +1,38 @@
+<html>
+<head><title>
+Basic System Commands
+</title></head>
+<body>
+<h2>Basic System Commands - March  2004 </h2>
+<ul>
+<li> Disk Partitions - df, du
+<li> Processes - ps -ef or -aux
+/etc/init
+
+
+dmesg
+syslogd
+
+telinit 
+runlevel
+/etc/inittab
+
+</ul>
+&copy Nachum Danzig 2003
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
