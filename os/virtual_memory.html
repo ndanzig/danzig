@@ -1,0 +1,200 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+
+<title>Operating Systems Course Outline </title>
+</head>
+<BODY >
+
+<h2>Virtual Memory</h2>
+
+
+<dl>
+ <dt>Virtual Memory      <dd> creates a logical memory which can be much larger than the physical memory 
+(uses external storage like a harddrive).  Allows more processes to be in CPU. Unlike overlays, lets
+programmers not worry about which code sections to overlay.
+<dt>Demand Paging <dd> 
+<dt>Lazy Swapper   <dd> only swaps  into memory some pages, not whole program.  Better name is <b>pager</b>.
+It must guess which pages will be used. Saves swap time and physical memory needs since only part is copied.
+<dt>Memory resident               <dd> Those pages in memory.
+<dt>Page table               <dd> Indicates which pages are non-resident (invalid) .
+
+<dt>page-fault trap               <dd> Occurs when a non-resident page is attempted to be accessed. Must now
+copy the page into memory. We check the page table and if a page is listed as invalid, we know
+it is not in memory and must be swapped in from the storage.
+<dt> Pure demand paging              <dd> Start with no pages in memory and bring in pages as page faults occur.
+
+<dt>restarting an instruction               <dd> may cause data errors if the instruction had already partially written
+some data.
+One solution is to write to the begining and end of the location. if a page fault occurs, it will occur before any data has been overwritten.  Another solution is to use registers to store old data.
+<dt>page-fault rate               <dd>must be kept to one in 2,500,000 memory accesses to prevent serious system degradation. 
+<dt>swap space               <dd>area on disk for swapping.  it is faster than regular disk space because memory block are larger.
+
+<dt>Copy on write               <dd> When forking a child, don't create all his code and data space, use the parents.
+Only if the child writes do you start creating pages for the child.
+<dt> vfork              <dd>a UNIX command which creates a child without any of its own memory. Parent is halted until 
+child suspended. vfork is intended to be used with  exec command.
+<dt>  memory mapped files             <dd>Use the paging and VM scheme to read sections of file into memory and 
+perform future read and writes to the file in memory.  saves time. Write occurs at close ( or sometimes earlier)
+
+<dt> Over allocation              <dd> We want to over allocate our memory to better utilize the CPU, i.e. to
+ have more processes running. But we may get a page fault and have no free space in memory.  What to do?
+<dt>  Page replacement             <dd> Simply pick a victim page from some process, a page which is not currently being
+used, and copy it back to the store. Essential this is a double page fault since two pages need to be written 
+(one in and one out)
+<dt>modify bit (dirty bit)               <dd> If page which is about to be written back to disk has not been modified,
+then simply discard it and save the time, don't write is back to disk since it is already there (assuming it has not been overwritten on disk) If page is modified (dirty) then you must write is back to disk.
+
+<dt>frame allocation algorithm               <dd>determine how much PhyM to give each process
+<dt>page allocation algorithm               <dd>determine which pages should be victims of page replacement. Goal is low
+ page fault rate. As number of frames increase, page faults decrease.
+<dt>Fifo Page replacement               <dd>Simple replace page that has been in memory the longest (even if it
+has been accessed recently).  If it is in active use, we will get another page fault and bring it into memory again.
+<dt>Belady's Anomaly               <dd>For some page replacemnt algorithms (like fifo) the page fault rate may actually
+increase when the number of frames is increased.  Usually, if you keep adding frames, it will go down again.
+
+<dt>Optimal Page replacement        (OPT)       <dd> Replace the page that will not be used for the longest period of time. Requires future knowledge. Used for comparison purposes.
+<dt>Least Recently Used (LRU) Page replacement        <dd> Replace the page that has not been used for the longest time. Essential , it is OPT backward in time. Implementations: 1. Associate a timestamp to each page for every memory access. 
+ Search all pages before each page replacement. 2. Insert every accessed page into
+a stack. Reinsert on  each subsequent access. Bottom of stack is LRU page. Due
+ to intense processing for either implemetation, hardware suport is required 
+to make them feasable.
+<dt> stack algorithm               <dd>Any algorithm which 
+does not suffer from Belady's anomoly.
+
+
+<dt>reference bit    <dd> a bit associated with each page which indicates whether 
+the page has been accesses.  Set to zero at start, and to 1 when accessed.  
+Used in most (all) LRU Approximation page replacement algorithms. 
+
+<dt>LRU Approximation using multiple bits <dd> Hardware could keep 8 bits
+, 1 for each page reference per time window.  Bits are right shifted. Page with 
+lowest value is LRU.
+<dt>Second-Chance Algorithm<dd> Create a fifo of pages. Cycle through the fifo
+ from oldest to most recently arrived page
+and replace the first page whose reference bit is zero. If bit is 1, reset to zero
+ (and reset arrival time to current time). If you reach the end without
+finding a 0, recyle through from  the top of the fifo. Zeros will be reset to 1 
+if pages are accessed before the next page fault.  
+Can be implemented with a circular queue. 
+
+
+
+<dt>Enhanced second chance algorithm <dd> Use two bits, the reference bit and
+the modify bit to determine which page to replace.  Used in Macintosh. May require
+4 loops through queue.
+<ol><li> (0,0) not recently use or modified- best candidate to be replaced.
+<li> (0,1) not recently used but yes modified - next best (will need to write out page)
+<li>(1,0) recently used but not modified.
+<li>(1,1) recently used and modified - worst candidate.
+</ol>
+Replace first page in the lowest non-empty catagory.
+<dt> Least Frequently Used (LFU) page replacement    <dd> Keep a count of the
+ number of accesses.  Pages with Low counts are replaced.  Need to shift out old 
+data otherwise heavilly used pages which are no longer used will remain.
+
+<dt>Most Frequently Used (MFU) page replacement <dd> Keep pages with 
+low use since they were probably just brought in and are in the locality.
+
+<dt>Page Buffering               <dd> Keep a pool of free frames.  1. If a page
+ selected for replacement needs to be written out, first insert new page to a free frame, and leter write out the modified page back to store.  Saves time.
+ In general we can write modified pages back to store and reset the modified bit
+whenever the paging device is idle. Can also keep track of which
+pages are in the free pool (making a page free does not actually erase its contents) This will save a page fault if it is again needed.
+<dt>Minimum Number of Frames to Allocate               <dd>Depends on architecture.
+Must be enough to store code of one instruction and all memory access that a 
+single instruction can make. Allowing indirection (pointers) increases 
+page minimums. Infinite indirection would require infinite frames and therefore
+cannot be allowed.
+<dt>Equal Allocation algorithm <dd> number of frames divided by number of process given to each process.  Leftovers 
+kept in pool.
+
+<dt> Proportioanl Allocation algorithm.              <dd>Divide the frames among the processes such that bigger memory 
+processes get proportionally more frames.  Create a ratio (process size) / (total processes size) .
+
+<dt> Global replacement              <dd> When page fault occurs, free a frame from any process.  Allows one 
+process to gradually accumulate more frames.  Could allow to take pages only
+from lower priority processes such that higher processes will eventually get more frames.
+
+<dt>Local replacement               <dd> When page fault occurs, free a frame only from myself. Keeps relative frame allocation intact.
+Process can control its own page fault rate. thus a certain process will always exhibit the same page fault rate and
+will not be affected by the behavior of other processes. BUt there is no way then 
+to compare page utilization rates among inter-process pages.
+Therefore Global page replacement is better.
+
+
+
+<dt>Thrashing    <dd>process spending more time paging that actually executing 
+code. As OS increases
+multiprocessing , CPU utilization rises, unless the reason for low CPU utilization is because processes are trashing, i.e. 
+waiting for the pager to allocate them a new page.  In this case increasing multiprogramming willl lower CPU utilization.
+
+<dt>Local replacement algorithm    <dd>only let a process page replace from itself.  This will help confine the thrashing
+but not entirely since the other processes will have longer wait in the paging queue.
+<dt>Locality Model                <dd>(not related to local replacement) Concept that as a process runs it moves from one memory location to another.  A <b>locality </b>is a set of memory pages that are used in the same time frame by one process.
+
+
+
+<dt>working-set window                <dd>The time frame in which we look at memory access to determine how many
+pages are in the working set. Must be big enough to really encompass the process locality. 
+<dt>working set               <dd>set of pages accesses in the most recent window snapshot.
+<dt>working set model               <dd>drop those pages which are not in the working set.  this will free frames for 
+other process. If there are enough free pages, the OS will add another process to the active state. and it will 
+start using 
+frames.  Some reserve of frames can be maintained.
+If not enough frames available, the os will suspend a given process and thus generate more frames for others.
+The algorithm checks every X intervals and updates the workign set.  I.e. we do not update the working set every 
+time memory is accessed.  We use a bit in a table to indicate when and if a page has been accessed.
+<dt>Page Fault frequency               <dd>prevent thrashing by keeping track of the page fault rate of each process.
+If it is too high, increase the number of frames that process has. If too low, reduce. If no free frames left, may need
+to suspend a process.
+
+<dt>               <dd>
+<dt>               <dd>
+<dt>               <dd>
+
+
+<dt>               <dd>
+
+<dt>               <dd>
+<dt>               <dd>
+<dt>               <dd>
+
+
+<dt>               <dd>
+
+<dt>               <dd>
+<dt>               <dd>
+<dt>               <dd>
+
+
+
+
+
+</dl>
+<p>Virtual memory means paging is using virtual memory locations for logical memory.  It then is translated to physical memory by adding a base memory location.
+
+<p>swapping can be done in a virtual memory scheme or in an overlaying scheme.  In a virtual memory scheme the size of the logical (virtual) memory is larger than the physical memory.  and the os must swap when the user program accesses memory outside the current physical memory.  there need to be a mapping system
+<p>
+In overlaying, two parts of the code section (for example) of one program reside in the same physical space in memory.  If one is accessed while the other is in physical memory, swapping must occur.  
+<p>
+who takes care of organizing this?  In both schemes, the os, so what is the difference.?
+<p>
+
+
+One program can have several threads.  there can be a main thread which must always be alive.  If it terminates then all threads terminate.  Or there can be no main thread, and then as long as one thread runs, the process is alive.
+Multi-threading can be implemented by the os or by application level libraries.  in the former case we have one to one mapping of kernel threads to user threads.  in the latter case we have one kernel thread for many user threads.
+<p>
+Processes run usually in user mode.  If a process calls a system call, it executes a function from the code of the operating system (but the pcb of the os is still not in context) when this occurs, the process goes into kernel mode to run this privileged command.  when the kernel level operation is completed, the process returns to user mode.
+
+
+
+<p>
+&copy; Nachum Danzig 2011
+</body>
+</html>
+
+
+
+

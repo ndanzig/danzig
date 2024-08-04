@@ -1,0 +1,33 @@
+<html>
+<body>
+<table border=3>
+<tr>
+<td>P1
+<td>P2
+<td>P1
+<td>P4
+<td>P1
+<td>P3
+</tr>
+
+</table>
+
+<br>
+<table border=0>
+<tr>
+<td>0
+<td>1
+<td>3
+<td>4
+<td>8
+<td>13
+<td>24
+</tr>
+
+</table>
+
+
+
+
+</body>
+</html>

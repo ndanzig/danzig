@@ -1,0 +1,307 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+
+<title>Operating Systems Course Outline </title>
+</head>
+<BODY >
+
+<h2>Operating Systems Course Outline</h2>
+
+
+
+<h4>6. Synchronization</h4>
+<dl>
+
+
+<dt>critical section               <dd>part of code where a 
+common variable or resource (file, table) is being updated.
+
+<dt>  critical section  problem             <dd>when one process is executing
+in its critical section, no other process may execute in its critical section.
+Mutual exclusion. Need a system of process cooperation.
+
+<dt>   entry section            <dd>code for requesting entry to CS
+<dt>   exit section            <dd>code for releasing CS
+<dt> Remainder section <dd> non-critical section code.
+<dt>critical section solution must fulfill 3 requirements    <dd><dl>
+
+<dt>Mutual Exclusion <dd>When a given process is in its critical section
+other processes cannot be in their critical sections.
+
+<dt>Progress   <dd> The decision as to who can enter the critical section
+must not be postponed indefinately. Also, when no process is in its critical
+ section and several processes are requesting to enter their critical section,
+ who should decide who will enter the critical section? Answ: Only those 
+processes which are not in their remainder section.
+<dt> Bounded Waiting <dd>If process P1 makes a request to enter its critical
+ section, the request might not be granted right away. 
+ Instead other processes may be allowed to enter their CSs. Process P1
+ must then  wait.  If there is a limit to the number of times those  other
+ processes may be granted access to their CSs before P1's request is
+granted then it is a bounded wait. I.e. waiting is not indefinate. 
+
+</dl>
+</dl>
+
+<h2>Two Process solutions</h2>
+Algorithm 1
+<br>Process P1, P2 are associated to values 0 and 1 respectively
+<br>and i and j are either 1 or 0 such that j==1-i
+<br>both processes have this structure, all variable are globally known
+<pre><code>
+turn=i;
+do
+{
+while ( turn != i); //if not i's turn , wait indefinately 
+// critical section
+
+turn = j; //after i leaves critical section, lets j in
+
+//remainder section
+
+}while (1);//loop again
+</code></pre>
+
+<p>This solution requires alternating access to the critical section. If P1
+wants to access the critical section twice (two loops) while P2 is all the
+while in its remainder section, then P1 has to wait indefinately.  This does
+not satisfy the progress requirement. But there is bounded wait since eventually P2 will either finish or re-enter the critical section.
+
+<p>
+Algorithm 2
+<br>Flag is boolean array of 2 elements ( bool flag[2];) initialized to false
+<br>Process P1, P2 are associated to values 0 and 1 respectively
+<br>and i and j are either 1 or 0 such that j==1-i
+<br>both processes have this structure, all variable are globally known
+<pre><code>
+do
+{
+flag[i] = true;//ready to enter CS
+while (flag[j]); //if j also want the critical section then i should wait 
+// critical section
+
+flag[i]= false; //after i leaves critical section, lets j in 
+
+//remainder section
+
+}while (1);//loop again
+</code></pre>
+
+<p>Instead of relying on process i to let process j in, we have made
+i and j simply indicate whether they need the CS .That is why this algorithm 
+needs two flag, one for i and one for j.  This solves the problem of i not 
+being allowed to have the CS twice in a row.  In this setup he can have the
+ CS twice in a row, but we still do not satisfy the progress requirement.
+If i and j both set the flags to true simultaneously then both process will
+be stuck in an infinate loop. We want a solution that does not rely on 
+lucky timing.
+
+<p>
+Algorithm 3
+<br>Combine Algorithms 1 and 2
+<br>I am process i.
+<pre><code>
+do
+{
+flag[i] = true;           //i states that he is ready to enter (he wants) the CS
+turn = j;             // i generously lets j into CS, if both processes do this, turn will get the later value
+while (flag[j] && turn == j);    //if j also wants the critical section AND j has set turn to i
+                                 //BEFORE i set turn to j (so that my turn = j comes last) then i must wait.
+// critical section
+
+flag[i]= false; //after i leaves critical section, lets j in 
+
+//remainder section
+
+}while (1);//loop again
+</code></pre>
+
+<p>This solution fulfills all 3 requirements.
+Notice we have bounded waiting because once i finishes its CS it lets j in.
+i will not enter the CS more than once while j is waiting.
+j's waiting comes to an end. Also we have progress because the
+once i leaves the critical section he no longer controls j's entry
+to the CS.
+<h2>Multi-Process Solution - Bakery Algorithm</h2>
+<p>Like a post office or bakery where you take a number and wait to be served.
+The process with the lowest number goes first. In case of tie, process with lowest PID goes first.
+<br>I am process i. max is a function that finds the largest number in the array.
+<pre><code>
+bool choosing[n]=0;
+int number [n]=0;
+
+do{
+choosing[i] = true; // I am about to take a number
+number[i] = max(number[0], number[1], ...., number[n-1])+1;// I get the largest number of those that are out there
+choosing[i]=false;// I finished taking a number
+for(j=0;j&lt;n;j++)// go through all the processes
+{
+while (choosing[j]);//make sure no one is currently taking a number
+while ((number[j]!=0)&&((number[j],j)&lt;(number[i],i))); // wait as long as another process has taken a number and 
+                                                      // its number is less than mine (or its PID is less)
+} 
+
+//c.s.
+
+number[i]=0;//indicate that i have left the C.S.
+
+//remainder
+
+}while(1);
+
+</code></pre>
+<h2>Hardware Solutions</h2>
+Have some kind of TestAndSet function which runs atomically.  Each process runs the TestAndSet instruction until it succeeds in seting , then it enters the CS.
+<h2>Semaphore Solutions</h2>
+Avoids the busy wait of the above algorithms. When a process is waiting , it takes itself out of the ready queue.
+When any process leaves the semaphore, all processes are returned to ready queue, or just the next process
+in the emaphores list of processes.  This list could be a fifo to ensure bounded wait.
+
+<h2>Bounded Buffer Problem</h2>
+n buffers which each can contain one item. 
+Then you have  a producer process, wanting to fill buffers.
+and a consumer process, wanting to empty them. Each much wait till there is an empty buffer or a full one, respectively.
+
+<h2>Readers-Writers Problem</h2>
+Some Processes want to read the shared data, others want to write or read and write.  We divide processes into
+ readers and writers. Multiple readers can access the data , but once a single writer acesses the data then not readers or
+writers can access it.
+
+<p>Solution #1, readers preference
+<blockquote> <code>
+<pre>
+semaphore wrt=1,mutex=1;
+readcount=0;
+writer()
+{
+    wait(wrt);
+    //writing is done
+    signal(wrt);
+}
+ 
+reader()
+{
+    wait(mutex); //wait for other reader and if I get in, lock other reader
+    readcount++; // indicate That I am reading,
+    if(readcount==1) // If I am the only reader
+        wait(wrt);  //make sure there is no writer
+// other wise I can assume the other readers have already locked out the writer
+    signal(mutex);// let other readers in
+    ///Do the Reading
+    ///(Critical Section Area)
+    wait(mutex); //since readcount-- is not atomic, I need to prevent several readers from doing it simultaneously
+    readcount--;
+    if(readcount==0) // no more readers
+       signal(wrt);  // let writer in
+    signal(mutex); // let readers in 
+}
+</pre>
+</code>
+</blockquote>
+<p>
+Notice that a=1 is atomic but a-- is not atomic because it is really
+a = a - 1.  So theoretically there could be a context switch between the a-1 and the asignmnet operation
+in which case, only one decrement of a will occur.  Hence there is a need to use a wait (mutex) before readcount--.
+Otherwise it could happen that the writer is never siganlled to begin writing.
+
+<p>
+Although this algorithm solves the Readers-writers problem, it could result in a writer waiting indefinately.
+As long as there is a reader reading, even a reader who came later than the writer, the writer wil be locked out.
+Therefore this solution is called a reader preference solution.  There are 2 other solutions.
+ <p>
+Solution #2
+<blockquote> <code>
+<pre>
+int readcount, writecount; (initial value = 0)
+semaphore mutex1, mutex2, mutex3, w, r ; (initial value = 1)
+
+reader(){
+  wait(mutex3);
+    wait(r);
+      wait(mutex1);
+        readcount ++;
+        if(readcount == 1)
+	   wait(w);
+      signal(mutex1);
+    signal(r);
+  signal(mutex3);
+ 
+//  do reading 
+ 
+  wait(mutex1);
+    readcount--;
+    if (readcount == 0)
+    signal(w);
+  signal(mutex1);
+ }
+ 
+writer()
+{
+  wait(mutex2);
+    writecount++;
+    if( writecount == 1 )
+         wait(r);
+  signal(mutex2);
+ 
+  wait(w);
+    //writing is performed
+  signal(w);
+ 
+  wait(mutex2);
+    writecoun--;
+    if (writecount == 0)
+       signal(r);
+  signal(mutex2);
+}
+
+
+</pre>
+</code>
+</blockquote>
+
+<p>
+The second readers-writers problem may starve readers.
+ Therefore, the third readers-writers problem is sometimes proposed.
+It adds the constraint that no thread shall be 
+allowed to starve; that is, the operation of obtaining a lock on the shared data 
+will always terminate in a bounded amount of time.
+
+
+
+
+
+<h2>Dining Philosophers Problem</h2>
+Five philosophers are siting at a table with 5 chopsticks.  They mostly think , but when one wants to eat he needs two
+chopstick, the one on his right and the one on his left. Each can only pick up one chopstick at a time.
+We need to prevent deadlock. 
+
+
+<dl>
+
+
+
+<dt>               <dd>
+
+<dt>               <dd>
+<dt>               <dd>
+
+<dt>               <dd>
+
+<dt>               <dd>
+
+<dt>               <dd>
+
+
+</dl>
+
+
+<p>
+&copy; Nachum Danzig 2010
+</body>
+</html>
+
+
+
+

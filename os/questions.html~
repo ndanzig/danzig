@@ -1,0 +1,166 @@
+<html>
+<body>
+<ol>
+
+<li>What is the definition of "progress" in the critical section problem?  What can 
+happen if there is no progress?  How is this effect different from the result of there being  no "bounded wait"?
+
+<li>Give one example when the OS has to deal with a critical section problem.
+
+<li>In the Bakery algorithm, what is wrong with defining taking a number as being also part
+of the critical section. (In the Bakery algorithm, how can two processes get the same number?  
+Why can't we prevent this by using some form of lock?)
+
+
+<li>In the Bakery algorithm what unfortunate result would occur if we used the
+process id to determine the order of entry into the critical section.  Which 
+CS requirement would not be met?
+
+
+
+
+
+<li>What basic  management functionality  must the operating system provide specifically in
+ a multi-process system?
+
+<li>Statistically speaking, are most processes io bound or CPU bound?  Explain why this is.
+
+<li>What mechanisms does the OS provide to enable IPC?
+
+<li>What is an atomic action and what is its relevance to the critical section problem?
+
+<li>What processes are in the ready queue and which are not?
+
+<li>What data defines a processes "context"?
+
+<li>In a multi-threaded environment, What are the pros and cons of using a one to one 
+user kenrel thread model as opposed to a one to many model?
+
+<li>In a many to many user/kernel thread model, are there equal numbers of kernel and 
+user threads, why?
+
+<li>Is a realtime system by definition more expensive than a non-realtime system?
+
+<li>An imbedded single process realtime system obviously need no process scheduling.  In a 
+multiprocess system, where one process is realtime and others are not, how is it possible to 
+provide realtime support for the one (or more) processes needing it? 
+
+<li>What is the role of a device driver? Is it part of the OS?
+
+
+<li>What is the difference between a software and a hardware interrupt?  Why, or in what case, is a hardware 
+interrupt needed?
+
+
+<li>How does the Operating system preempt a process while that process is occupying the CPU, after all,
+the OS is not in the CPU?
+
+<li>What is the advantage of Direct memory access (DMA) over other device driving systems?
+
+<li>What is processor affinity?
+
+<li>Does a multi-level feedback queue suffer from starvation?  Why?
+
+<li>What is a memory stall?
+
+<li>List from fatest to slowest the types of storage medium a modern computer can use.
+
+<li> What is the function of the bootstrap program?  In what type of storage medium does it usually reside?
+
+<hr>
+<li>What is the difference between swapping and context switching? 
+What does each achieve?
+ 
+ 
+<li>What types of data need to be copied during a context switch? Give 4 examples.
+ 
+ 
+<li>What is the size relationship between the timeslice and the time a 
+context switch takes?
+
+
+<li>Creating a hierarchial ordering of all resources prevents deadlock,
+ specifically by which of the following:
+<ol><li> Denying Mutual exclusion
+<li> Denying hold and wait
+<li> Allowing preemption
+<li> Denying Cirular wait
+ </ol>
+
+<li>Which algorithm(s) does not suffer from starvation:
+<ol>
+<li> fcfs
+<li> sjf
+<li> rr
+<li> priority
+</ol>
+
+<li>on a system with 14 printers:
+<table border=1>
+<tr> <td>Process<td>  Max Needs <td> Allocation </tr>
+<tr><td>P0 <td>             10   <td>               5 </tr>
+<tr><td>P1   <td>           7 <td>                  2 </tr>
+<tr><td>P2  <td>              9 <td>                   3</tr>
+</table> 
+is this a safe state?  UNSAFE
+ 
+
+<li>on a system with 10 printers:
+<table border=1>
+<tr> <td>Process<td>  Max Needs <td> Allocation </tr>
+<tr><td>P0 <td>             8   <td>   1 </tr>
+<tr><td>P1   <td>           2 <td>      2</tr>
+<tr><td>P2  <td>              7 <td>     2</tr>
+</table> 
+ 
+<li>if P0 requests  5 more printers, will granting it create a safe or unsafe state?  SAFE
+ 
+ 
+ 
+<li>on a system with 15 printers:
+
+<table border=1>
+<tr> <td>Process<td>  Max Needs <td> Allocation </tr>
+<tr><td>P0 <td>             10   <td>   5 </tr>
+<tr><td>P1   <td>           5 <td>      5</tr>
+<tr><td>P2  <td>              9 <td>     2</tr>
+</table> 
+is this a safe state? SAFE
+ 
+ 
+<li>Which scheduling algorithm has by definition the shortest wait time:
+<br>1. fcfs
+<br>2. sjf
+<br>3 (external ) priority
+<br>4. rr
+<br>5. depends on actual process  scenario
+
+ 
+<li>If the TimeSLice is very large,  RR will essentially turn into which other 
+algorithm:
+<br>1. fcfs
+<br>2. priority
+<br>3. sjf
+<br>4. remains rr
+ 
+<li>If the time for a context switch is zero,  the timeslice should be relatively 
+larger or smaller than if the context switch took 20ms?
+ 
+<li>Which scheudling algorithm(s)  can suffer from "starvation"?
+
+<br>1. fcfs
+<br>2. priority
+<br>3. sjf
+<br>4. rr
+
+<li>Given Process 1 with CPU burst time of 10, arrival time 0 priority 3
+and process 2 with CPU burst time of 20 and arrival time 5 and priority 1
+etc. and given time slice of 5  and aging every 5 seconds of wait time
+which of the 4 algorithms will have the shortest average wait time?
+
+
+</body>
+</html>
+
+ 
+

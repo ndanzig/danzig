@@ -1,0 +1,186 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+
+<title>Operating Systems Course Outline </title>
+</head>
+<BODY >
+
+<h2>Operating Systems Course Outline</h2>
+
+
+<h4>2. OS Services and Structure</h4>
+<dl>
+<dt> OS services</dt><dd>OS Provides: 1.User interface, 2. ability to execute another program, 3.access to I/O 4. File Sytem access, 5. IPC and Networked communication, 6. detection of error in software/hardware. OS should also provide: 1. resource allocation, 2. usage statistics, 3. security and authentication of users / security between processes.
+</dd>
+<dt>method to command OS directly (without program)<dd>shell interface, GUIs Xerox  
+<dt>system calls<dd>a request to OS for a service.   ex in Linux write(). There may be an API between software and OS 
+to simplify calling the OS.
+<dt>Process Control system call<dd>end, system (run something and return control - require more OS management),
+ exec (run and do not return control), fork, set time limit (select) , kill (send signal), locking shared data.
+<dt>File Management system calls<dd>open (needed to prevent others from writing),close, delete, read,write,chmod
+<dt>Device Management<dd>access devices (disk, screen, keyboard) just as in file.  
+<dt>System stats<dd>memory dump, trace (list each system call a process executes),debug  stepping, date
+<dt>Communication system calls <dd>IPC 1.message passing (socket, pipe, gethostid, getprocessid)2. shared memory 
+<dt>Protection<dd>permissions, setuid
+<dt>OS usually comes with some Utilities<dd>explorer, text editor, compiler, browser, control panel
+<dt>Design Goals<dd>easy to use, reliable,safe,  fast, easy to maintain, flexible.
+<dt>Policy vs Mechanism<dd>design should allow user, admin or software to alter policy (how long to set timer, how much
+memory to allocate) Time is a mechanism. Can also design system (like windows) to have no ability to alter policy.  this will give similar look and feel to all computers running windows.
+<dt>implementing an OS<dd>OS are written in C usually.  It is close to machine language but allows system to be cross platform. Writing in assembly Language would run faster but be harder to write and platform dependant
+
+
+
+<dt>OS Design </dt><dd>1. Just put all the code into one big Kernel program, complex to manage. 2. Use layers from application down to devise driver, organized but slower 3. Micro Kernel (ex. Mach), like layers but fewer layers 4. Modules that are seperate programs that can be linked in at boot or during running. 5. MacOS X uses Mach and bsd as kernel and adda application layer.  In general the more monolithic gives faster results but harder to modify.</dd>
+
+<dt> virtual machines</dt><dd>Guest believes it is running on hardware alone. Requires Hardware support. Each VM guest has
+ user and kernel mode, but the whole guest is running in user mode. So when a guest runs a system call, the hardware
+ needs to allow it access to the registers and programm counter. Better utilize hardward while still
+maintaining seperation between servers. Good for 
+sys admins and development </dd>
+<dt>simulations/emulations</dt><dd>Wite an entire CPU in software. Translate commands designed for one OS/hardware 
+to commands appropriate for another Hardware/OS and pass on to native OS. Much slower than VM. Advantage: not limitted to host's hardware type.   </dd>
+
+
+<dt>full virtualization<dd> complete virtualization of hardware so that an unaltered OS can run. A key challenge for 
+full virtualization is the interception and simulation of privileged operations, such as I/O instructions. The 
+effects of every operation performed within a given virtual machine must be kept within that virtual machine, virtual 
+operations cannot be allowed to alter the state of any other virtual machine, the control program, or the hardware. 
+Some machine instructions can be executed directly by the hardware, since their effects are entirely contained within 
+the elements managed by the control program, such as memory locations and arithmetic registers. But other instructions that would "pierce the virtual machine" cannot be allowed to execute directly; they must instead be trapped and simulated. Such instructions either access or affect state information that is outside the virtual machine.
+<p>
+Full virtualization has proven highly successful for a) sharing a computer system among multiple users, b) isolating users from each other (and from the control program) and c) emulating new hardware to achieve improved reliability, security and productivity.
+
+
+
+
+<dt>vmware</dt><dd> [from wikipedia]
+VMware software provides a completely virtualized set of hardware to the guest operating system.
+  VMware software virtualizes the hardware for a video adapter, a network adapter, and hard disk adapters. The host provides pass-through drivers for guest USB, serial, and parallel devices. In this way, VMware virtual machines become highly portable between computers, because every host looks nearly identical to the guest. In practice, a system administrator can pause operations on a virtual machine guest, move or copy that guest to another physical computer, and there resume execution exactly at the point of suspension. Alternately, for enterprise servers, a feature called VMotion allows the migration of operational guest virtual machines between similar but separate hardware hosts sharing the same storage. Each of these transitions is completely transparent to any users on the virtual machine at the time it is being migrated.
+<p>
+VMware Workstation, Server, and ESX take a more optimized path to running target operating systems on the host than emulators (such as Bochs) which simulate the function of each CPU instruction on the target machine one-by-one, or dynamic recompilation which compiles blocks of machine-instructions the first time they execute, and then uses the translated code directly when the code runs subsequently. (Microsoft Virtual PC for Mac OS X takes this approach.) VMware software does not emulate an instruction set for different hardware not physically present. 
+This significantly boosts performance, but can cause problems when moving virtual machine guests between hardware
+ hosts using different instruction-sets (such as found in 64-bit Intel and AMD CPUs), or between hardware hosts with 
+a differing number of CPUs. Stopping the virtual-machine guest before moving it to a different CPU type generally causes
+ no issues.
+<p>
+VMware's products use the CPU to run code directly whenever possible (as, for example, when running user-mode and virtual
+ 8086 mode code on x86). When direct execution cannot operate, such as with kernel-level and real-mode code, VMware
+ products re-write the code dynamically, a process VMware calls "binary translation" or BT. BT automatically modifies
+ x86 software on-the-fly to replace instructions that "pierce the virtual machine" with a different, virtual machine
+ safe sequence of instructions; this technique provides the appearance of full virtualization. The translated code gets 
+stored in spare memory, typically at the end of the address space, which segmentation mechanisms can protect and make
+ invisible. For these reasons, VMware operates dramatically faster than emulators, running at more than 80% of the speed
+ that the virtual guest operating-system would run directly on the same hardware. In one study VMware claims a 
+slowdown over native ranging from 0 to 6 percent for the VMware ESX Server. 
+<p>
+VMware's approach avoids some of the difficulties of virtualization on x86-based platforms. Virtual machines may deal 
+with offending instructions by replacing them, or by simply running kernel-code in user-mode. Replacing instructions
+ runs the risk that the code may fail to find the expected content if it reads itself; one cannot protect code against
+ reading while allowing normal execution, and replacing in-place becomes complicated. Running the code unmodified in
+ user-mode will also fail, as most instructions which just read the machine-state do not cause an exception and will 
+betray the real state of the program, and certain instructions silently change behavior in user-mode. One must always 
+rewrite; performing a simulation of the current program counter in the original location when necessary and
+ (notably) remapping hardware code breakpoints.
+<p>
+Although VMware virtual machines run in user-mode, VMware Workstation itself requires the installation of various 
+drivers in the host operating-system, notably to dynamically switch the GDT and the IDT tables.
+<p>
+The VMware product line can also run different operating systems on a dual-boot system simultaneously by booting 
+one partition natively while using the other as a guest within VMware Workstation.
+<p>
+Each guest in vmware is contained within one large file.  Copy the file and 
+you have a backup of the whole system.
+<p>
+See <a href="http://www.vmware.com/files/pdf/VMware_paravirtualization.pdf">VMware_paravirtualization.pdf </a>
+</dd>
+
+<dt>paravirtualization<dd>The guest OS is altered to make more effecient 
+system calls. Cannot be done on proprietary OS like XP
+<dt>Partial virtualization<dd>Most but not all of the hardware features are
+ simulated, yielding virtual machines in which some but not all software
+ can be run without modification. Usually, this means that entire operating 
+systems cannot run in the virtual machine - which would be the
+ sign of full virtualization - but that many can run.
+
+
+<dt>hypervisor</dt><dd> Either (1) a software systems that runs 
+directly on the host's hardware to control the hardware and to monitor 
+guest operating-systems. A guest operating system thus runs on 
+another level above the hypervisor (eg. vmware esx server). The hypervisor
+acts as an extremely thin host OS. 
+
+Or (2)a software applications running within a conventional
+ operating-system environment. Considering the hypervisor layer as a 
+distinct software layer, guest operating systems thus run at the third 
+level above the hardware. (eg. VMware workstation, VMWare server)
+<p>
+VMware introduced in 1998 a hypervisor for machines using the Intel x86 
+instruction set.
+The x86 architecture used in most PC systems poses particular difficulties 
+to virtualization. Full virtualization (presenting the illusion of a 
+complete set of standard hardware) on x86 has significant costs in hypervisor
+ complexity and run-time performance. Recently  CPU vendors have added
+ hardware virtualization assistance to their products. Intel's is called 
+Intel VT (codenamed Vanderpool) and AMD's is referred to as AMD-V 
+(codenamed Pacifica). These extensions address the parts of x86 that are
+ difficult or inefficient to virtualize, providing additional support to the 
+hypervisor. This enables simpler virtualization code and a higher performance
+ for full virtualization.
+<p>
+An alternative approach requires modifying the guest operating-system to
+ make system calls to the hypervisor, rather than executing machine
+ I/O instructions which are then simulated by the hypervisor. This is called
+ paravirtualization in Xen, a "hypercall" in Parallels Workstation, and
+ a "DIAGNOSE code" in IBM's VM. VMware supplements the slowest rough corners
+ of virtualization with device drivers for the guest. All are really the
+ same thing, a system call to the hypervisor below. Some microkernels
+ such as Mach and L4 are flexible enough such that "paravirtualization" 
+of guest operating systems is possible.
+<p>
+Others, like Xen, implement software-only virtual machines. Xen runs on a 
+normal host operating system such as Linux, and is able to run both
+ paravirtualized and fully virtualized (i.e., unmodified) operating systems with the help of the hardware virtualization extensions Intel VT-x. The Xen distribution already contains versions of FreeBSD, Linux, NetBSD, and Plan 9 from Bell Labs that have been so modified. User programs will continue to work on Xen without change. Also, Xen has been re-implemented on the OpenSolaris operating system as of build 75 
+
+</dd>
+<dt>JVM<dd>Java virtual machine make java code cross platform.  The JVM acts
+as the OS for running java byte code and translated the code/system calls to
+ the underlying machine language at run time. Alternitively, there may be a
+chip built-in for running byte-code. just-in-time compilation means that a
+function can be translated when first needed and referred to later when needed again without having to retranslate it.
+
+<dt>Bootstrap program</dt><dd>Paradox: Before the OS is up, the computer needs to load it. But without a OS computer can't run. Solution: a small piece of 
+code in EPROM  that locates and loads the kernel into memory.  Before loading however, it usually runs diagnostics and initializes registers. The Bootstrap may load a boot block which in turn loads the kernel or it itself may directly load the kernel.  Saving EPROM is a consideration. Ex. of a bootstrap program: GRUB</dd>
+<dt>firmware<dd>ROM, EPROM.  Cellphones use firmware for entire OS. Slower than RAM.
+
+<dt> DMA
+<dd>
+DMA stands for Direct Memory Access, a capability in modern computers that allows peripheral devices to send data to the motherboard.s memory without intervention from the CPU.
+<p>
+The DMA controllers are special hardware . now embedded into the chip in modern integrated processors . that manage the data transfers and arbitrate access to the system bus. The controllers are programmed with source and destination pointers (where to read/write the data), counters to track the number of transferred bytes, and settings, which includes I/O and memory types, interrupts and states for the CPU cycles.
+<p>
+Transfers are initiated when the DMA controller is notified of the need to move data to the memory by some event (keyboard press or mouse click, for examples). The controller asserts a DMA request signal to the CPU to use the system bus. The CPU completes its current operation and yields control of the bus to the DMA controller via a DMA acknowledge signal. The controller then reads and writes data and controls signals as if it is the CPU, which at that instant is tri-stated (idled). Upon completion of the transfer, DMA controller de-asserts the DMA request signal and the CPU in turn removes its DMA acknowledge signal and resumes control of the bus.
+<p>
+DMA is implemented in computer bus architectures to speed up computer operations and allow multitasking. Normally, the CPU will be fully occupied in any read/write operation; enabling DMA allows reading/writing data in the internal memory, external memory and peripherals without CPU involvement, thus making the processor available for other tasks. This ensures streamlined operations, as movement of data to/from memory is one of the most common computer operations and freeing the CPU of this overhead can lead to a significant improvement in performance.
+<p>
+DMA is useful in real-time computing applications where critical operations must be done concurrently. Stream processing is another application of DMA, where transfer and data processing are done simultaneously. Many hardware systems use DMA including floppy and disk drive controllers, graphics cards, network cards, sound cards and graphics processing units.
+<p>
+Synchronous DMA moves a byte or word at a time between system memory and a peripheral. After completing each transfer, the DMA asks the I/O port to signal when the latter is ready for another transaction. In this set-up, the DMA and the CPU shares the bus cycles, with the DMA winning any contest for system bus control.
+<p>
+Burst Mode DMA assumes that both the destination and source can take transfers as quickly as the controller can make them. The CPU sets up the controller, and after a signal from the I/O port, the entire data is copied to the destination. The DMA controller has sole access to the system bus during the transfer which is very rapid compared to synchronous DMA.
+<p>
+Flyby DMA, which is not supported by all controllers, puts out the source or destination address, then initiates a simultaneous read and write cycle. Flyby transfers are very fast as the read cycle and write cycle are compressed to a single cycle. Flyby can support both burst and synchronous types of transactions.
+
+
+</dl>
+
+
+<p>
+&copy; Nachum Danzig 2010
+</body>
+</html>
+
+
+
+

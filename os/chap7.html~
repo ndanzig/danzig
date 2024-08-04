@@ -1,0 +1,136 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+
+<title>Operating Systems Course Outline </title>
+</head>
+<BODY >
+
+<h2>Operating Systems Course Outline</h2>
+
+
+
+<h4>7. Deadlocks</h4>
+<dl>
+
+<dt> Resources   <dd> devices like floppy drive, printer, CD , HD. When avoiding deadlock, what concerns us 
+is <b>non-sharable resources</b>.
+
+Four Necessary Conditions for Deadlock to occur
+<dt>1. Mutual Exclusion               <dd>At least one resource must be held in a non-sharable state forcing other requesting
+processes to wait for its release.
+
+<dt>2.  Hold and wait             <dd>At least one process must be holding a resource and waiting for another
+resource to be released.
+
+<dt>3. No Preemption               <dd>Only way to free a resource is by the process releasing it. No preemption.
+
+<dt>4. Circular wait               <dd>A waiting for B who is waiting for C who is waiting for A again.
+
+<dt>Resource allocation Graph               <dd><img src="resourceAllocation.jpg" alt="ResourceAllocationGraph">
+
+<dt>Deadlock Prevention <dd> Do not allow one of the 4 conditions to occur.
+
+<dt>Deadlock Avoidance<dd> OS gets a list of resources each process will ever require and decides how to allocate them.
+<dt>Deadlock Detection <dd> Allow deadlocks to occur but check for them and recover.
+
+<dt> Ignore Deadlock Problem              <dd> Since deadlocks are rare, we can rely on rebooting to deal with them. 
+Most common solution.
+
+<dt>Methods of Deadlock Prevention              <dd><dl>
+
+<dt>Deny Mutual Exclusion              <dd> not a viable since some resources (printers) are inherently exclusive.
+<dt>Deny Hold and Wait               <dd>1. Require all resources that a process needs to be allocated at the start. If not 
+all its resources can be allocated, then don't start the process. 2. Allow a process to request resources only if it holds
+ none. There are two problems with these methods: low resource utilization (process may hold resources in idle)
+ and starvation (a process may wait forever for all its resources to be available at the same time).
+<dt>Allow Preemption    <dd> Two solutions: Either free all resources of a process waiting for some resource or when 
+a process requests a resource which a second process is using, check if that process is waiting for some resource, if it 
+is then preempt the desired resource for the first process from the second. Must continually check if the second process 
+ever goes to wait mode.
+
+<dt>Prevent Circular Wait <dd>Create a hierarchial ordering of all resources, then allow processes to request
+only resources of a higher order than the other resources they already are assigned. For example CD might be 1
+HD might be 5 and printer might be 13.  If a process is assigned a HD , he can no longer be assigned a CD (until 
+he releases the HD).
+
+</dl>
+
+
+
+<dt>Deadlock Avoidance <dd><dl>
+<dt> Safe State <dd> OS gets information from processes about their potential resource needs. 
+The OS guarantees that needs can be met and thereby  maintain the system in a safe state.  
+A safe state is one in which there exists an order in which all the processes can complete one by one and 
+each will receive its maximal needs.  To start with, all the potential requests of at least one 
+process must be able to be met currently.  This means that this
+process will complete and free up his resources.  These resources can then be 
+used by other processes allowing them to complete.  At every point there must exists at least one 
+process  which can get all its needed resources or else the state is not safe.
+<br>
+ For example,
+on a system with 12 printers: 
+<table border=1><tr><td>Process </td><td>Max Needs</td><td>Current Allocation</td></tr>
+<tr><td>P0 </td><td>10</td><td>5</td></tr>
+<tr><td>P1 </td><td>4</td><td>2</td></tr>
+<tr><td>P2 </td><td>9</td><td>2</td></tr>
+</table>
+This table represents a safe state since we can still service P1 all its future needs.   And upon his completion we 
+can service P0. And then P2. We cannot have a 
+deadlock in the current state.
+  At worst we will have to wait for P1 to finish and free its printers and then  P0 
+will be able to have its  Max Needs met. But, if P0 would request 2 more printers we would have to deny this request
+since that would leave only one free printer and a potential deadlock.  Obviously this scheme will cause resource 
+under-utilization since we are reserving a pool of unused resources.
+
+<dt>Resource Allocation Graph Algorithm<dd> Know ahead of time all potential resource claims (requests). Only grant 
+a request if it will not create a <i>potential</i> cycle. We use a dotted line to indicate a claim edge (i.e. a 
+potential future request). We need to examine all process claim edges before granting a request. Only works if 
+there is just one resource of each type.
+<br><image src="resourceAlloc_claim_edge.jpg">
+
+<dt>Banker's Algorithm <dd> Check that a stafe state exists for multiple resources by checking if there 
+is any process order by which all the processes can get all their resources and finish.  If no such order
+exists, then state is not safe. Make a Need table which is simply the Max_Needs - Current_Allocation.  Then 
+compare that the table of Available resources.  Look for a process that can finish, if one exists, then
+add its resources to Available, and continue.  If all processes finish, you have a safe state.
+<table border=1><tr><td>Process </td><td>Allocation A</td><td>Allocation B</td><td>Allocation C</td>
+
+<td>Max Needs A</td><td>Max Needs B</td><td>Max Needs C</td>
+</tr>
+<tr><td>P0 </td><td>1</td><td>1</td><td>1</td><td>3</td><td>2</td><td>2</td>
+</tr>
+<tr><td>P1 </td><td>2</td><td>2</td><td>1</td><td>3</td><td>4</td><td>1</td>
+</tr>
+<tr><td>P2 </td><td>2</td><td>1</td><td>0</td><td>3</td><td>1</td><td>0</td>
+</tr>
+</table>
+<p>Total Amount of A = 6, B = 5, C =2.  Is this system in a safe state? Yes.  Can we satisfy the request from P0 for one
+more of resource A? No.  What about the same request from P2? Yes, because the path to completion starts with P2.
+
+<dt> Wait for Graph              <dd>Like a resource allocation graph, but where the resources have
+been removed.  It shows which process are waiting for which other processes.  If a circle exists, you have detected a deadlock.
+
+
+<dt>Deadlock detection               <dd>use Bankers algorithm to detect deadlock where multiple resources are in use.
+<dt>Deadlock recover               <dd>1. abort all deadlocked process. 2. Abort one deadlocked process and check for 
+deadlock state, if still deadlocked, abort another process.
+<dt>Resource preemption               <dd> Select a process to have its resource(s) freed.  May need to roll back to 
+state before that process requested the resource (requires state overhead).  If resource is a file, it may get currupted.
+a certain process may get starved if selection of victim is based on some criteria
+
+
+
+</dl>
+<p>
+<a href="http://www.cs.odu.edu/~cs471w/spring10/lectures/Deadlocks.htm">another tutorial</a>
+
+<p>
+&copy; Nachum Danzig 2010
+</body>
+</html>
+
+
+
+

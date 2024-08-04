@@ -1,0 +1,119 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+
+<title>Operating Systems Course Outline </title>
+</head>
+<BODY >
+
+<h2>Operating Systems Course Outline</h2>
+
+
+<h4>3. Processes</h4>
+
+<dl>
+
+<dt>process composition<dd>value of program counter, register values, <em>stack</em> of temporory data like
+  (function params and values), data section (globals), heap (dynamically allocated memory), program code (code section).
+<dt>process states<dd>new, running, waiting(waiting for an event to occur), ready (waiting to get CPU), terminated (zombie).
+
+<dt>process control block (PCB) <dd>represents process in OS. contains: process state, program counter, CPU registers (ex. 
+accumulators), process priority, memory location, stats on the process,  list of I/O assigned to process, info on threads.
+
+
+
+<dt>process  scheduling</dt><dd>on multiprocess machines, the goal is have some process running at all times. Uses a 
+scheduling queue</dd>
+<dt>Job queue<dd>all processes on system.
+<dt>ready queue<dd> processes (PCB) in memory and waiting to execute
+
+<dt>device queue<dd>list of processes waiting for a particular device (I/O) . The device may be busy executing something from another process.
+<dt>queueing diagram<dd> show an example of one. Page 108
+<dt>dispatching<dd>selecting a process for execution.
+<dt>I/O Bound <dd>process which spends most of its time doing I/O
+<dt>CPU Bound <dd>process which spends most of its time doing computations
+<dt>scheduler<dd>OS element that determines which process gets the CPU next.
+There is a short term scheduler and a longer term one.  Logterm has more time
+ to decide which processes to make ready.
+Long term Scheduler should pick a mix of CPU and I/O bound processes to make ready.
+Windows and UNIX have no longterm  scheduler.  All processes are made ready for the short term scheduler to access.
+<dt>swapping<dd>when the medium term scheduler decided to temporarily remove
+ one process from memory and from the ready queue, to lighten the load for 
+other processes.
+<dt>Context<dd>PCB (CPU register values,process state,memory locations)
+<dt>context switch<dd>storing the context of a process so another
+process can be run. State save and state restore. Takes a few milliseconds, but takes longer for a more complex OS.
+<dt>Process creating<dd> Parent forks child and so on. Parent gets PID of child. init
+Child's resources may be a subset of the parent's or may be external, provided by the OS.
+Parent can pass data to child at initialization, eg. a file name to be opened. 
+Parent may stop running until child(ren) finish, or it may run concurrently.
+Child might run an exec command , thus replacing his memory image. 
+<dt>UNIX fork<dd>returns 0 to child process and CPID to parent process.  Parent variables
+are recreated in child and both processes continue executing from point after the fork. Show code example.
+<dt>process termination</dt><dd>child runs exit() to end and OS  deallocated all system resourced. 
+Exit value is returned to parent. Parent can allso "kill" child  using the CPID and kill(). In 
+UNIX if a parent dies before child, init become the new parent. Parent can pause by wait()ing 
+for a child to terminate. It can also waitpid() for a specific child. If parent does not wait 
+and a child dies, it becomes a "zombie" and the OS stores its exit value for any future wait.
+
+
+
+
+<dt>Inter Process Communication (IPC)<dd>processes can be  totally independent if they have no way to affect each other.
+If they are intended to work together they must communicate either via (1)shared memory or (2) Message passing. </dd>
+<dt>pros and cons of <b>message passing</b> and <b>shared memeory</b><dd> 
+MP better for small data transfer, no mutex needed. MP is easier than SM when 
+you need intercomputer communication.  SM requires only a one time system call,
+ unlike MP. It is faster  than MP but requires mutex/semaphore.
+
+<dt>Creating SM<dd>system call to get memory, then each must attach to it.
+Need to prevent simultaneous accessing.
+<dt>Producer-Consumer<dd>produces info, uses info. Web server - browser.
+Compiler - assembler. Both could access one buffer.  Need to maintain 
+pointers to know when full or empty. (bounded and unbounded buffers). 
+ Also need mutex/semaphore to prevent simultaneous accessing.
+
+<dt>Message Passing Addressing<dd> You can either send to/
+receive from  a specific process
+or to a port/mailbox.  The latter scheme is more versatile since any process
+may then communicate with you, via the port.
+<dt>MP Blocking<dd> If either side (sender or receiver) waits for message to
+ be accepted by the other side before sending more, we call that blocking.
+MP can be blocked on one side , or both, or neither side.  Also called
+asynchronous and synchronous MP.
+<dt>buffering<dd> the OS must buffer  messages for the processes if the sender is non-blocking.
+
+<Dt>Show example of SH<dd> See my unix lab website
+
+<dt>Sockets<dd> end-point of communication. 65,535 on a PC.  Well Known 
+ports, TCP (COP)  UDP (CLOP). Client initiates connection, uses IP.
+ <dt>Remote Procedure Calls (RPC)<dd>
+Use a specific port on another machine (server) to execute an associated 
+command.  More structured than sockets.  Need to deal with network packet
+ duplications to achieve "exactly once" command execution.  First implement 
+"at most once" by sending timestamps and storing a history in the server. Repeated commands are thrown out.  Then use ACKs sent from the server to verify
+ that the command reached the server. Client resends until he gets and ACK.
+<dt>pipe<dd> system resource
+ designed to allow communication between processes on one computer.
+
+<dt>ordinary pipe (or "anonymous pipes" in Windows)<dd>A pipe which allow producer consumer communication.  One side write, other side reads, unidirectional.  A second pipe would be needed for reverse communication.  Unix use read() and write() commands like files. Used in Parent-child process relationships.
+Examples are in the Unix Lab. Non reading process should close its reading side of the pipe. Non writing side of the pipe should close its writing side of the pipe.
+
+<dt>Named pipes<dd> bi-directional pipes that exist independently of other processes.  Many processes can use them simultaneously. In UNIX they are called FIFOs , mkfifo(), and are half-duplex. In Windows named pipes are full
+ duplex and can allow intercomputer communication.
+
+
+
+
+</dl>
+
+
+<p>
+&copy; Nachum Danzig 2010
+</body>
+</html>
+
+
+
+

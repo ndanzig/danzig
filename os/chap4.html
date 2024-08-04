@@ -1,0 +1,58 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+
+<title>Operating Systems Course Outline </title>
+</head>
+<BODY >
+
+<h2>Operating Systems Course Outline</h2>
+
+
+
+<h4>4. Threads</h4>
+<dl>
+<dt>thread<dd>a light weight process. It contains thread ID, a program counter
+a register set and a stack.  But it only shares with its parent its code section, data section, os resources like open files.  
+
+<dt>multithreading<dd>a process consisting of more than one thread.  Theoritcally allows for parallel processing.
+
+A webserver may create a new process for each connection , but it is less
+overhead and time consuming to use threads, especially since each thread uses the same code anyway. A web browser could be multi-process or multithreaded.  Either way , it would then be able to let the user do several tasks simultaneously.
+
+<dt>benefits of multithreading<dd>1. better application responsiveness 
+2. by default resources are shared allowing simpler IPC than processes 
+3. Faster creation time than processes
+4. allows full utilization of a multi-CPU machine or multi-core machines.
+
+<dt>Considerations when designing software to be run in parallel
+<dd>1.Divide application into part that can be run in parallel. 
+2.Ensure these part are equally time consuming and valuable to eachother.
+3.Make sure data access is not conflicting
+4.Synchronized threads that need to be.
+5.Determine how to test it.
+<dt>[User Thread : Kernel thread] Relationship <dd>Kernel threads are managed by the OS, user threads are managed by the
+ program.  When a user creates a thread there needs to be a kernel thread in the OS which will correspond to it and
+actually do the work. 
+The relationship between a number of user threads and the kernel threads can be either 
+many to one, one to one or many to (<=)  many. 
+n:1 permits programmer to create as many threads as he desires, 
+but does not provide true parallelism.  One blocked thread will block others.
+1:1 provides true parallelism but limits programmer to to finite number of 
+threads since each user thread will create one new kernel thread.
+Best is n:n, then the OS can decide when to create new kernel threads and when not to.
+<dt>pthreads<dd> POSIX standardwhich defines, specifies an API for thread creation and synchronization.
+Many implementations exist, Solaris, Mac, Linux, even third party software for Windows.
+
+</dl>
+
+
+<p>
+&copy; Nachum Danzig 2010
+</body>
+</html>
+
+
+
+

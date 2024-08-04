@@ -1,0 +1,85 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+
+<title>Operating Systems Course Outline </title>
+</head>
+<BODY >
+
+<h2>Operating Systems Course Outline</h2>
+
+<h4>1. Overview</h4>
+<dl>
+<dt>physical architecture.
+<dt>memory <dd>program code, stack (grows and shrinks),heap (free memory left)
+<dt>heap<dd>  Large modern OS's will enlarge the heap on demand up to
+ available virtual memory (or up to a maximum set by system policy). 
+ Default heap size is either set by the OS as policy, or/and at link time,
+ or/and can be reserved at runtime by an OS system call.  Depends on the OS.
+XP has a default size of 1mb.
+<br>
+For small embedded OS's where the application and OS are compiled 
+together and there is no virtual memory, the heap size is whatever is left
+ of RAM after compilation of all code and non-heap data (including the 
+stacks' memory, which have to be statically allocated).  The linker is the
+ one responsible for this.
+<dt>kernel</dt><dd>the one program running all the time providing other programs with services.</dd>
+<dt>system calls</dt><dd>requests from software for the kernel to provide a service.</dd>
+<dt>Storage Device Hierarchy</dt><dd>From fastest to slowest: registers, cache, main memory, Flash, HD, Optical Disk, tapes.</dd>
+<dt>Multi-processing architecture</dt><dd>Increased throughput(-overhead),  periferal re-use, cheaper, better reliability if one cpu fails (graceful degradation) Solaris uses symetric multiprocessing (ie no master-slave). Dual-core means two 
+CPUs on one chip.  Faster communication (since it is within a chip) and less power.  Can share registers and cache 
+or not share them. OS sees the dual-core as two processors and therefore must support them. </dd>
+<dt>clusters</dt><dd>several systems linked at high speeds (lan)results in high availability (robustness). may be one or more monitoring nodes. clusters can also provide high computation speeds/power.  Beowulf is one such that runs usually on linux.</dd>
+<dt>process</dt><dd>program loaded in memory and CPU is running it.</dd>
+<dt>job</dt><dd> program either not yet in memory but ready to be put in memory or a program in memory but not running.</dd>
+<dt>virtual memory</dt><dd>method of running a process when only part of it is in main memory.</dd>
+<dt>interrupt</dt><dd>signal to OS to stop and do some other action.  Can be from hardware (timer, system clock, network 
+card, (mouse could be))
+ or software (program sends a signal, mouse click could be polled and then a signal sent.) </dd>
+<dt>trap</dt><dd>software generated interrupt. Either by an error or a program request. <dd>
+<dt>Single programming</dt><dd>CPU works on one process till completion before starting the next process (Batch Mode)</dd>
+<dt>Multiprogramming</dt><dd>cpu switches to other process when waiting for I/O for a particular process.</dd>
+<dt>Time sharing (multi-tasking)</dt><dd>
+cpu has several processes in memory and gives each a time slice, usually very short. 
+It is a good way for a single cpu to appear to be running several processes at the same time. (either for multiple users or multiple programs) If memory is full and no more
+processes can be loaded in memory then the OS must decide which processes to load and which not to load.  This is called job scheduling. CPU scheduling is deciding which process to run. This method is very common today but has much overhead, including keeping data separate, swapping and virtual memory, preventing one program from affecting another (malicious).
+<dt>user mode and kernel mode</dt><dd>to prevent user software from executing privileged instructions (accessing
+ sockets, etc) independently from the OS. When user software requests a service or an interrupt occurs, this
+ triggers the operating system to go to kernel mode and provide the service or handle the interrupt. 
+If user software tries to access a privileged command the hardware will see that he
+is in usermode and refuse, informing the OS. (Hardware support is required) This system allows the OS to
+ supervise priveleged instructions and prevent harm.
+<dt>timer<dd>one method to limit CPU usage by a process.  Used in conjunction with other methods.
+<dt>register<dd>Very fast memory location where CPU puts data which it will perform computations on it.
+<dt>cache<dd>faster storage memory used temporarily. Faster than main memory. OS may put parts of program code or stack there for faster access.
+
+
+What happens if a process is timed out while it
+ is still using a register or cache? If the next process overwrites
+its cache/register then the first process will have corrupt data. the OS must prevent this.
+<dt>Real-time OS <dd> Application's process priority level may exceed that
+ of a system process. App can run in Kernel mode (in order to save the overhead of having to switch
+ between user and kernel mode) and it  can block (mask) OS interrupts.
+Typically,  real-time software requires 
+guaranteed CPU time for its process and guaranteed response time for an interrupt. The OS may also
+ deny other processes the ability to interrupt the real-time process.
+The OS may use a multi-level scheduling queue to provide these guarantees.
+In general, a real-time OS will sacrifice throughput for responsiveness and guaranteed resource allocation.
+ 
+ 
+
+<dt>embedded systems<dd>most are real-time, ex.  car engine. missile controller. Cellphone is  Non-realtime embedded, so too  DVD
+<dt>client server<dd>client makes request, server provides file or service. back and forth communication.
+<dt> peer to peer</dt><dd>each machine can provide service/files or request them. to discover files/services either 
+search a lookup computer or broadcast request and hope for an answer.</dd>
+</dl>
+
+<p>
+&copy; Nachum Danzig 2010
+</body>
+</html>
+
+
+
+

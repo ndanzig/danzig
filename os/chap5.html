@@ -1,0 +1,183 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+
+<title>Operating Systems Course Outline </title>
+</head>
+<BODY >
+
+<h2>Operating Systems Course Outline</h2>
+
+
+
+<h4>5. Process Scheduling</h4>
+<dl>
+<dt>Process Scheduling goal     <dd>to have CPU utilized all the time. Several processes are in memory, scheduler decides which should get the CPU. 
+<dt>CPU Burst Cycle<dd>Large number of short burst of CPU use, small number of longer bursts. I/O bound processes tend to have more and shorter bursts.
+
+
+<dt>short-term scheduler     <dd>when CPU is Idle (or at other times too),
+ this scheduler selects a process to run from the ready queue. Ready queue need not be a fifo. 
+<dt>When does ST Scheduler act?<dd>1. A Process becomes idle(wait for child, or I/O) 2.Process halted by a signal/interrupt 3. When a processes stops waiting and become ready again 4. when a process terminates.
+<dt>Non-Preemptive or cooperative Scheduling     <dd> Scheduler act only in cases 1 and 4 above. When a process gets CPU it keeps it for as long as it wants (Windows 3.x)
+<dt>Preemptive Scheduling     <dd>Scheduler acts in all 4 cases.  More complex and creates a critical area problem . Also what if Kernel is in the middle of a request from a process when the process is preempted?  Linux waits for the kernel to finish, but this is not good for some aplications (real-time). Also need to prevent an interrupt occuring in the middle of another interrupt.  Can cause data corrupting.  therefore interrupts usually block other interrupts.
+
+<dt>Dispatcher     <dd>Gives CPU to process selected by scheduler. needs to switch context, switch to user mode, jumpt to program counter location.
+<dt>Dispatch Latency     <dd>time it take to stop one process and start another. 
+
+<h4>Measures of Scheduling Algoritms - how to gauge an algorithm  </h4>
+<blockquote><dt>CPU Utilization     <dd>percent of time CPU is active
+
+<dt>Throughput     <dd>how many processes are completed per hour.
+
+<dt>Turnaround time     <dd>How long a given process takes to complete (on a busy system) 
+
+<dt>Waiting Time     <dd>total Time spent in ready queue (perhaps the best measure since cpu time is not determined by the scheduler.)
+
+<dt>Response time <dd>time it takes from process start to when first output 
+starts to be printed. This measure is independent of the output device's
+ speed.
+ </blockquote>
+We may want to optimize the average values for these gauges 
+or the maxes or mins .  We may also want to minimize the variance so we can have a predictable response time.
+
+
+
+
+<h4> Scheduling Algorithms</h4>
+<dt>Gantt Chart<dd>bar chart use for comparing algorithms. Process in order are represented showing burst time by length.
+<pre>
+__________________________________
+| P1                  | P2  | P3  |
+----------------------------------
+0                     14    17    20
+</pre>
+Average Wait time is  (0+14+17)/3 = 10.3
+
+<dt>First-Come, First-Served      <dd>Easy to implement, FIFO. But the order
+ that processes arrive can strongly affect average wait time.
+ Drawback also if there is one CPU bound Process, it may force other I/O bound processes to wait for it each time, <b>convoy effect</b>. Preempting based on time slice can help alleviate this, though this algorithm is usually considered to be non-preemptive.
+
+<dt>Shortest Job First         (SJF)   <dd>Should really be called shortest next-CPU-burst first  Need to know the length of the next CPU
+ burst of each process, then assign the shortest to the top of the queue (use fcfs to break ties). Gantt chart show this to have optimal average wait time, but can cause a long process to "starve".  Also How to comute next cpu burst? 
+We could try to predict it based on past behavior. Compute an exponential 
+average.
+
+<p>Let t<sub>n</sub>
+ be the length of the nth CPU burst, and let &tau;<sub>n+1</sub> be our predicted value for the next cpu burst. Then, for &alpha;,  0 &le;&alpha;&le;1, define
+<blockquote> &tau;<sub>n+1</sub> = &alpha; t<sub>n</sub> + (1- &alpha;)&tau;<sub>n</sub>
+</blockquote>
+ &tau;<sub>n</sub> stores past history, t<sub>n</sub> contains the most recent CPU burst history .
+Changing the value we assign to &alpha; changes the relative weight recent 
+and distant history has.
+If we preempt a process when a shorter one arrives we call this a
+ <b>shortest remaining time first</b> algorithm. 
+
+<p>Draw a Gantt chart for the following: 
+<table border="1pt" cellpadding="4pt">
+<tr><td>Process</td><td>Arrival Time</td><td>CPU Burst Time</td></tr>
+<tr><td>P1</td><td>0</td><td>7</td></tr>
+<tr><td>P2</td><td>1</td><td>2</td></tr>
+<tr><td>P3</td><td>3</td><td>11</td></tr>
+<tr><td>P4</td><td>4</td><td>4</td></tr></table>
+
+<a href=gantt1.html>Gantt Chart</a>
+<dt>Priority Scheduling     <dd> High priority jobs go first.  Priority can either be internal determined
+ (based on memory requirements, CPU need, etc.)  or determined
+ by something outside the OS. Can be preemptive. Probelm is that low priority process are kept waiting 
+indefinately.  "starvation" or "blocking". "Aging" solves this problem.
+<dt>Round-Robin <dd>Each process gets a "time slice" of CPU use in FCFS fashion, but is preempted 
+at end of time slice (eg. 20 ms).  If process CPU burst &lt; time slice, then the OS will move to next 
+job sooner. We want the time slice to be significantly larger than the time required to do a context switch.
+If the time slice is too large then we end up with a FCFS algorithm. 
+Ideally, at least 80% of the CPU bursts should be smaller than the time slice.
+ 
+
+<dt>Multi-Level Queue            <dd> Foreground processes (interactive) and background processes have different response time requirements. Each process is assigned perminently to one queue (i.e. interactive queue or batch queue).  Each queue 
+has its own scheduling algorithm and the combining of the queues is also according to some algorithm.  Interactive queue might get priority and may be a round robin.  The background queue might be a FCFS.
+
+
+ 
+
+<dt>Multi-Level Feedback Queue            <dd>Like Multi-level queue but can move from lower to higher priority queues and the reverse.  Long CPU burst process or CPU bound processes are set to lower priority.  Older processes can also have their priority raised. (Prevents starvation).  Example, have three queues. Queue 1 gives process 10 ms.If it does not finish, it is moved to queue 2.
+Only when queue 1 is empty is queue allowed to run.  It gives processes 20ms.
+If process does not finish, moved to queue 3 with 40 ms.  Queue 3 is only run once queue 2 is empty.  Thus short CPU processes run faster. We can also add aging so that old processes go back to queue 1 (or 2). Complex.
+ 
+<dt>Multiprocessor Scheduling <dd> Asymetric: processors are set up in a master slave manner. Symmetric Multiprocessing
+(SMP): Either private or shared ready queues.  If shared, need to prevent both processors from selecting the same 
+process to be run.  If private, OS must populate each queue in a balanced fashion.
+ 
+
+<dt>CPU Cache            <dd>by way of reminder, the CPU has its own cache  which is faster than RAM. 
+Recent data is kept in cache.  When a context switch occurs, the cache is not necessarily switched 
+out. Thus the OS must seperate cache data between processes.
+ 
+
+
+<dt>processor affinity            <dd>Once a process has been chosen for one processor, it is best to keep the process 
+assigned to that processor.  Otherwise the OS would need to copy out data from one CPU cache to the other.
+Processor affinity can be hard or soft(flexible)
+ 
+
+<dt>load balancing<dd>required on SMP systems that have private queues. <b>push migration</b> a seperate
+routine checks periodicaly for imbalances and redistributes. <b>pull migration</b>  an idle processor checks other 
+processor queues and takes its process. Can be implemented together. LB is contrary to idea of processor affinity.
+<dt> Multicore Processor<dd> Many CPUs on a single chip, each with its own registers and cache.
+<dt>Memory Stall <dd> processor waiting for memory to be accesses so it can perform.
+
+<dt>Multi-threaded<dd> two or more processes are loaded into each  cpu  (each has its own registers, cache may be shared)
+ processor alternates
+among the processes while waiting for a memory stall. May be combined with multicore. Multi-threading requires a
+ second level of process scheduling, i.e. when to switch among processes in the CPU and which one to activate.
+<dt>hard-ware thread            <dd>logical (virtual) processor
+<dt>Virtualization and scheduling <dd> Often a host system has many guest OSs. If the Guest OS alocated 100 ms to
+ each process, it may actually take longer than 100ms to get those virtual 100ms because
+other guests are demanding CPU.  Or put another way, you may have to slow down how many hardware cycles per second a guest
+has so that the host can handle all the interrupts of all its guest. In virtualization, you don't have the CPU speed
+you think you have.
+
+
+
+<p>
+ Question for thought.  When a process is switched out because of I/O when it is ready, where does it go in the queue, back to the top or to the end?
+
+
+
+<dl>
+<dt>interrupt handling<dd> 
+During an interrupt, the OS will usually block (mask) that same  interrupt. Accepting 
+two of the same interrupts (interrupting as interrupt) can cause a vicious circle which the OS may never
+get out of.
+ 
+
+<dt>Real-time OS <dd> Application's process priority level may exceed that
+ of a system process. App can run in Kernel mode (in order to save the overhead of having to switch
+ between user and kernel mode) and it  can block (mask) OS interrupts.
+Typically,  real-time software requires
+guaranteed CPU time for its process and guaranteed response time for an interrupt. The OS may also
+ deny other processes the ability to interrupt the real-time process.
+The OS may use a multi-level scheduling queue to provide these guarantees.
+In general, a real-time OS will sacrifice throughput for responsiveness and guaranteed resource allocation.
+
+
+
+
+
+<dt>vxworks<dd>a popular embedded real time OS, but more and more popular to use a Linux  on an embedded system, but Linux cannot provide hard real time because cannot guarantee fixed cpu allocation.
+<dt>soft real time<dd>timing important but time failure will not cause everything to be worthless. ex. VOIP, 
+
+<dt>hard real time<dd>time failure causes system to be useless,worthless. Ex. Missile System, GSM needs
+to transmit in strict time frames so as not to conflict with other phones in the cell, and needs guaranteed CPU to calculate what to send.
+<dt>interrupts on VMWare client<dd>should be slowed down or turned off because otherwise host is spending all time supplying the interrupts and client (guest) will run slow. When you set up a VMWare machine you set its disk size  and memory.  these should be less than host, even if you plan to run only one guest.
+</dd>
+</dl>
+
+<p>
+&copy; Nachum Danzig 2010
+</body>
+</html>
+
+
+
+
