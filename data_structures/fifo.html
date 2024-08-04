@@ -1,0 +1,38 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+<LINK REL=STYLESHEET HREF="../cpp/style.css" TYPE="text/css">
+
+<title>Fifos Lifo and Trees  </title>
+</head>
+<BODY >
+<h2>Trees</h2>
+<p>there are three ways to remove a node from a tree:
+<ol>
+<li>After removing the node connect his parent to his greater
+node and then connect his lesser node to his greaters least least...
+<li>after removing the node, connect his parent to his greater node
+and then use the insertNode function to re-insert the lesser child.
+once the lesser child has been inserted his children will still be
+ connected to the tree.  This is simpler to code but will cause more
+leaf nodes to be formed.
+
+<li> after the node is removed, insert the node's greater , least least ...
+node in its place.  Then connect the least pointer of parent of
+ the greater least least ... to the greater child of the promoted node 
+(if there is one)
+
+
+</ol>
+
+
+
+
+<p>
+&copy; Nachum Danzig 2010
+</body>
+</html>
+
+
+
+

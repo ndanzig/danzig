@@ -1,0 +1,64 @@
+<head>
+<TITLE>General notes about Stacks</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>General notes about stacks</H2></CENTER>
+
+<p>
+You have already learned how to make a linked list and how to add new nodes to the list.
+What you may not realize is that you have several options of how you choose to 
+add new noded to your list.  You saw one example of adding element to the end of the
+the list.  You found the end of the list by starting at the head and running through all the 
+nodes until a next pointer was null.  How should you remove elements form the linked list?
+One option is to always remove the newest node. This is kind of like seniority at the work place.
+If some one is fired, it is often, or perhaps should be, the most recent hiree.
+This is also like an ammo clip or magazine (or a pez candy despenser). The bullet to be popped
+oout next is alway the bullet that was most recently entered.  Think of a stack of pancakes.
+When the cook is making pancakes he puts them one at a time as he make them onto
+a plate.  After twenty minutes the stack may have 15 pancakes and the hotest one will be on top.
+When he serves them the luck person to be served first will get the most recent pancake.
+The unlucky last person will get a very cold pancake, it was the first pancake made.
+Stacks of pancakes pile up and unpile in reverse order.  This is called Last In First Out (or Lifo).
+It is also called a stack or a magazine.
+
+<p>
+How could we make our linked list function like a stack?  All we have to do is write a method
+pop( ) that returns something of type node and returns which even node was most recently added.
+To this, all we have to do is run though our linked list and when we get to the end, we know 
+we have reached to node we want to pop off the list. We will have to make the next pointer of
+the previous node point to null and then simple return a pointer to the last node.
+Here is a possible implementation of pop( ).
+
+<pre>
+node pop( node head )
+{
+if(head==null) //was I given an empty list?
+   return(null); 
+node previous = head;//note: I need to keep track of the previous node
+while ( head.next != null )
+   {
+   previous = head;// I need to update the previous node
+   head = head.next
+   } 
+previous.next=null;// unlink the last node
+return ( head );  // at this point head is pointing to the tail of the list
+}
+</pre>
+<p>
+This should do the trick and now I have a bonafid stack of lifo. 
+But this is a bit inefficient.  I have to run through the whole 
+stack in order to pop a node.  If I had a pointer to the tail
+of the list things might be much faster.  Try altering your
+addnode method to keep track of the tail.  You will also
+need to create a global tail.
+
+<p>
+&copy; Nachum Danzig February 2004
+
+
+</body>
+</html>
+
+
+
+

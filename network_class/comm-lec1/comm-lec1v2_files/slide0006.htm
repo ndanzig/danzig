@@ -1,0 +1,191 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns:oa="urn:schemas-microsoft-com:office:activation"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=us-ascii">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 11">
+<link id=Main-File rel=Main-File href="../comm-lec1v2.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>RS-232C Standard</title>
+<meta name=Description content="11/23/2008: Programming the UART 8250">
+<link rel=Stylesheet href="master03_stylesheet.css">
+<![if !ppt]>
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+if( !IsNts() ) Redirect( "PPTSld" );
+//--></script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="9"/>
+</o:shapelayout>
+</head>
+
+<body lang=HE style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onload="LoadSld()"
+onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#ffffff,#000000,#808080,#000000,#00cc99,#3333cc,#ccccff,#b2b2b2"
+ masterhref="master03.xml">
+ <p:shaperange href="master03.xml#_x0000_s1025"/><v:shapetype id="_x0000_t202"
+  coordsize="21600,21600" o:spt="202" path="m,l,21600r21600,l21600,xe">
+  <v:stroke joinstyle="miter"/>
+  <v:path gradientshapeok="t" o:connecttype="rect"/>
+ </v:shapetype><v:shape id="Slide_x0020_Number_x0020_Placeholder_x0020_3"
+  o:spid="_x0000_s9218" type="#_x0000_t202" style='position:absolute;left:570pt;
+  top:7in;width:150pt;height:36pt;visibility:visible' filled="f" stroked="f">
+  <v:fill o:detectmouseclick="t"/>
+  <v:path arrowok="t"/>
+  <o:lock v:ext="edit" grouping="t"/>
+  <v:textbox style='mso-rotate-with-shape:t'/>
+ </v:shape><p:shaperange href="master03.xml#_x0000_m1026"/><v:shape id="Rectangle_x0020_2"
+  o:spid="_x0000_s9219" type="#_x0000_m1026" style='position:absolute;left:24pt;
+  top:18pt;width:672pt;height:42pt;visibility:visible;mso-wrap-style:square;
+  v-text-anchor:middle'>
+  <v:stroke o:forcedash="f"/>
+  <v:path arrowok="f"/>
+  <o:lock v:ext="edit" rotation="f" aspectratio="f" position="f" selection="f"
+   verticies="f" text="f" adjusthandles="f" grouping="t" shapetype="f"/>
+  <v:textbox style='layout-flow:horizontal;mso-rotate-with-shape:t' inset="7.2pt,3.6pt,7.2pt,3.6pt"/>
+  <p:placeholder type="title" position="-1"/></v:shape><p:shaperange
+  href="master03.xml#_x0000_m1027"/><v:shape id="Rectangle_x0020_3" o:spid="_x0000_s9220"
+  type="#_x0000_m1027" style='position:absolute;left:18pt;top:66pt;width:684pt;
+  height:456pt;visibility:visible;mso-wrap-style:square;v-text-anchor:top'>
+  <v:stroke o:forcedash="f"/>
+  <v:path arrowok="f"/>
+  <o:lock v:ext="edit" rotation="f" aspectratio="f" position="f" selection="f"
+   verticies="f" text="f" adjusthandles="f" grouping="t" shapetype="f"/>
+  <v:textbox style='layout-flow:horizontal;mso-rotate-with-shape:t' inset="7.2pt,3.6pt,7.2pt,3.6pt"/>
+  <p:placeholder type="body" position="-1"/></v:shape>
+ <div v:shape="Slide_x0020_Number_x0020_Placeholder_x0020_3">
+ <div class=O1 style='mso-margin-left-alt:468'></div>
+ <div class=O2 style='mso-margin-left-alt:720'></div>
+ <div class=O3 style='mso-margin-left-alt:1008'></div>
+ <div class=O4 style='mso-margin-left-alt:1296'></div>
+ <div class=O style='text-align:center;position:absolute;top:94.25%;left:80.14%;
+ width:18.91%;height:4.0%'><span lang=HE style='font-family:Arial;mso-ascii-font-family:
+ Arial;mso-bidi-font-family:Arial;mso-hansi-font-family:Arial;font-size:75%;
+ mso-ansi-language:EN-US;mso-field-code:meta16' dir=rtl><b><span dir=ltr></span>8</b></span><span
+ lang=EN-US style='font-family:Arial;mso-ascii-font-family:Arial;mso-hansi-font-family:
+ Arial;font-size:75%;mso-ansi-language:EN-US;mso-special-format:lastCR;
+ display:none'><b>&#13;</b></span></div>
+ </div>
+ <div v:shape="Rectangle_x0020_2" class=T style='position:absolute;top:3.25%;
+ left:4.3%;width:91.57%;height:8.5%'><span lang=EN-US style='mso-bidi-language:
+ HE'>Programming the UART 8250</span></div>
+ <div v:shape="Rectangle_x0020_3" class=B><span style='position:absolute;
+ top:13.25%;left:7.3%;width:105.99%;height:6.0%'><span class=BB
+ style='position:absolute;left:-3.53%'>&#8226;</span><span lang=EN-US
+ style='mso-bidi-language:HE'>Programming is done by reading and writing
+ registers of </span></span><span style='position:absolute;top:19.5%;
+ left:7.3%;width:89.32%;height:6.0%'><span lang=EN-US style='mso-bidi-language:
+ HE'>the 8250. The registers are:&#13;</span></span>
+ <div style='position:absolute;top:26.5%;left:3.55%;width:93.07%;height:4.25%'><span
+ style='mso-special-format:nobullet;display:none'>&#8226;</span><span
+ lang=EN-US style='font-size:71%;mso-bidi-language:HE'><b><u>Base Address<span
+ style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Mode<span
+ style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ </span>Name<span
+ style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ </span>&#13;</u></b></span></div>
+ <div style='position:absolute;top:31.75%;left:3.55%;width:102.8%;height:4.25%'><span
+ style='mso-special-format:nobullet;display:none'>&#8226;</span><span
+ lang=EN-US style='font-size:71%;mso-bidi-language:HE'>+0<span
+ style='mso-spacerun:yes'>&nbsp; </span>(DLAB=0)<span style='mso-tab-count:
+ 1;width:3.19%'> </span>Write<span style='mso-tab-count:2;width:13.32%'> </span>Transmitter
+ Holding Buffer <span style='mso-tab-count:1;width:8.42%'> </span>THR&#13;</span></div>
+ <div style='position:absolute;top:37.25%;left:3.55%;width:102.8%;height:4.25%'><span
+ style='mso-special-format:nobullet;display:none'>&#8226;</span><span
+ lang=EN-US style='font-size:71%;mso-bidi-language:HE'>+0<span
+ style='mso-spacerun:yes'>&nbsp; </span>(DLAB=0)<span style='mso-tab-count:
+ 1;width:3.19%'> </span>Read<span style='mso-tab-count:2;width:13.89%'> </span>Receiver
+ Buffer<span style='mso-spacerun:yes'>&nbsp; </span><span style='mso-tab-count:
+ 3;width:20.24%'> </span>RBR&#13;</span></div>
+ <div style='position:absolute;top:42.5%;left:3.55%;width:102.62%;height:4.25%'><span
+ style='mso-special-format:nobullet;display:none'>&#8226;</span><span
+ lang=EN-US style='font-size:71%;mso-bidi-language:HE'>+0<span
+ style='mso-spacerun:yes'>&nbsp; </span>(DLAB=1)<span style='mso-tab-count:
+ 1;width:3.19%'> </span>Rd/Wr<span style='mso-tab-count:2;width:12.12%'> </span>Divisor
+ Latch Low Byte <span style='mso-tab-count:2;width:11.92%'> </span>DLL&#13;</span></div>
+ <div style='position:absolute;top:47.75%;left:3.55%;width:101.49%;height:4.25%'><span
+ style='mso-special-format:nobullet;display:none'>&#8226;</span><span
+ lang=EN-US style='font-size:71%;mso-bidi-language:HE'>+1<span
+ style='mso-spacerun:yes'>&nbsp; </span>(DLAB=0)<span style='mso-tab-count:
+ 1;width:3.23%'> </span>Rd/Wr<span style='mso-tab-count:2;width:12.26%'> </span>Interrupt
+ Enable Register <span style='mso-tab-count:2;width:11.11%'> </span>IER&#13;</span></div>
+ <div style='position:absolute;top:53.0%;left:3.55%;width:103.55%;height:4.25%'><span
+ style='mso-special-format:nobullet;display:none'>&#8226;</span><span
+ lang=EN-US style='font-size:71%;mso-bidi-language:HE'>+1<span
+ style='mso-spacerun:yes'>&nbsp; </span>(DLAB=1)<span style='mso-tab-count:
+ 1;width:3.16%'> </span>Rd/Wr<span style='mso-tab-count:2;width:12.02%'> </span>Divisor
+ Latch High Byte<span style='mso-tab-count:2;width:12.05%'> </span>DLM &#13;</span></div>
+ <div style='position:absolute;top:58.5%;left:3.55%;width:100.56%;height:4.25%'><span
+ style='mso-special-format:nobullet;display:none'>&#8226;</span><span
+ lang=EN-US style='font-size:71%;mso-bidi-language:HE'>+2<span
+ style='mso-tab-count:3;width:16.95%'> </span>Read<span style='mso-tab-count:
+ 2;width:14.2%'> </span>Interrupt Idendification Register <span
+ style='mso-tab-count:1;width:3.43%'> </span>IIR &#13;</span></div>
+ <div style='position:absolute;top:63.74%;left:3.55%;width:102.43%;height:4.25%'><span
+ style='mso-special-format:nobullet;display:none'>&#8226;</span><span
+ lang=EN-US style='font-size:71%;mso-bidi-language:HE'>+2<span
+ style='mso-tab-count:3;width:16.64%'> </span>Write<span style='mso-tab-count:
+ 2;width:13.37%'> </span>FIFO Control Register<span style='mso-tab-count:2;
+ width:14.52%'> </span>FCR&#13;</span></div>
+ <div style='position:absolute;top:69.0%;left:3.55%;width:102.62%;height:4.25%'><span
+ style='mso-special-format:nobullet;display:none'>&#8226;</span><span
+ lang=EN-US style='font-size:71%;mso-bidi-language:HE'>+3<span
+ style='mso-tab-count:3;width:16.61%'> </span>Rd/Wr<span style='mso-tab-count:
+ 2;width:12.12%'> </span>Line Control Register <span style='mso-tab-count:2;
+ width:14.73%'> </span>LCR&#13;</span></div>
+ <div style='position:absolute;top:74.5%;left:3.55%;width:103.55%;height:4.25%'><span
+ style='mso-special-format:nobullet;display:none'>&#8226;</span><span
+ lang=EN-US style='font-size:71%;mso-bidi-language:HE'>+4<span
+ style='mso-tab-count:3;width:16.46%'> </span>Rd/Wr<span style='mso-tab-count:
+ 2;width:12.02%'> </span>Modem Control Register<span style='mso-tab-count:2;
+ width:11.85%'> </span>MCR&#13;</span></div>
+ <div style='position:absolute;top:79.75%;left:3.55%;width:102.24%;height:4.25%'><span
+ style='mso-special-format:nobullet;display:none'>&#8226;</span><span
+ lang=EN-US style='font-size:71%;mso-bidi-language:HE'>+5<span
+ style='mso-tab-count:3;width:16.67%'> </span>Read<span style='mso-tab-count:
+ 2;width:13.97%'> </span>Line Status Register <span style='mso-tab-count:2;
+ width:16.45%'> </span>LSR&#13;</span></div>
+ <div style='position:absolute;top:85.0%;left:3.55%;width:103.18%;height:4.25%'><span
+ style='mso-special-format:nobullet;display:none'>&#8226;</span><span
+ lang=EN-US style='font-size:71%;mso-bidi-language:HE'>+6<span
+ style='mso-tab-count:3;width:16.52%'> </span>Read<span style='mso-tab-count:
+ 2;width:13.84%'> </span>Modem <span style='mso-tab-count:1;width:.65%'> </span>Status
+ Register <span style='mso-tab-count:2;width:12.21%'> </span>MSR&#13;</span></div>
+ <div style='position:absolute;top:90.25%;left:3.55%;width:102.43%;height:4.25%'><span
+ style='mso-special-format:nobullet;display:none'>&#8226;</span><span
+ lang=EN-US style='font-size:71%;mso-bidi-language:HE'>+7<span
+ style='mso-tab-count:3;width:16.64%'> </span>Rd/Wr<span style='mso-tab-count:
+ 2;width:12.15%'> </span>Scratch Register<span style='mso-tab-count:3;
+ width:21.23%'> </span>SCR</span><span lang=EN-US style='mso-bidi-language:
+ HE;mso-special-format:lastCR;display:none'>&#13;</span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

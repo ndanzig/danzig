@@ -1,0 +1,23 @@
+<HTML>
+<HEAD>
+<TITLE>JavaScript Exercise 3</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var img1a=new Image();
+img1a.src="../saskia1.gif";
+var img1b=new Image();
+img1b.src="../rainbow.gif";
+function mouseover() {
+  document.img1.src=img1a.src;
+}
+function mouseout() {
+  document.img1.src=img1b.src;
+}
+// -->
+</SCRIPT>
+<BODY BGCOLOR=WHITE>
+<A HREF="javascript:mousover()" onMouseover=mouseover()
+onMouseout=mouseout()><IMG SRC="../rainbow.gif" height=750 width=750 NAME="img1"></A>
+</BODY>
+</HTML>
+

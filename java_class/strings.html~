@@ -1,0 +1,75 @@
+<head>
+<TITLE>Programming - Strings</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>Strings</H3></CENTER>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+String is actually a built-in class.  Since it is a class, it has methods.  Let us
+see some of the methods it has.
+
+<pre>
+final int position =2;// create a variable named position whose value can never be changed
+String s, s1, s2, s3, s4, s5, s6;
+char charArray[]={ 'T','o','r','a','h'};
+byte byteArray[]={ (byte)'n', (byte)'e', (byte)'w' };
+
+// Constuctor Methods are methods which are called when the object is created.  
+// The name of the Constructor Method will always be the 
+// same as the class name.  The Constructor Method will never return
+// any value. There can be several Constructor Methods for a class
+// as long as they each have different parameter lists.
+// Here are several Constructor Methods for String.
+
+s = new String ( "hello" );  // copies hello into s
+s1 = new String ( ); // make s1 a blank String
+s2 = new String (s); // copies value of s into s2
+s3 = new String ( charArray ); // copies value of charArray into s3 (i.e. "Torah")
+s4 = new String ( charArray, 1, 3 );// 1 is offset, 3 is number of characters to copy
+                                    // copies "ora" into s4 
+s5 = new String ( byteArray, 0, 3);// copies the first 3 elements of byteArray into s5
+s6 = new String ( byteArray ); // copies all of byteArray into s6
+ 
+// Here are some other useful methods in class String
+
+s.length(); //returns length of String s, don't for get the (), this is a method.
+s.charAt(position); // returns the single character at positiion, i.e. 'l'
+s.getChars( 1, 3, charArray, 0 ); /*  the first param. is start of copying position,
+       the second param. is the index one past the last letter I want to copy,
+       charArray is the destination into which to copy,
+       the fourth param. is where in the destination array I should starting copying into.
+       This will copy "el" into the beginning of charArray, producing the String "elrah". 
+    */
+
+s1.equals("hello");  // returns <font color="blue">true</font> if s1 is "hello", 
+                     // == will only be <font color="blue">true</font> if it is the identical object in memory
+
+s1.equalsIgnoreCase("Hello");  //returns<font color="blue"> true </font>even if one string is UPPERCASE and the other is lowercase
+
+s1.compareTo(s2);   // returns 0 if s1 equals s2
+	            // returns a negative number if object s1 < parameter s2
+                    // returns a positive number if object s1  > parameter s2
+
+s1.indexOf( 'e' );
+s1.indexOf( 'l',2 );  //start looking at index  2
+s1.lastIndexOf( 'l' ); // start at end of string, go backwards
+
+
+s1.substring( 2 ); // start at index 2 till end
+s1.substring( 0,2 ); // start at index 0 till 2
+
+s1.concat (s2); //append s2 to end of s1
+
+
+<p><b>static class methods</b>
+
+int b = 77;
+String.valueOf(b); //returns 77 as a string
+</pre>
+
+
+<p>
+&copy Nachum Danzig December 2003
+
+</body>
+</html>

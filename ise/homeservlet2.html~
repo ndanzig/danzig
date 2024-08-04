@@ -1,0 +1,21 @@
+
+<HTML><HEAD><Title>Delete Person</Title></HEAD>
+<BODY>
+<FONT FACE="Arial"><P><H1>Delete Person</H1></P>
+
+<FORM method="post" action="http://stud41.ise.jct.ac.il:8080/iseproject/HomeServlet">
+
+<FONT SIZE=2>
+<P><B>Collaborator ID:</B>
+<INPUT TYPE="text" NAME="id" SIZE=10 MAXLENGTH=9/></P>
+<P><B>Collaborator Email:</B>
+<INPUT TYPE="text" NAME="email" SIZE=35 MAXLENGTH=40/></P>
+</FONT>
+
+<BR/><BR/>
+<INPUT TYPE="submit">
+<INPUT TYPE="reset">
+</FORM>
+
+</FONT></BODY>
+</HTML>

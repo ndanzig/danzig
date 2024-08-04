@@ -1,0 +1,155 @@
+<head>
+<TITLE>Programming - Repeating actions</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Intoduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>More kinds of loops</H3></CENTER>
+<p>
+The most basic type of loop is the <b>while</b> loop which we have  seen in 
+the previous chapter.  
+In truth, all you ever need to use is the <b>while</b> loop.  But two other
+loop structures were created to be used in certain cases.
+<p>
+Sometimes you may want to do a loop once no matter what
+and only check the condition statement to decide whether to 
+do the loop a second time.  A classic example of this (when you
+want to skip the first-time condition check) is when 
+you are printing a menu for the user.  
+
+<p>
+I will show you the basic structure of this kind of loop and then a menu example.
+The loop is called a <b> do while </b> loop.  Here is the structure: 
+
+
+<pre>
+do {
+ ........... 
+
+} while ( <i>condition</i> ) ;
+
+</pre
+
+
+<p>So you see it is rather like the <b>while</b> loop , but the while comes at the end.
+Be careful to remember the semi-colon ;  at the end.  Here is the menu example
+I promised:
+<tt>
+<blockquote>
+
+<tt>int input;
+<br>do {
+<br>cout&lt;&lt;"Please enter any positive integer, (-1 to quit)"&lt;&lt;endl;
+<br>cin&gt;&gt;input;
+<br>cout&lt;&lt;"You entered a "&lt;&lt;input&lt;&lt;endl;
+<br>}while(input != -1);
+
+</tt>
+</blockquote>
+<p> When this loop runs, it will output something like this
+
+<pre>
+<tt>
+Please enter any positive integer, (-1 to quit)
+5
+You entered a 5
+Please enter any positive integer, (-1 to quit)
+-1
+</tt>
+</pre> 
+<p>If I had used a while loop, I would have had to repeat code like 
+ this:
+<blockquote>
+<tt>int input;
+<br>cout&lt;&lt;"Please enter any positive integer, (-1 to quit)"&lt;&lt;endl;
+<br>cin&gt;&gt;input;
+<br>cout&lt;&lt;"You entered a "&lt;&lt;input&lt;&lt;endl;
+<br>while(input != -1)
+<br>cout&lt;&lt;"Please enter any positive integer, (-1 to quit)"&lt;&lt;endl;
+<br>cin&gt;&gt;input;
+<br>cout&lt;&lt;"You entered a "&lt;&lt;input&lt;&lt;endl;
+<br>}
+
+</tt>
+  
+
+
+</blockquote>
+
+<p> So you can see that my do while has saved me some hastles and potential confusions.
+<p> There is another kind of loop, the <b> for loop</b>. It has the advantage of compactly
+structuring the common commands for using a counter. Use a <b>for loop</b> when you need to use
+and initialize a counter.  Here is the stucture:
+
+<pre>
+for  ( <i>initialization</i> ; <i>condition</i> ; <i>incrementation</i> )
+{
+
+.....
+
+}
+</pre>
+<p> You will note that there are three sections separated by semi-colons ; . The 
+<b>for loop</b> requires exactly two semi-colons always. If you want to do two or
+more initializations or incrementations, simple semerate them by commas.  You cannot
+have more that one condition, but you can create complex conditions just like in a 
+while loop.
+
+
+<p>The <i>initialization</i> is for setting the counter(s).  You can also declare
+variables in the initalization section. The <i>condition</i>  section is 
+the same as the condition of the while and do while loops.  The <i>incrementation</i> 
+is pretty much for incrementing the counter, like i++ of counter++, but
+actually you can do just about any command here.  In general, just use the
+incrementation section for incrememting your counter(s).  Here is a basic example:
+
+<blockquote>
+<tt>for ( int i = 0; i &lt; 10 ; i++)
+<br>{
+<br>cout&lt;&lt;"5 times " &lt;&lt; i &lt;&lt;" is " &lt;&lt; i * 5&lt;&lt;endl;
+<br>}
+
+</tt>
+
+</blockquote>
+
+
+<p> The output of the above would be 
+<pre>
+5 times 0 is 0
+5 times 1 is 5
+5 times 2 is 10
+5 times 3 is 15
+5 times 4 is 20
+5 times 5 is 25
+5 times 6 is 30
+5 times 7 is 35
+5 times 8 is 40
+5 times 9 is 45
+<pre>
+
+<p> Some other for loop possibilities are:
+
+<tt><br> 
+for ( int i = 0, int j=10 ; i &lt; 10 &amp;&amp; j &lt; 100 ; i++ , j*=2) // two counters, double condition 
+<br>for ( i = 0, j=10 ; i &lt; 10 ; i++ , j--) // two counters, one condition 
+<br>for ( i = 0 ;;) //infinite loop
+<br>for ( i = 0 ;;) // infinite loop
+
+<br>etc.
+
+<br>
+&copy Nachum Danzig September 2003 - December 2006
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

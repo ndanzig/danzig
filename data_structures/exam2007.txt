@@ -1,0 +1,42 @@
+
+
+Final Exam
+Data Structures, 2007 
+N. Danzig Instructor
+
+2.5 hours
+Closed Book
+
+1. Write 2 versions of the delete_node function for a binary tree (a tree where
+the left node is less than the parent node and the right node is greater than it)
+The first version shoud re-insert the children of the deleted node. (Assume the existence
+of the function "insert_node") The second version should connect the children of the 
+deleted node in their correct locations.
+
+
+2. The heap condition is that the key in each node should be larger than 
+(or equal to) the keys in its children (if it has any). 
+Write a heap class with the insert_node function for an array implementation of a heap 
+You must write the "upheap" function. In an array implementation of a heap, the father node's index
+will be 1/2 the value of the son's index value.
+
+
+
+3. Write the definition of a class node which is capable of having multiple children.  
+Do not write the function definitions, simply declare the class.
+
+
+4. Assume you have the class 
+class student{
+public: 
+char * name;
+unsigned long IDnumber;
+etc.
+
+};
+
+Overload the < operator for this class.  Assume this operator will be used to alphabetize the students.
+
+5. Write the member function  "print_tree" for a binary tree. It should print the 
+tree in order. 
+

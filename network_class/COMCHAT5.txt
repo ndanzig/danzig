@@ -1,0 +1,482 @@
+ /* Name       : Chat Program via a serial port						     */
+ /* Written By : ND         */
+
+#include <string.h>
+#include <stdlib.h>
+#include <dos.h>
+#include <stdio.h>
+#include <conio.h>
+
+#define COM1 0x3F8
+
+#define THR 0
+#define RBR 0
+#define IER 1
+#define FCR 2
+#define LCR 3
+#define MCR 4
+#define LSR 5
+#define MSR 6
+
+#define DLL 0
+#define DLM 1
+#define DTR 0
+#define RTS 1
+#define CTS 4 //inside MSR
+#define DSR 5
+
+#define DLAB 7
+// LSR Register: Error types and bits offsets
+// Note: When the LSR is read, it is reset.
+#define DR 0 //indicates that a byte is ready to be read from RBR
+#define OVERRUN_ERROR 1
+#define PARITY_ERROR 2
+#define FRAMING_ERROR 3
+#define BREAK_INTERRUPT 4
+#define NUM_OF_ERRORS 4
+#define THRE 5 //1 indicates I can write to the THR
+#define TSRE 6
+
+#define ON 1
+#define OFF 0
+
+#define ODD 1
+#define EVEN 2
+#define NUM_OF_PARITY_OPTIONS 3
+
+#define ONE 0
+#define TWO 1
+
+#define UART_CLOCK_MAX_FREQUENCY 1843200
+#define MULTIPLIER 16
+#define MAX_SPEED_IN_BPS 115200
+
+#define DEFAULT_SPEED_IN_BPS 2400
+#define DEFAULT_WORD_LENGTH 8
+#define DEFAULT_PARITY_VALUE 0
+#define DEFAULT_STOP_BIT_LENGTH 1
+#define DEFAULT_INTERRUPT_MODE 0
+
+#define MINIMAL_WORD_LENGTH 5
+#define MAXIMAL_WORD_LENGTH 8
+#define MINIMAL_STOP_BIT_LENGTH 1
+#define MAXIMAL_STOP_BIT_LENGTH 2
+
+#define NUM_OF_SPEEDS 14
+#define NUM_OF_BUFFER_ELEMENTS 13
+#define SPEED_INDEX 0
+#define WORD_LENGTH_INDEX 1
+#define PARITY_INDEX 2
+#define STOP_BIT_INDEX 3
+#define NO_CHAR 256
+#define ESC 27
+#define ENTER 13
+
+
+char glbBuffer[]={"hello out there"};
+// This function changes the UART's settings.
+// If BitNumber<0 the function sets on or off the whole register given
+// to the function.
+void SetABitOrAByteOnOrOff(int port, int OnOrOff, int RegisterOffset, int BitNumber)
+{
+	int shifter;
+
+	if(BitNumber>=0)
+	{
+		shifter=1;
+		shifter=shifter<<BitNumber;
+	}
+	else
+	{
+	  shifter=0;
+	  shifter=~shifter;
+	}
+
+	if(OnOrOff==ON)
+	{
+		outp(port+RegisterOffset,inp(port+RegisterOffset) | shifter);
+	}
+	else     //off
+	{
+	 shifter=~shifter;
+	 outp(port+RegisterOffset,inp(port+RegisterOffset) & shifter);
+	}
+}
+
+// This function gets a setting from the UART.
+// If the 'port' parameter is set to -1 then the function
+// gets the information (or Byte) it needs to operate from the number
+// that is set into the parameter 'RegisterOffset'.
+int GetABitOrAByte(int port, int RegisterOffset,int BitNumber)
+{
+	int output;
+
+	if(port!=-1)
+	{
+	output=inp(port+RegisterOffset);
+	}
+	else
+	{
+	  output=RegisterOffset;
+	}
+
+	if(BitNumber>=0)
+	{
+		output=output>>BitNumber;
+		BitNumber=1;
+		output=output&BitNumber;
+	}
+
+	return(output);
+}
+
+int GetABaudRate(int SpeedInBPS)
+{
+	long clock=UART_CLOCK_MAX_FREQUENCY;
+	int multi=MULTIPLIER;
+	unsigned int temp=0;
+
+	temp=SpeedInBPS*multi;
+
+	return(clock/temp);
+}
+// Inits the DLL and DLM registers with a new speed
+void SetABaudRate(int port, int BaudRate)
+{
+	int lsb,msb;
+
+	if(BaudRate<1)
+	{
+		BaudRate=GetABaudRate(DEFAULT_SPEED_IN_BPS);
+	}
+
+	lsb=BaudRate%0xFF;
+	msb=BaudRate/0xFF;
+
+	SetABitOrAByteOnOrOff(port,ON,LCR,DLAB);
+	outp(DLL,lsb);
+	outp(DLM,msb);
+	SetABitOrAByteOnOrOff(port,OFF,LCR,DLAB);
+}
+int ReadABaudRate(int port)
+{
+	int lsb,msb;
+	SetABitOrAByteOnOrOff(port,ON,LCR,DLAB);
+
+	lsb=inp(DLL);
+	msb=inp(DLM);
+
+	SetABitOrAByteOnOrOff(port,OFF,LCR,DLAB);
+msb=msb<<8;
+return (lsb+msb);
+
+}
+
+
+void SetWordLength(int port, int NewLength)
+{
+	int first=OFF,second=OFF;
+
+	switch (NewLength)
+	{
+		case 6:
+			first=OFF;
+			second=ON;
+			break;
+		case 7:
+			first=ON;
+			second=OFF;
+			break;
+		case 8:
+			first=ON;
+			second=ON;
+			break;
+		default:
+			first=ON;
+			second=ON;
+	}
+
+	SetABitOrAByteOnOrOff(port,first,LCR,0);
+	SetABitOrAByteOnOrOff(port,second,LCR,1);
+}
+
+void SetParity(int port, int NewType)
+{
+	int parity=OFF;
+	int type=OFF;
+
+	if(NewType!=OFF)
+	{
+		if(NewType==ODD)
+		{
+			parity=ON;
+			type=ODD-1;
+		}
+		else
+		{
+			parity=ON;
+			type=EVEN-1;
+		}
+	}
+
+	SetABitOrAByteOnOrOff(port,parity,LCR,3);
+	SetABitOrAByteOnOrOff(port,type,LCR,4);
+}
+
+void SetStopBitLength(int port, int NewLength)
+{
+	if(NewLength==TWO)
+	{
+		SetABitOrAByteOnOrOff(port,ON,LCR,2);
+	}
+	else
+	{
+		SetABitOrAByteOnOrOff(port,OFF,LCR,2);
+	}
+}
+
+void ChangeCommunicationSettings(int port, int SpeedInBPS, int WordLength,
+								int parity, int StopBitLength, int InterruptMode)
+{
+	if(InterruptMode==OFF)
+	{
+		SetABitOrAByteOnOrOff(port,OFF,IER,-1);   /* Turn off interrupts */
+	}
+
+	SetABaudRate(port,GetABaudRate(SpeedInBPS));
+	SetWordLength(port,WordLength);
+	SetParity(port,parity);
+	SetStopBitLength(port,StopBitLength);
+}
+
+void StartOrStopTheControlSystem(int port, int OnOrOff)
+{
+	if(OnOrOff==ON)
+	{
+		SetABitOrAByteOnOrOff(port,ON,MCR,RTS);
+	}
+	else
+	{
+		SetABitOrAByteOnOrOff(port,OFF,MCR,RTS);
+	}
+}
+
+void KillTheConnection(int port)
+{
+	StartOrStopTheControlSystem(port,OFF);
+	SetABitOrAByteOnOrOff(port,OFF,MCR,DTR); // Kill the connection
+}
+
+void SendAChar(int port, int aChar)
+{
+	outp(port+THR,aChar);
+}
+
+int GetAChar(int port)
+{
+	int aChar=NO_CHAR;
+
+		aChar=inp(port+RBR);
+	return(aChar);
+}
+
+
+
+void SendDataBufferToPort(int port, int index_of_buffer)
+{
+		SendAChar(port,glbBuffer[index_of_buffer]);
+		printf("sent one char \n");
+}
+
+void SaveInfoToBuffer(int port)
+{
+	int i=0;
+
+//	while(i<NUM_OF_BUFFER_ELEMENTS)
+	{
+		glbBuffer[i]=GetAChar(port);
+		i++;
+	}
+}
+
+
+
+char* GetAnErrorName(int BitNumber)
+{
+	char* output;
+
+	switch(BitNumber)
+	{
+		case OVERRUN_ERROR:
+			return("Overrun Error");
+		case PARITY_ERROR:
+			return("Parity Error");
+		case FRAMING_ERROR:
+			return("Framing Error");
+		case BREAK_INTERRUPT:
+			return("Break Interrupt");
+		default:
+			return("Bad Input");
+	}
+}
+
+char* GetLastErrors(int port)
+{
+	int lsr,i=1,bit;
+	char* output="\0";
+
+	lsr=GetABitOrAByte(port,LSR,-1); // The LSR is reset after that command
+
+	while(i<=NUM_OF_ERRORS)
+	{
+		bit=GetABitOrAByte(-1,lsr,i);
+
+		if(bit==ON)
+		{
+			strcat(output,GetAnErrorName(i));
+			strcat(output," | ");
+		}
+		i++;
+	}
+
+	return(output);
+}
+
+void StartToRECV(int port)
+{
+	int input=NO_CHAR;
+	char byteRead;
+	char* errors;
+	int i=0;
+	do
+	{
+		{
+
+						if(GetABitOrAByte(port,LSR,DR)==ON)
+						{
+						printf("DR is indicating a byte has arrived\n");
+
+						byteRead=GetAChar(port);
+						printf("The byte we read is %c\n",byteRead);
+						}
+						else
+						{
+						printf("DR is indicating no byte arrived\n");
+						}
+		}
+		i++;
+
+		printf("\nplease type any char, ESC to exit\n");
+		input=getch();
+	}   while (input != ESC && i != 6); //only send 5 letters
+
+
+}
+
+
+void StartToChat(int port)
+{
+	int input=NO_CHAR;
+	int output=NO_CHAR;
+	char* errors;
+	int i=0;
+
+	do
+	{
+		{
+						if(GetABitOrAByte(port,LSR,THRE)==ON)
+						{
+						printf("THRE is indicating it is ready for a byte");
+
+						SendDataBufferToPort(port, i);
+						}
+						else
+						{
+						printf("THRE is indicating not ready for a byte");
+						}
+		}
+		i++;
+
+		printf("\nplease type any char, ESC to exit\n");
+		input=getch();
+	}   while (input != ESC && i != 6); //only send 5 letters
+
+
+}
+
+
+void main(int argc, char** argv)
+{
+	int baudrate;
+	int port=COM1;
+	int input=NO_CHAR;
+	int dsr=OFF;
+	char* title="COM Chat v1.0 ";
+	char* porttext="\0";
+	char mes[]={"(hit any key to continue)\n"};
+	int fcr,msr;
+
+  clrscr();
+
+  printf("%s %s\n",title,mes);
+  printf("Tell me the speed in BPS\n");
+  scanf("%d",&baudrate);
+  printf ("You typed %d. That requires a baud rate of %d \n ",baudrate, GetABaudRate(baudrate));
+ SetABaudRate(port,GetABaudRate(baudrate));
+ printf("The baud rate has been set to %d.  %s",ReadABaudRate(port), mes);
+ getch();
+ printf("MCR = %d\n",GetABitOrAByte(port,MCR,-1));
+ printf("%s",mes);
+ getch();
+
+  msr = GetABitOrAByte(port,MSR,-1);
+ printf("MSR = %d\n",msr);
+ printf("%s",mes);
+ getch();
+
+
+SetABitOrAByteOnOrOff(port,OFF,MSR,-1);
+
+  msr = GetABitOrAByte(port,MSR,-1);
+ printf("Now MSR = %d\n",msr);
+ printf("%s",mes);
+ getch();
+
+ SetABitOrAByteOnOrOff(port,OFF,MCR,DTR);
+  printf("DTR = %d\n",GetABitOrAByte(port,MCR,DTR));
+SetABitOrAByteOnOrOff(port,ON,MCR,DTR);
+ printf("Now the DTR = %d\n %s",GetABitOrAByte(port,MCR,DTR),mes);
+ getch();
+ SetABitOrAByteOnOrOff(port,OFF,MCR,-1); // Reset the MCR
+	SetABitOrAByteOnOrOff(port,OFF,LCR,-1); // Reset the LCR
+									 //allow fifo on rbr
+
+SetABitOrAByteOnOrOff(port,ON,FCR,0);
+SetABitOrAByteOnOrOff(port,ON,FCR,1);
+SetABitOrAByteOnOrOff(port,ON,FCR,2);
+
+
+	ChangeCommunicationSettings(port,DEFAULT_SPEED_IN_BPS,
+								DEFAULT_WORD_LENGTH
+								,DEFAULT_PARITY_VALUE,
+								DEFAULT_STOP_BIT_LENGTH,
+								DEFAULT_INTERRUPT_MODE);
+
+	 printf("Press, 1 to send, 2 to receive, or press esc to quit");
+
+			input=getch();
+		if (input =='1')
+		{
+						 printf("\nYou are sending.\n");
+				StartToChat(port);
+		}
+		if (input == '2')
+		{
+
+						 printf("\nYou are receiving.\n");
+				StartToRECV(port);
+		}
+	printf("\nLast Message\n %s",mes);
+ getch();
+
+}

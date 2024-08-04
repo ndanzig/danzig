@@ -1,0 +1,82 @@
+Final Exam
+Data Structures, 2012
+Moed Bet
+N. Danzig Instructor
+
+2.5 hours
+Closed book
+
+
+25 points  (Answer 5  out of 6 questions.  If you answer all 6,
+ I will ignore the last question.)
+------------------------------
+
+
+1.  What is a sentinel value? How does it assist in creating a bounded array?
+
+
+2.  What is the worst case scenario for a binary search tree? Explain. 
+
+
+3.  What is a balanced tree? If what situations would it be advantagous to a regular BST? What 
+are its drawbacks?
+
+
+4. When do 2-3-4 trees increase their number of rows? 
+
+
+5. What is the inherent difficulty in implementing a Fifo Array versus a Lifo Array?
+
+
+6. What is the rule of least access (least privilege)? 
+
+
+
+
+25 points each  (Answer 3 out of 4. If you answer all 4,
+ I will ignore the last question.)
+ 
+1.Use an array of 10 nodes to implement a fifo.  Do not use pointers or 
+pointer arithmetic.  Write only the class definition for node and fifo.  
+Write the push and pop functions for your fifo. If you try to push an 
+eleventh element push should fail and throw an exceptionrn.  If you pop 
+from an empty list pop should fail and throw an exception. Obviously, 
+if you push 10 nodes and then pop some off, you should still be able 
+to push more nodes.
+
+
+
+
+
+
+2.Write a function to print in descending order an array form Heap in descending order 
+( Greatest to Smallest).  It should be an integer heap. Assume that the 
+functions push and pop already exist. Assume the limit of the size of the
+heap to be 10,000 elements. When your function completes (returns), the 
+heap should be as it was before the function call.  The function should
+not corrupt the heap in any way.
+
+ 
+
+
+
+
+3. Write the delete_node function for a sorted linked-list (sorted in 
+ascending order). Be sure to correctly assign the next pointer.  Also 
+write the class definition (without the function definitions) for 
+class node and a clas linked-list.
+
+
+
+
+
+4. Write a function to implement a "quicksort" on an array of 
+integers.
+
+
+
+
+-------------------------------------------------
+
+Bonus question (5 points):  Explain how using inheritance and virtual functions
+one can create a single link-list of objects of differing types (differing classes).

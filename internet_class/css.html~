@@ -1,0 +1,140 @@
+<html>
+<head>
+<style type="text/css">
+<!-- div {font-size:14pt;}
+h1 {font-size:20pt; font-weight:bold; }
+h3 {font-size:16pt; font-weight:bold; }
+ -->
+</style>
+<title>CSS</title>
+</head>
+<body bgcolor="white">
+
+<h1>Cascading Style Sheets</h1>
+
+<a name=external>
+ <h3>External Style Sheets </h3>
+<div>
+The most powerful way to use CSS is to define a set of rules in a seperate file.  This file 
+must be in a certain format, the CSS format.  It must also be named with the suffix .css.
+My css file might be called mystyle.css and have the following content.
+</div>
+
+<p>
+<blockquote> 
+
+<tt>
+H1 {font-size:36pt; <br> color:blue;}
+<br><br>
+H2 { font-family:'Comic Sans MS'; <br>font-size:6cm; <br> color:green;  <br> font-weight: bold}
+<br><br>
+p {font-family:'Courier'; <br> font-size:16pt; <br> color:red; <br> margin-left:0.5in;}
+
+</tt>
+</blockquote> 
+<div><br>
+This file should be saved in the public html directory and given world readable permissions.
+Now any HTML page can reference this CSS page and aquire all the tag definitions  that are in the
+CSS file.  This is done by including a reference to the CSS page in the head of my HTML page.
+<br> Here is an example:
+</div>
+<p>
+<blockquote>
+
+<tt>
+<xmp>
+<html>
+<head>
+<LINK REL=STYLESHEET HREF="mystyle.css" TYPE="text/css">
+</head>
+<body> </body></html>
+</xmp>
+
+</tt>
+</blockquote>
+<br>
+<div>Now any &lt;H1&gt;  or &lt;h2&gt;  or &lt;p&gt; tags inside this HTML page will be altered
+in accordance with the definitions I made in the file mystyle.css. </div> 
+
+
+
+<a name=embedded>
+ <h3>Embedded Style Sheets </h3>
+<div>Embedded Style Sheets are quite similar to External Style Sheets. The difference here is that 
+instead of putting all the CSS commands in a separate file you insert them directly into the head of
+the HTML page.
+Here is an example:<br>
+</div>
+<p>
+<blockquote>
+
+<tt>
+<xmp>
+<html>
+<head>
+<STYLE TYPE="text/css">  
+<!--
+P {background-color: #c1ffc1;
+font-family: Times;
+font-size: 14pt;
+margin-left: 1in;
+margin-right: 1in;}
+
+H1 {font-size:36pt; 
+color:red;}
+
+
+-->
+</STYLE>
+</head>
+<body> </body></html>
+</xmp>
+
+</tt>
+</blockquote>
+<br>
+<div>
+This method is more concise than external style sheets for dealing with one HTML page,
+but if you have many HTML pages that all need these CSS definitions then you would 
+have to cut and paste these definitions into every page.  This is a major
+disadvantage of embedded style sheets.  BUt we will see later that you can combine the methods 
+to create default definitions and over-ride them when need.  That is called cascading.
+
+
+<a name=inline>
+ <h3>Inline Style Sheets </h3>
+The third way to use style sheets is by writing inline definitions.  In this method
+you define an HTML tag when you use it.  This definition only applies to one tag, therefore
+if you want several tags ( even of the same type) to have the same definitions, you must define each 
+tag individually as it is used.
+Here is an example:<br>
+</div>
+<p>
+<blockquote>
+
+<tt>
+<xmp>
+<html>
+<body>
+<P STYLE="background-color: #c1ffc1;
+font-family: Times;
+font-size: 14pt;">some paragraph text</p>
+
+<P STYLE="color:red;
+font-family: Times;
+font-size: 16pt;">some other paragraph text</p>
+
+<A STYLE="color:green; font-style:italic" HREF="./file.html">file </a>
+
+</body></html>
+</xmp>
+
+</tt>
+</blockquote>
+<br>
+<div>
+Note that in this last example the CSS information is in the body of the HTML page, in the tags.
+<p>
+&copy; Nachum Danzig 2004 
+</body>
+</html>

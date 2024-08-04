@@ -1,0 +1,168 @@
+<head>
+<TITLE>Programming - Sequence</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - Java</H2></CENTER>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+Writing computer programs is similar to giving instructions to human beings. &nbsp; &nbsp;
+A computer program is a set of <t>instructions</t> that 
+a computer can execute (carry out) one after the other. &nbsp; &nbsp;
+Each of these instructions is very simple. &nbsp; &nbsp;  By simple I mean that
+it is a very small (discrete) action for the computer to do. &nbsp; &nbsp;
+By combining tens, hundreds or even millions of such instructions
+programmers can get computers to do very complex things,  like 
+computing the salaries of employees and the like. &nbsp; &nbsp;
+But each instruction does very little. &nbsp; &nbsp;
+Only by combining many instructions can complex actions be done. &nbsp; &nbsp;
+A set of such instructions is called a program. &nbsp; &nbsp; These
+instructions are also called the program <b>code</b>. &nbsp; &nbsp;
+These instructions are executed in order (one after the other
+going downward). &nbsp; Another way of saying "in order" is saying "in sequence" &nbsp;
+&nbsp; Therefore we can say <b>a program is a set of code which is executed in sequence</b>. &nbsp;
+&nbsp; 
+</p>
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; Unlike 
+human beings, computers cannot figure out anything by themselves. &nbsp; &nbsp;
+This means the programmer must spell out every detail of what
+he wants the computer to do. &nbsp; &nbsp; But be careful, there is a saying:
+&nbsp; &nbsp; What does a computer do? &nbsp;
+ &nbsp; <b> A computer doesn't do what you want it to do, it does what 
+you tell it to do </b>. &nbsp; &nbsp;  Therefore, be very carful what 
+you <b>tell </b>it to do.  &nbsp; &nbsp;
+ A computer program could be compared to a cooking recipie for people
+ who have no idea how to cook. &nbsp; &nbsp;
+A normal human recipie might have a statement like:
+
+<blockquote>mix the ingredients in a bowl</blockquote>
+<br>
+A cooking recipie that a computer could understand would be a lot more
+detailed.  For the same human instruction above, a computer would need 
+something like the following: 
+<br><br>
+<blockquote>
+a bowl is a round container <br>
+a cabinet is a shelf with doors <br>
+a counter is a flat area 3 feet higher than the ground  <br>
+remove bowl from cabinet <br>
+put bowl on counter <br>
+put first ingredient in bowl   <br>
+put second ingredient in bowl  <br>
+put third ingredient in bowl <br>
+put fourth ingredient in bowl <br>
+remove mixing spoon from drawer <br>
+stir contents of bowl with mixing spoon  <br>
+stir contents of bowl with mixing spoon  <br>
+stir contents of bowl with mixing spoon  <br>
+stir contents of bowl with mixing spoon  <br>
+stir contents of bowl with mixing spoon  <br>
+</blockquote>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp; Since the computer knows very little itself , we have to tell it everything 
+we want it to do. &nbsp; &nbsp;
+We cannot assume it will figure anything out for itself. &nbsp; &nbsp;
+For example, if the programmer wants to compute the sum of 7 and 8 in Java
+he would first need to create a <i>variable</i> to store the sum in. &nbsp; &nbsp;  In the next
+instruction he could  put the sum into that variable. &nbsp; &nbsp;  A variable is a place in
+the computer's memory (RAM)
+where information can be stored. &nbsp; &nbsp;  Something like the way an empty shoebox can
+store shoes, computer memory can store numbers or letters. &nbsp; &nbsp;
+To do the above in Java, I would write  the following:
+<br><br>
+<blockquote>
+int nachumsSum;
+<br>nachumsSum = 7+8;
+</blockquote>
+<br><br>
+ &nbsp; &nbsp; &nbsp; &nbsp; The above is two instructions. &nbsp; &nbsp;  How do I tell the 
+computer that this is two
+separate instructions? &nbsp; &nbsp;  The semi-colon <b>;</b> indicates the 
+instruction is over. &nbsp; &nbsp;  By having two semi-colons I indicate that 
+I have two instructions (also called commands). &nbsp; &nbsp;
+The fact that they are on two separate lines in not relevent. &nbsp; &nbsp;
+I could have two commands on one line, or one command over
+two lines. &nbsp; &nbsp;  The computer does not care about lines. &nbsp; &nbsp;  Human readers do
+care about lines. &nbsp; &nbsp;  Human readers find it easier to read separate lines,
+so programmers usually write each command on a separte line for clarity. &nbsp; &nbsp;
+
+<p> The first instruction (a. k. a.  "command") is 
+
+<br>
+<blockquote>
+int nachumsSum;
+</blockquote>
+<br>
+When the computer reads this line it does the following:
+<br><br>
+<blockquote>
+Assigns the name "nachumsSum" to a variable (a place in computer memory) 
+. &nbsp; &nbsp;
+</blockquote>
+<br>
+ &nbsp; &nbsp; &nbsp; &nbsp; The word <b>int</b> is a special word in Java
+ which indicates that a memory place should be assigned a name. &nbsp; &nbsp;  There are 
+other such special words in Java which mean different things. &nbsp; &nbsp; These special
+ words are called <i>reserved</i> words. &nbsp; &nbsp;
+The name we assigned to the variable  is "nachumsSum". &nbsp; &nbsp;  This is not a reserved
+ word, but is a variable name of my choosing. &nbsp; &nbsp;  From now on in the program the
+ name <b>nachumsSum</b> will refer to
+ this variable. &nbsp; &nbsp; ( I cannot have two variables with the same name. )  Only 
+at the time  I am assigning the name to the variable do I use the command <i>int</i> 
+when I later use the variable I simply write <i>nachumsSum </i>, not <i>int 
+nachumsSum</i>. &nbsp; &nbsp;  
+
+<p>
+ &nbsp; &nbsp; &nbsp; &nbsp; 
+The second command:
+<blockquote>nachumsSum = 7+8;
+</blockquote><br>
+<blockquote>assigns (gives) the value on the <b>right</b> side of the = sign to the 
+<b>left</b> side.</blockquote><br>
+ In other words, it gives the variable the value of 7+8. &nbsp; &nbsp;  Since 7+8 is 15,
+the variable "nachumsSum" gets the value 15. &nbsp; &nbsp; <i>Variables</i> are similar to what is
+refered to in algebra as a variables.  &nbsp;  ( We will see later that there 
+is a difference between algebraic variables and programming variables,
+but for now think of them as the same thing. )  &nbsp; &nbsp;   They are signs (a letter or a short word)
+which can receive different values. &nbsp; &nbsp;  Because they can receive different values, 
+and therefore change in value from time to time, they are called  variables. &nbsp; &nbsp; 
+The value of a variable varies. &nbsp; &nbsp; It is therefore logical to
+say that its value is variable.  &nbsp; &nbsp; Hence, it is called a "variable") &nbsp; &nbsp; Programmers usually call this
+"<b>assigning a value to a variable</b>." &nbsp; &nbsp; Because this instruction assigns 
+a value to a variable, it is  also called an <i>assignment</i>. &nbsp; &nbsp;  The = sign is
+called the <i>assignment</i> operator because the operation it performs is 
+assignment. &nbsp; &nbsp; (Don't call it "equals" because this is a different concept.)&nbsp; &nbsp;
+The term operator should be added to the terms you have learnt. &nbsp; &nbsp;
+<p>&nbsp; &nbsp;&nbsp; &nbsp; In contrast to variables, numbers like 7 or 17000 or 1.1416 are fixed, that is, their value logically cannot change.&nbsp; &nbsp;
+  If 7 changes to 8, then it is no longer 7.&nbsp; &nbsp; Numbers such as these are therefore called <i>constants</i> because their value is constant; it never changes.&nbsp; &nbsp; We can assign a constant ( like 7 ) to a variable ( like "nachumsum" ) but we cannot do the reverse. &nbsp; ( If you think about it,
+ it does not make any sense at all to assign a variable to a number.
+ &nbsp; &nbsp; In fact,
+whatever is on the <b>left</b> side of the assignment operator ( = ) must be a variable and never a constant. ) &nbsp; &nbsp;
+ Get used to the terms <i>variable</i> and <i>constant</i> and remember the difference between them. 
+<br>
+<p>
+&nbsp; &nbsp; &nbsp; &nbsp; We have seen that first we must assign a name to a varaible.&nbsp; &nbsp;
+After this we can assign a value to the variable.&nbsp; &nbsp;
+These two operations together create a variable and give it an initial value.&nbsp; &nbsp;
+This process is a common one and is called <b><i>initialization</i></b>.&nbsp; &nbsp;
+
+<br>
+
+<h3>Terms in this chapter: instruction, command, sequence, code, reserved word, variable, value, constant,
+assignment, operator, and initialization.</h3> 
+
+<br>
+&copy Nachum Danzig September 2003
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

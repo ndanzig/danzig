@@ -1,0 +1,30 @@
+Final css
+
+1. What is 1em?
+
+2. What are the possible values for the field font-weight?
+
+3. none, dotted , dashed, solid  are values for what elements?
+
+4. What tag would be affected by this definition: div > p {border-color:red;} ?
+
+5. What tag would be affected by this definition: div  p {border-color:red;} ?
+
+6. What is the difference between absolute positioning and relative position?
+(There are two central differences)
+
+7. Draw a diagram of where the padding, border and margin of a <p> would be in the browser.
+
+8. What is the difference between  the definition div.x {font-size:24pt; color:blue;}
+   and .x {font-size:24pt; color:blue;} ?
+
+9 . Explain the meaning of this piece of CSS
+H1 {font: 24pt italic bold 'Times Roman' 'Courier'}
+
+10. can the :hover pseudo tag be used on any other tag than the a tag? Explain.
+ 
+11. What is the noraml behavior of two p tags following each other?  What effect will 
+making the first one float left have?  What effect will making the second one float left have?
+assume no other tags in the body.
+
+12. Can you use floating with relative positioning? Explain.

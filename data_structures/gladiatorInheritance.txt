@@ -1,0 +1,210 @@
+#include "iostream.h"
+#include "time.h"
+#define BEAR 1
+#define TIGER 2
+#define WOLF 3
+#define FIGHT 4
+#define QUIT 5
+#define SIZE 10
+
+class animal
+{
+ public:
+  static const char* type;
+  virtual const char * getType(){return ("animal");};
+  animal();
+  ~animal();
+  virtual int getpower(); 
+  int fight(animal *);
+
+};
+const char * animal::type= {"animal"};
+animal::animal()
+{}
+animal::~animal()
+{}
+int animal::getpower(){
+  cout<<"error";
+  return 1;}
+
+int animal::fight(animal * other)
+{
+  if (this->getpower() > other->getpower())
+    return 1;
+  return -1;
+
+}
+
+class wolf : public animal
+{
+  static int count;
+  static const char* type;
+  int age;
+  int stamina;
+
+public:
+  int getpower();
+  const char * getType(){return ("wolf");};
+  wolf(int, int);
+  ~wolf(){};
+};
+int wolf::count=0;
+const char * wolf::type= {"wolf"};
+
+class bear : public animal 
+{
+  static const char* type;
+  static int count;
+  int height;
+  int weight;
+
+public:
+  const char * getType(){return ("bear");};
+  int getpower();
+  bear(int, int);
+  ~bear(){};
+
+};
+int bear::count=0;
+const char * bear::type= {"bear"};
+class tiger : public animal
+{
+  static const char* type;
+  static int count;
+  int speed;
+  int teeth;
+
+public:
+  const char * getType(){return ("tiger");};
+  int getpower();
+  tiger(int, int);
+  ~tiger(){};
+};
+int tiger::count=0;
+const char * tiger::type= {"tiger"};
+
+///WOLF
+wolf::wolf(int age, int stamina)
+{
+  this->age=age;
+  this->stamina=stamina;
+}
+int wolf::getpower()
+{
+  return age+ stamina+ 8;
+}
+
+/////TIGER
+tiger::tiger(int speed, int teeth)
+{
+  this->speed=speed;
+  this->teeth=teeth;
+}
+int tiger::getpower()
+{
+  return speed + teeth+ 1;
+}
+
+////BEAR
+bear::bear(int weight, int height)
+{
+  this->weight=weight;
+  this->height=height;
+}
+int bear::getpower()
+{
+  return weight + height + 100;
+}
+
+int findAnimalByType(const char * type, animal * arr[], int size)
+{
+
+  int start = rand()%size;//choose a random partition
+
+  for (int i=start; i<size; i++) //search last part of array
+    if (strcmp(arr[i]->getType(), type)==0)
+      return i;
+
+  for (int i=0; i<start; i++) //search first part of array
+    if (strcmp(arr[i]->getType(), type)==0)
+      return i;
+
+  return -1;//not found
+    
+
+}
+
+void fight(animal * animals[], int size)
+{
+  char input[100];
+  char input2[100];
+  int animal1;
+  int animal2;
+  cout<<"\n Choose First animal \n Type bear  tiger or  wolf \n";
+  cin>>input;
+  animal1=findAnimalByType(input, animals, size) ;
+  if(-1 == animal1 )
+    {
+      cout <<"\nSorry, no "<<input<<"s today, better create some!\n";
+      return;
+    }
+  cout<<"\n Choose Second animal \n Type bear  tiger or  wolf \n";
+  cin>>input2;
+  animal2=findAnimalByType(input2, animals, size) ;
+  if(-1==animal2)
+    {
+      cout <<"\nSorry, no "<<input2<<"s today, better create some!\n";
+      return;
+    }
+  
+  if ( animals[animal1]->fight(animals[animal2])  == 1   )
+    cout<<endl<<animals[animal1]->getType()<<" won!\n";
+  else
+    cout<<endl<<animals[animal2]->getType()<<" won!\n";
+}
+
+
+int main()
+{
+  srand(time(0));
+  int type;
+  int type2;
+  int i;
+  animal *animals[SIZE];
+  i=0;
+  while(1)
+    {
+      cout << "hello  choose 1 to create bear, 2 create tiger, 3, wolf \n 4 to fight, 5 to quit without memory leak\n";
+      cin>>type;
+      switch(type)
+	{
+	case BEAR:
+	  if (i==SIZE) continue;
+	  animals[i]=new bear (rand()%10, rand()%20);
+	  break;
+	case TIGER:
+	  if (i==SIZE) continue;
+	  animals[i]=new tiger (rand()%10, rand()%20);
+	  break;
+	case WOLF:
+	  if (i==SIZE) continue;
+	  animals[i]=new wolf (rand()%10, rand()%25);
+	  break;
+	case FIGHT:
+	  fight(animals, i);
+	  continue;
+	case QUIT:
+	  for(;i>0;i--)
+	    delete  animals[i-1];
+	  return 1;
+	default:
+	  continue;
+
+	}
+      cout<<endl<<animals[i]->getType() <<" power is: "<<animals[i]->getpower()<<endl;
+      i++;
+
+
+    }
+  return 1;
+}

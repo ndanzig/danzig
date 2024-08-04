@@ -1,0 +1,130 @@
+<HTML>
+<head><title>Creating Directories and Compiling</title>
+</head>
+<body>
+<h2>Creating Directories and Compiling </h2>
+<pre>
+<h3>Creating Directories </h3>
+First, you must create the following directory in your homedirectory
+~/javaserver
+Then, in that directory you must create the directory
+WEB-INF
+Then, in that directory you must create the two directories
+classes and src.
+You must also create a file called web.xml in the same directory.
+
+The premissions for these files must be as follows:
+
+homedir    drwxr-xr-x 
+javaserver drwxr-xr-x
+WEB-INF    drwxr-xr-x
+classes    drwxr-xr-x
+src        drwx------    
+web.xml    -rw-r--r--
+
+The .class files from the servlets you write should be
+placed in the directoy classes.  The source code can also
+be placed here, but it will be ignored. The source code
+is supposed to be placed in the directory src, but this is
+not required.
+Any and all classes you use must be placed in the classes directory
+or in subdirectories of it.
+The permissions of such executables or subdirectories should be -rwxr-xr-x 
+
+
+The file web.xml is essentially a mapping of the url names you give to servlets
+and the real names of the .class files.  Tomcat will read this file
+to know what .class file to execute for a given url request.
+
+Here is a sample web.xml file:
+</pre>
+<xmp>
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+"http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+        <display-name>Nachum Examples</display-name>
+        <description>Simple example</description>
+
+
+        <servlet>
+                <servlet-name>MyHelloWorld</servlet-name>
+                <servlet-class>HelloWorld</servlet-class>
+        </servlet>
+
+        <servlet-mapping>
+                <servlet-name>MyHelloWorld</servlet-name>
+                <url-pattern>/hello_world</url-pattern>
+        </servlet-mapping>
+       
+</web-app>
+</xmp>
+<pre>
+/hello_world is the url for the page. HelloWorld is the name of the .class
+file which is placed in the directory classes.
+MyHelloWorld is simply the internal web.xml name used to link these two 
+elements.
+
+Your servlet can be view at this url:
+http://studXX.ise.jct.ac.il:8080/iseproject/myServlet
+<br>Replace the XX with your personal number.
+
+<h3>Compiling </h3>
+In order to compile you must first ssh to the server horayot.jct.ac.il
+You can login with your regular user name and password.
+Once you login you find you have all your UNIX homedirectory files.
+Your servlet will be in ~/javaserver/WEB-INF/classes
+The java compiler is called javac, so to compile all you really
+have to do is type javac myServlet.java
+Unfortunately, for two reasons, this may not work.
+First, you must tell the shell where to find the program javac.
+It is located here: /usr/java/jdk/bin
+So, you could type /usr/java/jdk/bin/javac
+Alternatively, you can set your path by adding a line like this 
+set path=( $path /usr/java/jdk/bin)  to your ~/.cshrc file.
+
+There is a second problem, you have to tell javac where to find
+the servlet class which you are extending.  You do this by specifying 
+the classpath (i.e. the location of extra classes for javac to include).
+The location of the class is here:
+/usr/local/tomcat/common/lib/servlet.jar
+But once you specify that javac should look here for classes, then javac will
+no longer look for classes in the local directory.  To get javac to look
+in more than one place, you must specify all the places for it to look,
+separating each one with a ":".
+
+Here is a complete example of how to compile:
+/usr/java/jdk/bin/javac  -classpath /usr/local/tomcat/common/lib/servlet.jar:. myServlet.java
+
+Alternatively, you could add an alias to your ~/.cshrc file.
+Add the following line:
+
+alias jc javac  -classpath /usr/local/tomcat/common/lib/servlet.jar:. \!:1 
+
+</pre>
+Good Luck!
+
+
+<P>
+<!-- Horizontal Rule (Bar) -->
+<HR ALIGN=CENTER  SIZE=5  WIDTH=70%>
+<br>
+&copy; Nachum Danzig 2004
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,51 @@
+
+<html>
+
+<head>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+<title>RS-232C and the UART 8250</title>
+</head>
+
+<BODY     >
+<CENTER>
+<h1>RS-232C and the UART 8250</h1>
+<br><h2> <A HREF="sld001.htm">Click here to start</A>
+ </h2><br>  
+</center>
+<center>
+ <table width=90%>
+  <tr>
+   <td valign=top align=left width=50%>
+      <h3><u>Table of Contents</u></h3>
+            <P ALIGN=LEFT><A HREF="sld001.htm">Introduction</a></P>
+        <P ALIGN=LEFT><A HREF="sld002.htm">RS-232C Standard</A></P>
+        <P ALIGN=LEFT><A HREF="sld003.htm">Why Use a Serial Interface?</A></P>
+        <P ALIGN=LEFT><A HREF="sld004.htm">The Connector</A></P>
+        <P ALIGN=LEFT><A HREF="sld005.htm">9D to 25D Conversion</A></P>
+        <P ALIGN=LEFT><A HREF="sld006.htm">DTE and DCE</A></P>
+        <P ALIGN=LEFT><A HREF="sld007.htm">The UART 8250</A></P>
+        <P ALIGN=LEFT><A HREF="sld008.htm">Programming the UART 8250</A></P>
+        <P ALIGN=LEFT><A HREF="sld009.htm">Accessing the Registers</A></P>
+        <P ALIGN=LEFT><A HREF="sld010.htm">Getting the Port Addresses</A></P>
+        <P ALIGN=LEFT><A HREF="sld011.htm">Accessing the Registers</A></P>
+        <P ALIGN=LEFT><A HREF="sld012.htm">Real vs. Protected Mode </A></P>
+        <P ALIGN=LEFT><A HREF="sld013.htm">Baud Rate</A></P>
+        <P ALIGN=LEFT><A HREF="sld014.htm">RS-232C Waves</A></P>
+        <P ALIGN=LEFT><A HREF="sld015.htm">The Line Control Register (LCR)</A></P>
+        <P ALIGN=LEFT><A HREF="sld016.htm">The LCR Parity Bits</A></P>
+        <P ALIGN=LEFT><A HREF="sld017.htm">Sending a Word</A></P>
+        <P ALIGN=LEFT><A HREF="sld018.htm">The Line Status Register (LSR)</A></P>
+        <P ALIGN=LEFT><A HREF="sld019.htm">The LSR (cont.)</A></P>
+
+   </td>
+   <td valign=top width=50%>
+   </td>
+  </tr>
+ </table>
+</center>
+
+
+</body>
+
+</html>

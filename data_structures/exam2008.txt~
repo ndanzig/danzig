@@ -1,0 +1,110 @@
+
+
+Final Exam
+Data Structures, 2008 
+N. Danzig Instructor
+
+2.5 hours
+Closed book
+25 points
+
+1. What are members and what are methods?
+
+
+2. What is inheritance?
+
+
+3. What is the rule of least access?
+
+
+4. Given n element, what is the average (worst case) speed of Bubble Sort 
+(in terms of n)?
+
+
+5. What is self-documenting code and how do we achieve it?
+
+
+6. What are friend functions?
+
+
+
+7.What is the difference between protected and private?
+
+
+
+8. There are only two possible different resulting structures when we split a "4-node"
+in a binary red-black tree. Why are there only 2? 
+
+
+What are they?   
+
+
+Why do we want to split these nodes in the first place?
+
+
+
+
+
+
+
+9. Explain the purpose of the key word virtual.
+
+
+
+
+
+
+10.  Assuming you have the class MixedFraction { int whole; int denominator; 
+int numerator} write the prototype for the operator overloading of the assign-
+ment operator (=).  Do not give me the actual working of the function, just 
+the functional prototype.
+
+
+
+
+
+
+
+
+
+Open Book
+Do 3 out of 4.
+25 points each 
+ 
+1.Use an array of 10 nodes to implement a lifo.  Do not use pointers or 
+pointer arithmetic.  Write the class definition for node and lifo.  Write 
+the push and pop functions for your lifo. If you try to push an eleventh
+element push shoudl fail and return -1.  If you pop from an empty list
+pop should fail and return an error code. Obviously, if you push 10
+nodes and then pop some off, you should now be able to push more nodes.
+
+
+
+
+
+
+2. Assuming you have a binary tree, write a special pop function.  The 
+function, which is a member of the tree, will pop the lowest number, but on 
+the next call will pop the highest number. Pop will alternately pop highest
+or lowest.  The function should return the pointer to the poped node.  It 
+should also free the parent node's pointer.
+
+
+
+
+
+
+3. Write the insert_node function for a doubly-linked (previous and next
+pointers) sorted list (sorted in ascending order). Be sure to correctly
+assign the next and previous pointers.  Write the class definition
+for node and the doubly-linked-list.
+
+
+
+
+
+4. A knight can traverse the 64 squares of a chess board without ever touching
+the same square twice.  Assume a knight is at any given starting position, 
+write a brute force recursion to find the path it traverses.  You may print 
+the path in reverse if that suits you. You will need to use some system for 
+identifying the 64 squares of the chess board.  

@@ -1,0 +1,117 @@
+public class Node{
+    int id;
+    String firstName ;
+public    Node next;
+    Node(){
+	id=0;
+	firstName="";
+	next=null;
+    }
+    Node(int num, String name){
+	id = num;
+	firstName = name;
+	next = null;
+    }
+
+    Node(int num, String name, Node nextNode){
+	id = num;
+	firstName = name;
+	next = nextNode;
+    }
+
+public String toString()
+    {
+	return "\nFirst Name: "+firstName + "\nID Number: "+id;
+
+    }
+}
+
+/////////////////////////////////////////////////////////////////////
+public class Fifo {
+    Node head;
+    Fifo(){
+	head=null;
+}
+    public void addNode(Node newNode)
+    {
+	Node temp;
+	if (head == null)
+	    {
+		head=newNode;
+	    }
+	else
+	    {
+		temp = head;
+		while (temp.next != null )
+		    {
+			temp = temp.next;
+		    }
+		temp.next = newNode;
+	    }
+	return;
+    }
+
+
+    public void addNode(int ID, String Name, Node next)
+    {
+	Node newNode = new Node(ID, Name, next);
+	Node temp;
+	if (head == null)
+	    {
+		head=newNode;
+	    }
+	else
+	    {
+		temp = head;
+		while (temp.next != null )
+		    {
+			temp = temp.next;
+		    }
+		temp.next = newNode;
+	    }
+	return;
+    }
+
+    public Node pop()
+    {
+	Node temp = null;
+	if (head == null)
+	    {
+	    return temp;
+	    }
+	else
+	    {
+		temp = head;
+		head = head.next;
+		return temp;
+	    }
+}
+
+
+
+
+}
+////////////////////////////////////////////////////////////////////////////////////////
+public class RunFifo {
+    public static void main (String args[])
+    {
+	Node toBeAdded;
+	Fifo myFifo = new Fifo();
+	toBeAdded = new Node(1234,"george");
+	myFifo.addNode(toBeAdded);
+	toBeAdded = new Node(5678,"george2");
+	myFifo.addNode(toBeAdded);
+	toBeAdded = new Node(91011,"george3");
+	myFifo.addNode(toBeAdded);
+
+	myFifo.addNode(5757,"Special Guy", null);
+
+	System.out.println(myFifo.pop());	
+	System.out.println(myFifo.pop());	
+	System.out.println(myFifo.pop());	
+	System.out.println(myFifo.pop());	
+	System.out.println(myFifo.pop());	
+	System.out.println(myFifo.pop());	
+	return;
+    }
+}

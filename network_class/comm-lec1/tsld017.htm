@@ -1,0 +1,63 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>Sending a Word</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>Sending a Word</H1> 
+ <P><UL>
+<LI><H2>In order to send a word the following steps must be taken on both sides (sender and receiver).
+</H2>
+</UL><UL>
+<LI><H2>Set the baud rate by computing it and loading DLL and DLM.
+</H2>
+</UL><UL>
+<LI><H2>Set the parity (enabled on/off, odd/even).
+</H2>
+</UL><UL>
+<LI><H2>Set the word length (5-8 bits).
+</H2>
+</UL><UL>
+<LI><H2>Set the number of stop bits.
+</H2>
+</UL><UL>
+<LI><H2>Write a word to the THR. This word (lets assume 8-bit words) is written into the TSR (Transmit Shift Register). The TSR then shifts the bits out one by one and transmits them on the TD line.
+</H2>
+</UL><UL>
+<LI><H2>
+</H2>
+</UL><UL>
+<LI><H2>
+</H2>
+</UL><UL>
+<LI><H2>
+</H2>
+</UL><UL>
+<LI><H2>The word is received by the RD on the receivers side and stored in the RBR register.</H2>
+</UL></P>
+<P><UL>
+THR<BR></UL></P>
+<P><UL>
+TSR<BR></UL></P>
+<P><UL>
+TD<BR></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld016.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld018.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld017.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

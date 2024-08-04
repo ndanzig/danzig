@@ -1,0 +1,73 @@
+<head>
+<TITLE>Programming - Sorting</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Intoduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>Sorting Algorithms</H3></CENTER>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+If we have an array of number in no particular order, we might want to 
+sort them into ascending or descending order.  This is called sorting.
+The most basic sorting algorithm is called 
+Bubble Sort.  Here it is:
+<p>
+
+<pre>
+public class sorting
+{
+ public static void main( String args[] )
+ {
+   int my_array[] = { 2, 6, 4, 8, 10, 12, 89, 68, 45, 37 };
+   boolean there_was_a_swap = false;
+
+   showArray( my_array );
+   for ( int c=0; c < my_array.length ; c++ )
+      {
+      for ( int element = 0 ; element < my_array.length-1 ; element++ )
+         {
+         if ( my_array[element] > my_array[element + 1] )
+             {  
+             swap( my_array, element, element + 1 );
+             there_was_a_swap = true;
+             }
+         }//end inner for loop
+
+      if ( there_was_a_swap == false )
+          {
+          break;
+          }
+      }//end outer for loop, end sorting algorithm
+   showArray( my_array );
+     }//end main
+ public static void showArray( int array[] )
+ {
+  for ( int c = 0 ; c < array.length ; c++ )
+  {
+   System.out.print( array[c]+", " );
+  }
+  System.out.println( );
+  return;
+ }
+ 
+ public static void swap( int sorting_array[], int i, int j )
+ {
+  int hold = sorting_array[i];
+  sorting_array[i] = sorting_array[j];
+  sorting_array[j] = hold;
+  return;
+ }
+}//end class
+</pre>
+
+<p>
+This is called bubble sort because the correct values bubble up to the surface.
+We must traverse n numbers n times, or n^2 times.  
+We could improve the efficiency a bit by noticing that we do not need to check the 
+last element which was put into its correct place.
+Try to improve the above program in this way.
+
+<p>
+&copy Nachum Danzig December 2003
+
+</body>
+</html>
+

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+
+<TITLE>Programming - Sequence</TITLE>
+
+
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER>
+
+<p>Watch this video about the <a href="http://developer.yahoo.com/yui/theater/video.php?v=crockonjs-1"> development of modern computing</a>
+
+<H2>Conceptual C++ : A Conceptual Approach to Computer Science in the C++ Language</H2>
+</CENTER>
+
+<p>
+What is programming? One answer is, Getting a computer to do stuff.  
+That is true and we will learn how to get a computer to perform tasks, 
+make calculations, and do stuff.  But programming could also be defined as 
+training our minds to think logically, 
+orderly and sequentially.  We need to learn to make explicit
+want we understand intuitively. 
+For example, we may intuitively know what an even number is, we can give
+examples of one, but we must discover an explicit, 
+exact test to determine whether
+a number is even or not.
+
+
+<p> 
+When people first start to use  computers  they sometimes begin to feel that 
+the computer has a mind of its own.  They click something expecting one result
+and get another. Why is this?  The first thing we have to know is that
+behind all the behavior of a computer
+lie programming instructions.  And those instructions were written by people.
+So in fact, a human being decided that the click you made should cause the 
+result it does.  The computer does not have a mind of its own; it is only as 
+smart as the person who programmed it.
+
+<p> Actually if a computer were a person, it would be a very dumb person 
+indeed.  For example, most people would understand a request like "Please 
+put the book on the table." In fact if someone did not understand this, it 
+would  surely be cause for concern. But just try to tell a computer  to put a book on a table.  It would have no idea what you mean. (And even if it did, it 
+doesn't have a way to move books around!)
+To tell a computer something as simple as this, you would first have to explain
+what a book is and what a table is.  And then you would have to tell
+it how to lift the book, how high to lift it, where to move it in relation
+to the table and exactly where on the table to release it.
+As you can see, what I am describing is truly a very detailed set of
+ instructions. These instructions could be considered a computer program.
+Standard computer languages are designed to tell a computer minutely detailed 
+instruction for how to complete certain tasks.  These tasks usually center 
+around mathematical computations and displaying information on a computer screen  (not moving books onto tables). In this course, we will be using a computer
+ language to make our computer do all sorts of fun and exciting things 
+(well, some of them are not that exciting.)
+
+<p>
+
+A computer program is a set of <t>instructions</t> that 
+a computer can execute (carry out) one after the other.  
+Each of these instructions is very simple.    By simple I mean that
+it is a very small (discrete) action for the computer to do.  
+By combining tens, hundreds or even millions of such instructions
+programmers can get computers to do very complex things,  like 
+simulating chemical reactions and computing the orbits of twin stars.
+They can also do more mundane and simple things like
+ computing the salaries of employees and  balancing financial information.
+
+
+But each instruction on its own does very little. 
+Only by combining many instructions can complex actions be done.  
+A set of such instructions is called a program.   These
+instructions are also called the program <b>code</b>.  
+These instructions are executed in order (one after the other
+going downward).  Another way of saying "in order" is saying 
+"in sequence" 
+ Therefore we can say <b>a program is a set of code which is executed in sequence</b>. 
+ 
+</p>
+
+<p>  Unlike 
+human beings, computers cannot figure out anything by themselves.  
+This means the programmer must spell out every detail of what
+he or she wants the computer to do.   A computer can't read 
+anyone's mind. Expressing this idea, someone once quipped: 
+ <b> A computer doesn't do what you want it to do, it does what 
+you tell it to do </b>.    Therefore, be very careful what 
+you <b>tell </b>it to do.   
+ A computer program could be compared to a cooking recipe for people
+ who have no idea how to cook.  
+A normal human recipe might have a statement like:
+
+<blockquote>mix the ingredients in a bowl</blockquote>
+<br>
+A cooking recipe that a computer could understand would be a lot more
+detailed.  For the same human instruction above, a computer would need 
+something like the following: 
+<br><br>
+<blockquote>
+a bowl is a round container <br>
+a cabinet is a shelf with doors <br>
+a counter is a flat area 3 feet higher than the ground  <br>
+remove bowl from cabinet <br>
+put bowl on counter <br>
+put each ingredient in bowl   <br>
+remove mixing spoon from drawer <br>
+stir contents of bowl with mixing spoon 10 times <br>
+
+</blockquote>
+<br>
+
+ Since the computer knows very little itself, 
+we have to tell it everything we want it to do.
+We cannot assume it will figure anything out for itself. 
+We have to define all the objects the computer is going to use (the bowl, the
+ spoon etc.).  We also have to tell it where to get these instruments from ("remove bowl from cabinet").
+We have to tell it how to move one object in relation to another ( "put each
+ingredient in bowl")
+We have to tell the computer  how many times to mix, etc.  
+So you see, on its own , the computer knows very little.  All it really
+knows is the language for you to communicate with it.  If it would not even know
+a language, you would really have a tough time instructing it what to do.
+For our purposes, the language the computer knows is C++.
+
+<p>The objects the  computer uses are kept in the computer's
+memory.  Computer memory is also called RAM ( Random
+Access Memory).  All your programs are stored in the computer memory (RAM).
+When the computer is turned off or restarted the memory (RAM) gets 
+swept clean.  The harddrive of your computer works differently.
+Information stored there remains even after you turn the computer off.
+You could think of RAM as short term memory and harddrive space as
+long term memory.
+<p>
+The RAM of the computer is made up of thousands of blocks of memory.
+This memory is used by all the programs running on the computer.
+If you are running a program like Microsoft Office, then this program
+is using some of the blocks of memory.  Each program gets assigned some 
+blocks of memory for its use.  One program should normally
+stay away from the memory assigned to another program.
+<p>
+I like to think of these blocks of memory in the computer RAM as being like a
+ warehouse  full of empty shoeboxes inside the computer. The shoeboxes are 
+simple brown cardboard boxes
+without any labels.  There are thousands of them.  Each program gets assigned 
+a few thousand for its use. When a program needs some computer memory, it 
+takes down 
+5 or 6 boxes and labels them and starts to put things into them.
+These boxes are the objects the program will use. They are like for example
+the mixing bowl in the "recipe" above.
+ Sometimes the program needs to open a shoebox and see what is inside.  Sometimes
+ it needs to discard what is in a certain shoebox and
+put something else into it. In  C++ (and for that matter, in all programming 
+languages that I know) these shoeboxes are called <i><b>variables</b></i>.
+In other words, a variable is a place in
+the computer's memory (RAM)
+where information can be stored.  
+
+<p> 
+All variables must have names.  We can't use a variable if it has not been
+ named.
+  The names we give to our variables are called <b>identifiers</b> 
+because they identify
+the place in memory where the variable is located.
+ The identifier is  usually a few letters long or it may be  a
+ short word.  Just as I can reuse the same shoebox many times for
+many different shoes, each time removing the old shoes and replacing them with 
+a different pair, so too I can reuse the same variable to receive different 
+values sequentially.     Because they can receive different values, 
+and therefore change in value from time to time, they are called  variables.   
+( The value of a variable varies.   It is therefore logical to
+say that its value is variable.    Hence, it is called a "variable") 
+
+<p> The steps needed for creating a variable are the following:
+(1) have the computer take one block of memory aside, (2) give it
+a name, (3) put  data into the memory.  Now this named block of 
+memory  (our variable) can be used and reused.
+
+<p>
+
+Now I will demonstrate these steps in  some simple C++ 
+instructions that a computer could
+ understand.
+If the programmer (that's me) wants to compute the sum of 7 and 8 in C++
+he  would first need to create a <i>variable</i> to store the sum in.
+In the next
+instruction he could  put the sum into that variable.  
+
+
+<p>
+  To do the above in C++, I would write  the following:
+<blockquote>
+int mySum;
+<br>mySum = 7+8;
+</blockquote>
+
+<p>
+Now let's explain this code segment.
+  
+The above two lines are two instructions which make the variable<i> mySum</i> 
+contain the number 15.
+What makes it two separate instructions?    
+The semi-colon (<b>;</b>) indicates the 
+end of each instruction.    By having two semi-colons I indicate that 
+I have two instructions ( also called commands ).  
+The fact that they are on two separate lines in not relevant.  
+I could have two commands on one line, or one command over
+two lines (not recommended).    The computer does not 
+care about lines.    Human readers do
+care about lines.    Human readers find it easier to read 
+separate lines,
+so programmers usually write each command on a separte line for clarity.
+But the computer only cares about semi-colons to separate commands.
+  
+
+<p> The first instruction ( command ) is: 
+
+<br>
+int mySum;
+<p>
+When the computer reads this line it needs to create a variable
+and to give it the name "mySum" 
+ (Remember, a variable is a place in computer memory, 
+like a shoebox in our comparison). How does it do this?
+First it looks for some unused memory in the block 
+of memory that has been assigned to it.  When it finds this unused memory,
+it labels it with the name mySum. This is as if a person went into the
+storehouse of shoeboxes and took down an empty one and labeled it on the
+ outside with a magic marker.
+
+<p>
+The word <b>int</b> is a special word in C++
+ which indicates that (1) a special type of memory place should be created and 
+(2) that it should be given the name that follows the word int.
+ This  command  is called a <b><i>declaration</i></b> because
+it declares ( states ) the existence of a new variable.
+Once you have declared a variable, you do not need to declare it again.
+You simply can use it by writing it again like this.
+<br>
+mySum = 8;
+<br>
+Note that I did not use the word <i>int</i> again.
+This point often confuses people. Only 
+at the time  I am creating the variable and giving it a name do I use the 
+special word  <i>int</i>. When I later use the variable,
+ I simply write <i>mySum</i>, not <i>int 
+mySum</i>.    
+
+
+
+<p>
+
+
+If I were to write again int mySum ; 
+the computer would think I wanted to create another variable with
+ the same name as the first variable.  This is not allowed and the
+ compiler would tell me
+ so. In general, I cannot have two variables with the same name. 
+If I could have two 
+variables with the same name, the computer would not know which one
+I meant when I wrote its name. 
+
+<p>
+The name or identifier we gave to the variable  is "mySum".
+    This is simply the name I have chosen.  I could have used
+any name to label this variable.  I could have called it "george".
+It is a variable name of my choosing.    From now on in the program, the
+ name <b>mySum</b> will refer to
+ this variable.   As we said, this is like a  name on the outside of a 
+shoebox used to easily identify it.  The name we choose for our
+variable does not  affect its contents. (We will 
+give the variable some contents in just another moment.) 
+
+<p>
+In addition to <i>int</i>, there are 
+other such special words in C++ which mean different things.   These special
+ words are called <b><i>keywords</i></b>.  They are also called <b><i>reserved
+</i></b> words.
+Together, all the reserved words make up the C++ language.  The English 
+language has about 250,000 words.  C++ has only 62 keywords; that's not too much to learn. 
+(There is a table of all of them near the end of this chapter)
+We will learn to use most of these keywords.
+
+<p>
+ In our case, <b>int</b> means that the type 
+of memory space we are creating will be capable of containing whole numbers
+ or integers  but not decimal numbers 
+(hence the name <b>int</b>, short for integer).
+It is as though we 
+are creating a shoebox which can only contain one kind of shoe, like sneakers.  Just as there are 
+different types of shoeboxes some for sneakers, some larger ones for boots
+ there are also 
+different types of variables which can contain different kinds of contents 
+(for example, ones that can contain decimal numbers instead of whole numbers).  These 
+variable type designators are called
+<i>primitive data types</i> because they are the most basic (or 
+primitive) types of variables that can be created.  Thus, int is a primitive data type.    
+
+<p>
+ 
+The second command:
+
+mySum = 7+8;
+ &nbsp; &nbsp;  
+puts a value into the variable.  It assigns the value on the <b>right</b> side of the = sign to the 
+variable on the 
+<b>left</b> side.<br>
+
+ In other words, it puts the value into the shoebox which is labeled 
+"mySum."  It gives the variable "mySum" the value of 7+8.    Since 7+8 is 15,
+the variable "mySum" gets the value 15.  Now my variable has some content.
+Since 15 is a whole number, I can put it into my variable.  I cannot put a 
+decimal number like 15.5 into my int variable.  If I would, I would lose the
+ decimal part and be left with just 15. In other words, int <b>truncates</b>
+the decimal off of a decimal number.
+ Later we will see how to store decimal numbers in a different type 
+of variable.
+
+
+<p>
+
+
+
+Programmers usually call any line of code which puts a value into a variable
+"<i>assigning a value to a variable</i>."   Because such an instruction 
+assigns 
+a value to a variable, it is  also called an <b><i>assignment</i></b>.    
+The = sign is therefore
+called the <i>assignment</i> operator because the operation it performs is 
+assignment.   (Don't call it "equals" because this is a different concept and
+is covered by a  different symbol! ) 
+There are other operators that you should know.  The +  (plus) operator
+adds two numbers and the - (minus) operator subtracts.  So too there is the /
+ (division) operator and the * (multiplication) operator.
+
+<p> In contrast to variables, numbers like 7 or
+ 17000 or 3.1416 are fixed, that is, their value logically cannot change. 
+  7 is always 7 and nothing else. If 7 changes to 8, then it is no longer 7.
+Numbers such as these are therefore called <b><i>constants</i></b> 
+because their value is constant; it never changes. They are also called 
+<b><i>literals</i></b> because they represent literally what they are.
+We can assign a constant ( like 7 ) to a variable ( like "mySum" ) but we 
+cannot do the reverse.  ( If you think about it,
+ it does not make any sense at all to assign a variable to a number.
+   In fact,
+whatever is on the <b>left</b> side of the assignment operator ( = ) must be
+ a variable and never a constant. )  
+ Get used to the terms <i>variable</i> and <i>constant</i> and remember the 
+difference between them. 
+<br>
+
+
+<p>
+ We have seen that first we must assign a name to a variable. 
+After this we can assign a value to the variable. 
+These two operations together create a variable and give it an initial value. 
+This process is a common one and is called <b><i>initialization</i></b>.&nbsp;
+<p>
+Above, we initialized mySum in two lines of code.  
+However these two steps can be combined into one line if we desire.
+Here is how:
+<blockquote>
+int mySum = 7+8;
+</blockquote>
+
+
+<p>After initialization we can assign more values to the variable we 
+created.  We can do this any number of times. Each time the old value in the 
+variable will be overwritten with the new value.  Here is an example:
+
+<blockquote>
+int someVariable = 4500;
+<br>someVariable = 25;
+<br>someVariable = 200;
+<br>someVariable = 1;
+</blockquote>
+<p>After these four lines  of code, the variable "someVariable"
+will have the value 1.  The 4500, the  25 and the 200 have been erased
+by being overwritten by 1.
+
+<p>If you want to create several variables in one line of code,
+this is made possible by using commas.
+Here is an example of a declaring 3 variables in one line.
+<blockquote>
+int firstVar, secondVar, anotherVar;
+</blockquote>
+<p>
+Now I can use any or all of these variables in my program.  For example, I can 
+write:
+
+<blockquote>
+int firstVar, secondVar, anotherVar;<br>
+firstVar=8; <br>
+secondVar=29999;<br>
+anotherVar=200;
+
+</blockquote>
+
+
+<p> 
+
+I can also assign 
+the value of one variable to another. 
+
+ In the following example I will assign the value of
+the variable <b>a</b> to the variable <b>b</b>.
+<blockquote>
+
+int a, b;
+<br>a=45 ;
+<br>b=a;
+</blockquote>
+
+At this point both a and b have the same value, 45 (note: a and b remain different variables).
+
+<br>
+ In the next example I will assign the value of
+the variable <b>a</b> to the variables <b>b</b> and <b>c</b> by chaining 
+together two assignment operators.
+<blockquote>
+
+int a, b, c;
+<br>a=45 ;
+<br>c=b=a;
+</blockquote>
+
+At this point both a,  b and c have the same value, 45.
+What happened here is that b first got a's value, 45.  Then
+c got b's value which by this time is 45.  What fun! Notice also that it
+makes sense to read this chained assignment from right to left.
+
+<p> Here is an example of what <b>not</b> to do.  I will attempt
+to assign <b>b</b> the value of <b>a</b> before <b>a</b> has any value.
+<blockquote>
+int a, b;
+<br>b=a;
+<br>a=45 ;
+</blockquote>
+
+ The second line here is faulty.  I cannot assign a non-existing value
+of <b>a</b> to the variable <b>b</b>.  Since the program executes 
+sequentially, <b>a </b>only
+gets the value 45 after the attempt to assign <b>b a</b>'s value.  
+This is an error.
+
+
+<p>As we have said, <b>int</b> is a primitive data type.  
+There are other primitive 
+data types.
+For your future reference, here is a table of all the primitive data 
+types along with the amount
+of computer memory they use (Bytes) and the maximum and minimum  values
+ they can be assigned
+ (Range). Look this over and later I will explain each data type. 
+<br>
+
+<table border="1">
+<tr><td>Name</td> <td> Bytes (minimum)</td> <td> Description</td><td>  Range</td>
+</td></tr><tr><td>char </td> <td> 1</td> <td>	character or integer 8 bits length.</td> <td>signed: -128 to 127
+unsigned: 0 to 255
+</td></tr><tr><td>short</td> <td> 2</td> <td>	integer 16 bits length.</td> <td>signed: -32768 to 32767
+unsigned: 0 to 65535
+</td></tr>
+
+<tr><td>
+long</td> <td> 4</td> <td> integer 32 bits length.</td> <td>signed:-2147483648 to 2147483647
+unsigned: 0 to 4294967295
+</td></tr>
+<tr><td>
+long long </td> <td> 4</td> <td> integer 64 bits length.</td> <td>signed:-9223372036854775808 to 
+9223372036854775807 
+unsigned: 0 to 18446744073709551615
+</td></tr>
+
+<tr><td>int</td> <td>??</td> <td> Integer. Its length traditionally depends on the length of the system's Word type, thus in MSDOS it is 16 bits long, whereas in 32 bit systems (like Windows XP and systems that work under protected mode in x86 systems) it is 32 bits long (4 bytes)</td> <td>See short, long
+</td></tr><tr><td>float</td> <td> 4	</td> <td>floating point number.</td> <td> 3.4e + / - 38 (7 digits)
+</td></tr><tr><td>double</td> <td>	8 </td> <td>double precision floating point number.</td> <td> 1.7e + / - 308 (15 digits)
+</td></tr><tr><td>long double </td> <td> 10</td> <td> long double precision floating point number. </td> <td> 1.2e + / - 4932 (19 digits)
+</td></tr><tr><td>bool</td> <td> 1</td> <td> Boolean value. </td> <td>It can take one of two values: true or false 
+</td></tr><tr><td>wchar_t</td> <td>	2</td> <td> Wide character. It is designed as a type to store international characters of a two-byte character set. NOTE: this is a type recently added by the ANSI-C++ standard. Not all compilers support it.</td> <td> wide characters
+</td></table>
+
+<p>
+We will learn about each primitive data type above as they come up
+in the following chapters. But there is one thing I need to explain now.
+Shoeboxes are made out of cardboard, primitive data types are made out of
+bytes.  You have probably heard the term Megabytes (MB)  or Gigabytes (GB).  
+This is how computer or camera memory is measured.  1 megabyte is about 
+a million bytes, 1 gigabyte is about 1 billion bytes.
+So if your computer has 256MB of memory and an int uses 4 bytes, then you 
+can create 
+about 64 million ints in your program.  That is a lot, but it is  a finite
+ number.
+ (I get this number by dividing 256,000,000 bytes by the 4 bytes of one 
+int.)  You will notice that in the above chart the number of bytes for 
+an int is not given.  This is because the size of an  int depends on the 
+computer you are using.  Because of this problem, we have two more primitive
+data types:  <b><i>short</i></b> and <b><i>long</i></b>.  Short is an int
+ of at least 2 bytes and long is an int
+of 4 bytes.  If you know you only need a small integer, you can use
+short.  If you need a longer integer you can use
+the long data type. This means that really you can always use either a short
+ or long in place of int.
+According to the chart, the maximum value you can assign
+to a short is 32,767.  If you assign a value higher than this - - for example,
+32,768  - - to your short variable, the number will get mangled into 
+some other number since there is not enough space in a short for this number.
+If you need a larger int  you can use long. Now I will 
+show you an example of assigning a value too
+large to be held in a short. Notice also that I do not use
+any commas when I write the value to be assigned.
+
+<blockquote>
+short someVariable = 33800;   &nbsp;  &nbsp; &nbsp;  &nbsp;   <b>Wrong!</b>
+<br>
+long someVariable = 33800;  &nbsp; &nbsp; &nbsp; &nbsp;  <b>Right!</b>
+
+</blockquote>
+Purist would say that you should never use the int primitive data type
+at all
+since it is uncertain what size you will get.  They would say to
+always use short if you are working with small values, and long if 
+you are working with large values (ones potentially larger than 
+32,767).  I agree with this approach in general, but since ints are 
+always longs on all 
+modern computers,  it is reasonable to use  int when 
+you really mean to use a long. But you should feel free to refrain from
+ using int altogether and to use
+ only longs and shorts instead.
+<p>
+In the range section of the table, you will notice the words signed and 
+ unsigned. This has nothing to do with a signed or unsigned check!
+ What it refers to
+is whether your int, short or long is also meant to have negative 
+values  assigned to it (numbers less than zero). 
+If you do not want to assign your variable
+any negative values then you can use an <b>unsigned long</b> for example.
+The advantage of doing this is that you then can put larger values into the 
+variable.  For example, if you declare a variable of type long, the maximum 
+value it can be assigned is 2,147,483,647 but if you declare an unsigned
+long then you can assign it a value of as much as 4,294,967,295 (but then 
+you cannot assign it a negative value). The way you declare an unsigned long,
+short or int is by preceding it with the word unsigned.  If you want a signed
+variable ( one that can be either positive of negative) simple write
+long, short or  int with nothing before it ( you can also write signed before
+ the data type, but this is the default anyway so it is not necessary).
+<p>
+Here is an example of the wrong and right way to do this:
+
+
+<blockquote>
+long someVariable = 3380000000;   &nbsp;  &nbsp; &nbsp;  &nbsp;   <b>Wrong!</b>
+<br>
+unsigned long someVariable = 3380000000;  &nbsp; &nbsp; &nbsp; &nbsp;  <b>Right!</b>
+
+</blockquote>
+
+
+<p>
+Here is another  example of  an error:
+
+
+<blockquote>
+unsigned long someVariable = -338000;   &nbsp;  &nbsp; &nbsp;  &nbsp;   <b>Wrong!</b>
+<br>
+long someVariable = -338000;  &nbsp; &nbsp; &nbsp; &nbsp;  <b>Right!</b>
+
+</blockquote>
+
+
+
+<p>
+Now we should discuss what are legal identifiers (variable names).  In algebra we used variable names like
+ "x" and "y".  In computer programming, we prefer names that are more descriptive of the purpose
+for which the variable is being used.  Some examples of variable names 
+are "studentCount" (for
+the number of students in a class or whatever), price (for the price of some 
+good), age, firstname. You might
+notice that the variable names are always nouns (never verbs). Also, if I want
+ a two 
+word name I capitalize the first letter of the second  word as in 
+student<b>C</b>ount. So too, capitalize the second and third words of three
+word variable names.
+In reality, these rules are really just strong recommendations; the
+ computer will let you use any string of letters.  
+
+<p>But there are some hard and fast rules. For example:
+<ol>
+<li>The first character of the variable must be either a letter, an underscore(_) or a dollar ($).
+<li>Any character thereafter can be either a letter, an underscore (_), a dollar($)  or a digit.
+<li>You can't use any other symbols or key strokes ( and no spaces either! ).
+<li>Variable names are case sensitive ( apple is not the same as aPple).
+<li>You cannot use keywords as variable names.
+</ol>
+ 
+<p> 
+So that you don't accidentally use a keyword as your variable name, here
+ is a table of all the keywords in C++. 
+So remember: Don't use
+ any of the following words as your variable names (identifiers).
+
+<table border="1">
+<tr> <td>
+<table border=0>
+<tr>
+<td> auto    </td><td>break     </td><td>case     </td><td>char     </td>
+</tr>
+<tr>
+<td>const     </td><td> continue    </td><td> default    </td><td> do    </td>
+</tr>
+<tr>
+<td> double    </td><td>  else   </td><td>enum     </td><td>  extern   </td>
+</tr>
+<tr>
+<td> float     </td><td>for     </td><td>goto     </td><td> if    </td>
+</tr>
+<tr>
+<td>int     </td><td>  long   </td><td>  register   </td><td> return    </td>
+</tr>
+<tr>
+<td>short     </td><td> signed     </td><td> sizeof    </td><td>  static   </td>
+</tr>
+<tr>
+<td>   struct    </td><td> switch    </td><td>typedef     </td><td> union    </td>
+</tr>
+<tr>
+<td> unsigned    </td><td>  void   </td><td>volitile     </td><td>while     </td>
+</tr>
+</table>
+</td>
+<td>
+
+<table border=0>
+<tr>
+<td>asm     </td><td>  bool   </td><td> catch    </td><td>class     </td>
+</tr>
+<tr>
+<td>const_cast     </td><td> delete    </td><td>dynamic_cast     </td><td>explicit     </td>
+</tr>
+<tr>
+<td> false    </td><td>friend     </td><td> inline    </td><td> mutable    </td>
+</tr>
+<tr>
+<td> namespace    </td><td>new     </td><td>operator     </td><td>  private   </td>
+</tr>
+<tr>
+<td>protected     </td><td>  public   </td><td>reinterpret_cast     </td><td> static_cast    </td>
+</tr>
+<tr>
+<td> template    </td><td> this    </td><td> throw    </td><td>true     </td>
+</tr>
+<tr>
+<td> try    </td><td> typeid    </td><td>typename     </td><td> using    </td>
+</tr>
+<tr>
+<td>virtual     </td><td>wchar_t  </td>
+</tr>
+</table>
+</td></tr></table>
+
+
+<p>
+To help clarify what are valid variable names, I made a sample
+of some valid and invalid variable names.
+<p>
+<table border=1 cellpadding=9> <tr> <td> <h3>Valid</h3>
+hello
+<br>$_
+<br>Study4$
+<br>Int
+<br>_int
+<br>Go$f_r
+<br>$read4me
+<br>my_int
+<br>counter3
+<br>bridgeSize
+<br>six6
+</td><td>
+
+<h3>Invalid</h3>
+int
+<br>5mice
+<br>go away
+<br>friend
+<br>short
+<br>long
+<br>&mice
+<br>red#
+<br>false
+<br>90
+<br>we're
+</td>
+</tr></table>
+
+<h3>Terms in this chapter: </h3>
+<b>
+ instruction, RAM, command, sequence, code, declaration, reserved 
+word, keyword, variable, value, constant, literal, int, truncate,
+short, long, assignment, identifier, operator, and initialization, MB, GB.</b> 
+
+<h3>Exercises</h3>
+<ol>
+
+<li>Describe the difference between a <i>short</i> and a <i>long</i>.
+<li>Describe the difference between a <i>variable</i> and a <i>constant</i>.
+<li>Initialize one short variable and two long variables (you can 
+choose their names).  
+<li>Change the value of the above variables to some different value.
+<li>Declare another short variable and assign it the value of your 
+first short variable.
+<li> Add two <b>literals</b> and store their sum in a variable.
+<li> Add two <b>variables</b> and store their sum in a third variable.
+<li> Multiply two <b>variables</b> and store their product in a third.
+<li> Divide two <b>variables</b> and store their quotient in a third.
+<li>We saw above that you can assign the value of one variable
+to another variable.  We did this like this:
+<br>int a, b;
+<br>a=45 ;
+<br>b=a;
+<br>In this case b was undefined until I assigned it a's value (b=a). If b 
+had been inialized with another value, it would be overwritten
+and lost at this point. This presents an obstacle if I want to
+exchange the values of a for b and b for a. Solve this problem.
+Write a series of commands so that b is assigned a's value and a is
+assigned b's original value.  The solution will require the use
+ of a third variable as a holder.
+</ol>
+
+<br>
+&copy Nachum Danzig September 2006
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

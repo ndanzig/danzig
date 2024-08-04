@@ -1,0 +1,90 @@
+<html>
+<body>
+
+<h2>Basic Fibre Optics</h2>
+
+<h3>Important Formulae </h3>
+
+<dl>
+
+<dt>i= -log p(a) = log[1/p(a)]
+    <dd>p(a) is the probability of event a occuring. The information given in a message or event increases as the probability of that event or message occuring becomes less likely. Log 1/0.01 is larger than 
+log 1/0.50.
+
+<dt>H(A) = M (log[1/p(a)] = &Sigma; p<sub>i</sub> log[1/p<sub>i</sub>]
+     <dd> H is the average amount of information given in each
+ event, called Entropy.  It  is the sum of the 
+information of each event  multiplied by the likelihood of that event. 
+This is like taking a weighted average of all the informations as opposed to 
+simply summing all the informations and dividing by the number of them.
+
+
+
+
+<dt>Entropy
+     <dd> the average unpredictability in a random variable, which is
+ equivalent to its information content.
+     <dt>X = [logk - H(A)]/logk
+<dd>If all K events have identical probablities, then the redundacy , called
+X, is  the number of bits used in the message (for example if k is 8, then logk would be 3 bits) minus the theoretical information in the bits H(A).  we then divide by logk to normalize the number.  Imagine in our example if H(A) were 3 then we would have zero redundancy.
+
+<dt>Statistical Redundancy
+     <dd>is the number of bits used to transmit a message minus the number of bits of actual information in the message.  Compression based on this is lossless.
+
+<dt>&Delta;f * &Delta;t = 1
+     <dd>
+
+<dt>&lambda; <sub>&mu;m</sub> = 300 /f<sub>THz</sub>
+     <dd>attenuation in a Fibre
+
+<dt>&lambda; <sub>m</sub> = 300 /f<sub>MHz</sub>
+     <dd>attenuation in Radio
+
+<dt>
+     <dd>
+
+<dt>
+     <dd>
+
+<dt>
+     <dd>
+
+<dt>
+     <dd>
+
+<dt>
+     <dd>
+
+<dt>
+     <dd>
+
+<dt>
+     <dd>
+
+<dt>
+     <dd>
+
+<dt>
+     <dd>
+
+<dt>
+     <dd>
+
+<dt>
+     <dd>
+
+<dt>
+     <dd>
+
+<dt>
+     <dd>
+
+<dt>
+     <dd>
+
+
+</dl>
+
+
+</body>
+</html>

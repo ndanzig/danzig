@@ -1,0 +1,38 @@
+<head>
+<TITLE>Data Structures Homework</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Data Structures - Java</H2></CENTER>
+<h3>
+Homework Assignments 
+</h3>
+
+<ol>
+<li> Do problem Homework assignment 12 in chapter 20. (i.e. 20.12)
+You are asked to convert algebraic expressions like (3+4) * 8 + 9
+into post fix notation where the operator follows the second number 
+instead of being in between the two numbers.  In the new version
+there should be no parantheses and the computer will simply
+do each operation as it encounters it.  This means you will have to
+put each operator in the right place. For example note this example:
+(3+4) * 8 + 9/12.  If we would convert it to 3 4 + 8 * 9 + 12 /
+when the computer calculated this it would get the wrong answer.
+the correct conversion of this list is: 3 4 + 8 * 9 12 / +.
+This will produce the correct answer.  You will need to store numbers and
+operators in a stack.  Read teh explanation in the book carefully. 
+
+</ol>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<TITLE>JavaScript Exercise 4</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+//change an image on mouse over
+var img1a=new Image();
+img1a.src="../compass.gif";
+var img1b=new Image();
+img1b.src="../earth.gif";
+function mouseover() {
+  document.img1.src=img1a.src;
+}
+function mouseout() {
+  document.img1.src=img1b.src;
+}
+// -->
+</SCRIPT>
+<BODY BGCOLOR=WHITE>
+<A HREF="http://www.stockmaster.com" TARGET="new" onMouseover=mouseover()
+onMouseout=mouseout()><IMG SRC="../earth.gif" NAME="img1"></A>
+
+
+<A HREF="../rainbow.gif" TARGET="new" onMouseover='window.open("http://www.cnn.com");'><IMG SRC="graphics/paper.gif" NAME="img1"></A>
+
+
+</BODY>
+</HTML>
+
+

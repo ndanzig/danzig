@@ -1,0 +1,81 @@
+Final Exam
+Data Structures, 2012
+N. Danzig Instructor
+
+2.5 hours
+Closed book
+25 points  (Answer 5  out of 6 questions.  If you answer all 6,
+ I will ignore the last question.)
+
+
+1. For an algorithm that is O(n log n) does it become more or less efficient per element
+ as the number of elements being worked on increases? 
+
+
+2. There are only two possible different resulting structures when we 
+split a "4-node" in a 2-3-4 tree. Why are there only 2? 
+
+
+What are they?   
+
+
+Why do we want to split these nodes in the first place?
+
+3. What is the big O in the worst case for a heap sort?
+(Hint: assume you are inseting 7 values and then poping them out.  How
+man hops would be required for 7 pushes  and 7 pops?)
+
+
+4. Given a pointer to a node in a linked list of nodes containing only a next 
+pointer and a value, is it possible to effectively remove that node from the 
+list without any side effects and without traversing the list again? Explain.
+
+
+5. Why is a heap better suited to be implemented using an array than a binary search tree is?
+
+6. Given n element, what is the worst case speed of Bubble Sort 
+(in terms of n)?
+
+
+
+25 points each  (Answer 3 out of 4. If you answer all 4,
+ I will ignore the last question.)
+ 
+1.Use an array of 10 nodes to implement a lifo.  Do not use pointers or 
+pointer arithmetic.  Write the class definition for node and lifo.  Write 
+the push and pop functions for your lifo. If you try to push an eleventh
+element push should fail and return -1.  If you pop from an empty list
+pop should fail and return an error code. Obviously, if you push 10
+nodes and then pop some off, you should still be able to push more nodes.
+
+
+
+
+
+
+2.Write a function to print a BST tree in descending order ( Greatest to smallest). 
+ Assume the bottom left most node is the smallest value. Assume the BST contains
+the standard node class we have used.
+
+ 
+
+
+
+
+3. Write the insert_node function for a doubly-linked (previous and next
+pointers) sorted list (sorted in ascending order). Be sure to correctly
+assign the next and previous pointers.  Also write the class definition
+(without the function definitions) for class node and  doubly-linked-list.
+
+
+
+
+
+4. Given a random binary tree, write  a function "int getlevel(int value)" 
+which will return the row level number of a node whose "data" is a given "value".
+  For example, given the tree
+       5
+    14    18
+  2   12 47 31 
+The function call getlevel(47) would return 3.  Assume no value in the tree 
+occurs more than once.

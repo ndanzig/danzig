@@ -1,0 +1,26 @@
+5. HTML Hyperlinks and Images 
+   (HTML - HyperText Markup Language)
+   A. "Hypertext" is a term created by visionary Ted Nelson
+      to describe non-linear writing in which you follow associative paths
+      through a world of textual documents. The most common use of hypertext
+      these days is found in the links on World Wide Web pages.
+
+   B. Hyperlinks
+      The word Hyperlink is short for Hypertext Link. 
+      Hyperlinks refer to:
+
+        1. Different HTML Pages
+           <a href="http://esp.jct.ac.il/page2.html">Link to Page 2</a>
+
+        2. Different Places in the Same Page
+           Word<a href="#word_definition"><sup>1</sup></a>
+           <a name="word_definition">A word is a word.</a>
+
+        3. An Email Address
+           <a href="mailto:someone@jct.ac.il">Email Me</a>
+
+        4. A File Server
+           <a href="ftp://ftp.iglu.org.il/">File Server</a>
+
+   C. Image Links
+	<img src="" height="" width="" alt="" border="">

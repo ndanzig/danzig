@@ -1,0 +1,464 @@
+<head>
+<TITLE>Thread in Java</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Threads</H2></CENTER>
+
+<p>
+When a program is executing ( or running ) it is called a process.  Every 
+process  runs in sequential order.  That means that one command is 
+executed after the other.  
+However, sometimes we may want to have two alternate lines of execution.
+For example, we may want to download a movie, and simultaneously play it.
+Normally we would have to wait for the download to finish before we could 
+attempt any other command , like playing it.  In such cases we can use
+a special Java Class called a Thread.
+<p>
+
+We can create an object of type thread in our main( ) method.  This object
+has a built in method called run( ) which like the main method is the entry 
+point of code execution.  That means that if for example we create two threads,
+then we have two points of code execution (in addition to the code exectuting 
+in the  main( ) method ) from which we can run any commands we desire.
+These commands will be run simultaneously.
+<p> Lets see an example:
+
+<pre>
+<tt>
+file: MyThreadProgram
+public class MyThreadProgram{
+public static void main( )
+   {
+      //declare the threads
+      MyThread thread1 = new MyThread( "thread1" );
+      MyThread thread2 = new MyThread( "thread2" );
+
+      thread1.start();//actually start the threads running 
+      thread2.start(); 
+
+        
+      System.err.println( "Started two Threads, main ends\n" );
+      //System.exit(0) ; this will kill the parent process and the two thread
+      //children, therefore not use System.exit(0) in the parent process.
+   } // end main()
+    
+}//end class 
+
+
+file: MyThread
+
+class MyThread extends Thread{
+   private int time;
+    
+   public MyThread (String name)
+   {
+      super( name );//call superclass constructor to assign name
+      //initialize time
+      time = ( int ) ( Math.random() * 8000 );//time will be 0-8000 miliseconds
+   }        
+    
+   public void run()//this is like main( ) in the parent class 
+   {
+      try {
+         System.err.println( 
+            getName() + " is going to sleep for " + time + "miliseconds" );
+            
+         Thread.sleep( time );
+      }
+        
+      // if thread is interrupted during its sleep, print stack trace
+      catch ( InterruptedException exception ) {
+         exception.printStackTrace();
+      }
+      System.err.println( getName() + " finished sleeping" );
+    
+   }
+} 
+
+</tt>
+</pre> 
+
+<p>
+Both threads will execute the code as defined in the file: MyThread.
+Both threads will start sleeping at (almost) the exact same moment.
+Their sleeping will be done in parallel.
+We don't know which thread will finish first since each thread sleeps
+a different amount of time.
+
+<p>
+A note about the concept of simultaneous execution.  In reality,
+if my computer has only one CPU then I cannot execute two seperate commans at
+once.  So what is really going in the computer is that the operating system
+is creating tiny slices of time, or time slices , of about 5 miliseconds
+and giving one slice to each process alternatively.  In this way both
+processes will advance together, although not strictly simultaneously, although
+from our perspective it will appear to be simultaneous.  In this way we can 
+avoid what is called blocking.  Blocking is when one activity cannot be done
+because another activity is taking up all the CPU time.  By alternating
+the time each process gets the CPU's time we can ensure that all processes get
+a share and no process is blocked out. When we create several threads in one
+program, the Java compiler asks the operating system to implement a time 
+sharing scheme to simulate parallel processing.  True parallel processing 
+can only occur on machine with more than one CPU.
+
+<p>
+In the above example, both threads executed the same code.  Alternatively, we
+ could have totally different executions for the two threads.
+We could use an if structure to perform different operations in
+each thread.  Here is how:
+
+<pre>
+<tt>
+file: MyThread
+
+class MyThread extends Thread{
+    
+   public MyThread (String name)
+   {
+      super( name );//call superclass constructor to assign name
+   }        
+    
+   public void run()
+   {
+      try {
+         String name=getName();
+	 if ( name.equals("thread1") )
+             {
+	     for (int c=0;c<50;c++)
+	             {
+	     	     System.err.println("I am thread 1." );
+                     }	     
+	     }	 
+	 else
+             {
+	     System.err.println("I am thread 2." );
+	     }
+      }
+      // if thread is interrupted during its sleep, print stack trace
+      catch ( InterruptedException exception ) {
+         exception.printStackTrace();
+      }
+    
+   }
+} 
+
+</tt>
+</pre> 
+
+<p>
+Assume the file: MyThreadProgram is running this thread program.
+<p>
+Threads can be passed parameters when they are instantiated.  These parameters
+follow the normal rules of parameters in methods: if a primitive data type
+is passed, it is passed by reference, if an array of a class is passed, it
+is passed by reference.  This means that if we give two different threads the
+same object, if one thread changes that object, the other thread will
+see these changes.  This is called a shared resource.  It is useful in many
+types of applications which require inter-process communication.
+<p>
+
+A consumer/producer problem is one in which one process creates data or 
+information and another process consumes or uses (reads) that data.
+A real world example of a consumer/producer problem would be a zoo keeper
+and a gorilla.  The zoo keeper supplies bananas and the gorilla eats them.
+They have a shared resource, the feeding trough.   
+There can be theoretical
+problems in such a relationship.  The gorilla might come for food before it
+is served and get angry.  The zoo keeper might put out bananas when the gorilla
+is not there.  And more problematically, the zoo keeper might put bananas in 
+the trough when the gorilla is trying to eat.  That could cost the zoo keeper
+his hand!  <p>
+When there is a single resource for two process we need to 
+synchronize the use of this resource so that only one process acesses 
+it at a time.
+Otherwise one process could overwrite the work of the other.  The solution
+for this problem is to use what is called a semaphore.  A semaphore is
+a flag to indicate that the resource is in use.  Before a process accesses
+the resource he checks that the flag is not up.  Then when he accesses the
+ resource he raises the flag, when he leaves he lowers the flag.  This system
+will prevent access overlap.  In java this is called synchronization. 
+The following is a simplistic implementation of a  consumer/producer 
+problem which does
+not deal with the problem of synchronizing acess to the shared resource.
+
+<pre> 
+<tt>
+
+
+file: Buffer.java
+// Buffer interface specifies methods called by Producer and Consumer.
+
+public interface Buffer {
+   public void set( int value );  // place value into Buffer
+   public int get();              // return value from Buffer
+}
+
+file: UnsynchronizedBuffer.java
+// UnsynchronizedBuffer represents a single shared integer.
+
+public class UnsynchronizedBuffer implements Buffer {
+   private int buffer = -1; // shared by producer and consumer threads
+
+   // place value into buffer
+   public void set( int value )
+   {
+      System.err.println( Thread.currentThread().getName() +
+         " writes " + value );
+
+      buffer = value;
+   }
+
+   // return value from buffer
+   public int get()
+   {
+      System.err.println( Thread.currentThread().getName() +
+         " reads " + buffer );
+
+      return buffer; 
+   }
+
+} // end class UnsynchronizedBuffer
+
+
+
+file: Producer.java
+// Producer's run method controls a thread that
+// stores values from 1 to 4 in sharedLocation.
+
+public class Producer extends Thread {
+   private Buffer sharedLocation; // reference to shared object
+
+   // constructor
+   public Producer( Buffer shared )
+   {
+       super( "Producer" );
+       sharedLocation = shared;
+   }
+
+   // store values from 1 to 4 in sharedLocation
+   public void run()
+   {
+      for ( int count = 1; count <= 4; count++ ) {  
+         
+         // sleep 0 to 3 seconds, then place value in Buffer
+         try {
+            Thread.sleep( ( int ) ( Math.random() * 3001 ) );
+            sharedLocation.set( count );  
+         }
+
+         // if sleeping thread interrupted, print stack trace
+         catch ( InterruptedException exception ) {
+            exception.printStackTrace();
+         }
+
+      } // end for
+
+      System.err.println( getName() + " done producing." + 
+         "\nTerminating " + getName() + ".");
+
+   } // end method run
+
+} // end class Producer
+
+
+
+file: Consumer.java
+
+// Consumer's run method controls a thread that loops four
+// times and reads a value from sharedLocation each time.
+
+public class Consumer extends Thread { 
+   private Buffer sharedLocation; // reference to shared object
+
+   // constructor
+   public Consumer( Buffer shared )
+   {
+      super( "Consumer" );
+      sharedLocation = shared;
+   }
+
+   // read sharedLocation's value four times and sum the values
+   public void run()
+   {
+      int sum = 0;
+
+      for ( int count = 1; count <= 4; count++ ) {
+         
+         // sleep 0 to 3 seconds, read value from Buffer and add to sum
+         try {
+            Thread.sleep( ( int ) ( Math.random() * 3001 ) );    
+            sum += sharedLocation.get();
+         }
+
+         // if sleeping thread interrupted, print stack trace
+         catch ( InterruptedException exception ) {
+            exception.printStackTrace();
+         }
+      }
+
+      System.err.println( getName() + " read values totaling: " + sum + 
+         ".\nTerminating " + getName() + ".");
+
+   } // end method run
+
+} // end class Consumer
+
+
+file: SharedBufferTest.java
+// SharedBufferTest creates producer and consumer threads.
+
+public class SharedBufferTest {
+
+    public static void main( String [] args )
+    {
+        // create shared object used by threads
+        Buffer sharedLocation = new UnsynchronizedBuffer();
+
+        // create producer and consumer objects
+        Producer producer = new Producer( sharedLocation );
+        Consumer consumer = new Consumer( sharedLocation );
+
+        producer.start();  // start producer thread
+        consumer.start();  // start consumer thread
+
+    } // end main
+
+} 
+
+</tt>
+</pre>
+Here is an example with synchronization.
+<pre>
+<tt>
+
+// Fig. 16.9: SynchronizedBuffer.java
+// SynchronizedBuffer synchronizes access to a single shared integer.
+
+public class SynchronizedBuffer implements Buffer {
+   private int buffer = -1; // shared by producer and consumer threads
+   private int occupiedBufferCount = 0; // count of occupied buffers
+   
+   // place value into buffer
+   public synchronized void set( int value )
+   {
+      // for output purposes, get name of thread that called this method
+      String name = Thread.currentThread().getName();
+
+      // while there are no empty locations, place thread in waiting state
+      while ( occupiedBufferCount == 1 ) {
+         
+         // output thread information and buffer information, then wait
+         try {
+            System.err.println( name + " tries to write." );
+            displayState( "Buffer full. " + name + " waits." );
+            wait();
+         }
+
+         // if waiting thread interrupted, print stack trace
+         catch ( InterruptedException exception ) {
+            exception.printStackTrace();
+         }
+
+      } // end while
+        
+      buffer = value; // set new buffer value
+        
+      // indicate producer cannot store another value
+      // until consumer retrieves current buffer value
+      ++occupiedBufferCount;
+        
+      displayState( name + " writes " + buffer );
+      
+      notify(); // tell waiting thread to enter ready state
+        
+   } // end method set; releases lock on SynchronizedBuffer 
+    
+   // return value from buffer
+   public synchronized int get()
+   {
+      // for output purposes, get name of thread that called this method
+      String name = Thread.currentThread().getName();
+
+      // while no data to read, place thread in waiting state
+      while ( occupiedBufferCount == 0 ) {
+
+         // output thread information and buffer information, then wait
+         try {
+            System.err.println( name + " tries to read." );
+            displayState( "Buffer empty. " + name + " waits." );
+            wait();
+         }
+
+         // if waiting thread interrupted, print stack trace
+         catch ( InterruptedException exception ) {
+            exception.printStackTrace();
+         }
+
+      } // end while
+
+      // indicate that producer can store another value 
+      // because consumer just retrieved buffer value
+      --occupiedBufferCount;
+
+      displayState( name + " reads " + buffer );
+      
+      notify(); // tell waiting thread to become ready to execute
+
+      return buffer;
+
+   } // end method get; releases lock on SynchronizedBuffer 
+    
+   // display current operation and buffer state
+   public void displayState( String operation )
+   {
+      StringBuffer outputLine = new StringBuffer( operation );
+      outputLine.setLength( 40 );
+      outputLine.append( buffer + "\t\t" + occupiedBufferCount );
+      System.err.println( outputLine );
+      System.err.println();
+   }
+    
+} // end class SynchronizedBuffer
+
+
+// Fig. 16.10: SharedBufferTest2.java
+// SharedBufferTest2creates producer and consumer threads.
+
+public class SharedBufferTest2 {
+
+   public static void main( String [] args )
+   {
+      // create shared object used by threads; we use a SynchronizedBuffer
+      // reference rather than a Buffer reference so we can invoke 
+      // SynchronizedBuffer method displayState from main
+      SynchronizedBuffer sharedLocation = new SynchronizedBuffer();
+        
+      // Display column heads for output
+      StringBuffer columnHeads = new StringBuffer( "Operation" );
+      columnHeads.setLength( 40 );
+      columnHeads.append( "Buffer\t\tOccupied Count" );
+      System.err.println( columnHeads );
+      System.err.println();
+      sharedLocation.displayState( "Initial State" );
+        
+      // create producer and consumer objects
+      Producer producer = new Producer( sharedLocation );
+      Consumer consumer = new Consumer( sharedLocation );
+        
+      producer.start();  // start producer thread
+      consumer.start();  // start consumer thread
+        
+   } // end main
+    
+} // end class SharedBufferTest2
+
+</tt>
+</pre> 
+
+
+<p>
+&copy; Nachum Danzig February 2004
+
+
+</body>
+</html>

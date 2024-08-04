@@ -1,0 +1,153 @@
+<head>
+<TITLE>Programming - User Interface</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Intoduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>Programming - User Interface</H3></CENTER>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+We have seen how to write a simple program. &nbsp; &nbsp; We saw what commands and variables are.  We have seen how to assign a value to a variable. &nbsp; &nbsp; But the 
+examples we have seen do not allow the person who runs (or executes) the
+ program to change any variables.&nbsp; &nbsp;  This person, called the 
+<i>user</i> 
+&nbsp;would be the person who uses our program after we finish writing 
+ it.&nbsp; We may want to allow him to alter the progam. &nbsp;
+ &nbsp;  Remember , once we finish writing a program, we save it to disk and
+can run it any number of times in the future. &nbsp; &nbsp; We may want these future runnings of the program to change according to the desire of the user.
+&nbsp; &nbsp;
+Any time you buy a software product you are a user or more exactly an <i>end user</i>. &nbsp; &nbsp;  So how do we allow this end user to affect our program 
+when it is running ?
+<p>&nbsp; &nbsp; &nbsp; &nbsp; Before I answer this question I need to make one more point clear.  &nbsp; &nbsp;In our examples, all the values have been <i> hard coded </i>.  &nbsp; &nbsp;That means that once the program is running they cannot be changed.&nbsp; &nbsp; If we would want to change the values we would have to stop the program and start editing the lines of the program.
+&nbsp; &nbsp; Carelessness in doing this could ruin our program. &nbsp; &nbsp;
+ Therefore we must think of a way to provide for changes 
+while the program is running and in a way that prevents careless errors from
+getting in. &nbsp; &nbsp; We achieve this goal by creating  a <i>user interface</i>. &nbsp; &nbsp;  Iterface is a computer science term 
+to mean a method for using something. &nbsp; &nbsp;  For example we might 
+say that the buttons on a blender are the interface for the blender. &nbsp; &nbsp;
+  No one would open up the blender to turn it on.  &nbsp; &nbsp; The manufacturer of the blender provides us with a safe interface to the inner working of the blender.  &nbsp; &nbsp; Similarly, the floor pedals of a car are the 
+interface to the engine of the car.  &nbsp; &nbsp;They provide a simple, clean
+ and safe way to operate the car.&nbsp; &nbsp;  
+The user interface of a program is based on the same concept.  &nbsp; &nbsp; The joystick or keyboard provides an interface to a program. &nbsp; &nbsp;
+ The joystick and keyboard are called
+<i>input devices</i> because they provide the physical means for inserting
+ data into a program. &nbsp; &nbsp;  But the programmer must decide what various inputs he wants to get from the user and what they will signify.
+<p>&nbsp; &nbsp;&nbsp; &nbsp; Similarly, we might want to show the user 
+text or pictures on the screen (or monitor). &nbsp; &nbsp; The screen is
+called an <i>output device</i> because it provides the physical means for 
+displaying data to the user. &nbsp; &nbsp; The programmer can decide what 
+data he wants to display on the output device. &nbsp; &nbsp; Whenever we 
+operate or run a program, although we may not think of it this way,  we are 
+in fact inputing data and viewing data output.
+
+<p>&nbsp; &nbsp;&nbsp; &nbsp;For example, let's say we want to create a
+simple calculator capable of adding any two numbers. &nbsp; &nbsp; We want to
+allow the user to decide which numbers he wants to add. &nbsp; &nbsp;
+So we need to ask him! &nbsp; &nbsp; We'll have to ask him for
+two different numbers and then print the result.  &nbsp; &nbsp;
+<i>Input</i> is any information we get from the user.  &nbsp; &nbsp;<i>
+Output</i> is any information we provide to the user. &nbsp; &nbsp;
+
+The two numbers he will  give us in this example  are the <i>input</i>, and the
+ sum we print is the <i>output</i>.&nbsp; &nbsp;
+
+
+<p>&nbsp; &nbsp;&nbsp; &nbsp;Regarding  our question of how to affect a program
+ while it is running we can say that we must provide a means for the user 
+to input data.  &nbsp; &nbsp;The way this is done is Java is by creating 
+a <i><b>dialog box</b></i>. &nbsp; &nbsp; is a small window that 
+pops up on the screen with a message in it and a small space to type. &nbsp;
+ &nbsp; It is called a dialog box because it allows the program to talk to
+(or have a dialog with) the user.  &nbsp; &nbsp; What ever the user types will
+be receivied by the program in a variable. &nbsp; &nbsp;  We will
+define this variable and give it a name of our choosing.
+&nbsp; &nbsp; After this we can use the information stored in the variable and with it whatever we want. 
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; In the following example I have made a simple addition program. &nbsp; &nbsp; It asks the user for two integers
+and after he has provided them, it tells him their sum. &nbsp; &nbsp;
+Try running the program.
+
+<pre>
+<tt>
+
+
+/*1*/ import javax.swing.JOptionPane; 
+/*2*/ public class <font color="purple">myAddNumbers</font>{
+/*3*/ public static void main( String args[])
+/*4*/ {
+/*5*/ String <font color="green"> Number1_as_string </font>;
+/*6*/ String <font color="green">Number2_as_string </font>;
+/*7*/ int <font color="green">Number1_as_integer</font>;
+/*8*/ int <font color="green">Number2_as_integer</font>;
+/*9*/ int <font color="green">sum</font>;
+
+/*10*/ JOptionPane.showMessageDialog(null, <font color="blue">"Welcome to my addition program."</font>);
+/*11*/ <font color="green">Number1_as_string</font>=JOptionPane.showInputDialog(<font color="blue">"Enter First Integer."</font>);
+/*12*/ <font color="green">Number2_as_string</font>=JOptionPane.showInputDialog(<font color="blue">"Enter Second Integer."</font>);
+/*13*/ <font color="green">Number1_as_integer</font>=Integer.parseInt(Number1_as_string);
+/*14*/ <font color="green">Number2_as_integer</font>=Integer.parseInt(Number2_as_string);
+/*15*/ <font color="green">sum</font>=<font color="green">Number1_as_integer</font>+<font color="green">Number2_as_integer</font>;
+/*16*/ JOptionPane.showMessageDialog(null, <font color="blue">"Your total sum is: "</font> + <font color="green">sum</font>);
+/*17*/ System.exit(0);
+/*18*/ }
+/*19*/ }
+</tt>
+</pre>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; Let us go through this program and explain
+ each line. &nbsp; &nbsp; I have added line numbers inside the symbol <b>/* */
+</b>.  The Java compiler will ignore the line number. &nbsp; &nbsp; They are
+there for ease of reference. &nbsp; &nbsp; Some of the lines I will not 
+explain yet.  &nbsp; &nbsp; You should just learn to copy them.  &nbsp; &nbsp;
+For example, lines 1 through 4 should be copied as is, only making one change
+to line 2.  &nbsp; &nbsp; the word myAddnumbers is the name of the program.
+ &nbsp; &nbsp; If I save my program with a different name, then
+put that name in place of myAddNumbers.  &nbsp; &nbsp; 
+Lines 7 though 9 should be clear to you.   &nbsp; &nbsp; They define 
+the names of three integer variable I will use in a future line of the program.
+ &nbsp; &nbsp; Lines 5 and 6 define a type of variable we have not yet seen.
+ &nbsp; &nbsp; That variable is not an int, it is a <i>string<</i>. 
+ &nbsp; &nbsp; Strings are variables capable of containing letter, words and sentences.  &nbsp; &nbsp; I can assign them values like I can ints, but there 
+value will be interpretted as a set of letters.  &nbsp; &nbsp; For example I can write,
+<br><tt>
+String aSentence;<br>
+aSentence="This is the best website I ever visited.";
+</tt>
+<br><br>
+This creates a variable of type String (note: unlike int, String is always capitalized) whose name is aSentence.   &nbsp; &nbsp; Then that variable
+is assign the content "This is the best website I ever visited." &nbsp; &nbsp;
+So far not too complicated. &nbsp; &nbsp; Using Strings is a big topic which 
+we will deal with in more depth later. &nbsp; &nbsp; Let's go back to lines 5 
+and 6 of the example program.  &nbsp; &nbsp; In these lines I 
+declare two variables of type String.
+&nbsp; &nbsp; 
+<p>&nbsp; &nbsp; &nbsp; &nbsp; In line 10 I use a special command 
+to create a pop up box called a message box.  &nbsp; &nbsp;
+Here I will display a message to the user. &nbsp; &nbsp; Everything not in 
+<font color="blue">blue
+</font> you must simple memorize or cut and paste.  &nbsp; &nbsp;
+The part in <font color="blue">blue
+</font> is the text of the message you want the use to see.
+&nbsp; &nbsp;
+
+
+
+
+
+</pre>
+
+<h3>Terms in this chapter: user interface, input, output. String</h3> 
+
+<br>
+&copy Nachum Danzig September 2003
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

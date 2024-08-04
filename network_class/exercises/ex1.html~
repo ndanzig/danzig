@@ -1,0 +1,18 @@
+<HTML>
+<Head><Title>Assignment #1</title>
+</head>
+<H1>Assignment #1</H1>
+Write a program that receives an integer and prints it in binary.<BR>
+There are 2 ways to perform this:
+<OL>
+<li>Using a mask and the shift operator (<tt><<</tt>) print each bit of
+the 32-bit integer.
+<li>Convert the number to binary using the following algorithm:
+<img="convert.jpg"</img>
+</ol>
+Use both ways in your program.
+The program should work for both negative and positive numbers.<br> (Hint: There is
+no need to perform two's-complement conversion.)
+<BODY>
+
+</BODY></HTML>

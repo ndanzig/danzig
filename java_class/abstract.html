@@ -1,0 +1,219 @@
+<head>
+<TITLE>Programming &#151; User Defined Classes &#151; part three</TITLE>
+</head>
+<BODY BGCOLOR="#ffffff" TEXT="#000044" link="#000099" vlink="#990000" alink="#0\
+0ff00">
+<CENTER><H2>Introduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>Creating User Defined Classes &#150; part three</H3></CENTER>
+
+
+<h3>  Abstract Classes.</h3>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+Sometimes we may wish to create an inheritance hierarchy in which the
+superclass is never instantiated. What does that mean?
+In other words, we may make a parent class and son classes.  Then we may make
+objects of type son but not of type father. Why would we want to do this you 
+may ask.  Well, perhaps we have a parent class SpaceObject and son classes
+Meteor, Star, Planet and SpaceShip.  If we are modeling the real world
+we must admit there are not space objects, there are only
+particular types of space objects, like stars and planets.  So we
+will never make an instance od SpaceObject; we will always use the son
+classes.  In such a case the father class is said to be <font color="blue">
+abstract</font>.  This is because SpaceObjects are not real things,
+they are the imaginary constructs of our minds.  They are virtual.  They are <b>abstract</b>.
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+Simply put, an abstract class is one in which some of its methods are not 
+defined and are labelled as abstract.
+The class will simply name the methods, give return values and parameters,
+but not actually define what the methods do.  Such undefined methods are called
+abstract methods.
+Any class which contains one or more abstract methods is an abstract class. 
+Although you are able to make a reference to the abstract class, you cannot 
+instatiate it with a new command. 
+Nevertheless, you should make a constuctor method for the abstract class.
+The abstract class must be a parent class or superclass.
+  Moreover there must be a son class which
+extends the superclass and defines the behaviour of the abstract methods.
+Theoretically, the son class may leave one or more abstract methods undefined,
+but then the son class is also abstract and must be declared as abstract and must have a
+son class extend it.<br>
+Here is how to define an abstract method in an abstract class:<br>
+<p><pre>
+public abstract void myMethod( <i><font color="brown">parameters</font></i> );
+</pre>
+Notice that there is no implementation of the method.  There is simply a semi-colon ;
+to indicate the end of the method.
+
+Here is how to define an abstract class:<br>
+<p><pre>
+public abstract class  myClass{
+<i><font color="brown">attributes</font></i>
+<i><font color="brown">abstracts methods</font></i>
+<i><font color="brown">methods</font></i>
+}
+</pre>
+
+<h3> Interfaces</h3>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+An abstract class that has no implemented methods at all is called an interface 
+or pure abstract class.  Strictly speaking interfaces are not classes.
+They simply define how other classes must be arranged.  Therefore interfaces cannot
+have constuctors.
+When defining such an interface use the keyword <font color="blue"> interface</font>.
+In such a class 
+all methods are declared to be public abstract.
+( Note: making them private abstract would not make much sense since then they would
+be locked to subclasses and it would be impossible 
+to implement them. )
+Since interfaces have no constructors you cannot run the new command on them, however you
+can create a reference to an interface by declaring a variable like this:
+<p>
+<pre>
+myInterface a;
+</pre>
+<p>
+You can use a reference to a superclass or interface to reference a subclass.
+This permits you to refer to different types of subclasses with the same
+superclass or interface reference. Interfaces in addition to having abstract methods may 
+have public static final data types as attributes.
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+The subclass will implement the  interface using the  keyword <font color="blue">implements</font>
+in place of extends in regular inheritance. 
+The subclass must implement every method in the interface and cannot add any more methods
+which are not declared already in the interface.
+If is does not implement all the methods then the subclass will be abstract and must be 
+declared as such.
+In any case, you must at least declare all the interface's methods.
+This is a way of forcing uniformity among a set of classes.
+In other words, by using interfaces and/or abstract classes you can guarentee
+that a set of subclasses will all have the same methods with the same return values and parameters.
+If you use an interface then you force every son to implement the methods himself.
+Then you can relate to objects by a superclass reference and call the subclass
+method implementations and you can be 100% sure these methods exist.
+
+Now, anyone who wants to add a class to your program will know what methods he needs to write 
+in order to work in your program.
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+For example, if I have an interface  AudioFile (or even an abstract class AudioFile) and I want
+ to use this class in my JukeBox program.  I want the JukeBox to handle any type of audio file.
+But the JukeBox class will have to be able to play the file and stop the file.  So I can make
+an interface AudioFile containing the abstract methods play and stop.
+Then if I write a class mp3File it will implement AudioFile and implement these two methods.
+I can do the same for wavFile etc.  If some time in the future someone invents a new file
+format and wants to add the capacity to play these files in my JukeBox class all he has to do
+is to implement the methods of AudioFile and then my JukeBox can work with the new file type.
+This is because JukeBox works with class AudioFile.  He does not care
+what subclass it is as long as it has the AudioFile "interface".  From the perspective
+of JukeBox, all that exists are AudioFiles.  There are no subclasses in his programming.
+This allows him to manipulate any future subclass that may be created.<br>
+Here is how to define an interface:<br>
+<p><pre>
+public interface AudioFile{
+public abstract void play( <i><font color="brown">parameters</font></i> );
+public abstract void stop( <i><font color="brown">parameters</font></i> );
+}
+</pre>
+<p>
+Another advantage of using interfaces is that
+one can inherit from only one class but one  can implement several interface classes.
+Simple separate with a comma each interface you are implementing.
+An interface is a form of an "is a" relationship.
+Here is how to implement an  interface:<br>
+<p><pre>
+public class mp3File implements AudioFile{
+public  void play( <i><font color="brown">parameters</font></i> )
+   {
+   <i><font color="brown">some code</font></i>
+
+   }
+
+public void stop( <i><font color="brown">parameters</font></i> )
+   {
+   <i><font color="brown">some code</font></i>
+
+   }
+
+<i><font color="brown">some code</font></i>
+
+}
+</pre>
+<p>
+A full <a href=./abstractExamples.html> example </a> of abstract class and interface.
+
+
+<h3>Some more features of classes useful in dealing with abstract classes and inheritance</h3>
+<ul>
+
+<li>defining methods and classes as final means that they cannot be overridden. <br>
+private methods are logically always final.<br>
+static methods are also final (i.e. they can't be overwritten).<br>
+a final class cannot be extended at all.  All of its methods are logically final. example: the String class.
+<li>superclass_reference <font color="blue">instanceof </font>  subclass_reference
+<br>to test in a superclass is of type subclass.
+<br>returns boolean true or false
+<li>a.getClass( ).getName( ) <br> method in Object returns type Class which has method getName( )
+<br>this is a way to get the name of the class (<b>a</b> in this example) you are working with.
+
+<li>each primitive data type has a class version of it or a class wrapper,
+they all inherit from object and can therefore be treated as objects.  this 
+enables polymorphism.
+</ul>
+<h3> Nested Classes</h3>
+A nested class is a class which is <b>defined</b> inside another class. For example,
+inside a class you might write a new class. <br> For example:
+<pre>
+class myClass{
+         class myNestedClass {
+	                     <font color="brown"> some code </font>
+	                     }
+         myNestedClass a;
+}
+</pre> 
+This could be useful when making a list such as a <i>first in first out</i> ( fifo ) list.
+In such a case, we might make a class "fifoList" to contain all our list items.
+The class fifoList will use objects of type fifoInsertable.  
+The outside world will insert
+instances of type Object into the fifoList and the fifoList will convert them into 
+fifoInsertable objects.
+Therefore, only the  class fifoList  needs to be know about  the fifoInsertable class.
+In such a case, the fifoInsertable class should be made as an inner class. 
+<P>
+Some facts about inner classes:
+<ul>
+<li> Inner classes can access all of the outerclass's methods and variables.
+<li> <font color="blue"> this </font> in an inner class refers to the inner class.
+<li> In order to refer to the outerclass from within the innner class write <font color="blue">
+ outerclass.this </font>.
+<li> To create a non-static inner class instance you must use the outer class like this:
+<br><tt>
+&nbsp; &nbsp; &nbsp; &nbsp; outerclass.innerclass innerclassreference = outerclassreference.new innerclass( );</tt><br>
+ for example:
+<br><tt>
+&nbsp; &nbsp; &nbsp; &nbsp; myClass.myNestedClass a  = b.new myNestedClass( );</tt><br>
+
+where b is of type myClass<br>
+another example would be 
+<br><tt> &nbsp; &nbsp; &nbsp; &nbsp; fifoList.fifoInsertable a = myfifoListInstance.new fifoInsertable( );</tt><br>
+<li>A static nested class has no access to non-static variables and methods 
+in outer class. 
+<li>An inner class can be declared in a method. It will then have access to the 
+instance variables and methods of the outer class object that declared it as well as the 
+method's final local variables.
+</ul>
+<h3>Anonymous Inner Classes </h3>
+<p>
+An inner class declared in a method can be created without a name. This class
+must implement an interface.  In such a case 
+there is an inline instance made instead of a name being assigned to the instance.  
+This instance can only be referenced at the line
+where it is created since there is no name by which to refer to it.  This type of
+inner class is called an anonymous inner class.
+
+<h3>
+Here is an example of an <a href="./innerClassExample.html"> anonymous inner class</a>.
+</h3>
+
+<p>
+&copy; Nachum Danzig December 2003
+</body>
+</html>

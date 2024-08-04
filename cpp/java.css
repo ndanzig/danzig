@@ -1,0 +1,5 @@
+.keyword { font-weight:bold; color:blue; }
+.number { color:red; }
+.string { color:green; }
+.brace { color:black; font-weight:bold; }
+.comment { color:brown; }

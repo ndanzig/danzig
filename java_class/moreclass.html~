@@ -1,0 +1,282 @@
+<head>
+<TITLE>Programming &#151; User Defined Classes &#151; part two</TITLE>
+</head>
+<BODY BGCOLOR="#ffffff" TEXT="#000044" link="#000099" vlink="#990000" alink="#0\
+0ff00">
+<CENTER><H2>Introduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>Creating User Defined Classes &#150; part two</H3></CENTER>
+
+
+<h3>  Implement the <font color="blue">toString</font> method.</h3>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+There is a very useful method which you should add to each class you make.
+This is the <b>toString ( ) </b> method.
+This method should simply return a string.  You can return any string you think
+is a good representation of the object as a String.  For example, you may 
+have a class dog with attributes: name, owner, breed, age.    
+The toString method might return Name: name, Owner: owner, Breed: breed, 
+Age: age.
+<br>
+Here is how I would write this method.
+<pre>
+public String toString( )
+{
+return "Name: "+name+ ", Owner: "+owner+", Breed: "+breed+",Age: "+age;
+}
+</pre>
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+In general many methods will assume there is a toString method in every 
+class.  This means that methods may attempt to run the toString method.
+For example, the System.out.print( ) method if passed a user-defined
+class will try to run the toString( ) method.  
+By default, every class in java has a toString() method built in.  It is 
+defined to return a String consisting of the class name followed
+by an @ and the location in memory where the instance resides.
+This ugly string will look something like this, for example, if I 
+use an instance of my dog class: <br> dog@C3ED4E .
+<br> You can over-ride the default toString method by
+writing your own toString method  in your class. Make sure to 
+write your own version of toString( ).
+<P>
+One advantage of writing a toString  method is that you can then print your 
+class or otherwise treat it as a String by explicitly calling  the 
+toString( ) method.
+It permits anyone to get a String representation
+of your class without having to know anything about your class's 
+internal workings.
+This is very useful if you want to write generic code meant to be 
+re-usable with a wide range of other classes - many of which may not even have 
+been written yet! By writing your classes to contain the method toString( ) 
+you allow  future users of your class to assume this method exists.  
+System.out.print( ) is one example of a method that assumes the 
+toString ( ) method has been implemented. If you pass System.out.print( )
+a class, it will automatically call the toString( ) method  without
+you having to.  This is the benefit you can realize because the author 
+of System.out.print( ) assumed you made a toString( ) method.
+<p>
+For example, if class dog has a toString( ) method, the following 
+will produce a good result:
+<pre>
+
+main()
+{
+dog a1 = new dog("Rex", "fred", "german", 3);
+System.out.print(a1);
+}
+</pre> 
+
+
+<h3>  Diagramming Classes.</h3>
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+Here is the way you should diagram your classes.  This will help to organize 
+your program and it will help your teacher to understand how your program 
+works.
+<table border="2">
+<caption> Class Name </caption>
+<tr><td>attribute &nbsp; &nbsp; &nbsp; &nbsp; <br>  attribute <br> attribute
+ <br> attribute <br> </td></tr>
+<tr><td> method <br> method <br> method <br> method <br> </td></tr>
+</table><br>
+The attributes are written above the center line and are assumed
+to be private unless otherwise specified.   The methods are written
+below the line and are assumed to be public unless otherwise specified.
+
+
+<h3> Containment and Inheritance - "has a" vs. "is a" relationships</h3>
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+Sometimes one class may contain another class.  It is possible
+in such a case to include the other class in the list of attributes
+in the new class. For example if I had a class card and a class deck
+I might observe that a deck contains an array of 52 cards.  This is 
+called a "has a" relationship because a deck "has a" card in it.
+When I notice relationships between parts of my program that logically 
+are  "has a" relationships I should use containment. <br>
+Here is how I would define class Deck to contain the class Card:
+<pre>
+class Deck
+{
+private card array[];
+<i><font color="brown"> more attributes</font></i>
+
+//-------------
+public Deck()//constuctor
+{
+array = new card[52];
+}
+<i><font color="brown"> more methods</font></i>
+
+}
+</pre> 
+In this case I made Deck contain 52 cards.  Note: the call to 
+<font color="blue">new </font> is done in  the constuctor.
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+ Alternatively, it may be 
+desirable to give one class the attributes of another by
+what is called <b>inheriting</b>. Let's say I have two classes
+Dog and sled_Dog.   I may notice that the class
+sled_Dog has all the same attributes and methods as the class
+Dog but it also has some additional attributes or methods.
+For example, maybe sled_Dog has the additional attribute 
+range, as in the number of miles he can pull a sled in one day.
+Like the above example of a deck of cards I want to re-use one 
+class when making another class.  But in this case I cannot
+say that this is a "has a" relationship.  A sled_Dog does not
+contain or "have a" Dog in it.  A sled_Dog "is a" Dog; it is a 
+kind of dog.  This type of relationship of re-use is achieved
+by a process called inheritance.
+  One class can inherit all the attributes and methods of another class.
+It is then free to add additional attributes or methods. 
+To do this you must use the key word <b>extends</b>.
+Assuming the class Dog is already defined, here is how I would define 
+sled_Dog:
+<pre>
+class sled_Dog <font color="blue"> extends  </font> Dog{
+public int range;
+<i><font color="brown"> more attributes</font></i>
+<i><font color="brown"> more methods</font></i>
+}
+</pre>
+This is actually more concise than the previous method.
+Later we will see that it is also more powerful. But remember that
+<br><b>inheritance should only be used in "is a" relationships.</b>
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+Now I will give a more detailed example using two classes, point and
+circle.  This example could be considered either a "has a" or an  "is a" 
+relationship. I will show an "is a" inheritance implementation.
+Here is how to diagram an inheritance relationship.
+<p>
+<center>
+<table border="2">
+<caption> Class Point </caption>
+<tr><td>int x_coordinate <br>  int y_coordinate 
+</td></tr>
+<tr><td>Point(int x, int y)  <br> String toString() <br> setPoint(int x, int y)</td></tr>
+</table>
+<br>
+<!-- font size="+3">
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; |<br>
+&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; V
+</font-->
+<image src="arrow3.jpg">
+<br><br>
+<table border="2">
+<caption> Class Circle </caption>
+<tr><td>float radius </td></tr>
+<tr><td> circle(int x, int y, float radius) <br> String toString() <br>
+double computeArea() </td></tr>
+</table>
+</center>
+<p>
+The arrow is meant to mean that circle inherits from point.
+The arrow points to where the child inherits from.
+Practically what inheritance  means is that class circle in addition
+to having the attribute radius also 
+has an x_coordinate and a y_coordinate.  Circle "inherits" these two
+attributes from its "parent" class point.  ( There is some logical sense to 
+this relationship because a point is really just a circle with a very small 
+radius, in fact, with no radius at all.  A circle is a point <i>plus</i>.
+It has everything a point has plus some extra size, its radius.)
+You should note that the constructor for circle has all three 
+attributes in it.  This is because circle possesses all three
+attributes.
+
+<p>
+To use inheritance, we would define point and then define circle 
+like this:
+
+<pre>
+public class Circle <font color="blue"> extends  </font> Point
+{
+float radius;
+circle(int x, int y, float radius) { <i>some code</i> }
+String toString()  { <i>some code</i> }
+double computeArea() { <i>some code</i> }
+}
+</pre>
+
+<h3>  The key word <font color="blue">super</font>.</h3>
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; We might wish to write the constructor method
+of Circle like this:
+<pre>
+Circle(int x, int y, float radius)
+{
+x_coordinate=x;
+y_coordinate=y;
+this.radius=radius;
+}
+</pre>
+However, there is one problem with doing this.  Since x_coordinate and 
+y_coordinate are defined as private, only class "point" can access them.
+If we want children and grandchildren of point to have access to the
+attributes of point, we must define those attributes as <font color="blue">
+protected</font>.  Protected is half-way in between public and private.
+Private attributes are only accessable to the class.
+Public attributes are accessable to any and all classes.
+Protected attributes are accessable to classes which inherit those attributes.
+In our case, making x_coordinate and
+y_coordinate protected would solve our problem.
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+Alternatively, we can leave x_coordinate and
+y_coordinate private and use the <b>public</b> constructor method of 
+point to initialize them.  Here's how:
+<pre>
+Circle(int x, int y, float radius)
+{
+super(x, y);
+this.radius=radius;
+}
+</pre>
+ 
+<p>
+ The key word <font color="blue">super</font> means run the 
+constructor method of the parent class.  The parent class is also
+called the super class because super is Latin for above.
+In this case, point is the class "above" circle.  
+The command super(x, y); will run point's constructor method and inialize
+circle's x_coordinate and y_coordinate.
+<p>
+We can also use the key word super when we have any two methods 
+which are defined both in the parent and in the child class.
+For example, assuming  both point and circle had the method toString,
+( this will only be true if the programmer has in fact defined these
+methods for his classes)
+the following code segment would by default call <b> circle's</b> toString()
+method.
+<pre>
+
+{
+Circle a1 = new Circle( 6, 7, 13.75 );
+String a2;
+a2 = a1.toString;
+}
+</pre>
+ 
+<p>If I wanted to run point's toString method on my circle a1 I must
+specify this by using the keyword super like this. ( Note:
+In doing this I will get a string as defined by point and this will 
+obviously not contain the radius since point has no radius. ) 
+
+<pre>
+{
+Circle a1 = new Circle( 6, 7, 13.75 );
+String a2;
+a2 = a1.super.toString;
+}
+</pre>
+<p>
+This will assign the String  version of Circle a1  as defined by point's
+ toString() to the varable a2.
+
+<p>
+&copy; Nachum Danzig December 2003
+</body>
+</html>

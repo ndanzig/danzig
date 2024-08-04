@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+
+
+
+<head>
+<TITLE>Programming &#151; User Defined Classes &#151; part three</TITLE>
+</head>
+<body>
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Creating Virtual Functions</H3></CENTER>
+
+
+
+<h3>  Virtual Functions</h3>
+
+<p>When writing a program that uses inheritance we can speak of the parent class and the child class.
+Since a child class inherits all the attributes and functions of the parent, for all intents and purposes it is a parent,
+that is, it can do anything that its parent can do. This is why we call inheritance an "is a" relationship.
+
+<p>For example if class cat is a child of class animal then we can say that cat "is an" animal. This leads to the 
+interesting  realization that an animal pointer can point to a child instance.  This is because the the animal pointer
+knows how to point to an animal and can run any function in an animal.  Since a cat is also an animal, it can be pointed 
+to by an animal pointer.  In general, a parent pointer can point to a child instance (but not the reverse).
+The following is an example of  what can be done.
+
+<blockquote>
+<code>
+Animal *ptr = new cat();
+</code>
+</blockquote>
+
+<p>This is useful when I want to create a list or array of heterogeneous instances (instances of different classes).
+As long as all those classes inherit from a single base class, then I can create an array or
+list of pointers of type base class and use this to point to all my different instances.
+
+<p>But what if a certain function exists in the base class but an inheritting class overloads the function,
+When I call the function like below, which version of the function will run? The parent's or the child's?
+<blockquote>
+<code>
+Animal *ptr = new cat();
+ptr-&gt;myFunction();
+</code>
+</blockquote>
+
+<p>Since the pointer ptr is of type Animal, it will run the version of myFunction written
+in Animal.  How can we make the same code above run the child's version of the function?
+What we must do is to define the parent's version of the function as <i><b>virtual</b></i>.
+By doing this, the parent "gives permission" to the parent pointer to run the child's version of the function.
+Once a function is defined in the parent as virtaul, all descendent's (even grandchildren's) 
+versions of the functions will also be virtual. 
+
+
+<p>Let me repeat this more formally. The virtual keyword means that a parent pointer to a 
+ child instance will run the child's version of the function. If the key word virtual is not used
+then only the parent version will be run.
+
+<p>For example, if I have a parent class Circle and I want the function getSurfaceArea() to
+ be virtual I would define the class like this.
+
+<blockquote><code><pre>
+    class Circle
+   {
+    protected:
+          double radius;
+          float x;
+          float y;
+    public:
+          static const double pi;
+           Circle(float x, float y, double radius);
+           double getArea(){return (pi*radius*radius);}
+           double getCirc() {return (2*pi*radius);}
+           virtual double getSurfaceArea() {return 0;}
+    };</pre>
+</code>
+</blockquote>
+
+<p>
+<p>Now a descendent of Circle (for example, sphere)  can chose to overload the function
+ getSurfaceArea() and have his version
+run even when being pointed to by a Circle pointer.  The child class can also chose not to overload the function.
+In that case the parent version will be run (since there is no child version).
+
+<p>Here is a simplified class that inherits from circle:
+
+
+<blockquote><code><pre>
+    class Simple : public Circle
+   {
+    public:
+           Simple(double r, float x, float y):Circle(x,y,r){}
+           virtual double getSurfaceArea() {return 2;}
+    };</pre>
+</code>
+</blockquote>
+
+<p>As you see all this class does is overload the function getSurfaceArea().
+Now I will create an instance of Simple and point to it with a Circle pointer
+and yet I will still run Simple's version of the function.
+<blockquote><code><pre>
+Circle * ptr;
+ptr=new Simple(1,2,3);
+ptr-&gt;getSurfaceArea();//will return 2 not 0
+</pre></code></blockquote>
+
+<p>Had the function not been defined in Circle as virtual,
+the above example would return 0 not 2 since the parent pointer
+would only know to run the parent function. 
+
+<p>Writing the word virtual before the function 
+definition in Simple is for clarity's sake.  By default once the
+function is virtual in the parent, it remains virtual in all children and grandchildren.
+
+
+<p>One subtle note worth mentioning is that if I do not use the arrow to call
+the function, then the virtual effect will no longer work.  In the following 
+example the function call will return 0 because I used a static call to the function and
+did not use the arrow operator.
+
+<blockquote><code><pre>
+Circle * ptr;
+ptr=new Simple(1,2,3);
+*(ptr).getSurfaceArea();//will return 0
+</pre></code></blockquote>
+
+
+
+<h3>Pure  Virtual Functions</h3>
+
+
+<p>As we have seen, a descendent of Circle can chose to overload the function getSurfaceArea() and have his version
+run even when being pointed to by a Circle pointer.  But the child class can also chose not to overload the function.
+In that case the parent version will be run (since there is no child version).
+What if I want to force the child to write his own version?  The only way I can do this is to not write
+the actual definition of the function in the parent at all. I would just declare that the function exists in
+ the parent but not write the function.  This is called creating a <i>pure virtual function</i>.
+This will force the child class to implement the parent function.
+In a non-pure virtual function the child may choose not to implement the
+ function and instead rely on the parent version of the function.
+
+<p>As  a byproduct of giving the parent even one pure virtual function, I can no longer
+instantiate the parent class, the parent class has become a <i> pure virtual class</i>.
+<p>
+This makes sense since it would create problems if I could instantiate the parent class.  What would happent if I 
+tried to run the undefined pure virtual fuinction of the parent?  Furthermore, it can be intuitively logical when
+the parent class is just a formal construct and not a real thing that I 
+would want an instance of.  For example, Animal is a human construct.  Really I should never create
+Animals since there are no animals as such, only dogs, cats and sheep for example.
+By creating a pure virtual function in a class the class becomes uninstatiatable and I also force the
+children classes to write their own versions of the function.  If they don't write it, the compiler will complain and
+ I can correct my code before I run it.
+If a child does not implement the parent pure virtual function then it too is a virtual class and must be 
+inherited by another class which does the implementation.
+<p>
+The syntax for creating a pure virtual function is like this:
+<blockquote><code>
+ virtual void myFunction()=0;
+</code>
+</blockquote>
+
+<p>In my example the function returns void and takes no parameter, but of course this is just
+one example, the function could also return an int and take three floats as parameters.
+What makes it pure virtual is the "=0".
+
+<p>A great example in which using a pure virtual class would be logical
+is when creating a fifo class and a lifo class. Instead of creating two seperate class, 
+you could write a class "fo" which would be a
+ partial implementation of a fifo/lifo containing just the "push" funtion.
+The "fo" class would a have a pure virtual function "pop" that each child
+(either fifo or lifo) would implemment.  You want to force the children to 
+make their own implementation since the pop behavior is different in a fifo and a lifo
+ and you never want an instance of a "fo" to be
+ made since the "fo" class is worthless without a pop function implementation.
+Obvioulsy the two child classes will implement pop differently, one poping the 
+head and the other the tail.  NOw I can create fifo or lifo  instances, but not "fo" instances.
+
+
+<h3>Example</h3>
+
+<p>Here is a full program using inheritance and a virtual (though not a pure virtaul) function in the parent class.
+It is a class circle which has a  child class sphere which inherit its methods and data. A sphere is like a circle but 
+it also has a z coordinate.  I chose to implement getSurfaceArea in circle (even though it does not
+make much sense) and not to make it a pure virtual function  because I wanted 
+to be able to make circle instances.
+Cylinder then inherits from sphere since it has all of sphere's attributes but has the additional attribute height.
+Once getSurfaceArea is defined in circle as virtual, then it is by default virtual in sphere and cylinder also.
+
+<xmp>
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+
+    class circle
+    {
+    protected:
+      double radius;
+      float x;
+      float y;
+    public:
+      static const double pi;
+
+      circle(float x, float y, double radius);
+      double getArea(){return (pi*radius*radius);}
+      double getCirc() {return (2*pi*radius);}
+      virtual double getSurfaceArea() {return 0;}
+    };
+
+circle::circle(float x, float y, double radius):x(x),y(y),radius(radius)
+{
+}
+
+class sphere: public circle
+{
+protected:
+  float z;
+public:
+  sphere(float x, float y, float z, double radius);
+  double getSurfaceArea() {return (4*pi*radius*radius);}
+  double getVolume() {return ((4/3)*pi*radius*radius*radius);}
+};
+
+
+
+sphere::sphere(float x, float y, float z, double radius) : circle(x,y,radius)
+{
+  this->z = z;
+}
+
+class cylinder:public sphere
+{
+  double height;
+public:
+  cylinder(float x, float y, float z, double radius, double height);
+  double getVolume() {return (getArea()*height);}
+  double getSurfaceArea() { return (getCirc()*(radius + height));}
+};
+
+cylinder::cylinder(float x, float y, float z, double radius, double height) : sphere(x,y,z,radius)
+{
+  this->height = height;
+}
+
+const double circle::pi = 3.14159;
+        
+int main(int argc, char *argv[])
+{
+        
+  circle *ptr;
+  ptr = new cylinder(1, 2, 3, 4, 5);
+  cout<<"surface area of cylinder is "<<ptr->getSurfaceArea()<<endl;
+  ptr = new circle(1, 2, 3);
+  cout<<"surface area of circle is "<<ptr->getSurfaceArea()<<endl;
+  cout<<"Area of circle is "<<ptr->getArea()<<endl;
+}
+</xmp>
+
+
+
+<p>
+&copy; Nachum Danzig May 2010
+</body>
+</html>

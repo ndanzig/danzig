@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+<head>
+<TITLE>Programming -  Operator overloading</TITLE>
+</head>
+<BODY BGCOLOR="#ffffff" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Comp Science - C++</H2></CENTER>
+<CENTER><H3>Operating Overloading</H3></CENTER>
+
+
+
+
+<p>
+Operator Overloading is generally used with classes since the operators are already defined for the primitive data types.
+Operators are pretty much the same as functions.  They take parameters and have a return value.
+For example the plus operator is a binary operator and therefore takes two parameters, usually of the same type , and 
+it returns the result of the same type as well.  So 1+2 returns 3.
+
+ <p>
+To get started overloading an operator, let's create a simple class, <i>cat</i>.
+We will then overload its stream insertion operator , <<.
+
+
+<blockquote><pre>
+class cat
+{
+int ID;
+char * name;
+char * breed;
+public:
+~cat(){delete[]name; delete[]breed;};
+cat(int ID, char * name, char * breed)
+{
+this-&gt;ID=ID;
+this-&gt;name = new char [strlen(name)+1];
+this-&gt;breed = new char[strlen(breed)+1];
+strcpy(this-&gt;name,name);
+strcpy(this-&gt;breed,breed);
+}
+void print()
+{
+cout&lt;&lt;"name: "&lt;&lt;name;
+cout&lt;&lt;" breed: "&lt;&lt;breed;
+cout&lt;&lt;" ID: "&lt;&lt;ID&lt;&lt;endl;
+}
+};
+</pre></blockquote>
+<p> 
+Now we have a class <i>cat</i> and we can create an instance and print its values using the 
+function print().
+<p>
+But I want to be able to print an instance of cat the same way I print an integer,
+by simply using cout and the &lt;&lt; operator.  If I were to try doing that all I would get would be some
+stange number which is the memory address of the cat instance.  In order for my 
+printing to work the way I want it to I need to define the behavior of the &lt;&lt; operator for my class.
+I can do this by overloading the &lt;&lt; operator like this:  
+<blockquote><pre>
+ostream &operator&lt;&lt;(ostream &mycout, const cat &instance)
+{
+mycout&lt;&lt;"name: "&lt;&lt;instance.name;
+mycout&lt;&lt;" breed: "&lt;&lt;instance.breed;
+mycout&lt;&lt;" ID: "&lt;&lt;instance.ID&lt;&lt;endl;
+return mycout;
+}
+</pre></blockquote>
+
+<p>
+Just like the + operator, the &lt;&lt; operator takes two values, a left hand value and a right hand value.
+In a command like <code>cout &lt;&lt; 17; </code> the left value (or lvalue) is cout  which is of type ostream.
+The right value (or rvalue) is 17 of type int.  When I try to print an instance of cat my rvalue will be
+of type cat.  The lvalue will still be of type ostream.  The two parameters in the above function are the 
+lvalue and rvalue respectively.  Thus, mycout refers to the lvalue and instance refers to the rvalue.  The
+ return type
+will be of type ostream since I want a command like <code>cout&lt;&lt;myCat&lt;&lt;myOtherCat;</code> to work.
+Let me explain that, the computer will evaluate that line from left to right.  It will
+execute the command <code>cout&lt;&lt;myCat;</code>  and return an ostream instance.  
+Then the computer will see that ostream instance followed by <code>&lt;&lt;myOtherCat;</code>.
+This will then also be able to execute.  If we had returned, let's say, an int for example,
+the computer would not be able to execute <code>someInteger&lt;&lt;myCat&lt;&lt;myOtherCat;</code>.
+In order to main the fact that the lvalue must always be an ostream , we must return an ostream.
+
+
+<p>
+Furthermore, since we cannot run the constructor on the ostream object we must get it my reference (hence the 
+&). If we were to write <code>ostream &operator&lt;&lt;(ostream mycout, const cat &instance)</code>
+then the operator call would try to create a copy of the ostream intacne cout, something which will not work
+since the constructor is private (This is how the ostream class was restricted to being a <a 
+href="http://en.wikipedia.org/wiki/Singleton_pattern"> singleton</a>.) For the same reason the retuirn value must be 
+a reference.  The rvalue could be passed by value, but I have chosen to pass it also by reference
+since I can then save a call to the copy constructor.  I have made the rvalue const so that I do not accidently 
+try to change it.  This operator should have no sideeffects. The const will help insure that.
+
+<p>
+If I try to run this operator on my class it will fail.  That is because the operator&lt;&lt; is trying to 
+access private attributes of the class even though it is not a member of the class. 
+I might think to make the operator a member of the class, but then I would need to call it by having the 
+lvalue be an instance of the class (Remember, only instances of the class can call member function). But in
+the case I need the lvalue to be of type ostream (i.e. <code>cout</code>). So what how can I grant the operator
+access to private attributes?  There is a special mechanism for doing this, it is called <b>friend</b>.  By making
+a non-member function a friend, I grant it access to private attributes of the class.
+I will need to add a line like this to my class, usually after the <code>public:</code> declaration.
+<blockquote><code>
+friend ostream &operator&lt;&lt;(ostream &mycout, const cat &instance);
+</code></blockquote>
+
+<p>
+Now I can write a main that will create a cat instance and print it using the operator&lt;&lt; 
+<blockquote><pre>
+int main()
+{
+cat fefe(17, "feefee", "persian");
+cout&lt;&lt;fefe;
+return 0;
+}
+
+</pre></blockquote>
+
+
+<p>
+
+
+Try using a template for operator overloading  for class with primitive data types.
+
+
+<p>
+Example overloading the addition and subtraction operators for a simple
+<a href="myInt.cpp">integer class</a>. Note that while it is preferable to use membership 
+when overloading an operator where the lvalue is the class, one
+can alternatively use friendship instead.
+<p>
+
+Another  <a href="operator_overloading.txt">Operator Overloading example</a>
+
+<p>
+&copy; Nachum Danzig April 2010
+</body>
+</html>

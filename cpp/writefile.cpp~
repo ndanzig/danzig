@@ -1,0 +1,35 @@
+#include <iostream>
+
+using std::cout;
+using std::cin;
+using std::ios;
+using std::cerr;
+using std::endl;
+#include <fstream>
+using std::ofstream;
+//using std::ostream;
+//using std::fstream;
+//using std::ifstream;
+#include <cstdlib>
+
+
+
+int main()
+{
+  int account;
+  char name[30];
+  double balance;
+
+  ofstream ClientFile( "data.dat", ios::out );
+
+  cout << " enter account number, name, balance. \n (eof (^Z) to end)";
+
+  while ( cin >> account >> name >> balance )
+   {
+     ClientFile <<account<<' '<<name <<' ' <<balance<<'\n';
+     cout<<":";
+
+   }
+
+ return (1);
+}

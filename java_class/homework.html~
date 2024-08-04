@@ -1,0 +1,102 @@
+<head>
+<TITLE>Java</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - Java</H2></CENTER>
+<h3>
+Homework Assignments 
+</h3>
+
+<ol>
+<li>chapter 2 problem 2.16, 2.19,  2.17,  (minimize number of print commands) 
+<li> Magic 8 Ball: Make a program which you can ask yes or no questions and which responds with one of the followong responses. Selection of response should be random. Choose either the official or unofficial list of responses.
+Click <a href="./magic8responses.html"> here </a> to see both lists.
+  
+
+<li> Write a Program which loops through the numbers from 1 to 255
+and prints out the ascii symbol for each number.  Use 1 message box.
+<li> Write a program which loops through the numbers 1 to 10 and prints the 
+number, the number squared, and the number cubed.  Use one dialog box.
+<li><ol type="a"><li>Modify your Magic 8 Ball program using a switch case.</li>
+<li>Modify your program which loops through the numbers 1 to 10 and prints the
+number, the number squared, and the number cubed using a "for" loop and instead
+of printing the number from 1 to 10, let the user decide the lower and upper 
+bounds.
+</ol>
+<li>Use the print('*') and println('*') commands to create various patterns (see picture in book, exercise 5.10).  Use for loops.
+<li>Write a program using nested for loops to produce a list of pythagorian triples. Print out all triples where the two sides are any integer less than or equal to 10,000. Hypotenuse can be any size. Write the most efficient method of creating the list.  Toward this end, keep track of how may if checks the program does (i.e use a counter which increments at each if ).
+<li>Write a program which allows the user to enter the 3 coefficients of
+a polynomial of the 2nd order and tells him the maximum and minimum values.  Implement this
+using a function  with 4 parameters and one return value.  It should loop through all numbers from, say -10,000 to +10,000 and should store the max and min
+values.  
+<li>Write a recursive function to compute a fibonocci series. Start at a user
+supplied starting point and continue 10 places.
+<ul><li>For an explanation of recursion try this <a href="recursion.html">
+ explanation</a></li></ul>
+<li>Solve the towers of Hanoi using recursive method calls.  
+<a href="recursion.html#hanoi">Explanation of problem.</a>
+
+<li>Make a program which allows one player to  play blackjack against the dealer.
+Each player should get 2 cards.  You cannot see the first card that the dealer gets.
+The dealer cannot see the first card you got, but you can see both cards you got.
+The objective is to get a sum as close to 21 as possible without going over it.
+The player with the highest number sum which is not over 21 wins. In a draw the dealer wins.
+You can keep asking for more cards, called "getting hit"  until you "bust", go over 21 points.
+The dealer can also get more cards. After two cards are dealt, (the program) will ask if
+you want more cards. If you say yes the dealer will give you one more card.
+This will continue until you reply no.
+The dealer will then give himself  more cards as long as  he has not reached
+ 17 points.
+If the dealer busts, you win.
+You do not need to store the names of the cards, like queen of diamonds.  Their numberical value is
+enough.  All face cards have the value 10. But note, the aces can be either one or eleven (11) 
+points.  This will complicate the computation
+of the totals, but there is a trick that will make it easier if you discover 
+it.
+You will need to use arrays to keep track of the cards' values and whether a card has already been played.
+( Two people can't both get the ace of spades! ) Use rand() to simulate shuffling the cards.
+You must create functions to make the code easier to understand. See  <a href="./principles.html"> Principles of 
+Good Programming</a> for some good programming practices. P.s. You could allow more than one game 
+to be played, until the deck is finished.  Have fun, and don't loose too much money.
+<li>Re-write the linear search function as a recursive function.  You may create an unsorted array
+of integers to be searched.
+<li>Write a recursive binary-search function for searching a sorted array.
+<li>Improve the above Black Jack program so that it keeps track of players 
+and their bank accounts in a file.  When the program is run it should 
+read player information from the file and allow players to continue playing
+with whatever money they have.  You may choose to keep track of their 
+initial starting cash so that you can see who has made the most money.
+(And who has lost the most.)  When the program is terminated write the 
+data back to the file so that next time you can continue from where you left 
+off.  This is similar to the high score record keeping in some video games.
+When the program is run you must show a list of old players and allow the
+user to choose which player he is.  Also allow him to make a new player
+and to assign him a new bank balance.  For extra credit make a class "player".
+Give it the logical attributes and methods it should have.
+<li>Write a program to compute the area and/or circumference of several shapes.
+Fully implement the point and circle classes as outlined 
+<a href="moreclass.html">here </a>.  Also create the classes ellipse,
+square , rectangle, quadrilateral, polygon.  Use inheritance.
+Make sure the inheritance  makes sense.  For example, ellipse can inherit
+from circle.  A circle is an ellipse with only one focus point. 
+Make sure all classes have toString() defined and either computeArea() or
+computeCircumference() or both defined.  Use the keyword <font color="blue">
+super</font>
+ to distinguish
+between parent and child class methods of the same name.
+<li>not announced
+</ol>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

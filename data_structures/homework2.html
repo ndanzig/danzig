@@ -1,0 +1,104 @@
+<head>
+<TITLE>Data Structures Homework</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Data Structures - Java</H2></CENTER>
+<h3>
+Homework Assignments 2003-2004
+</h3>
+
+<ol>
+<li> Do problem Homework assignment 12 in chapter 20. (i.e. 20.12)
+You are asked to convert algebraic expressions like (3+4) * 8 + 9
+into post fix notation where the operator follows the second number 
+instead of being in between the two numbers.  In the new version
+there should be no parantheses and the computer will simply
+do each operation as it encounters it.  This means you will have to
+put each operator in the right place. For example note this example:<br>
+<tt>(3+4) * 8 + 9/12. </tt> <br>
+If we would convert it to<tt> 3 4 + 8 * 9 + 12 / </tt>
+when the computer calculated this it would get the wrong answer.
+The correct conversion of this list is: <br>
+<tt>3 4 + 8 * 9 12 / + </tt>.<br>
+This will produce the correct answer.  You will need to store numbers and
+operators in a stack.  Read the explanation in the book carefully.<br> 
+Read also the relevent sections of chapter 20 for more details. <br>
+See my explanation about <a href="stacks.html">stacks</a>.
+-brodsky,fishman, wohlberg
+<li>Implement a Queue with a maximum number of elements of 4.  When enqueuing
+more than 4 elements, an error message should be sent "Sorry, queue full."
+Similarly, when dequeuing from an empty queue, send an error message
+"Sorry, queue empty." 
+Also implement a printQueue method.- brodsky, fishman
+<li>
+Create 4 threads where each thread counts and prints numbers
+at different rates.  You can control the rate that each one counts
+by using the Thread.sleep() method.  Simply call this method in between
+each count.  Each thread should "sleep" a different amount of time, preferably
+factors of 20.
+Simulate the Operating System's (O.S.) time-sharing by passing control
+to one thread after another every 20 seconds.  The controlling thread will
+be a seperate thread from the other 4 threads.
+You should achieve this by using a synchronized shared buffer.
+Have one buffer which all the threads share.  When they are notified,
+each thread will check to see if it is his turn by check a different
+semaphore value.  For instance, if the value is 1 then thread one will start counting
+if 2 then thread 2 will start.  If it is not a threads turn, he will return to the waiting state until the next notifyall() is run.
+After a thread has counted for 20 seconds (he knows he has been counting for 20 seconds by multiplying the number of loops he has made by the sleep time, assume the actual counting takes no time), he will then set the semaphore to 
+100 and run notifyall().  This will cause the controlling thread to be active.
+He will then change the semaphore value to the value to activate the next 
+thread in the loop.  If a thread has been deleted, he will skip that thread's number.
+Create a "ring" data structure where each node represents one of the 4 threads.
+The O.S.'s will use the ring to know which thread to pass control to.
+Allow the user to add or remove threads from the ring and to define how slow
+each thread he creates will count. (i.e. make a addnode and delete node 
+command).-fishman, jrose, brodsky, peretz
+<li> Write a doubly linked SORTED linked list.  Write addNode() and deleteNode().
+Adding nodes should be done in order to maintain the sorted nature of the list.
+  The nodes should be of abstract class
+ type  StringNode where each node must have a a String "name" by which the 
+nodes are sorted.  All other data in the nodes can be varied depending on the
+class which extends the StringNode. Thus your linked list is at least partially
+generic. Use a method getName() to get the name for sorting (and printing)
+ purposes. -fishman, huber,rose, brodsky
+<li> Do problem 20.22. I.e. make a binary tree with nodes of type sortableObject
+complete with deleteNode( ) method as defined in problem 20.22 except that instead of using the book's algorithm where the replacement node is the largest of the numbers smaller than the deleted node, use an algorithm 
+where the replacement node is the smallest of the numbers larger than the deleted
+node.  The nodes in the tree should be implementations of the following 
+interface.
+<br>
+<br>
+<tt>
+public interface sortableObject<br>
+{<br>
+public abstract int returnSortableInt();<br>
+}<br>
+ </tt>
+-fishman,brodsky, jrose, peretz(1/2), huber  
+<li>Write a recursive sort method for the quicksort algorithm.-jrose
+<li>Use an array of size 5000 integers to implement a binary tree.
+Include the method add, traverse, find but not the method delete.
+- J. Rose, fishman
+<li>Write a method heap sort to sort a random array by first inserting it into
+a heap array and then extracting it in order. Also implement the add (upheap)
+replace and delete(downheap) methods. - m. brodsky,b fishman, 
+<li>Create a red-black binary tree and insert elements of various 
+types sorted by an integer attribute in each object. Include a traverse
+method which produces a sorted list.  Include the insert and delete methods.
+<li>Write a method to traverse a regular binary tree level by level, left
+to right (book problem 20.24 ).  
+</ol>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

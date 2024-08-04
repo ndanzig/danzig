@@ -1,0 +1,318 @@
+#include "iostream.h"
+#include "time.h"
+#define BEAR 1
+#define TIGER 2
+#define WOLF 3
+#define FIGHT 4
+#define QUIT 5
+#define SIZE 10
+
+
+class bear;
+class tiger;
+class wolf 
+{
+  static int count;
+  //  static char type[10];
+  int age;
+  int stamina;
+
+public:
+  int getpower();
+  int fight(bear *);
+  int fight(wolf *);
+  int fight(tiger *);
+  wolf(int, int);
+};
+int wolf::count=0;
+
+class bear 
+{
+  static int count;
+  int height;
+  int weight;
+
+public:
+  int getpower();
+  int fight(bear *);
+  int fight(wolf *);
+  int fight(tiger *);
+  bear(int, int);
+};
+int bear::count=0;
+
+class tiger
+{
+  static int count;
+  int speed;
+  int teeth;
+
+public:
+  int getpower();
+  int fight(bear *);
+  int fight(wolf *);
+  int fight(tiger *);
+  tiger(int, int);
+};
+int tiger::count=0;
+
+///WOLF
+wolf::wolf(int age, int stamina)
+{
+  this->age=age;
+  this->stamina=stamina;
+}
+int wolf::getpower()
+{
+  return age+ stamina+ 8;
+}
+
+int wolf::fight(wolf * other)
+{
+  if (this->getpower() > other->getpower())
+    return 1;
+  return -1;
+}
+int wolf::fight(bear * other)
+{
+  if (this->getpower() > other->getpower())
+    return 1;
+  return -1;
+}
+int wolf::fight(tiger * other)
+{
+  if (this->getpower() > other->getpower())
+    return 1;
+  return -1;
+}
+
+/////TIGER
+tiger::tiger(int speed, int teeth)
+{
+  this->speed=speed;
+  this->teeth=teeth;
+}
+int tiger::getpower()
+{
+  return speed + teeth+ 1;
+}
+
+int tiger::fight(wolf * other)
+{
+  if (this->getpower() > other->getpower())
+    return 1;
+  return -1;
+}
+int tiger::fight(bear * other)
+{
+  if (this->getpower() > other->getpower())
+    return 1;
+  return -1;
+}
+int tiger::fight(tiger * other)
+{
+  if (this->getpower() > other->getpower())
+    return 1;
+  return -1;
+}
+
+
+////BEAR
+bear::bear(int weight, int height)
+{
+  this->weight=weight;
+  this->height=height;
+}
+int bear::getpower()
+{
+  return weight + height + 100;
+}
+
+int bear::fight(wolf * other)
+{
+  if (this->getpower() > other->getpower())
+    return 1;
+  return -1;
+}
+int bear::fight(bear * other)
+{
+  if (this->getpower() > other->getpower())
+    return 1;
+  return -1;
+}
+int bear::fight(tiger * other)
+{
+  if (this->getpower() > other->getpower())
+    return 1;
+  return -1;
+}
+
+void fight(bear * b[], tiger * t[], wolf *w[], int bi, int ti, int wi)
+{
+  char input[100];
+  char input2[100];
+
+  cout<<"\n Choose First animal \n bear(1)  tiger(2)  wolf(3) \n";
+  cin>>input;
+  cout<<"\n Choose Second animal \n bear(1)  tiger(2)  wolf(3) \n";
+  cin>>input2;
+  if ((strcmp(input, "1")==0 || strcmp(input2,"1")==0  ) && bi == 0)
+    {
+      cout <<"\nNo bears today, better create some!\n";
+      return;
+    }
+
+
+  if ((strcmp(input, "2")==0 || strcmp(input2,"2")==0  ) && ti == 0)
+    {
+      cout <<"\nNo tigers today, better create some!\n";
+      return;
+    }
+
+
+  if ((strcmp(input, "3")==0 || strcmp(input2,"3")==0  ) && wi == 0)
+    {
+      cout <<"\nNo wolves today, better create some!\n";
+      return;
+    }
+
+
+  if (strcmp(input, "1")==0 && strcmp(input2,"1")==0)
+    {   
+      cout<<" You chose bear vs bear \n";
+      if (1 == b[rand()%bi]->fight( b[rand()%bi]))
+	cout <<" first bear won\n" ;
+      else
+	cout <<" second bear won\n" ;
+      return;
+    }
+	  
+  if (strcmp(input, "1")==0 && strcmp(input2,"2")==0)
+    {   
+      cout<<" You chose bear vs tiger \n";
+      if (1 == b[rand()%bi]->fight(t[rand()%ti]))
+	cout <<"bear won\n" ;
+      else
+	cout <<" tiger won\n" ;
+      return;
+    }
+
+  if (strcmp(input, "1")==0 && strcmp(input2,"3")==0)
+    {   
+      cout<<" You chose bear vs wolf \n";
+      if (1 == b[rand()%bi]->fight(w[rand()%wi]))
+	cout <<" bear won\n" ;
+      else
+	cout <<" wolf won\n" ;
+      return;
+    }
+	  
+  if (strcmp(input, "2")==0 && strcmp(input2,"1")==0)
+    {   
+      cout<<" You chose tiger vs bear \n";
+      if (1 == t[rand()%ti]->fight(b[rand()%bi]))
+	cout <<" tiger won\n" ;
+      else
+	cout <<" bear won\n" ;
+      return;
+    }
+
+  if (strcmp(input, "2")==0 && strcmp(input2,"2")==0)
+    {   
+      cout<<" You chose tiger vs tiger \n";
+      if (1 == t[rand()%ti]->fight(t[rand()%ti]))
+	cout <<" first tiger won\n" ;
+      else
+	cout <<" second tiger  won\n" ;
+      return;
+    }
+
+
+  if (strcmp(input, "2")==0 && strcmp(input2,"3")==0)
+    {   
+      cout<<" You chose tiger vs wolf \n";
+      if (1 == t[rand()%ti]->fight(w[rand()%wi]))
+	cout <<" tiger won\n" ;
+      else
+	cout <<" wolf won\n" ;
+      return;
+    }
+
+	  
+  if (strcmp(input, "3")==0 && strcmp(input2,"1")==0)
+    {   
+      cout<<" You chose wolf vs bear \n";
+      if (1 == w[rand()%wi]->fight(b[rand()%bi]))
+	cout <<" wolf won\n" ;
+      else
+	cout <<" bear won\n" ;
+      return;
+    }
+
+  if (strcmp(input, "3")==0 && strcmp(input2,"2")==0)
+    {   
+      cout<<" You chose wolf vs tiger \n";
+      if (1 == w[rand()%wi]->fight(t[rand()%ti]))
+	cout <<" wolf won\n" ;
+      else
+	cout <<" tiger won\n" ;
+      return;
+    }
+
+  if (strcmp(input, "3")==0 && strcmp(input2,"3")==0)
+    {   
+      cout<<" You chose wolf vs wolf \n";
+      if (1 == w[rand()%wi]->fight(w[rand()%wi]))
+	cout <<" first wolf won\n" ;
+      else
+	cout <<" second won\n" ;
+      return;
+    }
+
+  return;
+}
+
+
+int main()
+{
+  srand(time(0));
+  int type;
+  int type2;
+  int bi,wi,ti;
+  bear *bearsA[SIZE];
+  wolf *wolvesA[SIZE];
+  tiger *tigersA[SIZE];
+  wi=bi=ti=0;
+  while(1)
+    {
+      cout << "hello  choose 1 to create bear, 2 create tiger, 3, wolf \n 4 to fight, 5 to quit with memory leak\n";
+      cin>>type;
+      switch(type)
+	{
+	case BEAR:
+	  if (bi==SIZE) break;
+	  bearsA[bi]=new bear (rand()%10, rand()%20);
+	  cout <<" bear power is: "<<bearsA[bi]->getpower()<<endl;
+	  bi++;
+	  break;
+	case TIGER:
+	  if (ti==SIZE) break;
+	  tigersA[ti]=new tiger (rand()%10, rand()%20);
+	  cout <<" tiger power is: "<<  tigersA[ti]->getpower()<<endl;
+	  ti++;
+	  break;
+	case WOLF:
+	  if (wi==SIZE) break;
+	  wolvesA[wi]=new wolf (rand()%10, rand()%20);
+	  cout <<" wolf power is: "<<wolvesA[wi]->getpower()<<endl;
+	  wi++;
+	  break;
+	case FIGHT:
+	  fight(bearsA, tigersA,wolvesA,bi,ti,wi);
+	  break;
+	case QUIT:
+	  return 1;
+	}
+    }
+  return 1;
+}

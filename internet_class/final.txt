@@ -1,0 +1,295 @@
+Internet HTML Final
+June 3, 2007
+
+Choose the answer that most accurately completes the sentence.
+
+
+1. The  <i> tag stands for 
+a)index
+b)italic
+c)item
+d)indent
+
+
+2.  The <title> tag is placed inside the tag
+a) <block>
+b) <body>
+c) <table>
+d) <head>
+
+
+3. The following tag <body background="red.jpg">
+a) causes the background to be the color red.
+b) is an error.
+c) creates on the background a link called red.jpg 
+d) puts the image called red.jpg as the background image.
+
+
+
+4. The <a> tag 
+a) can create a link.
+b) is used in tables.
+c) creates an attribute.
+d) is used in PHP.
+
+
+
+5. The  following is correct HTML  code:  <ol type="a"> 
+a) true 
+b) false
+
+ 
+
+6. The <ol> tag creates a
+a) organized list
+b) optional list
+c) ordered list 
+d) operative list
+
+
+
+7. The <br> tag is used to 
+a) make a new line
+b) make bold text
+c) break row in a table
+d) show a picture
+
+
+8. The  symbol &nbsp; is
+a) not valid html
+b) used to create a new line
+c) used to create a link
+d) used to create a space
+
+
+9. The <div> tag can be used to 
+a) show an image
+b) create the "divide" symbol
+c) align text on the right side
+d) divide a table
+
+
+10. The <pre> tag is used 
+a) only in lists
+b) to show text "as is"
+c) to prevent browsers from displaying text
+d) only in forms
+
+
+11. Each <frameset> tag must contain only one <frame> tag.
+a) true
+b) false
+
+12. The <h6> tag is
+a) the largest sized headline text
+b) the smallest sized headline text
+c) a large sized  headline text
+d) a small sized headline text
+e) none of the above
+
+13. In the following piece of html code
+ <body vlink="red" >
+ the word "red" is 
+
+ a) an attribute
+ b) a description
+ c) a value 
+ d) a tag 
+
+14. The following piece of html code
+
+ <table> 
+<tr> <td>1</td></tr>
+<tr> <td>2</td></tr>
+<tr> <td>3</td></tr>
+<tr> <td>4</td></tr>
+<tr> <td> <table> <tr><td>5</td></tr> <tr><td>6</td></tr> </table> </td> </tr>
+</table>
+
+a) Produces a table like this:
+-----------------
+| 1     |  2    |
+|----------------
+| 3     |  4    |
+|---------------
+| 5     |  6    |
+-----------------
+
+b) Produces a table like this:
+-------------------
+| 1      |  2     |
+|------------------
+| 3 | 4 | 5 | 6 |
+|------------------|
+
+
+c) Produces a table like this:
+--------
+| 1    |
+|       |
+|       |
+|-------|
+| 2    |
+|       |
+|       |
+|-------|
+| 3    |
+|       |
+|       |
+|-------|
+| 4    |
+|       |
+|       |
+|-------|
+|   |   |
+| 5|6 |
+|   |   |
+|-------|
+
+
+d) Produces a table like this:
+--------|
+| 1    |
+|       |
+|       |
+|-------|
+| 2    |
+|       |
+|       |
+|-------|
+| 3    |
+|       |
+|       |
+|-------|
+| 4    |
+|       |
+|       |
+|-------|
+|   5  |
+|-------|
+|   6  |
+|-------|
+
+
+e)is incorrect.
+
+15. The following piece of html code
+
+ <table> 
+ <tr> <td>1</td>
+      <td>2</td>
+ </tr>
+ <tr> <td>3</td>
+      <td>4</td>
+ </tr>
+      <td>5</td>
+      <td>6</td>
+ </table>
+
+a) Produces a table like this:
+-----------------
+| 1     |  2    |
+|----------------
+| 3     |  4    |
+|---------------
+| 5     |  6    |
+-----------------
+
+b) Produces a table like this:
+-----------------
+| 1     |  2    |
+|----------------
+| 3 | 4 | 5 | 6 |
+|---------------|
+
+
+c) Produces a table like this:
+--------
+| 1    |
+|       |
+|       |
+|-------|
+| 2    |
+|       |
+|       |
+|-------|
+| 3    |
+|       |
+|       |
+|-------|
+| 4    |
+|       |
+|       |
+|-------|
+|   |   |
+| 5|6 |
+|   |   |
+|-------|
+
+
+d) Produces a table like this:
+--------|
+| 1    |
+|       |
+|       |
+|-------|
+| 2    |
+|       |
+|       |
+|-------|
+| 3    |
+|       |
+|       |
+|-------|
+| 4    |
+|       |
+|       |
+|-------|
+|   5  |
+|-------|
+|   6  |
+|-------|
+
+e)is incorrect.
+
+
+
+
+16. To create fields in a form we use the tag
+a) <submit>
+b) <input>
+c) <enter>
+d) <text> 
+
+
+17. The <select> tag is used to create a 
+a) text box
+b) check box
+c) drop-down window
+d) radio button
+
+18. In CSS I can override the behavior of the <p> tag if I desire.
+a) True
+b) False
+
+19. A PHP page with the following line
+            $data = $_POST["data"];
+would expect to receive from a form some text called "data".
+When writing the matching form we need to define as "data" the attribute
+
+a) name
+b) type
+c) data
+d) php 
+
+
+20. The <font> tag can be used to 
+a) set text size
+b) set text color
+c) set text font type
+d) all of the above
+e) none of the above
+f) b and c
+g) a and b
+h) a and c 
+

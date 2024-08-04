@@ -1,0 +1,161 @@
+<head>
+<TITLE>Programming - Using Arrays</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Intoduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>Using Arrays</H3></CENTER>
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+If we wanted to keep track of the fees we charged cars for parking in our garage we would need a variable for the fee for a given car.  And perhaps another varaible for 
+the total daily charges.  To do this we might write something like this.
+<br><tt>
+<br>boolean quit = false;
+<br>double fee, total_fees;
+<br>while( ! quit )
+<br>&nbsp; &nbsp;{
+<br>&nbsp; &nbsp;fee = get_charges();
+<br>&nbsp; &nbsp;total_fees += fee;
+<br>&nbsp; &nbsp;}
+ </tt> <br>
+
+This seems fine except what if after we were done computing all the fees and 
+the total fee we wanted to know what the 4th car had paid,  How could we recall
+this information?
+We could store each fee in a different variable.  We could make
+<br><tt>
+double fee1,fee2,fee3,fee4,fee5;
+</tt> <br>
+Then we would have to copy the fee into a different variable each time.
+We would have to use a lot of if and else's to check which 
+iteration number we were on so we would know which fee number to assign.
+This would produce very messy code, but it could work.
+In stead we can create an array of ints.
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+If we want to create a set of variable of the same type we can do this by creating an array.
+An array is a set of variables of one type all having the same name but with different index numbers.
+We can declare an array like this:
+<br><tt>int a[]= new int[12] ;   </tt> <br>
+This will create 12 integers located in contiguous spaces in memory, i.e. one after the other.
+By using the number 12 we have instructed the computer to find us 12 new integer 
+locations in memory.  The new command is an instruction to the operating system to find whatever number of contiguous spaces we specify afterwards.  In this 
+case we specified 12 int's.  If an int is 4 bytes then the computer will look 
+for 12 * 4 or 48 bytes of memory in adjacent places.  
+If we ask for a very large space, the computer may fail to find the space and 
+the new command will fail at run time.
+The name of this array will be "a".
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+We can reference different parts of the array by using indexes, also called 
+offsets.  Here is how it is done.
+<br><tt>a[0] = 18 ;   </tt> <br>
+
+This assigns the first element of array a the value 18.
+
+Since we asked for 12 spaces, we got 12 spaces, but the indexes will 
+start with zero ( 0 ) and go until eleven ( 11 ).
+So to assign the last element in the array a value we would do the following.
+<br><tt>a[11] = 625 ;   </tt> <br>
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+We can assign different values to the different elements in the array 
+inside of a loop.
+We can increment through all the indexes of the array by using our counter 
+as the index of the array.  Let's see the above example rewritten using an array.
+<br><tt>
+<br>double fee[] = new double [ 12 ];
+<br>double total_fees;
+for(int counter =0; counter < 12; counter++ )
+<br>&nbsp; &nbsp;{
+<br>&nbsp; &nbsp;fee[ counter ]  = get_charges();
+<br>&nbsp; &nbsp;total_fees += fee [ counter ] ;
+<br>&nbsp; &nbsp;}
+ </tt> <br> 
+ 
+In this example counter will start with the value of 0 and increment upwards
+till it reaches 12.  The first car will have its fee stored in the variable
+fee [ 0 ] .  The second car will be in fee [ 1 ] , and so on until the last or 12th
+car will have its fee assigned to fee [11] .
+If at some later time I wish to recall the fee of the 4th car I can 
+access it by writing <tt> fee [ 3 ] </tt> .
+This provides a simple way to store a large set of data in an easilly
+accessable format.
+<p> &nbsp; &nbsp; &nbsp; &nbsp; The name of the array in this case is "fee".
+What is the type of this name?  It is not simply a double. It is 
+a reference to a set of doubles.  If I want to dereference
+a particular element in the array I must specify which element.
+As we have seen I do this by using the braces [ ] and including a number
+inside them.  That number is called the index of the array, or the array 
+offset.
+If I were to passing an array in a method, what type would I write in the
+ method definition? I would specify that it is an array.  I would do this like this:
+
+<br><tt>
+<br>int myMethod ( double someName [  ] )
+<br>{
+<br>
+<br>}
+ </tt> <br>  
+
+This means that the method myMethod has a parameter which is an array
+of doubles.  This array can be of any size.
+<br>
+I would call the function like this:
+<br><tt>
+<br>{
+<br> myMethod ( fee );
+<br>}
+ </tt> <br>  
+The call will pass the whole array named fee to the method myMethod.
+Now teh method can access all the element in the array.
+In the method myMethod the elements will be refered to by the new 
+name I gave the array, someName.  I.e. to print the 
+4th element in the array inside the method I would write
+<br><tt>
+<br>System.out.println( someName [ 3 ] );
+ </tt> <br>  
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; We have learned that in methods any 
+changes to the values that were passed as variables to the 
+method (through the parameters) if changed inside the method, do not affect
+the original variable in the calling mathod.  This is try because
+the variable itself is not passed to the method, but only the value of
+the variable is passed.  That value is then copied into 
+the variable which appears in the parameter list in the function defininition
+in the order it was written.
+Thus changes in the method variable do not affect the original variable.
+This is not true with arrays.  Since an array name is a reference to the 
+variables inside it, when a copy of this reference is made, the copy still 
+refers to the same variables.   So when I dereference the 
+elements of the method's array, they are the same variables as
+the calling method's array.  <font color="red">  Changes in the array 
+elements in a passed array will affect the array in the calling function. </font>
+If I give a hit-man an address of a person to be killed,
+even if  the hit-man  makes a copy of the address on a separate paper,
+when he goes to the house at the address on the copied paper and 
+kills the man inside that house, the man who lives in the house at the address
+on the original paper is also dead - <b> it 
+is the same man! </b>.  The paper is a copy, but the thing it refers to is 
+only one thing.
+
+<br>
+Try an example and see for yourself, but don't get killed.
+<br>
+<p>
+&copy Nachum Danzig November 2003
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

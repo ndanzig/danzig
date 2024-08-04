@@ -1,0 +1,99 @@
+<HTML>
+<head><title>Using several classes</title>
+</head>
+<body>
+<h2>Using several classes by creating packages </h2>
+<xmp>
+For some reason, Tomcat will not recognize classes in the directory
+where your servlet is running.  In order to have your servlet use classes 
+which you create you will need to put these classes inside of a package. 
+Then your servlet can import this package and access your classes.
+
+For example, if you want to create and use the following class:
+
+public class stam 
+{
+    int number;
+    char letter;
+
+    public stam(int n, char l  )
+    {
+        number=n;
+        letter=l;
+    }
+    public int getNumber()
+    {return number;}
+    public char getletter()
+    {return letter;}
+
+}
+
+You must first create a directory in horayot:~/javaserver/WEB-INF/classes
+called, for example, stampackage.  Then you must add the following line 
+to the start of the above class:
+
+package stampackage;
+
+Then after you compile the above class, place the compiled version (.class)
+and the source code (.java) in the directory 
+horayot:~/javaserver/WEB-INF/classes/stampackage.
+
+Then set the permissions correctly (i.e. 755) for the directory and the files
+inside it.
+
+Now, in your servlet add the following line to the start of your servlet source
+code:
+
+import stampackage.*;
+ 
+
+Now your servlet can create instances of the class stam. When you compile the 
+servlet it should work.
+
+Example using an instance of the class "stam":
+
+import java.io.*;
+import java.util.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import stampackage.*;
+
+public class Ex1 extends HttpServlet{
+    public void init(ServletConfig config)
+        throws ServletException{             }
+
+ public void doGet (HttpServletRequest request, HttpServletResponse response)
+                      throws ServletException, IOException
+	{
+        stam a = new stam(7,'w');
+        int number = a.getNumber();
+        PrintWriter output = response.getWriter();
+        response.setContentType("text/html");
+        output.println("<HTML><HEAD><Title>Stam Example</Title></HEAD><body>");
+	output.println("<center><h1><font color=\"blue\"> This Number is from class <i>stam</i>:  "+number+"</font></h1></br>");
+	output.println("</center></body></html>");
+    }//end doGet                                                                
+}//end servlet                                                                  
+
+</xmp>
+
+<P>
+<!-- Horizontal Rule (Bar) -->
+<HR ALIGN=CENTER  SIZE=5  WIDTH=70%>
+<br>
+&copy; Nachum Danzig 2004
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

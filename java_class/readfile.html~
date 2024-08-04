@@ -1,0 +1,81 @@
+<head>
+<TITLE>Programming - Reading Files</TITLE>
+</head>
+<BODY BGCOLOR="#ffffff" TEXT="#000044" link="#000099" vlink="#990000" alink="#0\
+0ff00">
+<CENTER><H2>Intoduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>Reading from a File</H3></CENTER>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+Here is a short program which reads from a file named 
+myList.dat and prints the lines of that file in reverse order.  The file can
+contain a maximum of 100 lines in this example. Note the two step process for
+reading files. First we create a file handle of type FileReader, then we
+create a buffer capable of reading the from the file handle.
+<p>
+
+<pre>
+import javax.swing.JOptionPane;
+import java.io.*;
+public class Read_File
+{
+ public static void main( String args[] )
+ {
+  final int Max = 100;
+  int counter = 0;
+  String array[] = new String [Max];
+  String line, output="";
+  String file = "myList.dat";
+  try
+  {
+//create a file handle
+      FileReader file_reader = new FileReader ( file );
+
+//open file and create an object for reading file
+      BufferedReader my_buffer_reader = new BufferedReader ( file_reader );
+
+      do 
+      {
+//copy one line into variable "line"
+           line = my_buffer_reader.readLine();
+	   if(line == null)           //we reached the end of file, so quit
+	       {
+	       break;
+	       }
+	   array[counter] = new String ( line );
+	   counter++;
+      }while( counter < Max );//continue until array is filled up
+      my_buffer_reader.close();//close my buffer
+      while (counter !=0 )//print contents in reverse order
+      {
+      	   counter--;
+	   output+=array[counter];
+	   output+='\n';
+      }
+      JOptionPane.showMessageDialog(null, "The file contains: \n" + output);
+  }//end try
+  
+  catch ( FileNotFoundException someException )
+  {
+   System.out.println( "File not found." );
+  }
+  
+  catch ( IOException someException )
+  {
+   System.out.println( someException );
+  }
+  
+  System.exit(0);
+ }//end main()
+}//end class
+
+</pre>
+Here are the contents of a file named <tt>myList.dat</tt>
+<p>
+<pre>
+hello
+world
+</pre>
+<p>
+&copy; Nachum Danzig December 2003
+</body>
+</html>

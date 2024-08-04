@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>
+Writing a file in Tomcat
+</title>
+</head>
+
+<body bgcolor="white">
+<h2>Writing a file in Tomcat
+</h2>
+<p>
+If you attempt to write a file from your servlet, you need to specify 
+where the file will be.  Since the file will actually be written by 
+the Tomcat server, the place is determined by teh Tomcat
+configuration file.  At JCT the files will be written in the 
+directory:
+<p>/usr/local/tomcat/users/<i>username</i>/ 
+
+<p>
+
+
+The owner of the file will be the user tomcat. Therefore, the only way to modify the files there is through your servlet.
+<p>
+
+<br>
+&copy; Nachum Danzig 2004
+
+
+
+
+</body>
+</html>

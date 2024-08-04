@@ -1,0 +1,871 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=us-ascii">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 11">
+<link id=Main-File rel=Main-File href="../comm-lec1v2.htm">
+<link rel=Preview href=preview.wmf>
+<meta name=Robots content=NoIndex>
+<script src=script.js></script><script><!--
+
+if( !(IsWin("PPTOtl")||IsWin("PPTNav")||IsWin("PPTOtlNav")) )
+{
+	obj = GetObj("Main-File")
+	parent.location.href=obj.href
+}
+
+var gOtlHiliteClr="#ffffff",gOtlNormalClr="#000000",gOtlActiveClr="#ffff00",gSelected="",gTxtState=false,gChildEntryTable=new Array()
+
+function Load()
+{
+	if( IsWin("PPTOtl" ) ){ LoadOtl(); parent.gOtlLoaded=true; return }
+	if( g_supportsPPTHTML ) {
+		if( IsWin("PPTNav" ) ){ LoadNav("NavObj",UpdNav); parent.gNavLoaded=true; return }
+		if( IsWin("PPTOtlNav" ) ){ LoadNav("OtlNavObj",UpdOtlNav); parent.gOtlNavLoaded=true; return }
+	}
+}
+function Upd(){ if( IsWin("PPTNav") ) LoadNav("NavObj",UpdNav) }
+function LoadNav( oId,UpdFunc )
+{
+	document.ondragstart=CancelDrag
+	document.onselectstart=CancelDrag
+	document.body.style.margin=2
+	UpdFunc()
+	obj=document.all.item(oId)
+	obj.style.display="block"
+	obj.style.visibility="visible"
+	document.bgColor="threedface"
+
+	if( parent.frames["PPTNts"] )
+		notesBtn.style.display = ""
+	if( parent.gHasNarration )
+		nb_voiceBorder.style.display = ""
+}
+function LoadOtl()
+{
+	var otl=GetObj("OtlObj")
+	otl.style.display="block"
+	otl.style.visibility="visible"
+	if( gOtlActiveClr == "" ) gOtlActiveClr=document.linkColor
+	if( gOtlHiliteClr == "" ) gOtlHiliteClr=document.fgColor
+	if( gOtlNormalClr == "" )
+		gOtlNormalClr=document.bgColor
+	else
+		document.bgColor=gOtlNormalClr  
+
+	InitArray()
+
+	if( ObjExists( parent.gCurSld ) ) {
+		ChangeState( parent.gCurSld,gOtlNormalClr,gOtlHiliteClr )
+		gSelected=parent.gCurSld
+	}
+	else gSelected = -1
+
+	UpdOtl()
+}
+function UpdOtl(){ UpdIdx(parent.gCurSld) }
+function UpdIdx( idx )
+{
+	if( gSelected != idx ) {
+		if( gSelected > 0 )
+			ChangeState( gSelected,gOtlHiliteClr,gOtlNormalClr )
+
+		if( ObjExists( idx ) ) {
+			gSelected = idx
+			ChangeState( gSelected,gOtlNormalClr,gOtlHiliteClr )
+		}
+		else gSelected = -1
+	}
+
+	if( gTxtState != parent.gOtlTxtExp ) {
+		state = "block"
+		if( !parent.gOtlTxtExp )
+			state="none"
+
+		for(ii=0; ii<gChildEntryTable.length; ii++) {
+			obj=gChildEntryTable[ii];
+			if( obj.id == null ) continue;
+
+			if( obj.id.indexOf("PPTC") >= 0 )
+				obj.style.display=state;
+		} 
+		gTxtState=parent.gOtlTxtExp
+		if( ObjExists( gSelected ) )
+			ChangeState( gSelected,gOtlNormalClr,gOtlHiliteClr )
+	}
+}
+function InitArray()
+{
+	count=0
+	var list=GetTags(document,"DIV");
+	for(ii=0; ii<list.length; ii++) {
+		obj=list.item(ii)
+		if( obj.id == null ) continue
+
+		if( obj.id.indexOf("PPTC") >= 0 )  
+			gChildEntryTable[count++]=obj
+	}
+}
+function ChangeState( idx,fgColor,bgColor )
+{
+	obj=GetObj("PPTL"+idx)
+	obj.style.color=fgColor
+
+	obj=GetObj("PPTP"+idx)
+	obj.style.backgroundColor=bgColor
+}
+function ChgClr( o,clr ){ if( o.id != "PPTL"+gSelected ) o.style.color=clr }
+function Over( src ){ ChgClr(GetLink(src),gOtlActiveClr) }
+function Out( src ){ ChgClr(GetLink(src),gOtlHiliteClr) }
+function Follow(src){ window.location.href = GetLink(src).href; }
+function ObjExists( ii ) { obj=GetObj("PPTP"+ii ); return( obj ) }
+function GoToSld( href ){ UpdIdx(parent.GetSldNum(href)); parent.GoToSld( href ) }
+function CancelDrag(){ window.event.cancelBubble=true;window.event.returnValue=false}
+function GetLink(src)
+{
+   if(src.tagName=="A") return src
+   else return GetTags(src,"A").item(0)
+}
+
+function UpdNav()
+{
+	txt = "<center>";
+	if( parent.GetHrefObj( parent.gCurSld ).mOrigVis == 1 )
+		txt += "Slide " + parent.GetCurSldNum() + " of " + parent.GetNumSlds()
+	else
+		txt += "Hidden Slide"
+	txt += "</center>";
+	nav_text.innerHTML = txt;
+
+	if( !parent.HasPrevSld() )
+		gBtnArr["nb_prev"].Enabled(0)
+	else
+		gBtnArr["nb_prev"].Enabled(1)
+
+	if( !parent.HasNextSld() )
+		gBtnArr["nb_next"].Enabled(0)
+	else
+		gBtnArr["nb_next"].Enabled(1)
+	gBtnArr["nb_nts"].Enabled(1)
+	gBtnArr["nb_ntsBorder"].SetFlag( parent.gHasNts )
+
+	gBtnArr["nb_sldshw"].Enabled(1)
+	gBtnArr["nb_voice"].Enabled(1)
+}
+
+function ExecBtn()
+{
+	if (event.keyCode == 13)
+	{
+		BtnOnDown();
+		BtnOnUp();
+	}
+}
+function UpdOtlNav()
+{
+	gBtnArr["nb_otl"].SetEnabled();
+
+	if( parent.gOtlOpen )
+		gBtnArr["nb_otlTxt"].Enabled( true );
+	else
+		document.all.item("nb_otlTxtBorder").style.visibility = "hidden";
+}
+
+
+
+
+//--></script>
+<style>
+<!--.PTxt
+	{position:relative;
+	width:100%;
+	margin-top:5px;
+	padding-left:2px;
+	font-weight:bold;}
+.CTxt
+	{position:relative;
+	width:100%;
+	margin-top:5px;}
+a
+	{color:white;
+	text-decoration:none;}
+ul
+	{color:white;
+	margin-bottom:0px;
+	margin-left:20px;}
+.sldNum
+	{margin-top:5px;
+	color:white;}
+.button
+	{position:absolute;
+	width:32px;
+	height:20px;
+	border-style:solid;
+	border-width:1px;
+	border-color:threedface;}
+-->
+</style>
+</head>
+
+<body onload="Load()" style='margin:2px'>
+
+<div id=NavObj onload="Load()" onmouseover="BtnOnOver()"
+onmousedown="BtnOnDown()" onmouseout="BtnOnOut()" onmouseup="BtnOnUp()"
+onkeypress="ExecBtn()" style='display:none;visibility:hidden'>
+<table id="notesBtn" style='display:none;position:relative;width:55px' align=left cellpadding=0
+ cellspacing=0>
+ <td nowrap>
+ <div id="nb_ntsElem" title="Show/Hide
+Notes" align=center style='position:relative;margin-left:5px;margin-right:5px;padding:3px;
+ font-family:Arial;color:buttontext;font-size:9pt; cursor:default'>
+ <img src="notes_flag.gif" id="nb_nts" style='display:none'> &nbsp;Notes</div>
+ <div id="nb_ntsBorder" title ="Show/Hide
+Notes" onfocus="BtnOnOver()" onblur="BtnOnOut()" TABINDEX=1 style='position:absolute;top:0%;left:0%;width:100%;height:20px'>
+
+ </div>
+ </td>
+</table>
+
+
+<table style='position:relative;width:70px' align=right cellpadding=0 cellspacing=0>
+ <td nowrap>
+ <div id="nb_sldshwText" title="Full Screen Slide Show" align=center style='position:relative;margin-left:20px;padding:3px;
+ font-family:Arial;color:buttontext;font-size:9pt;cursor:default'>Slide
+Show</div>
+ <div id="nb_sldshwBorder" title="Full Screen Slide Show" onfocus="BtnOnOver()" onblur="BtnOnOut()" TABINDEX=5 style='position:absolute;top:0%;left:0%;width:100%;height:20px'>
+ <div style='position:absolute;clip:rect(0px, 18px, 18px, 0px)'><img
+ src="buttons.gif" id="nb_sldshw" style='position:relative;left:-254px'></div>
+ </div>
+ </td>
+ <td>
+ <div id="nb_voiceBorder" style='display:none;position:absolute;top:0;left:-40px;
+ width:20px;height:20px' onfocus="BtnOnOver()" onblur="BtnOnOut()" TABINDEX=4 class=button>
+ <div style='position:absolute;clip:rect(0px, 18px, 18px, 0px)'><img
+ src="buttons.gif" id="nb_voice" title="Pause/Play Narration" style='position:
+ relative;left:-290px'></div>
+ </div>
+ </td>
+</table>
+
+<table style='position:relative' align=center cellpadding=0 cellspacing=0>
+ <td nowrap>
+ <div id="nb_prevBorder" onfocus="BtnOnOver()" onblur="BtnOnOut()" TABINDEX=2 class=button style='left:-30px'>
+ <div style='position:absolute;clip:rect(0px, 30px, 18px, 0px)'><img
+ src="buttons.gif" id="nb_prev" title="Previous Slide" style='position:relative;
+ left:0px'></div>
+ </div>
+ <span id="nav_text" style='position:relative;top:3px;width:100px;font-family:
+ Arial;color:buttontext;font-size:9pt'></span>
+ <div id="nb_nextBorder" onfocus="BtnOnOver()" onblur="BtnOnOut()" TABINDEX=3 class=button>
+ <div style='position:absolute;clip:rect(0px, 30px, 18px, 0px)'><img
+ src="buttons.gif" id="nb_next" title="Next Slide" style='position:relative;
+ left:-90px'></div>
+ </div>
+ </td>
+</table>
+</div>
+
+<div id=OtlNavObj onload="Load()" onmouseover="BtnOnOver()"
+onmousedown="BtnOnDown()" onmouseout="BtnOnOut()" onmouseup="BtnOnUp()"
+onkeypress="ExecBtn()" style='display:none;visibility:hidden'>
+
+<table style='position:relative;width:70px' align=left cellpadding=0 cellspacing=0>
+ <td nowrap><div title="Show/Hide
+Outline" id="nb_otl" onfocus="BtnOnOver()" onblur="BtnOnOut()" TABINDEX=11
+ style='position:absolute;top:0%;left:0%;width:100%;height:100%;cursor:default'>
+ <div id="nb_otlElem" align=center style='position:relative;padding:3px;font-family:Arial;
+ color:buttontext;font-size:9pt'>Outline</div></div>
+ </td>
+</table>
+
+<table style='position:relative' align=center cellpadding=0 cellspacing=0>
+ <td>
+ <div style='position:absolute;left:-18px;width:24px;height:20px;border-style:
+ solid;border-width:1px;border-color:threedface' onfocus="BtnOnOver()" onblur="BtnOnOut()" TABINDEX=12 id="nb_otlTxtBorder">
+ <div style='position:absolute;clip:rect(0px, 22px, 18px, 0px)'><img
+ src=buttons.gif id="nb_otlTxt" title="Expand/Collapse Outline"
+ style='position:relative;left:-157px'></div>
+ </div>
+ </td>
+</table>
+
+</div>
+
+<div id=OtlObj style='display:none;visibility:hidden;'>
+
+
+<table width="100%" style='font-family:Arial;font-size:9pt'>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>1</font></div>
+  </td>
+  <td width="100%">
+  <div id=PPTP1 class=PTxt dir=rtl align=left><font size=2><a
+  href="javascript:GoToSld('slide0014.htm');" id=PPTL1>&#1502;&#1506;&#1489;&#1491;&#1492;
+  &#1489;&#1502;&#1489;&#1493;&#1488;
+  &#1500;&#1514;&#1511;&#1513;&#1493;&#1512;&#1514;</a></font></div>
+  <div id=PPTC1 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li><span dir=rtl>&#1489;&#1492;&#1514;&#1488;&#1501;
+       &#1500;&#1488;&#1502;&#1493;&#1504;&#1492; &#1513;&#1500;&#1497;
+       &#1513;&#1514;&#1500;&#1502;&#1497;&#1491;
+       &#1513;&#1488;&#1497;&#1504;&#1493; &#1513;&#1493;&#1500;&#1496;
+       &#1489;&#1488;&#1504;&#1490;&#1500;&#1497;&#1514; &#1500;&#1488;
+       &#1497;&#1499;&#1493;&#1500; &#1500;&#1492;&#1514;&#1492;&#1491;&#1512;
+       &#1489;&#1514;&#1493;&#1488;&#1512; &#1488;&#1511;&#1491;&#1502;&#1497;
+       &#1489;&#1502;&#1491;&#1506;&#1497; &#1492;&#1502;&#1495;&#1513;&#1489;,
+       &#1488;&#1494;&#1497;:<span dir=ltr><br>
+              <br>
+              </span>&#1494;&#1492; &#1492;&#1513;&#1511;&#1507;
+       &#1492;&#1488;&#1495;&#1512;&#1493;&#1503;
+       &#1489;&#1506;&#1489;&#1512;&#1497;&#1514;
+       &#1513;&#1514;&#1512;&#1488;&#1493; &#1489;&#1511;&#1493;&#1512;&#1505;</span></li>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>2</font></div>
+  </td>
+  <td>
+  <div id=PPTP2 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0001.htm');" id=PPTL2>RS-232C Standard</a></font></div>
+  <div id=PPTC2 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>The RS-232C standard is an asynchronous serial communication method.</li>
+   <li>Serial means that the information is sent 1-bit at a time.</li>
+   <li>Asynchronous means that no clock signal is sent with the data.<span
+       style='mso-spacerun:yes'>&nbsp; </span>Each side uses its own clock and
+       a start and stop bit. Synchronous communication means that a clock
+       signal is sent in addition to a data signal (or interwoven with it)See
+       http://en.wikipedia.org/wiki/Asynchronous_serial_communication</li>
+   <li>The RS-232C standard works at the physical layer of the
+       communication<span style='mso-spacerun:yes'>&nbsp; </span>standard. This
+       is the lowest level and the one that physically connects the devices.</li>
+   <li>The communication is done through the serial port of the PC. This is a
+       male connector with 25 (old) or 9 (new) pins, in both cases only 9 pins,
+       at the most, are used.</li>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>3</font></div>
+  </td>
+  <td>
+  <div id=PPTP3 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0002.htm');" id=PPTL3>Why Use a Serial
+  Interface?</a></font></div>
+  <div id=PPTC3 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>Good question? We program in parallel (writing a value to a char, int,
+       float), why communicate serially? Less data is transferred per send.</li>
+   <li>There are several reasons:</li>
+   <ul>
+    <li>Serial cables can be longer than parallel cables.</li>
+    <li>Serial cables are cheaper than parallel cables, although there is a
+        cost of converting parallel data to the serial connection.</li>
+    <li>Infra Red are serial. Detecting 1 point of light isn't easy, try
+        detecting 8 or more points of light.</li>
+    <li>Many microcontrollers (<span dir=rtl>&#1502;&#1497;&#1511;&#1512;&#1493;-&#1502;&#1506;&#1489;&#1491;&#1497;&#1501;</span>)
+        use SCI (Serial Communication Interface) to communicate with the outer
+        world.</li>
+    <li>SATA disks are serial. See http://en.wikipedia.org/wiki/Serial_ATA</li>
+    <br>
+    <br>
+   </ul>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>4</font></div>
+  </td>
+  <td>
+  <div id=PPTP4 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0003.htm');" id=PPTL4>The Connector</a></font></div>
+  <div id=PPTC4 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>The pins abbreviations are (numbers in parentheses are the 25D pin
+       numbers.</li>
+   <li>1. CD (8)</li>
+   <li>2. RD (Rx) (3)</li>
+   <li>3. TD (Tx) (2)</li>
+   <li>4. DTR (20)</li>
+   <li>5. SG (Ground) (7)</li>
+   <li>6. DSR (6)</li>
+   <li>7. RTS (4)</li>
+   <li>8. CTS (5)</li>
+   <li>9. RI (22)</li>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>5</font></div>
+  </td>
+  <td>
+  <div id=PPTP5 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0007.htm');" id=PPTL5>9D to 25D Conversion</a></font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>6</font></div>
+  </td>
+  <td>
+  <div id=PPTP6 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0004.htm');" id=PPTL6>DTE and DCE</a></font></div>
+  <div id=PPTC6 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>A DTE (Data Terminal Device) is usually a computer.</li>
+   <li>A DCE (Data Communication Device) is usually a Modem. A Cable connecting
+       2 PCs is also a Modem. It is called a NULL Modem.</li>
+   <li>The problem with communications is that the DTE speed is much greater
+       than the DCE speed. The communication protocol bridges this gap (<span
+       dir=rtl>&#1502;&#1490;&#1513;&#1512; &#1506;&#1500;
+       &#1492;&#1508;&#1506;&#1512;</span>).</li>
+   <li>The DCE to DCE speed is also called the line speed.</li>
+   <li>Maximum Modem speed today is 56K BPS (56K Bits Per Second), this is the
+       line speed. On the other hand the maximum DTE/DCE speed is 115,200 BPS.
+       This is the gap software must bridge.</li>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>7</font></div>
+  </td>
+  <td>
+  <div id=PPTP7 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0005.htm');" id=PPTL7>The UART 8250</a></font></div>
+  <div id=PPTC7 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>OK, lets say we understood the previous slides. How does the CPU send
+       signals through the serial port?</li>
+   <li>A UART (Universal Asynchronous Receiver/Transmitter) is used. The UART
+       is a device that the CPU programs to perform tasks for it. It detects
+       logical transitions (voltage changes) on the serial ports.</li>
+   <li>In our case the UART 8250 is the device that controls the serial port.
+       The 8250 is the first of a family that contains the 8250B, 16450, 16550
+       and others.</li>
+   <li>The 8250 was introduced with the XT PC, so your computer probably has a
+       later version. But all are backward compatible, so we can program as
+       though we have a 8250.</li>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>8</font></div>
+  </td>
+  <td>
+  <div id=PPTP8 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0006.htm');" id=PPTL8>Programming the UART
+  8250</a></font></div>
+  <div id=PPTC8 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>Programming is done by reading and writing registers of the 8250. The
+       registers are:</li>
+   <li>Base Address<span
+       style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Mode<span
+       style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       </span>Name</li>
+   <li>+0<span style='mso-spacerun:yes'>&nbsp;
+       </span>(DLAB=0)	Write		Transmitter Holding Buffer 	THR</li>
+   <li>+0<span style='mso-spacerun:yes'>&nbsp; </span>(DLAB=0)	Read		Receiver
+       Buffer<span style='mso-spacerun:yes'>&nbsp; </span>			RBR</li>
+   <li>+0<span style='mso-spacerun:yes'>&nbsp; </span>(DLAB=1)	Rd/Wr		Divisor
+       Latch Low Byte 		DLL</li>
+   <li>+1<span style='mso-spacerun:yes'>&nbsp; </span>(DLAB=0)	Rd/Wr		Interrupt
+       Enable Register 		IER</li>
+   <li>+1<span style='mso-spacerun:yes'>&nbsp; </span>(DLAB=1)	Rd/Wr		Divisor
+       Latch High Byte		DLM</li>
+   <li>+2			Read		Interrupt Idendification Register 	IIR</li>
+   <li>+2			Write		FIFO Control Register		FCR</li>
+   <li>+3			Rd/Wr		Line Control Register 		LCR</li>
+   <li>+4			Rd/Wr		Modem Control Register		MCR</li>
+   <li>+5			Read		Line Status Register 		LSR</li>
+   <li>+6			Read		Modem 	Status Register 		MSR</li>
+   <li>+7			Rd/Wr		Scratch Register			SCR</li>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>9</font></div>
+  </td>
+  <td>
+  <div id=PPTP9 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0008.htm');" id=PPTL9>Accessing the Registers</a></font></div>
+  <div id=PPTC9 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>On the 80x86 architecture I/O devices are accessed using special I/O
+       instructions. These instructions are called IN and OUT, access I/O Ports.</li>
+   <li>I/O Ports are addresses in what's called I/O space, these are addresses
+       that when accessed using the special I/O instructions access the
+       registers of I/O devices.</li>
+   <li>The PC has standard ports for the serial interfaces, these ports are
+       called COM1 - COM4. They are mapped to the following port numbers and
+       IRQ (Interrupt Request) lines.</li>
+   <li>Name<span
+       style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       </span>Port address<span style='mso-spacerun:yes'>&nbsp;&nbsp;
+       </span>IRQ</li>
+   <li>COM 1	3F8		4</li>
+   <li>COM 2	2F8		3<span style='mso-spacerun:yes'>&nbsp; </span>(usually the
+       serial mouse)</li>
+   <li>COM 3	3E8		4</li>
+   <li>COM 4	2F8		3</li>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>10</font></div>
+  </td>
+  <td>
+  <div id=PPTP10 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0009.htm');" id=PPTL10>Getting the Port
+  Addresses</a></font></div>
+  <div id=PPTC10 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>#include &lt;stdio.h&gt;</li>
+   <li>#include &lt;dos.h&gt;</li>
+   <li>void main(void)</li>
+   <li>{ 	unsigned int far *ptraddr; /* Pointer to location of Port Addresses
+       */</li>
+   <li>	unsigned int address,a;	 /* Address of Port */</li>
+   <li>	ptraddr=(unsigned int far *)0x00000400; //where addresses of com ports
+       are</li>
+   <li>	for (a = 0; a &lt; 4; a++) {</li>
+   <li>		address = *ptraddr;</li>
+   <li>		if (address == 0)</li>
+   <li>			printf(&quot;No port found for COM%d \n&quot;,a+1);</li>
+   <li>		else</li>
+   <li>			printf(&quot;Address assigned to COM%d is %Xh\n&quot;,a+1,address);
+       		*ptraddr++; }</li>
+   <li>}</li>
+   <br>
+   <br>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>11</font></div>
+  </td>
+  <td>
+  <div id=PPTP11 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0010.htm');" id=PPTL11>Accessing the Registers</a></font></div>
+  <div id=PPTC11 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>The port addresses for the COMs are defined in the BIOS (Basic I/O
+       System) ROM (Read Only Memory) from addresses 0x400 to 0x408.</li>
+   <li>OK. So how do we access the registers?</li>
+   <li>There is a C interface to the IN and OUT instructions:<br>
+              int inp(unsigned short port); <br>
+              <span
+       style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       </span>// read a byte from the port<br>
+              int outp(unsigned short port, int val); <br>
+              <span
+       style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       </span>// write a byte to the port</li>
+   <li>Using these two instruction is is possible to access the registers
+       defined in the previous slides. For instance to read the LCR we have to
+       write:<br>
+              int val;<br>
+              val = inp(0x3F8 + 3); // or inp(0x3FB);</li>
+   <li>Look at the functions descriptions in the help manuals of Visual C++ or
+       BorlandC.</li>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>12</font></div>
+  </td>
+  <td>
+  <div id=PPTP12 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0011.htm');" id=PPTL12>Real vs. Protected Mode</a></font></div>
+  <div id=PPTC12 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>Protected mode is the mode that the computer runs in when it has to
+       support multiple users. UNIX and XP run only in protected mode. A
+       regular user can&#8217;t access the I/O ports.</li>
+   <li>Real mode (or single-user mode, or priveleged-mode) is the mode used by
+       the OS to access I/O devices. DOS runs in real mode. So we<span
+       style='mso-spacerun:yes'>&nbsp; </span>will use a Virtual PC to run DOS
+       in order to run our programs.</li>
+   <li>inp and outp work when compiled with BorlandC, the Visual C++ versions (_inp
+       and _outp) might create problems, try it out.</li>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>13</font></div>
+  </td>
+  <td>
+  <div id=PPTP13 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0012.htm');" id=PPTL13>Baud Rate</a></font></div>
+  <div id=PPTC13 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>The rate of transfer is in BPS. The UART 8250 has a clock that's rate is
+       1.8432 MHz. The UART divides the clock signal by 16, giving a maximum
+       baud of 115,200 BPS.</li>
+   <li>But this rate might be too fast for some devices, so the rate is
+       controllable.</li>
+   <li>Lets say we want to communicate at 2400 BPS. We have to divide the clock
+       rate by a number multiplied by 16 to get the desired rate. This number
+       is called the baud rate.</li>
+   <li>Thus, in our case 2400 = 1.8432*10<sup>6</sup>/(baud rate * 16).</li>
+   <li>The baud rate = 1.8432*10<sup>6</sup>/(2400 * 16) = 48</li>
+   <li>The baud rate is stored in the DLL and DLM before transmission starts.
+       The DLL Contains the 8 LSBs (Least Significant Bits) and the DLM
+       contains the 8 MSBs (Most Significant Bits).</li>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>14</font></div>
+  </td>
+  <td>
+  <div id=PPTP14 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0013.htm');" id=PPTL14>RS-232C Waves</a></font></div>
+  <div id=PPTC14 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>So far we have introduced RS-232 Communications in relation to the PC.
+       RS-232 communication is asynchronous. That is a clock signal is not sent
+       with the data. Each word is synchronized using its start bit, and an
+       internal clock on each side (defined by the baud rate) reads the data.</li>
+   <br>
+   <br>
+   <br>
+   <li>The signal is in the logical 1 state (a.k.a. &quot;mark&#8220; or
+       &#8220;stop&#8221;), a start bit in logical 0 state<span
+       style='mso-spacerun:yes'>&nbsp; </span>(a.k.a. &quot;space&quot;)
+       signals that data is about to be sent. Then 8 bits of data are sent
+       (this can be changed), a parity bit is optional (not shown here) and the
+       a stop bit or bits (logical 1)<span style='mso-spacerun:yes'>&nbsp;
+       </span>is sent. This is called a frame (<span dir=rtl>&#1502;&#1505;&#1490;&#1512;&#1514;</span>).
+       The data is framed between a stop and start bit. The start and stop bits
+       ensure a state transition.</li>
+   <li>The above waveform is relevant to the TD and RD lines only.</li>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>15</font></div>
+  </td>
+  <td>
+  <div id=PPTP15 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0015.htm');" id=PPTL15>The Line Control
+  Register (LCR)</a></font></div>
+  <div id=PPTC15 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>The LCR is a 8-bit register (as all 8250 registers) that controls the
+       data that goes on the TD and RD lines. Its bits are:</li>
+   <li>Bits 0,1: Select the word length, from 5 to 8 bits.</li>
+   <ul>
+    <li>00: 5 bit word</li>
+    <li>01: 6 bit word</li>
+    <li>10: 7 bit word</li>
+    <li>11: 8 bit word</li>
+   </ul>
+   <li>Bit 2: Sets the length of the stop bit.</li>
+   <ul>
+    <li>0: 1 bit length</li>
+    <li>1: 1.5 bit<span style='mso-spacerun:yes'>&nbsp; </span>length if 5 bit
+        word selected, 2 bit length if 6,7,8 bit word selected</li>
+   </ul>
+   <li>Bit 6: Sets the break control bit. When this bit is set to 1 the TD line
+       is permanently set to 0 (space).</li>
+   <li>Bit 7: Sets the DLAB (Divisor Latch Access Bit).</li>
+   <ul>
+    <li>0: enables access to RBR, THR, and IER.</li>
+    <li>1: enables access to DLL and DLM (to set the baud).</li>
+   </ul>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>16</font></div>
+  </td>
+  <td>
+  <div id=PPTP16 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0016.htm');" id=PPTL16>The LCR Parity Bits</a></font></div>
+  <div id=PPTC16 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>Bit 3: Parity enable bit.</li>
+   <ul>
+    <li>0: no parity bit sent</li>
+    <li>1: parity bit sent</li>
+   </ul>
+   <li>Bit 4: Chooses between odd and even parity.</li>
+   <ul>
+    <li>0: odd parity. The number of<span style='mso-spacerun:yes'>&nbsp;
+        </span>'1's in the word is counted. If odd, the parity bit is set, if
+        even, it isn't set.</li>
+    <li>1: even parity. The number of<span style='mso-spacerun:yes'>&nbsp;
+        </span>'1's in the word is counted. If even, the parity bit is set, if
+        odd it isn't set.</li>
+    <li>For instance the word 11001011 has odd parity. So if parity is enabled
+        (bit 3) and bit 4 is 0<span style='mso-spacerun:yes'>&nbsp; </span>(odd
+        parity), the parity bit sent will be 1 and the receiver will check the
+        data and expect to find a 1 in the parity bit.</li>
+   </ul>
+   <li>Bit 5: Sets the &quot;sticky&quot; parity bit. The parity bit is always
+       the same value, &quot;high&quot; (1) or &quot;low&quot; (0).</li>
+   <ul>
+    <li>0: The parity bit is set by the input word.</li>
+    <li>1: The parity bit is 0 if bit 4 is 1, the parity bit is 1 if bit 4 is
+        0. This setting is permanent as long as bit 6 is set.</li>
+   </ul>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>17</font></div>
+  </td>
+  <td>
+  <div id=PPTP17 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0018.htm');" id=PPTL17>Sending a Word</a></font></div>
+  <div id=PPTC17 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>In order to send a word the following steps must be taken on both sides
+       (sender and receiver).</li>
+   <li>Set the baud rate by computing it and loading DLL and DLM.</li>
+   <li>Set the parity (enabled on/off, odd/even).</li>
+   <li>Set the word length (5-8 bits).</li>
+   <li>Set the number of stop bits.</li>
+   <li>Write a word to the THR. This word (lets assume 8-bit words) is written
+       into the TSR (Transmit Shift Register). The TSR then shifts the bits out
+       one by one and transmits them on the TD line.</li>
+   <br>
+   <br>
+   <br>
+   <br>
+   <li>The word is received by the RD on the receivers side and stored in the
+       RBR register.</li>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>18</font></div>
+  </td>
+  <td>
+  <div id=PPTP18 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0017.htm');" id=PPTL18>The Line Status
+  Register (LSR)</a></font></div>
+  <div id=PPTC18 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>The LSR shows the current status of communication, errors in
+       transmission will be written into the register.</li>
+   <li>Bit 0: Data Ready (DR) indicator. When set, it indicates that a byte is
+       ready to be read from the RBR. Reading from the RBR sets the DR bit to
+       0.</li>
+   <li>Bit 1: Overrun Error (OE) indicator. When set indicates that a new byte
+       has been received before the current byte in the RBR has been read. The
+       OE is reset (set to 0) when the LSR is read.</li>
+   <li>Bit 2: Parity Error (PE) indicator. When set indicates that a parity
+       error has occurred. Is reset by reading the LSR.</li>
+   <li>Bit 3: Framing Error (FE) indicator. Is set whenever the received word
+       doesn't have a valid stop bit. The stop bit following the last data bit
+       or parity is detected as a 0 instead of a 1.</li>
+   <li>Bit 4: Break Interrupt (BI) indicator. Is set whenever the RD line is
+       held in the space state for longer than it takes to send a word.</li>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+ <tr onmouseover="Over(this)" onmouseout="Out(this)" onclick="Follow(this)"
+  style='cursor:hand'>
+  <td align=right valign=top>
+  <div class=sldNum><font size=2>19</font></div>
+  </td>
+  <td>
+  <div id=PPTP19 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0019.htm');" id=PPTL19>The LSR (cont.)</a></font></div>
+  <div id=PPTC19 class=CTxt style='display:none'><font size=2>
+  <ul>
+   <li>Bit 5: Transmitter Holding Register Empty (THRE) indicator. When set it
+       is possible to write another byte into the THR. The bit is set when the
+       byte is transferred from the THR to the TSR. The bit is reset when the
+       processor starts loading a byte into the THR.</li>
+   <li>Bit 6: Transmitter Shift Register Empty (THRE) indicator. When set,
+       indicates that the TSR is empty. It is reset when a word is loaded into
+       it from the THR.</li>
+   <li>Bit 7: Unused. Permanent 0.</li>
+  </ul>
+  </font></div>
+  </td>
+ </tr>
+</table>
+
+
+
+</div>
+
+<div style='display:none'><a href=master03.htm></a><a href=master03.xml></a><a
+href=preview.wmf></a><a href=master02.htm></a><a href=pres.xml></a><a
+href=editdata.mso></a><a href=slide0014.htm></a><a href=slide0001.htm></a><a
+href=slide0002.htm></a><a href=slide0003.htm></a><a
+href="slide0003_image001.png"></a><a href="slide0003_image002.gif"></a><a
+href=slide0007.htm></a><a href="slide0007_image003.png"></a><a
+href="slide0007_image004.gif"></a><a href=slide0004.htm></a><a
+href=slide0005.htm></a><a href=slide0006.htm></a><a href=slide0008.htm></a><a
+href=slide0009.htm></a><a href=slide0010.htm></a><a href=slide0011.htm></a><a
+href=slide0012.htm></a><a href=slide0013.htm></a><a
+href="slide0013_image005.png"></a><a href="slide0013_image006.gif"></a><a
+href=slide0015.htm></a><a href=slide0016.htm></a><a href=slide0018.htm></a><a
+href="slide0018_image007.gif"></a><a href=slide0017.htm></a><a
+href=slide0019.htm></a><a href=master01.htm></a><a
+href="master03_stylesheet.css"></a><a href=script.js></a><a
+href="../comm-lec1v2.htm"></a><a href=fullscreen.htm></a><a href=buttons.gif></a><a
+href=frame.htm></a><a href=outline.htm></a></div>
+
+</body>
+
+</html>

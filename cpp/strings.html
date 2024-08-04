@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+<head>
+<TITLE>Programming - Strings Pointers and Arrays</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Strings, Pointers and More Arrays</H3></CENTER>
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+Now that you have learned what an array is, it should be clear that 
+just as you can make an array of int's or float's, you can also make
+an array of char's.  The special thing about an array of char's though,
+is that an array of char's  is capable of storing words or sentences.
+If you make an array of characters and then put a NULL at the end,
+you have created a special array called a <b> string</b>.
+
+<blockquote>
+A <b>string</b> is a NULL terminated array of <b>char</b>s<sup>*</sup>.
+
+</blockquote>
+
+<p><b>cin</b> and <b>cout</b> are built to work with strings. That means that if you give, for
+example, <b>cout</b> the name of a NULL terminated <b>char</b> array, it will print out
+the entire array until the NULL is reached.  If, however, you supply
+<b>cout</b> with a regular <b>char</b> array (i.e. one which is not NULL terminated)
+it will print beyond the end of the array.  It will continue printing 
+the junk in memory after the array until it reaches a NULL somewhere in that junk.
+Make sure to only give <b>cout</b> or <b>cin</b> a single character or correctly formed <em>string</em>.
+
+<p> Strings are not so hard to create.  Any set of 
+character literals inside quotation marks is automatically followed
+by a NULL, so it is a string. It can be assigned to an array of <b>char</b>s
+and then that array will be a string.   Let's see an example of the power of 
+<b>cin</b> and <b>cout</b> with strings.
+
+<blockquote>
+<tt>
+<br>int main()
+<br>{
+<br>
+<br>char ar[60]="greg";
+<br>cout&lt;&lt;ar;
+<br> ////  ar="hheeee"; //illegal
+<br> cin &gt;&gt;ar;
+<br> cout&lt;&lt;ar;
+<br>
+<br>  return 1;
+<br>}
+</tt>
+</blockquote>
+
+In this example I created an array of  60 characters (actually, while the array
+has 60 spaces, I can only use 59 of them for the letters of a string  because
+I need one for a NULL at the end).
+
+<p>
+Then I assign the array the literal string "greg".  (This can ONLY be done 
+when the array is declared, not afterward.) The first four spaces of the string
+contain the letters <tt>greg</tt> and the fifth space contains a NULL character.
+The remaining 55 characters in the array are not used and therefore contain unknown or junk data.
+
+<p>Then I overwrite the array with whatever the user types in. 
+(Note: If he types more than 59 character I will over-run my array.)
+
+<p> Then I can print out the new contents of the array.  
+Notice how <b>cin</b> and <b>cout</b> are smart enough 
+to print the entire array when I give them the name of the array.
+This will not work with an <b>int</b> or <b>float</b> array.  It only works with a NULL
+terminated character array. This is because the <b>cin</b> and <b>cout</b> functions know 
+to read until they reach a NULL.  Since <b>int</b>, <b>float</b>, <b>short</b>, etc. arrays 
+are not necessarily NULL terminated, <b>cin</b> and <b>cout</b> have no way to know
+when the end is reached.  Therefore they cannot print regular arrays. However, they can
+of course print the individual elements of an array.
+
+<p>
+Ok, now we have a string.  But since the string is actually just an array of 
+characters I can mess around with it.  For example, I can print the array 
+in backward order.  First, I will show you how to print it in forward order.
+(This is actually what the function <b>cout</b> does when you give it an array name,
+but we will print each element ourselves manually instead of using cout's built-in capabilities.)
+
+
+
+<blockquote>
+<tt>
+<br>int printString( char  myString[] )
+<br>{
+<br> int i;
+<br> for ( i = 0; myString[i] != NULL; i++)
+<br>  &nbsp;  { cout &lt;&lt; myString[i];
+<br>  &nbsp;  }
+<br>  return 1;
+<br>}
+</tt>
+</blockquote>
+
+
+<p> This function starts at the beginning of the array it is passed and 
+keeps printing out the letters one at a time until it reaches the end of the array.
+( Remember string arrays always end with a NULL, so the NULL will be
+my clue to know when the array is over.)
+
+<p>To print the array backward I first have to find the end of the array.
+So I will count till I get the end of the array and then work backward.
+Let's see the example:
+
+
+<blockquote>
+<tt>
+<br>int reversePrintString( char myString[] )
+<br>{
+<br> int i;
+<br> for ( i = 0; myString[i] != NULL; i++);
+<br> for (  ; i >= 0; --i)
+<br>  &nbsp;  { cout &lt;&lt; myString[i];
+<br>  &nbsp;  }
+<br>  return 1;
+<br>}
+</tt>
+</blockquote>
+
+Notice that first I do a loop that does nothing except increment <b>i</b> till
+it reaches the end of the array.  Then I create another loop
+to print the array from its last element to its first element.
+
+<p>
+
+I can also do other things, like, for example, find the first 'p' in the 
+string. Or for example, <b>change</b> the original string by, say,
+taking any lowercase t's in the array and making them into capital T's.
+Let's see this second  example.
+
+<blockquote>
+<tt>
+<br>int t_to_T( char myString[] )
+<br>{
+<br> for (int i = 0; myString[i] != NULL; i++)
+<br>  &nbsp;  {
+<br> &nbsp;   &nbsp;  if (myString[i]=='t')
+<br>   &nbsp;   &nbsp;  &nbsp;   &nbsp; { 
+<br>   &nbsp;   &nbsp;  &nbsp;   &nbsp;  myString[i]='T';
+<br>   &nbsp;   &nbsp;  &nbsp;   &nbsp; } 
+<br>  &nbsp;  }
+<br>  return 1;
+<br>}
+</tt>
+</blockquote>
+
+<p>
+As we explained in the section on arrays, the changes made here will affect
+the original array in the calling function.
+And notice, I did not print out the string in the function.  I simply 
+changed the string.  If I would want to print out the array I would
+do that in the calling function, the main() function for example:
+<blockquote>
+<tt>
+<br>int main()
+<br>{
+<br> char charlie[100]="this is a test string.";
+<br> t_to_T( charlie);
+<br> cout &lt;&lt; charlie;
+<br>  return 1;
+<br>}
+</tt>
+</blockquote>
+<p>
+Notice that when I called t_to_T  I passed the name of my string, charlie.
+I did not have to use and should not use the [ ] 's .
+Also notice that the string is much larger than it needs to be. 
+This is ok, but I have wasted some 75 char's.
+<h3>String Functions</h3>
+
+<p>In the string.h library there are various ready made functions for you to use:
+  <ul>
+    <li>int strlen (const char * str);// returns number of characters in str
+    <li>char * strcpy (char * str1, const char * str2);// copies str2 into str1
+    <li>char *  strcat (char * str1, const char * str2);// copies str2 to the  end of str1, concatenation
+    <li>int strcmp (const char * str1, const char * str2);// if str1 is less than str2 returns an integer less than 0, if str1
+      is equal to str2, returns 0, if str1 is greater than str2 returns an integer greater than 0
+  </ul>
+  Similarly, there are functions that limit the maximum number of characters to count, copy, concatenate or compare
+  <ul>
+    <li>int strnlen (const char * str, int n);// returns number of characters in str, but not more that n
+    <li>char * strncpy (char * str1, const char * str2, int n);// copies not more than n characters of str2 into str1
+    <li>char *  strncat (char * str1, const char * str2, int n);// copies not more than n characters of str2 to the  end of str1, concatenation
+    <li>int strncmp (const char * str1, const char * str2, int n);// compares at most n characters of str1 and str2,
+      if str1 is less than str2 returns an integer less than 0, if str1
+      is equal to str2, returns 0, if str1 is greater than str2 returns an integer greater than 0
+  </ul>
+
+  Here is an example of a the function strcmp()
+<xmp>
+  int Mystrcmp(const char * str1, const char * str2){
+  int i;
+  for(i=0; str1[i]==str2[i] && str1[i] && str2[i] ; i++);
+  return str1[i] - str2[i];
+  }
+ </xmp> 
+  
+
+
+<h3> Array Copying </h3>
+
+<p> We know that the assignment operator ( = ) will copy the value of one data-type
+into a variable.  For example I can write:
+<br><tt>short p = 90;</tt>
+But the assignment operator will not copy an entire array.  The following example
+will not compile because I am trying to copy a whole array into another array:
+<blockquote>
+<tt>
+<br>int main()
+<br>{
+<br> short lucy[10]={34,5,34,64,36,2,634,8,17,20};
+<br> short linus[10];
+<br> linus=lucy;
+<br>  return 1;
+<br>}
+</tt>
+</blockquote>
+In order to accomplish an array copy I need to loop through the entire array
+copying each element from one array into the other array one at a time.
+
+Let's see this example.
+<blockquote>
+<tt>
+<br>int main()
+<br>{
+<br> short i; 
+<br> short lucy[10]={34,5,34,64,36,2,634,8,17,20};
+<br> short linus[10];
+<br> for( i=0;i<10;i++)
+<br>  &nbsp; &nbsp;linus[i]=lucy[i];
+<br> return 1;
+<br>}
+</tt>
+</blockquote>
+
+If I were to write a function to copy an  array to another array, I would need
+to also pass the size of the array so that I would know when to stop copying.  Here is
+an example of a function to copy an array of  <b>short</b>s, ar1 into another array of 
+ <b>short</b>s, ar2.
+
+<blockquote>
+<tt>
+<br> void shortArrayCopy( short ar1[], short ar2[], short size )
+<br>{
+<br> short i;
+<br> for ( i = 0; i &lt; size; i++)
+<br>  &nbsp;  {
+<br> &nbsp;   &nbsp;  ar2[i]=ar1[i];
+<br>  &nbsp;  }
+<br>  return ;
+<br>}
+</tt>
+</blockquote>
+
+Now, if I were to write the same function to copy one string into another string,
+I could do it without knowing the size of my string.  Instead, I could use the fact 
+that there is a NULL character at the end of the string to know when to stop copying.
+Since every string ( but not necessarily every <b>char</b> array) ends in a NULL, 
+I can write a function 
+to copy the contents of one string into another string without knowing the size
+of either array.
+
+<p> Here is a string copy function:
+
+<blockquote>
+<tt>
+<br>void stringCopy( char str1[] , char str2[])
+<br>{
+<br> int i;
+<br> for (i = 0; str1[i] != NULL; i++)
+<br>  &nbsp;  {
+<br> &nbsp;   &nbsp;  str2[i]=str1[i];
+<br>  &nbsp;  }
+<br>  str2[i]=NULL;
+<br>  return;
+<br>}
+</tt>
+</blockquote>
+Notice that I continue my for loop until I reach the NULL at the end of the 
+string str1.  Also note that I need to copy a NULL into my newly copied array. 
+I need to do this because the loop will fail to copy the NULL from str1.  So
+str2 will remain without a NULL at its end.  If I leave it that way it will
+be a normal <b>char</b> array, but it won't be a string.  In order to make sure it
+can be used as a string I need to make it a string.  I do this by adding a NULL to 
+the end.  I know where the end is because I have counted my way through the array str1
+using <b>i</b> as my counter.  Therefore, I can copy a NULL into the <b>i</b>'th place of array str2.
+<blockquote>Remember that  you cannot use the = operator to copy an entire array
+whether it be a <b>float</b> array or even a string.
+</blockquote>
+
+
+<H3>Pointers</H3>
+
+If I declare a variable, let's say <tt> int a = 70; </tt> we know that the 
+computer will find a block of memory and associate it with "a" such that
+any number I assign to "a" will be put into that block of memory.
+How can I find out where this memory location is?
+C++ provides a safe and easy way to do this.  We use the ampersand &.
+<p>
+If I write:<br>
+<blockquote>
+<tt>
+int a = 70; <br>
+cout&lt;&lt; &a;<br>
+
+</tt>
+</blockquote>
+I will get a weird looking number on my screen which will represent the location 
+in the computer's memory of "a". 
+The function of the ampersand & in  this case is to extract the address of "a".
+This may not seem very useful but later on it will be very useful.  
+Right now you just need to understand what the & does.  It  is the basis for 
+the next topic.
+<p>
+In the above example I merely printed that weird number.  What if I wanted to store
+it in a variable.  What type would that variable be?  I can't use a simple int since this
+number is not really a regular int. It is the address of an int.  It is a new type,
+<i>an address of an int</i> type.  To declare a variable of this type we write:
+<blockquote>
+<tt>
+int *p; <br>
+</tt>
+</blockquote>
+Now "p" is a variable of this special type which is capable of 
+storing the address of an int. 
+When I actually use "p" I no longer need to write the star *.  I simply write
+p and the computer knows what type p is, just the same way as it knows
+what type "a" is. 
+In order to create a variable capable of storing the address of
+a float, I would write something like this:
+<blockquote>
+<tt> float *ppp; </tt>
+</blockquote>
+In fact, all the primitive data-types in C++ have their own distinct "address of" types.  
+<p>
+To store the address of "a" in "p" and then print it,
+I would write the following:
+<br>
+<blockquote>
+<tt>
+int a = 70; <br>
+int *p;<br>
+p = &amp;a;<br>
+cout &lt;&lt; p;<br>
+</tt>
+</blockquote>
+
+<p>In the above example "p" is called a <b>pointer</b> because while it is not "a"
+it does point to the location of "a" in memory.  Any variable we declare with a 
+star * is a pointer to the type of variable declared.
+Thus, "ppp" is a <b>float</b> pointer.  This is just a short hand way to say
+that "ppp" is a type capable of containing the address of a float.
+Now we will see that we can access a variable by means of its address. 
+This is called dereferencing the pointer.
+This does not seem very useful at the moment, but it is very useful 
+and we will see why.
+
+<h3>Dereferencing</h3>
+<p> Let's say I have the address of a certain space  in memory, how can I 
+access or change its <b>contents</b>? For example, can I change "a"
+by means of "p"? The answers is yes, but I need to use a special
+operator, the asterisk *. (Yes, this is the same * we use in a pointer
+declaration, so it can be confusing.  But this operator is only 
+used <b>not</b> in a declaration.) By placing a star before "p" I indicate that I am 
+refering to  the content that the memory space "p" points to. In short hand this is called
+dereferencing "p".  Here is an example which changes "a" from 70
+to 90 by means of dereferencing "p":
+<br>
+<blockquote>
+<tt>
+int a = 70; <br>
+int *p;<br>
+p = &amp;a;<br>
+*p = 90;<br>
+cout &lt;&lt; a;<br>
+</tt>
+</blockquote>
+<p> 
+The " *p = 90; " in the above example means go to the place to which "p"
+ points
+and go to the contents of that place and assign it the value 90.  Since "p"
+points to the location of "a" , the contents of that location is "a". So "a"
+ will be assigned the value 90. 
+The use of the asterisk * to dereference a pointer should not be
+confused with its use in declaring a pointer.  These two operations 
+have nothing in common except their use of the asterisk symbol.  This
+often confuses students.  It would have been clearer if
+the inventors of C++ had used two different symbols for these two different 
+operations, but they didn't.
+
+<p>
+If you ever by mistake tried to print an array of int's all at once using cout like this
+<blockquote>
+<tt>
+int a[] = {1,2,3,4,5,6,7,8,9,10}; <br>
+cout &lt;&lt; a;<br>
+</tt>
+</blockquote>
+you probably notice you got a weird number on the screen and not your array contents.
+That number is the address in memory of the first element of your array.
+In general we should know that <em> the name of an array is a pointer to its first element</em>.
+We can use this fact in an interesting way.  Remember that we cannot copy the values of one array to another
+except by copying each and every individual element of the array into the other array.
+But that doesn't mean we cannot assign another pointer to our array name.
+Look at the following code segment:
+<br>
+<blockquote>
+<tt>
+int a[]={34,14,25,3,64,29,45}; <br>
+int i, *p;<br>
+p = a;<br>
+for(i=0; i &lt; 7; i++)<br>
+&nbsp; &nbsp; cout &lt;&lt; p[i];<br>
+</tt>
+</blockquote>
+ 
+In this example, we print the elements of array "a" by referencing it through "p".
+Using the assignment operator  = has not made a duplicate copy of the 
+array, it has merely cause another pointer to point to the same array.  Any
+changes made to the array via "p" will affect the array as accessed via "a" as well.
+This is because there is only one copy of the array in the computer memory.
+ 
+<p>You may ask yourself is there a data-type capable of storing the  address
+in memory of "p" in the above example? In the above example, "p" is a pointer to an int.
+What type can store the address of this type?  A regular <b>int</b> pointer (int *) won't do the 
+trick.  You will need to use a type designed to store an address of an address.
+This is known as a double pointer because it points to a pointer.  
+You declare something of this type like this:
+<bockquote>
+<br> <tt> 
+int ** pptr;
+<br></tt>
+Now "pptr" can store the address of "p" like this:
+<br> <tt> 
+pptr = &amp;p;
+<br></tt>
+</blockquote>
+You may guess correctly that this process can go on and on.  We can have a pointer to a 
+double pointer.  And so on. But generally we will never  need much more than
+a double pointer.
+Later we will see a practical use of double pointers.
+ 
+<h3>Pointer As Function Parameters</h3>
+
+<h3>Pointer Arithmatic</h3>
+You can also reference an array by using pointers.  Since the name of the array
+is a pointer to the first element of the array you can access the first
+element of the array by dereferencing like this:
+<blockquote><tt> int myArray[3];
+<br>*myArray =8;
+ </tt> </blockquote>
+
+
+The above line should be read as "the contents of the thing pointed to by the pointer
+myArray is assigned the value 8".
+And since array elements follow one after the other in memory,
+you can access the second element in the array like this:
+<blockquote><tt> int myArray[3];
+<br>*(myArray+1) =8;
+ </tt> </blockquote>
+
+
+This should be read as "the contents of the thing one after the thing pointed to by the pointer myArray
+ is assigned the value 8".
+By adding one to the address of the first element of the array I got the 
+address of the second element of the array. Remember <em>the elements of the array are located 
+in contiguous spaces in memory</em>, so the address of the second element is exactly one more than
+the address of the first element.
+Once I have this address I can dereference it and
+change its contents.  Thus we have two alternate methods of manipulating arrays:
+the normal array notation [] and the pointer arithmetic notation.
+
+
+<h3>Dynamic Allocation of Memory</h3>
+
+We have seen that we must decide the size of an array at the time of its declaration.  Thus we
+must write:
+<blockquote> <tt> 
+float farray[100];
+</tt>
+</blockquote>
+But we <em>cannot</em> write:
+<blockquote> <tt> 
+
+short size;<br>
+cin &gt;&gt; size;<br> 
+float farray[size];
+</tt>
+</blockquote>
+
+
+When the compiler sees an array declaration, he must know what size array to create from memory.
+These are static arrays. 
+If we are to decide the size of an array during the program execution, we must have
+a way to create arrays dynamically. For this purpose we use the special command <b>new</b>.
+The <b>new</b> command returns a pointer to a new block of memory created at run time.
+This new block of memory can be of a size determined during program execution.
+Here is an example using <b>new</b>:
+
+<blockquote> <tt>
+short * arrayPtr, size;<br>
+cin &gt;&gt; size;<br> 
+arrayPtr = new short[size];
+</tt>
+</blockquote>
+
+Since <b>new</b> returns a pointer, I created a pointer to store the location of
+my new memory block.  I can access this memory the same way I would access a normal array.
+I can use array dereferencing like this:
+<blockquote> <tt>
+
+arrayPtr[0] = 340;<br> 
+</tt>
+</blockquote>
+
+or I can use pointer dereferencing notation. The pointer "arrayPtr" points to the first element 
+of the array just like the 
+name of an array points to the first element of an array.  So for most practical 
+purposes I have an ordinary array just like I had when I declared a static array.
+But I have created this array dynamically, i.e. at run time.
+
+<p> The 
+<b>new</b> command can also be used to create a single variable at run time.
+Here is how to use new to create one variable:
+<blockquote> <tt>
+
+float *ptr;<br> 
+ptr=new float;<br> 
+*ptr=3.1415; 
+</tt>
+</blockquote>
+
+You will notice that this <b>float</b> has no name, it only has a pointer to it. 
+Therefore if I want to access it I need to use the dereference operator *.
+I can't access by its name like an ordinary data type since it has no name.
+<p>
+
+I can also supply the new <b>float</b> (or what ever data type I create) with a value 
+at creation time.  I do this like this:
+<blockquote> <tt>
+
+float *ptr;<br> 
+ptr=new float(3.1415);
+
+</tt>
+</blockquote>
+
+<p>
+Since "ptr" is a variable like any variable it can be used to point at one
+thing and then at another thing and so on.  It is re-usable.  So, for example,
+I can write the following:
+<blockquote> <tt>
+float *ptr;<br> 
+ptr=new float(3.1415);<br> 
+ptr=new float(200.5);
+</tt>
+</blockquote>
+Now, in this case ptr is pointing only to the second <b>float</b> I have created.  How can I make 
+ptr point back to the first <b>float</b> I created?  <em>I can't!</em>  I can't access that first 
+<b>float</b> in any way.  I have lost all knowledge of where it is in memory and I can never regain that information.
+This is called a <b> memory leak</b>.  The memory assigned to the first <b>float</b> 
+created is still in use by my program and I have no way to free it.  Doing this repeatedly
+can cause a computer to run out of memory.  Therefore, before you re-assign a pointer
+to a new piece of memory, you must free or <i>delete </i> the old data from memory.
+To do this you must use the <b>delete</b> command.  Here is an example:
+<blockquote> <tt>
+
+float *ptr;<br> 
+ptr=new float(3.1415);<br> 
+delete ptr; 
+ptr=new float(200.5);<br> 
+</tt>
+</blockquote>
+
+Note that the pointer is not deleted.  The command <b>delete frees the memory a pointer
+points to</b> but does not delete the pointer itself. Use <b>delete</b> only on 
+memory created with the <b>new</b> command.
+Since the pointer is not itself deleted, I may use it again, which I in fact do in the very next
+line of code.
+
+<p>
+Arrays created with the <b>new</b> command must also be deleted.  In short, any time you
+create memory blocks with the <b>new</b> command, you must free them again with the 
+<b>delete</b> command. Here is an example of creating and freeing an array dynamically:
+
+<blockquote> <tt>
+int * arrayPtr;<br>
+int size;<br>
+cin &gt;&gt; size;<br> 
+arrayPtr = new int[size];<br> 
+delete [] arrayPtr;<br>
+arrayPtr = new int[size+10];<br>
+delete [] arrayPtr;<br>
+</tt>
+</blockquote>
+
+Notice that I deleted all the memory I created with new.  There were
+two calls to new and so I called delete twice as well.
+
+
+<H3>Multi-dimensional  Arrays</H3>
+
+<p>
+So far we have had examples of array which are sets of variables.
+In these examples there has been one index for each element.
+If we would represent these arrays graphically they  
+could be drawn as a row of numbers in boxes, like this:
+<blockquote>
+
+<table>
+<tr>
+<td>
+<table>
+  <tr><td>index</td></tr>
+  <tr><td>
+    <table border="0" cellpadding="2" cellpadding="2">
+    <tr><td>0</td></tr>
+    <tr><td>1</td></tr>
+    <tr><td>2</td></tr>
+    <tr><td>3</td></tr>
+    <tr><td>4</td></tr>
+    <tr><td>5</td></tr>
+    <tr><td>6</td></tr>
+    <tr><td>7</td></tr>
+    <tr><td>8</td></tr>
+    <tr><td>9</td></tr>
+    </table></td>
+  </tr>
+</table>
+</td>
+<td>
+<table>
+  <tr><td>values</td></tr>
+  <tr>
+    <td><table border="2">
+    <tr><td>20</td></tr>
+    <tr><td>17</td></tr>
+    <tr><td>2</td></tr>
+    <tr><td>34</td></tr>
+    <tr><td>61</td></tr>
+    <tr><td>2</td></tr>
+    <tr><td>75</td></tr>
+    <tr><td>93</td></tr>
+    <tr><td>32</td></tr>
+    <tr><td>8</td></tr>
+    </table></td>
+  </tr>
+</table>
+</td>
+</tr>
+</table>
+ </blockquote>
+
+Such and array is called one dimensional because it can be
+drawn in a linear or one-dimensional fashion.
+There also exists the possibility of making 2 or more dimensional arrays.
+These are also called multi-indexed or multi-subscripted arrays.
+
+<p>
+For example, a two dimensional array could be declared in the following way:
+<blockquote><tt> int myArray[10][3]; </tt> </blockquote>
+This will create an array of size 10 by 3 int's - a total of
+30 int's will be created.  
+I chose a 10 by 3 array.  You can make an array of any size you like simply by
+ changing the numbers you use in the array declaration.  You could make an 
+array of 3 by 10 or an array of 100 by 2 or 100 by 100, and so on.
+<p>
+When arrays are created,
+their elements are not assigned any  initial values. Therefore we can't know
+what is in each cell of the array.  It will likely be zero, but we can't be sure.
+We will call this content junk since it is meaningless data.  I indicate
+this junk with the question mark.
+The above array could be drawn like this:
+<blockquote>
+<table>
+<tr>
+<td>
+<table>
+  <tr><td>index</td></tr>
+  <tr><td>
+    <table border="0" cellpadding="2">
+    <tr><td>0</td><tr>
+    <tr><td>1</td><tr>
+    <tr><td>2</td><tr>
+    <tr><td>3</td><tr>
+    <tr><td>4</td><tr>
+    <tr><td>5</td><tr>
+    <tr><td>6</td><tr>
+    <tr><td>7</td><tr>
+    <tr><td>8</td><tr>
+    <tr><td>9</td><tr>
+    </table></td>
+  </tr>
+</table>
+</td>
+
+<td>
+<table cellpadding="3">
+<tr>
+<td>0</td><td>1</td><td>2</td>
+</tr>
+
+
+<tr>
+<td colspan="3"> 
+  <table border="2">
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  </table>
+</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</blockquote>
+
+<p>
+We access elements of two dimensional arrays by using 2 indexes.
+For example, if we wanted to assign the value 18 to
+the element at position 4 down and 2 across in the above array
+we would write something like this (remember, indexes
+start with 0 so the 4th row is index number 3):
+<p><tt>  myArray [3][1] = 18; </tt> <p>
+
+This would change the array in the following way:
+<br>
+<table>
+<tr>
+<td>
+<table>
+  <tr><td>index</td></tr>
+  <tr><td>
+    <table border="0" cellpadding="2">
+    <tr><td>0</td><tr>
+    <tr><td>1</td><tr>
+    <tr><td>2</td><tr>
+    <tr><td>3</td><tr>
+    <tr><td>4</td><tr>
+    <tr><td>5</td><tr>
+    <tr><td>6</td><tr>
+    <tr><td>7</td><tr>
+    <tr><td>8</td><tr>
+    <tr><td>9</td><tr>
+    </table></td>
+  </tr>
+</table>
+</td>
+
+<td>
+<table cellpadding="3">
+<tr>
+<td>0</td><td>1</td><td>2</td>
+</tr>
+
+
+<tr>
+<td colspan="3"> 
+  <table border="2">
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>18</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  <tr><td>?</td><td>?</td><td>?</td></tr>
+  </table>
+</td>
+</tr>
+</table>
+</td></tr>
+</table>
+
+<p>Essentially, we now have a set of 30 integers which we can access
+(change or printed etc.) by using two sets of
+indices. The name of the array ( myArray ) refers to this
+whole set of integers.
+
+<p>We can also make arrays of 3 or 4 dimensions though these are impossible
+to draw in two dimensions, and they are bit harder to imagine in your mind.
+To think of a 3 dimensional array imagine a 2 dimensional array
+and then think of each cell in that array itself containing many
+elements.  
+A three dimensional array is created in the following way:
+<p><tt> int myArray[10][10][3]; </tt> <p>
+This will create an array named myArray containing 300 integers.
+We can access any element of this array by using 3 indices.
+For example, if we wanted to assign the value 312 to
+the element at position 3 down and 7 across
+and 2 in, we would write something like this 
+<p><tt>  myArray [2][6][1] = 312; </tt> <p>
+
+
+Once you grasp this you might be then able to think one
+more step.  Imagine each element of your 3 dimensional array as containing
+not just one element, but a whole set of elements.
+It is quite hard to imagine anything more than 3 dimensions,
+but theoretically, you can have 4, 5, 6, 7, etc. dimensional arrays.
+In practice you should never use more than a 3 dimensional array 
+for three reasons: (1) They will use up a lot of memory even with relatively
+small indexed ( an even sided 4 dimension array of size 100 integers
+will have 100,000,000 integers in it, or 400 mb of data ) (2) You will make errors
+(3) You will confuse anyone trying to read your code.
+Even using 3 dimensional arrays is not really advisable.
+
+<h3>Dynamic Allocation of 2 Dimensional Arrays</h3>
+
+<p>We have seen that we can allocate a one dimensional array dynamically by using
+the new command.  The same is true for a two or three dimensional array.  But it
+is more complicated.  First we have to think how a two dimensional array
+will be stored in memory.  It is stored as a set of one dimensional array.
+Since each of these one dimensional arrays has one pointer to it, we need to create
+a set of pointers.  This is done by creating an array of pointers.
+Here is how to create an array of 10 <b>int</b> pointers:
+<p><tt> int *ptrArray[10]; </tt> <p>
+Then we need to make each of these pointers point to a new array.
+To do this, we simply loop through all the pointers and assign each one 
+a new array.  Here is an example of creating 10 <b>int</b> arrays of 100 <b>int</b>s each
+and using our array of pointers to point to them:
+<br> <tt>
+int *ptrArray[10], i;<br>
+for(i=0;i &lt; 10; i++)<br> 
+&nbsp; &nbsp; ptrArray[ i ] = new int [100];<br> 
+<br></tt>
+I could then assign values to the array by using the normal method of
+dereferencing a 2 dimensional array.  Here is how to assign
+values to this new 2-D array:
+<br> <tt>
+ ptrArray[0][0]=130; <br>
+ ptrArray[0][1]=108; <br>
+ ptrArray[9][87]=24530; <br>
+<br></tt>
+And so on...
+<p>I can also use variable to create this 2-D array.  Thus I can have the user enter
+the array size. To do this I need to have a pointer to my array of pointers.
+For this I will need to use one of those double pointers we discussed above. 
+I need a double pointer because the name of my array of pointers points to
+the first element in that array.  Since that element is a pointer (just 
+like all the elements in that array) the thing that points to it
+must be a pointer to a pointer, or in other words a double pointer.
+Here is an example of creating a fully dynamic 2-D array where the user
+decides its size:
+<br> <tt>
+
+int **ptrArray, height, length, i;<br>
+cout &lt;&lt; "Length? "; <br>
+cin &gt;&gt; length; <br>
+cout &lt;&lt; "Height? "; <br>
+cin &gt;&gt; height; <br>
+ptrArray= new int* [height];<br>
+for(i=0;i &lt; height; i++)<br> 
+&nbsp; &nbsp; ptrArray[ i ] = new int [length];</tt>
+<p>
+To free this memory when I am done with it, I will need to loop
+just as I did when I created the array.  Here is how this is done:
+<br> <tt>
+
+
+for(i=0;i &lt; height; i++)<br> 
+&nbsp; &nbsp; delete [] ptrArray[ i ];<br>
+delete [][] ptrArray;<br>
+
+</tt>
+<br>Notice that I also freed the double pointer.  I did this by using delete
+followed by two sets of []'s. This indicates that the double pointer ptrArray
+should be deleted.
+
+<h3>Reference Parameters</h3>
+
+<xmp>
+void change_me(int & someint)
+{
+if (someint == 0)
+    someint=1;
+else
+    someint=0;
+return;
+} 
+
+int main()
+{
+  int p =0;
+  change_me(p);
+  cout<<p;
+}
+</xmp>
+This function will actually work.  It will change the value of p
+in the main function.  It works because the &amper; causes the variable
+<i>someint</i> to function like a pointer even though we use it 
+like a regular int variable.  This saves a lot of writing versus
+using pointer style notation and pointers.
+<p>
+<sup>*</sup>Note: There are other types of strings  like the class String and strings where the first
+element contains the value of the length of the string, but for the purposes of this chapter, this is the relevant 
+definition.
+
+<h3>Function Pointers</h3>
+<p>Just as we have said that the name of an array is a pointer to the first element in the array
+so too, <emp>a function name is pointer to the beginning of the code where the function is stored in memory.</emp>
+ Therefore, I can pass a function as a parameter  to another function. In the following example
+doOtherFunct is a function whose sole ability is to run another function.  It can run any function that it is passed
+so long as that function returns an integer and accepts as parameters two integers.
+
+<blockquote>
+<tt>
+<pre>int doOtherFunct( int param1, int param2, int(*otherFunct)(int, int))  //line 1
+{
+int p = (*otherFunct)(param1, param2);                                      //line 3
+return p;                                                                   //line 4
+}
+</pre>
+</tt> 
+</blockquote>
+Notice that I used parenthesis in the parameter list (line 1) to group the funtion name with the star.
+This indicates that my function expects a function pointer (function name) to be passed and not an
+integer pointer (The * would group with the int if I had not used parenthesis).
+The * in line 3 is dereferencing the funtion so that I may call it.
+
+
+<h3>Exercises</h3>
+<ol>
+<li>Write a function which is passed two <b>float</b> arrays and their size.  It should copy 
+the contents of array1 into array2. Call the function floatCopy.
+<li>Write a function which is passed two strings.  It should copy string1 into
+string2, but in reverse order.
+<li>Write a function which is passed one string and one char. It should return
+a pointer to the first occurrence of that character in the string.
+
+<li>Write a function to compare two strings. Return a positive value integer if the first
+string alphabetically precedes the second. Return a negative value if
+string two precedes string one and return 0 if they are identical.  Do this using
+pointer notation (not index [ ] notation).
+<li>Write a function which is passed two char pointers and prints
+all the chars in memory between the two pointers.
+<li> Write a function called sum. the function should take two pointers to ints. It
+should put the  value of the sum of the two ints into the first int.
+it should return void.
+
+<li>write a function called swap.  It should take two pointers to floats
+and swap the values from the first float to the second and from the second to the first.
+After this function is called in the main() the actually variables in the main will have
+switched their values.
+
+
+<li>Write a function which is passed a string.  It should capitalize every letter
+in the string.  Characters which are not letters, such as ?,#.; etc. should be
+left unchanged. You might want to look up the ascii values of the letters and 
+characters, but this is not neccessary.
+<li>Write a function which is passed an array of int's and the size of that array. 
+It should then create a new array of size "size+1". It should then copy the contents
+of the old array into the new array, leaving the last element blank.  The function 
+should be called expandArray.
+<li>Write a function which is passed two <b>shorts</b> representing the length
+and height  of a 2-D array.  The function should create such an array using new. It 
+should also return a double pointer which points to the newly created array.
+<li>
+Write a function to append one string to the end of a second string.  The parameters of this function
+should be two strings as indicated by two char pointers (not arrays).  You can however use
+array notation when copying the arrays.
+</ol>
+
+
+<p>
+&copy Nachum Danzig November 2003 - December 2009
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

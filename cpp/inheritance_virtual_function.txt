@@ -1,0 +1,103 @@
+# include <iostream.h>
+# include <stdio.h>
+# include <string.h>
+
+class  Employee
+{
+public:
+	char first[10];
+	char last[10];
+	int pay;
+	Employee* next;
+	Employee(char a[10], char b[10], int c);
+	Employee();
+	~Employee();
+virtual void print();
+
+};
+
+
+Employee::Employee(char a[10], char b[10], int c)
+{
+strcpy(first,a);
+strcpy(last,b);
+pay=c;
+
+}
+
+
+Employee::Employee()
+{
+	next='\0';
+	cout<<"Please enter employee first and last name, as well as his pay 
+per month. "<<endl;
+	fgets(first, 10, stdin);
+	fgets(last, 10, stdin);
+	cin>>pay;
+}
+
+Employee::~Employee()
+{
+	cout<<"Hi this is a destructor, I do absoluletly nothing!!! :)"<<endl;
+}
+
+void Employee::print()
+{
+	cout<<"first "<< first<<" last "<<last<<" pay "<<pay<<endl;
+}
+
+class HourlyEmployee : public Employee
+{
+public:
+	int hours;//hours per work
+	HourlyEmployee();
+	HourlyEmployee(char a[10], char b[], int c, int d);
+void print();
+};
+
+HourlyEmployee::HourlyEmployee()
+{
+	//next='\0';
+	//cout<<"Please enter employee first and last name, as well as his pay 
+per month. "<<endl;
+	//fgets(first, 10, stdin);
+	//fgets(last, 10, stdin);
+//	Employee::Employee();
+	cout<<"Enter the employees hours of work per week. "<<endl;
+	cin>>hours;
+}
+HourlyEmployee::HourlyEmployee(char a[10], char b[], int c, int d): 
+Employee(a, b, c)
+{
+	hours=d;
+}
+void HourlyEmployee::print()
+{
+	Employee::print();
+	cout<<" hours "<< hours<<endl;
+}
+
+
+
+class EmployeeLL
+{
+public:
+	EmployeeLL* head;
+	EmployeeLL();
+};
+
+EmployeeLL::EmployeeLL()
+{
+	head='\0';
+}
+
+main()
+{
+	Employee* myEmployee;
+	HourlyEmployee* myHourlyEmployee;
+	myHourlyEmployee= new HourlyEmployee("mary", "miller",34,3);
+	myHourlyEmployee->print();
+	myEmployee=myHourlyEmployee;
+	myEmployee->print();
+
+}

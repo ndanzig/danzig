@@ -1,0 +1,13 @@
+
+<HTML>
+<BODY>
+<DIV ID="DIV1">BLA BLA BLA</DIV>
+<IMG ID="img1" SRC="Bedankt.jpg">
+</BODY>
+<SCRIPT type="text/javascript" LANGUAGE="JavaScript"><!--
+  document.getElementById("DIV1").innerHTML="<B>Hey!</B>";
+  document.getElementById("img1").src = "../ise.jpg";
+//--></SCRIPT>
+
+</HTML>
+

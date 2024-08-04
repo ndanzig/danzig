@@ -1,0 +1,50 @@
+<head>
+<TITLE>Java - Introduction to Computer Science - Programming </TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00
+ff00">
+<CENTER><H2>Introduction to Computer Science - Java</H2></CENTER>
+
+public class Ice_Cream
+{
+//Attribute
+private String flavor;
+//Constructor
+public Ice_Cream( String flavor )
+{
+this.flavor = flavor;
+}
+//Behavior
+public String Get_flavor()
+{
+return flavor;
+}
+public static int Get_price()
+{
+return 5;
+}
+public String Change_flavor( String flavor_change )
+{
+this.flavor = flavor_change;
+return flavor;
+}
+}
+public class Ice_Cream_Main
+{
+public static void Print_Ice_Cream( Ice_Cream cone )
+{
+System.out.println( cone.Get_flavor() );
+System.out.println( Ice_Cream.Get_price() + " shekel" );
+}
+public static void main( String args[] )
+{
+Ice_Cream cone1 = new Ice_Cream( "chocolate" );
+Ice_Cream cone2 = new Ice_Cream( "vanilla" );
+Print_Ice_Cream( cone1 );
+Print_Ice_Cream( cone2 );
+cone1.Change_flavor( "strawberry" );
+cone2.Change_flavor( "cookie dough" );
+Print_Ice_Cream( cone1 );
+Print_Ice_Cream( cone2 );
+}
+}

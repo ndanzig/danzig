@@ -1,0 +1,126 @@
+<head>
+<TITLE>Data Structures Homework</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Data Structures - C++</H2></CENTER>
+<h3>
+Homework Assignments 2005
+</h3>
+
+<ol>
+<li>
+You should know how to make a dynamicly allocated array.  
+Study my <a href="dynamic_array.cpp">example with int arrays</a> thoroughly. Make sure you understand it. Discuss it with others in the class. (Don't worry 
+if you don't understand the the functions printf and scanf, just know that
+ they are basically like cout and cin.)   Then write the same thing using the
+ class <b>box</b> instead.  Make a dynamically allocated array of boxes.  
+The class box should look like this:
+<br>class box{
+<br> int height;   
+<br>  int length;
+<br>  int width;
+<br>  box();
+<br>}  
+<br> box::box(){
+<br>  height=1;
+<br>  length=1;
+<br>  width=1;
+<br>  }
+
+</li>
+<li>Modify my program <a href="dynamic_array.cpp">dynamic_array.cpp</a> so that
+the user can assign his own values to the array.  Also, allow that after he 
+has created his array he can decide to make it bigger by any amount he wants.
+(He may do this any number of times so you will need an infite loop.)
+To do this, you will have to create a new array of the larger total size and 
+then copy the values from the old array into the new and then let him put more
+ values into the new array and finally, delete the old array. Remember to hold
+onto a pointer to the old array so that you can delete it when you are done
+copying its contents into the new array. 
+</li>
+
+<li> Do the same as the above with a <b>box</b> class array instead of an int array.
+Also, add the method computeVolume to the box class.
+</li>
+
+<li>
+Create a Linked list of Boxes and provide the following functionality:
+<br>addBox (int, int, int, box** Head)
+<br>findBoxbyHeight(int H, box* Head) this function should go through the 
+list and print out the h,l, and w of the first box it finds with the height
+ specifiied.  It should also print out the place in the list where the box is 
+located. 
+<br>save this for last: deleteBoxbyHeight(int, box** Head) deletes a box from 
+anywhere in the list if it has the specified height.
+
+</li>
+
+<li> 
+Make a class Student with the following attributes: firstname, lastname, t.z.number, GPA, next.  It should have the methods setGPA, and the overloaded operators &gt; and &lt; .  Create the class StudentLL which is a linked list class containing the attribute head of type Box and an orderedAdd method which will add new students according in ascending order.  Use the  &gt; and &lt; operators to keep the list sorted.
+</li>
+
+<li>Create a LIFO class with  push and pop functions. The push function should return 1 on success and -1 on failure. The pop function should
+return a pointer to a Student, or a pointer cast of -1 on failure. The 
+class should have the attributes: Head, maxSize and currentSize. The LIFO should be composed of nodes which 
+are Students. and the Student class constructor should take also a pointer to 
+the next node he is supposed to point to.
+
+</li>
+
+<li>
+Create an array based FIFO.  Make a fixed sized array of boxes.
+Write the push anD pop functions.  Popping from an empty list should return the
+ error code -1. Similarly, pushing to a full list should cause the same error.
+You must recycle the once freed spaces in the array so that if the max size is 10, you will 
+be able to add 8 for example, then remove 4 and still be able to add 6 more boxes to the array
+. You will need to write a setBox method to set the
+values of the already created boxes.
+</li>
+<LI>
+Write a binary tree class which  has the addnode and deletenode functions.  Also include
+a printTreeInOrder function which should print all the nodes of the tree in ascending order 
+according to whatever greater than / less than  evaluation you choose.
+</li>
+<li>
+Write a linked list of nodes which is capable of containing various classes.  All the classes
+should inherit from one class ( say , Employee ) and the linked list 
+should be implemented in terms of that parent class. Each child class should have its own
+version of a print function.  The linked list class should have a printallnodes member
+ function which should print all the nodes of the linked list.  Be sure to use virtual 
+functions so that pointers of type parent can be used to call child versions of the print 
+function.  Include a delete node and add node function in the linked list class.
+
+</LI>
+
+<li>
+Write a quicksort function which can sort an array of integers.
+
+</li>
+
+<li> <i>( Make a student database . Have two classes , student and teacher.  Allow 
+a teacher to add students freely  while the program is running. (program should be in an infinite loop) . Use dynamic memory allocation to keep the database 
+the exact right size.  Student class should have attributes: name, classestaking
+grades.
+Teacher has name, classesteaching and password.
+Student can register to courses and can check their grades and average.  they cannot change their grades.
+Teachers can give themselves courses and can change (or give) grades to students whom they teach.  They can also see the grades of their students. Make appropriate 
+methods.
+)</i>
+</li>
+
+
+</ol>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

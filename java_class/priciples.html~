@@ -1,0 +1,76 @@
+<head>
+<TITLE>Programming - Using Arrays</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Intoduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>Using Arrays</H3></CENTER>
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+If we wanted to keep track of the fees we charged cars for parking in our garage we would need a variable for the fee for a given car.  And perhaps another varaible for 
+the total daily charges.  To do this we might write something like this.
+<br><tt>
+<br>double fee, total_fees;
+while( ! quit )
+<br>&nbsp; &nbsp;{
+<br>&nbsp; &nbsp;fee = get_charges();
+<br>&nbsp; &nbsp;total_fees += fee;
+<br>&nbsp; &nbsp;}
+ </tt> <br>
+
+This seems fine except what if after we were done computing all the fees and the total fee we wanted to know what the 4th car had paid,  How could we recall
+this information?
+We could store each fee in a different variable.  We could make
+<br><tt>
+double fee1,fee2,fee3,fee4,fee5;
+</tt> <br>
+The we would have to copy the fee into a different variable each time.
+We would have to use a lot of if and else's tto check which 
+iteration number we were on so we would know which fee number to assign.
+This would produce very messy code, but it could work.
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+If we want to create a set of variable of the same type we can do this by creating an array.
+An array is a set of variables of one type all having the same name but with different index numbers.
+We can declare an array like this:
+<br><tt>int a[]= new int[12] ;   </tt> <br>
+This will create 12 integers located in contiguous spaces in memory, i.e. one after the other.
+By using the number 12 we have instructed the computer to find us 12 new integer 
+locations in memory.  The new command is an instruction to the operating system to find whatever number of contiguous spaces we specify afterwards.  In this 
+case we specified 12 int's.  If an int is 4 bytes then the computer will look 
+for 12 * 4 or 48 byte of memory in adjacent places.  If we ask for a very large space, the computer may fail to find the space and the new command will fail at run time.
+The name of this array will be "a".
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+we can reference different parts of the array by using indexes, also called offsets.  Here is how it is done.
+<br><tt>a[0] = 18 ;   </tt> <br>
+
+This assigns the first element of array a teh value 18.
+
+Since we asked for 12 spaces, we got 12 spaces, but the indexes will 
+start with zero ( 0 ) and go until eleven ( 11 ).
+So to assign the last element in the array a value we would do the following.
+<br><tt>a[11] = 625 ;   </tt> <br>
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+We can assign values to teh different 
+ 
+<p> &nbsp; &nbsp; &nbsp; &nbsp; passing arrays in functions
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+
+<br>
+&copy Nachum Danzig November 2003
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

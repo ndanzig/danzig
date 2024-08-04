@@ -1,0 +1,138 @@
+<head>
+<TITLE>Programming - Repeating actions</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Intoduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Alternating program flow with a Switch Case</H3></CENTER>
+
+<font size=+1>
+
+Switch Case statements are like "if" statements that have been optimised for the situation where 
+the programmer wants to test the same expression for many possible values. The syntax is 
+the following (where var and var_1 etc. are integers or characters):
+
+<pre>
+switch(var)  //equivalent to "if var "
+{
+   case var_1:  //equivalent to "==  var_1;" then do the folowing statements separated by ';' 
+     cout&lt;&lt;var_1;
+     break;   //leave the switch
+   case var_2:   //equivalent to "==  var_2;"
+
+     cout&lt;&lt;var_2;
+     break;
+              //etc.
+   case var_n:
+     cout&lt;&lt;var_n;
+     break;
+   default:   //if nothing else matches do this
+     //do the folowing statements separated by ';' 
+     cout&lt;&lt;"No action taken";
+}
+
+
+
+Here is the basic structure of all case switches:
+
+ switch ( integer )
+
+{
+case 1: 
+&nbsp; &nbsp; &nbsp; &nbsp; statement;
+&nbsp; &nbsp; &nbsp; &nbsp; statement;
+&nbsp; &nbsp; &nbsp; &nbsp; statement;
+&nbsp; &nbsp; &nbsp; &nbsp; break;
+case 2: 
+&nbsp; &nbsp; &nbsp; &nbsp; statement;
+&nbsp; &nbsp; &nbsp; &nbsp; statement;
+&nbsp; &nbsp; &nbsp; &nbsp; statement;
+&nbsp; &nbsp; &nbsp; &nbsp; break;
+case 3: 
+&nbsp; &nbsp; &nbsp; &nbsp; statement;
+&nbsp; &nbsp; &nbsp; &nbsp; statement;
+&nbsp; &nbsp; &nbsp; &nbsp; statement;
+&nbsp; &nbsp; &nbsp; &nbsp; break;
+<i>etc.</i>
+<i>etc.</i>
+
+default:
+&nbsp; &nbsp; &nbsp; &nbsp; statement;
+&nbsp; &nbsp; &nbsp; &nbsp; statement;
+}
+
+</pre>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+
+
+Any expression can go inside the switch. The computer goes through the cases in order looking for a case that returns TRUE for the comparison ((expression from switch) == (value from case)).
+<p>
+If the computer reaches a case which matches, it performs the set of statements beneath it until it finds a break statement. <b>BEWARE</b> if you forget to put a break statement at the end of your case the computer will continue with the statements under the next case statement. This is called "falling through" the cases. Usually you don't want to have this happen, so be
+sure to include a break after each case. But, if falling through is used 
+properly, it can be a feature - not a bug.
+<p>
+The programmer can also use a default case. This case is put at the end of all the cases and it will always match in cases where no other 
+<b>case</b> matched. 
+<p>
+Let's see an example:
+<pre>
+
+int lucky_number;
+cout&lt;&lt;"Guess the Integer:";
+cin&gt;&gt;lucky_number;
+switch(lucky_number)
+{
+ case -1:
+ case -2:
+ case -3:   //for all these cases do this
+   cout&lt;&lt; "Don't be so negative!\n";
+   break;   //the break tells me to leave the switch
+ case 0:
+   cout&lt;&lt;"You're a 0!\n";
+   break;   
+ case 1:
+   cout&lt;&lt;"You're Number 1!\n";
+   break;
+ case 2:
+   cout&lt;&lt;"Two's Company!\n";
+   break;
+ case 3:
+   cout&lt;&lt;"Three's a crowd!\n";
+   break;
+ case 4:
+   cout&lt;&lt;"Why have you 4saken me?\n";
+   break;
+ case 5:
+   cout&lt;&lt;"High 5!\n";
+   break;
+ case 6:
+   cout&lt;&lt;"Pick up Sticks!\n";
+   break;
+ case 7:
+   cout&lt;&lt;"That's MY Lucky Number!\n";
+   break;
+ case 8:
+   cout&lt;&lt;"Crazy Eights!\n";
+   break;
+ case 9:
+   cout&lt;&lt;"Only cats have 9 lives!\n";
+   break;
+}
+</pre>
+</font>
+
+<br>
+&copy Nachum Danzig September 2003 - January 2006
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

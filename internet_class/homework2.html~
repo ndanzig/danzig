@@ -1,0 +1,46 @@
+<head>
+<TITLE>Project</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Internet Programming and HTML </H2></CENTER>
+<h3>
+Final Projects 
+</h3>
+
+<ol>
+<li> Make a chess board (in GIMP or with JavaScript) and chess pieces (in Gimp)
+and allow player to move the pieces around and remove pieces when captured.
+Use Javascript and css.  Have links (or frames) to store which pieces have been captured on each side. 
+You can include move verification if you like. - shalom huber
+<li>Make your own message board using php, mysql and css. Have more than 2 catagories at least of topic for each message room.  (User could be allowed to create new topic rooms.) Old messages should be stored for future reference.- gershon
+<li> Make a chat program.  when you join you are told who else is at the site.
+you can write messages to a common page.  use javascript to force the reloading
+of the page every 15 seconds. Use php -mysql to store the messages and lush very old ones.
+<li>Make a tetras game using Javascript and gimp. Use arrow keys to rotate pieces.
+<li>Make a shooting game where objects quickly move on screen and clicking on them destroys them.
+save high scores in a database. 
+<li>Use javascript to run a horse racing game. - moshe brodsky
+<li>Black jack game using javascript - peretz
+<Li>Slot machine in javascript, make images with gimp - jonathan
+<li>Create a set of at least 20 madlibs and allow the user to choose a type
+of mad lib and then randomly pick one from that type.  For example, madlibs 
+about sports.  Also allow the user to have a random choice from all the 
+available madlibs.  The madlibs should be well written, funny but<b> CLEAN</b>. - Moshe S.
+<li> Use built-in php functions to create a hebrew/English calendar for the current month.  You will need to use a function to get the current date.
+Also provide an English/Hebrew birthday converter.
+</li>
+</ol>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

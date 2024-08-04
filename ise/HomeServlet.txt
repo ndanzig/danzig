@@ -1,0 +1,95 @@
+import java.io.*;
+import java.util.Vector;
+import java.util.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import dataList.*;
+
+public class HomeServlet extends HttpServlet
+{
+
+
+    private dataList list;
+    private final String filename="/usr/local/tomcat/users/danzig/homeservletfile";
+
+    public void init() throws ServletException //(ServletConfig config)
+    {
+	try 
+	    {list=new dataList(filename);}
+	catch(Exception e)
+	    {
+		System.err.println("Exception -- dataList init failed, exception message: " + e.getMessage());
+		System.exit(0);
+	    }
+	ServletContext context=getServletConfig().getServletContext();
+	context.setAttribute("shared-list", list);
+    }//end init
+
+
+    protected void doGet (HttpServletRequest req,
+                       HttpServletResponse res) throws ServletException, IOException{
+	res.setContentType("text/html");
+        res.setHeader("pragma", "no-cache");
+        PrintWriter out = res.getWriter();
+        out.println("<HTML><HEAD><Title>Display People Page</Title></HEAD><body>");
+	out.print("<META NAME=\"AUTHOR\" CONTENT=\"Nachum Danzig\"/></HEAD>");
+	out.print("<BODY>");
+	out.print("<FONT FACE=\"Arial\">");
+	out.print("<p align=\"center\"><H2>  Here are all the People  </H2></p>");
+	out.print("<TABLE WIDTH=\"90%\" cellspacing=\"0\">");
+	out.print("<TR>");
+	out.print("<th align=\"left\" valign=\"bottom\"><i>Site Services</i></th>");
+	out.print("<th align=\"center\" valign=\"bottom\"><font color=\"black\">Current Members</font><HR/></th>");
+	out.print("</TR>");
+	out.print("<TR>");
+	out.print("<td height=\"50\" bgcolor=\"lightgreen\"><font size=\"3\"><A  HREF=\"http://danzig.jct.ac.il/ise/homeservlet2.html\">Delete People</A> <br><a HREF=\"http://danzig.jct.ac.il/ise/homeservlet.html\">Add More People</A>  </font></td>");
+	out.print("<td rowspan=\2\">");
+        list.displayList(out); //Display Vector Object
+	out.print("</td></TR>");
+	out.print("</TABLE></FONT></BODY></HTML>");         
+    }//end doGet
+
+    protected void doPost (HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+	res.setContentType("text/html");
+        res.setHeader("pragma", "no-cache");
+        PrintWriter out = res.getWriter();
+	String ID = req.getParameter("id");
+	String EMAIL=req.getParameter("email");
+	boolean success;
+		out.println("<HTML><HEAD><Title>Delete Attempt Results</Title></HEAD><body>");
+		out.print("ID");
+		out.println(ID);
+		out.println("<BR>email");
+		out.println(EMAIL);
+
+
+
+	//call  public synchronized boolean deleteList(String id, String email)
+		success=list.deleteList(ID,EMAIL);
+		if (success==true )
+	    {
+		out.println("<h2>Deleted Success!!</h2>");
+	    }
+	else
+	    {
+		out.println("<h2>Deleted Failed!!</h2>");
+	    }
+
+		out.println("<a href=\"HomeServlet\"> Display People  </a>");
+		out.println("</body></html>");
+
+    }//end doPost
+
+
+
+}//end HomeServlet
+
+
+
+
+
+
+
+
+
+

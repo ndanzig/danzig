@@ -1,0 +1,139 @@
+<head>
+<TITLE>Programming - Repeating actions</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>Repeating the same action more than once</H3></CENTER>
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+We have seen that to get a computer to do what we want we must
+tell it every step, down to the last detail. &nbsp; 
+This can be very tedious. &nbsp;  It is especially
+tedious when we want it to do the same action several times.
+&nbsp;   For example in the chapter on sequence we 
+wrote a recipie for a computer to mix a cake.
+&nbsp;   To get the computer to stir the bowl five (5)
+times, we had to write  "stir contents of bowl with mixing spoon" 
+five (5) times.
+&nbsp;   Wouldn't it be nice if we could tell the computer
+"Do the following action five (5) times: stir contents of bowl with 
+mixing spoon."
+&nbsp;   This would certainly save us some typing. &nbsp; 
+Especially if we had wanted the computer to stir the bowl a
+hundred (100) times! &nbsp; 
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;  So how do we tell the computer
+to repeat an action many times? &nbsp;  Why not write something like
+what we saw above? 
+<blockquote> "Do the following action five (5) times: stir contents of bowl with mixing spoon."
+</blockquote>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+This would work for our case, but sometimes the situation is more complicated.
+&nbsp;   Really, we want to tell the computer "stir contents of bowl 
+with mixing spoon
+<b>until mixture is smooth</b>." &nbsp;   This may take five
+mixes, but it may take ten or twenty.  &nbsp;  If we generalize our
+case, we could say "Do something until something else changes." &nbsp; 
+Now, as we saw in computer programs we store "things" in variables. &nbsp;
+ &nbsp; We can refine our instruction to something like "Do something until
+variable X changes." 
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; But what does "changes" mean?  &nbsp; 
+Changes in what way?  &nbsp;  Variables are just numbers.  &nbsp; 
+How do numbers change?   &nbsp;  They can either increase or decrease.
+ &nbsp;  So we could have some variable increase each time we 
+stir the bowl, and then when that variable is larger than, say, five (5), 
+we could end our action.  &nbsp;  This is exactly how programs really
+work.  Let's see an example first in English and then in Java.
+
+<blockquote> make a variable and call it "counter" <br>
+assign the value "1" to the "counter"  <br>
+do the following as long as counter is less than "6"
+ 
+<blockquote> add "1" to counter <br>
+write this message to the screen "Hi mom!"
+  </blockquote> 
+<br>
+  </blockquote> 
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+This "English" is intended to be similar to a programming language
+but it should be understandable.  &nbsp;  (Note: I gave the name
+"counter" to the variable, but I could have given any other name just as well.
+ &nbsp;  I could have called it "George", but I like to give meaningful names.  &nbsp;  This
+ this variable is supposed to count, I called it "counter.")  &nbsp;   Try to understand the
+ logic of the above instructions. 
+ &nbsp;  How many times will the message get printed?  &nbsp; 
+Now let's see this is Java.  &nbsp;  Try to match up each line of
+English above with the Java below.
+
+
+
+<blockquote>  
+int counter;<br>
+counter = 1;<br>
+while ( counter < 6)<br>
+{<br>
+<blockquote> 
+counter = counter+1; <br>
+System.out.println("Hi mom!");<br> 
+</blockquote> 
+}<br>
+<br>
+</blockquote> 
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+Can you match up the two versions? &nbsp;  Try again! &nbsp; 
+One thing should confuse you.  What does this line mean: "counter = counter+1;"?
+ &nbsp;  How can a variable equal the same variable plus 1?  &nbsp;
+ &nbsp;  That breaks the rules of algebra! &nbsp;  If counter is 1,
+well, 1 does not equal 1 + 1. &nbsp;   What is our mistake? &nbsp; 
+&nbsp; Our mistake is that we think = means equals, remember it means <b>
+assign the value on the right side to the left side</b>. &nbsp; 
+In our case that translates to assign the value 1 + 1 to counter. 
+&nbsp;  Counter had been 1, now it will be 2. &nbsp; 
+Another way of thinking about what this line means is to translate it as 
+follows: "the new value of counter will now be what the old value of
+ counter was, plus one." &nbsp;  Think about this for a moment.
+
+
+<p> &nbsp;  &nbsp; &nbsp;  &nbsp;  You should notice that the two lines inside
+the braces { } are repeated 5 times. &nbsp;  How does this happen? 
+&nbsp;   We said programs are executed in sequence, how can the 
+computer execute the same line more than once? &nbsp; 
+What the computer does when it sees the closing brace } is to return to the 
+condition inside the "while" line.&nbsp;  ("<b>while</b>" is another  keyword.) &nbsp; 
+ If that condition is true
+then the computer goes back into the code inside the braces { }. &nbsp; (Code inside braces 
+is called a <i>code block</i> or a <i>code section</i>.) &nbsp;  
+If the condition is not true, then it skips over the braces, just 
+like in an " if ".    
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+The difference from "if" is that here the
+computer jumps up to the top of the "while" when it gets to the end. &nbsp;
+The computer then re-checks the condition of the "while" to see if it is still 
+true before proceeding to do the code section again. &nbsp;  In an "if" once the
+ code inside the braces is execute, the computer never comes back to it. &nbsp;  If we 
+think of a "while" as a way to get the computer to go down and 
+then jump up to the top again, we can visualize a kind of looping effect.
+ &nbsp;   Programmers call this construction a "<b>loop</b>".
+ 
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+Terms to remember: counter, while, code section, and loop.
+<br>
+&copy Nachum Danzig September 2003
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

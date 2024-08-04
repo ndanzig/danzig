@@ -1,0 +1,42 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>Accessing the Registers</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>Accessing the Registers</H1> 
+ <P><UL>
+<LI><H2>The port addresses for the COMs are defined in the BIOS (Basic I/O System) ROM (Read Only Memory) from addresses 0x400 to 0x408. 
+</H2>
+</UL><UL>
+<LI><H2>OK. So how do we access the registers? 
+</H2>
+</UL><UL>
+<LI><H2>There is a C interface to the IN and OUT instructions:int inp(unsigned short port);              // read a byte from the portint outp(unsigned short port, int val);             // write a byte to the port
+</H2>
+</UL><UL>
+<LI><H2>Using these two instruction is is possible to access the registers defined in the previous slides. For instance to read the LCR we have to write:int val;val = inp(0x3F8 + 3); // or inp(0x3FB);
+</H2>
+</UL><UL>
+<LI><H2>Look at the functions descriptions in the help manuals of Visual C++ or BorlandC.  </H2>
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld010.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld012.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld011.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

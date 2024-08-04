@@ -1,0 +1,59 @@
+<html>
+<head>
+</head>
+
+<body bgcolor="white">
+<H2>JavaScript</h2>
+<xmp>
+<script language="JavaScript"><!--
+//a comment
+alert("hello");
+
+//--></script>
+
+example 2
+
+<HTML>
+<BODY>
+<DIV ID="DIV1">BLA BLA BLA</DIV>
+<IMG ID="img1" SRC="somepic.jpg">
+</BODY>
+<SCRIPT type="text/javascript" LANGUAGE="JavaScript"><!--
+  document.getElementById("DIV1").innerHTML="<B>Hey!</B>";
+  document.getElementById("img1").src = "differentpic.jpg";
+//--></SCRIPT>
+
+</HTML>
+
+example 3
+
+<HTML>
+<SCRIPT LANGUAGE="JavaScript"><!--
+function func1()
+{
+  document.getElementById("DIV1").innerHTML = "<B>Hey!</B>";
+}
+function func2()
+{
+  document.getElementById("img1").src = "differentpic.jpg";
+}
+function func3()
+{
+  document.getElementById("img1").src = "somepic.jpg";
+}
+//--></SCRIPT>
+<BODY>
+<DIV ID="div1" onclick="func1();">Hi</DIV>
+<IMG ID="img1" onmouseover="func2();" onmouseout="func3();" SRC="somepic.jpg">
+</BODY>
+</HTML>
+
+For using Javascript in seperate files, use:
+<script type="text/javascript" src="program.js"></script>
+</xmp>
+
+
+
+
+</body>
+</html>

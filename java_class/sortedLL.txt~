@@ -1,0 +1,174 @@
+public class Node2{
+    int id;
+    String firstName ;
+public    Node2 next;
+public    Node2 previous;
+    Node2(){
+	id=0;
+	firstName="";
+	next=null;
+	previous=null;
+    }
+    Node2(int num, String name){
+	id = num;
+	firstName = name;
+	next = null;
+	previous=null;
+    }
+
+    Node2(int num, String name, Node2 nextNode, Node2 prev ){
+	id = num;
+	firstName = name;
+	next = nextNode;
+	previous=prev;
+    }
+    Node2(Node2 other ){
+	id = other.id;
+	firstName = other.firstName;
+	next = other.next;
+	previous=other.previous;
+    }
+
+public String toString()
+    {
+	return "\nFirst Name: "+firstName + "\nID Number: "+id;
+
+}
+}
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+public class SortedLinkedList {
+    Node2 head;
+    SortedLinkedList()
+    {
+	head=null;
+    }
+    public void insertNode(Node2 newNode)
+    {
+	Node2 temp, current;
+	if (head == null)
+	    {
+		head=newNode;
+		return;
+	    }
+	if(head.id > newNode.id)
+	    {
+		newNode.next=head;
+		head=newNode;
+		newNode.next.previous=head;
+		return;
+	    }
+	current = head;
+	while (current.next != null && current.next.id < newNode.id  )
+	    {
+		current = current.next;
+	    }
+	temp=current.next;
+	current.next = newNode;
+	newNode.previous=current;
+	newNode.next=temp;
+	
+	if(temp != null)
+	    {
+		temp.previous=newNode;
+	    }
+	return;
+    }
+
+    public int deleteNode(int num )
+    {
+	int ret_val;
+	Node2 temp;
+	if (head == null)
+	    {
+	    return -1;
+	    }
+	else
+	    {
+
+		temp = head;
+		while (temp.next !=null && temp.id < num)
+		{
+		    temp = temp.next;
+		}
+		if(temp.id != num)
+		    {
+			return -1;
+		    }
+
+		ret_val=temp.id;
+		if (temp == head)
+		    {
+			head=head.next;
+			if (head != null)
+			    {
+				head.previous=null;
+			    }		    
+		    }
+		else
+		    {
+			temp.previous.next=temp.next;
+			if(temp.next != null)
+			    {
+				temp.next.previous = temp.previous;
+			    }
+		    }
+		return ret_val;
+		
+		
+	    }
+    }//end function deleteNode
+    
+
+
+    public void printReverse()
+    {
+
+	if (head == null)
+	    {
+		return;
+	    }
+	Node2 temp=head;
+	while(temp.next != null)
+	    {
+	    temp=temp.next;
+	    }
+	
+	do
+	    {
+		System.out.println(temp);
+		temp=temp.previous;
+	    }
+	while (temp != null);
+	return;
+    }
+
+
+}//end class
+
+////////////////////////////////////////////////////////////////////////
+
+public class RunSortedLinkedList {
+    public static void main (String args[])
+    {
+	Node2 toBeAdded;
+	SortedLinkedList myLL = new SortedLinkedList();
+	toBeAdded = new Node2(1234,"george");
+	myLL.insertNode(toBeAdded);
+	toBeAdded = new Node2(91011,"george2");
+	myLL.insertNode(toBeAdded);
+	toBeAdded = new Node2(5678,"george3");
+	myLL.insertNode(toBeAdded);
+
+	toBeAdded = new Node2(12,"george4");
+	myLL.insertNode(toBeAdded);
+
+
+	myLL.printReverse();
+
+
+	return;
+    }
+}

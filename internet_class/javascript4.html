@@ -1,0 +1,32 @@
+<body>
+<script language="javascript">
+
+
+
+
+function nameGame(){
+
+var name = document.getElementById("txtMyName").value;
+
+
+
+var goodDay = confirm("Are you having a good day, " + name + "?");
+
+	if(goodDay)
+		alert(name + ", share the joy!");
+	else
+		alert(name + ", have you considered heroin?");
+
+
+}
+
+
+</script>
+
+
+<input type=text id="txtMyName" />
+<input type="button" value="pay" onclick="nameGame()"/>
+
+
+
+</body>

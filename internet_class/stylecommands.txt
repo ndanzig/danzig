@@ -1,0 +1,500 @@
+color:
+exemple:
+p
+{
+  color: red;
+}
+every paragraph will be in red.
+-------------------------------------------
+font-size:
+exemple: 
+p
+{
+ font-side: 14px;
+}
+( can also use this )
+#1
+    * xx-small : minuscule
+    * x-small : très petit
+    * small : petit
+    * medium : moyen
+    * large : grand
+    * x-large : très grand
+    * xx-large : euh... gigantesque :D
+#2
+ .petit_em
+{
+   font-size: 0.7em; ( means 0.7 % of the real size )
+}
+.grand_em
+{
+   font-size: 1.3em; ( 1.3 % of the real size )
+}
+-----------------------------------------
+font-family:
+exemple: 
+font-fanily: "Arial Black"; Can use more than 1 saying if the first one 
+dosent work use the second exemple:
+font-family: "Arial Black", Arial, Verdana, serif; Use serif at last its the 
+one that will work for sure.
+here is some comon text types:
+    * Arial
+    * Arial Black
+    * Comic Sans MS
+    * Courier New
+    * Georgia
+    * Impact
+    * Times New Roman
+    * Trebuchet MS
+    * Verdana
+
+------------------------------------------
+text-align:
+tells us where is the text going to be located.
+exemple:
+CSS PART
+.signature
+{
+test-align: right;
+}
+XHTML PART
+<p class="signature">Signé : M@teo21</p> 
+-------------------------------------------
+text-indent:
+exemple:
+p
+{
+text-indent: 30px; I want all my paragraph to start 30 pixwl on the right.
+}
+---------------------------------------
+two easy one that can be easily used:
+word-spacing: (use pixels)
+letter-spacing: (use pixels)
+exemple:
+p
+{
+ word-spacing: 5px;
+ letter-spacing: 2px;
+}
+---------------------------------------
+font-style:
+exemple:
+p
+{
+ font-style: oblique;
+}
+oblique and italic are exactly the same
+normal is normal size text
+---------------------------------------
+use bold with css:
+font-weight:
+exemple:
+p
+{
+ font-weight: bold;
+}
+---------------------------------------
+the text will be writen in small capitals
+font-variant:
+exemple:
+p
+{
+ font-variant: small-caps;
+}
+---------------------------------------
+text-transform: can transformate text by using this command and those:
+    * uppercase : all the text will be capitalised.
+    * lowercase : all the text will be witen like if CAPS LOCK WAS off.
+    * capitalize : Every first word letter will be capitalized.
+    * none : default no transformation.
+exemple:
+p
+{
+ text-transform: upercase;
+}
+---------------------------------------
+text-decoration: This will actualy decorate the w/e with those:
+    * underline : will underline:
+    * line-through : will cross:
+    * overline : will put a ligne on top of the text.
+    * blink : will make the test blink ( dosent work on IE use mozilla to test. )
+    * none : normal (par défaut).
+---------------------------------------
+change the background color.
+background-color: black;
+color: white; <-- is the text color :P
+easy :P but remember how to use those:
+exemple:
+body
+{
+  background-color: black;
+  color: white;
+}
+
+also
+
+body
+{
+   background-image: url("../images/neige.png");
+}
+to remember:
++ fixed / image stays fixed
++ scroll / image follows the scrolling of the page
+exemple:
+body
+{
+   background-image: url("../images/neige.png");
+   background-attachment: fixed;
+   (or background-attachment: scroll;)
+}
+---------------------------------------
+    * no-repeat : the font will be unique on the page 
+    * repeat-x : the font will be unique on the first horizontal line.
+    * repeat-y : the font will be unique on the first veritcal line:
+    * repeat : the font will be repeated default.
+
+exemple:
+body
+{
+ background-repeat: repeat-x;
+}
+---------------------------------------
+    
+background-position:
+
+    * top 
+    * bottom 
+    * left 
+    * center 
+    * right 
+exemple:
+body
+{
+   background-image: url("../images/skieur.gif"); the font it self and is link
+   background-repeat: no-repeat; the font will not be repeated.
+   background-position: top right; the font will be on the top right
+   background-attachment: fixed; /* and the font is fixed.
+}
+---------------------------------------
+---------------------------------------
+how to modifiy the way anything when a mouse is over it with css. (hover)
+---------------------------------------
+---------------------------------------
+#1
+learning hover .. hover means when your mouse is over the link.
+exemple
+a:hover
+{
+commands of css. :P
+}
+funny exemple il make it when you put your mouse over alink it gets underlined
+ and become green. so here is the way to do it:
+
+a:hover // which means when i have hover(my mouse over) a(a link or adress)
+{//do
+text-decoration: underline; // underline my link
+color: green; make my link become the color ( green in this case.)
+
+---------------------------------------
+p:hover // when I put my mouse over a paragraph 
+{
+   background-color: #CFE1EB; the takes a background of color light blue in this case :D
+   text-indent: 20px; and the paragraph starts are 20 pixel.
+}
+---------------------------------------
+---------------------------------------
+Active means when im clicking wich is really fast. most of the time u wont even 
+realise it :D
+---------------------------------------
+---------------------------------------
+a:active // when the client clicks on the link 
+{
+   background-color: #FFCC66; // it will get a back ground of this color which i think is 
+                                 orange.
+}
+u can also use a:focus to make it more obvious but it dosent work with IE so do it this way
+
+ a:active, a:focus meaning applicate this background color to active and focus(focus stays
+                                                                               longer)
+{
+   background-color: #FFCC66;
+}
+---------------------------------------
+visited means visited exemple :P
+a:visited will mean a link that as been used already will look like:
+
+use text decoration by exemple
+a:visited ( y default will change color :D )
+{
+ text-decoration: none;
+}
+ can also change font style the color by using color: red; or font-style: italic; or 
+ oblique; just to remember you guys italic and oblique is the same ^^
+---------------------------------------
+p:first-letter will modifiy every firstletter :P
+will modifiy every first letter of paragraph :D
+exemple
+p:first-letter
+{ 
+ color: blue;
+}
+
+also
+p:first-line // will modify first line of paragraph
+{
+ color: blue;
+}
+----------------------------------------
+   
+using :before :after
+exemple lets say i have alot of questions enormous number of question and i want to add
+before the text Question: and after the text ? to save writing i could use a css style
+doing this:
+.question:before
+{
+ content: "Question :"; will put this before every class called question(.question)if you 
+                        dont know what is a class make sure you studdy your cours.
+}
+.question:after
+{
+ content: " ?"; Will put this contect after every class called question (.question)
+}
+----------------------------------------
+{
+   list-style-position: inside; the list dosent go forward
+}
+{
+   list-style-position: outside; the list moves a litle on the right.
+}
+
+----------------------------------------
+.list
+{
+   list-style-type: circle;
+}
+.list
+{
+   list-style-type: square;
+}
+.list
+{
+   list-style-type: none;
+}
+xhtml code:
+<ul class="list">
+   <li>Liste</li>
+   <li>à</li>
+   <li>puces</li>
+</ul>
+css:on top u can also use disc which is default so no needs :D
+
+---------------------------------------
+# for ordered liste here the type you can use. :
+
+    * decimal : des nombres 1, 2, 3, 4, 5... (par défaut)
+    * decimal-leading-zero : des nombres commençant par zéro (01, 02, 03, 04, 05...). Ne fonctionne pas sur Internet Explorer
+    * upper-roman : numérotation romaine, en majuscules (I, II, III, IV, V...)
+    * lower-roman : numérotation romaine, en minuscules (i, ii, iii, iv, v...)
+    * upper-alpha : numérotation alphabétique, en majuscules (A, B, C, D, E...)
+    * lower-alpha : numérotation alphabétique, en minuscules (a, b, c, d, e...)
+    * lower-greek : numérotation grecque. Ne fonctionne pas sur Internet Explorer
+
+XTML CODE:
+<ol class="toc"> // for type of classing.
+<li>Un</li>
+<li>Deux</li>
+<li>Trois</li>
+<li>Quatre</li>
+</ol>
+css code: 
+.toc
+{
+ list-style-type: upper-roman, lower-roman; // a bit of study I'm saying use upper roman
+                                               and if you can use lower-roman
+}
+ 
+----------------------------------------
+and now let me show you something pretty neat chaging the ul with an small image :D
+exemple:
+ul // unless of using a disc or a square or a circle im using a small image in front of my
+      listing content.
+{
+   list-style-image: url("dossier.png");
+}
+-----------------------------------------
+p
+{
+   width: 50%;
+   text-align: justify;
+}
+ the text will be 50% of his original width.
+p
+{
+   width: 250px;
+   text-align: justify;
+}
+ the text will be 250 pixel of width.
+------------------------------------------
+p
+{ 
+   width: 250px;
+   height: 100px;
+   text-align: justify;
+} 
+.coupe
+{
+   overflow: hidden; // this one will just skip line when reaching maximum.
+}
+.barres_defilement
+{ 
+   overflow: scroll; // this one will will create a scroll
+}
+.auto
+{
+   overflow: auto; //this one will create a scroll automatilcly :O
+}
+----------------------------------------------------
+
+    * La largeur : indiquez la largeur de votre bordure. Mettez une valeur en pixels (comme 2px), ou utilisez un des mots-clé suivants :
+          o thin : bordure fine
+          o medium : bordure moyenne
+          o thick : bordure épaisse
+
+      C'est le navigateur qui choisit le nombre de pixels qui correspond à thin, medium et thick. En général, c'est à peu près pareil sur tous les navigateurs.
+      Personnellement, j'ai plutôt tendance à utiliser des valeurs en pixels au lieu de "thin" et compagnie... Mais c'est une question de goût après tout ;)
+    * La couleur : c'est la couleur de votre bordure. Utilisez, comme on l'a appris, soit un nom de couleur ("black", "red"...), soit une valeur hexadécimale (#FF0000), soit une valeur rgb (rgb(198, 212, 37))
+    * Le type de bordure : là, vous avez pas mal de choix. Votre bordure peut être un simple trait, ou des pointillés, ou encore des tirets etc... Voici les différentes valeurs disponibles :
+          o none : pas de bordure (par défaut)
+          o solid : un trait simple.
+          o dotted : pointillés.
+          o dashed : tirets.
+          o double : bordure double.
+          o groove : en relief.
+          o ridge : effet 3D.
+          o inset : autre effet 3D (on a l'impression que le block forme un creux).
+          o outset : encore un autre effet 3D (on a l'impression que le block est surélevé).
+using command by exemple:
+.nameofclass
+{
+  border: 3px double red; saying border exprended of 3px using double border using red.
+}
+
+to specify wich side you want the border if you only want one side.
+    * border-top : bordure en haut.
+    * border-bottom : bordure en bas.
+    * border-left : bordure en gauche.
+    * border-right : bordure en droite.
+
+exemple 
+ .nameofclass
+{
+ border-right: 3px double red;
+}
+-----------------------------------------
+gift: removing the border from a linked image
+-----------------------------------------
+using the code by exemple:
+XHTML CODE:
+<p>
+<a href="http://www.siteduzero.com"><img src="images/hawai.jpg" alt="" title=""></a>
+</p>
+CSS CODE:
+a img // means every image inside a link
+{
+   border: none; // dont use the border :D
+}
+------------------------------------------
+    * padding : indique la taille de la marge intérieure. A exprimer en général en pixels (px).
+    * margin : indique la taille de la marge extérieure. Là encore, on utilise le plus souvent des pixels.
+
+exemple:
+CODE CSS:
+p
+{
+   width: 350px;
+   border: 1px solid black;
+   text-align: justify;
+   padding: 12px; making a marge of 12px on the interrior
+   margin: 50px; making a marge of 50px on the exterior
+}
+if you dont understand try it by doing this:
+
+CODE (X)HTML:
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam laci
+nia leo ac nunc. Nulla aliquet. Nullam quam leo, volutpat vitae, venenatis
+ eget, blandit eu, augue. Proin ac libero nec magna laoreet tempus. Nullam 
+felis. Nam et libero. Sed velit dui, tempus in, nonummy venenatis, accumsan 
+id, justo. Ut ullamcorper. Cras sem diam, vulputate nec, tempor at, pretium 
+at, magna. Pellentesque habitant morbi tristique senectus et netus et malesu
+ada fames ac turpis egestas. Curabitur sapien pede, malesuada ac, ultricies 
+in, dignissim eget, mauris. Nullam varius diam ac ligula. Morbi mattis posuere
+ odio. Ut mattis risus ac erat. Nam volutpat, nisl vitae venenatis mollis, 
+erat tincidunt purus, nec ornare felis tellus sed purus. Phasellus orci.
+</p>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam laci
+nia leo ac nunc. Nulla aliquet. Nullam quam leo, volutpat vitae, venenatis
+ eget, blandit eu, augue. Proin ac libero nec magna laoreet tempus. Nullam 
+felis. Nam et libero. Sed velit dui, tempus in, nonummy venenatis, accumsan 
+id, justo. Ut ullamcorper. Cras sem diam, vulputate nec, tempor at, pretium 
+at, magna. Pellentesque habitant morbi tristique senectus et netus et malesu
+ada fames ac turpis egestas. Curabitur sapien pede, malesuada ac, ultricies 
+in, dignissim eget, mauris. Nullam varius diam ac ligula. Morbi mattis posuere
+ odio. Ut mattis risus ac erat. Nam volutpat, nisl vitae venenatis mollis, 
+erat tincidunt purus, nec ornare felis tellus sed purus. Phasellus orci.
+</p>
+---------------------------------------------
+
+img
+{
+   display: block;
+}
+makes every img become a block type unless of inline
+---------------------------------------------
+using float: left; or float: right;
+p:first-letter all first paragraph first lettr.
+{
+   float: left; first letter is floating on the left :D
+}
+    * left : le texte se poursuit en-dessous après un float:left;
+    * right : le texte se poursuit en-dessous après un float:right;
+    * both : le texte se poursuit en-dessous, que ce soit après un float:left; ou après un float:right;
+----------------------------------------------
+background-attachment:
+    * absolute : positionnement absolu.
+    * fixed : positionnement fixe.
+    * relative : positionnement relatif.
+    
+    * left : position par rapport à la gauche de la page.
+    * right : position par rapport à la droite de la page.
+    * top : position par rapport au haut de la page.
+    * bottom : position par rapport au bas de la page.
+-
+XHTML CODE:
+<p>
+Ceci est un paragraphe normal.<br />
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer vel libero. Cras dolor. Quisque quis odio eget justo pulvinar aliquet. 
+Morbi luctus mi. Fusce leo. Integer eleifend condimentum felis. Phasellus vitae nibh. Mauris pellentesque porta magna. Quisque at turpis. 
+Praesent semper odio eget risus. Praesent bibendum imperdiet massa. Quisque ac arcu ac augue dapibus vestibulum. Pellentesque gravida. 
+Mauris turpis. Aenean molestie. Praesent at quam et ligula pellentesque luctus.
+</p>
+
+<div>Block positionné</div>
+CSS CODE:
+
+div
+{
+   background-color: yellow;
+   border: 1px solid green;
+   
+   position: absolute;
+   left: 35px;
+   top: 50px;
+}
+--------------------------------------------
+
+
+
+
+
+
+

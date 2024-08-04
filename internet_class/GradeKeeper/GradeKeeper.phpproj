@@ -1,0 +1,96 @@
+"General"
+{
+"ProjectIdGuid" = "{F4B0870C-FB38-4CDF-B2F4-01482A33592D}"
+"ProjectVersion" = "2.4.5.4617"
+}
+"Configurations"
+{
+    "Local|PHP 5"
+    {
+    "IncludeDirs" = ""
+    }
+    "Local|PHP 4"
+    {
+    "IncludeDirs" = ""
+    }
+    "Remote|PHP 5"
+    {
+    "IncludeDirs" = ""
+    }
+    "Remote|PHP 4"
+    {
+    "IncludeDirs" = ""
+    }
+}
+"Files"
+{
+    "html page1.htm"
+    {
+    "ProjRelPath" = "T"
+    }
+    "html page1.html"
+    {
+    "ProjRelPath" = "T"
+    }
+    "negrotigers.html"
+    {
+    "ProjRelPath" = "T"
+    }
+    "style.css"
+    {
+    "ProjRelPath" = "T"
+    }
+    "testing.php"
+    {
+    "ProjRelPath" = "T"
+    }
+    "class.php"
+    {
+    "ProjRelPath" = "T"
+    }
+    "code_class.php"
+    {
+    "ProjRelPath" = "T"
+    }
+    "code_login.php"
+    {
+    "ProjRelPath" = "T"
+    }
+    "code_main.php"
+    {
+    "ProjRelPath" = "T"
+    }
+    "code_master.php"
+    {
+    "ProjRelPath" = "T"
+    }
+    "index.php"
+    {
+    "ProjRelPath" = "T"
+    }
+    "main.php"
+    {
+    "ProjRelPath" = "T"
+    }
+    "silverlight.php"
+    {
+    "ProjRelPath" = "T"
+    }
+    "silverlightassignmentname.php"
+    {
+    "ProjRelPath" = "T"
+    }
+    "studentreport.php"
+    {
+    "ProjRelPath" = "T"
+    }
+}
+"ProjStartupServices"
+{
+}
+"Globals"
+{
+}
+"References"
+{
+}

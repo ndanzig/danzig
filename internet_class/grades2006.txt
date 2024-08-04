@@ -1,0 +1,10 @@
+grades 2006 internet
+		quiz 1	quiz2	project
+reuven ryba	77	0
+odiel malchi	93
+avi gutfreund	50
+daniel bamberger66
+jason		90
+avi hirsch	70
+bryan mermelstein60
+shalom fialloff 60

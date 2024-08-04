@@ -1,0 +1,56 @@
+<head>
+<TITLE>Programming - Writing Files</TITLE>
+</head>
+<BODY BGCOLOR="#ffffff" TEXT="#000044" link="#000099" vlink="#990000" alink="#0\
+0ff00">
+<CENTER><H2>Introduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>Writing a File</H3></CENTER>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+Here is a short program which writes to a file named 
+myList.dat. This involves a three step process of creating
+a file handle and two objects to allow writing to the file.
+It will insert 5 strings into the file.  It will overwrite what ever contents
+were previously in the file.
+<p>
+
+<pre>
+import javax.swing.JOptionPane;
+import java.io.*;
+public class Write_File
+{
+ public static void main( String args[] ) throws IOException
+ {
+  final int Max = 5;
+  int counter = 0;
+  String temp="";
+  String file = "myList.dat";
+
+//1. create a file handle
+  FileWriter file_writer = new FileWriter ( file );
+
+//2. open file and create an object for writing to the file
+  BufferedWriter my_buffer_writer = new BufferedWriter ( file_writer );
+//3. create an printing object for writing to the file
+  PrintWriter outFile = new PrintWriter (my_buffer_writer);
+
+  do 
+      {
+      temp=JOptionPane.showInputDialog("Enter a string to be inserted in the file.");
+      outFile.println(temp);
+      counter++;
+      }while( counter < Max );//insert 5 strings into file
+
+  outFile.close();//close  printing object
+  JOptionPane.showMessageDialog(null, "Five strings were inserted into file " + file);
+  System.exit(0);
+ }//end main()
+}//end class
+
+</pre>
+
+<p>
+
+<p>
+&copy; Nachum Danzig December 2003
+</body>
+</html>

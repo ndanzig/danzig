@@ -1,0 +1,118 @@
+Moed Bet 2008 
+Data Structures
+
+CLOSED BOOK (20 minutes maximum)  25 points
+
+1. What is data encapsulation and how is it achieved?
+
+
+
+
+2. What is an abstract data type?
+
+
+
+3. What is polymorphism and how is it achieve?
+
+
+
+4. What is function overloading?
+
+
+
+5. Code reuse can be achieved by "cutting and pasting" the
+code into two or more places.  What is wrong with this method of
+reusing code?  
+
+
+
+
+
+6. What are two good methods of achieving the goal of code reuse?
+
+
+
+
+
+7. The name of an array is const pointer to the first element in the array.
+What limitation does the fact that it is a const pointer and not a regular
+pointer does this create.
+
+
+
+
+
+
+
+8. Using "new" show how I could create a 2 dimensional dynamically allocated 
+array of ints where each row is of a different length.
+
+
+
+
+
+
+
+
+9. What is the reference parameter and what is unique about it.
+
+
+
+
+
+10.  Why is a 2-3-4 tree better implemented by means of
+a red-black tree conception?
+
+
+OPEN BOOK
+
+
+Do 3 out of 4.
+25 points each 
+ 
+1.Use an array of 10 nodes to implement a fifo.  Do not use pointers or 
+pointer arithmetic.  Write the class definition for node and fifo.  Write 
+the push and pop functions for your fifo. If you try to push an eleventh
+element push should fail and return -1.  If you pop from an empty list
+pop should fail and return -2. Obviously, if you push 10 nodes and then 
+pop some off, you should now be able to push more nodes.
+
+
+
+
+
+2. Write a function which takes as a parameter a binary tree (either in
+heap form or regulary binary tree form) and an integer.
+The function will print out the values of the nodes on
+the horizontal level as indicated by the integer. For example,
+if my tree looks like this
+      7
+   5     9
+ 3  |  8  10
+
+and I give the function the integer 2 it will print
+
+5 , 9
+
+if I give it 3 it will print 3, 8, 10. (Commas are not required 
+to be printed) You should assume you have access to the nodes of the 
+tree and that their data is simple an integer.
+
+
+
+3. Create a  multi-tree such that each node can have an unlimited
+number of children nodes. Each node should have an integer attribute
+called id which is assumed to be unique to that node.  The insert_node
+function should take 2 parameters, the node to be inserted, and the id
+of the parent for that node.  Define the class multi-tree and node.
+Write the function insert_node. No need to write deleteNode or printTree.
+
+
+
+4. Write a program to recurse through a maze of zeros and ones
+to find a path out. The maze is represented by a two dimensional
+array of integers, 10 by 10. Assume zero is a wall and 1 is an open path.
+You know you have exited when you reach a position on any of the outer edges
+of the matrix. You will start at point 5,5.  DO NOT mark places you
+have already visited and do not use the "keep  one hand on a wall"
+method.  Assume no circular paths exist.

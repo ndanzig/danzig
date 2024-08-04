@@ -1,0 +1,237 @@
+<head>
+<TITLE>Data Structures Review</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Data Structures - C++</H2></CENTER>
+<h3>
+Topics for the Final Exam
+</h3>
+<i>For all of these topics you may get a theoretical question or an impletation exercise </i>
+<ul>
+
+<li>Recursion
+<li>Sorting Algorithms
+    <blockquote>*Heap Sort
+    <br> *Quick Sort
+    <br>Merge Sort
+
+</blockquote>
+<li>*Basic Linked List
+<li>*Fifo Linked List
+<li>*Lifo Linked List
+<li>*Heap Linked List
+<li>*Binary Tree Linked List
+<li>*Basic Sorted Linked List
+<li>*Array Implementation Fifo
+<li>*Array Implementation Lifo
+<li>*Array Implementation Heap
+<li>Array Implementation Binary Tree
+<li>Multi-Node Trees
+<li>*Red Black Trees (Theory)
+<li>*Virtual Functions
+<li>*Virtual Classes (Abstract Classes)
+<li>*Inheritance   
+</ul>
+<p>
+
+
+<CENTER><H2>Lab in Advanced - C++</H2></CENTER>
+<h3>
+Topics for the Final Exam
+</h3>
+<i>For all of these topics you may get a theoretical question or an impletation exercise </i>
+<ul>
+<li>*Template Classes
+<li>*Template Functions
+<li>*Binary Tree using Templates
+<li>*Inheritance
+<li>*Virtual Functions 
+<li>*Operator Overloading
+<li>Bitwise Operations
+<li>File Writing/Reading
+<li>*Exception Handling
+<li>The String Class
+</ul>
+<hr>
+ 
+<h3>Possible Programming questions:</h3>
+
+<h4>Data structures</h4>
+<ul>
+<li>Write the up-heap function for a LL heap with parent pointers.
+<li>Write the down-heap function for a LL heap with parent pointers.
+<li>Write the up-heap function for an array heap.
+<li>Write the down-heap function for an array heap.
+<li>Write a function which given the desired horizontal row in a LL Binary tree, will print that row from left to write.
+<li>Write a recursive function to in order print a LL BST.
+
+<li>Write a full implementation of a FIFO in an array of size 10.  If more than 10 elements are in the FIFO at any one time
+the push function should fail.
+<li>Write a full implementation of a LIFO in an array of size 10.  If more than 10 elements are in the FIFO at any one time
+the push function should fail.
+<li>write a funtion to insert elements to a sorted linked list with a next and previous pointer
+<li>write the quick sort algorithm to sort a linked list of nodes.
+<li>Use a heap to sort an array of floats 
+<li>Create a linked list containing objects of type cat and dog which inherit 
+from a class animal
+<li>Write a linked list class called fifolifo with 3 functions,
+ push, lifopop, fifopop;
+<li>Show in code how you can create a fifo using a preexistent lifo class.
+
+</ul>
+<h4>C++ Workshop</h4>
+<ul>
+<li>Given a class to store a Mixed Fraction, over the +,=,-,==,&lt;&lt;, &gt;&gt;, /, * , ++ , --, &gt; , &lt; , &gt;= operators for two mixed fractions, for a mixed fraction and an int, and for an int and a mixed fraction, where applicable.
+
+
+<li>write a template for a  quicksort function so that I can sort any type
+of array
+<li>Write a multiply function that checks the size of the multiplicand and the 
+multiplier (the integer parameters)  and throws an exception if the predicted result will be too large to hold in an int
+<li>create a class that can only be instantiated once.  Any attempt to create more than once instance will throw and exception.
+
+<li> Create a base class and a derived class such that a base class pointer to
+ a derived class object will call the "print" function in the derived class.
+
+<li>create a class that cannot be instatiated but which has a function 
+ that prints "hello world".  Call this function in the main function. 
+<li> create a memory leak of 400 bytes.
+<li>write a copy constuctor for the class student . Student has the
+ following attributes:
+1. char * name;  2. int IDNumber; 3. float GPA;
+
+</ul>
+
+
+
+<a name="theory_questions">
+<p>
+<h3 id="theory_questions">Theory questions -  Advanced C++</h3>
+
+<ol>
+<li>What is the syntax for calling a static function?
+<li>Give an example of when a copy constructor is <b>required</b>.
+<li>If a function only returns a single integer (indicating success or failure of that
+<br>function) How can you in old style C still effectively return other information?
+<li>How does C++ address this same issue?
+<li>Why must you use the reference parameter when defining a copy constructor?
+<li>What is the difference between the implementation of the assignment operator 
+and the copy constructor, assuming you write both for you class?
+<li>List the ways the copy constructor can be called (both explicitly and implicitly).
+<li>When do you need to run the delete command explicitly?  
+<li>When do you need the write a destructor function?
+<li> What does the default copy constructor do? What does it not do?
+<li>What are the various methodologies for editing a file (to store and update data)?  Give Three. 
+<li>What are their pros and cons of each method?
+<li>What is the difference between protected and private?
+<li>What is the difference between a virtual function and a regular function?
+<li>What are some advantages of using a purely virtual function as opposed to a virtual one? Disadvantages?
+<li>How in code do you create a Pure Virtual function?
+<li>What are the advantages and disadvantages of using a template class to create a linked list versus
+ using an inheriting parent class?
+<li>When do we <em>need</em> to overload the assignment operator?
+<li>Can a template class inherit from a template class?  
+Why might you want to do this as opposed to just inheriting from a class?
+<li>On what can you use the -> operator?
+<li>Can a function be static and virtual?
+<li>What is a static member of a class?
+<li> What is a const variable?
+<li>What is the difference between an array name and a pointer?
+<li>What does making a function a "friend" do?
+<li>In operator overloading, when do you need to use "friendship"?
+<li>Why should parameters passed by reference be defined as const as opposed to one passed by value?
+<li> How do you explicitly run the base class constructor from the derived class constructor?
+<li>What is the syntax for initializing a static member?
+<li>Can child classes initialize a const static variable in the parent?
+<li>If a child changes the value of a static member in the parent class, will instances of the parent class see the change?
+<li>If a function is virtual in the parent but not in the child  will a parent pointer pointing to a grandchild 
+ run the parent function, the child function , or the grandchild function? Explain.
+<li>What is the difference between a deep and a shallow copy? Why is this significant?
+<li>Why is exception handling better than returning a special value to indicate failure? (two reasons)
+<li>What result would be achieved by making the constructor function of a parent class protected?
+<li>What does the word const in the code "int function( int a ) const" do? 
+<li>What is an initialization list? Where is it used?  
+<li>Can you over load a static function with non-static version?
+</ol>
+
+
+
+<h3 id="theory_data_structures">Theory questions -  Data Structures</h3>
+
+<ol>
+<li>What is a divide and conquer algorithm? Why is it efficient?
+<li>What is a sentinel value?  How does it assist in creating a bounded array?
+<li>What are the advantages and disadvantages of using an array to implement a heap?
+<li>Why is a heap better suited to be implemented  using an array than a binary search tree is?
+<li>What is the rule of least access (least privilege)?
+<li>When creating a heterogeneous linked list, what different designs might you use?
+<br>What class structures could you use?
+<li>Give an example of a type of application for which a Fifo is needed.
+<li>Give an example of a type of application for which a Lifo is needed.
+<li>Give an example of a type of application for which a Binary Search Tree is needed.
+<li>How do you determine the efficiency of an algorithm (Big O notation)? What do you consider and what do you ignore? Why?
+<li>For an algorithm that is O(n log n) does it become more or less efficient as the number of
+variables being worked on increases?
+<li>What is the worst case scenario for a binary search tree?  Explain.
+<li>What is a balanced tree?
+<li>When do 2-3-4 trees increase their number of rows?
+<li>In terms of rows, which is more balanced, a heap or a binary  red/black tree?
+<li>Is a binary red/black tree more or less balanced than true 2-3-4 tree? Explain.
+<li>What is the inherent difficulty in implementing a Fifo Array versus a Lifo Array?
+</ol>
+
+
+
+<h3 id="theory_oop">Theory questions -  Object Oriented Programming</h3>
+<ol>
+<li>Why was operator overloading invented?
+<li>When overloading an operator, what considerations go into deciding what the function should do?
+<li>How do classes enable you to solve the problem of functions only returning one
+<br>variable? (give two ways)
+<li>Why are functions in classes also called methods?
+<li>What is <a href="http://en.wikipedia.org/wiki/Data_abstraction"> data abstraction</a>?
+<li>How is <a href="http://en.wikipedia.org/wiki/Encapsulation_(object-oriented_programming)">
+ data encapsulation</a> achieved?  
+<li>What is <a href="http://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming">polymorphism</a>
+ and why is it desirable? 
+<li>Why are classes default private and structs default public?
+<li>What is private inheritance? When might you use it?
+<li>When might using a private constructor function be advisable? What design pattern can it facilitate?
+<li>What is a "has a" relation? How do you implement it in C++?
+<li>What is an "is a" relation? How do you implement it in C++?
+<li>How should you decide which to use?
+
+</ol>
+
+<h3 id="theory_ppl">Theory questions -  Principles of Programming Languages</h3>
+<ol>
+<li>Why were classes invented?
+<li>Why was inheritance invented? What design/software goals does it facilitate?
+
+</ol>
+
+
+
+
+<p>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

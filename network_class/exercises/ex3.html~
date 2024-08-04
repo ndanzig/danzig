@@ -1,0 +1,55 @@
+<HTML>
+<Head><Title>Assignment #3</title>
+</head>
+<H1>Assignment #3</H1>
+Write a program that sends messages between two computers through their serial
+ports.
+The program will be called <tt>talk2me</tt> and receives from the user the following
+command line parameters:
+<OL>
+<li>Mode (send or recv).
+<li>The COM (COM1, COM2, COM3 or COM4).
+<li>Word length (5 - 8).
+<li>Number of stop bits (1, 1.5, 2).
+<li>Parity (even, odd, or none).
+<li>Transfer rate (given the transfer rate you must compute the baud rate).
+</ol>
+For example the sender must run his program like this:
+<pre>
+C:\>talk2me send COM1 8 1 odd 1200
+</pre>
+The receiver must run his program like this:
+<pre>
+C:\>talk2me recv COM1 8 1 odd 1200
+</pre>
+The program must get the base address of the COM from the BIOS (address 0x400).
+
+<H3>Sending</H3>
+After the transmission parameters have been set, the program enters a loop 
+where it receives strings from the user and sends them through the 
+serial port. This is done by writing each char to the THR. Have the NULL char
+signal the end of the string. Don't forget to check the LSR to make sure the
+current char has been sent. If an error in transmission happens you must notify
+the user  that an error occured, where it occured (sender or receiver) and what
+the error is.
+<P>
+Termination of the program is performed by sending the "quit" string (use
+<tt>strncmp()</tt> to check if the string is the quit string).
+When the quit string has been received the program breaks the transmission by 
+setting the Break bit of the LCR and then exiting.
+ 
+<H3>Receiving</H3>
+After the transmission parameters have been set, the program enters a loop 
+where it receives chars from the RBR, writes them into a buffer and when the 
+NULL char is received prints the string. Check if a new char has arrived by 
+reading the LSR. 
+<p>
+If there is an error in the data the receiver must let the sender and the user
+know what
+the error is. In the case of an error you may stop transmission.
+The receiver is notified that the sender has finished transmitting when the 
+Break signal is sent on the line.
+
+<BODY>
+
+</BODY></HTML>

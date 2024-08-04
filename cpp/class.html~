@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+
+<head>
+
+<TITLE>Programming - User Defined Classes</TITLE>
+</head>
+<BODY BGCOLOR="#ffffff" TEXT="#000044" link="#000099" vlink="#990000" alink="#0\
+0ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Creating User Defined Classes</H3></CENTER>
+
+
+<h3>Basic Class </h3>
+
+<p>The most basic purpose of a <b><i>class</i></b> is to combine data types into a single unit.
+Classes are blueprints for creating objects of data in a program.
+A primitive data type defines a certain built-in type of data, int, float, char etc.
+For example, you can make a variable of type 
+<font color="lightblue"> int </font> if you want by writing something like this:
+<blockquote>
+<code>int myVariableName;</code>
+</blockquote>
+This will create a variable of type int. This variable can also be called an 
+<em>object</em> or <em>instance</em> of the type int.  
+ We can then use this variable to store data.  
+But what if we wanted a data type which is 
+capable of storing two ints inside it, or, let's say, three ints and a char?
+C++ has no data type like this, but we can create our own data type by combining 
+already existing data types.
+This is called creating a user defined data type, or a class.
+The data in the class are called the <b><i>attributes</b></i>  of the class.
+
+<p>
+But this is not all.  The class we create can also have built-in functions.
+These functions are called the <b><i>behavior</i></b> of the class.  
+They are the possible behaviors the class can exhibit.
+
+<p> <u>A class, therefore, is a grouping together of data and functionality. </u> 
+This means that where we once passed data to a function via the parameters,
+ we now will not need to pass parameters. Instead, the function already has access to the 
+data it needs. The data and the functions are grouped together in one class.  All the parts of
+the class have the same scope. I.e, within the class all the variables are globals.
+
+
+<p>
+Here is the basic format of a class:
+<blockquote>
+class anyName
+<br>{
+<br>
+<br>//<i><font color="brown"> list of variables </font></i>
+<br>type myVariableName; <b>//attributes</b> 
+<br>
+<br>function( <i><font color="brown"> parameter list</font></i>  )<b>//behavior</b>
+<br>   {
+<br>   //<i><font color="brown"> some code</font></i>
+<br>   }
+<br>
+<br>};//end class
+
+</blockquote>
+
+<p>
+<i>anyName</i> is the name I have given to the class.
+The name is follow by a set of braces { }. Inside the braces
+the attributes are listed and the behavior is defined (i.e. the functions
+of the class are defined or prototyped).  
+After the closing brace there must be a semi-colon.
+All classes should have this basic form though a class can  lack
+attributes or behaviors. 
+
+<p>
+Here is a simple example of an actual class which follows the above format:
+<blockquote><code>
+class AClass
+<br>{
+<br>int a;
+<br>void someFunction( )
+<br>   {
+<br>   cout &lt;&lt; "This is a simple printing behavior of the class AClass. The 
+attribute of this class is the integer   " &lt;&lt; a  &lt;&lt; endl;
+<br>   }
+<br>
+<br>};//end class
+</code></blockquote>
+
+<p>
+Notice that the function can directly access the attribute "a" in the class.  
+I do not need to pass the function any parameters. This is what I meant  when I wrote that
+classes combine data and functionality. Functions in the class are called member functions.
+<em>Member functions have access to all the data in the class.</em>  
+That is how I was able to refer to "a" inside the function. For member function "someFunction"
+ it is as though "a" is a global variable. 
+<p>
+ Member functions can have parameters also. These parameters work like parameters in ordinary functions.
+That is, I  refer to them by name. What if I have a parameter which is also called "a", how do I 
+distinguish between the variable "a" which is an attribute of the class and variable "a"
+which is a parameter?  For this purpose there is the keyword 
+<i><b>this</b></i> followed by the symbol -&gt;. 
+Normally, "a" would refer to the attribute "a" but it there is a parameter "a" then "a" refers to the 
+parameter.  To refer to the attribute "a" I would need to write "this-&gt;a". 
+
+<p> For example, this class has a function to print out attribute "a" parameter "a" times:
+<blockquote><code><pre>
+class AClass
+{
+int a;
+void anotherFunction(long a)
+   {
+   if (a &lt; 0) 
+        return;
+   while (a > 0)
+    {
+        cout &lt;&lt; "This is attribute a : " " &lt;&lt; this-&gt;a  &lt;&lt; endl;
+        a--;
+    }
+   }
+};//end class </pre>
+</code></blockquote>
+
+The keyword this is used to differentiate between an attribute and a parameter of the same name.
+
+
+
+
+<p>Once I have defined this class, I can use it in my main function in my
+program to create an instance.  In the following code excerpt I will create one object
+of type AClass.  I could  create several object of the type 
+class AClass but for now I will create just one.
+If I want to run the function in the class,
+ I will call the function  by the the object I have created.
+ Here is an example of a possible excerpt from the 
+main function that uses this class:
+
+<blockquote><code>
+AClass myInstance(7800);
+<br>myInstance.someFunction();
+</code>
+</blockquote>
+
+<p>I created the object myInstance and supplied its attribute the integer 7800.
+At this point I have an instance of the class AClass and it has data in it.
+Then, in order to run the function someFunction( ) I wrote the name of the instance  
+I created followed by a dot (the dot operator).
+Only then did we write the name of the function we wanted to run.
+
+<p>
+The dot operator is used to refer to functions or data inside an individual instance of the class.
+The dot operator indicates that we wish to run the function someFunction( ) that is associated
+with (that is inside) the particular object myInstance.
+ I can also use the dot operator to refer to the  data in the instance.
+For example,if I want to print the attribute "a" of an instance I can write  
+<blockquote><code>
+AClass myInstance(7800);
+<br>cout &lt;&lt; myInstance.a;
+</code>
+</blockquote>
+
+
+<p>We have seen how a class is a grouping of data and functionality. I can create
+multiple instances of the same class and access the functions or data of
+each instance by using the dot operator.
+
+
+
+
+
+
+
+
+
+<p>
+There is no programming problem which requires the use of classes.  In fact many 
+computer languages do not have classes at all.  But it was found that
+programming problems can be broken down into component parts and solved
+with less confusion if classes are used.  In very small programs the 
+benefits of classes are small and hard to perceive.  But for programs
+that require large numbers of people to work on them and that contain
+millions of lines of code, classes make the job of
+organizing the program infinitely easier. Often when attempting to use classes in 
+a program, the first thing to do with the programming problem
+ is to try to see if there are any real world things which you can model.
+Then, make classes for them and give the classes useful behavior.
+This should help to organize your final program.
+
+
+<H3>Constructors</h3>
+
+<p>I have now explained the basics of creating a class and instantiating it (making an instance),
+but I have not explained how the instance gets created. How does the value I pass at the time
+I make the instance (7800 in the above example)  get into the data of the instance? For this to happen there
+must be a <i><b>constructor</b></i> function which will be run when I create an instance of the class.
+This is called  <b><i>constructing</i></b> the instance or object. Every class needs to have a constructor 
+function if it is going to be constructed.   Technically, the attempts to construct 
+instances of AClass that I have made in the examples so far on this page will not work.  
+I neglected to write a constructor function.
+Now  I will show you what needs to be added to the class for it to work.
+
+
+<p>
+I will rewrite the class AClass and include a  simple constructor function:
+
+<blockquote><code>
+class AClass
+<br>{
+<br>int a;
+<br>someFunction( )
+<br>   {
+<br>   cout &lt;&lt; "This is a simple printing behavior of the class AClass. The 
+attribute of this class is the integer   " &lt;&lt; a  &lt;&lt; endl;
+<br>   }
+<br>
+<br>AClass(int val)
+<br> {
+<br> a=val;
+<br> } 
+<br>}//end class
+</code></blockquote>
+
+
+<p>I added a function called AClass.  Notice that that is also the name of the 
+class.  All constructor functions have the same name as the class for which they 
+are written.  Also notice the function has no return type.  All constructor functions have no return value.
+This function takes a parameter, val, which is then assigned to the 
+data, int a, inside the class, AClass.  If AClass had more than one piece of
+data I would need to pass several values, and to define my
+constructor function to take several values.
+
+<p>
+ Normally, all attributes  (the data of the class) are assigned initial values by the constructor function.  
+There is no other way to initialize class data.  This is the job of the constructor. If you would be able to 
+initialize data in the class definition, then all instances of the 
+class would have the same values. This is not desirable since you will usually
+want the attributes to be different.   Therefore, C++ specifies that 
+you can only initialize attributes of the class via the constructor function.
+You can of course change the values of the attributes later
+by writing a function to do this and running that function later with new values.
+This function might be called setAttributes( ).  This is the general normal behavior for
+ a constructor function to have.  But theoretically, I can write any code I like in the constructor function.
+We will learn later that static data is initialized without  using the constructor function. 
+
+
+<p> The constructor function is run when we create or construct an object
+of the class.  So, for example, a line like this will run the constructor function:
+
+<blockquote>
+<code>AClass  myVariableName(932);</code>
+</blockquote>
+
+<p>In this example, I am passing the value 932 to the parameter val.  The constructor function
+then assigns the data attribute "a" the value it stores, 932.
+This is the function of the constructor function, to assign values to the data in the instance.
+
+<p>There exists a short hand way of writing a constructor function. It is called using a <i><b>initialization list</b></i>
+. Here is an example of that:
+
+<blockquote><code>
+class AClass
+<br>{
+<br>int a;
+<br>someFunction( )
+<br>   {
+<br>   cout &lt;&lt; "This is a simple printing behavior of the class AClass. The 
+attribute of this class is the integer   " &lt;&lt; a  &lt;&lt; endl;
+<br>   }
+<br>
+<br>AClass(int val):a(val)
+<br> {
+<br> } 
+<br>}//end class
+</code></blockquote>
+
+<p>What this does is to initialize the attribute "a" with the value val.
+In this second method we are in essence having our constructor call the constructor
+function of int and passing it the value.  Then our constructor function does not need any 
+code in its body.
+<p>
+These two methods are parallel to the two methods
+of initializing any primitive data type.  We can initialize float f in either
+of the two following ways:
+<blockquote>
+<code>float f;
+<br>f=3.14159;</code>
+</blockquote>
+
+<p>Or
+<blockquote>
+<code>float f=3.14159;</code>
+</blockquote>
+
+<p>The second way is more concise just like using the initialization list above.
+
+<h3>Creating an Instance Using <em>new</em></h3>
+
+<p>I have shown you an example of creating an instance of a class by writing 
+the class name followed by the instance name and a set of parenthesis containing any
+variables to be passed to the constructor function. There exists a second way to
+create an instance of a class.  This method involves creating a pointer and
+running the <i>new</i> command.
+Here is an example:
+  
+<blockquote><code>
+AClass * ptr;<i><font color="brown">/*declare a pointer of type AClass */ </font></i>
+<br>ptr = new AClass(7800); <i><font color="brown">/*run AClass's constructor function*/</font></i>
+</code>
+</blockquote>
+
+<p>This will also run the constructor function and pass the value 7800 to the instance being constructed.
+One important question to ask is in which of the above two lines of code is the constructor function
+being run?  It is being run in the second line, when I pass the value to the command "new". This implies that creating
+a class pointer does not cause the constructor to be run.  This is entirely correct.
+Creating a pointer is not the same as creating an instance. A pointer is not instantiated.
+
+<p>If we create an instance in this way I no longer use the dot
+operator to call the function.  Instead I use the the arrow  operator like this:
+<blockquote><code>
+AClass * ptr;
+<br>ptr = new AClass(7800); 
+<br>ptr-&gt;someFunction();
+</code>
+</blockquote>
+
+
+<p>In general, whenever I have a pointer to an object I use the arrow operator instead of the dot operator.
+<p>The dot and arrow operators not only give me access to the function in the object, they also give me access to the 
+data (attributes) of the object.  Therefore, if  I want to initialize  the value of the int a 
+in a particular object to 7800 and then to change the value to 455,  I can write:
+
+<blockquote><code>
+AClass * ptr;
+<br>ptr = new AClass(7800); 
+<br>ptr-&gt;a=455;
+</code>
+</blockquote>
+
+<h3>Default constructor</h3>
+<p>Every class has a default constructor.  This constructor takes no parameter and simply
+creates an object where all the attributes are undefined.  If you have no attributes in your class
+then this behavior will suffice.  But assuming you do have some attributes you will need to overload
+the default constructor and supply your attributes with default values, like zero.
+
+
+<p> Here is what the default constructor of class AClass could look like:
+<blockquote><code>
+AClass()
+<br> {
+<br> a  = 0;
+<br> } 
+
+</code></blockquote>
+
+<p> This will create an instance whose "a" is initialized at the value zero.
+
+<p>If I want to create an instance and run the default constructor, I would simple write 
+<code><blockquote>
+AClass moo;
+</code></blockquote>
+Even though the tell tale sign of a function call, the parenthesis, are absent
+I am still running the constructor function in this example.  
+The following, although reasonable,  would be incorrect
+<code><blockquote>
+AClass moo();
+</code></blockquote>
+
+
+<p>When running the default constructor without the use of the new command, 
+do not use parenthesis.
+<p>In all of the above examples I have created an instance of type AClass by 
+running the constructor function.
+The constructor function does the job of creating the object whether it is run explicitly 
+(using the <i>new</i> command) or implicitly.  It is run only 
+once per instance, at instantiation.  As we have said, the purpose of the constructor 
+function is to actually create the object and to assign values to the attributes of the class.
+Moreover, it is, in fact,  <em>illegal to assign values in the class definition</em>. You must 
+use the constructor function for this.
+
+
+<!--------------------p>
+Every class has a default constructor function, but it is good practice to 
+create several constructor functions.
+Note that the constructor function has the same name 
+as the class and has no return type. 
+
+
+<p>Here is an example of a class definition:
+
+<blockquote>
+<code>
+class MyClass {
+<br>public:
+<br>//data or "attributes"
+<br>int data;
+<br>float more_data;
+<br>//functions
+<br>MyClass(int data, float more_data);
+<br>MyClass(MyClass & other);
+<br>void printData();
+<br>};
+</code>
+</blockquote>
+
+<p>
+This class definition has two pieces of data and two "constructor" functions and another function called printData.
+I have just written the function prototypes but I have not yet written the functions.
+The idea of this class is that I can call the function printData and without having to pass it any data it will be
+able to print the data of the class.
+
+
+<p> When I create an instance of a class the constructor function is run.  This enables me to assign values to the
+data of the class.  It is illegal to assign the data any value in the class definition.
+Data can only be given values by running a constructor function. Creating a pointer of type MyClass does not
+run a constructor since no actual instance of the class is created, only a pointer is created.
+------------------------->
+
+<h3>Copy Constructor</h3>
+<p> So far we have seen  a constructor that takes as parameters initial values for the class attributes.
+We have seen the default constructor that takes no parameters.  The third essential
+constructor takes a reference to another instance of the same class. It is called 
+the <b>copy constructor</b>.  Its purpose is to be used when a copy of an existing instance needs
+to be created.  This can happen when, for example, I pass an instance as a parameter to a function.
+If I pass it by value and not by reference, then the function makes a copy  of it.
+  In such a case the copy constructor will be called. 
+The copy constructor can also be called explicitly, by passing an instance to the new command.
+<p>
+There is by default a copy constructor made by the compiler,
+ but it only 
+does a shallow copy, that is it copies all the data, but if a <i>new</i> command was used in the constructor
+the default copy constructor will not call a new command and the copy made will have a
+ pointer to the same data as the original instance. In fact, all pointer in the copy will
+point to what ever the original instance is pointing to.  The copy will not have its own data. It iwll only have 
+copies of the <em>pointers</em>.
+This is bad. Therefore as a rule, whenever you use new in your constructor  you need to write a copy constructor.
+This constructor should perform what is called a deep copy. I.e., it should allocate memory of the same
+size as the original instance and then it  should go through an copy all the data
+being pointed to by pointers in the original instance back to the copy instance.
+
+<p>Even though you can usually rely on the
+default copy constructor, it is good practice to always write your own copy constructor. That
+way if you need a deep copy you won't forget to write it.
+<p>
+Here is an example of a copy constructor for the class AClass:
+
+<blockquote><code>AClass(AClass & other)
+<br>{
+<br>a=other.a;
+<br>} </code></blockquote>
+
+<p>As you can see, the parameter of this constructor function is another
+instance of AClass.  The function then simply copies the data values of the 
+other instance into the data of the instance being created. No deep copy needs to be preformed.
+
+<p> Notice also that I have used the reference parameter when writing the function prototype
+of the copy constructor. 
+This is to prevent an infinite loop.  If I were to pass by value the parameter, then
+in order for my copy constructor to run it would need to call a copy constructor (since the
+ function would need to make a copy of the parameter passed).
+This would cause an infinite loop of function calls. By passing a reference, no copy needs 
+to be created. Alternatively, I could just as well have used a pointer and not a reference.
+ 
+<h3>Destructors</h3>
+
+<p> A destructor function is a function designed to delete 
+memory created for an instance when that instance is destroyed.
+The destructor function is called whenever I run a delete command on an instance or when ever  an instance
+ goes out of scope, as when a function that created an instance  returns.
+<p>
+A destructor function can  be written though one will be created by default. 
+When must I write a destructor function?
+Any time I call new in my constructor I must write my own destructor to delete what ever was created with new.  
+All other data will be deleted anyway once it leaves scope.
+Therefore , the default constructor for AClass is sufficient and I don't need to write one. But 
+I can write one anyway. It is similar to the constructor but is preceded by a tilde.
+<p>
+It is written like this
+<code><blockquote>
+~AClass() {}
+</code></blockquote>
+
+<p> Notice that in this example the destructor function is blank since nothing in the class was created with new.
+If I had created something with new in my class, I would need to use the 
+<em>delete</em> command in my destructor to deallocate all the memory I created.
+
+
+<h3>Scope resolution Operator</h3>
+
+<p> In my examples of classes I have defined my functions within the class definition.
+I could also have simply written the functional prototype in the class definition
+and then written the function definition after the  class.
+To do this we need to use the  <em>scope resolution operator ::</em>.
+
+Here is an example of defining a class in this way:
+
+
+<blockquote><code>
+class AClass
+<br>{
+<br>int a;
+<br>void someFunction( );
+<br>AClass(int  );
+<br>};//end class
+<p>
+void AClass::someFunction( );
+<br>   {
+<br>   cout &lt;&lt; "This is a simple printing behavior of the class AClass. The 
+attribute of this class is the integer   " &lt;&lt; a  &lt;&lt; endl;
+<br>   }
+<br> AClass::AClass(int val)
+<br> {
+<br> a=val;
+<br> } 
+
+</code></blockquote>
+
+<p>The class definition simply contains the attributes and the function prototypes (for both the 
+function someFunction and for the constructor function).
+Then when I actually define the functions I must tell the compiler that I am defining the 
+functions in the class AClass.  To do this, I use the scope resolution operator.
+Theoretically there could be two functions named someFunction, each in separate classes.  I need to 
+use the scope resolution operator to specify where the function I am defining is located.
+<p>
+Functions can be defined in the class, or outside it using the scope resolution operator.  The second
+method is preferable for two reasons.  First, it is easier to 
+read the class if it is not cluttered with function definitions.  Second, there could
+be a problem of function precedence, i.e. two functions, each using the other
+requires each function to know about the other before either one can be written.
+This requires functional prototyping.
+
+
+
+<h3>Access</h3>
+
+<p>
+The attributes and methods (data and functions) of a class can either be accessible 
+via the object or blocked.  If a function, for example, is publicly accessible, then I can run it as I have 
+ in the above examples.  In all of my example I have assumed that the attributes and methods are all publicly accessible.
+
+If, however, a function is private, then only other functions in the class can run it, but it cannot be run 
+by the instance itself.  The mechanism for making attributes and methods public
+is to write the word <b><i>public </i></b> followed by a colon before those elements you
+want to be public. By placing public: as the first line of the class definition, you will
+ make the entire class public. To make the attributes and methods private, write the word
+<b><i>private </i></b> followed by a colon before those elements you
+want to be private. 
+<p>
+By default all the data and functions are private and therefore not accessible via the instance.
+Therefore, all the preceding examples I have shown will not work until you add the word public:
+ to the class definition.
+You can make some functions or data private and others public by 
+arranging the words public and private appropriately.
+The ability to limit access to class attributes and methods achieves the 
+<a href="http://en.wikipedia.org/wiki/Object_oriented_programming">Object Oriented Programming</a> ideal of <a 
+href="http://en.wikipedia.org/wiki/Encapsulation_%28computer_science%29#Encapsulation"> encapsulation</a>.
+<p>
+For now, just make all the data and functions of your class public.
+Here is how the class should look:
+<blockquote><code>
+class AClass
+<br>{
+<br><i><b>public:</b></i>
+<br>int a;
+<br>void someFunction( );
+<br>AClass(int  );
+<br>};//end class
+<p>
+void AClass::someFunction( );
+<br>   {
+<br>   cout &lt;&lt; "This is a simple printing behavior of the class AClass. The 
+attribute of this class is the integer   " &lt;&lt; a  &lt;&lt; endl;
+<br>   }
+<br> AClass::AClass(int val)
+<br> {
+<br> a=val;
+<br> } 
+
+</code></blockquote>
+
+
+<h3>Theory</h3>
+
+<p>The people who theorize about good programming have come up with
+a concept called Object Oriented design.  There are many aspects to this 
+theory.  The theory states that we should model all our 
+class after real world things. Since things in the real world
+have descriptions ( attributes )  and things they do (
+behavior, functions, method). So classes have attributes and behavior.
+The attributes of a class are the data the class will store and use.
+The behavior is what the class is capable of doing with its data.
+Another program or class can then ask the class to perform one of its behaviors
+by running one of the methods in the class.   
+
+
+
+
+
+<h3>Questions to think about</h3>
+<p>
+What is wrong with having a <b>private</b> constructor function?
+When might it not be wrong and in fact be useful?
+
+<h3>Quotes</h3>
+
+<ul>
+<li>Any time you use new, you need to use delete. If you don't use new you can't use delete
+<li>When you delete a pointer, you don't delete the pointer, but the thing pointed to.
+<li>Creating a pointer to a class does not run the constructor. Creating an instance does.
+<li>In general, all data should be private and at least some functions should be public.
+<li>Use the dot operator on instances of the class, not on pointers or on the class name.
+</ul>
+
+
+
+
+
+
+
+
+
+
+<h3>Some Examples</h3>
+
+<!---a href="./dogexample.html"> Here is an fully implemented example of a class which models a real world thing, a dog.
+</a>I did not fully implement it.  For example, I could have given it
+methods like goForAWalk( ) or bark( ).
+<p --->
+<a href="./arrayofStudents.txt">  Here is an example showing an array of Student class instances  </a>
+
+<p>
+<a href="./classesExample_withDelete.cpp">  Here is an example showing a Linked List implementation of Student class instances with deleting functionality </a>
+
+
+
+<p>
+<a href="./Ice_Cream.html"> Here is an example demonstrating the use of a 
+static method in a very simple class.</a>
+
+
+<p>
+Exercise: Think of any real world thing and model it with a class.
+
+
+
+<p>
+&copy; Nachum Danzig December 2003 -  January 2010
+</body>
+</html>

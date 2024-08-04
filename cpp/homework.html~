@@ -1,0 +1,130 @@
+<head>
+<TITLE>C++ Homework</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<p>
+Answer to exam question to reverse sentence <a href="reverseSentenceRecursive.c
+">Reverse Sentence Recursive</a>
+</p>
+
+
+<h3>
+Homework Assignments 
+</h3>
+
+<ol>
+<li>Write a program that print a diamond shape of stars to the screen.
+Use only what C++  we have already learned. It should look like this:
+<br>&nbsp;&nbsp;&nbsp;*
+<br>&nbsp;&nbsp;***
+<br>&nbsp;*****
+<br>*******
+<br>&nbsp;*****
+<br>&nbsp;&nbsp;***
+<br>&nbsp;&nbsp;&nbsp;*
+
+<li>
+The Game of Craps
+<br>
+ player rolls two dice. Each die has six faces. These faces contain 1,2,3,4,5 or 6 spots. After the dice have come to rest, the sum of the spots on  the two 
+upward faces
+is calculated. If the sum is 7 or 11 on the first throw , the player wins.  If the sum is 2,3,or
+ 12 on the first throw (called "craps" ) the player loses and the house wins.
+ If the sum is 4,5,6,8,9, or 10 on the first throw, then that sum becomes the player's point. To win, he must continue rolling the dice until he "makes his point", i.e. rolls the same sum again. If the player rolls 7 before making the point, he loses.
+<ul>
+<li>Create this game in C++:
+<li>write a function int rollDie( void) to simulate the rolling of 2 dice.
+   <ul>
+   <li>function should return a random number between 1 and 6
+
+   </ul>
+<li>write a function int firstRoll ( void) to simulate the first roll.
+<ul>
+   <li> Function should call rollDie two times.
+   <li> It should then return 0 for a winning roll
+   <li> It should return -1 for a losing roll
+   <li> It should return the  total roll value for non-winning non-losing rolls
+   </ul>
+
+<li>write a function int makePoint ( int point) to simulate the later rolls.
+<ul>
+   <li> Function should get as input the "point" to be made
+      <li> It should then return -1 for a losing roll
+   <li> It should return 0 for non-winning non-losing rolls
+   <li> It should  return 1 for a winning roll
+
+   </ul>
+</ul>
+
+<li>Write a program which allows the user to decide how big
+of an array he wants to make (use <font color=blue>new</font> command). 
+Then, access the array
+using pointer arithmatic (not [] ). Allow him to enter student grades 
+to the array.
+Sort the array. Then print the array contents. Print the average grade. 
+Do this by writing seperate function such as sortArray, 
+printArray and takeAverage. In these functions you will pass the array
+as a parameter (i.e. using *). 
+
+<li> Write a text based computer game: Create a struct called
+Warrior which has the following attributes: 1. Name, 2. Type_of_Warrior,
+3. Number_of_swords, 4. Number_of_shields, 5. Number_of_arrows,
+6. Number_of_limbs, 7. Current_strength, 8. Score. 
+Type of warrior can be wizard, elf, goblin, dwarf, footman, horseman.
+Current_strength can be from 1 - 10. When the game is run player(s) can 
+choose to use a already existing warrior (as found in a file) or they
+can create a new warrior. When the game is first run,
+there are no warriors yet.  The player(s) can create new warriors which
+will get standard values for all attributes depending on the type of 
+warrior they choose.  When players finish the game , the game  saves their
+ warriors in a file.
+<p>Thus, as they continue to play the game, the players may
+develop a large set of warriors.
+
+<p>Play is as follows: select two warriors and have them fight.
+The game will print who wins and who looses. The winner gets his 
+strength increased by one and his score increased by 10 (you may
+choose to give him more points if he beats a stronger opponent)
+ , the looser gets his strength decreased by two.
+Also, by some somewhat random factor, loosers will loose weapons
+and winners gain, though sometimes this will be reversed (randomly).
+Loosers may also loose limbs!
+The program will compute who wins and who looses a given battle
+ by comparing the 
+relative strengths, weaponry, number of limbs and type of warrior.
+Those with higher numbers will usually win, but not always (use a weighted 
+random factor). Print who has the top 5 high scores.
+
+<li>Pythagorian Triples
+<li>Write a function which is given a letter (character) and a number.
+If the number is the ascii value of the given letter, then the 
+function will return boolean true, otherwise it will return boolian false.
+
+<li>Parking garage problem. Chapter 3 , Exercise 3.12 (if you don't have a book
+the library should have one.)
+<li><i>multiple</i> function. Chapter 3 , Exercise 3.20.
+<li> Math Quiz.  Chapter 3 , Do both Exercise 3.35 and 3.36.
+<li>Exercise using arrays Chapter 4 , Exercise 4.12.
+<li>Another exercise using arrays Chapter 4 , Exercise 4.10.
+<li> Dice rolling (use a for loop) Chapter 4 , Exercise 4.17.
+<li> If you have time: write a program to create a set of names
+and phone numbers (stored as a 2 dimentional  <tt>char </tt> array.)
+Write the functions addName and changePhoneNumber.  The user can add up to
+10 names and phone numbers using addName.  He can change a phone
+number of a name using changePhoneNumber and specifying the index of which
+name he wants to change.
+</ol>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

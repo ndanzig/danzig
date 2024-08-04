@@ -1,0 +1,38 @@
+import java.io.*;
+import java.util.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import stampack.*;
+
+public class Ex1 extends HttpServlet{
+    public void init(ServletConfig config)
+	throws ServletException{
+    }
+
+
+    public void doPost (HttpServletRequest request,
+		       HttpServletResponse response) throws ServletException, IOException{
+	int number1, number2, sum=0 ;
+	stam a = new stam(7,'w');
+	int number3 = a.getNumber();
+	PrintWriter output = response.getWriter();
+	response.setContentType("text/html");
+        output.println("<HTML><HEAD><Title>Calculator Results</Title></HEAD><body>");
+	output.println("<center><h1><font color=\"blue\"> This Number is from class <i>stam</i>:  "+number3+"</font></h1></br>");
+	number1=Integer.parseInt(request.getParameter("firstoperand"));
+	number2=Integer.parseInt(request.getParameter("secondoperand"));
+	if(request.getParameter("action").equals("add") )
+            {
+		sum=number1+number2;
+	    }
+	else if(request.getParameter("action").equals("subtract") )
+            {
+		sum=number1-number2;
+	    }
+        output.println("<h2>Calculator Results</h2>");
+
+	output.println("<center><h1><font color=\"red\">"+sum+"</font></h1></br>");
+		output.println("</center></body></html>");
+
+    }//end doGet
+}//end servlet

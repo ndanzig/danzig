@@ -1,0 +1,25 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class myscan {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 Scanner fred = new Scanner(System.in);
+	     int i ;
+	     System.out.println("heelll");
+	     i = fred.nextInt();
+
+	     System.out.println("heelll");
+
+	     System.out.println(i);
+
+	     
+
+
+	}
+
+}

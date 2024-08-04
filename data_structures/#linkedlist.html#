@@ -1,0 +1,123 @@
+ <head>
+<TITLE>Linked List Data Stucture in Java by Nachum Danzig</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>The Linked List Data Stucture in Java</H2></CENTER>
+
+<p>
+An array is a way of organizing data by placing each datum next to each 
+other in memory. There are two problems with this system.  First, since the 
+computer must find a contiguous block of memory you must tell it the 
+size block you are requesting.  If you later wish to increase the size, you must make a new request for a larger block.  Then you must copy from the one 
+block of data to the other ( from the old array to the new array). This 
+a waste of computer processing and resources.  Moreover, it requires you to
+have two blocks of data in use during the transfer.  Once the transfer is
+complete you can del;ete the old data (the old array) but until then, you must
+hold two copies of the data in memory simultaneously.  This means you can
+maximally use only half the computer memory for your array.  The second problem
+is that if you want to delete one datum in the middle of your block
+of data you will have a gap and you must move all the following data back one 
+space to fill in the gap.  This is also wasteful of computer processing time.
+
+<p>
+Becasue of these two major problems there is a different system for storing
+and structuring data.  This system is called a <b> linked list</b>.  In a 
+linked list
+each element or datum contains a reference to the next element or datum.
+Each time a new element is created the element next to it is made
+to refer to it.  Then, in order to find a particular element one must traverse
+from the first element along the chain of elements until the desired element is
+found.  In this system the elements can be stored anywhere is the computer's
+memeory since we do not use offsets (indexes) to find elements. Further more,
+we can delete an element simply by removing the reference to the element.
+We have the previous element skip over the element needing to bne deleted and
+refer to the next element in the chain.  Java will detect that this element
+is no longer refered to and therefore impossible to use and will de-allocate
+it memory.  This is called <b>garbage collection</b>.
+Here is an example of how to define an element as a class capable of
+refering to another element.
+
+<p>
+<pre>
+public class LinkedListElement
+{
+//Attributes  [i.e. data]
+public LinkedListElement theNextElement;
+private String name;
+<i><font color="brown"> more attributes</font></i>
+
+//Behavior [i.e. methods]
+//Constructors
+public LinkedListElement()  //constructor which takes no parameters, sets to default
+{
+name="";
+}
+
+public LinkedListElement(String name)  //constructor which takes a parameter
+{
+this.name=name;
+}
+<i><font color="brown"> more methods</font></i>
+
+}//end class
+</pre>
+<p>
+Note that each LinkedListElement contains a reference to a LinkedListElement.
+This reference will do the work of connecting each element to the following 
+element.  This reference is public so that it can be changed when new elements
+are added or deleted.
+<br>Here is the way a linked list class might use these elements to create a
+chain of data.
+
+<p>
+<pre>
+public class LinkedList
+{
+//Attributes  [i.e. data]
+private LinkedListElement head;
+
+//Behavior [i.e. methods]
+//Constructors
+public LinkedList()  //constructor which takes no parameters
+{
+head=NULL;
+}
+
+public addElement(String name)
+{
+LinkedListElement tempHead=head;
+while(tempHead==NULL)
+  {
+  tempHead=temphead.theNextElement;
+  }
+tempHead = new LinkedListElement(name);
+}
+
+<i><font color="brown"> more methods</font></i>
+
+}//end class
+</pre>
+<p>
+If head refers to NULL then the chain is still empty.
+However, if head refers to a real  LinkedListElement then we need to
+put the new element at the end of the list.
+To do this we keep checking to see if the current element's
+next reference is NULL.  Once we have an element whose next reference
+is NULL we know we have reached the end of the list and it is time to add
+our element to the list.  At this point we can use the new operator to actually
+create the new element.
+<p>
+Here is an example in C++ of a linked list partially implemented.
+<a href="linkedlists.cpp"> Linked List C++</a>
+
+
+<p>
+&copy; Nachum Danzig January 2004
+
+
+</body>
+</html>
+
+
+
+

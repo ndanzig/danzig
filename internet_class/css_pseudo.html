@@ -1,0 +1,71 @@
+<html>
+<head>
+<STYLE TYPE="text/css">  
+<!--
+P {
+width:60em;
+margin-left: 1em;
+}
+
+i:hover 
+{
+font-size:14pt; 
+color:red;
+}
+ 
+b:first-child
+{
+border: solid red ;
+font-size:14pt;
+color:red;
+font-weight:normal;
+
+}
+
+
+-->
+</style>
+
+</head>
+
+
+<body>
+<h2>CSS - Pseudo Classes</h2>
+
+Look at this CSS
+<pre>
+i:hover 
+{
+font-size:14pt; 
+color:red;
+}
+ 
+b:first-child
+{
+border: solid red ;
+font-size:14pt;
+color:red;
+font-weight:normal;
+</pre>
+
+<p>
+This is <i>italic</i>. And it changes when you hover over it.
+<p>
+The bold text here has been <b>boxed in red</b>. Because it is the first b tag which is a son of the paragraph<br>
+<b>But this text is regular bold because it is the second b tag that is a  son of the paragraph</b>
+Note that it is not considered a child of the BR preceding it.
+<br>
+Were it preded by a p or div or almost any other tag it would become the first child of that tag.
+BR is special!!
+
+
+
+<p>Some pseudo classes only work on the a tag
+<pre>
+a:link {color:#FF0000;}      /* unvisited link */
+a:visited {color:#00FF00;}  /* visited link */
+a:active {color:#0000FF;}  /* selected link */
+</pre>
+
+</body>
+</html>

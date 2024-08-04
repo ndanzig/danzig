@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<LINK REL=STYLESHEET HREF="css.css" TYPE="text/css">
+<title>Sample CSS page</title>
+</head>
+<body>
+
+<img id="wiki" src="wikipedia.jpg" alt="wikipedia logo">
+
+<H1 id="top">Sample CSS page</h1>
+
+<div id="main">
+<p>
+Phase-shift keying (PSK) is a digital modulation  scheme that conveys data by changing, or modulating, the phase of a reference signal (the carrier wave).
+</p>
+
+<p class="two">
+
+Any digital modulation scheme uses a finite number of distinct signals to represent digital data. PSK uses a finite number of phases, each assigned a unique pattern of binary digits. Usually, each phase encodes an equal number of bits. Each pattern of bits forms the symbol that is represented by the particular phase. The demodulator, which is designed specifically for the symbol-set used by the modulator, determines the phase of the received signal and maps it back to the symbol it represents, thus recovering the original data. This requires the receiver to be able to compare the phase of the received signal to a reference signal  such a system is termed coherent (and referred to as CPSK).
+</p>
+
+
+
+<p class="three">
+
+Alternatively, instead of using the bit patterns to set the phase of the wave, it can instead be used to change it by a specified amount. The demodulator then determines the changes in the phase of the received signal rather than the phase itself. Since this scheme depends on the difference between successive phases, it is termed differential phase-shift keying (DPSK). DPSK can be significantly simpler to implement than ordinary PSK since there is no need for the demodulator to have a copy of the reference signal to determine the exact phase of the received signal (it is a non-coherent scheme). In exchange, it produces more erroneous demodulations. The exact requirements of the particular scenario under consideration determine which scheme is used.
+
+</p>
+
+<p> The <b>bold</b> behaviour will override the paragraph behaviour for
+those attributes that <b>bold</b> defines.
+</p>
+
+
+<b> This is all bold except for <p> this paragraph which will override the 
+bold behaviour</p> until the poaragraph ends.
+</b> 
+
+<p class="norma">
+A convenient way to represent PSK schemes is on a constellation diagram. This shows the points in the Argand plane where, in this context, the real and imaginary axes are termed the in-phase and quadrature axes respectively due to their 900 separation. Such a representation on perpendicular axes lends itself to straightforward implementation. The amplitude of each point along the in-phase axis is used to modulate a cosine (or sine) wave and the amplitude along the quadrature axis to modulate a sine (or cosine) wave.
+</p>
+<img src="wikipedia.jpg" alt="wiki logo again"  id="wiki_float">
+
+<p class=norma>
+In PSK, the constellation points chosen are usually positioned with uniform angular spacing around a circle. This gives maximum phase-separation between adjacent points and thus the best immunity to corruption. They are positioned on a circle so that they can all be transmitted with the same energy. In this way, the moduli of the complex numbers they represent will be the same and thus so will the amplitudes needed for the cosine and sine waves. Two common examples are "binary phase-shift keying" (BPSK) which uses two phases, and "quadrature phase-shift keying" (QPSK) which uses four phases, although any number of phases may be used. Since the data to be conveyed are usually binary, the PSK scheme is usually designed with the number of constellation points being a power of 2.
+
+
+</p>
+
+designed with the number of constellation points being just some text
+<br>
+
+<ul>
+<li>this is
+<li>a simple
+<li>list of
+<li>some words
+</ul>
+
+
+</div>
+
+
+
+</body>
+</html>
+

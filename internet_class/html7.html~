@@ -1,0 +1,138 @@
+<html>
+<head>
+<title>GIMP</title>
+</head>
+<body bgcolor="lightgrey">
+<pre>
+<h1>Image Editing</h1>
+
+The GIMP's main use is for the creation and editing of bitmap
+images. This ranges from the touching up of digital photographs to the
+creation of digital art or the authoring of logos.
+
+<h1>File Formats</h1>
+
+<b>XCF: The native file format of The GIMP</b>
+
+    When saving images that are not yet complete and there is intent
+to continue working later, the most appropriate file format to choose
+is XCF. This file format is the native file format that The GIMP
+uses. XCF supports many features including compression.
+
+While XCF is an excellent choice in file format, it is not as portable
+as one might like. It is wise to save images that are not for use
+exclusively from within The GIMP using a differing format. 
+
+<b>PNG: Portable Network Graphics</b>
+
+    PNG can preserve all the transparency and color of an image and
+uses powerful lossless compression to reduce file sizes. In
+particular, computer-generated images usually compress very well.
+
+PNG supports smooth 8-bit transparency which can make for exceptional
+zero loss web graphics, but a caveat. Some browsers do not fully
+support all of the features that PNG offers. As always, check
+compatibility between the viewer and the format before commiting to a
+particular format. 
+
+<b>JPEG: Joint Picture Expert Group</b>
+
+    Photographs and other images from the real world (which include
+most images taken with digital cameras and color scans) can be
+compressed very effectively with JPEG.
+
+    JPEG images are compressed using a semi intelligent lossy
+algorithm that is very good at fooling the human eye. This format is
+excellent for saving on space and preserving viewable quality, but
+there are many situations where JPEG is an unsuitable format to
+choose. If the image contains broad bands of single color or is
+mechanical in nature (many broad straight single color areas), JPEG is
+a bad choice of format. Another note to make is that repeated saving
+of images that are JPEG encoded will result in degredation to quality
+over each save. As with any powerful option, be aware of this format's
+lossy compression method, and ensure the choice of JPEG is not made
+lightly.
+
+The JPEG filter used by The GIMP utilizes JFIF compression for
+compatibility with most existing software. It allows you to adjust the
+quality of the image and see immediately how the saved image will look
+and how big the file will be.  
+
+<b>GIF: Graphics Interchange Format</b>
+
+    Unlike all the other file formats described here GIF requires the
+use of a colormap. This means that a maximum of 256 different colors
+will be preserved in the saved image. The GIMP can perform the
+conversion automatically, but the results may sometimes be
+disappointing due to this limitation of GIF.
+
+    Despite the poor compression and limited number of colors, there
+are two desirable features of GIF for web designers. GIF is non lossy,
+so no image data is lost over saves, and GIF supports animation and
+transparency. The GIMP supports both of these features fully.
+</pre>
+<h1>Tools</h1>
+<img src="1_shot.png">
+<ol>
+<li>
+<ul>
+<li>Rectangle Select
+<li>Circle Select
+<li>Freehand Select
+<li>Magic Select
+<li>Bezier Select
+</ul>
+<li>
+<ul>
+<li>Shape Select
+<li>Move
+<li>Zoom
+<li>Crop
+<li>Rotate/Scale/Perspective
+</ul>
+<li>
+<ul>
+<li>Flip Selection
+<li>Text
+<li>Select Color
+<li>Fill
+<li>Gradient
+</ul>
+<li>
+<ul>
+<li>Pencil
+<li>Brush
+<li>Eraser
+<li>Airbrush
+<li>Pattern
+</ul>
+<li>
+<ul>
+<li>Blur/Sharpen
+<li>Pen
+<li>Dodge/Burn
+<li>Smudge
+<li>Distance/Angle
+</ul>
+</ol>
+<h1>New File Options</h1>
+<img src="2_shot.png">
+<h1>Image Window(with Background)</h1>
+<img src="3_shot.png">
+<h1>Image Window(Transparent- No Background)</h1>
+<img src="4_shot.png">
+<h1>Layers Dialog</h1>
+<img src="5_shot.png">
+<h1>Brush Dialog</h1>
+<img src="6_shot.png">
+<h1>Color Selection Dialog</h1>
+<img src="2002_11_11_141558_shot.png">
+<img src="car1.gif"><br>
+<img src="car2.gif"><br>
+<img src="car3.gif"><br>
+<img src="car4.gif"><br>
+<img src="car5.gif"><br>
+<img src="car6.gif"><br>
+<img src="car7.gif"><br>
+</body>
+</html>

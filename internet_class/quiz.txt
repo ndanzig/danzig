@@ -1,0 +1,70 @@
+HTML Quiz
+Please describe clearly, completely and in as short a way the following 
+HTML tags (how where and when it is used and what graphic effect it has):
+
+
+	<html>
+	
+
+
+
+	<title>
+
+
+
+
+	<i>
+
+
+
+        <br />
+
+
+
+	<h2>
+
+
+
+
+	<div>
+
+
+	
+
+	&gt;
+
+
+
+
+	&copy; 
+
+
+	
+	<sub>
+
+
+
+
+	<xmp>
+
+
+
+
+
+
+	<li>
+
+
+
+
+
+List and describe as many attributes of the following tags as you can:
+
+	<body> 
+
+
+
+
+	       
+	       
+        <font>

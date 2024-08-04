@@ -1,0 +1,196 @@
+<html>
+<head>
+   <title>Introduction to Network Communication (lab) -Danzig</title>
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="1000dd" vlink="800000" alink="800090">
+
+<center>
+<h1>
+Introduction to Network Communication (lab) -Danzig</h1></center>
+<basefont size=4> 
+Introduction to Network Communication:  This lab gives hands on 
+experience on the working of PC serial ports. You will program the RS-232 ( rs232 ) 
+interface and use it to communicate between computers. This is a physical 
+layer (level 1 in OSI) protocol.  This lab will thus
+give an idea of how communication protocols work.
+<h3>
+<ul>
+<li><A HREF="index.html#3">Recommended Reading</A> </li>
+<li><A HREF="index.html#4">Grading Policy</A></li>
+<li><A HREF="index.html#5">Lecture Slides</A></li>
+<li><A HREF="index.html#5.5">Programming</A></li>
+<li><A HREF="index.html#5.6">Submission</A></li>
+<li><A HREF="index.html#5.7">Assignment grading</A></li>
+<li><A HREF="index.html#6">Exercises</A></li>
+</ul>
+
+<a NAME="1"></a>General Information</h3>
+
+<ul>
+<li>
+<b>Lab hours:</b></li>
+
+<ul>
+<li>
+Wednesday: &nbsp; &nbsp; 16:30 - 18:15</li>
+
+</ul>
+
+<li>
+<b>Lecturer: </b><a href="http://danzig.jct.ac.il/">Nachum Danzig</a></li>
+
+<li>
+<b>E-mail: </b><a href="mailto:danzig@jct.ac.il">danzig@jct.ac.il</a></li>
+</ul>
+
+
+<h3>
+Recommended Reading</h3>
+<a NAME="3"></a>Look at the following web sites for more info about serial
+ports and RS-232:
+<ul>
+<li>
+<a href="http://en.wikibooks.org/wiki/Serial_Programming:8250_UART_Programming">Serial Programming Guide (Wikibook)</a></li>
+
+
+<li>
+<a href="http://www.geocities.com/SiliconValley/Heights/5704/serial3.html">About com ports</a></li>
+<li>
+<a href="http://www.lammertbies.nl/comm">www.lammertbies.nl/comm</a></li>
+</ul>
+
+<h3>
+<a NAME="4"></a>Grading Policy</h3>
+
+The lab grade will be composed of:
+<ol>
+<li>
+Attendence - 10% </li>
+<li>Quiz - 20 %</li>
+<li>
+Ex2 - 20%</li>
+
+<li>
+Ex3 - 20%</li>
+
+<li>
+Ex4 - 30%</li>
+</ol>
+
+<h3>
+<a NAME="5"></a>Lecture Slides</h3>
+These slides are in two formats: HTML and Power Point. For the PowerPoint version, download the PowerPoint
+version to your computer and print it through the PowerPoint application.
+It is possible to print 1,2,3 or 6 slides to a single page.
+<br>Click here for lecture one which discusses <a href="comm-lec1/comm-lec1v2.htm">RS-232C
+and UART 8250 </a>(HTML version) or here for the 
+<a href="comm-lec1/comm-lec1v2.ppt">Power
+Point version</a>.
+<br>Click here for lecture two which discusses the <a href="comm-lec2/comm-lec2.htm">
+Control Lines </a>&nbsp; (HTML version) &nbsp; or here for the <a href="comm-lec2/comm-lec2.ppt">PowerPoint
+Version</a>.
+<h3>
+<a NAME="5.5"></a>Programming</h3>
+As you will be programming in C /C++ observe the C programming conventions.
+See my <a href="http://danzig.us/cpp/principles.html">list of programming pinciples.</a>
+Here are some of the more basic rules:
+<ul>
+<li>
+Indentation of loops and <tt>if/else</tt> statements</li>
+
+<li>
+Functions of a reasonable size so that they can be understood at a glance</li>
+
+<li>
+Meaningful variable and function names</li>
+
+<li>
+Use <tt>#define</tt> or <tt>const</tt> for constants and write them in
+upper-case</li>
+</ul>
+And of course observe other good programming practices such as
+<ul>
+<li>
+&nbsp;Don't use <font color="purple">cool</font> tricks just to save a
+variable or line of code</li>
+
+<li>
+&nbsp;On the other hand don't go allocating MBs of memory if buffers can
+be reused</li>
+
+<li>
+&nbsp;Free unused memory allocations</li>
+</ul>
+
+<h4>
+<a NAME="Documentation"></a>Documentation</h4>
+Documentation is part of the assignment. Follow these rules:
+<ul>
+<li>
+Give a general description of the classes or data structures you use, their
+purpose and where they should be used.</li>
+
+<li>
+Document every function (class member or not), it's inputs, outputs and
+general description. The function should be written in a way that no documentation
+in the body of the function is needed.</li>
+
+<li>
+Document untrivial (i.e. not i,j,k,sum ...) variables when defined</li>
+
+<li>
+Document "tricky" lines of code ( <tt>if (x = (y >> 2)) &amp;&amp; z?1:0)</tt>
+)</li>
+</ul>
+
+<h3>
+<a NAME="5.6"></a>Submission</h3>
+You are to submit one hard copy of the code per pair. Do this only after the 
+assignment has been tested by the lecturer.
+<h3>
+<a NAME="5.7"></a>Assignment Grading</h3>
+The grade for each assignment is composed of :
+<ul>
+<li>
+&nbsp;<b>Programming:</b> 15% - Observation of "correct" programming techniques.</li>
+
+<li>
+&nbsp;<b>Communications: </b>20% - Correct use of the material given in
+the theoretical course.</li>
+
+<li>
+&nbsp;<b>Execution:</b> 50% - Correct performance of the program's goal.</li>
+
+<li>
+&nbsp;<b>Documentation:</b> 15% - Clear documentation of your program.</li>
+</ul>
+For late submissions the penalty is a reduction of<i> <b>10</b></i>&nbsp; points
+per week.
+<br>&nbsp;
+<h3>
+<a NAME="6"></a>Exercises</h3>
+
+<ul>
+<li>
+<a href="exercises/ex1.html">Assignment
+ 1</a> </li>
+
+<li>
+<a href="exercises/ex2.html">Assignment
+ 2</a></li>
+
+<li>
+<a href="exercises/ex3.html">Assignment
+ 3</a> </li>
+<li><a href="exercises/ex4.html">Assignment
+4</a> </li>
+</ul>
+
+<center>
+<hr WIDTH="100%"></center>
+
+<address>
+If you have comments or suggestions, email me at <a href="mailto:danzig@jct.ac.il">danzig@jct.ac.il</a></address>
+
+</body>
+</html>

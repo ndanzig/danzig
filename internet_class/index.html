@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+<head>
+<title>HTML Course Outline </title>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000066">
+
+<h2>HTML Curriculum and Course Material</h2>
+
+<pre>
+Short Syllabus:
+<p>An introductory course in the creation of web sites.  The course is 
+taught in the UNIX and Windows environments.  Basic UNIX commands are covered. 
+All standard HTML tags are taught including hrefs, lists, tables and forms.
+Cascading Style Sheets (CSS) is also taught. An emphasis is placed on 
+understanding HTML and CSS code. 
+<p>Client side and server side scripting is taught using the 
+following languages: Javascript, PHP, MySQL. Students create two  projects: 
+one is a static web site incorporating all the knowledge they acquire in the 
+first half of the course, the other is a dynamic web site which uses one of 
+the scripting methods covered in the course. In this second project the student
+is expected to learn on his own in greater depth and to demonstrate the 
+scripting method of his choosing.
+<p>It is also possible for a student to do a CSS project, provided that it is
+sufficiently complex.
+<p>Attendance is required and constitutes a significant part of the grade.
+Periodic class room assignments are also part of the final grade.
+<p><a href="homework3.html">Homework 2005</a>
+</pre>
+<xmp>
+Detailed Lecture Summary:
+
+ 1. Basic Linux Environment and Commands
+	login, terminal, emacs, ls, cd, mkdir, chmod, rm </xmp>
+  &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp;
+   &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp;
+ Some basic UNIX <a href="../unix_class/unixCommands.html">commands</a>.
+<br>
+  &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp;
+     &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp; A basic <a href="../unix_class/emacsCommands.html"> emacs </a> tutorial.
+
+
+<xmp>  
+ 2. HTML Introduction
+	Material:
+	* HTML tags are used to mark-up HTML  elements
+	* HTML tags are surrounded by the two characters < and >
+    	* The surrounding characters are called angle brackets
+    	* HTML tags normally come in pairs like <b> and </b>
+    	* The first tag in a pair is the start tag, the second tag is the end tag
+    	* The text between the start and end tags is the element content
+    	* HTML tags are not case sensitive, <b> means the same as <B>
+
+	<html>,<head>,<title>
+
+	Tag Attributes
+	Tags can have attributes. Attributes can provide additional
+	information about the HTML elements on your page.
+	This tag defines the body element of your HTML page: <body>.
+ 	With an added bgcolor attribute, you can tell the browser that the
+ 	background color of your page should be red, like this: 
+	<body bgcolor="red">.
+	Attributes always come in name/value pairs like this: 	name="value".
+	Attributes are always added to the start tag of an HTML element.
+
+	<body TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00" background="picture.gif"
+	leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" >
+
+ 3. HTML Text Tags
+	Material to Cover:
+	Physical: <b>,<i>,<u>,<p>,<br />,<center>,<h1..6>,<!-- -->, <tt>, <strike>, <big>, <small>
+	<hr align=left size=4  width=50%><nobr></nobr>
+	<font size="+2"|"-2"|2 color="#005500" face="ariel,times new roman ..."> 
+	Logical: <div align="left"> <em><strong><abbr><address><blockquote> <code> <samp><dfn> <cite>	
+
+ 4. HTML Special Text Cases and HTML lists
+	Material to Cover:
+	Text  	Description  		Entity Name  	Entity Number
+	  	non-breaking space 	&nbsp;	 	&#160;
+	< 	less than 		&lt; 		&#60;
+	> 	greater than 		&gt; 		&#62;
+	& 	ampersand 		&amp; 		&#38;
+	" 	quotation mark 		&quot; 		&#34;
+	' 	apostrophe    				&#39;
+	# 	pound 			&pound; 	&#163;
+	 	copyright 		&copy; 		&#169;
+	® 	registered trademark 	&reg; 		&#174;
+	× 	multiplication 		&times; 	&#215;
+	÷ 	division 		&divide; 	&#247;
+	
+	<sup>,<sub>, <pre>, <xmp>
+
+	LISTS: <ul type="circle"|"square"> <ol type="I"|"a"|"A"|"i"> <li>
+	<dl> def. list <dt> def. term  <dd> - definition description  <acronym title=> 
+</xmp> &nbsp;   &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; <a href="http://www.htmlhelp.com/reference/html40/alist.html">A Complete Alphabetical Issue of HTML 4.0 Elements</a><br>
+ &nbsp;   &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; <a href="http://barzilai.org/math_sym.htm">Math Symbols in HTML</a><br>
+&nbsp;   &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; <a href="http://www.avaloncity.com/info/fprefect/spice/colors.htm">A List of Colors and their RGB values </a><xmp>
+http://www.htmlhelp.com/reference/html40/alist.html
+
+ 5. HTML Hyperlinks and Images
+	Material to Cover:
+	<body link="" alink="" vlink="">
+	<a href="page"></a>
+	<a name="label">  <a href="page#label"></a>
+	<img src="" height="" width="" alt="" border="" align="">
+</xmp> &nbsp;   &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; <a href="5.html">(more info on Hyperlinks and Images)</a><xmp> 
+<EMBED SRC="sound.mid" AUTOSTART=TRUE LOOP=TRUE WIDTH=0 HEIGHT=0></EMBED>
+
+ 6. HTML Tables
+	Materials to Cover:
+	<table border="" cellspacing="" cellpadding="" width="" height=""> 
+	<table bgcolor="" background=""> <caption> <thead> <tfoot>
+	<tr>,<td align="" valign="" colspan="" rowspan="" width="" height="" >
+	Nested Tables  
+</xmp> &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; An <a href="../schedule.html"> example </a> of a table.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Another example with <a href="cells.html">cells</a>.
+<pre>
+ 7. Cascading Style Sheets ( CSS )
+        Material to Cover:
+	selector {property:value; [property:value ... ]}
+	Examples:  H1 {font-size:24pt; color:blue;}
+	           p {font-family:'Courier'; font-size:12pt; color:red; margin-left:0.5in;}
+	<a href="./css.html#external">External Styles</a>, <a href="./css.html#embedded">Embedded Styles</a>, <a href="./css.html#inline"> Inline Styles</a>
+	The Cascade effect
+	Style Classes: P.rightaligned {text-align:right}  
+	               &lt;p class="rightaligned"&gt;Right aligned paragraph&lt;/p&gt;
+        DIV and Span used with classes
+	Shortcuts: H1 {font: 24pt italic bold 'Times Roman' 'Courier'}
+	           H1, H2, H3 {font-family:'Times Roman' ; font-weight:bold;}
+        My Sample html <a href="css_example.html"> page </a>.
+        The css <a href="css.css"> page </a> it uses.
+	Chapter 2 of the book <a href="http://www.w3.org/Style/LieBos2e/enter/"> Cascading Style Sheets, designing for the Web </a>.
+        A Hebrew PostScript list of CSS <a href="./css_ref.ps">attributes and values</a> by Yedidia Klein.
+	A Hebrew <a href="./CSS.ppt">PowerPoint</a> slide show also by Yedidia Klein.
+        <a href="stylecommands.txt">Some CSS commands </a> <a href="css.rtf"> Newer Version those commands </a>
+        <a href="http://redmelon.net/tstme/box_model/">Box Model Demo and explanation</a>
+        <a href="http://www.w3.org/TR/CSS2/cover.html">CSS Documentation</a>
+ 7.1 CSS Positioning
+        <a href="css_position.html">Positioning</a>
+ 7.2 CSS Float
+        <a href="css_floating.html">Floating</a>
+ 7.3 CSS Children
+        <a href="css_children.html">Children</a>
+ 7.4 CSS Pseudo Classes
+        <a href="css_pseudo.html">Pseudo Classes </a>
+
+</pre><xmp>
+ 8. GIMP Introduction
+	Material to Cover:
+	Computer Graphics Types, Web Graphics
+	New File Menu, Tool Panel, Save As Menu
+</xmp> &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; Class <a href="html7.html"> notes</a>.
+<xmp>
+
+ 9. GIMP Simple Graphics
+	Material to Cover:
+	Layers, Selecting, Graphics Tricks- Drawing Shapes
+ 10. GIMP Functional Graphics
+	Material to Cover:
+	Background Tiles, Text, Buttons, Logos
+ 11. GIMP Photo Touch Ups
+	Material to Cover:
+	Image->Colors Menu- Hue, Saturation, Color, Contrast, Thresholds
+
+</xmp> 12. &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;<a href="metatags.html"">Meta Tags</a>.
+<xmp>
+13. HTML Frames
+	<frameset cols="130, *" border="0">, <frame src="left.html" noresize scrolling="no" name="leftside">
+	<frame>,<a href="" target="rightside">, open new page: target="_Top", <noframes> 
+	<iframe src="" width="400" height=80%> hidden text </iframe> - used in regular html page
+	Nested Frames
+</xmp><pre>
+14. Client side scripting - <a href="javascript.html">Java script</a>
+        <a href="javascript2.html">An Example</a>.
+
+15. HTML <a href="../php_course/index.html#forms">Forms</a>.
+
+16. <a href="../php_course/">PHP and MYSQL</a>.
+       Example of a <a href="mysql.html">trivial message board</a>.
+
+17. Final Project. Choose from the projects listed <a href="homework2.html">here</a>.
+</pre>
+<P>
+Midterm Project.  Use HTML and CSS to complete one of the projects listed <a href="homework.html">here</a>.
+<p>
+<ul>
+
+<li>Classic source for web programming languages <a href="http://www.w3.org/"> w3c</a>
+<li>A great site for info on html etc. is <a href="http://www.w3schools.com/">www.w3schools.com</a>. But the site only works from Windows&reg; machines. Sorry.
+<li>A user-friendly site for learning HTML etc:  <a href="http://www.htmlgoodies.com">htmlgoodies </a>
+<li><a href="http://www.intranetjournal.com/corner/wrox/progref/vbt/"> VB Script Tutorial </a>
+<li><a href="http://visibone.com/products/everythingbook.html">VISIBONE</a>
+<li><a href="http://tizag.com/">tizag Tutorial</a>
+<li><a href="http://whatwg.org/html5">HTML 5 </a>
+
+<li><a href="htmlprimerall.html"> HTML Primer</a>
+<li><a href="http://shekel.jct.ac.il/~sifriah/210615/world-of-olives.html">The librarian Chana Lajcher's HTML demo page</a>
+<li><a href="http://www.math.fau.edu/locke/SymTest.htm"> Test special html symbols </a>
+
+<li><a href="testsymobls.html">mirror of Test special html symbols </a>
+<li><a href="yale.html">Yale </a>
+<li><a href="samplecss.html">Sample CSS </a>
+
+</ul>
+<p>
+&copy; Nachum Danzig 2003
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+<head>
+<TITLE>Programming - Using Enum</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Enumeration Types</H3></CENTER>
+
+
+<p>In there most basic form enums are sets of variables defined to have different constant integer values.
+  So for example, if enums didn't exist  I might created a bunch of constant variables for using in my program:
+  <blockquote>
+<br>const int SHEEP = 0;
+<br>const int COW =1;
+<br>const int FOX =2;
+<br>const int TURTLE = 3;
+
+  </blockquote>
+  Then I could use these values in my program by using the variable name instead of the value.
+  This will make reading and coding my program simpler.  I don't have to remember all the values
+  for the animals but I can simply write the kind of animal and it will mean the number
+  that kind is associated with or defined to be.
+  <blockquote>
+<br>int myAnimal;
+<br>cin &gt;&gt;myAnimal;
+<br>if (myanimal == SHEEP)
+<br> etc....
+  </blockquote>
+
+  I can achieve the exact same result using enums.  Using enums in this way not only saves me having to type "const int" but
+  also helps organize the look of my code.  Here is how I would do the exact same thing using enum:
+  <blockquote>
+<br>enum {
+<br>SHEEP = 0,
+<br>COW =1,
+<br>FOX =2,
+<br>TURTLE = 3,
+
+<br>};
+  </blockquote>
+Now I have the values SHEEP, COW etc defined as before and I can use them whereever I could use a const int.
+<p>
+  The name enum is short of enumeration.  To enumerate is to assign numerical values to things. Enumerations also allow me to leave out
+  the values and in such a case the compiler will supply values starting from 0.  So, the following example is equivalent to the preceding:
+  <blockquote>
+<br>enum {
+<br>SHEEP,
+<br>COW,
+<br>FOX,
+<br>TURTLE ,
+<br>};
+  </blockquote>
+  What happens if I run the following code?
+    <blockquote>
+  <br>cout << TURTLE;
+	      </blockquote>
+
+    I will see a 3 printed.
+
+<p>
+  I can also tell the compiler to start the enum from a different value from 0.  For example, if I want the enum to start from 1 I would write
+
+  
+	<blockquote>
+<br>enum {
+<br>SHEEP = 1,
+<br>COW,
+<br>FOX,
+<br>TURTLE ,
+<br>};
+	</blockquote>
+	 Now if I run the following code I will print a 4 to the screen.
+    <blockquote>
+  <br>cout << TURTLE;
+	      </blockquote>
+
+   
+<p>
+  But this is not all.  An enumeration can also be a user defined data type.  This can also be called a named enum.  The previous examples were unnamed enums.
+
+  Here is an example of a named enum:
+	      <blockquote>
+
+    
+<br>	enum animals {
+<br>	SHEEP,
+<br>	COW,
+<br>	FOX,
+<br>	TURTLE ,
+<br>	};
+	      </blockquote>
+	      Now I have an enum named animals where each type is defined by a different integer value. That means just like there are
+	      the types int, float, char, now there is also a type animal.  But this type can only have certain values.  It can only be assinged the
+	      values listed when I defined the enum.
+	      I could use it like this:
+	      	      <blockquote>
+<br>	animals a = animals::COW;
+	      </blockquote>
+This means theat a get the value of animal associated with COW, i.e. 1.
+
+<p>
+  
+
+<p>
+Here is another example of an enum declaration:
+
+<blockquote> <tt>
+enum Error {DIVIDEBYZERO, NOFILE, ACCESSDENIED, NORESOURCE};
+</tt></blockquote>
+
+<p>This will create a user define type called Error which can be assign the values DIVIDEBYZERO, NOFILE, ACCESSDENIED, or
+ NORESOURCE where DIVIDEBYZERO == 0, NOFILE == 1, ACCESSDENIED == 2, and NORESOURCE == 3.
+<p>
+  Just as with classes, I can create instances of my enumeration by inserting instance identifiers after the closing brace.
+  The following will create 3 instances (a, b and c) of the enum class Error:
+<blockquote> <tt>
+enum Error {DIVIDEBYZERO, NOFILE, ACCESSDENIED, NORESOURCE}a,b,c;
+ 
+</tt></blockquote>
+
+<p>
+By convention, we use all capital letters for values of enums, just as we do with defines. 
+And we capitalize enum names, just like class names.
+<p>
+In order to create an instance of this type I need to write something like this:
+<blockquote> <tt>
+
+Error myerrror;
+
+</tt></blockquote>
+
+As long as no other enum or define is using the identifier NORESOURCE, I can give my instance a value like this:
+
+<blockquote> <tt>
+myerror = NORESOURCE;
+
+</tt></blockquote>
+But if NORESOURCE is also used in another enum or in a define, then I must use the scope resolution operator :: as in the previous example, like this
+
+<blockquote> <tt>
+myerror = Error::NORESOURCE;
+
+</tt></blockquote>
+<p>
+As we stated earlier, we can only assign the enum instance names listed in the declaration. Can we assign the enum instance 
+the literal integer equivalent of one of the names listed in the declaration?
+<blockquote> <tt>
+myerror = 4;  
+</tt></blockquote>
+Try it out an see what your commpiler says.
+<br>
+
+We can certainly  compare the value if a enum instance to a literal integer.
+
+
+
+<p>By default, the values assigned to an enumeration start at zero (0)  and ascend by increments of one.
+If I want to start at a different number, one (1) for example, I simply need to define the first value to
+ be that number (one)  and all  following 
+values will increment upward from there.
+
+For example, this will give the months of the year the values 1 through 12:
+<blockquote> <tt>
+
+enum Months { JAN=1, FEB, MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC};
+
+</tt></blockquote>
+
+
+I can also assign completely unrelated values to my enum, as in the example below.  The
+values must be integers, and not decimal values. (Though, for example, 'a' is allowed as a value since it
+is interpretted as its ascii value, 97.)
+
+<p>
+
+<blockquote> <tt>
+<br>#include "stdio.h"
+
+<br>int main()
+<br>{
+
+<br>  enum Error {DIVIDEBYZERO =4 , NOFILE=6 , ACCESSDENIED=18, NORESOURCE=17}a, b;
+
+<br>  a = NOFILE;
+<br>  &nbsp; &nbsp; 
+// a=6; <b><i> will not compile, can only assign listed identifiers</i></b>
+
+<br>  if (a == 6 )
+<br>  &nbsp; &nbsp;   {
+<br>
+<br>   &nbsp; &nbsp;    printf("File does not exist.\n");
+<br>
+<br>   &nbsp; &nbsp;  }
+
+<br>return 1;
+<br>}
+
+</tt></blockquote>
+
+
+
+
+<p>
+&copy Nachum Danzig October 2011 - January 2017
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

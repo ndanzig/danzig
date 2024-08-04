@@ -1,0 +1,40 @@
+<head>
+<TITLE>DT</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Data Types</H3></CENTER>
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+<table border="1">
+<tr><td>Name</td> <td> Bytes</td> <td> Description</td><td>  Range</td>
+</tr><tr><td>char  1	character or integer 8 bits length.signed: -128 to 127
+unsigned: 0 to 255
+</tr><tr><td>short 2	integer 16 bits length.signed: -32768 to 32767
+unsigned: 0 to 65535
+</tr><tr><td>
+long 4 integer 32 bits length.signed:-2147483648 to 2147483647
+unsigned: 0 to 4294967295
+</tr><tr><td>int * Integer. Its length traditionally depends on the length of the system's Word type, thus in MSDOS it is 16 bits long, whereas in 32 bit systems (like Windows 9x/2000/NT and systems that work under protected mode in x86 systems) it is 32 bits long (4 bytes).See short, long
+</tr><tr><td>float 4	floating point number. 3.4e + / - 38 (7 digits)
+</tr><tr><td>double	8 double precision floating point number. 1.7e + / - 308 (15 digits)
+</tr><tr><td>long double 10 long double precision floating point number.  1.2e + / - 4932 (19 digits)
+</tr><tr><td>bool 1 Boolean value. It can take one of two values: true or false NOTE: this is a type recently added by the ANSI-C++ standard. Not all compilers support it. Consult section bool type for compatibility information.true or false
+</tr><tr><td>wchar_t	2 Wide character. It is designed as a type to store international characters of a two-byte character set. NOTE: this is a type recently added by the ANSI-C++ standard. Not all compilers support it. wide characters
+
+<br>
+&copy Nachum Danzig September 2004
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,53 @@
+<html>
+<body>
+<link rel="stylesheet" type="text/css" href="java.css" style="java">
+<h2>Example of an anonymous innerclass</h2>
+<pre>
+<h3> The interface <i>myInnerInterface</i></h3> 
+
+<span class="keyword">public</span> <span class="keyword">interface</span> myInnerInterface
+<span class="brace">{</span>
+&nbsp <span class="keyword">public</span> <span class="keyword">abstract</span> String myToString(); <span class="comment">//you could also call this method "toString()"</span>
+<span class="brace">}</span>
+<hr>
+<h3> The class <i>myClass</i></h3>
+
+<span class="keyword">public</span> <span class="keyword">class</span> myClass
+<span class="brace">{</span>
+&nbsp myClass() <span class="brace">{}</span>;
+
+&nbsp <span class="keyword">public</span> <span class="keyword">void</span> myClassMethod()
+&nbsp <span class="brace">{</span>
+&nbsp &nbsp System.out.println(<span class="string">"hello new class"</span> +
+			   <span class="keyword">new</span> myInnerInterface ()
+			   <span class="brace">{</span>
+			   &nbsp <span class="keyword">public</span> String myToString()<span class="comment">//this could have implemented toString()</span>
+			   &nbsp <span class="brace">{</span>
+			   &nbsp &nbsp <span class="keyword">return</span>(<span class="string">"Hi, What is my name anyway?"</span>);
+			   &nbsp <span class="brace">}</span>
+			   <span class="brace">}</span>.myToString() <span class="comment">//if we had implement toString then we could have</span>
+			                  <span class="comment">// entirely removed the call  ".myToString()"</span>
+			);<span class="comment">//end println</span>
+&nbsp <span class="brace">}</span><span class="comment">//end myMethod</span>
+
+<span class="brace">}</span>
+
+<hr>
+<h3> The class <i>myClassTest</i></h3>
+
+<span class="keyword">public</span> <span class="keyword">class</span> myClassTest
+<span class="brace">{</span>
+&nbsp <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main (String args[])
+&nbsp <span class="brace">{</span>
+&nbsp &nbsp myClass a = <span class="keyword">new</span> myClass();
+&nbsp &nbsp a.myClassMethod();
+&nbsp &nbsp <span class="keyword">return</span>;
+&nbsp <span class="brace">}</span>
+<span class="brace">}</span>
+
+</pre>
+<p>
+&copy; Nachum Danzig January 2004
+
+</body>
+</html>

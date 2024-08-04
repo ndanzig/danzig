@@ -1,0 +1,65 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+<LINK REL=STYLESHEET HREF="../cpp/style.css" TYPE="text/css">
+
+<title>Heaps  </title>
+</head>
+<BODY >
+<h2>Heaps</h2>
+
+<p> A heap is a data structure in which the value (or key) of every parent node is larger (or smaller) than that of 
+ both child nodes.  This is the heap rule.
+It follows then that the  head node will have the largest value of all. Another requirement of a heap is that
+it is a balanced tree.  When new nodes are added the tree will only increase in rows if all the free
+places in the previous row are occupied.
+The pop function will always pop off the head node.
+
+<p>How can we guarantt the heap rule and maintain a balanced tree?  The approach we will take is to add the new node
+to the bottom row of the tree and then swap it with its parent node until such time that the parent is larger than 
+the newnode.  This process is called upheaping.  
+
+<p>When we remove a node we pop the head.  We then need to find a replacement for the head.  We will take the
+ bottom-most node and insert it in the head position.  This will clearly violate the heap rule. To fix this we will
+then compare the current head node with each of its children. We will then swap it with its larger child
+and continue down.  We will keep swapping until both children are smaller than the current node. 
+This process is called downheaping.
+
+
+
+
+
+<p> A fifo or a queue lets us push element and pop them out in the same order they came in.
+This is useful form buffering data flow.  But sometimes we want to pop things out in a different 
+order from that which they came in. This new order is based on a priority assigned to each element.
+A queue designed to allow this is called a priority queue.
+If we view the value or key of the node in a heap as a priority, i.e. a high value means this node has a high priority,
+then we can call the heap a priority queue. Every time we pop off a node we will get the highest priority 
+node.
+
+<p> We can also create a sort function based on a heap.  We simply take a number of random nodes and put them in 
+heap form by inserting each one into the heap.  Then we can pop them out again and will will have a sorted list 
+(from highest to lowest).
+
+
+<p> Usually a heap is implemented using an array. The head element is inserted in the first index of the
+array, the second in the second place and so on. This is the simplest way to
+implement a heap.  Here is an implementation using a linked list binary tree instead. It is more
+complex than the array implementation.
+I have only done the insert function.  I leave it to the reader to write pop and downheap. 
+<p>
+
+<A href="heap.cpp">Heap Code</a>
+
+
+
+
+
+<p>
+&copy; Nachum Danzig 2010
+</body>
+</html>
+
+
+
+

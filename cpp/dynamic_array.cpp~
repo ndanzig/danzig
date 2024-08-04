@@ -1,0 +1,83 @@
+#include <stdio.h>
+
+int main()
+{
+  int dim1, dim2, i=0, j=0;
+
+  int *array1; 
+  int **array2; 
+
+  /*  printf("let's make a 1-D array. Enter the size: "  );
+  scanf("%d",&dim1 );
+
+  array1= new int[dim1];
+  while (i<dim1)
+    {
+      array1[i]=i;
+      i++;
+    }
+  printf("\nSuccess!! "  );
+  i=0;
+  printf("\nThe values in your 1-D array are: "  );
+  while (i<dim1)
+    {
+      printf("\nPlace %d has value: %d", i, array1[i] );
+      i++;
+    }
+ printf("\nDeleting!! "  );
+  delete array1;
+  */
+  i=0;
+
+  printf("\nNow, let's make a 2-D array. Enter first dimension: "  );
+  scanf("%d",&dim1 );
+  printf("\nEnter second dimension: "  );
+  scanf("%d",&dim2 );
+  
+  array2 = new int*[dim1];  
+  
+  while (i<dim1)
+    {
+      array2[dim1] = new int[dim2]; 
+      i++;
+    }
+  printf("\nSuccess!! "  );
+  i=0;
+
+  while (i<dim1)
+    {
+      while(j<dim2)
+	{
+	  array2[i][j]=i;
+	  j++;
+	}
+      j=0;
+      i++;
+    }
+
+  /*
+
+  printf("\nThe values in your 2-D array are: "  );
+
+  while (i<dim1)
+    {
+      while(j<dim2)
+	{
+	  array2[i][j]=i;
+	  j++;
+	}
+      j=0;
+      i++;
+    }
+
+  printf("\nDeleting!! "  );
+
+  while (i<dim1)
+    {
+      delete array2[i];
+      i++;
+    }
+  delete array2;
+*/
+  return 2;
+}

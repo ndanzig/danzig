@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>
+Internet Software Engineering (lab)
+</title>
+</head>
+
+<body bgcolor="white">
+<h2>Internet Software Engineering (lab)
+</h2>
+
+
+<ul>
+<li><a href="directories.html">What Directories you need to create</a>
+
+</li>
+<li><a href="compiling.html">How to
+ compile using javac</a></li>
+
+<li>
+<a href="addprojects.html">How to add new projects via the manager</a> 
+</li>
+<li>
+<a href="packages.html">How to use several classes by creating <b> packages</b>
+</a> 
+
+</li>
+
+<li>
+<a href="writing.html">Where your servlet writes its files.</a> 
+
+</li>
+<li>
+<a href="createaccounts.html">How the sysadmin creates Tomcat accounts.</a 
+
+</li>
+<li>
+<a href="logs.html">Where can I see my error messages and System.out prints?</a 
+
+</li>
+
+</ul>
+
+Some links:
+
+<ul>
+<li><a href="http://stud41.ise.jct.ac.il:8080/iseproject/hello_world">A
+ Hello World Servlet</a>
+        <ul><li><a href="HelloWorld.txt">Source code 
+for Hello World Servlet</a></li>
+         </ul>
+</li>
+
+<li><a href="calc.html">A Simple Calculator</a>
+        <ul>
+	<li><a href="Ex1form.txt">Source code Calculator Form Page</a></li>
+	<li><a href="Ex1.txt">Source code for Calculator results page</a></li>
+         </ul>
+</li>
+
+
+
+</li>
+
+<li><a href="starthomeservlet.html"> A simple servlet created list using a dataList</a>
+        <ul>
+	<li><a href="HomeServlet.txt">Source code dataList example: HomeServlet</a></li>
+	<li><a href="UpdateServlet.txt">Source code dataList example: UpdateServlet</a></li>
+	         </ul>
+
+</li>
+<li><a href="http://ise.jct.ac.il:8080/CoursesForum/home">Dr. Gottlieb's Home Page</a>
+</li>
+<li><a href="http://stud40.ise.jct.ac.il:8080/iseproject/mail-list">Dr. Gottlieb's Email List Example</a></li>
+
+<li><a href="http://java.sun.com/webservices/docs/1.0/tutorial/doc/JavaWSTutorialTOC.html">Sun's XML Java Tutorial</a>
+<!---- br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="http://java.sun.com/webservices/docs/1.0/tutorial/doc/JAXPXSLT5.html#64603">Writing Out a DOM as an XML File</a  ---->
+</li>
+<li>
+<a href="http://java.sun.com/developer/technicalArticles/xml/WebAppDev2/index.html"> 
+An overview of XML, SAX and DOM 
+</a>
+</li>
+
+<li><a href ="http://java.sun.com/j2ee/1.4/docs/tutorial/doc/index.html"> Sun Tutorial on DOM and SAX</a>
+</li>
+<li><a href ="http://java.sun.com/xml/jaxp/dist/1.1/docs/tutorial/TOC.html">Working with XML Tutorial</a>
+</li>
+<li><a href ="33pageDOM.html">Class Notes</a></li>
+
+<li><a href ="TransformationApp02a.txt">My Sample</a></li>
+<li><a href ="TransformationApp02b.txt">My Second Sample</a></li>
+
+<li><a href ="my.dtd">DTD example</a> <a href ="xhtml.dtd">xhtml DTD example</a>  </li>
+
+<li>
+<a href ="http://java.sun.com/j2se/1.4.2/docs/api/org/w3c/dom/Document.html">
+List of methods for the <b>Document</b> class of Sun's DOM API</a><i> &nbsp;
+ &nbsp; You can also 
+view all the methods of all classes in Sun's API for DOM from here.</i></li>
+
+<li>
+<a href ="http://www.eclipse.org/">Eclipse Java Development Environment</a></li>
+<li><a href ="XSLtutorial.htm">XSLtutorial</a></li>
+<li><a href ="http://java.sun.com/webservices/jaxp/dist/1.1/docs/tutorial/dom/2_display.html">Displaying a DOM</a></li>
+
+<li><a href="http://today.java.net/pub/a/today/2004/08/12/groovyxml.html">A Funny (but sad) Comparison of Dom with other approaches </a></li>
+<li>
+<a href ="http://www.w3.org/TR/xmlschema-0/">Something New, XML Schema's</a></li>
+
+<!-- See http://www.cs.uiowa.edu/~slonnegr/xml/  -->
+
+</ul>
+
+<P>
+<!-- Horizontal Rule (Bar) -->
+<HR ALIGN=CENTER  SIZE=5  WIDTH=70%>
+<br>
+&copy; Nachum Danzig 2004
+
+
+
+
+</body>
+</html>

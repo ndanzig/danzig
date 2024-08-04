@@ -1,0 +1,76 @@
+<head>
+<TITLE>Programming Principles</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>Priciples of Good  Programming</H3></CENTER>
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+Here are some principles of good programming - and some tips.
+<ol>
+<li> Use nouns as variable names. Example, "hours".
+<li> Use verbs as functions names. Example "calculate_fee".
+<li> Comments should not describe <stong>what</strong> you are doing but    <stong>why</strong> you are doing it.  What you are doing should be clear from the code itself.</li> 
+<li> A flag should never be called "flag".  Use an adjective 
+or a past participle, for example, "empty"
+"finished"  as in <br>
+ <tt>while ( !finished ) </tt> 
+<li> Never use "Magic Numbers". A "magic number" is a number other than
+zero or 1 that you need in the program to have things work.
+If you need such a number, use a const, a #DEFINE, or, in Java, a final to give the
+number a meaningful name. Use all capital letters for names of constants. 
+For example, if you want a a loop 
+to run a maximum of 100 times, write the following:
+<br><tt> final int MAX = 100 ; <br>
+for ( i = 0 ; i < MAX ; i++ )
+<br>{
+<br>
+<br>}  </tt>
+<li> Indent consistently.
+<li> Use parenthesis for clarity. 
+<li> Avoid global variables like the plague.
+<li> Use meaningful names for variables and functions. If you can't think of a 
+meaningful name for
+ a function, probably your function is doing too many different things.
+<li>When ever you have an action which can be separated into a function
+and the function will have a meaningful name, make a function.
+<li>Your main should be read as close to sensible English as possible. 
+This is called self-documenting code.
+<li>No function, including main(), should be longer that 1 printed page.
+<li>When trying to solve a problem, think of an average case somewhere in the 
+middle and think of how you might solve it.  Then, see if you solution works 
+for the first or smallest case and for the last or largest case.  These two 
+cases are called the extreme cases.  You may need to modify your solution 
+a bit so that it will work for the extremes.  Hopefully you can find a 
+solution that
+solves both the normal middle case and also works for the extremes without
+resorting to using if's and else's to deal with the extremes independantly.
+Remember, "Seldom is the solution that works, the best solution."
+<li>Ideally, methods should return a boolean value of "true" on success and 
+"false" on failure.  Any other return values can be given to the calling method
+by means of a reference in the parameter list.  In some cases this is not true.
+For example, recursive methods sometimes need to return a meaningful value.
+Also, in simple math methods a return value is the simplest approach.  
+<li>The compiler is king.  It will tell you what is acceptable syntax. (Though
+not all compilers follow the same language specifications.)
+</ol>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+See also <a href="http://gematria.jct.ac.il/~naiman/c++/programming-habits.html">Dr. Naiman's advice</a>.
+
+<p>
+&copy Nachum Danzig November 2003
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

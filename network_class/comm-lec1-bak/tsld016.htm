@@ -1,0 +1,46 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>The LCR Parity Bits</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>The LCR Parity Bits</H1> 
+ <P><UL>
+<LI><H2>Bit 3: Parity enable bit.
+</H2>
+<UL>
+<LI>0: no parity bit sent
+<LI>1: parity bit sent
+</UL></UL><UL>
+<LI><H2>Bit 4: Chooses between odd and even parity.
+</H2>
+<UL>
+<LI>0: odd parity. The number of  '1's in the word is counted. If odd the parity bit is set, if even it isn't set.
+<LI>1: even parity. The number of  '1's in the word is counted. If even the parity bit is set, if odd it isn't set.
+<LI>For instance the word 11001011 has odd parity. So if parity is enabled (bit 3) and bit 4 is 0  (odd parity), the parity bit sent will be 1 and the receiver will check the data and expect to find a 1 in the parity bit.
+</UL></UL><UL>
+<LI><H2>Bit 5: Sets the "sticky" parity bit. The parity bit is always the same value, "high" (1) or "low" (0). 
+</H2>
+<UL>
+<LI>0: The parity bit is set by the input word.
+<LI>1: The parity bit is 0 is bit 4 is 1, the parity bit is 1 if bit 4 is 0. This setting is permanent as long as bit 6 is set.</UL></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld015.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld017.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld016.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

@@ -1,0 +1,41 @@
+
+
+Final Exam
+Data Structures, 2006 
+N. Danzig Instructor
+
+2.5 hours
+Closed Book
+
+
+1.  What is the advantage of using a red/black tree over using an ordinary 
+binary tree ?
+
+
+
+
+
+
+
+
+
+2. Write 2 versions of the delete_node function for a binary tree (a tree where
+the left node is less than the parent node and the right node is greater than it)
+The first version shoud re-insert the children of the deleted node. (no need to 
+write insert_node) The second version should connect the children of the 
+deleted node in their correct locations.
+
+
+
+
+3. Write the insert_node function for a doubly-linked (previous and next pointers)
+sorted list.
+
+
+
+
+4. The heap condition is that the key in each node should be larger than 
+(or equal to) the keys in its children (if it has any). Write the insert_
+node function for a binary tree implementation of a heap (you must
+also write the upheap function to ensure  the heap condition
+remains true.)

@@ -1,0 +1,80 @@
+HTML Curriculum
+
+ 1. Basic Linux Environment and Commands
+	login, terminal, ls, cd, mkdir, chmod, rm
+
+ 2. HTML Introduction
+	Material:
+	* HTML tags are used to mark-up HTML  elements
+	* HTML tags are surrounded by the two characters < and >
+    	* The surrounding characters are called angle brackets
+    	* HTML tags normally come in pairs like <b> and </b>
+    	* The first tag in a pair is the start tag, the second tag is 	 
+the end tag
+    	* The text between the start and end tags is the element content
+    	* HTML tags are not case sensitive, <b> means the same as <B>
+
+	<html>,<head>,<title>
+
+	Tag Attributes
+	Tags can have attributes. Attributes can provide additional
+	information about the HTML elements on your page.
+	This tag defines the body element of your HTML page: <body>. 	With an
+added bgcolor attribute, you can tell the browser that the 	background
+color of your page should be red, like this: 
+	<body bgcolor="red">.
+	Attributes always come in name/value pairs like this: 	name="value".
+	Attributes are always added to the start tag of an HTML element.
+
+	<body>
+
+ 3. HTML Text Tags
+	Material to Cover:
+	<b>,<i>,<u>,<p>,<br>,<center>,<h1..6>,<!-- -->,<hr>
+
+ 4. HTML Special Text Cases
+	Material to Cover:
+	Text  	Description  		Entity Name  	Entity Number
+	  	non-breaking space 	&nbsp;	 	&#160;
+	< 	less than 		&lt; 		&#60;
+	> 	greater than 		&gt; 		&#62;
+	& 	ampersand 		&amp; 		&#38;
+	" 	quotation mark 		&quot; 		&#34;
+	' 	apostrophe    				&#39;
+	£ 	pound 			&pound; 	&#163;
+	© 	copyright 		&copy; 		&#169;
+	® 	registered trademark 	&reg; 		&#174;
+	× 	multiplication 		&times; 	&#215;
+	÷ 	division 		&divide; 	&#247;
+	
+	<sup>,<sub>,<pre>
+ 5. HTML Hyperlinks and Images
+	Material to Cover:
+	<body link="" alink="" vlink="">
+	<a href=""></a>
+	<a name=""></a>
+	<img src="" height="" width="" alt="" border="">
+ 6. HTML Tables
+	Materials to Cover:
+	<table border="" cellspacing="" cellpadding=""> 
+	<table bgcolor="" background="">
+	<tr rowspan="">,<td align="" valign="" colspan="">
+	Nested Tables  
+ 7. GIMP Introduction
+	Material to Cover:
+	Computer Graphics Types, Web Graphics
+	New File Menu, Tool Panel, Save As Menu
+ 8. GIMP Simple Graphics
+	Material to Cover:
+	Layers, Selecting, Graphics Tricks- Drawing Shapes
+ 9. GIMP Functional Graphics
+	Material to Cover:
+	Background Tiles, Text, Buttons, Logos
+10. GIMP Photo Touch Ups
+	Material to Cover:
+	Image->Colors Menu- Hue, Saturation, Color, Contrast, Thresholds
+11. HTML Frames
+	<frameset>,<frame>,<a href="" target="">,<noframes>
+	Nested Frames
+12,13. Final Project
+

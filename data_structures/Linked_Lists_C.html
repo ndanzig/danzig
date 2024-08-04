@@ -1,0 +1,3264 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:st1="urn:schemas-microsoft-com:office:smarttags"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<link rel=File-List href="Linked_Lists_C_files/filelist.xml">
+<link rel=Edit-Time-Data href="Linked_Lists_C_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Linked Lists and C++</title>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="metricconverter"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="City"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="place"/>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Daniel Glucksman</o:Author>
+  <o:LastAuthor>danzig</o:LastAuthor>
+  <o:Revision>5</o:Revision>
+  <o:TotalTime>509</o:TotalTime>
+  <o:Created>2009-02-22T12:55:00Z</o:Created>
+  <o:LastSaved>2009-02-22T13:10:00Z</o:LastSaved>
+  <o:Pages>3</o:Pages>
+  <o:Words>4768</o:Words>
+  <o:Characters>23844</o:Characters>
+  <o:Lines>198</o:Lines>
+  <o:Paragraphs>57</o:Paragraphs>
+  <o:CharactersWithSpaces>28555</o:CharactersWithSpaces>
+  <o:Version>11.9999</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:PunctuationKerning/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+  <w:LsdException Locked="true" Name="Normal"/>
+  <w:LsdException Locked="true" Name="heading 1"/>
+  <w:LsdException Locked="true" Name="heading 2"/>
+  <w:LsdException Locked="true" Name="heading 3"/>
+  <w:LsdException Locked="true" Name="heading 4"/>
+  <w:LsdException Locked="true" Name="heading 5"/>
+  <w:LsdException Locked="true" Name="heading 6"/>
+  <w:LsdException Locked="true" Name="heading 7"/>
+  <w:LsdException Locked="true" Name="heading 8"/>
+  <w:LsdException Locked="true" Name="heading 9"/>
+  <w:LsdException Locked="true" Name="toc 1"/>
+  <w:LsdException Locked="true" Name="toc 2"/>
+  <w:LsdException Locked="true" Name="toc 3"/>
+  <w:LsdException Locked="true" Name="toc 4"/>
+  <w:LsdException Locked="true" Name="toc 5"/>
+  <w:LsdException Locked="true" Name="toc 6"/>
+  <w:LsdException Locked="true" Name="toc 7"/>
+  <w:LsdException Locked="true" Name="toc 8"/>
+  <w:LsdException Locked="true" Name="toc 9"/>
+  <w:LsdException Locked="true" Name="caption"/>
+  <w:LsdException Locked="true" Name="Title"/>
+  <w:LsdException Locked="true" Name="Subtitle"/>
+  <w:LsdException Locked="true" Name="Strong"/>
+  <w:LsdException Locked="true" Name="Emphasis"/>
+  <w:LsdException Locked="true" Name="Table Grid"/>
+ </w:LatentStyles>
+</xml><![endif]--><!--[if !mso]><object
+ classid="clsid:38481807-CA0E-42D2-BF39-B33AF135CC4D" id=ieooui></object>
+<style>
+st1\:*{behavior:url(#ieooui) }
+</style>
+<![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:1627421319 -2147483648 8 0 66047 0;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:-1610611985 1073750139 0 0 159 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:0in;
+	line-height:115%;
+	mso-pagination:widow-orphan;
+	font-size:11.0pt;
+	font-family:Calibri;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:Arial;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-noshow:yes;
+	mso-style-link:"Balloon Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:Tahoma;
+	mso-fareast-font-family:"Times New Roman";}
+span.BalloonTextChar
+	{mso-style-name:"Balloon Text Char";
+	mso-style-noshow:yes;
+	mso-style-locked:yes;
+	mso-style-link:"Balloon Text";
+	mso-ansi-font-size:8.0pt;
+	mso-bidi-font-size:8.0pt;
+	font-family:Tahoma;
+	mso-ascii-font-family:Tahoma;
+	mso-hansi-font-family:Tahoma;
+	mso-bidi-font-family:Tahoma;}
+p.ListParagraph, li.ListParagraph, div.ListParagraph
+	{mso-style-name:"List Paragraph";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:.5in;
+	mso-add-space:auto;
+	line-height:115%;
+	mso-pagination:widow-orphan;
+	font-size:11.0pt;
+	font-family:Calibri;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:Arial;}
+p.ListParagraphCxSpFirst, li.ListParagraphCxSpFirst, div.ListParagraphCxSpFirst
+	{mso-style-name:"List ParagraphCxSpFirst";
+	mso-style-type:export-only;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	mso-add-space:auto;
+	line-height:115%;
+	mso-pagination:widow-orphan;
+	font-size:11.0pt;
+	font-family:Calibri;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:Arial;}
+p.ListParagraphCxSpMiddle, li.ListParagraphCxSpMiddle, div.ListParagraphCxSpMiddle
+	{mso-style-name:"List ParagraphCxSpMiddle";
+	mso-style-type:export-only;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	mso-add-space:auto;
+	line-height:115%;
+	mso-pagination:widow-orphan;
+	font-size:11.0pt;
+	font-family:Calibri;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:Arial;}
+p.ListParagraphCxSpLast, li.ListParagraphCxSpLast, div.ListParagraphCxSpLast
+	{mso-style-name:"List ParagraphCxSpLast";
+	mso-style-type:export-only;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:.5in;
+	mso-add-space:auto;
+	line-height:115%;
+	mso-pagination:widow-orphan;
+	font-size:11.0pt;
+	font-family:Calibri;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:Arial;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 31.5pt 1.0in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:118692468;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-2088751014 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l0:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1
+	{mso-list-id:1074159893;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-95231900 666388582 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l1:level1
+	{mso-level-start-at:2;
+	mso-level-number-format:bullet;
+	mso-level-text:-;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Calibri;
+	mso-fareast-font-family:"Times New Roman";}
+@list l1:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2
+	{mso-list-id:1164856242;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1248386984 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l2:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:1.0in;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l2:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3
+	{mso-list-id:1432165269;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1738611342 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l3:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l3:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4
+	{mso-list-id:1496606993;
+	mso-list-type:hybrid;
+	mso-list-template-ids:586832110 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l4:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l4:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5
+	{mso-list-id:1603565310;
+	mso-list-type:hybrid;
+	mso-list-template-ids:2067701638 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l5:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:74.25pt;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l5:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l6
+	{mso-list-id:1999575549;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1759955614 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l6:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:none;
+	mso-level-number-position:left;
+	margin-left:1.0in;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l6:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l6:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l6:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l6:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l6:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l6:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l6:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l6:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="3074"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-US style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><b><u><span
+style='font-size:22.0pt;line-height:115%'>Linked Lists and C++<o:p></o:p></span></u></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b><u><span
+style='font-size:16.0pt;line-height:115%'>By Daniel <span class=SpellE>Glucksman</span><o:p></o:p></span></u></b></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>What do
+we assume for those who read this</span></b><span style='font-size:12.0pt;
+line-height:115%'>? <o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%'>- A basic background in C++ <o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%'>- You know what objects, classes, and pointers do on a very
+basic level<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%'>-You’ve worked with arrays for a brief period of time and understand
+their operation<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>How is a
+class created?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Let’s say we
+want to create a class called cars; furthermore we want the class cars to
+contain objects called Toyota, Nissan, and Ford as illustrated below:<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-no-proof:
+yes'><!--[if gte vml 1]><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+ o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+ stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="Diagram_x0020_1" o:spid="_x0000_i1025" type="#_x0000_t75"
+ style='width:315pt;height:153.75pt;visibility:visible'>
+ <v:imagedata src="Linked_Lists_C_files/image001.png" o:title="" cropleft="-27610f"
+  cropright="-27649f"/>
+ <o:lock v:ext="edit" aspectratio="f"/>
+</v:shape><![endif]--><![if !vml]><img width=420 height=205
+src="Linked_Lists_C_files/image002.gif" v:shapes="Diagram_x0020_1"><![endif]></span><span
+style='font-size:12.0pt;line-height:115%'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>The basic
+code for creating this will look something like this<o:p></o:p></span></p>
+
+<p class=MsoNormal><i>Class cars<o:p></o:p></i></p>
+
+<p class=MsoNormal><i>{<o:p></o:p></i></p>
+
+<p class=MsoNormal><span class=SpellE><span class=GramE><i>int</i></span></span><i>
+<span class=SpellE>enginesize</span>, <span class=SpellE>wheellength</span>;<o:p></o:p></i></p>
+
+<p class=MsoNormal><i>};<o:p></o:p></i></p>
+
+<p class=MsoNormal><span class=SpellE><i>Int</i></span><i> <span class=GramE>main()</span><o:p></o:p></i></p>
+
+<p class=MsoNormal><i>{<o:p></o:p></i></p>
+
+<p class=MsoNormal><span class=GramE><i>cars</i></span><i> Nissan, Ford, <st1:place
+w:st="on"><st1:City w:st="on">Toyota</st1:City></st1:place>;<span
+style='mso-tab-count:1'>           </span><span style='color:#4F6228'> //This
+creates the objects of class cars</span><o:p></o:p></i></p>
+
+<p class=MsoNormal><span class=GramE><i>return</i></span><i> 0;<o:p></o:p></i></p>
+
+<p class=MsoNormal><i>}<o:p></o:p></i></p>
+
+<p class=MsoNormal><i><span style='font-size:12.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></i></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+color:#5F497A'>Explanation of above code</span></b><span style='font-size:12.0pt;
+line-height:115%'>: <o:p></o:p></span></p>
+
+<p class=MsoNormal><i><u>“Class cars”<o:p></o:p></u></i></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Here we are
+defining <span class=GramE>a class cars</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><i><u>“<span class=SpellE><span class=GramE>int</span></span>
+<span class=SpellE>enginesize</span>, <span class=SpellE>wheellength</span>;”<o:p></o:p></u></i></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>We are
+giving it the variables <span class=SpellE>enginesize</span> and <span
+class=SpellE>wheellength</span> both of type int.<span
+style='mso-spacerun:yes'>  </span>Our objects of class cars <st1:City w:st="on"><st1:place
+ w:st="on">Toyota</st1:place></st1:City>, Nissan, Ford will each have different
+<span class=SpellE>enginesize’s</span> and <span class=SpellE>wheellength’s</span>
+which is true in real life.<o:p></o:p></span></p>
+
+<p class=MsoNormal><i><u>“<span class=GramE>cars</span> Nissan, Ford, <st1:place
+w:st="on"><st1:City w:st="on">Toyota</st1:City></st1:place>”;</u></i><u><span
+style='font-size:12.0pt;line-height:115%'><o:p></o:p></span></u></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Your class doesn’t
+actually exist before this line, you can’t call it from the main, but what you
+can do is create objects and then call those objects. We are now creating 3
+objects for our class cars, which we call Nissan, Ford, and <st1:City w:st="on"><st1:place
+ w:st="on">Toyota</st1:place></st1:City>. <o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>What’s
+the problem with above method of creating objects?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>While it’s
+true we have created 3 objects successfully. There are two problems with this
+method of defining objects in the main:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%'>1)<span style='mso-spacerun:yes'>  </span>If we wanted to create
+a large amount of objects like 100,000 cars, it would take forever.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%'>2) The objects are predefined whether we need them or not; in
+some cases we might only need 4 cars and in some 10,000 but the fact remains
+100,000 are created every time and stored in memory(What a waste?)<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>What’s
+another way to create objects?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>A better way
+to create an object is what’s called dynamic allocation or on the fly creation.
+In this method you only create an object when you need it. The code is written
+below:<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=SpellE><i><span style='font-size:12.0pt;
+line-height:115%'>Int</span></i></span><i><span style='font-size:12.0pt;
+line-height:115%'> <span class=GramE>main()</span><o:p></o:p></span></i></p>
+
+<p class=MsoNormal><i><span style='font-size:12.0pt;line-height:115%'>{<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span class=GramE><i><span style='font-size:12.0pt;
+line-height:115%'>cars*</span></i></span><span class=SpellE><i><span
+style='font-size:12.0pt;line-height:115%'>ptr</span></i></span><i><span
+style='font-size:12.0pt;line-height:115%'>;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span class=SpellE><span class=GramE><i><span
+style='font-size:12.0pt;line-height:115%'>ptr</span></i></span></span><span
+class=GramE><i><span style='font-size:12.0pt;line-height:115%'>=</span></i></span><i><span
+style='font-size:12.0pt;line-height:115%'>new cars;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span class=GramE><i><span style='font-size:12.0pt;
+line-height:115%'>return</span></i></span><i><span style='font-size:12.0pt;
+line-height:115%'> 0;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><i><span style='font-size:12.0pt;line-height:115%'>}<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+color:#5F497A'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+color:#5F497A'>Explanation of above code</span></b><span style='font-size:12.0pt;
+line-height:115%'>: <o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><i><u><span style='font-size:12.0pt;
+line-height:115%'>cars*</span></u></i></span><span class=SpellE><i><u><span
+style='font-size:12.0pt;line-height:115%'>ptr</span></u></i></span><i><u><span
+style='font-size:12.0pt;line-height:115%'>;<o:p></o:p></span></u></i></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>This is
+where pointers come into play; here we are creating a pointer called <span
+class=SpellE>ptr</span>, which points to an object of the class cars. So in our
+case it either points to <st1:City w:st="on"><st1:place w:st="on">Toyota</st1:place></st1:City>,
+Nissan, or Ford.<o:p></o:p></span></p>
+
+<p class=MsoNormal><i><u><span style='font-size:12.0pt;line-height:115%'>“<span
+class=SpellE><span class=GramE>ptr</span></span><span class=GramE>=</span>new
+cars;”<o:p></o:p></span></u></i></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>We are
+creating a new object of class car and while we don’t give it a name like <st1:City
+w:st="on"><st1:place w:st="on">Toyota</st1:place></st1:City>, Ford, or Nissan,
+we instead store its location in memory in the pointer.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;color:red'>For
+example: </span><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-spacerun:yes'> </span>if we are creating the object <st1:City w:st="on"><st1:place
+ w:st="on">Toyota</st1:place></st1:City> we perform the following steps:<o:p></o:p></span></p>
+
+<p class=ListParagraph style='text-indent:-.25in;mso-list:l1 level1 lfo2'><![if !supportLists]><span
+style='font-size:12.0pt;line-height:115%;mso-fareast-font-family:Calibri;
+mso-bidi-font-family:Calibri'><span style='mso-list:Ignore'>-<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+line-height:115%'>we create a new car<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.5in;text-indent:-.25in;line-height:normal;mso-list:l1 level1 lfo2'><![if !supportLists]><span
+style='font-size:12.0pt;mso-fareast-font-family:Calibri;mso-bidi-font-family:
+Calibri'><span style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+font-family:"Times New Roman"'>-store it’s memory location which we will say is
+<st1:metricconverter ProductID="00212323 in" w:st="on">00212323 in</st1:metricconverter>
+the pointer called <span class=SpellE>ptr</span><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-left:.25in'><span style='font-size:12.0pt;
+line-height:115%'>Now <span class=SpellE>ptr</span> knows where to find the
+object <st1:City w:st="on">Toyota</st1:City> even though we have not called it <st1:City
+w:st="on"><st1:place w:st="on">Toyota</st1:place></st1:City>.<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>What’s
+the problem with this method?</span></b><span style='font-size:12.0pt;
+line-height:115%'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>The problem
+with the above method is very simply the fact that you need a new pointer for
+every object you create otherwise the previous one get’s erased and you don’t
+know where to find it.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;color:red'>For
+example: </span><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-spacerun:yes'> </span>The following happen if we want to create
+another new car after <st1:City w:st="on"><st1:place w:st="on">Toyota</st1:place></st1:City>
+such as Nissan using the code below:<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=SpellE><span class=GramE><i><span
+style='font-size:12.0pt;line-height:115%'>ptr</span></i></span></span><span
+class=GramE><i><span style='font-size:12.0pt;line-height:115%'>=</span></i></span><i><span
+style='font-size:12.0pt;line-height:115%'>new cars; <span style='mso-tab-count:
+2'>             </span>//This is <st1:place w:st="on"><st1:City w:st="on">Toyota</st1:City></st1:place><o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span class=SpellE><span class=GramE><i><span
+style='font-size:12.0pt;line-height:115%'>ptr</span></i></span></span><span
+class=GramE><i><span style='font-size:12.0pt;line-height:115%'>=</span></i></span><i><span
+style='font-size:12.0pt;line-height:115%'>new cars<span style='mso-tab-count:
+2'>               </span>//this is Nissan<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>-The memory
+location we used to find <st1:City w:st="on"><st1:place w:st="on">Toyota</st1:place></st1:City>
+00212323 stored in the value will be overwritten with that of Nissan namely
+00567687.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>-<st1:City
+w:st="on"><st1:place w:st="on">Toyota</st1:place></st1:City> will remain in
+memory even though we can’t access it<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Obviously
+creating a new pointer each time will solve this but do you want to create
+100,000 pointers?<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>How do we
+reconcile the above issue of creating 100,000 pointers?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>The first
+way is to create an array of pointers. Each place in the array points to a
+different object of cars.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>-<span
+class=GramE>array[</span>0] points to <st1:place w:st="on"><st1:City w:st="on">Toyota</st1:City></st1:place><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>-<span
+class=GramE>array[</span>1] points to Nissan …….<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>The
+following is illustrated below:<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-no-proof:
+yes'><!--[if gte vml 1]><v:shape id="Diagram_x0020_6" o:spid="_x0000_i1026"
+ type="#_x0000_t75" style='width:393pt;height:156pt;visibility:visible'>
+ <v:imagedata src="Linked_Lists_C_files/image003.png" o:title=""/>
+ <o:lock v:ext="edit" aspectratio="f"/>
+</v:shape><![endif]--><![if !vml]><img width=524 height=208
+src="Linked_Lists_C_files/image004.gif" v:shapes="Diagram_x0020_6"><![endif]></span><span
+style='font-size:12.0pt;line-height:115%'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>The code for
+executing such as operation is written below<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=SpellE><i><span style='font-size:12.0pt;
+line-height:115%'>Int</span></i></span><i><span style='font-size:12.0pt;
+line-height:115%'> <span class=GramE>main()</span><o:p></o:p></span></i></p>
+
+<p class=MsoNormal><i><span style='font-size:12.0pt;line-height:115%'>{<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span class=GramE><i><span style='font-size:12.0pt;
+line-height:115%'>cars*</span></i></span><span class=SpellE><i><span
+style='font-size:12.0pt;line-height:115%'>ptr</span></i></span><i><span
+style='font-size:12.0pt;line-height:115%'>[100];<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span class=SpellE><span class=GramE><i><span
+style='font-size:12.0pt;line-height:115%'>ptr</span></i></span></span><span
+class=GramE><i><span style='font-size:12.0pt;line-height:115%'>[</span></i></span><span
+class=SpellE><i><span style='font-size:12.0pt;line-height:115%'>i</span></i></span><i><span
+style='font-size:12.0pt;line-height:115%'>]=new cars;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span class=GramE><i><span style='font-size:12.0pt;
+line-height:115%'>return</span></i></span><i><span style='font-size:12.0pt;
+line-height:115%'> 0;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><i><span style='font-size:12.0pt;line-height:115%'>}<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+color:#5F497A'>Explanation of above code</span></b><span style='font-size:12.0pt;
+line-height:115%'>: <o:p></o:p></span></p>
+
+<p class=MsoNormal><u><span style='font-size:12.0pt;line-height:115%'>“<span
+class=GramE><i>cars*</i></span><span class=SpellE><i>ptr</i></span><i>[100];”<o:p></o:p></i></span></u></p>
+
+<p class=ListParagraph style='text-indent:-.25in;mso-list:l1 level1 lfo2'><![if !supportLists]><span
+style='font-size:12.0pt;line-height:115%;mso-fareast-font-family:Calibri;
+mso-bidi-font-family:Calibri'><span style='mso-list:Ignore'>-<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+line-height:115%'>Here we create an array called <span class=SpellE>ptr</span>(size
+100) of pointers which each point to objects of the class cars(Nissan, <st1:City
+w:st="on"><st1:place w:st="on">Toyota</st1:place></st1:City>, Ford)<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.5in;text-indent:-.25in;line-height:normal;mso-list:l1 level1 lfo2'><![if !supportLists]><span
+style='font-size:12.0pt;mso-fareast-font-family:Calibri;mso-bidi-font-family:
+Calibri'><span style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+font-family:"Times New Roman"'>So <span class=SpellE><span class=GramE>ptr</span></span><span
+class=GramE>[</span>0] will point to <st1:place w:st="on"><st1:City w:st="on">Toyota</st1:City></st1:place>
+and <span class=SpellE>ptr</span>[1] will point to Nissan…..<o:p></o:p></span></span></p>
+
+<p class=MsoNormal><i><u><span style='font-size:12.0pt;line-height:115%'>“<span
+class=SpellE><span class=GramE>ptr</span></span><span class=GramE>[</span><span
+class=SpellE>i</span>]=new cars;”<o:p></o:p></span></u></i></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Here we
+create a new car on the fly like before but this time we must store it in a
+place of the <span class=GramE>array ,</span> so “<span class=SpellE>i</span>”
+represents the index of the array. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-spacerun:yes'> </span>“<span class=SpellE><span class=GramE>i</span></span>”
+must progress, how would you accomplish this? Either using a loop or some other
+clever technique it’s up to you.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;color:red'>For
+example</span><span style='font-size:12.0pt;line-height:115%'>:<span
+style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><i><span style='font-size:12.0pt;
+line-height:115%'>For(</span></i></span><span class=SpellE><i><span
+style='font-size:12.0pt;line-height:115%'>i</span></i></span><i><span
+style='font-size:12.0pt;line-height:115%'>=0;i&lt;100;i++);<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+color:#5F497A'>Explanation of above code</span></b><span style='font-size:12.0pt;
+line-height:115%'>:<span style='mso-spacerun:yes'>  </span>Here we have a loop
+which creates 100 objects each one stored in a place in the array from 0 to 99.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;color:#E36C0A'>Summary</span><span
+style='font-size:12.0pt;line-height:115%'>:<span style='mso-spacerun:yes'> 
+</span>So far we have explained the advantage of using an array to point to
+objects of a class. Let’s just recap the main points<o:p></o:p></span></p>
+
+<p class=ListParagraph style='margin-left:74.25pt;mso-add-space:auto;
+text-indent:-.25in;mso-list:l5 level1 lfo4'><![if !supportLists]><span
+style='font-size:12.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
+dir=LTR><span style='font-size:12.0pt;line-height:115%'>By not using an array
+you either must predefined objects such as cars Nissan or create them
+dynamically using the new command but have a different pointer for each object
+created.<o:p></o:p></span></span></p>
+
+<p class=MsoNormalCxSpFirst style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;margin-left:74.25pt;mso-add-space:auto;text-indent:-.25in;line-height:
+normal;mso-list:l5 level1 lfo4'><![if !supportLists]><span style='font-size:
+12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:
+Symbol'><span style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+font-family:"Times New Roman"'>By using an array you can create objects on
+demand and use only one array<span style='mso-spacerun:yes'>  </span>to store
+all of them<o:p></o:p></span></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>What are
+the advantages and disadvantages of using array?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Advantages:<o:p></o:p></span></p>
+
+<p class=ListParagraph style='margin-left:1.0in;mso-add-space:auto;text-indent:
+-.25in;mso-list:l6 level1 lfo6'><![if !supportLists]><span style='font-size:
+12.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+line-height:115%'>Ability to store multiple objects<o:p></o:p></span></span></p>
+
+<p class=MsoNormalCxSpFirst style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;margin-left:1.0in;mso-add-space:auto;text-indent:-.25in;line-height:normal;
+mso-list:l6 level1 lfo6'><![if !supportLists]><span style='font-size:12.0pt;
+font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol'><span
+style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+font-family:"Times New Roman"'>You can go straight to any point in the array by
+knowing its index. So if I want to access the 5<sup>th</sup> object I just go
+to <span class=SpellE><span class=GramE>ptr</span></span><span class=GramE>[</span>5]
+or more correctly <span class=SpellE>ptr</span>[4] since an array<span
+style='mso-spacerun:yes'>  </span>starts from 0.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Disadvantages:
+<o:p></o:p></span></p>
+
+<p class=ListParagraph style='margin-left:1.0in;mso-add-space:auto;text-indent:
+-.25in;mso-list:l2 level1 lfo8'><![if !supportLists]><span style='font-size:
+12.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+line-height:115%'>An Array upon creation must be given a definite size, so in
+our case we decided it to be 100 spaces wide. If we wanted to create object 101
+we could do this but we need to create a bigger array and then copy the first
+array into the new array which as you can guess is inefficient.<o:p></o:p></span></span></p>
+
+<p class=MsoNormalCxSpFirst style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;margin-left:1.0in;mso-add-space:auto;text-indent:-.25in;line-height:normal;
+mso-list:l2 level1 lfo8'><![if !supportLists]><span style='font-size:12.0pt;
+font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol'><span
+style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+font-family:"Times New Roman"'>A new member of the array should be added to the
+last unused place of the array. <o:p></o:p></span></span></p>
+
+<p class=MsoNormalCxSpMiddle style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;margin-left:1.0in;mso-add-space:auto;line-height:normal'><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:red'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormalCxSpMiddle style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;margin-left:1.0in;mso-add-space:auto;line-height:normal'><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:red'>For example</span><span
+style='font-size:12.0pt;font-family:"Times New Roman"'>: If we already had 3
+objects and wanted to add a 4<sup>th</sup> we should add it to position 4 of
+the array and while possible will be very inefficient to add it at position 2
+and move everything over.<o:p></o:p></span></p>
+
+<p class=MsoNormalCxSpMiddle style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;margin-left:1.0in;mso-add-space:auto;line-height:normal'><span
+style='font-size:12.0pt;font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormalCxSpMiddle style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;margin-left:1.0in;mso-add-space:auto;line-height:normal'><b><u><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:red'>Example why it
+is bad to have to add things to the end of the array</span></u></b><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:red'>:</span><span
+style='font-size:12.0pt;font-family:"Times New Roman"'><span
+style='mso-spacerun:yes'>  </span>if you want to sort the array let’s say by
+lowest <span class=SpellE>enginesize</span> to highest <span class=SpellE>enginesize</span>,
+then each time you add a new object to the end you must sort it again moving
+everything over.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+
+<p class=MsoNormalCxSpMiddle style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;margin-left:1.0in;mso-add-space:auto;line-height:normal'><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:red'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormalCxSpMiddle style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;margin-left:1.0in;mso-add-space:auto;line-height:normal'><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:red'>For example: </span><span
+style='font-size:12.0pt;font-family:"Times New Roman"'><span
+style='mso-spacerun:yes'> </span>if we are adding Nissan to the end of the list
+and it has the lowest engine size, then when we sort we have to put Nissan in
+the front of the list and move everything over which once again is inefficient.<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>Where do
+linked lists come into all this?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>A linked
+list is another way to solve the issue above of having to create 100,000
+pointers. The linked list just like an array has <span class=GramE>it’s</span>
+own advantages and disadvantages. A good programmer should know when to use an
+array and when to use a linked list. Hopefully I will help you make this decision.<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>What is a
+linked list?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>You should
+think of a linked list as being a list of objects in our case <st1:City w:st="on"><st1:place
+ w:st="on">Toyota</st1:place></st1:City>, Nissan, and Ford.<span
+style='mso-spacerun:yes'>  </span>In addition to each one having an <span
+class=SpellE>enginesize</span> and <span class=SpellE>wheellength</span>
+variable, each one will also have a pointer which we’ll call <span
+class=SpellE>nextobject</span>.<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><u><span style='font-size:12.0pt;line-height:115%'>Understanding
+what this pointer will do is the key to linked lists. <o:p></o:p></span></u></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>The code
+will look like this:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><i><span
+style='mso-bidi-font-family:"Courier New";color:blue;mso-no-proof:yes'>class</span></i><i><span
+style='mso-bidi-font-family:"Courier New";mso-no-proof:yes'> cars<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><i><span
+style='mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></i></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><i><span
+style='mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><i><span
+style='mso-bidi-font-family:"Courier New";color:blue;mso-no-proof:yes'>int</span></i><i><span
+style='mso-bidi-font-family:"Courier New";mso-no-proof:yes'> enginesize,
+wheellength;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><i><span
+style='mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></i></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><i><span
+style='mso-bidi-font-family:"Courier New";mso-no-proof:yes'>cars*nextobject;<span
+style='mso-spacerun:yes'>   </span>//<b>this is the key to linked lists<o:p></o:p></b></span></i></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><i><span
+style='mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>cars(<span style='color:
+blue'>int</span> enginesize,<span style='color:blue'>int</span> wheellength)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>this</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'> enginesize-&gt;enginesize;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>this</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'>
+wheellength-&gt;wheellength;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>}</span><i><span
+style='mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><i><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></i></p>
+
+<p class=MsoNormal><i><span style='font-size:10.0pt;line-height:115%;
+font-family:"Courier New";mso-no-proof:yes'>};<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+color:#5F497A'>Explanation of above code</span></b><span style='font-size:12.0pt;
+line-height:115%'>: <o:p></o:p></span></p>
+
+<p class=MsoNormal><i><u><span style='mso-bidi-font-family:"Courier New";
+mso-no-proof:yes'>“cars*nextobject;<span style='mso-spacerun:yes'>  </span>“<o:p></o:p></span></u></i></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>We declared
+a pointer called <span class=SpellE>nextobject</span> to be a pointer to
+objects of the class cars. So in our case <span class=SpellE>nextobject</span>
+can either point to Nissan, <st1:place w:st="on"><st1:City w:st="on">Toyota</st1:City></st1:place>,
+or <span class=GramE>Ford.</span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>“cars(<span
+style='color:blue'>int</span> enginesize,<span style='color:blue'>int</span>
+wheellength)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>this</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'>
+enginesize-&gt;enginesize;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>this</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'>
+wheelength-&gt;wheellength;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>}”<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>This is a
+constructor function which intializes the values enginesize and wheelength with
+the values sent to this function by our other function which adds objects to
+the class cars as we will see later on.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>What on
+earth does this <span class=SpellE>nextobject</span> pointer do?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>The pointer <span
+class=SpellE>nextobject</span> exists within every object created. Its job is to
+point to the next object in the list more specifically it points to the next
+object’s memory address. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;color:red'>For
+example</span><span style='font-size:12.0pt;line-height:115%'>:<span
+style='mso-spacerun:yes'>  </span>Toyota will point to Nissan and Nissan will
+point to Ford or to be more exact Toyota will point to the memory location of
+Nissan, Nissan will point to the memory location of Ford…..<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>The
+following idea is illustrated below:<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-no-proof:
+yes'><!--[if gte vml 1]><v:shape id="Diagram_x0020_7" o:spid="_x0000_i1027"
+ type="#_x0000_t75" style='width:325.5pt;height:73.5pt;visibility:visible'>
+ <v:imagedata src="Linked_Lists_C_files/image005.png" o:title="" croptop="-12536f"
+  cropbottom="-13157f"/>
+ <o:lock v:ext="edit" aspectratio="f"/>
+</v:shape><![endif]--><![if !vml]><img width=434 height=98
+src="Linked_Lists_C_files/image006.gif" v:shapes="Diagram_x0020_7"><![endif]></span><span
+style='font-size:12.0pt;line-height:115%'><o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>Why would
+we want to point to the next object?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>By knowing
+the first object in the list, in our case <st1:City w:st="on"><st1:place w:st="on">Toyota</st1:place></st1:City>,
+we can find either Nissan or Ford or any other object that exists after it. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;color:red'>For
+example:</span><span style='font-size:12.0pt;line-height:115%'> Here is how we
+can find Ford by knowing the first object in the list, <st1:City w:st="on"><st1:place
+ w:st="on">Toyota</st1:place></st1:City>:<o:p></o:p></span></p>
+
+<p class=ListParagraph style='text-indent:-.25in;mso-list:l4 level1 lfo10'><![if !supportLists]><span
+style='font-size:12.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+line-height:115%'>We start with <st1:City w:st="on"><st1:place w:st="on">Toyota</st1:place></st1:City>
+and look at its “<span class=SpellE>nextobject</span>” value which contains the
+memory location to the object Nissan. <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.5in;text-indent:-.25in;line-height:normal;mso-list:l4 level1 lfo10'><![if !supportLists]><span
+style='font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+font-family:"Times New Roman"'>Then we look at Nissan’s “<span class=SpellE>nextobject</span>”
+which contains the memory location to the object Ford.<span
+style='mso-spacerun:yes'>  </span><o:p></o:p></span></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>What
+about Ford’s “<span class=SpellE>nextobject</span>” value it’s the last on the
+list?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>For the last
+object on a linked list we have several options of what to do with its “<span
+class=SpellE>nextobject</span>” value.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>-We can set
+it to 0 thereby telling the program it’s the last object in the list<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>-We can set
+it to the first object on the list making the list circular; <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;color:red'>For
+example</span><span style='font-size:12.0pt;line-height:115%'>:<span
+style='mso-spacerun:yes'>  </span>To make the list circular we will point
+Ford’s “<span class=SpellE>nextobject</span>” <span class=GramE>value<span
+style='mso-spacerun:yes'>  </span>to</span> the memory location of <st1:place
+w:st="on"><st1:City w:st="on">Toyota</st1:City></st1:place>;<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>Remember that
+all the pointer “<span class=SpellE>nextvalue</span>” stores is the memory
+address of the next object in the list,<span style='mso-spacerun:yes'> 
+</span>except for the last object which as discussed above has a unique value.<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>How do we
+get the last object in the list to equal this unique value?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-weight:
+bold'>First of all in the program we will write we are going to have the last
+object’s “<span class=SpellE>nextobject</span>” pointer value equal 0. To do
+this we must add a line to our cars class constructor function:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>“cars(<span
+style='color:blue'>int</span> enginesize,<span style='color:blue'>int</span>
+wheellength)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>this</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'>
+enginesize-&gt;enginesize;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>this</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'>
+wheelength-&gt;wheellength;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><i><u><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'>nextobject=0;<o:p></o:p></span></u></i></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>}”<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+color:#5F497A'>Explanation of above code</span></b><span style='font-size:12.0pt;
+line-height:115%'>: <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><i><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'>“nextobject=0;”</span></i><span
+style='font-size:10.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>This line sets the
+nextobject value of every object created to 0 by default. Later if another
+object will be added we will change that nextobject value of the previous
+object to point to the memory location of the new one. This line guarantees
+that the last object’s “nextobject” value will equal 0;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><i><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></i></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>What are
+the advantages and disadvantages to linked <span class=GramE>lists.</span><o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Advantages:<o:p></o:p></span></p>
+
+<p class=ListParagraph style='text-indent:-.25in;mso-list:l3 level1 lfo12'><![if !supportLists]><span
+style='font-size:12.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+line-height:115%'>You can add an infinite number of objects to the list, you just
+keep linking them<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.5in;text-indent:-.25in;line-height:normal;mso-list:l3 level1 lfo12'><![if !supportLists]><span
+style='font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+font-family:"Times New Roman"'>You can add an object anywhere in the list <o:p></o:p></span></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;color:red'>For
+example</span><span style='font-size:12.0pt;line-height:115%'> you can add a 3<sup>rd</sup>
+object between objects one and two. In our case you can add Ford between <st1:City
+w:st="on"><st1:place w:st="on">Toyota</st1:place></st1:City> and Nissan. We
+discussed some of the implications of this above.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Disadvantages:<o:p></o:p></span></p>
+
+<p class=ListParagraph style='text-indent:-.25in;mso-list:l0 level1 lfo14'><![if !supportLists]><span
+style='font-size:12.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+line-height:115%'>You can’t jump to a certain object in the list like you can
+in an array. Instead you must start from the beginning and find your way
+through the list via the “<span class=SpellE>nextobject</span>” pointers.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Ok now that
+we understand what linked lists are in there most basic form we can talk about
+how we would create this list. In the next part we will write a function which
+creates a linked list and adds objects to it (<st1:City w:st="on"><st1:place
+ w:st="on">Toyota</st1:place></st1:City>, Nissan, and Ford).<o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b><u><span
+style='font-size:14.0pt;line-height:115%'><o:p><span style='text-decoration:
+ none'>&nbsp;</span></o:p></span></u></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b><u><span
+style='font-size:14.0pt;line-height:115%'>Creating a Linked List<o:p></o:p></span></u></b></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>Conceptually
+how do we create a linked list?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>There are
+two considerations which must be taken into account before we start to write
+our function and they are listed below:<o:p></o:p></span></p>
+
+<p class=ListParagraph style='text-indent:-.25in;mso-list:l0 level1 lfo14'><![if !supportLists]><span
+style='font-size:12.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+line-height:115%'>In a linked list we find any object by starting with the
+first object and finding our way to the rest. That said we must always know the
+first object in the list. We are going to create a pointer called “head” which
+keeps track of this first object.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+line-height:normal'><span style='font-size:12.0pt;font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.5in;text-indent:-.25in;line-height:normal;mso-list:l0 level1 lfo14'><![if !supportLists]><span
+style='font-size:12.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;
+mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span dir=LTR><span style='font-size:12.0pt;
+font-family:"Times New Roman"'>To add an item to the list we have to set the
+previous object’s “<span class=SpellE>nextobject</span>” value to the new
+object we create. <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;color:red'>For example</span><span style='font-size:12.0pt;
+line-height:115%'>:<span style='mso-spacerun:yes'>  </span>if we create Nissan we
+must set <st1:City w:st="on"><st1:place w:st="on">Toyota</st1:place></st1:City>’s
+“<span class=SpellE>nextobject</span>” value to equal the location in memory of
+Nissan.<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>How do we
+actually write our linked list add function?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>The first
+two lines of code we need in our function are:<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><i><span style='font-size:12.0pt;
+line-height:115%'>cars*</span></i></span><i><span style='font-size:12.0pt;
+line-height:115%'>temp;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><i><span style='font-size:12.0pt;line-height:115%'>Temp=new
+cars;<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+color:#5F497A'>Explanation of above code</span></b><span style='font-size:12.0pt;
+line-height:115%'>: <o:p></o:p></span></p>
+
+<p class=MsoNormal><i><span style='font-size:12.0pt;line-height:115%'>“<span
+class=GramE>cars*</span>temp;”<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-spacerun:yes'> </span>Basically here we are creating a new pointer
+called temp, which will be used to point to the memory location of objects in
+the class cars such as <st1:City w:st="on"><st1:place w:st="on">Toyota</st1:place></st1:City>,
+Nissan, or Ford.<o:p></o:p></span></p>
+
+<p class=MsoNormal><i><span style='font-size:12.0pt;line-height:115%'>“Temp=new
+cars;”<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Here we are
+creating a new object of class cars (which in our first case is <st1:City
+w:st="on"><st1:place w:st="on">Toyota</st1:place></st1:City>), and storing its
+memory location in the pointer called temp. As you can imagine each time we run
+the function we want to create a new object so that is what this line does.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Now we need
+a way to link the previous object’s “<span class=SpellE>nextobject</span>”
+value with the new object we just created. To do this we need to find the last
+object in the list, <span class=GramE>How</span> do we find the last object? by
+starting from the beginning and finding our way through the list of objects
+until we find the object who’s “<span class=SpellE>nextobject</span>” value
+equals 0 which means there is no next object after that one, so it’s the last
+one.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Please
+examine carefully the code below:<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:12.0pt;line-height:
+115%'>cars*</span></span><span style='font-size:12.0pt;line-height:115%'>head;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:12.0pt;line-height:
+115%'>cars*</span></span><span style='font-size:12.0pt;line-height:115%'>Temp2;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Temp2=head;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:12.0pt;line-height:
+115%'>while(</span></span><span style='font-size:12.0pt;line-height:115%'>Temp2-&gt;next!=0)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Temp2=Temp2-&gt;next;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:159.75pt'><span style='font-size:12.0pt;
+line-height:115%'>Temp2-&gt;next=Temp;<span style='mso-tab-count:1'>                    </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+color:#5F497A'>Explanation of above code</span></b><span style='font-size:12.0pt;
+line-height:115%'>: <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“<span
+class=GramE>cars*</span>head;”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>We create a
+pointer called head which points to objects of the class cars such as <st1:place
+w:st="on"><st1:City w:st="on"><span class=SpellE><span class=GramE>toyota</span></span></st1:City></st1:place>,
+<span class=SpellE>nissan</span> and ford. This pointer should always point to
+the first object in the list.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“<span
+class=GramE>cars*</span>Temp2;”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Here we
+create another new pointer which we call temp2, which will be used to point to
+objects of the class cars such as <st1:City w:st="on"><st1:place w:st="on">Toyota</st1:place></st1:City>,
+Nissan, or Ford. This pointer will be used to store the memory address of the
+last object in our current list. Remember this does not include the new object
+we just created, we never linked it.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“Temp2=head;”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>We
+initialize Temp2 to equal the memory location of the first object in the list
+which is what the pointer “head” points to. Temp2 will start from the first
+object and progress until it finds the last object;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“<span
+class=GramE>while(</span>Temp2-&gt;<span class=SpellE>nextobject</span>!=0)”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>This while
+loop will only <b>quit</b> when the current object’s “<span class=SpellE>nextobject</span>”
+value is equal to 0 meaning it’s the last object in the list.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“Temp2=Temp2-&gt;next;”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Starting
+from the first object called “head” this line of code progresses the pointer Temp2
+through the list till it reaches the end.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“Temp2-&gt;next=Temp;”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>This is a
+key line; it sets the last object in the list’s “<span class=SpellE>nextobject</span>”
+value equal to the new object we created, making this a linked list.<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>How do we
+get head to point to the first object in the <span class=GramE>list(</span><st1:place
+w:st="on"><st1:City w:st="on">Toyota</st1:City></st1:place>)?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>We can
+accomplish this by writing <span class=GramE>an if</span> statement such as
+that below:<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:12.0pt;line-height:
+115%'>If(</span></span><span style='font-size:12.0pt;line-height:115%'>head==0)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:12.0pt;line-height:
+115%'>head=</span></span><span style='font-size:12.0pt;line-height:115%'>Temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+color:#5F497A'>Explanation of above code</span></b><span style='font-size:12.0pt;
+line-height:115%'>: <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“<span
+class=GramE>If(</span>head==0)”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>When does
+head=0? <span class=GramE>Only when the list is empty.</span> So we are
+checking if the list is empty.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“<span
+class=GramE>head=</span>Temp;”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Here we set
+head to point to the first object we created. Remember this line of code only
+executes when the list is empty.<o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:12.0pt;line-height:115%'>How do we prevent double entries to
+the list?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-weight:
+bold'>Let’s say we added a variable called <span class=SpellE>serialnumber</span>,
+and each time we created a new car we assigned it a value. Now we know that no
+two cars have the same serial number, so we may want to prevent duplicate
+entries by writing the following code:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>if</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'>
+(temp2-&gt;serialnumber==serialnumber)<span style='mso-spacerun:yes'>   </span><span
+style='color:green'>//if duplicate exists<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>delete temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>cout&lt;&lt;<span
+style='color:#A31515'>&quot;already exists&quot;</span>&lt;&lt;endl;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>return</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'>;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:12.0pt;color:#5F497A'>Explanation of above code</span></b><span
+style='font-size:12.0pt'>:</span><span style='font-size:10.0pt;font-family:
+"Courier New";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>“<span style='color:blue'>if</span>
+(temp2-&gt;serialnumber==serialnumber)”<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>This line of code
+checks if the serial number of the current object is equal to the serial number
+of the new object we just created. Obviously this line will be placed within
+our while loop so it will check every object from beginning to end.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>“delete temp;”<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>cout&lt;&lt;<span
+style='color:#A31515'>&quot;already exists&quot;</span>&lt;&lt;endl;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Here we are
+deleting the new object from memory and letting the user know that their object
+already exists.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>However we also
+need to add this exact if statement a second time after the while loop ends.
+The reason is that the while loop progresses to the last object, it quits
+before actually checking if that last object is a duplicate. By adding the If
+statement following the while loop we are checking that last object.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>How does
+the code look put together?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;line-height:115%;font-family:
+"Courier New";color:blue;mso-no-proof:yes'>class</span><span style='font-size:
+10.0pt;line-height:115%;font-family:"Courier New";mso-no-proof:yes'> cars <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>public</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'>:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+1'>      </span><span style='color:blue'>int</span> wheellength, enginesize;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+1'>      </span>cars*nextobject;<span style='mso-tab-count:1'>  </span><span
+style='color:green'>//link list pointers<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+3'>                  </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+1'>      </span><span style='color:green'>//constructor function<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+1'>      </span>cars(<span style='color:blue'>int </span>enginesize<span
+style='color:blue'>, int </span>wheelength) <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span><span style='color:blue'>this</span>-&gt;enginesize=enginesize;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span>this-&gt;wheellength=wheellength;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span>nextobject=0;<span style='mso-tab-count:1'>     </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>};<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>void</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'> add(int
+enginesize,int wheellength)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:green;mso-no-proof:yes'>//creates a new object
+of the class cars and sends the enginesize and wheellength values which it gets
+from the user.It stores this value in the pointer temp</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>temp=<span style='color:
+blue'>new</span> cars(enginesize, wheellength);<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+1'>      </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>if</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'> (head==0)<span
+style='mso-tab-count:2'>            </span><span style='mso-spacerun:yes'>   
+</span><span style='color:green'>//Check if this is the first object<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:green;mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span><span style='mso-spacerun:yes'> </span>{<span
+style='mso-tab-count:3'>                </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+3'>                  </span>head=temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span><span style='mso-spacerun:yes'> </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>else</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'> <span
+style='color:blue'>if</span> (head!=0)<span style='mso-spacerun:yes'>      
+</span><span style='color:green'>//Checks if this is not the first object<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span>temp2=head;<span style='mso-tab-count:1'> </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+3'>                  </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span><span style='color:blue'>while</span>(temp2-&gt;next!=0)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span>{<span style='mso-tab-count:3'>                 </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+3'>                  </span><span style='color:blue'>if</span>
+(temp2-&gt;serialnumber==serialnumber)<span style='color:green'>//if duplicate
+exists<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+3'>                  </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+4'>                        </span>cout&lt;&lt;<span style='color:#A31515'>&quot;already
+exists&quot;</span>&lt;&lt;endl;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+4'>                        </span><span style='color:blue'>delete</span> temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+4'>                        </span><span style='color:blue'>return</span>;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+3'>                  </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+8'>                                                </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+3'>                  </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span>temp2=temp2-&gt;next;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+4'>                        </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span>}<span style='color:green'>//end of while<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>if</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'>
+(temp2-&gt;serialnumber==serialnumber)<span style='mso-spacerun:yes'>   </span><span
+style='color:green'>//if duplicate exists on last time<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+1'>      </span>cout&lt;&lt;<span style='color:#A31515'>&quot;already
+exists&quot;</span>&lt;&lt;endl;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+1'>      </span><span style='color:blue'>delete</span> temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+1'>      </span><span style='color:blue'>return</span>;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>}<span style='color:green'><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:green;mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>temp2-&gt;next=temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+7'>                                          </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>}<span style='color:green'>//end
+of else if<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:green;mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;line-height:115%;font-family:
+"Courier New";mso-no-proof:yes'>}<span style='color:green'>//end of function<o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b><u><span
+style='font-size:14.0pt;line-height:115%;mso-bidi-font-family:"Courier New";
+mso-no-proof:yes'>Deleting from a linked list<o:p></o:p></span></u></b></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Conceptually how do we
+delete from a linked list?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>There are four considerations we must take into
+account before writing our delete function<o:p></o:p></span></p>
+
+<p class=ListParagraph><span style='font-size:12.0pt;line-height:115%;
+mso-bidi-font-family:"Courier New";mso-no-proof:yes'>1) If we delete the first
+item of a list, we must change the value of head to the next object in the
+list.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+line-height:normal'><span style='font-size:12.0pt;font-family:"Times New Roman";
+mso-bidi-font-family:"Courier New";mso-no-proof:yes'>2) If we delete the last
+item in the list we must set the nextobject value of the previous object to 0<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+line-height:normal'><span style='font-size:12.0pt;font-family:"Times New Roman";
+mso-bidi-font-family:"Courier New";mso-no-proof:yes'>3) If we delete the first
+item of a list and it is also the only item in the list, we must set head equal
+to 0<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+line-height:normal'><span style='font-size:12.0pt;font-family:"Times New Roman";
+mso-bidi-font-family:"Courier New";mso-no-proof:yes'>4) If we delete an object
+from anywhere else in a list, we have to set the previous object’s “nextobject”
+value to point to the object following the one we want to delete.<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>How do we
+actually write our linked list delete function?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>In our
+function we are going to delete an object based on a search criterion, so first
+we have to check a certain variable of every single object from beginning to
+end and if it matches our <span class=SpellE>seachterm</span> we execute the
+delete procedure. In this program we are going to check <span class=SpellE>enginesize</span>:<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:12.0pt;line-height:
+115%'>If(</span></span><span style='font-size:12.0pt;line-height:115%'>head==0)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=SpellE><span style='font-size:12.0pt;line-height:
+115%'>Cout</span></span><span style='font-size:12.0pt;line-height:115%'>&lt;&lt;”list
+is empty”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Return;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Else<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Temp2=head;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:12.0pt;line-height:
+115%'>While(</span></span><span style='font-size:12.0pt;line-height:115%'>temp2-&gt;<span
+class=SpellE>nextobject</span>!=0)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span><span class=GramE>If(</span>head==temp2&amp;&amp;temp2-&gt;<span
+class=SpellE>enginesize</span>==<span class=SpellE>searchterm</span>)<span
+style='mso-spacerun:yes'>   </span>//Scenario 1<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>Head=temp2-&gt;<span class=SpellE>nextobject</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>Temp=Temp2;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>Temp2=Temp2-&gt;<span class=SpellE>nextobject</span>;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>Delete Temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%'>Else <span class=GramE>If(</span>temp2- &gt;<span
+class=SpellE>nextobject</span>-&gt;<span class=SpellE>enginesize</span>==<span
+class=SpellE>searchterm</span>)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Temp=Temp2-&gt;nextobject;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Temp2-&gt;nextobject=Temp2-&gt;nextobject-&gt;nextobject;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Delete
+temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>If
+(temp2-&gt;nextobject!=0) //last case deleted scenrio#2<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{Temp2=Temp2-&gt;nextobject;}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Else <o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Temp2=Temp2-&gt;nextobject;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>If(head==temp2&amp;&amp;temp2-&gt;enginesize==searchterm)//scenario
+3<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Delete temp2;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Head=0;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:12.0pt;color:#5F497A'>Explanation of above code</span></b><span
+style='font-size:12.0pt'>:</span><span style='font-size:10.0pt;font-family:
+"Courier New";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“<span
+class=GramE>If(</span>head==0)”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“<span
+class=SpellE>cout</span>&lt;&lt;”list is empty”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“Return;”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Here we
+check if the list is empty, if it is there is nothing to delete and we want to
+tell the user.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+"Courier New";mso-no-proof:yes'>“</span><span style='font-size:12.0pt;
+line-height:115%'>Temp2=head;”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>We
+initialize Temp2 to point to the memory location of the first object in the
+list<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“<span
+class=GramE>While(</span>temp2-&gt;<span class=SpellE>nextobject</span>!=0)”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Just as
+before, we progress through the list until we reach the object whose “<span
+class=SpellE>nextobject</span>” value is equal to 0, meaning it’s the end of
+the list.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“<span
+class=GramE>If(</span>head==temp2&amp;&amp;temp2-&gt;<span class=SpellE>enginesize</span>==<span
+class=SpellE>searchterm</span>)”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>This line
+takes into account our first scenario where we are deleting the first item in
+the list and there are other items following it. We are saying if the current
+object we are checking is the first object in the list and its <span
+class=SpellE>enginesize</span> is equal to our search term then<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“Head=temp2-&gt;<span
+class=SpellE>nextobject</span>”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Change the
+value head to the next object in the list, since we will delete the current
+first object.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“Temp=Temp2;”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>We assign a
+new pointer called Temp, to point to the same location as Temp2. The reasoning
+is because we need to both <span class=GramE>progress</span> Temp2 to check the
+next object and also delete it. With just one variable if we delete Temp2 we
+can’t progress it since it doesn’t exist, and if we progress it first, then we
+don’t know what to delete.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“Temp2=Temp2-&gt;<span
+class=SpellE>nextobject</span>;”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>We progress
+Temp2 to the next object, so we can check it<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Delete Temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Here we
+delete the object.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“Else <span
+class=GramE>If(</span>temp2- &gt;<span class=SpellE>nextobject</span>-&gt;<span
+class=SpellE>enginesize</span>==<span class=SpellE>searchterm</span>)”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>We are
+checking if the <b>next object in the list’s</b> <span class=SpellE>enginesize</span>
+is equal to our search term. This statement will never check the first object
+in the list which is ok, since we have our first if statement checking that. It
+will also check the last object, so we don’t need to write another if statement
+to do this following the while loop like before.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>“Temp=Temp2-&gt;nextobject;”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>We are assigning Temp to point to the object we
+want to delete which is going to be the next object after temp2, since our
+search statement is checking the next object and not the current one.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>“Temp2-&gt;nextobject=Temp2-&gt;nextobject-&gt;nextobject;”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>This sets the previous object’s Temp2,
+nextobject value to equal that of the object following the one we want to
+delete.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>“Delete temp;”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>This deletes our object from memory<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>“If (temp2-&gt;nextobject!=0)“<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>“Temp2=Temp2-&gt;nextobject;”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>This line takes into account scenario 2 when we
+are deleting the last object from the list, this makes sure we only progress
+Temp2 if it’s not the last object because if it is the last object then Temp2 “next
+object” based on the code will be set to 0. Therefore progressing Temp2 to
+equal Temp2 “next object” will causes Temp2 to equal 0 <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>When we get to the while loop the program will
+crash because there will be no temp2-&gt;nextobject since temp2 will equal 0.
+Instead we leave Temp2 as the last object before the deleted one and check that
+“nextobject” value which will equal 0 and the while loop will fail.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>“If(head==temp2&amp;&amp;temp2-&gt;enginesize==searchterm)”<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>This takes into
+account scenario 3 where the first and only object is being deleted<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>“Delete temp2;”<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>We just delete the
+current object<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>“Head=0;”<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>We set head to 0,
+to indicate the list is empty<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:0in;margin-bottom:.0001pt;
+text-align:center;line-height:normal;mso-layout-grid-align:none;text-autospace:
+none'><b><u><span style='font-size:14.0pt;mso-bidi-font-family:"Courier New";
+mso-no-proof:yes'>Printing our list<o:p></o:p></span></u></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Conceptually how do we
+print out our linked list?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>First we have to decide which information to print
+out for each object. Do we want to print out only the enginesize? Or maybe also
+the wheellength?<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>After this is decided we must write code which
+loops through the entire list from beginning to end printing each item<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>How do we
+actually write our linked list print function?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:12.0pt;line-height:
+115%'>if(</span></span><span style='font-size:12.0pt;line-height:115%'>head==0)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=SpellE><span style='font-size:12.0pt;line-height:
+115%'>Cout</span></span><span style='font-size:12.0pt;line-height:115%'>&lt;&lt;”list
+is empty”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Return;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Else<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Temp2=head;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span class=GramE><span
+style='font-size:12.0pt;line-height:115%'>while</span></span><span
+style='font-size:12.0pt;line-height:115%'> (temp2-&gt;next!=0)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span class=SpellE><span
+style='font-size:12.0pt;line-height:115%'>Cout</span></span><span
+style='font-size:12.0pt;line-height:115%'>&lt;&lt;<span class=SpellE>enginesize</span>;<span
+style='mso-spacerun:yes'>   </span>//whatever else you want to include put here<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%'>Temp2=Temp2-&gt;next;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=SpellE><span style='font-size:12.0pt;line-height:
+115%'>Cout</span></span><span style='font-size:12.0pt;line-height:115%'>&lt;&lt;<span
+class=SpellE>enginesize</span>;<span style='mso-spacerun:yes'>  
+</span>//whatever else you want to include put here<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:12.0pt;color:#5F497A'>Explanation of above code</span></b><span
+style='font-size:12.0pt'>:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>“</span><span class=GramE><span
+style='font-size:12.0pt;line-height:115%'>if(</span></span><span
+style='font-size:12.0pt;line-height:115%'>head==0)”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>We check if
+the list is empty<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“<span
+class=GramE>while</span> (temp2-&gt;next!=0)”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>We go
+through the entire list, but remember we don’t check the last entry so must
+include another “<span class=SpellE>Cout</span>” following the while loop<o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b><u><span
+style='font-size:14.0pt;line-height:115%'>Adding a previous pointer to each
+object<o:p></o:p></span></u></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>We may want to add a “previousobject” pointer
+so each object always know the object before it, and the first object’s
+p”reviousobject” pointer has a value of 0 or points to the last item in a list
+in a circular list.<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+mso-bidi-font-family:"Courier New";mso-no-proof:yes'>How do we intialize this
+pointer?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>We start by declaring our pointer within the
+class cars<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>Cars*previousobject<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>We also want to intalize it’s value to 0, so we
+add to our constructor function the following line<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>Previousobject=0;<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Conceptually how do we
+create this pointer?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>Whenever we add a new item to the list , we
+need to set its “previousobject” value equal to the previous object. We have a
+special case, when we create the first object, we have to leave the previous
+objects value equal to 0<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>Whenever we delete an item from the list, we
+need to set the “previousobject” value of the object following the deleted
+object to the object before the deleted one. However there are some exceptions<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>1) When we delete the first object in a list
+and it is the only object in the list, we don’t need to do anything<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>2) When we delete the first object in a list
+and there are other objects, we have to set the “previousobject” value of the
+object following the deleted one to 0.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>3) When we delete the last object in the list,
+we have to do nothing.<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>How do we
+actually code this pointer operation for adding?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>We will be
+adding onto the code we wrote before<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>First to the
+add function we have to add the following lines:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>void</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'> add(int
+enginesize,int wheellength)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:green;mso-no-proof:yes'>//creates a new
+object of the class cars and sends the enginesize and wheellength values which
+it gets from the user.It stores this value in the pointer temp</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>temp=<span style='color:
+blue'>new</span> cars(enginesize, wheellength);<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+1'>      </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>if</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'> (head==0)<span
+style='mso-tab-count:2'>            </span><span style='mso-spacerun:yes'>   
+</span><span style='color:green'>//Check if this is the first object<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:green;mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span><span style='mso-spacerun:yes'> </span>{<span
+style='mso-tab-count:3'>                </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+3'>                  </span>head=temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span><span style='mso-spacerun:yes'> </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>else</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'> <span
+style='color:blue'>if</span> (head!=0)<span style='mso-spacerun:yes'>      
+</span><span style='color:green'>//Checks if this is not the first object<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span>temp2=head;<span style='mso-tab-count:1'> </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+3'>                  </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span><span style='color:blue'>while</span>(temp2-&gt;next!=0)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span>{<span style='mso-tab-count:3'>                 </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+3'>                  </span><span style='color:blue'>if</span>
+(temp2-&gt;serialnumber==serialnumber)<span style='color:green'>//if duplicate
+exists<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+3'>                  </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+4'>                        </span>cout&lt;&lt;<span style='color:#A31515'>&quot;already
+exists&quot;</span>&lt;&lt;endl;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+4'>                        </span><span style='color:blue'>delete</span> temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+4'>                        </span><span style='color:blue'>return</span>;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+3'>                  </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+6'>                                    </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span>temp2=temp2-&gt;next;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+6'>                                    </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+2'>            </span>}<span style='color:green'>//end of while<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>if</span><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'>
+(temp2-&gt;serialnumber==serialnumber)<span style='mso-spacerun:yes'>   </span><span
+style='color:green'>//if duplicate exists on last time<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+1'>      </span>cout&lt;&lt;<span style='color:#A31515'>&quot;already
+exists&quot;</span>&lt;&lt;endl;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+1'>      </span><span style='color:blue'>delete</span> temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+1'>      </span><span style='color:blue'>return</span>;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:10.0pt;font-family:"Courier New";mso-no-proof:yes'>temp-&gt;previous=temp2<span
+style='color:green'><o:p></o:p></span></span></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>temp2-&gt;next=temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+7'>                                          </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'>}<span style='color:green'>//end
+of else if<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:green;mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;line-height:115%;font-family:
+"Courier New";mso-no-proof:yes'>}<span style='color:green'>//end of function<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:12.0pt;color:#5F497A'>Explanation of above code</span></b><span
+style='font-size:12.0pt'>:</span><span style='font-size:10.0pt;font-family:
+"Courier New";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt'>“</span><b><span style='font-size:10.0pt;font-family:"Courier New";
+mso-no-proof:yes'>temp-&gt;previous=temp2<span style='color:green'>”<o:p></o:p></span></span></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:10.0pt;font-family:"Courier New";color:green;mso-no-proof:
+yes'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>This sets the
+“previousobject” value of the newly created object to that of the one before.
+Remember this line doesn’t execute when you create the first object<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>How do we
+actually code this pointer operation for deleting?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:12.0pt;line-height:
+115%'>If(</span></span><span style='font-size:12.0pt;line-height:115%'>head==0)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=SpellE><span style='font-size:12.0pt;line-height:
+115%'>Cout</span></span><span style='font-size:12.0pt;line-height:115%'>&lt;&lt;”list
+is empty”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Return;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Else<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Temp2=head;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:12.0pt;line-height:
+115%'>While(</span></span><span style='font-size:12.0pt;line-height:115%'>temp2-&gt;<span
+class=SpellE>nextobject</span>!=0)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span><span class=GramE>If(</span>head==temp2&amp;&amp;temp2-&gt;<span
+class=SpellE>enginesize</span>==<span class=SpellE>searchterm</span>)<span
+style='mso-spacerun:yes'>   </span>//Scenario 1<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>Head=temp2-&gt;<span class=SpellE>nextobject</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span><b>Head-&gt;<span class=SpellE>previousobject</span>=0;<span
+style='mso-spacerun:yes'>                        </span>// scenario 2<o:p></o:p></b></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>Temp=Temp2;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>Temp2=Temp2-&gt;<span class=SpellE>nextobject</span>;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>Delete Temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%'>Else <span class=GramE>If(</span>temp2- &gt;<span
+class=SpellE>nextobject</span>-&gt;<span class=SpellE>enginesize</span>==<span
+class=SpellE>searchterm</span>)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Temp=Temp2-&gt;nextobject;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Temp2-&gt;nextobject=Temp2-&gt;nextobject-&gt;nextobject;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Delete
+temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>If
+(temp2-&gt;nextobject!=0) //last case deleted scenrio#2<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><b><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Temp2-&gt;next-&gt;previous=Temp2<span
+style='mso-spacerun:yes'>   </span>//scenario 3<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Temp2=Temp2-&gt;nextobject;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Else <o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Temp2=Temp2-&gt;nextobject;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>If(head==temp2&amp;&amp;temp2-&gt;enginesize==searchterm)//scenario
+3<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Delete temp2;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Head=0;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:12.0pt;color:#5F497A'>Explanation of above code</span></b><span
+style='font-size:12.0pt'>:</span><span style='font-size:10.0pt;font-family:
+"Courier New";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“Head-&gt;<span
+class=SpellE>previousobject</span>=0;”<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:178.5pt'><span style='font-size:12.0pt;
+line-height:115%'><span style='mso-tab-count:1'>                                                            </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>This takes
+into account scenario 2 when the first object is being deleted and there are
+other objects that follow, we need to progress head, and then set the “<span
+class=SpellE>previousobject</span>” value of that new object equal to 0, since
+it is now first.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>“Temp2-&gt;next-&gt;previous=Temp2”<b><span
+style='mso-spacerun:yes'>  </span><o:p></o:p></b></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>This line sets the “previousobject” of value of
+the one following the deleted one to the one before it.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>Scenario 3 which is when we are deleting the last
+it taken into account by being place in our if statement insuring that this
+operation is only performed when it’s not the last one.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b><u><span
+style='font-size:14.0pt;line-height:115%'>Keeping track of the last object in a
+list<o:p></o:p></span></u></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>It may be
+useful to keep track of the last object in the list with a pointer called last,
+how would we keep track of the last object?<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Conceptually how do we use
+this pointer?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>Everytime we create a newobject that is the
+last one in the list, so in our add function we will have a line <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>Temp=last;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>The problem is when we delete the last object
+in the list, we need to update last to be the one before. We can solve this
+with an else statement such as this<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";color:blue;mso-no-proof:yes'>else<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+10.0pt;font-family:"Courier New";mso-no-proof:yes'><span style='mso-tab-count:
+3'>                  </span>{last=temp2;}<span style='mso-tab-count:3'>                 </span></span><span
+style='font-size:12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>In addition if we delete the first and only
+object, we need to set last equal to 0. The following line place within our add
+function will suffice<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;mso-bidi-font-family:
+"Courier New";mso-no-proof:yes'>Last=0;<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%'>How do we
+actually code this for deleting?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:12.0pt;line-height:
+115%'>If(</span></span><span style='font-size:12.0pt;line-height:115%'>head==0)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=SpellE><span style='font-size:12.0pt;line-height:
+115%'>Cout</span></span><span style='font-size:12.0pt;line-height:115%'>&lt;&lt;”list
+is empty”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Return;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Else<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>Temp2=head;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:12.0pt;line-height:
+115%'>While(</span></span><span style='font-size:12.0pt;line-height:115%'>temp2-&gt;<span
+class=SpellE>nextobject</span>!=0)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span><span class=GramE>If(</span>head==temp2&amp;&amp;temp2-&gt;<span
+class=SpellE>enginesize</span>==<span class=SpellE>searchterm</span>)<span
+style='mso-spacerun:yes'>   </span>//Scenario 1<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>Head=temp2-&gt;<span class=SpellE>nextobject</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>Head-&gt;<span class=SpellE>previousobject</span>=0<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>Temp=Temp2;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>Temp2=Temp2-&gt;<span class=SpellE>nextobject</span>;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>Delete Temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><span
+style='mso-tab-count:1'>            </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%'>Else <span class=GramE>If(</span>temp2- &gt;<span
+class=SpellE>nextobject</span>-&gt;<span class=SpellE>enginesize</span>==<span
+class=SpellE>searchterm</span>)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Temp=Temp2-&gt;nextobject;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Temp2-&gt;nextobject=Temp2-&gt;nextobject-&gt;nextobject;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Delete
+temp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>If
+(temp2-&gt;nextobject!=0) //last case deleted scenrio#2<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Temp2-&gt;next-&gt;previous=Temp2<span
+style='mso-spacerun:yes'>   </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Temp2=Temp2-&gt;nextobject;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Else <o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><b><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Last=temp2;<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Else <o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Temp2=Temp2-&gt;nextobject;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='text-indent:.5in'><span style='font-size:12.0pt;
+line-height:115%;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>If(head==temp2&amp;&amp;temp2-&gt;enginesize==searchterm<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Delete temp2;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Head=0;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Last=0;<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:12.0pt;color:#5F497A'>Explanation of above code</span></b><span
+style='font-size:12.0pt'>:</span><span style='font-size:10.0pt;font-family:
+"Courier New";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>“Else
+{Last=temp2};”<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'>This line of
+code says if the last term is being deleted then set last to point to the one
+before the deleted object.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>“Last=0;”<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>This says if the
+first and only object is being deleted then set last equal to 0;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Summary: so now we
+have previous pointers in each object and a last pointer to keep track of the
+last object in the list. What operations can we perfrom with this?<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:0in;margin-bottom:.0001pt;
+text-align:center;line-height:normal;mso-layout-grid-align:none;text-autospace:
+none'><b><u><span style='font-size:14.0pt;mso-bidi-font-family:"Courier New";
+mso-no-proof:yes'>Printing the list backwards<o:p></o:p></span></u></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+14.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>How
+do we print backwards conceptually?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>We want to start at
+the end of the list and follow the previous links till we get to when
+previousobject=0 which means it’s the end of the list.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>How
+do we code this?<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>If(head==0)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Cout&lt;&lt;”list
+is empty”&lt;&lt;endl;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Return;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Temp2=last;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>While(temp2-&gt;previous!=0)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;text-indent:
+.5in;line-height:normal;mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Cout&lt;&lt;enginesize;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;text-indent:
+.5in;line-height:normal;mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Temp2=temp2-&gt;previous;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>Cout&lt;&lt;enginesize;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><b><span
+style='font-size:12.0pt;color:#5F497A'>Explanation of above code</span></b><span
+style='font-size:12.0pt'>:</span><span style='font-size:10.0pt;font-family:
+"Courier New";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt'>“</span><span style='font-size:12.0pt;mso-bidi-font-family:"Courier New";
+mso-no-proof:yes'>Temp2=last;”<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>We want to start
+from the back of the list<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>“While(temp2-&gt;previous!=0)”<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;text-indent:
+.5in;line-height:normal;mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>“Temp2=temp2-&gt;previous;”<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'>We start from the
+end of the list and keep progressing till we find the previousobject is equal
+to 0, which means we’re at the end of the list, however the loop quits before
+we actually print to the screen the last object.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
+12.0pt;mso-bidi-font-family:"Courier New";mso-no-proof:yes'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

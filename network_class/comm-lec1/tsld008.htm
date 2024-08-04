@@ -1,0 +1,69 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>Programming the UART 8250</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>Programming the UART 8250</H1> 
+ <P><UL>
+<LI><H2>Programming is done by reading and writing registers of the 8250. The registers are:
+</H2>
+</UL><UL>
+<H2>Base Address      Mode                   Name                                                         
+</H2>
+</UL><UL>
+<H2>+0  (DLAB=0)	Write		Transmitter Holding Buffer 	THR
+</H2>
+</UL><UL>
+<H2>+0  (DLAB=0)	Read		Receiver Buffer  			RBR
+</H2>
+</UL><UL>
+<H2>+0  (DLAB=1)	Rd/Wr		Divisor Latch Low Byte 		DLL
+</H2>
+</UL><UL>
+<H2>+1  (DLAB=0)	Rd/Wr		Interrupt Enable Register 		IER
+</H2>
+</UL><UL>
+<H2>+1  (DLAB=1)	Rd/Wr		Divisor Latch High Byte		DLM 
+</H2>
+</UL><UL>
+<H2>+2			Read		Interrupt Idendification Register 	IIR 
+</H2>
+</UL><UL>
+<H2>+2			Write		FIFO Control Register		FCR
+</H2>
+</UL><UL>
+<H2>+3			Rd/Wr		Line Control Register 		LCR
+</H2>
+</UL><UL>
+<H2>+4			Rd/Wr		Modem Control Register		MCR
+</H2>
+</UL><UL>
+<H2>+5			Read		Line Status Register 		LSR
+</H2>
+</UL><UL>
+<H2>+6			Read		Modem 	Status Register 		MSR
+</H2>
+</UL><UL>
+<H2>+7			Rd/Wr		Scratch Register			SCR</H2>
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld007.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld009.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld008.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

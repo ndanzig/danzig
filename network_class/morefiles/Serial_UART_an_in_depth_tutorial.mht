@@ -1,0 +1,5884 @@
+From: <Saved by Windows Internet Explorer 7>
+Subject: Serial UART, an in depth tutorial
+Date: Thu, 13 Nov 2008 15:37:24 +0200
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="multipart/alternative";
+	boundary="----=_NextPart_000_0000_01C945A5.B996FBD0"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0000_01C945A5.B996FBD0
+Content-Type: application/x-javascript
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://e-learn.jct.ac.il/js/common.js
+
+PROPERTIES_COOKIE =3D 'HLPropList'
+//---- replace parameter in given url---//
+var INITIAL_DATE =3D '1/1/1990'
+var isE =3D true;
+if(!window.ActiveXObject)
+	isE =3D false;
+=09
+function ReplaceURL(strOrginalParam, strReplaceParam, strURL)
+{
+	var arrOrgs =3D (strOrginalParam+'').split(',')
+	var arrReps =3D (strReplaceParam+'').split(',')
+=09
+	for (var c =3D 0; c < arrOrgs.length; c++)
+	{=09
+		var pos =3D strURL.indexOf(arrOrgs[c] + '=3D')
+		if ( pos !=3D -1)
+		{
+			var pos1 =3D strURL.indexOf('&', pos + 1)
+			if (pos1 !=3D -1)
+				var ParamPart =3D strURL.substring(pos, pos1)
+			else
+				var ParamPart =3D strURL.substr(pos, strURL.length)
+			var strURLAfter =3D strURL.replace(ParamPart, arrOrgs[c] + '=3D' + =
+arrReps[c])
+		}
+		else
+		{
+			//check if has anyparameters
+			posBeginParam =3D strURL.indexOf('?')=20
+			if (posBeginParam !=3D -1 && strURL.substr(posBeginParam + 1, =
+strURL.length).length > 0)
+				var strURLAfter =3D strURL + '&' + arrOrgs[c] + '=3D' + arrReps[c]
+			else
+				var strURLAfter =3D strURL + '?' + arrOrgs[c] + '=3D' + arrReps[c]
+		}
+	}
+	return strURLAfter
+}
+
+function overPortalLink(a)
+{
+	a.style.textDecoration =3D 'underline'
+}
+
+function outPortalLink(a)
+{
+	a.style.textDecoration =3D 'none'
+}
+
+function sendXmlMetadata( page, message ) {
+	var xmlhttp =3D new ActiveXObject( 'Microsoft.XMLHTTP' );
+	xmlhttp.Open( 'POST', page, false );
+	if( message =3D=3D null || message =3D=3D '' ) message =3D =
+'<root></root>';
+	xmlhttp.Send( message );
+	return xmlhttp.responseText;
+}
+
+
+function DisplayHLDate(strDate, HLDateFormat)
+{
+	//get date in format DMY. check HLFormat, fix if needed for display
+	if (strDate =3D=3D '')
+		return ''
+
+	var arrDate =3D (strDate+ '').split('/')
+	if (arrDate.length !=3D 3)
+		return ''
+	var dateD =3D arrDate[0]
+	var dateM =3D arrDate[1]
+	var dateY =3D arrDate[2]
+	if (dateD.length =3D=3D 1)
+		dateD =3D '0' + dateD
+	if (dateM.length =3D=3D 1)
+		dateM =3D '0' + dateM
+	if (dateY.length =3D=3D 2)
+		dateY =3D '20' + dateY
+	=09
+	if (HLDateFormat =3D=3D 'dd/mm/yyyy')
+		return ( dateD  +'/' + dateM + '/' + dateY)
+	else
+		return ( dateM  +'/' + dateD + '/' + dateY)
+}=09
+
+function InsertHLDate(strDate, HLDateFormat)
+{
+	//get date in HLFormat, fix if needed for insertion as DMY
+	var arrDate =3D (strDate+ '').split('/')
+	if (arrDate.length !=3D 3)
+		return ''
+
+	if (HLDateFormat =3D=3D 'dd/mm/yyyy')
+	{
+		var dateD =3D arrDate[0]
+		var dateM =3D arrDate[1]
+		var dateY =3D arrDate[2]
+	}
+	else
+	{
+		var dateD =3D arrDate[1]
+		var dateM =3D arrDate[0]
+		var dateY =3D arrDate[2]
+	}
+	if (dateD.length =3D=3D 1)
+		dateD =3D '0' + dateD
+	if (dateM.length =3D=3D 1)
+		dateM =3D '0' + dateM
+	if (dateY.length =3D=3D 2)
+		dateY =3D '20' + dateY
+	return ( dateD  +'/' + dateM + '/' + dateY)
+}
+
+function getDiffDays (EndD, BeginD)
+{
+	//the date except the format mmddyyyy
+	//the dates parameters come in the fomat ddmmyyyy
+=09
+	msecondsPerDay =3D 1000 * 60 * 60 * 24
+	BDay =3D BeginD.substr(0,BeginD.indexOf('/'))
+	BMonth =3D BeginD.substr(BeginD.indexOf('/')+1, BeginD.indexOf('/'))
+	BYear =3D BeginD.substr(BeginD.lastIndexOf('/') + 1, BeginD.length)
+	EDay =3D EndD.substr(0,EndD.indexOf('/'))
+	EMonth =3D EndD.substr(EndD.indexOf('/')+1, EndD.indexOf('/'))
+	EYear =3D EndD.substr(EndD.lastIndexOf('/') + 1, EndD.length)
+	BD =3D new Date(BMonth + '/' + BDay + '/' + BYear)
+	ED =3D new Date(EMonth + '/' + EDay + '/' + EYear)
+	Dif =3D ED.getTime() - BD.getTime()
+	DifDays =3D  Dif / msecondsPerDay=20
+	return DifDays
+}
+function DateAddDays(d,  num)
+{
+	var arrDate =3D d.split('/')
+	if (arrDate.length < 3)
+		return ''
+	var d =3D Number(arrDate[0]) + Number(num)
+	var m =3D arrDate[1]-1
+	var y =3D arrDate[2]
+	newd=3D new Date(y,m,d)
+	tmp =3D newd.getDate() + "/" + (newd.getMonth()+1) + "/" + =
+newd.getYear();
+	return tmp
+}
+function validEmail(strAllEmails, charSplit)
+	{
+		var ValidEmails=3D'';
+		var InvalidEmails=3D'';
+		var arrMails =3D strAllEmails.split(charSplit)
+		for (var m=3D0; m < arrMails.length; m++)
+		{
+			var strEmail =3D arrMails[m]
+			var at =3D strEmail.indexOf('@');
+			if (at < 1 || at =3D=3D strEmail.length - 1)
+			{
+				InvalidEmails =3D InvalidEmails + strEmail + charSplit;
+				continue;
+			}
+			var last =3D strEmail.lastIndexOf('@');
+			if (last > at)
+			{
+				InvalidEmails =3D InvalidEmails + strEmail + charSplit;
+				continue;
+			}
+			at =3D strEmail.indexOf('.');
+			if (at < 1 || at =3D=3D strEmail.length - 1)
+			{
+				InvalidEmails =3D InvalidEmails + strEmail + charSplit;
+				continue;
+			}
+			ValidEmails =3D ValidEmails + strEmail + charSplit;
+		}
+	if (ValidEmails !=3D '')
+		ValidEmails =3D ValidEmails.substr(0, ValidEmails.length - 1)
+	if (InvalidEmails !=3D '')
+		InvalidEmails =3D InvalidEmails.substr(0, InvalidEmails.length - 1)
+	return ValidEmails + '$$$' + InvalidEmails;
+	}
+
+function hideElement(id)
+	{
+	var elem =3D document.getElementById(id);
+	if (elem !=3D null)
+		elem.style.display =3D 'none'
+	}
+
+function showElement(id)
+	{
+	var elem =3D document.getElementById(id);
+	if (elem !=3D null)
+		elem.style.display =3D 'block'
+	}
+
+function showOrHideElement(id)
+	{
+	var elem =3D document.getElementById(id);
+	if (elem =3D=3D null)
+		return;
+	if (elem.style.display =3D=3D 'none')
+		elem.style.display =3D 'block'
+	else
+		elem.style.display =3D 'none'
+	}
+
+function setCase(e)
+	{
+	var val =3D trim(e.value);
+	e.value =3D val.charAt(0).toUpperCase() + val.substring(1, =
+val.length).toLowerCase();
+	}
+
+function legalName(box, strAlert, illegal)
+	{
+	var str =3D trim(box.value);
+	for (var c =3D 0; c < illegal.length; c++)
+		if (parseInt(str.indexOf(illegal[c])) > -1)
+			{
+			alert(strAlert);
+			box.focus();
+			return false
+			}
+	return true
+	}
+
+function ChecklegalNamePositive(str)
+	{
+	=09
+		for(var c=3D0; c< str.length;c++)
+		{
+			if ((str.charCodeAt(c) < 48 || str.charCodeAt(c) > =
+122)&&(str.charAt(c)!=3D"_" && str.charAt(c)!=3D"-"))
+				return false;
+			else if ((str.charCodeAt(c) > 57 && str.charCodeAt(c) < =
+65)&&(str.charAt(c)!=3D"_" && str.charAt(c)!=3D"-"))
+				return false;
+			else if ((str.charCodeAt(c) > 90 && str.charCodeAt(c) < =
+97)&&(str.charAt(c)!=3D"_" && str.charAt(c)!=3D"-"))
+				return false;=09
+		}
+		return true;
+	=09
+	}
+
+function legalNamePositive(str)
+//check if the string contains only English chars and numbers
+// 0-9 [48-57]; A-Z [65-90]; a-z [97-122]
+	{
+
+		for(var c=3D0; c< str.length;c++)
+		{
+			if (str.charCodeAt(c) < 48 || str.charCodeAt(c) > 122)
+				return false;
+			else if (str.charCodeAt(c) > 57 && str.charCodeAt(c) < 65)
+				return false;
+			else if (str.charCodeAt(c) > 90 && str.charCodeAt(c) < 97)
+				return false;=09
+		}
+		return true;
+	}
+function legalNamePositiveEx(str)
+//check if the string contains only English chars, Hebrew chars, numbers =
+and the space, the apostrophy, the hifen chars
+// 0-9 [48-57]; A-Z [65-90]; a-z [97-122]; Alef - Tav [1488-1514] ;  - =
+[45]; space [32]; () [40-41]; . [46]; : [58]
+	{
+		for(var c=3D0; c< str.length;c++)
+		{
+
+			if (str.charCodeAt(c) < 32 || str.charCodeAt(c) > 1514)
+				return false;
+			else if (str.charCodeAt(c) > 58 && str.charCodeAt(c) < 65)
+				return false;
+			else if (str.charCodeAt(c) > 90 && str.charCodeAt(c) < 97)
+				return false;=09
+			else if (str.charCodeAt(c) > 122 && str.charCodeAt(c) < 1488)
+				return false;
+			else if (str.charCodeAt(c) > 32 && str.charCodeAt(c) < 40)
+				return false;
+			else if (str.charCodeAt(c) > 41 && str.charCodeAt(c) < 45)
+				return false;
+			else if (str.charCodeAt(c) =3D=3D 47)
+				return false;
+	=09
+		}
+		return true;
+	}
+
+function legalNamePositiveEx3(str)
+{
+	for(var c=3D0; c< str.length;c++)
+		{
+			if (str.charCodeAt(c) < 32 || str.charCodeAt(c) > 1514 =
+&&(str.charAt(c)!=3D"_" && str.charAt(c)!=3D"-"))
+				return false;
+			else if (str.charCodeAt(c) > 58 && str.charCodeAt(c) < 65 =
+&&(str.charAt(c)!=3D"_" && str.charAt(c)!=3D"-"))
+				return false;
+			else if (str.charCodeAt(c) > 90 && str.charCodeAt(c) < 97 =
+&&(str.charAt(c)!=3D"_" && str.charAt(c)!=3D"-"))
+				return false;=09
+			else if (str.charCodeAt(c) > 122 && str.charCodeAt(c) < 1488 =
+&&(str.charAt(c)!=3D"_" && str.charAt(c)!=3D"-"))
+				return false;
+			else if (str.charCodeAt(c) > 34 && str.charCodeAt(c) < 39 =
+&&(str.charAt(c)!=3D"_" && str.charAt(c)!=3D"-"))
+				return false;
+			else if (str.charCodeAt(c) > 41 && str.charCodeAt(c) < 45 =
+&&(str.charAt(c)!=3D"_" && str.charAt(c)!=3D"-"))
+				return false;
+			else if (str.charCodeAt(c) =3D=3D 47 || str.charCodeAt(c) =3D=3D 33 =
+&&(str.charAt(c)!=3D"_" && str.charAt(c)!=3D"-"))
+				return false;
+	=09
+		}
+		return true;
+	=09
+}=09
+=09
+function legalNamePositiveEx2(str)
+//check if the string contains only English chars, Hebrew chars, numbers =
+and the space, the apostrophy, the hyphen chars
+// 0-9 [48-57]; A-Z [65-90]; a-z [97-122]; Alef - Tav [1488-1514] ;  - =
+[45]; space [32]; () [40-41]; . [46]; : [58]; " [34]; ' [39]
+	{
+		for(var c=3D0; c< str.length;c++)
+		{
+
+			if (str.charCodeAt(c) < 32 || str.charCodeAt(c) > 1514)
+				return false;
+			else if (str.charCodeAt(c) > 58 && str.charCodeAt(c) < 65)
+				return false;
+			else if (str.charCodeAt(c) > 90 && str.charCodeAt(c) < 97)
+				return false;=09
+			else if (str.charCodeAt(c) > 122 && str.charCodeAt(c) < 1488)
+				return false;
+			else if (str.charCodeAt(c) > 34 && str.charCodeAt(c) < 39)
+				return false;
+			else if (str.charCodeAt(c) > 41 && str.charCodeAt(c) < 45)
+				return false;
+			else if (str.charCodeAt(c) =3D=3D 47 || str.charCodeAt(c) =3D=3D 33)
+				return false;
+	=09
+		}
+		return true;
+	}
+=09
+function legalNamePositiveEx4(str)
+//check if the string contains only English chars, Hebrew chars, numbers =
+and the space
+// 0-9 [48-57]; A-Z [65-90]; a-z [97-122]; Alef - Tav [1488-1514] ;  - =
+[45]; space [32]; () [40-41]; . [46]; : [58]; " [34]; ' [39]
+{
+	for(var c=3D0; c< str.length;c++)
+	{
+
+		if (str.charCodeAt(c) < 32 || str.charCodeAt(c) > 1514)
+			return false;
+		else if (str.charCodeAt(c) > 58 && str.charCodeAt(c) < 65)
+			return false;
+		else if (str.charCodeAt(c) > 90 && str.charCodeAt(c) < 97)
+			return false;=09
+		else if (str.charCodeAt(c) > 122 && str.charCodeAt(c) < 1488)
+			return false;
+		else if (str.charCodeAt(c) < 48 && str.charCodeAt(c) !=3D 32)
+			return false;=09
+	}
+	return true;
+}
+function legalNameEnglish(str, strAlert)
+//check if the string does not contain a hebrew char
+	{
+		for (var c=3D0; c<str.length; c++)
+		{
+			if (str.charCodeAt(c) >=3D 1488 && str.charCodeAt(c) <=3D 1514)
+			{
+				alert(strAlert);
+				return false;
+			}
+		}
+		return true;=09
+	}=09
+
+function legalCourseNum(str)
+//check if the string contains English chars and numbers, Hyphen char
+// 0-9 [48-57]; A-Z [65-90]; a-z [97-122]; - [45]
+	{
+
+		for(var c=3D0; c< str.length;c++)
+		{
+			if (str.charCodeAt(c) =3D=3D 46 || str.charCodeAt(c) =3D=3D 47)
+				return false;
+			else if (str.charCodeAt(c) < 45 || str.charCodeAt(c) > 122)
+				return false;
+			else if (str.charCodeAt(c) > 57 && str.charCodeAt(c) < 65)
+				return false;
+			else if (str.charCodeAt(c) > 90 && str.charCodeAt(c) < 97)
+				return false;=09
+		}
+		return true;
+	}
+=09
+function legalName2(str, illegal)
+	{
+	for (var c =3D 0; c < illegal.length; c++)
+	{=09
+		if (parseInt(str.indexOf(illegal[c])) > -1)
+			return false
+	}
+	return true
+	}
+
+function verifyBox(box, strAlert)
+	{
+=09
+	if (trim(box.value) =3D=3D '')
+		{
+		alert(strAlert);
+		box.focus();
+		return false
+		}
+	return true
+	}
+
+=09
+function trim(str)
+	{
+	var result =3D new String(str);
+	while (result.charAt(result.length - 1) =3D=3D ' ')
+		result =3D result.substring(0, result.length - 1);
+	while (result.charAt(0) =3D=3D ' ')
+		result =3D result.substring(1, result.length);
+	return result
+	}
+function makeRequest(frame)
+	{
+	//	Receives a frame and return an associated array that reflects the =
+frame's
+	//	querystring paramethers (similar to the Request.querystring =
+collection in ASP)
+
+	var href =3D frame.location.href;
+	var qs =3D href.substring(href.indexOf('?') + 1, href.length);
+
+	var pairs =3D qs.split('&');
+	var request =3D [];
+
+	var pair;
+	var equal;
+
+	for (var p =3D 0; p < pairs.length; p++)
+		{
+		pair =3D pairs[p];
+		equal =3D pair.indexOf('=3D');
+		request[pair.substring(0, equal)] =3D unescape(pair.substring(equal + =
+1, pair.length).replace(/\+/g, ' '))
+		}
+	return request
+	}
+
+function legalDate(strDate)
+{
+	var err2 =3D 0;
+	var arrDate =3D strDate.split('/')
+	if (arrDate.length < 3)
+	{
+		return false
+	}
+	else
+	{
+		//init the values
+		var d =3D arrDate[0]
+		var m =3D arrDate[1]
+		var y =3D arrDate[2]
+		if (d.length =3D=3D 1)
+			d =3D '0' + d
+		if (m.length =3D=3D 1)
+			m =3D '0' + m
+		if (y.length =3D=3D 2)
+			y =3D '20' + y
+		if (d.length !=3D 2 || m.length !=3D 2 || y.length !=3D 4)
+			return false
+
+		//check the values
+		if (isNaN(d) || d<0 || d.indexOf(',')!=3D-1 || d.indexOf('.')!=3D-1 || =
+d.indexOf('-')!=3D-1) err2 =3D 1
+		if (isNaN(m) || m<0 || m.indexOf(',')!=3D-1 || m.indexOf('.')!=3D-1 || =
+m.indexOf('-')!=3D-1) err2 =3D 1
+		if (isNaN(y) || y<0 || y.indexOf(',')!=3D-1 || y.indexOf('.')!=3D-1 || =
+y.indexOf('-')!=3D-1) err2 =3D 1
+		if (m<1 || m>12) err2 =3D 1
+		if (d<1 || d>31) err2 =3D 1
+		if (y<1990 || y>3000) err2 =3D 1
+		//check months with 30 days
+		if (m=3D=3D4 || m=3D=3D6 || m=3D=3D9 || m=3D=3D11)
+		{
+			if (d=3D=3D31) err2=3D1
+		}
+		// february, leap year
+		if (m=3D=3D2)
+		{
+			// feb
+			var feb=3DparseInt(y/4)
+			if (isNaN(feb))=20
+			{
+				err2=3D1
+			}
+
+			if (d>29) err2=3D1
+			if (d=3D=3D29 && ((y/4)!=3DparseInt(y/4))) err2=3D1
+		}
+		if (err2 !=3D 0)
+			return false
+	}	=09
+	return true
+}
+function strFromDate(strDate)
+{
+	var arrDate =3D strDate.split('/')
+	if (arrDate.length < 3)
+		return ''
+	else
+	{
+		//init the values
+		var d =3D arrDate[0]
+		var m =3D arrDate[1]
+		var y =3D arrDate[2]
+		if (d.length =3D=3D 1)
+			d =3D '0' + d
+		if (m.length =3D=3D 1)
+			m =3D '0' + m
+		if (y.length =3D=3D 2)
+			y =3D '20' + y
+		if (d.length !=3D 2 || m.length !=3D 2 || y.length !=3D 4)
+			return ''
+	}
+	var str =3D y + m + d + '000000'
+	return str
+}
+
+function myParseInt(strTmp)
+{
+	//return a decimal integer
+	return parseInt(strTmp, 10)
+}
+
+function dateFromStr(str)
+{
+	if (trim(str) !=3D '')
+	{
+		var y =3D str.substring(0,4)
+		var m =3D str.substring(4,6)
+		var d =3D str.substring(6,8)
+		var strDate =3D d +'/' + m + '/' + y
+	}
+	else
+		var strDate =3D '';
+	return strDate
+}
+
+function CheckDatesDiffs(Date1,Date2)
+{
+=09
+=09
+	if (trim(Date1) !=3D '')
+	{
+		var y =3D Date1.substring(0,4)
+		var m =3D Date1.substring(4,6)
+		var d =3D Date1.substring(6,8)
+		var strDate1 =3D d +'/' + m + '/' + y
+	}
+	else
+		return false;
+=09
+	if (trim(Date2) !=3D '')
+	{
+		var y2 =3D Date2.substring(0,4)
+		var m2 =3D Date2.substring(4,6)
+		var d2 =3D Date2.substring(6,8)
+		var strDate2 =3D d2 +'/' + m2 + '/' + y2
+	}
+	else
+		return false;
+	=09
+	if(y>y2)
+		return true;
+	if(m>m2 && y=3D=3Dy2)
+		return true;
+	if(d>d2 && m=3D=3Dm2 && y=3D=3Dy2)
+		return true;
+=09
+=09
+	=09
+	=09
+return false	=09
+=09
+=09
+}
+
+
+function SetCookieJs(CookieName,CookieValue)
+{
+	var NewCookie
+	var aCookie =3D document.cookie.split("; ");
+	prop_found=3D0
+	for (var i=3D0; i < aCookie.length; i++)
+	{
+		var pair =3D aCookie[i].split("=3D");
+		if (PROPERTIES_COOKIE =3D=3D pair[0])
+		{
+			prop_found=3D1
+			if (aCookie[i].indexOf(CookieName+'=3D') !=3D -1)
+				return
+			else
+				=
+NewCookie=3DaCookie[i].substr(0,aCookie[i].length)+'&'+CookieName+'=3D'+e=
+scape(CookieValue)+';'
+		}
+    }
+    if (!prop_found)
+		document.cookie=3DPROPERTIES_COOKIE + '=3D'+CookieName+'=3D' + =
+escape(CookieValue) + ';path=3D/;'=20
+	else
+		document.cookie=3D NewCookie + ';path=3D/;'=20
+}
+
+
+function GetWindowPos(width, height)
+{
+	var t, l, params
+=09
+	t =3D (window.screen.height-height)/2		// top
+	l =3D (window.screen.width-width)/2		//left
+	params =3D ",top=3D" + t + ",left=3D" + l
+	return params
+}
+function VerifyChars( El, AllowChars, ForbiddenChars, isMandatory, =
+strErrMand, strErrChars)
+{
+
+	curStr =3D trim(El.value)
+	if (isMandatory =3D=3D '1' && curStr =3D=3D '')
+	{
+		alert (strErrMand)
+		El.focus();
+		return false
+	}
+	//AllowChars & ForbiddenChars are in Format [char1 -  char2][char3]...
+	if (trim(AllowChars + '').length > 0)
+	{
+		var AllowCells =3D (AllowChars + '').split(']')
+		strOK =3D 1
+		c =3D 0
+		while (c < curStr.length && strOK =3D=3D 1)
+		{
+			charOK =3D 0
+			j =3D 0
+			while  ( j < (AllowCells.length - 1) && charOK =3D=3D 0)
+			{
+
+				var curChars =3D AllowCells[j].substring(1, AllowCells[j].length)
+				var MinMax =3D curChars.split('-')
+				if (MinMax.length =3D=3D 1)
+				{
+					//one character
+					if (curStr.charCodeAt(c) =3D=3D MinMax[0])
+						charOK =3D 1
+				=09
+				}
+				else
+				{
+					//range
+					if (curStr.charCodeAt(c) >=3D MinMax[0] && curStr.charCodeAt(c) =
+<=3D MinMax[1])
+						charOK =3D 1
+				=09
+				}
+				j++
+			}
+			if (charOK =3D=3D 0)
+			{
+				strOK =3D 0
+			}
+			c++
+		}
+		if (strOK =3D=3D 0)
+		{
+			alert (strErrChars)
+			El.focus()
+			return false;
+		}
+	}
+	if (trim(ForbiddenChars + '').length > 0)
+	{
+		var ForbiddenCells =3D (ForbiddenChars + '').split(']')
+		strOK =3D 1
+		c =3D 0
+		while (c< curStr.length && strOK =3D=3D 1)
+		{
+	=09
+			charOK =3D 1
+			j =3D 0
+			while  ( j < AllowCells.length && charOK =3D=3D 1)
+			{
+				var curChars =3D AllowCells[j].substring(1, AllowCells[j].length)
+				var MinMax =3D curChars.split('-')
+				if (MinMax.length =3D=3D 1)
+				{
+					//one character
+					if (curStr.charCodeAt(c) =3D=3D MinMax[0])
+						charOK =3D 0
+				}
+				else
+				{
+					//range
+					if (curStr.charCodeAt(c) >=3D MinMax[0] && curStr.charCodeAt(c) =
+<=3D MinMax[1])
+						charOK =3D 0
+				}
+				j++
+			}
+			if (charOK =3D=3D 0)
+				strOK =3D 0
+			c++
+		}
+		if (strOK =3D=3D 0)
+		{
+			alert (strErrChars)
+			El.focus()
+			return false;
+		}
+	}=09
+	return true;
+}
+function WinWidth(Per)
+{
+	return Per/100 * screen.width
+}
+function WinHeight(Per)
+{
+	return Per/100 * screen.height
+}
+function findRootChildFrame( name )=20
+{
+	var currentFrame =3D this;
+	var index =3D 0; // prevents endless loop
+	while( currentFrame.name !=3D name && currentFrame !=3D null && index < =
+50 )=20
+	{
+		if( currentFrame.frames[ name ] !=3D null ) currentFrame =3D =
+currentFrame.frames[ name ];
+		else if( currentFrame.parent !=3D currentFrame ) currentFrame =3D =
+currentFrame.parent;
+		else if( currentFrame.window.opener !=3D null ) currentFrame =3D =
+currentFrame.window.opener;
+		index++;
+	}
+	return currentFrame;
+}
+
+function toggleProgressBar( on, parentName )=20
+{
+	var name =3D ( parentName =3D=3D null ? 'ProgressBar' : parentName );
+	var fs =3D findRootChildFrame( name );
+	var rows =3D fs.rows.split( ',' );
+	rows[ rows.length - 1 ] =3D ( on ? 20 : 0 );
+	fs.rows =3D rows.join();
+}
+
+function SendRequest(Page, Data)
+{
+	=09
+	if (window.ActiveXObject)
+	{
+		var xmlhttp =3D new ActiveXObject("Microsoft.XMLHTTP")
+		xmlhttp.open ("POST", Page, false);
+		xmlhttp.send(Data)	=09
+	=09
+		return xmlhttp.responseText
+	}
+	else
+	{
+		var xmlhttp =3D new XMLHttpRequest();
+		xmlhttp.open ("POST", Page, false);
+		xmlhttp.send('');
+	=09
+	=09
+		return xmlhttp.responseText
+	}
+=09
+}
+
+function SetSiteLanguage(Lang)
+{
+	document.cookie=3D'cetLanguage=3Dsite=3D' + Lang + ';'
+}
+
+function SetCookieJs2(MainCookie,CookieName,CookieValue)
+{
+	var NewCookie
+	var aCookie =3D document.cookie.split("; ");
+	prop_found=3D0
+	for (var i=3D0; i < aCookie.length; i++)
+	{
+		var pair =3D aCookie[i].split("=3D");
+		if (MainCookie =3D=3D pair[0])
+		{
+			prop_found=3D1
+			if (aCookie[i].indexOf(CookieName+'=3D') !=3D -1)
+				return
+			else
+				=
+NewCookie=3DaCookie[i].substr(0,aCookie[i].length)+'&'+CookieName+'=3D'+e=
+scape(CookieValue)+';'
+		}
+    }
+    if (!prop_found)
+		document.cookie=3DMainCookie + '=3D'+CookieName+'=3D' + =
+escape(CookieValue) + ';path=3D/;'=20
+	else
+		document.cookie=3D NewCookie + ';path=3D/;'=20
+}
+function OpenLESkin(Path,NewWin)
+{
+	try{
+	if(NewWin=3D=3D1)
+		=
+newWin=3Dwindow.open(Path,'InfoMode','top=3D0,left=3D0,width=3D'+(screen.=
+width-10)+',height=3D'+(screen.height-60)+',resizable=3Dyes')
+	else
+		parent.parent.parent.frames['vcMain'].location.href=3DPath
+	}
+	catch(e)
+	{
+		try{
+		=
+top.opener.top.parent.parent.parent.frames['vcMain'].location.href=3DPath=
+
+		top.close();
+		}
+		catch(e)
+		{
+			alert(e.description)
+		}
+	=09
+	}
+}
+function DateOBjFromStrDate(d)
+{
+	var arrDate =3D d.split('/')
+	if (arrDate.length < 3)
+		return ''
+	var d =3D arrDate[0]
+	var m =3D arrDate[1]
+	var y =3D arrDate[2]
+	return new Date(y,m-1,d)
+}
+/*function getCookieVal (offset)=20
+{=20
+	var endstr =3D document.cookie.indexOf (";", offset);=20
+	if (endstr =3D=3D -1)=20
+	endstr =3D document.cookie.length;=20
+	return unescape(document.cookie.substring(offset, endstr));=20
+} */
+function GetOperatingSystem()
+{
+
+	var str=3Dnavigator.appVersion
+	var oper_sys=3Dstr.split(";")[2]
+	var oper_sys_final=3Doper_sys.split(")")[0]
+	oper_sys_final=3D oper_sys_final.slice(1)=09
+	return oper_sys_final;
+}
+function SetScreenSize(heght,width)
+{
+	opSys =3D GetOperatingSystem()
+	var span =3D document.all['SpanForHeight']
+=09
+	if (span!=3Dnull)
+	{
+		if ( opSys =3D=3D'Windows NT 5.1')
+			h =3D screen.availHeight-heght-18
+		else
+			h =3D screen.availHeight-heght
+		if ( width!=3D-1)
+		{
+			w =3D screen.availWidth-width
+			//w=3D150
+			try{
+			span.style.width =3D w
+			}catch(e)
+			{
+			}
+		}
+		try{
+		//h=3D200
+		span.style.height =3D h
+		}catch(e)
+		{
+		}
+
+	}
+}
+
+function sendXml( page, message )=20
+{
+	if(isE)
+		var xmlhttp =3D new ActiveXObject( 'Microsoft.XMLHTTP' );
+	else
+		var xmlhttp =3D new XMLHttpRequest();=20
+=09
+	xmlhttp.open( 'GET', page, false );
+	if( message =3D=3D null || message =3D=3D '' ) message =3D =
+'<root></root>';
+		xmlhttp.send( message );
+	return xmlhttp.responseText;
+}
+
+function ExportEvaluationData(departmentID, groupID, courseID, =
+userIDList, searchStr)
+{
+	var page =3D "/HighLearnNet/ShaharSheli/ShaharSheliActions.aspx";
+	var request =3D 'ActionType=3DExportEvalData&DepartmentID=3D' + =
+departmentID + '&GroupID=3D' +
+				  groupID + '&CourseID=3D' + courseID + '&UserIDList=3D' + =
+userIDList +
+				  '&SearchStr=3D' + escape(searchStr);
+	var result =3D sendXmlPost( page, request, null )
+	return result;
+}
+
+function sendXmlPost( page, request, message )=20
+{
+	if(isE)
+		var objHTTP =3D new ActiveXObject("Microsoft.XMLHTTP");
+	else
+		var objHTTP =3D new XMLHttpRequest();=20
+   =20
+    var httpMethod =3D "POST";
+    objHTTP.open(httpMethod, page, false);
+    objHTTP.setRequestHeader("Content-Type", =
+"application/x-www-form-urlencoded");
+    objHTTP.send(request);
+    var reply =3D objHTTP.responseText;
+    return reply;
+}
+
+function SendXmlHttpRequest(page)
+{
+	var xmlhttp =3D new ActiveXObject( 'Microsoft.XMLHTTP' );
+	xmlhttp.Open( 'GET', page, false );
+	xmlhttp.Send();
+	var result =3D xmlhttp.responseText;
+	return result;
+}
+function DateSelector(Element)
+{
+			=09
+   remote=3Dwindow.open('/DateToReport.asp?Date=3D' + escape( =
+document.all[ Element ].value ) + '&Element=3D'+ escape( Element =
+),'Calendar', =
+'width=3D188,height=3D220,resizable=3Dno,scrollbars=3Dno,status=3D0');
+	if (remote !=3D null)
+	{
+		if (remote.opener =3D=3D null)
+			remote.opener =3D self;
+			remote.focus();
+	}
+}
+		=09
+
+function legalDate(strDate)
+{
+	var err2 =3D 0;
+	var arrDate =3D strDate.split('/')
+	if (arrDate.length < 3)
+	{
+		return false
+	}
+	else
+	{
+		//init the values
+		var d =3D arrDate[0]
+		var m =3D arrDate[1]
+		var y =3D arrDate[2]
+		if (d.length =3D=3D 1)
+			d =3D '0' + d
+		if (m.length =3D=3D 1)
+			m =3D '0' + m
+		if (y.length =3D=3D 2)
+			y =3D '20' + y
+		if (d.length !=3D 2 || m.length !=3D 2 || y.length !=3D 4)
+			return false
+
+		//check the values
+		if (isNaN(d) || d<0 || d.indexOf(',')!=3D-1 || d.indexOf('.')!=3D-1 || =
+d.indexOf('-')!=3D-1) err2 =3D 1
+		if (isNaN(m) || m<0 || m.indexOf(',')!=3D-1 || m.indexOf('.')!=3D-1 || =
+m.indexOf('-')!=3D-1) err2 =3D 1
+		if (isNaN(y) || y<0 || y.indexOf(',')!=3D-1 || y.indexOf('.')!=3D-1 || =
+y.indexOf('-')!=3D-1) err2 =3D 1
+		if (m<1 || m>12) err2 =3D 1
+		if (d<1 || d>31) err2 =3D 1
+		if (y<1990 || y>3000) err2 =3D 1
+		//check months with 30 days
+		if (m=3D=3D4 || m=3D=3D6 || m=3D=3D9 || m=3D=3D11)
+		{
+			if (d=3D=3D31) err2=3D1
+		}
+		// february, leap year
+		if (m=3D=3D2)
+		{
+			// feb
+			var feb=3DparseInt(y/4)
+			if (isNaN(feb))=20
+			{
+				err2=3D1
+			}
+
+			if (d>29) err2=3D1
+			if (d=3D=3D29 && ((y/4)!=3DparseInt(y/4))) err2=3D1
+		}
+		if (err2 !=3D 0)
+			return false
+	}	=09
+	return true
+}
+
+// Initializes a new instance of the StringBuilder class
+// and appends the given value if supplied
+function StringBuilder(value)
+{
+=09
+    this.strings =3D new Array("");
+    this.append(value);
+}
+
+// Appends the given value to the end of this instance.
+StringBuilder.prototype.append =3D function (value)
+{
+	if (value)
+    {
+        this.strings.push(value);
+    }
+}
+
+// Clears the string buffer
+StringBuilder.prototype.clear =3D function ()
+{
+	this.strings.length =3D 1;
+}
+
+// Converts this instance to a String.
+StringBuilder.prototype.toString =3D function ()
+{
+    return this.strings.join("");
+}
+
+function param( ExtraParam ) {
+	var width =3D arguments[ 1 ];
+=09
+	var params =3D "";
+	w =3D ( arguments[ 1 ] ? arguments[ 1 ] : window.screen.width * 0.9 ); =
+// width
+	h =3D ( arguments[ 2 ] ? arguments[ 2 ] : window.screen.height * 0.8 ); =
+// height
+	l =3D ( arguments[ 3 ] ? arguments[ 3 ] : ( window.screen.width - w ) / =
+2 );// left
+	t =3D ( arguments[ 4 ] ? arguments[ 4 ] : ( window.screen.height - h ) =
+/ 4 );// top
+	//t =3D ( window.screen.height - h ) / 4; // top
+=09
+	if( ExtraParam.indexOf( "TB" ) !=3D -1 ) { // toolbar=3Dyes
+		h =3D h - 60;
+		params =3D params + "toolbar=3Dyes,";
+	}
+	if( ExtraParam.indexOf( "MB" ) !=3D -1 ) { // menubar=3Dyes
+		h =3D h - 30;
+		params =3D params + "menubar=3Dyes,";
+	}=09
+	if( ExtraParam.indexOf( "LO" ) !=3D -1 ) { // location=3Dyes
+		h =3D h - 30;
+		params =3D params + "location=3Dyes,";
+	}
+	if( ExtraParam.indexOf( "ST" ) !=3D -1 ) { // status=3Dyes
+		h =3D h - 30;
+		params =3D params + "status=3Dyes,";
+	}
+	if( ExtraParam.indexOf( "RE" ) !=3D -1 ) { // resizable=3Dyes
+		params =3D params + "resizable=3Dyes,";
+	}
+	if( ExtraParam.indexOf( "SB" ) !=3D -1 ) { // scrollbars=3Dyes
+		params =3D params + "scrollbars=3Dyes,";
+	}
+	if( ExtraParam.indexOf( "FS" ) !=3D -1 ) { // fullscreen=3Dyes
+		params =3D params + "fullscreen=3Dyes,";
+	}
+	params =3D params + "height=3D" + h + ",width=3D" + w + ",top=3D" + t + =
+",left=3D" + l;
+	return( params );
+}
+	function focus( win ) {
+	if( win ) win.focus();
+}
+function cmdItemEdit(SubjectId,ItemId,HeaderType,CourseId) {
+	var bareketPath =3D '/bareket/';
+	var params =3D 'RE,SB';
+	if( HeaderType !=3D 60 && HeaderType !=3D 61) params +=3D ',TB';
+	if(HeaderType =3D=3D 34)
+	{
+	AddWindow =3D window.open(=20
+			bareketPath + 'EditItemByType.asp'=20
+				+ '?sid=3D' + SubjectId
+				+ '&iid=3D' + ItemId
+				+ '&IH_Type=3D' + HeaderType
+				+ '&vcCourseID=3D' + CourseId,
+			'AddWindow',=20
+			=
+'toolbar=3Dyes,resizable=3Dyes,scrollbars=3Dyes,height=3D630,width=3D500,=
+top=3D38,left=3D200');
+		}=09
+		else if(HeaderType =3D=3D 36)=09
+			{
+			AddWindow =3D window.open(=20
+			bareketPath + 'EditItemByType.asp'=20
+				+ '?sid=3D' + SubjectId
+				+ '&iid=3D' + ItemId
+				+ '&IH_Type=3D' + HeaderType
+				+ '&vcCourseID=3D' + CourseId,	=09
+			'AddWindow',=20
+			=
+'resizable=3Dno,scrollbars=3Dyes,height=3D410,width=3D650,top=3D58,left=3D=
+200');
+		}
+		else if (HeaderType =3D=3D 1)
+	{=09
+	     AddWindow =3D window.open(=20
+			bareketPath + 'EditItemByType.asp'=20
+				+ '?sid=3D' + SubjectId
+				+ '&iid=3D' + ItemId
+				+ '&IH_Type=3D' + HeaderType
+				+ '&vcCourseID=3D' + CourseId,
+	           'AddWindow',=20
+		        param( params ));
+	=09
+		 AddWindow.moveTo( 0, 0 );
+		 AddWindow.resizeTo( screen.availWidth, screen.availHeight );
+		}
+		else
+		{
+         AddWindow =3D window.open(=20
+			bareketPath + 'EditItemByType.asp'=20
+				+ '?sid=3D' + SubjectId
+				+ '&iid=3D' + ItemId
+				+ '&IH_Type=3D' + HeaderType
+				+ '&vcCourseID=3D' + CourseId,
+				'AddWindow',=20
+			param( params ));
+			}
+			focus( AddWindow );
+
+			=09
+}
+
+function openmainwin(iid,ObjType)
+{
+
+ AddWindow =3D window.open
+ ('/HighLearnNet/kb/ListDeleteFromMain.aspx'
+ + '?iid=3D' +iid=20
+ + '&ObjType=3D' +ObjType=20
+ ,'DeleteFromList'
+ ,'height=3D400,width=3D500,top=3D58,left=3D200');
+=20
+}
+
+/////////////////////////////////////////////////////////////////////////=
+////////////
+// Check the BROWSER :
+function check_Brow()
+{
+	str=3Dnavigator.appVersion
+	brow_sys=3Dstr.split(";")[1]
+	version=3D brow_sys.split(" ")[2]
+	client_browser=3Dnavigator.appName +" "+version=20
+	// Disable Internet Explorer 5.5 : (version!=3D"5.5" &&)=20
+	if(navigator.appName!=3D"Microsoft Internet Explorer" || =
+version.split(".")[0]!=3D"6" && version.split(".")[0]!=3D"7")
+	  {=09
+			// NOT IE or less then IE 6.0 :												=09
+			return 0
+	  }
+	else
+	  {
+			return 2
+	  }
+}
+/////////////////////////////////////////////////////////////////////////=
+///////////
+// Check Operating System :
+function check_OpSys()
+{
+	str=3Dnavigator.appVersion
+	oper_sys=3Dstr.split(";")[2]
+	oper_me=3D""
+	try{oper_me =3D str.split(";")[3]}catch(e){}
+	oper_sys_final=3Doper_sys.split(")")[0]
+	oper_sys_final=3D oper_sys_final.slice(1)
+	if(oper_sys_final =3D=3D "Macintosh")
+	{
+		// Mackintosh =3D NOT GOOD
+		return 0
+	}
+	else
+	{
+		if(oper_sys_final.split(" ")[1]=3D=3D"98" || oper_sys_final.split(" =
+")[1]=3D=3D"NT")
+		{
+			// WINDOWS 98 and higher : GOOD
+			return 2
+		}
+		else
+		{
+			// less then WINDOWS 98 : NOT GOOD
+			return 0
+		}
+	}
+	if (oper_sys_final=3D=3D"Windows NT 5.0")
+		//document.all['operatingTD'].innerText=3D "Windows 2000"
+		return 2					//  GOOD
+	else if(oper_sys_final=3D=3D"Windows NT 5.1")
+		//document.all['operatingTD'].innerText=3D "Windows XP"
+		return 2					//  GOOD
+	else if (oper_sys_final=3D=3D"Windows 98" && oper_me=3D=3D"Win 9x =
+4.90")=20
+		//document.all['operatingTD'].innerText=3D "Windows Me"
+		return 2					//  GOOD
+	else
+		document.all['operatingTD'].innerText=3D oper_sys_final
+}
+/////////////////////////////////////////////////////////////////////////=
+//////////////
+// Check Platform :
+function check_Platform()
+{
+	if(navigator.platform !=3D opt[2])
+	{	// Platform =3D WIN32 :  GOOD
+		return 0
+	}
+	else
+	{	// Platform else : NOT GOOD
+		return 2
+	}
+}
+/////////////////////////////////////////////////////////////////////////=
+///////////
+// Check Screen Resolution :
+function check_Resolution()
+{
+	client_resolution=3Dscreen.width + "*" + screen.height
+	if(client_resolution !=3D opt[3])
+	{
+		if(screen.width =3D=3D opt[6] && screen.height =3D=3D opt[7])
+			return 2					// GOOD
+		else if(screen.width > opt[6] && screen.height > opt[7])
+			return 1					// OK (less then GOOD)
+		else
+			return 0					// NOT GOOD
+	}
+	else
+	{	// GOOD :
+		return 2
+	}
+}
+/////////////////////////////////////////////////////////////////////////=
+/////////////
+// Check Cookies :
+function check_Cookie()
+{
+	if(navigator.cookieEnabled)
+	{
+		return 2
+	}
+	else
+	{
+		return 0
+	}
+}
+/////////////////////////////////////////////////////////////////////////=
+////////////
+// Check Media Player :
+function check_Media()
+{
+	var obj =3Ddocument.all("LoginLinksClientCaps")
+	var client_media;
+	=
+if(obj.isComponentInstalled("{22D6F312-B0F6-11D0-94AB-0080C74C7E95}","Com=
+ponentID") || =
+obj.isComponentInstalled("{6BF52A52-394A-11d3-B153-00C04F79FAA6}","Compon=
+entID"))
+		return 2
+	else
+		return 0
+}
+/////////////////////////////////////////////////////////////////////////=
+//////////
+// Check Java Virtual Machine :
+function check_JVM()
+{
+	var obj =3Ddocument.all("LoginLinksClientCaps")
+=09
+	var client_JVM =3D obj.isComponentInstalled("MSJava", "progid") || =
+obj.isComponentInstalled("{8AD9C840-044E-11D1-B3E9-00805F499D93}","Compon=
+entID")|| =
+obj.isComponentInstalled("{08B0E5C0-4FCB-11CF-AAA5-00401C608500}","Compon=
+entID")
+	if(client_JVM)
+	{
+		return 2
+	}
+	else
+	{
+		return 0
+	}
+}
+/////////////////////////////////////////////////////////////////////////=
+//////////
+// Check Web :
+function check_Web()
+{
+	var obj =3Ddocument.all("LoginLinksClientCaps")
+=09
+	//var client_web=3D =
+obj.isComponentInstalled("{73fa19d0-2d75-11d2-995d-00c04f98bbc9}","clsid"=
+)
+	var client_web=3D =
+obj.isComponentInstalled("{08B0E5C0-4FCB-11CF-AAA5-00401C608500}","compon=
+entID")
+	if(client_web)
+	{
+		return 2
+	}
+	else
+	{
+		return 0
+	}
+}
+//////////////////////////////////////////////////////////////////////
+// Check For PopUp Blocker:
+function check_PopUpBlocker()
+{ =20
+=09
+	//var oWin =3D =
+window.open("","testpopupblocker","width=3D1,height=3D1,top=3D-3000,left=3D=
+-3000");
+	var oWin =3D =
+window.open("","","width=3D10,height=3D10,top=3D-5000,left=3D-5000");
+	//oWin.moveTo( 0, 0 );
+	//oWin.resizeTo( screen.availWidth, screen.availHeight );
+	//oWin.moveTo(-200,-200)
+	if ( oWin=3D=3Dnull || typeof(oWin)=3D=3D"undefined" )=20
+	{
+		PopUpOn =3D true
+		return 0
+	}=20
+	else=20
+	{
+	=09
+		PopUpOn =3D false
+		oWin.close();
+		return 2
+	}=20
+}
+/////////////////////////////////////////////////////////////////////////=
+/////////////
+
+// Status of all checks :
+function check_Status()
+{
+=09
+	status=3D0
+	if(check_Brow()=3D=3D0 ||check_OpSys()=3D=3D0 ||  =
+check_Platform()=3D=3D0 || check_Resolution()=3D=3D0 =
+||check_Cookie()=3D=3D0 || check_Media()=3D=3D0 || check_JVM()=3D=3D0 || =
+check_Web()=3D=3D0 || check_PopUpBlocker()=3D=3D0 )
+		status =3D 1
+=09
+	if (status>0)
+	{
+		animation_Sys_Chk(index)
+		interval_Status_ID =3D setTimeout('clear_Interval()',10000)
+	}
+=09
+}
+/////////////////////////////////////////////////////////////////////////=
+//////////////
+// Animation for "System Check" Button : (in case of bad status)
+function animation_Sys_Chk(x)
+{
+	if(index =3D=3D 0)
+	{
+		if (interval_Animation_ID !=3D null)
+			clearTimeout(interval_Animation_ID)
+		if (x =3D=3D 0)
+		{
+			document.all['sys_chk'].style.visibility =3D "visible"
+			interval_Animation_ID =3D setTimeout('animation_Sys_Chk(1)',500)
+		}
+		else if (x=3D=3D1)
+		{
+			document.all['sys_chk'].style.visibility =3D "hidden"
+			interval_Animation_ID =3D setTimeout('animation_Sys_Chk(0)',500)
+		}
+	}
+}
+/////////////////////////////////////////////////////////////////////////=
+//////////////
+function clear_Interval()
+{
+	index =3D 3							// Stop Loop Value
+	clearTimeout(interval_Status_ID)
+	clearTimeout(interval_Animation_ID)
+	document.all['sys_chk'].style.visibility =3D "visible"
+}
+/////////////////////////////////////////////////////////////////////////=
+/////////////
+// Parameter for SchoolCity : <body =
+onload=3D"chk_SchoolCity_Param(schoolCity)">
+	function chk_SchoolCity_Param(schoolCity)
+	{
+		if(schoolCity =3D=3D 1)
+			check_Status()
+	}
+------=_NextPart_000_0000_01C945A5.B996FBD0
+Content-Type: multipart/alternative;
+	boundary="----=_NextPart_001_0003_01C945A5.B9996CD0"
+
+
+------=_NextPart_001_0003_01C945A5.B9996CD0
+Content-Type: text/html;
+	charset="windows-1255"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://e-learn.jct.ac.il/bareket/ShowItemByType.asp?random=2566&sid=40169&iid=40067&sentfrom=ItemMenu.asp&vcCourseGuid=C59313594929B645BB0ABC9D02CB2EB5&vcCourseID=24232&headertype=2
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN">
+<HTML><HEAD><TITLE>Serial UART, an in depth tutorial</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1255">
+<SCRIPT language=3Djavascript>
+
+function SetFocus()
+{
+	try{
+	window.focus();
+	}
+	catch(e)
+	{}
+}
+</SCRIPT>
+
+<META content=3D"MSHTML 6.00.6000.16735" =
+name=3DGENERATOR></HEAD><FRAMESET=20
+frameSpacing=3D0 rows=3D0,*,0,0,0 frameBorder=3D0><FRAME =
+name=3DPermission=20
+src=3D"http://e-learn.jct.ac.il/bareket/CleanPermission.asp?random=3D2566=
+&amp;sid=3D40169&amp;iid=3D40067&amp;sentfrom=3DItemMenu.asp&amp;vcCourse=
+Guid=3DC59313594929B645BB0ABC9D02CB2EB5&amp;vcCourseID=3D24232&amp;header=
+type=3D2"=20
+scrolling=3Dyes><FRAME name=3DMainPer=20
+src=3D"http://e-learn.jct.ac.il/bareket/ItemFrames.asp?IH_Type=3D2&amp;ra=
+ndom=3D30824&amp;sid=3D40169&amp;iid=3D40067&amp;AddLinkBoard=3Dno&amp;se=
+ntfrom=3DItemMenu.asp&amp;user=3D&amp;rid=3D&amp;qid=3D&amp;TopSubject=3D=
+40169&amp;eid=3D&amp;FromPortal=3D&amp;vcCourseGUID=3D0xC59313594929B645B=
+B0ABC9D02CB2EB5&amp;FromLinkBoard=3D&amp;GO_BACK=3D&amp;LinkedItem=3D&amp=
+;VcCourseName=3D&amp;VcCourseID=3D24232&amp;CourseWareID=3D&amp;RealItemI=
+D=3D40067&amp;alone=3D&amp;AssignmentID=3D&amp;newwin=3D&amp;Back2Eunit=3D=
+&amp;OptionID=3D&amp;OrigCourseGUID=3D0xC59313594929B645BB0ABC9D02CB2EB5&=
+amp;FromResponses=3D"></FRAMESET></HTML>
+
+------=_NextPart_001_0003_01C945A5.B9996CD0
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://e-learn.jct.ac.il/bareket/CleanPermission.asp?random=2566&sid=40169&iid=40067&sentfrom=ItemMenu.asp&vcCourseGuid=C59313594929B645BB0ABC9D02CB2EB5&vcCourseID=24232&headertype=2
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE></TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1255">
+<SCRIPT language=3Djavascript=20
+src=3D"http://e-learn.jct.ac.il/js/common.js"></SCRIPT>
+
+<SCRIPT language=3Djavascript>
+
+	function Clean()
+	{
+=09
+	var Path
+	Path=3D"/upload/24232/library/40120/40169/I40067";
+	var count =3D0
+	try{
+		if(document.all['FullWinItem'].value=3D=3D1)
+		{
+		=
+if(parent.opener.parent.parent.parent.frames['vcTop'].document.all['Full'=
+].value=3D=3D"" || =
+parent.opener.parent.parent.parent.frames['vcTop'].document.all['Full'].v=
+alue=3D=3D'/upload/24232/library/40120/40169/I40067')
+				{
+				=
+parent.opener.parent.parent.parent.frames['vcTop'].document.all['Full'].v=
+alue=3D'/upload/24232/library/40120/40169/I40067'
+				}
+				else
+				{
+				=
+parent.opener.parent.parent.parent.frames['vcTop'].document.all['Full'].v=
+alue=3Dparent.opener.parent.parent.parent.frames['vcTop'].document.all['F=
+ull'].value+',/upload/24232/library/40120/40169/I40067'
+				}
+	=09
+		document.all['FullWinItem'].value=3D0;
+		return;
+		}
+	}catch(e){}
+	try{
+		=
+if(parent.opener.parent.parent.parent.frames['vcTop'].document.all['Full'=
+].value!=3D""){
+		=
+Path=3DPath+','+parent.opener.parent.parent.parent.frames['vcTop'].docume=
+nt.all['Full'].value;
+		}
+	}catch(e){}
+	=
+try{parent.opener.parent.parent.parent.frames['vcTop'].document.all['Full=
+'].value=3D""}catch(e){}
+=09
+		=
+try{parent.parent.parent.frames['ClearC'].window.location.href=3D'CleanCo=
+okie.asp?path=3D'+Path+'&Clean=3Dyes'}catch(e){count++}
+		=
+try{parent.window.opener.parent.parent.parent.frames['ClearC'].window.loc=
+ation.href =
+=3D'CleanCookie.asp?path=3D'+Path+'&Clean=3Dyes'}catch(e){count++}
+		=
+try{parent.opener.parent.parent.parent.parent.parent.opener.parent.parent=
+.parent.frames['ClearC'].window.location.href =
+=3D'CleanCookie.asp?path=3D'+Path+'&Clean=3Dyes'}catch(e){count++}
+=09
+	if (count =3D=3D 1 || count > 2)
+	{
+		try{
+		CurrentPage =3D 'CleanCookieXmlHttp.asp'
+		Data =3D 'path=3D'+ Path=20
+		sendXmlPost( CurrentPage, Data, null =
+)//('CleanCookie.asp?path=3D'+Path+'&Clean=3Dyes', "")
+		}catch(e){}
+	}
+	}
+	</SCRIPT>
+
+<META content=3D"MSHTML 6.00.6000.16735" name=3DGENERATOR></HEAD>
+<BODY onbeforeunload=3DClean()>
+<FORM name=3DFullWinItems action=3D""><INPUT type=3Dhidden value=3D0 =
+name=3DFullWinItem>=20
+</FORM></BODY></HTML>
+
+------=_NextPart_001_0003_01C945A5.B9996CD0--
+
+------=_NextPart_000_0000_01C945A5.B996FBD0
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: 7bit
+Content-Location: http://e-learn.jct.ac.il/bareket/ItemBar.asp?OptionID=&random=24885&tid=&eid=&iid=40067&qid=&mode=&cmode=&sid=40169&order=&user=&sentfrom=ItemMenu.asp&DeleteSessions=&vcCourseID=24232&vcCourseName=&vcCourseGuid=0xC59313594929B645BB0ABC9D02CB2EB5&AssignmentID=&AddLinkBoard=no&newwin=&relatedItem=&ItemCount=&OrderID=&FinalTest=&FinalTestMode=&WithBar=
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1255">
+<META content="MSHTML 6.00.6000.16735" name=GENERATOR></HEAD>
+<BODY></BODY></HTML>
+
+------=_NextPart_000_0000_01C945A5.B996FBD0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.google.com/logos/Logo_25wht.gif
+
+R0lGODlhSwAgAPfYAAAAhAADbAAPuQAMmwAJcgAPowAbxwAZtgAbqQAUeAAnxAAtzwAouQEglwsi
+cyw7cXR7lQAx1wAuxwAoqRM5uBUyixk6o0BOe2BqiquzzShGmjNKj0hZjHaHtYeVvIKLo7K4ygE4
+vhhFsShSt0BhtVlzsWR/wVRpn2h6qG97mqKtyJOarM7Y8K2yvwpK1HWRz5Cq4uHk6w5Y5jFiyUp3
+zmuT52SH0WuO2L/F0eLo9La4vPn7/+Dh43mb2Iek24KbyJuy27K90cbO3FqJ1nSj8ZKt2qu93LXI
+5snV6dfc5L3O5d3h5fL1+Pz9/t3e3+vx9fr9/+Xo6unt7/b4+dTb3fL29vz//8/R0fn++6q0rKaw
+qABmAABgAAFtARhIGD+HPzZeNn/Gf47DjpzTnGV+ZZGokcHcwYmYiZ+pn+n26djk2Pf59/Hy8e7v
+7hWBFGC8X4DIf4jJhZLLkOTm4f//+f7++/r69/////b29Nvb2fr6+fTy6PLWZNrKiee2CvDEKPDc
+kPa/CfC7E+OyEt/c0uSmAIxtGMuoQMqzcKCRZdjOsb+5qLOvo/qyAM6VALuKCIZoH766sPj28aJw
+AXRQAuzq5t7c2I1bAO7s6enk3a+lmfn39dfV08fGxebTyfbz8uKrm9rQzeTc2ty0rOJ7adnJxttP
+O+lZRdBvYeiUh+axqdQaBdYpE8taS8WJgujAu8mtqq8QAMITAck2J7g2KbZRSLJcVa9uaNKUj/DP
+zNQLAIg3Mp1CPIdKRteinta7uccGAIQcF2wfHH5MSoxgXtGsq7KXlr2lpNcAANQDALwBALIAAKcA
+AJMDAHUAAFgAAIwDAWgFA3gYF8a3t9nT0/35+erp6ezs7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAANgALAAAAABLACAA
+AAj/ALEJHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3IgQypQmHBeuMSPnjRs1GKcUoUGCxIgZ
+N47cCWkQSxoxbshgVCICRZKZeoJYWNBACE2DY7qcuXhkAoiDDx60OVow6dKKSUJ8QIhDD9WCcrqg
+sTgkAZ2Hm1SlSjVqk8E9gOIq8lrwCQsqTqgYYYFNzpaxA1+tfSVQh2EdPHQUXOLiwsNStFz9ciWL
+FSyCfQ4pUoTIjyBFA+30MNHBhQwRHXJgi7NFi8BPrW4Vu6WL1hNsig8XNBICg8NQsUINdAJM2TSB
+fR7tGEioUKFO2O4MOSHQCYMGTgSydm0l9kBczIbh/x6vmCARBr4ZVjG1q6CrZNKwzfGjqSCiRpCw
+KQlxZeAPA45hAwcXrr3CjBQCZdKKMMYs1IMEDzQEyirEFCSKLs7EAIgjkRRESCOXtEFEAdAJtIQC
+DggExxZZYEMKNNe8gootxzEURAQJ7GHQE0gksQQSd5ACjHgE3cFKNNPw8QgjBUERyCWc1KAABKEh
+EOCALZ7SzDG+iPIQGwsgsBVBOdxQAg0uaIANKskIY5Ap0VDDhyOJGPQHJZUIIUACbAgkRADZYRMG
+Fy22skx9EZlgQAOWEAQSNj8cQOUoyEBDRUGzPINNH/gZNAglAnUQQAVHKDECDgOF0Ro2uCATzKMP
+ff9iwQEUxGBQERNQiU0ty/RCECbQNMiEI0sSlMkkiwxkTQZojqldFy2yoYwythQ000JRJFCAAkYU
+1EMA6VUBDTS4DESLrwIpMskkmQh0xyN1FuRDBBsQ9AYXVx3TzDKzeIJNLrhU05ATHBAwwAg2+ADD
+CxpwgGp1vThjiyu13IIFQYsYMgkimSFiEBM+HCAACVNgo8cXXoBRxsXGROMMNM3wkgtEmLTwAQoe
+qCDEtQW18csvkiCUiSKe9DlQHUWQUIIHHzhggAZ1DHTHGgNZQU0pXn4lER5DaGCrQNZYMMAKWtME
+xAR5FCRFAemVvRENAzRaUANku72RCQJwsFsFZ9kkrZEdGwAwwQ1AAGEDCdf4HRIOKXBwQgdBKC75
+5JRXbvnlNAUEADs=
+
+------=_NextPart_000_0000_01C945A5.B996FBD0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://e-learn.jct.ac.il/upload/24232/library/40120/40169/I40067/serial-uartdepth.mht.htm
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" =
+"http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML lang=3Den><HEAD><TITLE>Serial UART, an in depth tutorial</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3DISO-8859-1">
+<META content=3Dindex,follow,noarchive name=3Drobots>
+<META content=3D"Lammert Bies =A9 1997-2006" name=3Dauthor>
+<META content=3D"MSHTML 6.00.6000.16735" name=3DGENERATOR>
+<META=20
+content=3D"lammert, bies, RS232, RS422, RS485, RS-232, RS-422, RS-485, =
+serial, communication, handshake, loopback, null, modem, 8250, 8250A, =
+16450, 16550, 16550A, 16550D, signal, level, signal level"=20
+name=3Dkeywords>
+<META=20
+content=3D"The serial UART. Detailed information about the use and =
+programming of UARTs for serial communications."=20
+name=3Ddescription>
+<STYLE type=3Dtext/css>BODY {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 20px; MARGIN: =
+0px; PADDING-TOP: 0px
+}
+BODY {
+	FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif
+}
+TD {
+	FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif
+}
+TH {
+	FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif
+}
+A {
+	FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif
+}
+H1 {
+	FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif
+}
+H2 {
+	FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif
+}
+H3 {
+	FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif
+}
+CAPTION {
+	FONT-FAMILY: Verdana,Arial,Helvetica,sans-serif
+}
+BODY {
+	FONT-WEIGHT: normal; COLOR: #000; TEXT-DECORATION: none
+}
+P {
+	FONT-WEIGHT: normal; COLOR: #000; TEXT-DECORATION: none
+}
+TD {
+	FONT-WEIGHT: normal; COLOR: #000; TEXT-DECORATION: none
+}
+TH {
+	FONT-WEIGHT: bold
+}
+A {
+	COLOR: #039; TEXT-DECORATION: underline
+}
+A:hover {
+	COLOR: #09f
+}
+A:active {
+	COLOR: #09f
+}
+H1 {
+	COLOR: #039; TEXT-DECORATION: none
+}
+H2 {
+	COLOR: #039; TEXT-DECORATION: none
+}
+H3 {
+	COLOR: #039; TEXT-DECORATION: none
+}
+.tabh1 {
+	COLOR: #039; TEXT-DECORATION: none
+}
+.tabh2 {
+	COLOR: #039; TEXT-DECORATION: none
+}
+.tabh3 {
+	COLOR: #039; TEXT-DECORATION: none
+}
+H1 A {
+	COLOR: #039; TEXT-DECORATION: none
+}
+H2 A {
+	COLOR: #039; TEXT-DECORATION: none
+}
+H3 A {
+	COLOR: #039; TEXT-DECORATION: none
+}
+H1 {
+	FONT-WEIGHT: normal; FONT-SIZE: 15pt; LINE-HEIGHT: 125%
+}
+.tabh1 {
+	FONT-WEIGHT: normal; FONT-SIZE: 15pt; LINE-HEIGHT: 125%
+}
+H2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 12.5pt
+}
+.tabh2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 12.5pt
+}
+H3 {
+	FONT-WEIGHT: bold; FONT-SIZE: 11pt
+}
+.tabh3 {
+	FONT-WEIGHT: bold; FONT-SIZE: 11pt
+}
+CAPTION {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; PADDING-BOTTOM: 0.6em
+}
+.caption {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; PADDING-BOTTOM: 0.6em
+}
+.osup {
+	FONT-SIZE: 6pt
+}
+.osub {
+	FONT-SIZE: 6pt
+}
+SUP {
+	VERTICAL-ALIGN: baseline; BOTTOM: 0.5em; POSITION: relative
+}
+#menubar {
+	BACKGROUND: #eee; HEIGHT: 90px
+}
+#blackbar {
+	BACKGROUND: #000
+}
+#menubar TD {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: =
+0px; PADDING-TOP: 0px
+}
+#blackbar TD {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: =
+0px; PADDING-TOP: 0px
+}
+.content {
+	PADDING-RIGHT: 15px; PADDING-LEFT: 15px; BACKGROUND: =
+url(/button/shadow.png) repeat-x 50% top; PADDING-BOTTOM: 15px; FONT: =
+80%/125% Verdana, Arial, Helvetica, sans-serif; VERTICAL-ALIGN: top; =
+PADDING-TOP: 15px; TEXT-ALIGN: left
+}
+.leftmenu {
+	VERTICAL-ALIGN: top; WIDTH: 150px; TEXT-ALIGN: center
+}
+.leftmenu2 {
+	VERTICAL-ALIGN: top; WIDTH: 150px; TEXT-ALIGN: center
+}
+.leftmenu {
+	BACKGROUND: url(/button/dark_shadow.png) #ccc repeat-x 50% top; =
+PADDING-TOP: 6px
+}
+.leftmenu2 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: #ccc; =
+PADDING-BOTTOM: 10px; PADDING-TOP: 2px
+}
+.qlink {
+	FONT: 9pt Arial,Verdana,Helvetica,sans-serif; WHITE-SPACE: nowrap; =
+TEXT-DECORATION: none
+}
+.qlinkbutton {
+	FONT-SIZE: 8pt; COLOR: #f00
+}
+DT {
+	FONT-WEIGHT: bold; PADDING-BOTTOM: 3pt
+}
+DD {
+	PADDING-BOTTOM: 6pt
+}
+.news {
+	FONT-WEIGHT: normal
+}
+.googleadd {
+	FLOAT: right; MARGIN: 0px 0px 6px 6px
+}
+TABLE.pinout {
+	BORDER-RIGHT: #369 1px solid; BORDER-TOP: #369 1px solid; MARGIN: 3px; =
+BORDER-LEFT: #369 1px solid; BORDER-BOTTOM: #369 1px solid; =
+BORDER-COLLAPSE: collapse
+}
+.pinout TD {
+	PADDING-RIGHT: 10pt; PADDING-LEFT: 10pt; FONT-SIZE: 10pt; =
+PADDING-BOTTOM: 2pt; PADDING-TOP: 2pt
+}
+.pinout TH {
+	PADDING-RIGHT: 10pt; PADDING-LEFT: 10pt; FONT-SIZE: 10pt; BACKGROUND: =
+#369; PADDING-BOTTOM: 4pt; COLOR: #fff; PADDING-TOP: 2pt
+}
+TD.arrow {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; =
+VERTICAL-ALIGN: middle; PADDING-TOP: 0px
+}
+TH.arrow {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; =
+VERTICAL-ALIGN: middle; PADDING-TOP: 0px
+}
+.even {
+	VERTICAL-ALIGN: baseline
+}
+.odd {
+	VERTICAL-ALIGN: baseline
+}
+.even {
+	BACKGROUND: #fff
+}
+.odd {
+	BACKGROUND: #eee
+}
+.literature {
+	CLEAR: both
+}
+.literature TD {
+	FONT-SIZE: 10pt
+}
+.full {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 100%; =
+BORDER-BOTTOM: 0px; BORDER-COLLAPSE: collapse
+}
+.twocols TD {
+	FONT-SIZE: 10pt
+}
+.footer {
+	BACKGROUND: #369; FONT: 8pt Arial,Verdana,Helvetica,sans-serif; =
+VERTICAL-ALIGN: middle; COLOR: #fff; WHITE-SPACE: nowrap; HEIGHT: 20px; =
+TEXT-DECORATION: none
+}
+.footer A {
+	BACKGROUND: #369; COLOR: #fff; FONT-FAMILY: =
+Arial,Verdana,Helvetica,sans-serif; TEXT-DECORATION: none
+}
+.footer A:hover {
+	COLOR: #000; TEXT-DECORATION: underline
+}
+.footer A:active {
+	COLOR: #000
+}
+.kwoot {
+	CLEAR: both; BORDER-RIGHT: #777 2px solid; PADDING-RIGHT: 0.5em; =
+BORDER-TOP: #777 2px solid; MARGIN-TOP: 15px; PADDING-LEFT: 0.5em; =
+BACKGROUND: #fff; PADDING-BOTTOM: 0.35em; MARGIN-LEFT: auto; =
+BORDER-LEFT: #777 2px solid; COLOR: #000; MARGIN-RIGHT: auto; =
+PADDING-TOP: 0.35em; BORDER-BOTTOM: #777 2px solid
+}
+.kw_text {
+	FONT-SIZE: 8pt; PADDING-BOTTOM: 0.45em; TEXT-ALIGN: left
+}
+.kw_auth {
+	FONT-SIZE: 7pt; TEXT-ALIGN: right
+}
+.red {
+	FONT-WEIGHT: bold; COLOR: red
+}
+.blue {
+	FONT-WEIGHT: bold; COLOR: blue
+}
+.delicious {
+	FONT-SIZE: 85%
+}
+</STYLE>
+
+<STYLE type=3Dtext/css media=3Dprint>.googleadd {
+	DISPLAY: none
+}
+#googlesearch {
+	DISPLAY: none
+}
+#googlefoot {
+	DISPLAY: none
+}
+#blackbar {
+	DISPLAY: none
+}
+.leftmenu {
+	DISPLAY: none
+}
+.leftmenu2 {
+	DISPLAY: none
+}
+.kwoot {
+	DISPLAY: none
+}
+#menuLayer {
+	DISPLAY: none
+}
+#maintitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 12pt
+}
+</STYLE>
+</HEAD>
+<BODY>
+<TABLE class=3Dfull id=3Dmenubar>
+  <TBODY>
+  <TR>
+    <TD align=3Dleft>
+      <H1 id=3Dmaintitle>&nbsp;&nbsp;Serial UART information</H1></TD>
+    <TD vAlign=3Dtop align=3Dright>
+      <DIV id=3Dgooglesearch><!-- SiteSearch Google -->
+      <FORM action=3Dhttp://www.google.com/custom method=3Dget =
+target=3D_top>
+      <TABLE bgColor=3D#eeeeee border=3D0>
+        <TBODY>
+        <TR>
+          <TD vAlign=3Dtop noWrap align=3Dleft height=3D32><A=20
+            href=3D"http://www.google.com/"><IMG height=3D32 =
+alt=3DGoogle=20
+            src=3D"http://www.google.com/logos/Logo_25wht.gif" =
+width=3D75=20
+            border=3D0></IMG></A> </TD>
+          <TD noWrap><INPUT type=3Dhidden value=3Dwww.lammertbies.nl=20
+            name=3Ddomains></INPUT> <INPUT maxLength=3D255 size=3D31 =
+name=3Dq></INPUT> <INPUT type=3Dsubmit value=3DSearch name=3Dsa></INPUT> =
+</TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD noWrap>
+            <TABLE>
+              <TBODY>
+              <TR>
+                <TD><INPUT type=3Dradio CHECKED value=3D""=20
+                  name=3Dsitesearch></INPUT> <FONT color=3D#000000=20
+                  size=3D-1>Web</FONT> </TD>
+                <TD><INPUT type=3Dradio value=3Dwww.lammertbies.nl=20
+                  name=3Dsitesearch></INPUT> <FONT color=3D#000000=20
+                  size=3D-1>www.lammertbies.nl</FONT> =
+</TD></TR></TBODY></TABLE><INPUT=20
+            type=3Dhidden value=3Dpub-6001052049996482 =
+name=3Dclient></INPUT> <INPUT=20
+            type=3Dhidden value=3D1 name=3Dforid></INPUT> <INPUT =
+type=3Dhidden=20
+            value=3DISO-8859-1 name=3Die></INPUT> <INPUT type=3Dhidden=20
+            value=3DISO-8859-1 name=3Doe></INPUT> <INPUT type=3Dhidden=20
+            =
+value=3DGALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBG=
+C:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1;=20
+            name=3Dcof></INPUT> <INPUT type=3Dhidden value=3Den =
+name=3Dhl></INPUT>=20
+        </TD></TR></TBODY></TABLE></FORM><!-- SiteSearch Google =
+--></DIV></TD></TR></TBODY></TABLE>
+<TABLE class=3Dfull id=3Dblackbar>
+  <TBODY>
+  <TR>
+    <TD><IMG height=3D25 alt=3D"Main Menu" src=3D"" width=3D369 =
+useMap=3D#mapleft=20
+      border=3D0></TD>
+    <TD width=3D"99%">&nbsp;</TD>
+    <TD><IMG height=3D25 alt=3D"Language selection Menu" src=3D"" =
+width=3D79=20
+      useMap=3D#mapright border=3D0></TD></TR></TBODY></TABLE>
+<TABLE class=3Dfull>
+  <TBODY>
+  <TR>
+    <TD class=3Dleftmenu>
+      <TABLE cellSpacing=3D8 cellPadding=3D0 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD class=3Dqlink align=3Dleft><B>Quick links</B></TD></TR>
+        <TR>
+          <TD class=3Dqlinkbutton>=95</TD>
+          <TD align=3Dleft><A class=3Dqlink=20
+            =
+href=3D"http://www.lammertbies.nl/comm/info/RS-232_specs.html">RS-232=20
+            specs</A></TD></TR>
+        <TR>
+          <TD class=3Dqlinkbutton>=95</TD>
+          <TD align=3Dleft><A class=3Dqlink=20
+            =
+href=3D"http://www.lammertbies.nl/comm/info/RS-232_io.html">I/O and=20
+            IRQ's</A></TD></TR>
+        <TR>
+          <TD class=3Dqlinkbutton>=95</TD>
+          <TD align=3Dleft><A class=3Dqlink=20
+            =
+href=3D"http://www.lammertbies.nl/comm/info/RS-232_flow_control.html">Flo=
+w=20
+            control</A></TD></TR>
+        <TR>
+          <TD class=3Dqlinkbutton>=95</TD>
+          <TD align=3Dleft><A class=3Dqlink=20
+            =
+href=3D"http://www.lammertbies.nl/comm/info/RS-232_null_modem.html">Which=
+=20
+            null modem?</A></TD></TR>
+        <TR>
+          <TD class=3Dqlinkbutton>=95</TD>
+          <TD align=3Dleft><A class=3Dqlink=20
+            =
+href=3D"http://www.lammertbies.nl/comm/info/crc-calculation.html">On-line=
+=20
+            CRC</A></TD></TR>
+        <TR>
+          <TD class=3Dqlinkbutton>=95</TD>
+          <TD align=3Dleft><A class=3Dqlink=20
+            =
+href=3D"http://www.lammertbies.nl/comm/cable/RS-232.html">RS-232=20
+            cables</A></TD></TR>
+        <TR>
+          <TD class=3Dqlinkbutton>=95</TD>
+          <TD align=3Dleft><A class=3Dqlink=20
+            =
+href=3D"http://www.lammertbies.nl/comm/cable/RS-232-spy-monitor.html">Spy=
+=20
+            cables</A></TD></TR>
+        <TR>
+          <TD class=3Dqlinkbutton>=95</TD>
+          <TD align=3Dleft><A class=3Dqlink=20
+            =
+href=3D"http://www.lammertbies.nl/comm/info/I2C-bus.html">I2C bus=20
+            interface</A></TD></TR>
+        <TR>
+          <TD class=3Dqlinkbutton>=95</TD>
+          <TD align=3Dleft><A class=3Dqlink=20
+            =
+href=3D"http://www.lammertbies.nl/comm/info/RS-232-usb.html">USB to=20
+            RS232</A></TD></TR>
+        <TR>
+          <TD class=3Dqlinkbutton>=95</TD>
+          <TD align=3Dleft><A class=3Dqlink=20
+            =
+href=3D"http://www.lammertbies.nl/comm/software/index.html">Software=20
+            download</A></TD></TR>
+        <TR>
+          <TD class=3Dqlinkbutton>=95</TD>
+          <TD align=3Dleft><A class=3Dqlink=20
+            =
+href=3D"http://www.lammertbies.nl/comm/software/RS-232_shop.html">RS232=20
+            software shop</A></TD></TR></TBODY></TABLE>
+      <P>
+      <P>
+      <CENTER>
+      <SCRIPT type=3Dtext/javascript><!--=0A=
+google_ad_client =3D "pub-6001052049996482";=0A=
+google_ad_width =3D 120;=0A=
+google_ad_height =3D 90;=0A=
+google_ad_format =3D "120x90_0ads_al";=0A=
+google_ad_channel =3D "4151544874";=0A=
+google_color_border =3D "CCCCCC";=0A=
+google_color_bg =3D "CCCCCC";=0A=
+google_color_link =3D "003399";=0A=
+google_color_url =3D "008000";=0A=
+google_color_text =3D "000000";=0A=
+//--></SCRIPT>
+
+      <SCRIPT src=3D"" type=3Dtext/javascript>=0A=
+</SCRIPT>
+      </CENTER></TD>
+    <TD class=3Dcontent rowSpan=3D2>
+      <DIV class=3Dgoogleadd>
+      <SCRIPT type=3Dtext/javascript><!--=0A=
+google_ad_client =3D "pub-6001052049996482";=0A=
+google_alternate_ad_url =3D =
+"http://www.lammertbies.nl/google_minimize.html";=0A=
+google_ad_width =3D 336;=0A=
+google_ad_height =3D 280;=0A=
+google_ad_format =3D "336x280_as";=0A=
+google_ad_type =3D "text_image";=0A=
+google_ad_channel =3D"4151544874";=0A=
+google_color_border =3D "FFFFFF";=0A=
+google_color_bg =3D "FFFFFF";=0A=
+google_color_link =3D "003399";=0A=
+google_color_url =3D "008000";=0A=
+google_color_text =3D "000000";=0A=
+//--></SCRIPT>
+
+      <SCRIPT src=3D"" type=3Dtext/javascript>=0A=
+</SCRIPT>
+      </DIV>
+      <DIV class=3Ddelicious><IMG height=3D10 src=3D"" width=3D10> <A=20
+      =
+onclick=3D"window.open('http://del.icio.us/post?v=3D4&amp;noui&amp;jump=3D=
+close&amp;url=3D'+encodeURIComponent(location.href)+'&amp;title=3D'+encod=
+eURIComponent(document.title), =
+'delicious','toolbar=3Dno,width=3D700,height=3D400'); return false;"=20
+      href=3D"http://del.icio.us/post" rel=3Dnofollow>Save this page to=20
+      del.icio.us</A></DIV>
+      <DL>
+        <DT>On this page=20
+        <DD><A=20
+        =
+href=3D"http://www.lammertbies.nl/comm/info/serial-uart.html#intr">Serial=
+=20
+        UART, an introduction</A>=20
+        <DD><A=20
+        =
+href=3D"http://www.lammertbies.nl/comm/info/serial-uart.html#type">Serial=
+=20
+        UART types</A>=20
+        <DD><A=20
+        =
+href=3D"http://www.lammertbies.nl/comm/info/serial-uart.html#regs">Regist=
+ers</A>=20
+        </DD></DL>
+      <H1 id=3Dintr>Serial UART, an introduction</H1>
+      <P>An <STRONG>UART</STRONG>, <EM>universal asynchronous receiver / =
+
+      transmitter</EM> is responsible for performing the main task in =
+serial=20
+      communications with computers. The device changes incomming =
+parallel=20
+      information to serial data which can be sent on a communication =
+line. A=20
+      second <STRONG>UART</STRONG> can be used to receive the =
+information. The=20
+      <STRONG>UART</STRONG> performs all the tasks, timing, parity =
+checking,=20
+      etc. needed for the communication. The only extra devices attached =
+are=20
+      line driver chips capable of transforming the <STRONG>TTL</STRONG> =
+level=20
+      signals to line voltages and vice versa.=20
+      <P>To use the <STRONG>UART</STRONG> in different environments, =
+registers=20
+      are accessible to set or review the communication parameters. =
+Setable=20
+      parameters are for example the communication speed, the type of =
+parity=20
+      check, and the way incomming information is signalled to the =
+running=20
+      software.=20
+      <P>
+      <H2 id=3Dtype>Serial UART types</H2>
+      <P>Serial communication on PC compatibles started with the=20
+      <STRONG>8250</STRONG> <STRONG>UART</STRONG> in the <STRONG>IBM=20
+      XT</STRONG>. In the years after, new family members were =
+introduced like=20
+      the <STRONG>8250A</STRONG> and <STRONG>8250B</STRONG> revisions =
+and the=20
+      <STRONG>16450</STRONG>. The last one was first implemented in the=20
+      <STRONG>AT</STRONG>. The higher bus speed in this computer could =
+not be=20
+      reached by the <STRONG>8250</STRONG> series. The differences =
+between these=20
+      first <STRONG>UART</STRONG> series were rather minor. The most =
+important=20
+      property changed with each new release was the maximum allowed =
+speed at=20
+      the processor bus side.=20
+      <P>The <STRONG>16450</STRONG> was capable of handling a =
+communication=20
+      speed of 38.4 kbs without problems. The demand for higher speeds =
+led to=20
+      the development of newer series which would be able to release the =
+main=20
+      processor from some of its tasks. The main problem with the =
+original=20
+      series was the need to perform a software action for each single =
+byte to=20
+      transmit or receive. To overcome this problem, the =
+<STRONG>16550</STRONG>=20
+      was released which contained two on-board <EM>FIFO buffers</EM>, =
+each=20
+      capable of storing 16 bytes. One buffer for incomming, and one =
+buffer for=20
+      outgoing bytes.=20
+      <P>A marvellous idea, but it didn't work out that way. The=20
+      <STRONG>16550</STRONG> chip contained a firmware bug which made it =
+
+      impossible to use the buffers. The <STRONG>16550A</STRONG> which =
+appeared=20
+      soon after was the first <STRONG>UART</STRONG> which was able to =
+use its=20
+      FIFO buffers. This made it possible to increase maximum reliable=20
+      communication speeds to 115.2&nbsp;kbs. This speed was necessary =
+to use=20
+      effectively modems with on-board compression. A further enhancment =
+
+      introduced with the <STRONG>16550</STRONG> was the ablity to use=20
+      <STRONG>DMA</STRONG>, <EM>direct memory access</EM> for the data =
+transfer.=20
+      Two pins were redefined for this purpose. <STRONG>DMA</STRONG> =
+transfer is=20
+      not used with most applications. Only special serial I/O boards =
+with a=20
+      high number of ports contain sometimes the necessary extra =
+circuitry to=20
+      make this feature work.=20
+      <P>The <STRONG>16550A</STRONG> is the most common =
+<STRONG>UART</STRONG> at=20
+      this moment. Newer versions are under development, including the=20
+      <STRONG>16650</STRONG> which contains two 32 byte FIFO's and on =
+board=20
+      support for software flow control. Texas Instruments is developing =
+the=20
+      <STRONG>16750</STRONG> which contains 64 byte FIFO's.=20
+      <P>
+      <H2 id=3Dregs>Registers</H2>
+      <P>Eight I/O bytes are used for each <STRONG>UART</STRONG> to =
+access its=20
+      registers. The following table shows, where each register can be =
+found.=20
+      The base address used in the table is the lowest I/O port number =
+assigned.=20
+      The switch bit <STRONG>DLAB</STRONG> can be found in the line =
+control=20
+      register <STRONG>LCR</STRONG> as bit&nbsp;7 at I/O address=20
+      base&nbsp;+&nbsp;3.=20
+      <P>
+      <CENTER>
+      <TABLE class=3Dpinout>
+        <CAPTION>UART register to port conversion table</CAPTION>
+        <TBODY>
+        <TR>
+          <TH>&nbsp;</TH>
+          <TH colSpan=3D2>DLAB =3D 0</TH>
+          <TH colSpan=3D2>DLAB =3D 1</TH></TR>
+        <TR>
+          <TH>I/O port</TH>
+          <TH>Read</TH>
+          <TH>Write</TH>
+          <TH>Read</TH>
+          <TH>Write</TH></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD>base</TD>
+          <TD><B>RBR</B><BR>receiver<BR>buffer</TD>
+          <TD><B>THR</B><BR>transmitter<BR>holding</TD>
+          <TD colSpan=3D2><B>DLL</B> divisor latch LSB</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD>base + 1</TD>
+          <TD><B>IER</B><BR>interrupt<BR>enable</TD>
+          <TD><B>IER</B><BR>interrupt<BR>enable</TD>
+          <TD colSpan=3D2><B>DLM</B> divisor latch MSB</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD width=3D"20%">base + 2</TD>
+          <TD =
+width=3D"20%"><B>IIR</B><BR>interrupt<BR>identification</TD>
+          <TD width=3D"20%"><B>FCR</B><BR>FIFO<BR>control</TD>
+          <TD =
+width=3D"20%"><B>IIR</B><BR>interrupt<BR>identification</TD>
+          <TD width=3D"20%"><B>FCR</B><BR>FIFO<BR>control</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD>base + 3</TD>
+          <TD colSpan=3D4><B>LCR</B> line control</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD>base + 4</TD>
+          <TD colSpan=3D4><B>MCR</B> modem control</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD>base + 5</TD>
+          <TD><B>LSR</B><BR>line<BR>status</TD>
+          <TD>=96<BR>factory<BR>test</TD>
+          <TD><B>LSR</B><BR>line<BR>status</TD>
+          <TD>=96<BR>factory<BR>test</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD>base + 6</TD>
+          <TD><B>MSR</B><BR>modem<BR>status</TD>
+          <TD>=96<BR>not<BR>used</TD>
+          <TD><B>MSR</B><BR>modem<BR>status</TD>
+          <TD>=96<BR>not<BR>used</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD>base + 7</TD>
+          <TD colSpan=3D4><B>SCR</B> =
+scratch</TD></TR></TBODY></TABLE></CENTER>
+      <P>
+      <DL>
+        <DT>Available registers=20
+        <DD><A=20
+        =
+href=3D"http://www.lammertbies.nl/comm/info/serial-uart.html#RBR">RBR,=20
+        receiver buffer register</A>=20
+        <DD><A=20
+        =
+href=3D"http://www.lammertbies.nl/comm/info/serial-uart.html#THR">THR,=20
+        transmitter holding register</A>=20
+        <DD><A=20
+        =
+href=3D"http://www.lammertbies.nl/comm/info/serial-uart.html#IER">IER,=20
+        interrupt enable register</A>=20
+        <DD><A=20
+        =
+href=3D"http://www.lammertbies.nl/comm/info/serial-uart.html#IIR">IIR,=20
+        interrupt identification register</A>=20
+        <DD><A=20
+        =
+href=3D"http://www.lammertbies.nl/comm/info/serial-uart.html#FCR">FCR,=20
+        FIFO control register</A>=20
+        <DD><A=20
+        =
+href=3D"http://www.lammertbies.nl/comm/info/serial-uart.html#LCR">LCR,=20
+        line control register</A>=20
+        <DD><A=20
+        =
+href=3D"http://www.lammertbies.nl/comm/info/serial-uart.html#MCR">MCR,=20
+        modem control register</A>=20
+        <DD><A=20
+        =
+href=3D"http://www.lammertbies.nl/comm/info/serial-uart.html#LSR">LSR,=20
+        line status register</A>=20
+        <DD><A=20
+        =
+href=3D"http://www.lammertbies.nl/comm/info/serial-uart.html#MSR">MSR,=20
+        modem status register</A>=20
+        <DD><A=20
+        =
+href=3D"http://www.lammertbies.nl/comm/info/serial-uart.html#SCR">SCR,=20
+        scratch register</A>=20
+        <DD><A=20
+        =
+href=3D"http://www.lammertbies.nl/comm/info/serial-uart.html#DLX">DLL,=20
+        divisor latch LSB</A>=20
+        <DD><A=20
+        =
+href=3D"http://www.lammertbies.nl/comm/info/serial-uart.html#DLX">DLM,=20
+        divisor latch MSB</A> </DD></DL>
+      <P>The communication between the processor and the =
+<STRONG>UART</STRONG>=20
+      is completely controlled by twelve registers. These registers can =
+be read=20
+      or written to check and change the behaviour of the communication =
+device.=20
+      Each register is eight bits wide. On a PC compatible, the =
+registers are=20
+      accessible in the <A=20
+      =
+href=3D"http://www.lammertbies.nl/comm/info/RS-232_io.html#intr">I/O =
+address=20
+      area</A>. The function of each register will be discussed here in =
+detail.=20
+      <P>
+      <H3 id=3DRBR>RBR : Receiver buffer register (RO)</H3>
+      <P>The <STRONG>RBR</STRONG>, <EM>receiver buffer register</EM> =
+contains=20
+      the byte received if no FIFO is used, or the oldest unread byte =
+with=20
+      FIFO's. If FIFO buffering is used, each new read action of the =
+register=20
+      will return the next byte, until no more bytes are present. =
+Bit&nbsp;0 in=20
+      the <STRONG>LSR</STRONG> <EM>line status register</EM> can be used =
+to=20
+      check if all received bytes have been read. This bit wil change to =
+zero if=20
+      no more bytes are present.=20
+      <P>
+      <H3 id=3DTHR>THR : Transmitter holding register (WO)</H3>
+      <P>The <STRONG>THR</STRONG>, <EM>transmitter holding register</EM> =
+is used=20
+      to buffer outgoing characters. If no FIFO buffering is used, only =
+one=20
+      character can be stored. Otherwise the amount of characters =
+depends on the=20
+      type of <STRONG>UART</STRONG>. Bit&nbsp;5 in the =
+<STRONG>LSR</STRONG>,=20
+      <EM>line status register</EM> can be used to check if new =
+information must=20
+      be written to <STRONG>THR</STRONG>. The value&nbsp;1 indicates =
+that the=20
+      register is empty. If FIFO buffering is used, more than one =
+character can=20
+      be written to the transmitter holding register when the bit =
+signals an=20
+      empty state. There is no indication of the amount of bytes =
+currently=20
+      present in the transmitter FIFO.=20
+      <P>The <EM>transmitter holding register</EM> is not used to =
+transfer the=20
+      data directly. The byte is first transferred to a shift register =
+where the=20
+      information is broken in single bits which are sent one by one.=20
+      <P>
+      <H3 id=3DIER>IER : Interrupt enable register (R/W)</H3>
+      <P>The smartest way to perform serial communications on a PC is =
+using=20
+      interrupt driven routines. In that configuration, it is not =
+necessary to=20
+      poll the registers of the <STRONG>UART</STRONG> periodically for =
+state=20
+      changes. The <STRONG>UART</STRONG> will signal each change by =
+generating a=20
+      processor interrupt. A software routine must be present to handle =
+the=20
+      interrupt and to check what state change was responsible for it.=20
+      <P>Interrupts are not generated, unless the <STRONG>UART</STRONG> =
+is told=20
+      to do so. This is done by setting bits in the =
+<STRONG>IER</STRONG>,=20
+      <EM>interrupt enable register</EM>. A bit value&nbsp;1 indicates, =
+that an=20
+      interrupt may take place.=20
+      <P>
+      <CENTER>
+      <TABLE class=3Dpinout>
+        <CAPTION>IER : Interrupt enable register</CAPTION>
+        <TBODY>
+        <TR align=3Dmiddle>
+          <TH>Bit</TH>
+          <TH>Description</TH></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>0</B></TD>
+          <TD align=3Dleft>Received data available</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>1</B></TD>
+          <TD align=3Dleft>Transmitter holding register empty</TD></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>2</B></TD>
+          <TD align=3Dleft>Receiver line status register =
+change</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>3</B></TD>
+          <TD align=3Dleft>Modem status register change</TD></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>4</B></TD>
+          <TD align=3Dleft>Sleep mode (16750 only)</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>5</B></TD>
+          <TD align=3Dleft>Low power mode (16750 only)</TD></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>6</B></TD>
+          <TD align=3Dleft>reserved</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>7</B></TD>
+          <TD align=3Dleft>reserved</TD></TR></TBODY></TABLE></CENTER>
+      <P>
+      <H3 id=3DIIR>IIR : Interrupt identification register (RO)</H3>
+      <P>An <STRONG>UART</STRONG> is capable of generating a processor =
+interrupt=20
+      when a state change on the communication device occurs. One =
+interrupt=20
+      signal is used to call attention. This means, that additional =
+information=20
+      is needed for the software before the necessary actions can be =
+performed.=20
+      The <STRONG>IIR</STRONG>, <EM>interrupt identification =
+register</EM> is=20
+      helpful in this situation. Its bits show the current state of the=20
+      <STRONG>UART</STRONG> and which state change caused the interrupt =
+to=20
+      occur.=20
+      <P>
+      <CENTER>
+      <TABLE class=3Dpinout>
+        <CAPTION>IIR : Interrupt identification register</CAPTION>
+        <TBODY>
+        <TR align=3Dmiddle>
+          <TH>Bit</TH>
+          <TH colSpan=3D6>Value</TH>
+          <TH>Description</TH>
+          <TH>Reset by</TH></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD vAlign=3Dcenter rowSpan=3D2><B>0</B></TD>
+          <TD colSpan=3D6>0</TD>
+          <TD align=3Dleft>Interrupt pending</TD>
+          <TD align=3Dleft>=96</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D6>1</TD>
+          <TD align=3Dleft>No interrupt pending</TD>
+          <TD align=3Dleft>=96</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD vAlign=3Dcenter rowSpan=3D6><B>1,2,3</B></TD>
+          <TD colSpan=3D2><B>Bit 3</B></TD>
+          <TD colSpan=3D2><B>Bit 2</B></TD>
+          <TD colSpan=3D2><B>Bit 1</B></TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD colSpan=3D2>0</TD>
+          <TD colSpan=3D2>0</TD>
+          <TD colSpan=3D2>0</TD>
+          <TD align=3Dleft>Modem status change</TD>
+          <TD align=3Dleft>MSR read</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD colSpan=3D2>0</TD>
+          <TD colSpan=3D2>0</TD>
+          <TD colSpan=3D2>1</TD>
+          <TD align=3Dleft>Transmitter holding register empty</TD>
+          <TD align=3Dleft>IIR read or THR write</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD colSpan=3D2>0</TD>
+          <TD colSpan=3D2>1</TD>
+          <TD colSpan=3D2>0</TD>
+          <TD align=3Dleft>Received data available</TD>
+          <TD align=3Dleft>RBR read</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD colSpan=3D2>0</TD>
+          <TD colSpan=3D2>1</TD>
+          <TD colSpan=3D2>1</TD>
+          <TD align=3Dleft>Line status change</TD>
+          <TD align=3Dleft>LSR read</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD colSpan=3D2>1</TD>
+          <TD colSpan=3D2>1</TD>
+          <TD colSpan=3D2>0</TD>
+          <TD align=3Dleft>Character timeout (16550)</TD>
+          <TD align=3Dleft>RBR read</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD vAlign=3Dcenter><B>4</B></TD>
+          <TD colSpan=3D6>0</TD>
+          <TD align=3Dleft>Reserved</TD>
+          <TD align=3Dleft>=96</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD vAlign=3Dcenter rowSpan=3D2><B>5</B></TD>
+          <TD colSpan=3D6>0</TD>
+          <TD align=3Dleft>Reserved (8250, 16450, 16550)</TD>
+          <TD align=3Dleft>=96</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD colSpan=3D6>1</TD>
+          <TD align=3Dleft>64 byte FIFO enabled (16750)</TD>
+          <TD align=3Dleft>=96</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD vAlign=3Dcenter rowSpan=3D4><B>6,7</B></TD>
+          <TD colSpan=3D3><B>Bit 7</B></TD>
+          <TD colSpan=3D3><B>Bit 6</B></TD>
+          <TD>&nbsp;</TD>
+          <TD>&nbsp;</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D3>0</TD>
+          <TD colSpan=3D3>0</TD>
+          <TD align=3Dleft>No FIFO</TD>
+          <TD align=3Dleft>=96</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D3>1</TD>
+          <TD colSpan=3D3>0</TD>
+          <TD align=3Dleft>Unusable FIFO (16550 only)</TD>
+          <TD align=3Dleft>=96</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D3>1</TD>
+          <TD colSpan=3D3>1</TD>
+          <TD align=3Dleft>FIFO enabled</TD>
+          <TD align=3Dleft>=96</TD></TR></TBODY></TABLE></CENTER>
+      <P>
+      <H3 id=3DFCR>FCR : FIFO control register (WO)</H3>
+      <P>The <STRONG>FCR</STRONG>, <EM>FIFO control register</EM> is =
+present=20
+      starting with the <STRONG>16550</STRONG> series. This register =
+controls=20
+      the behaviour of the FIFO's in the <STRONG>UART</STRONG>. If a =
+logical=20
+      value&nbsp;1 is written to bits&nbsp;1 or&nbsp;2, the function =
+attached is=20
+      triggered. The other bits are used to select a specific FIFO mode. =
+
+      <P>
+      <CENTER>
+      <TABLE class=3Dpinout>
+        <CAPTION>FCR : FIFO control register</CAPTION>
+        <TBODY>
+        <TR align=3Dmiddle>
+          <TH>Bit</TH>
+          <TH colSpan=3D2>Value</TH>
+          <TH>Description</TH></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD vAlign=3Dcenter rowSpan=3D2><B>0</B></TD>
+          <TD colSpan=3D2>0</TD>
+          <TD align=3Dleft>Disable FIFO's</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D2>1</TD>
+          <TD align=3Dleft>Enable FIFO's</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD vAlign=3Dcenter rowSpan=3D2><B>1</B></TD>
+          <TD colSpan=3D2>0</TD>
+          <TD align=3Dleft>=96</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD colSpan=3D2>1</TD>
+          <TD align=3Dleft>Clear receive FIFO</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD vAlign=3Dcenter rowSpan=3D2><B>2</B></TD>
+          <TD colSpan=3D2>0</TD>
+          <TD align=3Dleft>=96</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D2>1</TD>
+          <TD align=3Dleft>Clear transmit FIFO</FONT></TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD vAlign=3Dcenter rowSpan=3D2><B>3</B></TD>
+          <TD colSpan=3D2>0</TD>
+          <TD align=3Dleft>Select DMA mode 0</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD colSpan=3D2>1</TD>
+          <TD align=3Dleft>Select DMA mode 1</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD><B>4</B></TD>
+          <TD colSpan=3D2>0</TD>
+          <TD align=3Dleft>Reserved</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD vAlign=3Dcenter rowSpan=3D2><B>5</B></TD>
+          <TD colSpan=3D2>0</TD>
+          <TD align=3Dleft>Reserved (8250, 16450, 16550)</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD colSpan=3D2>1</TD>
+          <TD align=3Dleft>Enable 64 byte FIFO (16750)</FONT></TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD vAlign=3Dcenter rowSpan=3D5><B>6,7</B></TD>
+          <TD><B>Bit 7</B></TD>
+          <TD><B>Bit 6</B></TD>
+          <TD align=3Dleft>Receive FIFO interrupt trigger =
+level</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD>0</TD>
+          <TD>0</TD>
+          <TD align=3Dleft>1 byte</FONT></TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD>0</TD>
+          <TD>1</TD>
+          <TD align=3Dleft>4 bytes</FONT></TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD>1</TD>
+          <TD>0</TD>
+          <TD align=3Dleft>8 bytes</FONT></TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD>1</TD>
+          <TD>1</TD>
+          <TD align=3Dleft>14 bytes</TD></TR></TBODY></TABLE></CENTER>
+      <P>
+      <H3 id=3DLCR>LCR : Line control register (R/W)</H3>
+      <P>The <STRONG>LCR</STRONG>, <EM>line control register</EM> is =
+used at=20
+      initialisation to set the communication parameters. Parity and =
+number of=20
+      data bits can be changed for example. The register also controls =
+the=20
+      accessibility of the <STRONG>DLL</STRONG> and <STRONG>DLM</STRONG> =
+
+      registers. These registers are mapped to the same I/O port as the=20
+      <STRONG>RBR</STRONG>, <STRONG>THR</STRONG> and =
+<STRONG>IER</STRONG>=20
+      registers. Because they are only accessed at initialisation when =
+no=20
+      communication occurs this register swapping has no influence on=20
+      performance.=20
+      <P>
+      <CENTER>
+      <TABLE class=3Dpinout>
+        <CAPTION>LCR : line control register</CAPTION>
+        <TBODY>
+        <TR align=3Dmiddle>
+          <TH>Bit</TH>
+          <TH colSpan=3D6>Value</TH>
+          <TH>Description</TH></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD vAlign=3Dcenter rowSpan=3D5><B>0,1</B></TD>
+          <TD colSpan=3D3><B>Bit 1</B></TD>
+          <TD colSpan=3D3><B>Bit 0</B></TD>
+          <TD align=3Dleft>Data word length</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D3>0</TD>
+          <TD colSpan=3D3>0</TD>
+          <TD align=3Dleft>5 bits</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D3>0</TD>
+          <TD colSpan=3D3>1</TD>
+          <TD align=3Dleft>6 bits</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D3>1</TD>
+          <TD colSpan=3D3>0</TD>
+          <TD align=3Dleft>7 bits</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D3>1</TD>
+          <TD colSpan=3D3>1</TD>
+          <TD align=3Dleft>8 bits</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD vAlign=3Dcenter rowSpan=3D2><B>2</B></TD>
+          <TD colSpan=3D6>0</TD>
+          <TD align=3Dleft>1 stop bit</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD colSpan=3D6>1</TD>
+          <TD align=3Dleft>1.5 stop bits (5 bits word)<BR>2 stop bits =
+(6, 7 or 8=20
+            bits word)</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD vAlign=3Dcenter rowSpan=3D6><B>3,4,5</B></TD>
+          <TD colSpan=3D2><B>Bit 5</B></TD>
+          <TD colSpan=3D2><B>Bit 4</B></TD>
+          <TD colSpan=3D2><B>Bit 3</TH></B>
+          <TD>&nbsp;</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D2>x</TD>
+          <TD colSpan=3D2>x</TD>
+          <TD colSpan=3D2>0</TD>
+          <TD align=3Dleft>No parity</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D2>0</TD>
+          <TD colSpan=3D2>0</TD>
+          <TD colSpan=3D2>1</TD>
+          <TD align=3Dleft>Odd parity</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D2>0</TD>
+          <TD colSpan=3D2>1</TD>
+          <TD colSpan=3D2>1</TD>
+          <TD align=3Dleft>Even parity</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D2>1</TD>
+          <TD colSpan=3D2>0</TD>
+          <TD colSpan=3D2>1</TD>
+          <TD align=3Dleft>High parity (stick)</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D2>1</TD>
+          <TD colSpan=3D2>1</TD>
+          <TD colSpan=3D2>1</TD>
+          <TD align=3Dleft>Low parity (stick)</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD vAlign=3Dcenter rowSpan=3D2><B>6</B></TD>
+          <TD colSpan=3D6>0</TD>
+          <TD align=3Dleft>Break signal disabled</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD colSpan=3D6>1</TD>
+          <TD align=3Dleft>Break signal enabled</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD vAlign=3Dcenter rowSpan=3D2><B>7</B></TD>
+          <TD colSpan=3D6>0</TD>
+          <TD align=3Dleft>DLAB : RBR, THR and IER accessible</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD colSpan=3D6>1</TD>
+          <TD align=3Dleft>DLAB : DLL and DLM=20
+      accessible</TD></TR></TBODY></TABLE></CENTER>
+      <P>Some remarks about parity:=20
+      <P>The <STRONG>UART</STRONG> is capable of generating a trailing =
+bit at=20
+      the end of each dataword which can be used to check some data =
+distortion.=20
+      Because only one bit is used, the parity system is capable of =
+detecting=20
+      only an odd number of false bits. If an even number of bits has =
+been=20
+      flipped, the error will not be seen.=20
+      <P>When <EM>even parity</EM> is selected, the =
+<STRONG>UART</STRONG>=20
+      assures that the number of high bit values in the sent or received =
+data is=20
+      always even. <EM>Odd parity</EM> setting does the opposite. Using=20
+      <EM>stick parity</EM> has very little use. It sets the parity bit =
+to=20
+      always&nbsp;1, or always&nbsp;0.=20
+      <P>Common settings are:=20
+      <P>
+      <UL>
+        <LI>8 data bits, one stop bit, no parity=20
+        <LI>7 data bits, one stop bit, even parity </LI></UL>
+      <P>
+      <H3 id=3DMCR>MCR : Modem control register (R/W)</H3>
+      <P>The <STRONG>MCR</STRONG>, <EM>modem control register</EM> is =
+used to=20
+      perform handshaking actions with the attached device. In the =
+original UART=20
+      series including the <STRONG>16550</STRONG>, setting and resetting =
+of the=20
+      control signals must be done by software. The new =
+<STRONG>16750</STRONG>=20
+      is capable of handling flow control automatically, thereby =
+reducing the=20
+      load on the processor.=20
+      <P>
+      <CENTER>
+      <TABLE class=3Dpinout>
+        <CAPTION>MCR : Modem control register</CAPTION>
+        <TBODY>
+        <TR align=3Dmiddle>
+          <TH>Bit</TH>
+          <TH>Description</TH></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>0</B></TD>
+          <TD align=3Dleft>Data terminal ready</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>1</B></TD>
+          <TD align=3Dleft>Request to send</TD></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>2</B></TD>
+          <TD align=3Dleft>Auxiliary output 1</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>3</B></TD>
+          <TD align=3Dleft>Auxiliary output 2</TD></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>4</B></TD>
+          <TD align=3Dleft>Loopback mode</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>5</B></TD>
+          <TD align=3Dleft>Autoflow control (16750 only)</TD></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>6</B></TD>
+          <TD align=3Dleft>Reserved</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>7</B></TD>
+          <TD align=3Dleft>Reserved</TD></TR></TBODY></TABLE></CENTER>
+      <P>The two <EM>auxiliary outputs</EM> are user definable. =
+Output&nbsp;2 is=20
+      sometimes used in circuitry which controls the interrupt process =
+on a PC.=20
+      Output&nbsp;1 is normally not used, however on some I/O cards, it =
+controls=20
+      the selection of a second oscillator working at 4&nbsp;MHz. This =
+is mainly=20
+      for <STRONG>MIDI</STRONG> purposes.=20
+      <P>
+      <H3 id=3DLSR>LSR : Line status register (RO)</H3>
+      <P>The <STRONG>LSR</STRONG>, <EM>line status register</EM> shows =
+the=20
+      current state of communication. Errors are reflected in this =
+register. The=20
+      state of the receive and transmit buffers is also available.=20
+      <P>
+      <CENTER>
+      <TABLE class=3Dpinout>
+        <CAPTION>LSR : Line status register</CAPTION>
+        <TBODY>
+        <TR align=3Dmiddle>
+          <TH>Bit</TH>
+          <TH>Description</TH></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>0</B></TD>
+          <TD align=3Dleft>Data available</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>1</B></TD>
+          <TD align=3Dleft>Overrun error</TD></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>2</B></TD>
+          <TD align=3Dleft>Parity error</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>3</B></TD>
+          <TD align=3Dleft>Framing error</TD></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>4</B></TD>
+          <TD align=3Dleft>Break signal received</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>5</B></TD>
+          <TD align=3Dleft>THR is empty</TD></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>6</B></TD>
+          <TD align=3Dleft>THR is empty, and line is idle</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>7</B></TD>
+          <TD align=3Dleft>Errornous data in =
+FIFO</TD></TR></TBODY></TABLE></CENTER>
+      <P>Bit&nbsp;5 and&nbsp;6 both show the state of the transmitting =
+cycle.=20
+      The difference is, that bit&nbsp;5 turns high as soon as the=20
+      <EM>transmitter holding register</EM> is empty whereas bit&nbsp;6=20
+      indicates that also the <EM>shift register</EM> which outputs the =
+bits on=20
+      the line is empty.=20
+      <P>
+      <H3 id=3DMSR>MSR : Modem status register (RO)</H3>
+      <P>The <STRONG>MSR</STRONG>, <EM>modem status register</EM> =
+contains=20
+      information about the four incomming modem control lines on the =
+device.=20
+      The information is split in two nibbles. The four most =
+siginificant bits=20
+      contain information about the current state of the inputs where =
+the least=20
+      significant bits are used to indicate state changes. The four =
+LSB's are=20
+      reset, each time the register is read.=20
+      <P>
+      <CENTER>
+      <TABLE class=3Dpinout>
+        <CAPTION>MSR : Modem status register</CAPTION>
+        <TBODY>
+        <TR align=3Dmiddle>
+          <TH>Bit</TH>
+          <TH>Description</TH></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>0</B></TD>
+          <TD align=3Dleft>change in Clear to send</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>1</B></TD>
+          <TD align=3Dleft>change in Data set ready</TD></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>2</B></TD>
+          <TD align=3Dleft>trailing edge Ring indicator</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>3</B></TD>
+          <TD align=3Dleft>change in Carrier detect</TD></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>4</B></TD>
+          <TD align=3Dleft>Clear to send</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>5</B></TD>
+          <TD align=3Dleft>Data set ready</TD></TR>
+        <TR class=3Dodd>
+          <TD align=3Dmiddle><B>6</B></TD>
+          <TD align=3Dleft>Ring indicator</TD></TR>
+        <TR class=3Deven>
+          <TD align=3Dmiddle><B>7</B></TD>
+          <TD align=3Dleft>Carrier =
+detect</TD></TR></TBODY></TABLE></CENTER>
+      <P>
+      <H3 id=3DSCR>SCR : Scratch register (R/W)</H3>
+      <P>The <STRONG>SCR</STRONG>, <EM>scratch register</EM> was not =
+present on=20
+      the <STRONG>8250</STRONG> and <STRONG>8250B</STRONG>=20
+      <STRONG>UART</STRONG>. It can be used to store one byte of =
+information. In=20
+      practice, it has only limited use. The only real use I know of is =
+checking=20
+      if the <STRONG>UART</STRONG> is a=20
+      <STRONG>8250</STRONG>/<STRONG>8250B</STRONG>, or a=20
+      <STRONG>8250A</STRONG>/<STRONG>16450</STRONG> series. Because the=20
+      <STRONG>8250</STRONG> series are only found in XT's even this use =
+of the=20
+      register is not commonly seen anymore.=20
+      <P>
+      <H3 id=3DDLX>DLL and DLM : Divisor latch registers (R/W)</H3>
+      <P>For generating its timing information, each =
+<STRONG>UART</STRONG> uses=20
+      an oscillator generating a frequency of about 1.8432&nbsp;MHz. =
+This=20
+      frequency is divided by&nbsp;16 to generate the time base for=20
+      communucation. Because of this division, the maximum allowed =
+communication=20
+      speed is 115200&nbsp;bps. Modern <STRONG>UARTS</STRONG> like the=20
+      <STRONG>16550</STRONG> are capable of handling higher input =
+frequencies up=20
+      to 24&nbsp;MHz which makes it possible to communicate with a =
+maximum speed=20
+      of 1.5&nbsp;Mbps. On PC's higher frequencies than the =
+1.8432&nbsp;MHz are=20
+      rarely seen because this would be software incompatible with the =
+original=20
+      XT configuration.=20
+      <P>This 115200&nbsp;bps communication speed is not suitable for =
+all=20
+      applications. To change the communication speed, the frequency can =
+be=20
+      further decreased by dividing it by a programmable value. For very =
+slow=20
+      communications, this value can go beyond&nbsp;255. Therefore, the =
+divisor=20
+      is stored in two seperate bytes, the <EM>divisor latch =
+registers</EM>=20
+      <STRONG>DLL</STRONG> and <STRONG>DLM</STRONG> which contain the =
+least, and=20
+      most significant byte.=20
+      <P>For error free communication, it is necessary that both the=20
+      transmitting and receiving <STRONG>UART</STRONG> use the same time =
+base.=20
+      Default values have been defined which are commonly used. The =
+table shows=20
+      the most common values with the appropriate settings of the =
+divisor latch=20
+      bytes. Note that these values only hold for a PC compatible system =
+where a=20
+      clock frequency of 1.8432&nbsp;MHz is used.=20
+      <P>
+      <CENTER>
+      <TABLE class=3Dpinout>
+        <CAPTION>DLL and DLM : Divisor latch registers</CAPTION>
+        <TBODY>
+        <TR align=3Dmiddle>
+          <TH>Speed (bps)</TH>
+          <TH>Divisor</TH>
+          <TH>DLL</TH>
+          <TH>DLM</TH></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD align=3Dright><B>50</B></TD>
+          <TD align=3Dright>2,304</TD>
+          <TD>0x00</TD>
+          <TD>0x09</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD align=3Dright><B>300</B></TD>
+          <TD align=3Dright>384</TD>
+          <TD>0x80</TD>
+          <TD>0x01</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD align=3Dright><B>1,200</B></TD>
+          <TD align=3Dright>96</TD>
+          <TD>0x60</TD>
+          <TD>0x00</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD align=3Dright><B>2,400</B></TD>
+          <TD align=3Dright>48</TD>
+          <TD>0x30</TD>
+          <TD>0x00</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD align=3Dright><B>4,800</B></TD>
+          <TD align=3Dright>24</TD>
+          <TD>0x18</TD>
+          <TD>0x00</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD align=3Dright><B>9,600</B></TD>
+          <TD align=3Dright>12</TD>
+          <TD>0x0C</TD>
+          <TD>0x00</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD align=3Dright><B>19,200</B></TD>
+          <TD align=3Dright>6</TD>
+          <TD>0x06</TD>
+          <TD>0x00</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD align=3Dright><B>38,400</B></TD>
+          <TD align=3Dright>3</TD>
+          <TD>0x03</TD>
+          <TD>0x00</TD></TR>
+        <TR class=3Dodd align=3Dmiddle>
+          <TD align=3Dright><B>57,600</B></TD>
+          <TD align=3Dright>2</TD>
+          <TD>0x02</TD>
+          <TD>0x00</TD></TR>
+        <TR class=3Deven align=3Dmiddle>
+          <TD align=3Dright><B>115,200</B></TD>
+          <TD align=3Dright>1</TD>
+          <TD>0x01</TD>
+          <TD>0x00</TD></TR></TBODY></TABLE></CENTER>
+      <P>
+      <CENTER id=3Dgooglefoot>
+      <SCRIPT type=3Dtext/javascript><!--=0A=
+google_ad_client =3D "pub-6001052049996482";=0A=
+google_alternate_ad_url =3D =
+"http://www.lammertbies.nl/google_minimize.html";=0A=
+google_ad_width =3D 468;=0A=
+google_ad_height =3D 60;=0A=
+google_ad_format =3D "468x60_as";=0A=
+google_ad_type =3D "text_image";=0A=
+google_ad_channel =3D"4151544874";=0A=
+google_color_border =3D "336699";=0A=
+google_color_bg =3D "FFFFFF";=0A=
+google_color_link =3D "0000FF";=0A=
+google_color_url =3D "008000";=0A=
+google_color_text =3D "000000";=0A=
+//--></SCRIPT>
+
+      <SCRIPT src=3D"" type=3Dtext/javascript>=0A=
+</SCRIPT>
+      </CENTER>
+      <P>
+      <TABLE class=3Dkwoot>
+        <TBODY>
+        <TR>
+          <TD>
+            <DIV class=3Dkw_text>The supplies necessary for yesterday's=20
+            work<BR>must be ordered no later then noon tomorrow.</DIV>
+            <DIV class=3Dkw_auth>THE ORDERING PRINCIPLE=20
+      </DIV></TD></TR></TBODY></TABLE></P></TD></TR>
+  <TR>
+    <TD class=3Dleftmenu2></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=3D0 cellPadding=3D0 width=3D"100%" border=3D0>
+  <TBODY>
+  <TR>
+    <TD class=3Dfooter align=3Dleft>&nbsp;&nbsp;Mar. 2007 | <A=20
+      href=3D"http://www.lammertbies.nl/sitemap.html">Site map</A> | <A=20
+      =
+href=3D"http://www.lammertbies.nl/whoami/address.html">Contact</A></TD>
+    <TD class=3Dfooter align=3Dright>&nbsp;&nbsp;&nbsp;Copyright =A9 =
+1997-2007=20
+      Lammert Bies, All rights =
+reserved&nbsp;&nbsp;</TD></TR></TBODY></TABLE>
+<SCRIPT language=3DJavaScript src=3D"" type=3Dtext/javascript></SCRIPT>
+
+<SCRIPT language=3DJavaScript src=3D"" type=3Dtext/javascript></SCRIPT>
+
+<SCRIPT language=3DJavaScript1.2 =
+type=3Dtext/javascript>fwLoadMenus();</SCRIPT>
+<MAP name=3Dmapleft><AREA=20
+  onmouseover=3Dwindow.FWshowMenu(window.fw_menu_about,10,115);=20
+  onmouseout=3DFW_startTimeout(); shape=3DRECT alt=3DHomepage =
+coords=3D5,0,93,25=20
+  href=3D"http://www.lammertbies.nl/index.html"><AREA=20
+  onmouseover=3Dwindow.FWshowMenu(window.fw_menu_interfacing,108,20);=20
+  onmouseout=3DFW_startTimeout(); shape=3DRECT alt=3DInterfacing =
+coords=3D103,0,174,25=20
+  href=3D"http://www.lammertbies.nl/comm/index.html"><AREA shape=3DRECT =
+alt=3DContact=20
+  coords=3D184,0,239,25 =
+href=3D"http://www.lammertbies.nl/whoami/address.html"><AREA=20
+  shape=3DRECT alt=3DSitemap coords=3D249,0,305,25=20
+  href=3D"http://www.lammertbies.nl/sitemap.html"><AREA shape=3DRECT =
+alt=3DForum=20
+  coords=3D315,0,364,25 =
+href=3D"http://www.lammertbies.nl/forum/index.php"></MAP><MAP=20
+name=3Dmapright><AREA shape=3DRECT alt=3DEnglish =
+coords=3D5,0,37,25><AREA shape=3DRECT=20
+  alt=3DNederlands coords=3D47,0,74,25=20
+  =
+href=3D"http://www.lammertbies.nl/comm/info/nl_serial-uart.html"></MAP>
+<SCRIPT src=3D"" type=3Dtext/javascript>=0A=
+</SCRIPT>
+
+<SCRIPT type=3Dtext/javascript>=0A=
+_uacct =3D "UA-295305-1";=0A=
+urchinTracker();=0A=
+</SCRIPT>
+</BODY></HTML>
+
+------=_NextPart_000_0000_01C945A5.B996FBD0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://e-learn.jct.ac.il/bareket/sysimages/100/vCampus/1pix.gif
+
+R0lGODlhAQABALMAAAAAAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAACH5BAEAAAEALAAAAAABAAEAAAQCMEQAOw==
+
+------=_NextPart_000_0000_01C945A5.B996FBD0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://e-learn.jct.ac.il/bareket/sysimages/100/vCampus/common/edit.gif
+
+R0lGODlhEAAQAPcAAAAAAP///wc7wRlJxS1Zyv7+/P388QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAAALAAAAAAQABAA
+AAg8AAEIHEiwoMGDCA8KSFhw4UKDAiJKFPiw4cCHFS0CeEggI0GMAgZsRAiSIsmJJhVCPCkRJcOX
+MGPKNBgQADs=
+
+------=_NextPart_000_0000_01C945A5.B996FBD0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://e-learn.jct.ac.il/bareket/sysimages/100/vCampus/common/print.gif
+
+R0lGODlhEAAQAPcAAAAAAP///wc7wf7+/P388QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAAALAAAAAAQABAA
+AAgzAAEIHEiwoMGDCBMiFMCwoUIBBCEmbOhwYsSFFDMalLix40GOA0FeLJhRo8KTKFOqNBgQADs=
+
+------=_NextPart_000_0000_01C945A5.B996FBD0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://e-learn.jct.ac.il/bareket/sysimages/100/vCampus/common/close.gif
+
+R0lGODlhEAAQAPcAAAAAAP///wc7wRhIxRxMxv7+/P388QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAAALAAAAAAQABAA
+AAgyAAEIHEiwoMGDCBMqXMjQoAABBB8mlAiA4sSHEBkSGNAQY8aLAi06/FiRZMOTKFMaDAgAOw==
+
+------=_NextPart_000_0000_01C945A5.B996FBD0
+Content-Type: text/css;
+	charset="windows-1255"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://e-learn.jct.ac.il/upload/misc/CssFiles/styles.css
+
+A.reportDrillDownLink {
+	FONT-WEIGHT: bold; COLOR: black; FONT-FAMILY: arial; TEXT-DECORATION: =
+none
+}
+A.reportDrillDownLink:hover {
+	FONT-WEIGHT: bold; COLOR: blue; FONT-FAMILY: arial; TEXT-DECORATION: =
+underline
+}
+.reportNav {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; CURSOR: default; COLOR: #093071; =
+FONT-FAMILY: arial; TEXT-DECORATION: none
+}
+A.reportNavLink {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; COLOR: #093071; FONT-FAMILY: arial; =
+TEXT-DECORATION: underline
+}
+A.reportNavLink:hover {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; COLOR: blue; FONT-FAMILY: arial; =
+TEXT-DECORATION: underline
+}
+A.webFolder {
+	FONT-SIZE: 12px; BEHAVIOR: url(#default#AnchorClick); FONT-FAMILY: =
+Arial
+}
+A.listItemNoLine {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: arial; TEXT-DECORATION: =
+none
+}
+DIV.systemMessage {
+	FONT-SIZE: 16px; COLOR: black; font-familiy: arial
+    font-weight:Bold
+}
+SPAN.ColorobjectName {
+	COLOR: #ffffff
+}
+SPAN.field {
+	FONT-SIZE: 12px; FONT-FAMILY: arial
+}
+SPAN.SubTitleAdmin {
+	FONT-WEIGHT: bold; FONT-FAMILY: Arial
+}
+.Side {
+	SCROLLBAR-BASE-COLOR: whitesmoke; BACKGROUND-COLOR: whitesmoke
+}
+.PortalSide {
+	SCROLLBAR-BASE-COLOR: #78adde; BACKGROUND-COLOR: #eceffb
+}
+.Header {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-SIZE: 14px; COLOR: #ffffff; =
+BACKGROUND-COLOR: #70a7ac
+}
+BODY {
+	FONT-SIZE: 12px; COLOR: black; FONT-FAMILY: Arial; BACKGROUND-COLOR: =
+whitesmoke
+}
+.Header_Rec {
+	WIDTH: 20px; BACKGROUND-COLOR: #f6d94d
+}
+.Sorted_Table_Header_ON {
+	FONT-WEIGHT: bold; COLOR: #f6f17c; BACKGROUND-COLOR: #5f76bc; =
+TEXT-DECORATION: underline
+}
+.Sorted_Table_Header_ON_CATALOG {
+	FONT-WEIGHT: bold; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/grad_long.gif); COLOR: #f7fa08; =
+TEXT-DECORATION: underline
+}
+.Sorted_Table_Header_OFF {
+	FONT-WEIGHT: bold; COLOR: white; BACKGROUND-COLOR: #5f76bc; =
+TEXT-DECORATION: underline
+}
+.Sorted_Table_Header_MAIN_CATALOG_REGISTRATION {
+	FONT-WEIGHT: bold; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/grad_long.gif); COLOR: white
+}
+.Sorted_Table_Header_OFF_CATALOG_REGISTRATION {
+	FONT-WEIGHT: bold; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/grad_long.gif); COLOR: white; =
+TEXT-DECORATION: underline
+}
+.Regular_Table_Header {
+	FONT-WEIGHT: bold; COLOR: white; BACKGROUND-COLOR: #5f76bc
+}
+.Table_Content_Main {
+	BACKGROUND-COLOR: #c9daec
+}
+.Table_Content_Main_GREY {
+	BACKGROUND-COLOR: #e1e1e1
+}
+.Table_Content_Main_Item {
+	BACKGROUND-COLOR: #c6dbec
+}
+.Table_Content_Main_Question {
+	BACKGROUND-COLOR: #deedf2
+}
+.Table_Content_Main_Gray {
+	BACKGROUND-COLOR: #dce1e7
+}
+.Table_AssignmentContent_Main_old {
+	BACKGROUND-COLOR: #c9daec
+}
+.Table_AssignmentContent_Main {
+	BACKGROUND-COLOR: #dbe6f2
+}
+.Table_AssignmentContent_Main_Level_0 {
+	BACKGROUND-COLOR: #93b5d9
+}
+.Table_AssignmentContent_Main_level_1 {
+	BACKGROUND-COLOR: #b7cee6
+}
+.Table_AssignmentContent_Main_Level_2 {
+	BACKGROUND-COLOR: #c9daec
+}
+.Table_AssignmentContent_Main_Student {
+	BACKGROUND-COLOR: #c9daec
+}
+.AssignmentTableClass {
+	BORDER-RIGHT: medium none; BORDER-TOP: medium none; BORDER-LEFT: medium =
+none; BORDER-BOTTOM: medium none
+}
+.Table_Content_Secondary {
+	BACKGROUND-COLOR: #deedf2
+}
+.kishur {
+	CURSOR: hand; COLOR: blue; TEXT-DECORATION: underline
+}
+.Sub_Header {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; COLOR: black; BACKGROUND-COLOR: =
+#9fcadd
+}
+TD {
+	FONT-SIZE: 12px; FONT-FAMILY: Arial
+}
+.BorderTd {
+	BORDER-LEFT: white 2px solid; BORDER-BOTTOM: white 2px solid
+}
+.Sorted_Table_Header {
+	FONT-WEIGHT: bold; COLOR: #ffffff; BACKGROUND-COLOR: #5f76bc
+}
+.Sorted_Table_Header_CATALOG {
+	FONT-WEIGHT: bold; COLOR: #ffffff; BACKGROUND-COLOR: #3a9fda
+}
+.Search_Title {
+	BORDER-RIGHT: yellow 1px; BORDER-TOP: yellow 1px; BORDER-LEFT: yellow =
+1px; BORDER-BOTTOM: yellow 1px; BACKGROUND-COLOR: #fafbdb
+}
+.Search_Title_Forum {
+	BACKGROUND-COLOR: #f6f6fe
+}
+.Title_Forum {
+	BACKGROUND-COLOR: #e0edff
+}
+.New_Forum {
+	COLOR: mediumblue
+}
+SPAN.PortalTitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #ffffff; FONT-FAMILY: Arial; =
+BACKGROUND-COLOR: #5f76bc
+}
+.Description {
+	BACKGROUND-COLOR: #e6e6e6
+}
+INPUT {
+	FONT-SIZE: 12px; FONT-FAMILY: Arial
+}
+SELECT {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; FONT-SIZE: 12px; =
+BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid; FONT-FAMILY: Arial
+}
+TEXTAREA {
+	FONT-SIZE: 12px; COLOR: black; FONT-FAMILY: Arial
+}
+.buttons {
+	BORDER-RIGHT: #5d77bc 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: =
+#5d77bc 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; VERTICAL-ALIGN: =
+middle; BORDER-LEFT: #5d77bc 1px solid; CURSOR: hand; COLOR: #5e3fb4; =
+BORDER-BOTTOM: #5d77bc 1px solid; FONT-FAMILY: Arial; LETTER-SPACING: =
+normal; HEIGHT: 18px; BACKGROUND-COLOR: #f3ffc8
+}
+.Sub_Header_Rec {
+	WIDTH: 20px; BACKGROUND-COLOR: #f6d94d
+}
+.Table_Content_MainB {
+	BACKGROUND-COLOR: #bac6f8
+}
+.Buttons_With_Img {
+	BORDER-RIGHT: #5d77bc 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: =
+#5d77bc 1px solid; PADDING-LEFT: 2px; FONT-WEIGHT: normal; FONT-SIZE: =
+12px; VERTICAL-ALIGN: bottom; BORDER-LEFT: 0px; CURSOR: hand; COLOR: =
+#5e3fb4; BORDER-BOTTOM: #5d77bc 1px solid; FONT-FAMILY: Arial; =
+LETTER-SPACING: normal; HEIGHT: 18px; BACKGROUND-COLOR: #f3ffc8; =
+TEXT-DECORATION: none
+}
+.img {
+	BORDER-RIGHT: 0px; BORDER-TOP: #5d77bc 1px solid; VERTICAL-ALIGN: =
+bottom; BORDER-LEFT: #5d77bc 1px solid; CURSOR: hand; BORDER-BOTTOM: =
+#5d77bc 1px solid; HEIGHT: 16px; BACKGROUND-COLOR: #f3ffc8
+}
+.Link_Buttons {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: 1px solid; =
+PADDING-LEFT: 2px; FONT-WEIGHT: normal; FONT-SIZE: 12px; VERTICAL-ALIGN: =
+bottom; BORDER-LEFT: 1px solid; CURSOR: hand; COLOR: #5e3fb4; =
+BORDER-BOTTOM: 1px solid; FONT-FAMILY: Arial; LETTER-SPACING: normal; =
+HEIGHT: 18px; BACKGROUND-COLOR: #f3ffc8; TEXT-DECORATION: none
+}
+.textbox {
+	BORDER-RIGHT: #787878 1px solid; BORDER-TOP: #787878 1px solid; =
+VERTICAL-ALIGN: middle; BORDER-LEFT: #787878 1px solid; BORDER-BOTTOM: =
+#787878 1px solid; BACKGROUND-COLOR: #ffffff
+}
+.textboxBottomLine {
+	BORDER-RIGHT: #787878 0px solid; BORDER-TOP: #787878 0px solid; =
+BORDER-LEFT: #787878 0px solid; BORDER-BOTTOM: black 1px solid; =
+BACKGROUND-COLOR: #f5f5f5
+}
+A.TopMenuLink {
+	FONT-SIZE: 10pt; FONT-FAMILY: Arial; BACKGROUND-COLOR: #aac3d9; =
+TEXT-DECORATION: none
+}
+.OverLinkMenu {
+	FONT-SIZE: 10pt; FONT-FAMILY: Arial; BACKGROUND-COLOR: #aac3d9; =
+TEXT-DECORATION: underline
+}
+.TopBody {
+	BACKGROUND-COLOR: #aac3d9
+}
+.TopStick {
+	COLOR: #34608d
+}
+.CourseTopColor {
+	BACKGROUND-COLOR: #316594
+}
+.CourseTopColorA {
+	COLOR: #dcff60
+}
+.RemarkGray {
+	FONT-SIZE: 12px; COLOR: gray; FONT-FAMILY: Arial
+}
+.OLD_Sorted_Assignments_Table_ON {
+	FONT-WEIGHT: bold; COLOR: #f6f17c; BACKGROUND-COLOR: #70a7ac; =
+TEXT-DECORATION: underline
+}
+.Sorted_Assignments_Table_ON {
+	FONT-WEIGHT: bold; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/PersonalFiletop-back.jpg); COLOR: =
+#f6f17c; TEXT-DECORATION: underline
+}
+.Sorted_Assignments_Table_OFF {
+	FONT-WEIGHT: bold; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/PersonalFiletop-back.jpg); COLOR: =
+white; TEXT-DECORATION: underline
+}
+.OLD_Sorted_Assignments_Table_OFF {
+	FONT-WEIGHT: bold; COLOR: white; BACKGROUND-COLOR: #70a7ac; =
+TEXT-DECORATION: underline
+}
+.Assignments_Header_Sort_ON {
+	FONT-WEIGHT: bold; COLOR: #f6f17c; BACKGROUND-COLOR: #5f76bc
+}
+.MetaDataSection {
+	BORDER-RIGHT: #316594 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: =
+#316594 1px solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; MARGIN: 0px =
+0px 5px; BORDER-LEFT: #316594 1px solid; WIDTH: 100%; PADDING-TOP: 5px; =
+BORDER-BOTTOM: #316594 1px solid; BACKGROUND-COLOR: #e5e1e1
+}
+.Assignments_Header_Sort_OFF {
+	FONT-WEIGHT: bold; COLOR: white; BACKGROUND-COLOR: #5f76bc
+}
+.AssignmentsStudent_Header_Sort_OFF {
+	FONT-WEIGHT: bold; COLOR: white; BACKGROUND-COLOR: #5f76bc; TEXT-ALIGN: =
+center
+}
+.AdminNav {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #deedf2; CURSOR: hand; =
+COLOR: #1a4f7b; FONT-FAMILY: Arial
+}
+.AdminNavSelect {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #194f7b; CURSOR: hand; =
+COLOR: #ffffff; FONT-FAMILY: Arial
+}
+.AdminNavSelectPreferences {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #5599be; CURSOR: hand; =
+COLOR: #ffffff; FONT-FAMILY: Arial
+}
+.AdminNavPreferences {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #a2c9d0; CURSOR: hand; =
+COLOR: #045487; FONT-FAMILY: Arial
+}
+.AdminSubNav {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #b4c4d4; CURSOR: hand; =
+COLOR: #355fa9; FONT-FAMILY: Arial
+}
+.AdminSubNavSelect {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #355fa9; CURSOR: hand; =
+COLOR: #ffffff; FONT-FAMILY: Arial
+}
+A.listItemAdmin {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: arial; TEXT-DECORATION: =
+none
+}
+.Mandatory {
+	COLOR: #ff0000
+}
+.Search {
+	BACKGROUND-COLOR: whitesmoke
+}
+.Vcompetency {
+	BACKGROUND-COLOR: #7b8fd0
+}
+.Wcompetency {
+	BACKGROUND-COLOR: #e1707b
+}
+.Mcompetency {
+	BACKGROUND-COLOR: #d5d7e0
+}
+.NoFitnessPortal {
+	COLOR: red; TEXT-DECORATION: none
+}
+.LoginLinks {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: #5e7cb8
+}
+.CommBody {
+	BACKGROUND-COLOR: whitesmoke
+}
+.titleNotActiveComm {
+	FONT-SIZE: 16px; COLOR: #70a7ac; FONT-FAMILY: arial; TEXT-DECORATION: =
+none
+}
+.SubTitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 11pt; FONT-FAMILY: Arial
+}
+.CatalogList {
+	BACKGROUND-COLOR: #f6f6fe
+}
+.CatalogLE {
+	FONT-WEIGHT: bold; COLOR: #ffffff; BACKGROUND-COLOR: #5f76bc
+}
+.TopBoardTable {
+	BORDER-RIGHT: #70a7ac 1px solid; BORDER-TOP: #70a7ac 1px solid; =
+BORDER-LEFT: #70a7ac 1px solid
+}
+.TopBoardTableMessageNew {
+	BORDER-TOP: #c3daea 1px solid
+}
+.MessageBoardTable {
+	BORDER-RIGHT: #70a7ac 1px solid; BORDER-TOP: #70a7ac 1px solid; =
+BORDER-LEFT: #70a7ac 1px solid; BORDER-BOTTOM: #70a7ac 1px solid; =
+BACKGROUND-COLOR: #fcfdef
+}
+.TopSelect {
+	FONT-WEIGHT: bold; FONT-SIZE: 20px; CURSOR: default; COLOR: #362e5f; =
+FONT-FAMILY: Arial
+}
+.CourseTop1 {
+	COLOR: #dcff60
+}
+.CourseTop2 {
+	BACKGROUND-COLOR: #316594
+}
+.CourseTop3 {
+	COLOR: #316594
+}
+.CourseTop4 {
+	BACKGROUND-COLOR: #f7fbde
+}
+.TopNews {
+	BORDER-BOTTOM: #78adde 1px solid; BACKGROUND-COLOR: #d6dfff
+}
+.BottomNews {
+	BORDER-TOP: #78adde 1px solid; BACKGROUND-COLOR: #d6dfff
+}
+.TopBottomLine {
+	BACKGROUND-COLOR: #100159
+}
+.CalendarDatePickMonth {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; COLOR: white; =
+BORDER-BOTTOM: 0px; BACKGROUND-COLOR: #5f76bc; TEXT-ALIGN: center
+}
+.CatalogLEPath {
+	COLOR: #ffffff; BACKGROUND-COLOR: #5f76bc
+}
+.ButtonsLowZone {
+	COLOR: white; BACKGROUND-COLOR: #184c7b
+}
+.Addressbook_Search_Title {
+	BACKGROUND-COLOR: #fafad2
+}
+.ToolBarAssignmentOn {
+	COLOR: #ffffff; BACKGROUND-COLOR: #5998c1
+}
+.ToolBarAssignmentOff {
+	COLOR: #3258a3; BACKGROUND-COLOR: #a1c8cd
+}
+.AdminNavSecRow {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #bed0ed; CURSOR: hand; =
+COLOR: #4682b4; FONT-FAMILY: Arial
+}
+.AdminNavSelectSecRow {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #3a66a7; CURSOR: hand; =
+COLOR: #f0e68c; FONT-FAMILY: Arial
+}
+.Backbody {
+	BACKGROUND-POSITION: center center; BACKGROUND-REPEAT: no-repeat; =
+BACKGROUND-COLOR: transparent; background-scroll: fixed
+}
+.section-inner {
+	BORDER-RIGHT: #92a5b4 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: =
+#92a5b4 1px solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; BORDER-LEFT: =
+#92a5b4 1px solid; WIDTH: 100%; PADDING-TOP: 0px; BORDER-BOTTOM: #92a5b4 =
+1px solid; BORDER-COLLAPSE: collapse; HEIGHT: 25px
+}
+.RemarkTree-Div {
+	BORDER-RIGHT: #92a5b4 1px solid; BORDER-TOP: #92a5b4 1px solid; =
+Z-INDEX: 101; LEFT: 183px; VISIBILITY: visible; BORDER-LEFT: #92a5b4 1px =
+solid; WIDTH: 250px; COLOR: black; BORDER-BOTTOM: #92a5b4 1px solid; =
+POSITION: absolute; TOP: 150px; HEIGHT: 150px; BACKGROUND-COLOR: #bfd9f2
+}
+.inner-Table {
+	BORDER-RIGHT: #92a5b4 1px solid; BORDER-TOP: #92a5b4 1px solid; =
+BORDER-LEFT: #92a5b4 1px solid; WIDTH: 85%; BORDER-BOTTOM: #92a5b4 1px =
+solid; BACKGROUND-COLOR: white
+}
+.PF_Header {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-WEIGHT: bold; FONT-SIZE: =
+14px; COLOR: #093071
+}
+.PF_Header_Rec {
+	WIDTH: 20px; BACKGROUND-COLOR: #093071
+}
+.PF_AdminNavPreferences {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #d0e1f1; CURSOR: hand; =
+COLOR: #093071; FONT-FAMILY: Arial
+}
+.PF_AdminNavSelectPreferences {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #8db3d7; CURSOR: hand; =
+COLOR: #ffffff; FONT-FAMILY: Arial
+}
+.PF_AdminNavPreferencesNew {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #e1eaf3; CURSOR: hand; =
+COLOR: #5982ab; FONT-FAMILY: Arial
+}
+.PF_AdminNavSelectPreferencesNew {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #8db3d7; CURSOR: hand; =
+COLOR: #285887; FONT-FAMILY: Arial
+}
+.PF_AdminNavPreferencesTable {
+	BORDER-RIGHT: #184d7b thin solid; BORDER-TOP: #184d7b thin solid; =
+BORDER-LEFT: #184d7b thin solid; BORDER-BOTTOM: #184d7b thin solid
+}
+.PF_PropertyName {
+	FONT-WEIGHT: bold; BACKGROUND: #adccea
+}
+.PF_PropertyValue {
+	FONT-WEIGHT: normal; BACKGROUND: #c5ddf4
+}
+.PF_PropertyValue_Button {
+	BORDER-RIGHT: #093071 1px solid; BORDER-TOP: #093071 1px solid; =
+FONT-WEIGHT: normal; BACKGROUND: #c5ddf4; BORDER-LEFT: #093071 1px =
+solid; COLOR: blue; BORDER-BOTTOM: #093071 1px solid
+}
+.ResponseGuidence {
+	BACKGROUND-COLOR: #e7e7e7
+}
+.FAV_NormalText {
+	FONT-SIZE: 9pt; COLOR: #285887; FONT-FAMILY: Arial
+}
+.FAV_NormalText_HREF {
+	FONT-SIZE: 9pt; COLOR: #285887; FONT-FAMILY: Arial; TEXT-DECORATION: =
+underline
+}
+A.MetaTypes {
+	COLOR: black; TEXT-DECORATION: none
+}
+A.MetaTypes:hover {
+	TEXT-DECORATION: underline
+}
+A.MetaTypesBold {
+	FONT-WEIGHT: bold; COLOR: black
+}
+A.MetaMatchTypes {
+	COLOR: black; TEXT-DECORATION: none
+}
+A.MetaMatchTypes:hover {
+	TEXT-DECORATION: underline
+}
+A.MetaMatchTypesBold {
+	FONT-WEIGHT: bold; COLOR: black
+}
+.PF_HeaderB {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-WEIGHT: bold; FONT-SIZE: =
+14px; BACKGROUND-ATTACHMENT: scroll; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/PersonalFiletop-back.jpg); COLOR: =
+#093071
+}
+.PF_Header_Sub {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-WEIGHT: bold; FONT-SIZE: =
+14px; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/SubHeaderImg.gif); COLOR: #093071
+}
+.PF_Header_Sub_Rec {
+	WIDTH: 20px; BACKGROUND-COLOR: #8a9cba
+}
+.PF_Header_Sub_MD {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-WEIGHT: bold; FONT-SIZE: =
+14px; COLOR: white; BACKGROUND-COLOR: #3e56a0
+}
+.PF_Header_Sub_MD {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-WEIGHT: bold; FONT-SIZE: =
+14px; COLOR: white; BACKGROUND-COLOR: #3e56a0
+}
+.MESSAGES_BACKGROUND_COLOR {
+	BORDER-RIGHT: #c3daea thin solid; BORDER-TOP: white thin solid; =
+BORDER-LEFT: #c3daea thin solid; BORDER-BOTTOM: #c3daea thin solid; =
+BACKGROUND-COLOR: #e5eef7
+}
+.MESSAGES_TD_COLOR {
+	BORDER-RIGHT: #e5eef7; BORDER-TOP: #e5eef7; BORDER-LEFT: #e5eef7; =
+BORDER-BOTTOM: #e5eef7; BACKGROUND-COLOR: #e5eef7
+}
+.PF_Header_Sub_Content {
+	BACKGROUND-COLOR: #e3edf7
+}
+.PF_Header_Content {
+	COLOR: #e3edf7
+}
+.Sorted_READNSIGN_Table_ON {
+	FONT-WEIGHT: bold; COLOR: #f6f17c; TEXT-DECORATION: underline
+}
+.Sorted_READNSIGN_Table_OFF {
+	FONT-WEIGHT: bold; COLOR: white; TEXT-DECORATION: underline
+}
+.Assignments_Header_Sort_OFF_InnerTable {
+	FONT-WEIGHT: bold; COLOR: white; BACKGROUND-COLOR: #8195d2
+}
+.Table_Content_Main_InnerTable {
+	BACKGROUND-COLOR: #dde7f2
+}
+.visible {
+	DISPLAY: block; VISIBILITY: visible
+}
+.invisible {
+	DISPLAY: none; VISIBILITY: hidden
+}
+.ltr {
+	DIRECTION: ltr
+}
+.TypeLink {
+	FONT-SIZE: 12px; CURSOR: hand; COLOR: black; TEXT-DECORATION: none
+}
+.AssMDSystemHeader {
+	BORDER-BOTTOM: #ffffff 1px solid; BACKGROUND-COLOR: #dedfe3
+}
+.AssMDCourseHeader {
+	BORDER-BOTTOM: #ffffff 1px solid; BACKGROUND-COLOR: #c9daec
+}
+.ItemLink {
+	CURSOR: hand; COLOR: blue; TEXT-DECORATION: none
+}
+A.ItemLink:hover {
+	CURSOR: hand; TEXT-DECORATION: underline
+}
+.ItemApprovalDescriptionBackground {
+	BACKGROUND-COLOR: #e7e7e7
+}
+.Table_ItemApproval_Content_Main {
+	BACKGROUND-COLOR: #e5e8ed
+}
+.Table_Content_Main_Light {
+	BACKGROUND-COLOR: #e9f0f8
+}
+.iframeDimensions {
+	WIDTH: 675px; HEIGHT: 300px
+}
+P {
+	PAGE-BREAK-AFTER: always
+}
+.buttons_With_Img_Disable {
+	BORDER-RIGHT: #5f76bc 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: =
+#5f76bc 1px solid; PADDING-LEFT: 2px; FONT-WEIGHT: normal; FONT-SIZE: =
+12px; VERTICAL-ALIGN: bottom; BORDER-LEFT: 0px; CURSOR: hand; COLOR: =
+#564da6; BORDER-BOTTOM: #5f76bc 1px solid; FONT-FAMILY: Arial; =
+LETTER-SPACING: normal; HEIGHT: 18px; BACKGROUND-COLOR: #bdc0ac; =
+TEXT-DECORATION: none
+}
+.ContentListHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; COLOR: white; BACKGROUND-COLOR: =
+#315678
+}
+.ContentListTable {
+	BORDER-RIGHT: #315678 1px solid; BORDER-TOP: #315678 0px solid; =
+BORDER-LEFT: #315678 1px solid; BORDER-BOTTOM: #315678 1px solid
+}
+.DisableLinkableElementText {
+	FONT-SIZE: 12px; COLOR: black; FONT-FAMILY: Arial; TEXT-DECORATION: =
+none
+}
+.firebrick {
+	COLOR: firebrick
+}
+.Header_Border {
+	BORDER-RIGHT: whitesmoke thin solid; BORDER-TOP: whitesmoke thin solid; =
+BORDER-LEFT: whitesmoke thin solid; BORDER-BOTTOM: whitesmoke thin solid
+}
+.iframeDimensions600 {
+	WIDTH: 550px; HEIGHT: 300px
+}
+.img_Disable {
+	BORDER-RIGHT: 0px; BORDER-TOP: #5f76bc 1px solid; VERTICAL-ALIGN: =
+bottom; BORDER-LEFT: #5f76bc 1px solid; CURSOR: hand; BORDER-BOTTOM: =
+#5f76bc 1px solid; HEIGHT: 16px; BACKGROUND-COLOR: #bdc0ac
+}
+.ItemApprovalLink {
+	CURSOR: hand; COLOR: blue; TEXT-DECORATION: underline
+}
+.ItemPagesBar {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-WEIGHT: bold; FONT-SIZE: =
+14px; BACKGROUND-ATTACHMENT: scroll; MARGIN-LEFT: 1px; BACKGROUND-COLOR: =
+#dfe7f1
+}
+.ItemPageSelectedTD {
+	FONT-WEIGHT: bold; FONT-SIZE: 13px; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/SelectedPageBG.gif); BORDER-LEFT: white =
+1px solid; COLOR: #093071; FONT-FAMILY: Arial
+}
+.ItemPagesTable {
+	BORDER-TOP: white 2px solid
+}
+.ItemPageTD {
+	FONT-WEIGHT: normal; FONT-SIZE: 13px; BORDER-LEFT: white 1px solid; =
+COLOR: #093071; FONT-FAMILY: Arial
+}
+.ItemStyle {
+	WIDTH: 180px
+}
+.Option_Label {
+	BORDER-RIGHT: #5f76bc 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: =
+#5f76bc 1px solid; PADDING-LEFT: 2px; FONT-WEIGHT: normal; FONT-SIZE: =
+12px; BACKGROUND-IMAGE: none; VERTICAL-ALIGN: bottom; BORDER-LEFT: =
+#5f76bc 1px solid; COLOR: navy; BORDER-BOTTOM: #5f76bc 1px solid; =
+BACKGROUND-REPEAT: repeat; FONT-FAMILY: Arial; LETTER-SPACING: normal; =
+HEIGHT: 18px; BACKGROUND-COLOR: #dee2e3; TEXT-DECORATION: none
+}
+.RegularElementText {
+	FONT-SIZE: 12px; COLOR: #315678; FONT-FAMILY: Arial; TEXT-DECORATION: =
+none
+}
+.Remark {
+	FONT-SIZE: 11px; FONT-FAMILY: Arial
+}
+.Selected_subject {
+	FONT-WEIGHT: bold; COLOR: white
+}
+.Table_Content_MainC {
+	BACKGROUND-COLOR: #e3edf7
+}
+.TestTime {
+	BORDER-RIGHT: darkblue 1px solid; BORDER-TOP: darkblue 1px solid; =
+BORDER-LEFT: darkblue 1px solid; BORDER-BOTTOM: darkblue 1px solid; =
+BACKGROUND-COLOR: #deebff
+}
+.wait {
+	BORDER-RIGHT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; PADDING-LEFT: =
+0px; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-LEFT: 0px; WIDTH: 100%; =
+PADDING-TOP: 0px; BORDER-BOTTOM: 0px; POSITION: relative; TOP: 0px; =
+HEIGHT: 100%; TEXT-ALIGN: center
+}
+A.ItemApprovalLink {
+	CURSOR: hand; COLOR: blue; TEXT-DECORATION: underline
+}
+A.LinkableElementText {
+	FONT-SIZE: 12px; COLOR: blue; FONT-FAMILY: Arial; TEXT-DECORATION: none
+}
+A.LinkableElementText:hover {
+	FONT-SIZE: 12px; COLOR: blue; FONT-FAMILY: Arial; TEXT-DECORATION: =
+underline
+}
+A.PageLink {
+	COLOR: #093071; TEXT-DECORATION: none
+}
+A.PageLink:hover {
+	COLOR: #093071; TEXT-DECORATION: underline
+}
+A.PageLink:visited {
+	COLOR: #093071
+}
+A.PageLinkSelected {
+	COLOR: #093071; TEXT-DECORATION: none
+}
+A.PageLinkSelected:hover {
+	COLOR: #093071; TEXT-DECORATION: underline
+}
+A.PageLinkSelected:visited {
+	COLOR: #093071
+}
+A.SelectedElementText:hover {
+	FONT-SIZE: 12px; COLOR: #f95f0b; FONT-FAMILY: Arial; TEXT-DECORATION: =
+underline
+}
+A.SelectedElementText:link {
+	FONT-SIZE: 12px; COLOR: #f95f0b; FONT-FAMILY: Arial; TEXT-DECORATION: =
+none
+}
+.img2 {
+	BORDER-RIGHT: #5f76bc 1px solid; BORDER-TOP: #5f76bc 1px solid; =
+VERTICAL-ALIGN: bottom; BORDER-LEFT: 0px; CURSOR: hand; BORDER-BOTTOM: =
+#5f76bc 1px solid; HEIGHT: 16px; BACKGROUND-COLOR: #f6ffc0
+}
+.Buttons_With_Img2 {
+	BORDER-RIGHT: 0px; PADDING-RIGHT: 2px; BORDER-TOP: #5f76bc 1px solid; =
+PADDING-LEFT: 2px; FONT-WEIGHT: normal; FONT-SIZE: 12px; VERTICAL-ALIGN: =
+bottom; BORDER-LEFT: #5f76bc 1px solid; CURSOR: hand; COLOR: #564da6; =
+BORDER-BOTTOM: #5f76bc 1px solid; FONT-FAMILY: Arial; LETTER-SPACING: =
+normal; HEIGHT: 18px; BACKGROUND-COLOR: #f6ffc0; TEXT-DECORATION: none
+}
+.ItemPageLastTD {
+	FONT-WEIGHT: normal; FONT-SIZE: 13px; FONT-FAMILY: Arial
+}
+.mainPage {
+	BACKGROUND-COLOR: whitesmoke
+}
+.MastField {
+	FONT-SIZE: 12px; COLOR: red; FONT-FAMILY: Arial
+}
+.ReadNSignSide {
+	BACKGROUND-COLOR: #ffe38b
+}
+.RegularElement0 {
+	FONT-WEIGHT: bold; BACKGROUND-COLOR: #c6dbef
+}
+.RegularElement1 {
+	BACKGROUND-COLOR: #e5ecf3
+}
+.RegularElement2 {
+	BACKGROUND-COLOR: #f3f8fc
+}
+.Search_Title_ON {
+	FONT-WEIGHT: bold; COLOR: #585858; BACKGROUND-COLOR: #e6e6e6
+}
+.Search_Title_OFF {
+	FONT-WEIGHT: bold; COLOR: #a51414; BACKGROUND-COLOR: #e6e6e6
+}
+.bold {
+=09
+}
+A.MenuItem_Item_Name:link {
+=09
+}
+A.MenuItem_Item_Name:visited {
+=09
+}
+A.MenuItem_Item_Name:hover {
+=09
+}
+A.MenuItem_Item_Name:active {
+=09
+}
+A.MenuItem_Question_Name:link {
+=09
+}
+A.MenuItem_Question_Name:visited {
+=09
+}
+A.MenuItem_Question_Name:hover {
+=09
+}
+A.MenuItem_Question_Name:active {
+=09
+}
+.MenuItem_Item_Name {
+	COLOR: blue
+}
+.MenuItem_Question_Name {
+	COLOR: blue
+}
+.LowerMenu {
+	BACKGROUND-POSITION: center top; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/lower_item.gif); BACKGROUND-REPEAT: =
+repeat-x; BACKGROUND-COLOR: transparent; background-scroll: fixed
+}
+.ExamQuesListFont {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #093071; TEXT-DECORATION: =
+underline
+}
+.Exam_Ques_List_Body {
+	BACKGROUND-COLOR: #eff3fe
+}
+.Exam_Nav_Ques_Body {
+	BACKGROUND-COLOR: #e9f1fb
+}
+A.ExamLink:link {
+	COLOR: navy
+}
+A.ExamLink:visited {
+	COLOR: navy
+}
+A.ExamLink:hover {
+	COLOR: navy
+}
+A.ExamLink:active {
+	COLOR: blue
+}
+.Exam_Ques_List {
+	BACKGROUND-COLOR: whitesmoke
+}
+.Exam_Ques_List_Done {
+	BACKGROUND-COLOR: #ffdfa0
+}
+.Exam_Ques_List_Wrong {
+	BACKGROUND-COLOR: #ff2626
+}
+.Exam_Ques_List_Active {
+	BACKGROUND-COLOR: #ffa800
+}
+.Exam_Ques {
+	FONT-SIZE: 16px; COLOR: firebrick
+}
+.Exam_Summary_Title {
+	COLOR: navy
+}
+.Exam_Ques_Embed_Option {
+	BORDER-RIGHT: white 3px ridge; PADDING-RIGHT: 2px; BORDER-TOP: white =
+3px ridge; PADDING-LEFT: 2px; PADDING-BOTTOM: 0px; BORDER-LEFT: white =
+3px ridge; COLOR: white; PADDING-TOP: 0px; BORDER-BOTTOM: white 3px =
+ridge; BACKGROUND-COLOR: #842010
+}
+.Table_Col_Header {
+	BACKGROUND-COLOR: #93badb
+}
+.Table_Col_Content {
+	BACKGROUND-COLOR: #c9daec
+}
+A.linkStyle:link {
+	COLOR: blue; TEXT-DECORATION: underline
+}
+A.linkStyle:visited {
+	COLOR: blue; TEXT-DECORATION: underline
+}
+A.linkStyle:hover {
+	COLOR: blue; TEXT-DECORATION: underline
+}
+A.linkStyle:active {
+	COLOR: #800080; TEXT-DECORATION: underline
+}
+A.linkStyleNoDecoration:link {
+	COLOR: blue; TEXT-DECORATION: none
+}
+A.linkStyleNoDecoration:visited {
+	COLOR: blue; TEXT-DECORATION: none
+}
+A.linkStyleNoDecoration:hover {
+	COLOR: blue; TEXT-DECORATION: underline
+}
+A.linkStyleNoDecoration:active {
+	COLOR: #800080; TEXT-DECORATION: none
+}
+.Tree1 {
+	COLOR: #000000; BACKGROUND-COLOR: #ffffff
+}
+.FontColor {
+	COLOR: navy
+}
+.Calendar_Sorted_Table_Header {
+	FONT-WEIGHT: bold; COLOR: yellow; BACKGROUND-COLOR: #5f76bc
+}
+.Calendar_DatePick_QuickAdd {
+	BACKGROUND-COLOR: #e9edf0
+}
+SPAN.textday {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; FONT-FAMILY: arial; =
+BACKGROUND-COLOR: #efeff7
+}
+SPAN.Title {
+	FONT-SIZE: 14px; FONT-FAMILY: arial
+}
+.over {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; FONT-SIZE: =
+12px; BORDER-LEFT-COLOR: red; BORDER-BOTTOM-COLOR: red; PADDING-BOTTOM: =
+0px; WIDTH: 22px; CURSOR: hand; BORDER-TOP-STYLE: solid; =
+BORDER-TOP-COLOR: red; PADDING-TOP: 0px; FONT-FAMILY: arial; =
+BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; HEIGHT: 18px; =
+BACKGROUND-COLOR: white; BORDER-RIGHT-COLOR: red; BORDER-BOTTOM-STYLE: =
+solid
+}
+.regular {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 12px; =
+BORDER-LEFT-COLOR: #efeff7; BORDER-BOTTOM-COLOR: #efeff7; =
+PADDING-BOTTOM: 0px; WIDTH: 22px; CURSOR: hand; BORDER-TOP-STYLE: solid; =
+BORDER-TOP-COLOR: #efeff7; PADDING-TOP: 0px; FONT-FAMILY: arial; =
+BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; HEIGHT: 18px; =
+BACKGROUND-COLOR: #efeff7; BORDER-RIGHT-COLOR: #efeff7; =
+BORDER-BOTTOM-STYLE: solid
+}
+.evented {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; FONT-SIZE: =
+12px; BORDER-LEFT-COLOR: #efeff7; BORDER-BOTTOM-COLOR: #efeff7; =
+PADDING-BOTTOM: 0px; WIDTH: 22px; CURSOR: hand; BORDER-TOP-STYLE: solid; =
+BORDER-TOP-COLOR: #efeff7; PADDING-TOP: 0px; FONT-FAMILY: arial; =
+BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; HEIGHT: 18px; =
+BACKGROUND-COLOR: #efeff7; BORDER-RIGHT-COLOR: #efeff7; =
+BORDER-BOTTOM-STYLE: solid
+}
+.bad {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; FONT-SIZE: =
+12px; BORDER-LEFT-COLOR: #efeff7; BORDER-BOTTOM-COLOR: #efeff7; =
+PADDING-BOTTOM: 0px; WIDTH: 22px; CURSOR: default; BORDER-TOP-STYLE: =
+solid; BORDER-TOP-COLOR: #efeff7; PADDING-TOP: 0px; FONT-FAMILY: arial; =
+BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; HEIGHT: 18px; =
+BACKGROUND-COLOR: #efeff7; BORDER-RIGHT-COLOR: #efeff7; =
+BORDER-BOTTOM-STYLE: solid
+}
+.marked {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; FONT-SIZE: =
+12px; BORDER-LEFT-COLOR: red; BORDER-BOTTOM-COLOR: red; PADDING-BOTTOM: =
+0px; WIDTH: 22px; CURSOR: hand; BORDER-TOP-STYLE: solid; =
+BORDER-TOP-COLOR: red; PADDING-TOP: 0px; FONT-FAMILY: arial; =
+BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; HEIGHT: 18px; =
+BACKGROUND-COLOR: white; BORDER-RIGHT-COLOR: red; BORDER-BOTTOM-STYLE: =
+solid
+}
+.PagerStyle {
+	BORDER-RIGHT: #5f76bc 2px solid; BORDER-TOP: #5f76bc 2px solid; =
+DISPLAY: inline; VERTICAL-ALIGN: middle; BORDER-LEFT: #5f76bc 2px solid; =
+CURSOR: hand; COLOR: #800080; BORDER-BOTTOM: #5f76bc 2px solid; HEIGHT: =
+18px; TEXT-DECORATION: none
+}
+.Response_Table {
+	BACKGROUND-COLOR: #eaeaea
+}
+.Response_TextArea {
+	BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; =
+BORDER-LEFT: black 1px solid; BORDER-BOTTOM: black 1px solid; =
+BACKGROUND-COLOR: #fefefe
+}
+.Correct_Answer {
+	BORDER-RIGHT: #787878 1px solid; BORDER-TOP: #787878 1px solid; =
+VERTICAL-ALIGN: middle; BORDER-LEFT: #787878 1px solid; BORDER-BOTTOM: =
+#787878 1px solid; BACKGROUND-COLOR: #daf8da
+}
+.BlueFontColor {
+	COLOR: #222090
+}
+.BlueBgColor {
+	BACKGROUND-COLOR: #e6edf7
+}
+.ShaharSheliButtonWithImg {
+	BORDER-RIGHT: #5d77bc 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: =
+#5d77bc 1px solid; PADDING-LEFT: 2px; FONT-WEIGHT: normal; FONT-SIZE: =
+12px; VERTICAL-ALIGN: bottom; BORDER-LEFT: 0px; CURSOR: hand; COLOR: =
+navy; BORDER-BOTTOM: #5d77bc 1px solid; FONT-FAMILY: Arial; =
+LETTER-SPACING: normal; HEIGHT: 18px; BACKGROUND-COLOR: #e6edf7; =
+TEXT-DECORATION: none
+}
+.ShaharSheliImg {
+	BORDER-RIGHT: 0px; BORDER-TOP: #5d77bc 1px solid; VERTICAL-ALIGN: =
+bottom; BORDER-LEFT: #5d77bc 1px solid; CURSOR: hand; BORDER-BOTTOM: =
+#5d77bc 1px solid; HEIGHT: 16px; BACKGROUND-COLOR: #e6edf7
+}
+.ShaharSheliLinkButton {
+	BORDER-RIGHT: #5d77bc 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: =
+#5d77bc 1px solid; PADDING-LEFT: 2px; FONT-WEIGHT: normal; FONT-SIZE: =
+12px; VERTICAL-ALIGN: bottom; BORDER-LEFT: #5d77bc 1px solid; CURSOR: =
+hand; COLOR: navy; BORDER-BOTTOM: #5d77bc 1px solid; FONT-FAMILY: Arial; =
+LETTER-SPACING: normal; HEIGHT: 18px; BACKGROUND-COLOR: #e6edf7; =
+TEXT-DECORATION: none
+}
+.DataTblDoubleHeaderR {
+	BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/double_bright_hl.gif); HEIGHT: 39px
+}
+.NewCalendarDatePickMonth {
+	FONT-WEIGHT: bold; FONT-SIZE: 13px; COLOR: black; TEXT-ALIGN: center
+}
+.DataTblHeaderR {
+	FONT-WEIGHT: bold; FONT-SIZE: 13px; BACKGROUND-IMAGE: =
+url(/Upload/misc/CssFiles/Images/bright_hl.gif); TEXT-ALIGN: center
+}
+.SecondTitle {
+	COLOR: black; BACKGROUND-COLOR: #e6edf7
+}
+.TestEditTable {
+	BACKGROUND-COLOR: #dddddd
+}
+.TestEditSubject {
+	BACKGROUND-COLOR: #cccccc
+}
+.TestEditItem {
+	BACKGROUND-COLOR: #a6caf0
+}
+.TestPreviewSubject {
+	BACKGROUND-COLOR: #cacfd4
+}
+.TestPreviewSubjectTR {
+	FONT-SIZE: 12px; HEIGHT: 20px
+}
+.TestPreviewSubjectTD {
+	FONT-SIZE: 12px; COLOR: #143e6e
+}
+.TestPreviewItemTR {
+	HEIGHT: 20px; BACKGROUND-COLOR: #dddddd
+}
+.TestPreviewItemTD {
+	COLOR: #143e6e
+}
+.TestPreviewItemQ {
+	BACKGROUND-COLOR: #eaeaea
+}
+.TestPreviewBorder {
+	BORDER-RIGHT: #c0c3c7 thin solid; BORDER-TOP: #c0c3c7 thin solid; =
+BORDER-LEFT: #c0c3c7 thin solid; BORDER-BOTTOM: #c0c3c7 thin solid
+}
+.QuestionBody {
+	FONT-SIZE: 16px
+}
+.Question_DropDown_Headers {
+	BORDER-RIGHT: white 3px ridge; PADDING-RIGHT: 2px; BORDER-TOP: white =
+3px ridge; PADDING-LEFT: 2px; FONT-SIZE: 16px; PADDING-BOTTOM: 0px; =
+BORDER-LEFT: white 3px ridge; COLOR: white; PADDING-TOP: 0px; =
+BORDER-BOTTOM: white 3px ridge; BACKGROUND-COLOR: #842010
+}
+
+------=_NextPart_000_0000_01C945A5.B996FBD0
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://e-learn.jct.ac.il/bareket/ItemOptions2.asp?random=26218&tid=&eid=&iid=40067&qid=&mode=&sid=40169&order=&user=&SentFrom=ItemMenu.asp&DeleteSessions=&alone=&GO_BACK=&LinkedItem=&newwin=&ReqCourseGUID=0xC59313594929B645BB0ABC9D02CB2EB5&IH_Type=2&OriginalItemID=40067&FromResponses=
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>=F6=F4=E9=E9=E4 =E1=F4=F8=E9=E8 =EE=E9=E3=F2 - =
+=EE=F1=EA =E0=F4=F9=F8=E5=E9=E5=FA</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1255">
+<SCRIPT language=3Djavascript>
+
+window.setTimeout("PutRedirectWord()",3000)
+function Approve() {
+	=
+x=3Dwindow.showModalDialog("password.asp","","dialogHeight:180px;dialogWi=
+dth:300px;center:yes;status:no")
+	if(x){
+		=
+location.href=3D"ItemOptions2.asp?random=3D29334&iid=3D40067&sign=3Dno&ti=
+d=3D&eid=3D&qid=3D&mode=3D&sid=3D40169&order=3D1&user=3D&GO_BACK=3D&sentf=
+rom=3DItemMenu.asp&BeenApproved=3Dyes&Managerid=3D"+x
+	}
+}
+
+function GOTORelatedItem() {
+str=3Dnavigator.appVersion
+var IsXP=3D0
+oper_sys=3Dstr.split(";")[2]
+oper_sys_final=3Doper_sys.split(")")[0]
+oper_sys_final=3D oper_sys_final.slice(1)
+if(oper_sys_final=3D=3D"Windows NT 5.1")
+{
+	IsXP=3D1=09
+}
+		=09
+var params =3D 'RE,SB';
+var Height =3D 74;
+if(IsXP=3D=3D1)
+	Height =3D 64;
+
+if(screen.height=3D=3D600)=20
+{
+	if(IsXP=3D=3D0)
+		 Height =3D 71;
+	else
+		 Height =3D 61;=09
+}
+
+/*if (!document.RelatedItem.iid.options[0].selected) {
+		try{
+			if(parent.parent.parent.parent.parent.frames['ClearC'])
+				=
+NewItem=3Dparent.parent.parent.parent.parent.frames['ClearC'].window.open=
+('ShowItemByType.asp?random=3D27494&iid=3D'+document.RelatedItem.iid.valu=
+e+'&tid=3D'+document.RelatedItem.iid.value+'&user=3D&SentFrom=3DItemMenu.=
+asp&LinkedItem=3Dyes&vcCourseGuid=3D0xC59313594929B645BB0ABC9D02CB2EB5&vc=
+CourseID=3D24232', 'NewItem', =
+'toolbar=3Dyes,menubar=3Dyes,scrollbars=3Dyes,resizable=3Dyes,width=3D600=
+,height=3D400,top=3D' + ( screen.height - 400 ) / 2 + ',left=3D' + ( =
+screen.width - 600 ) / 2)
+			else if =
+(parent.parent.window.opener.parent.parent.parent.frames['ClearC'])
+				=
+NewItem=3Dparent.parent.window.opener.parent.parent.parent.frames['ClearC=
+'].window.open('ShowItemByType.asp?random=3D22604&iid=3D'+document.Relate=
+dItem.iid.value+'&tid=3D'+document.RelatedItem.iid.value+'&user=3D&SentFr=
+om=3DItemMenu.asp&LinkedItem=3Dyes&vcCourseGuid=3D0xC59313594929B645BB0AB=
+C9D02CB2EB5&vcCourseID=3D24232', 'NewItem', =
+'toolbar=3Dyes,menubar=3Dyes,scrollbars=3Dyes,resizable=3Dyes,width=3D600=
+,height=3D400,top=3D' + ( screen.height - 400 ) / 2 + ',left=3D' + ( =
+screen.width - 600 ) / 2)
+			else =
+if(parent.parent.window.opener.opener.parent.parent.parent.frames['ClearC=
+'])
+				=
+NewItem=3Dparent.parent.window.opener.opener.parent.parent.parent.frames[=
+'ClearC'].window.open('ShowItemByType.asp?random=3D31378&iid=3D'+document=
+.RelatedItem.iid.value+'&tid=3D'+document.RelatedItem.iid.value+'&user=3D=
+&SentFrom=3DItemMenu.asp&LinkedItem=3Dyes&vcCourseGuid=3D0xC59313594929B6=
+45BB0ABC9D02CB2EB5&vcCourseID=3D24232', 'NewItem', =
+'toolbar=3Dyes,menubar=3Dyes,scrollbars=3Dyes,resizable=3Dyes,width=3D600=
+,height=3D400,top=3D' + ( screen.height - 400 ) / 2 + ',left=3D' + ( =
+screen.width - 600 ) / 2)
+		=
+}catch(e){window.open('ShowItemByType.asp?random=3D27257&iid=3D'+document=
+.RelatedItem.iid.value+'&tid=3D'+document.RelatedItem.iid.value+'&user=3D=
+&SentFrom=3DItemMenu.asp&LinkedItem=3Dyes&vcCourseGuid=3D0xC59313594929B6=
+45BB0ABC9D02CB2EB5&vcCourseID=3D24232', 'NewItem', =
+'toolbar=3Dyes,menubar=3Dyes,scrollbars=3Dyes,resizable=3Dyes,width=3D600=
+,height=3D400,top=3D' + ( screen.height - 400 ) / 2 + ',left=3D' + ( =
+screen.width - 600 ) / 2)}
+		try{NewItem.focus()}catch(e){}
+	}*/
+	if(IsXP=3D=3D0)
+	{
+		if (!document.RelatedItem.iid.options[0].selected) {
+			try{
+				if(parent.parent.parent.parent.parent.frames['ClearC'])
+					=
+NewItem=3Dparent.parent.parent.parent.parent.frames['ClearC'].window.open=
+('ShowItemByType.asp?random=3D23316&iid=3D'+document.RelatedItem.iid.valu=
+e+'&tid=3D'+document.RelatedItem.iid.value+'&user=3D&SentFrom=3DItemMenu.=
+asp&LinkedItem=3Dyes&vcCourseGuid=3D0xC59313594929B645BB0ABC9D02CB2EB5&vc=
+CourseID=3D24232', 'NewItem', =
+'toolbar=3Dyes,menubar=3Dyes,scrollbars=3Dyes,resizable=3Dyes,width=3D'+0=
+.95 * screen.width+',height=3D'+Height/100 * =
+screen.height+',top=3D65,left=3D30')
+				else if =
+(parent.parent.window.opener.parent.parent.parent.frames['ClearC'])
+					=
+NewItem=3Dparent.parent.window.opener.parent.parent.parent.frames['ClearC=
+'].window.open('ShowItemByType.asp?random=3D29244&iid=3D'+document.Relate=
+dItem.iid.value+'&tid=3D'+document.RelatedItem.iid.value+'&user=3D&SentFr=
+om=3DItemMenu.asp&LinkedItem=3Dyes&vcCourseGuid=3D0xC59313594929B645BB0AB=
+C9D02CB2EB5&vcCourseID=3D24232', 'NewItem', =
+'toolbar=3Dyes,menubar=3Dyes,scrollbars=3Dyes,resizable=3Dyes,width=3D'+0=
+.95 * screen.width+',height=3D'+Height/100 * =
+screen.height+',top=3D65,left=3D30')
+				else =
+if(parent.parent.window.opener.opener.parent.parent.parent.frames['ClearC=
+'])
+					=
+NewItem=3Dparent.parent.window.opener.opener.parent.parent.parent.frames[=
+'ClearC'].window.open('ShowItemByType.asp?random=3D11459&iid=3D'+document=
+.RelatedItem.iid.value+'&tid=3D'+document.RelatedItem.iid.value+'&user=3D=
+&SentFrom=3DItemMenu.asp&LinkedItem=3Dyes&vcCourseGuid=3D0xC59313594929B6=
+45BB0ABC9D02CB2EB5&vcCourseID=3D24232', 'NewItem', =
+'toolbar=3Dyes,menubar=3Dyes,scrollbars=3Dyes,resizable=3Dyes,width=3D'+0=
+.95 * screen.width+',height=3D'+Height/100 * =
+screen.height+',top=3D65,left=3D30')
+			=
+}catch(e){window.open('ShowItemByType.asp?random=3D26309&iid=3D'+document=
+.RelatedItem.iid.value+'&tid=3D'+document.RelatedItem.iid.value+'&user=3D=
+&SentFrom=3DItemMenu.asp&LinkedItem=3Dyes&vcCourseGuid=3D0xC59313594929B6=
+45BB0ABC9D02CB2EB5&vcCourseID=3D24232', 'NewItem', =
+'toolbar=3Dyes,menubar=3Dyes,scrollbars=3Dyes,resizable=3Dyes,width=3D'+0=
+.95 * screen.width+',height=3D'+Height/100 * =
+screen.height+',top=3D65,left=3D30')}
+			try{NewItem.focus()}catch(e){}
+		}
+	}
+	else
+	{
+		if (!document.RelatedItem.iid.options[0].selected) {
+			try{
+				if(parent.parent.parent.parent.parent.frames['ClearC'])
+					=
+NewItem=3Dparent.parent.parent.parent.parent.frames['ClearC'].window.open=
+('ShowItemByType.asp?random=3D26161&iid=3D'+document.RelatedItem.iid.valu=
+e+'&tid=3D'+document.RelatedItem.iid.value+'&user=3D&SentFrom=3DItemMenu.=
+asp&LinkedItem=3Dyes&vcCourseGuid=3D0xC59313594929B645BB0ABC9D02CB2EB5&vc=
+CourseID=3D24232', 'NewItem', =
+'toolbar=3Dyes,menubar=3Dyes,scrollbars=3Dyes,resizable=3Dyes,width=3D'+0=
+.95 * screen.width+',height=3D'+Height/100 * =
+screen.height+',top=3D75,left=3D30')
+				else if =
+(parent.parent.window.opener.parent.parent.parent.frames['ClearC'])
+					=
+NewItem=3Dparent.parent.window.opener.parent.parent.parent.frames['ClearC=
+'].window.open('ShowItemByType.asp?random=3D20707&iid=3D'+document.Relate=
+dItem.iid.value+'&tid=3D'+document.RelatedItem.iid.value+'&user=3D&SentFr=
+om=3DItemMenu.asp&LinkedItem=3Dyes&vcCourseGuid=3D0xC59313594929B645BB0AB=
+C9D02CB2EB5&vcCourseID=3D24232', 'NewItem', =
+'toolbar=3Dyes,menubar=3Dyes,scrollbars=3Dyes,resizable=3Dyes,width=3D'+0=
+.95 * screen.width+',height=3D'+Height/100 * =
+screen.height+',top=3D75,left=3D30')
+				else =
+if(parent.parent.window.opener.opener.parent.parent.parent.frames['ClearC=
+'])
+					=
+NewItem=3Dparent.parent.window.opener.opener.parent.parent.parent.frames[=
+'ClearC'].window.open('ShowItemByType.asp?random=3D14869&iid=3D'+document=
+.RelatedItem.iid.value+'&tid=3D'+document.RelatedItem.iid.value+'&user=3D=
+&SentFrom=3DItemMenu.asp&LinkedItem=3Dyes&vcCourseGuid=3D0xC59313594929B6=
+45BB0ABC9D02CB2EB5&vcCourseID=3D24232', 'NewItem', =
+'toolbar=3Dyes,menubar=3Dyes,scrollbars=3Dyes,resizable=3Dyes,width=3D'+0=
+.95 * screen.width+',height=3D'+Height/100 * =
+screen.height+',top=3D75,left=3D30')
+			=
+}catch(e){window.open('ShowItemByType.asp?random=3D26488&iid=3D'+document=
+.RelatedItem.iid.value+'&tid=3D'+document.RelatedItem.iid.value+'&user=3D=
+&SentFrom=3DItemMenu.asp&LinkedItem=3Dyes&vcCourseGuid=3D0xC59313594929B6=
+45BB0ABC9D02CB2EB5&vcCourseID=3D24232', 'NewItem', =
+'toolbar=3Dyes,menubar=3Dyes,scrollbars=3Dyes,resizable=3Dyes,width=3D'+0=
+.95 * screen.width+',height=3D'+Height/100 * =
+screen.height+',top=3D75,left=3D30')}
+			try{NewItem.focus()}catch(e){}
+		}=09
+	}
+}
+function PrintTop()
+{
+	var bodyStr=3Dparent.frames["ItemBody"].location.href
+	var pos=3DbodyStr.toLowerCase().indexOf("redirectword")
+	if(pos>=3D0)
+		var PrintPage=3Dparent.frames["ItemBody"].frames["vcBodyWord"]
+	else=09
+		var PrintPage=3Dparent.frames["ItemBody"]
+	=09
+	PrintPage.focus()
+	PrintPage.print()
+}
+function HideImg()
+{
+	window.setTimeout("Hide()",1000)
+	//document.all['closeImg'].style.display=3D"none"
+}
+function Hide()
+{
+	document.all['closeImg'][0].style.display=3D"none"
+	document.all['closeImg'][1].style.display=3D"none"
+	//document.all['closeImg'].style.display=3D"none"
+}
+function closeImg() {
+	try{
+		if(parent.parent.name=3D=3D"vcCourseMain")
+		{
+			document.all['closeImg'][1].style.display=3D"none"
+		}
+	}
+	catch(e){}
+	try{
+		if =
+(parent.window.opener.parent.window.opener.name=3D=3D"vcPortalCalendar") =
+{
+		=09
+			document.all['image1'].style.display=3D"none"
+		}
+	}
+	catch(e){}
+=09
+	=09
+}
+function PutRedirectWord()
+{
+	try{
+		var ItemBodyUrl=3Dparent.frames["ItemBody"].location.href
+		var WinWordFile;
+		var WinWordPos=3DItemBodyUrl.indexOf("ReDirectWord.asp")
+		if (WinWordPos>-1)
+		{
+			WinWordFile=3DItemBodyUrl.substring(WinWordPos,ItemBodyUrl.length)
+			document.all["ReDirectWord"].value=3DWinWordFile
+		}
+	}
+	catch(e)
+	{}
+}
+// xml
+function sendXml( page, message ) {
+	var xmlhttp =3D new ActiveXObject( 'Microsoft.XMLHTTP' );
+	xmlhttp.Open( 'GET', page, false );
+	if( message =3D=3D null || message =3D=3D '' ) message =3D =
+'<root></root>';
+	xmlhttp.Send( message );
+	return xmlhttp.responseText;
+}
+
+function doFavoriteAction( action ) {
+	var page =3D '/HighLearnNet/Favorites/FavoritesActions.aspx'
+			+ '?action=3D' + action
+			+ '&iid=3D40067'
+			+ '&cid=3D24232'
+	var result =3D sendXml( page, null );
+	=
+try{top.window.opener.parent.parent.parent.frames["KBaseTop"].ReloadMain(=
+)}catch(e){};
+	document.location.reload();
+}
+
+function doFavoriteItem( FavoriteType ) {
+=09
+	var Command =3D "AddItemToFavorite"
+	var _Height =3D 200
+	var _Width =3D 300
+	var _IID =3D "40067"
+	var _CourseGUID =3D "0xC59313594929B645BB0ABC9D02CB2EB5"
+	var _CourseID =3D "24232"
+	var ItemName =3D "Serial+UART%2C+an+in+depth+tutorial"
+	var CurrLEID=3D"24232"
+	var ParamString =3D "&vcCourseID=3D" + _CourseID + "&vcCourseGUID=3D" + =
+_CourseGUID + "&vcCourseName=3D" + ItemName + "&ItemID=3D" +_IID	+ =
+"&FavoriteType=3D" + FavoriteType+"&CurrLEID=3D"+CurrLEID=09
+	var ParamStr =3D '/favorites/AddCourseToFavoritesPopup.asp?Command=3D' =
++ Command + ParamString
+	var result =3D sendXml( ParamStr, null );
+=09
+	window.document.location.href=3Dwindow.document.location.href;
+	alert(result)
+	//var WinAttribStr =3D 'left=3D300,top=3D200,height=3D' + _Height + =
+',width=3D' + _Width + =
+',status=3Dno,toolbar=3Dno,menubar=3Dno,location=3Dno,titlebar=3Dno'
+	//window.open(ParamStr,'',WinAttribStr);=09
+	=09
+=09
+}
+
+
+function doMyFavoriteAction(Command, FavoriteType )=20
+{
+=09
+	var _Height =3D 200
+	var _Width =3D 300
+	var _IID =3D "40067"
+	var _CourseGUID =3D "0xC59313594929B645BB0ABC9D02CB2EB5"
+	var _CourseID =3D "24232"
+	var CurrLEID=3D"24232"
+	var ItemName =3D "Serial+UART%2C+an+in+depth+tutorial"
+	var ParamString =3D "&CourseID=3D" + _CourseID + "&ItemID=3D" +_IID	+ =
+"&FavoriteType=3D" + FavoriteType+"&CurrLEID=3D"+CurrLEID	=09
+	var ParamStr =3D '/favorites/FavoriteActions.asp?Command=3D' + Command =
++ ParamString
+	var result =3D sendXml( ParamStr, null );
+	document.location.reload()=09
+=09
+}
+
+
+function ActionFavoriteItem(action)
+{
+	var ItemType =3D 2
+	var CommandDelete =3D 'Delete'
+=09
+	if (action =3D=3D 'RemoveFavorite')
+		doMyFavoriteAction(CommandDelete, ItemType  )
+	else
+		doFavoriteItem( ItemType )
+	=09
+
+	=09
+
+}
+
+function ActionRecommendedItem(action)
+{
+	var ItemType =3D 1
+	var CommandDelete =3D 'Delete'
+	if (action =3D=3D 'RemoveRecommendation')
+		doMyFavoriteAction(CommandDelete, ItemType  )
+
+	else
+		doFavoriteItem( ItemType )
+	=09
+}
+
+
+function OpenMetadata()
+{
+
+	var _Height =3D 595
+	var _Width =3D 350
+=09
+	Command =3D "DisplayItem"
+	var ItemID =3D 40067
+	ParamString =3D "&TypeID=3D-99&ItemID=3D" + ItemID
+
+	var ParamStr =3D 'SetFieldsValues.asp?Command=3D' + Command + =
+ParamString
+	var WinAttribStr =3D 'center=3Dyes;dialogHeight=3D' + _Height + =
+'px;dialogWidth=3D' + _Width + 'px;help=3Dno;status=3Dno,resizable=3Dno'
+	var RefModalDialog =3D =
+window.showModalDialog(ParamStr,'',WinAttribStr);
+	//var RefModalDialog =3D window.open(ParamStr,'',WinAttribStr);
+
+}
+
+
+</SCRIPT>
+<LINK href=3D"http://e-learn.jct.ac.il/upload/misc/CssFiles/styles.css"=20
+rel=3DSTYLESHEET>
+<META content=3D"MSHTML 6.00.6000.16735" name=3DGENERATOR></HEAD>
+<BODY class=3DLowerMenu dir=3Drtl vLink=3Dblue topMargin=3D0 =
+onload=3DcloseImg()>
+<TABLE height=3D"100%" cellSpacing=3D0 cellPadding=3D0 width=3D"100%" =
+align=3Dcenter=20
+border=3D0>
+  <TBODY>
+  <TR>
+    <TD vAlign=3Dtop><IMG height=3D7=20
+      =
+src=3D"http://e-learn.jct.ac.il/bareket/sysimages/100/vCampus/1pix.gif"=20
+      width=3D1></TD></TR>
+  <TR><!--td23-->
+    <TD vAlign=3Dcenter align=3Dright width=3D2>&nbsp;&nbsp;</TD>
+    <FORM id=3Dform3 name=3Dform3=20
+    =
+action=3DEditItemByType.asp?random=3D13830&amp;SentFrom=3DItemMenu.asp&am=
+p;TopSubject=3D40169&amp;sid=3D40169&amp;iid=3D40067&amp;user=3D&amp;Orig=
+CourseID=3D24232&amp;FromResponses=3D=20
+    method=3Dpost target=3D_top>
+    <TD dir=3Drtl vAlign=3Dcenter align=3Dright width=3D50><SPAN=20
+      class=3DButtons_With_Img =
+onclick=3Ddocument.form3.submit()>=F2=F8=E5=EA</SPAN><IMG=20
+      class=3Dimg onclick=3Ddocument.form3.submit()=20
+      =
+src=3D"http://e-learn.jct.ac.il/bareket/sysimages/100/vCampus/common/edit=
+.gif">=20
+    </TD></FORM>
+    <TD vAlign=3Dcenter align=3Dright>&nbsp;&nbsp;</TD>
+    <TD dir=3Drtl vAlign=3Dcenter align=3Dright><NOBR><SPAN =
+class=3DLink_buttons=20
+      onclick=3DOpenMetadata()>=E4=EE=E0=F4=E9=E9=F0=E9=ED</SPAN> =
+</NOBR></TD><!--td1-->
+    <TD vAlign=3Dcenter align=3Dright width=3D2>&nbsp;&nbsp;</TD>
+    <TD dir=3Drtl vAlign=3Dcenter align=3Dright width=3D115><NOBR><SPAN=20
+      class=3DButtons_With_Img =
+onclick=3D"ActionFavoriteItem('AddFavorite');">=E4=E5=F1=F3=20
+      =EC=F0=E1=E7=F8=E9=ED =F9=EC=E9</SPAN><IMG class=3Dimg=20
+      onclick=3D"ActionFavoriteItem('AddFavorite');"=20
+      =
+src=3D"http://e-learn.jct.ac.il/bareket/sysimages/100/vCampus/common/edit=
+.gif">=20
+      </NOBR></TD>
+    <TD vAlign=3Dcenter align=3Dright width=3D2>&nbsp;&nbsp;</TD>
+    <TD dir=3Drtl vAlign=3Dcenter align=3Dright width=3D100><NOBR><SPAN=20
+      class=3DButtons_With_Img=20
+      =
+onclick=3D"ActionRecommendedItem('AddRecommendation');">=E4=E5=F1=F3=20
+      =EC=EE=E5=EE=EC=F6=E9=ED</SPAN><IMG class=3Dimg=20
+      onclick=3D"ActionRecommendedItem('AddRecommendation');"=20
+      =
+src=3D"http://e-learn.jct.ac.il/bareket/sysimages/100/vCampus/common/edit=
+.gif">=20
+      </NOBR></TD>
+    <TD vAlign=3Dcenter align=3Dleft><NOBR><SPAN =
+class=3DOption_Label>=E2=E5=E3=EC =E4=F7=E5=E1=F5:=20
+      39KB</SPAN> </NOBR></TD>
+    <TD vAlign=3Dcenter align=3Dright width=3D2>&nbsp;&nbsp;</TD>
+    <TD id=3DcloseImg dir=3Drtl vAlign=3Dcenter align=3Dleft =
+width=3D60><NOBR><SPAN=20
+      class=3Dbuttons_With_Img =
+onclick=3Djavascript:PrintTop()>=E4=E3=F4=F1</SPAN><IMG=20
+      class=3Dimg onclick=3Djavascript:PrintTop()=20
+      =
+src=3D"http://e-learn.jct.ac.il/bareket/sysimages/100/vCampus/common/prin=
+t.gif">=20
+      </NOBR></TD>
+    <TD id=3DcloseImg dir=3Drtl vAlign=3Dcenter align=3Dleft =
+width=3D60><NOBR><SPAN=20
+      class=3Dbuttons_With_Img =
+onclick=3Djavascript:top.close()>=F1=E2=E5=F8</SPAN><IMG=20
+      class=3Dimg onclick=3Djavascript:top.close()=20
+      =
+src=3D"http://e-learn.jct.ac.il/bareket/sysimages/100/vCampus/common/clos=
+e.gif">=20
+      </NOBR></TD>
+    <TD vAlign=3Dcenter align=3Dright=20
+width=3D2>&nbsp;&nbsp;</TD></TD></TR></TBODY></TABLE>
+<FORM><INPUT type=3Dhidden name=3DReDirectWord>=20
+</FORM><!-- AspEnd File --></BODY></HTML>
+
+------=_NextPart_000_0000_01C945A5.B996FBD0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://e-learn.jct.ac.il/bareket/sysimages/100/vcampus/HL_DOWN.gif
+
+R0lGODdhjQAfAPcAAAQCBFyGhKTCxNTS1DxCRJSSlDxiXNTq7LzW3Ozq7CQiJJSutGRiZLTCxDRa
+XHyipOz29KyqrGR2fFRSVHyGhNz29AwSFCwyNNze3KzO7LTOzHySlOTq7JS2vHRydEx2dLzm5Pz2
+/OTi5Pzy/JzC5JyepMza3Ozy9LTO7AQKDERWXOz+/LS2tExeZISKjDQ6PFxubNTi9HR6fERKTDxq
+ZNzy9CQqLKSqrISyrPT29BwaHKzK7Nzq9LTW9PTu/GRqbIyipKyytBQaHOTy9Jy+5FxaXJyanExi
+ZOzu/JSyrDReXGR+hBQSFNTm7MTO1IySlKS2tKTK7KSmpLzS9AwKDIyKjDw6PHx6fCwqLNzq/LzW
+7AQGBERCRJyWnOzu7MTGzOz69KyurISChOT2/DQyPKzS7HyanOTu/Fx2dOzm9KTC7MTa9PTy9LTS
+7EReXIyqrKS+vIyOjDw+PHx+fLza7GyalKzCxNTa3JSWlDxmZJyqrGRmZLTKzDxWVGx2fFRWVNzi
+5HSGjMzi9ExubPz+/LzO1Ly6vFRaXGxqbISSlKSipExKTMze9FR2fJyytISipPT+/LSytDxeXGx+
+hNzm7LzKzNTW3AwWHOTu9HR2dOTm5NTm9PT6/Nzu7IymrFxeXBQWFKS6vAwODCwuLERGRISGhDQ2
+NFx6fKzGzGxudCQmJHyWlPz6/JyipAQODERaXCQuLKSurExmZMTS1Nzu/OT6/KTG7MTe9JyurGx6
+fLzS1FReXExOTAQCDDxiZOzq9Oz2/KyqtNz2/Nze5KzO9OTq9JzC7Ozy/LTO9LS2vPT2/KzK9Iyi
+rOTy/KSmrIyKlDw6RHx6hLzW9AQGDOzu9Oz6/KyutKzS9PTy/LTS9EReZKS+xIyOlDw+RHx+hLza
+9JSWnGRmbDxWXFRWXHR2fOTm7NTm/Nzu9FxeZBQWHAwOFCwuNERGTISGjDQ2PAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAAjQAfAAAI/wBt2doh
+kGDBgVF2RCG2gxiKDNnatInYY4qWb9K0rNm48RYjRoJCxhAUY5O5TVlKZlnJIwuPMy0xYTqDqRnN
+ZseG4Dx24phPYMeAKTumTBkwTkWRclLKiVVTToQIQSXEKqrVq1izat1KaFmUKF7BJhy7Y9mOHRnS
+IsuAYspELT0yrqGj8dsaRh49hhRkzlzJkn2zHGhJmFYxWjNnDjnTDEljnNSa9ewZ1KhlZdWUMV3K
+mbPUq1W5ih4ddaxpsgrRLktLrA2KiNm0xM4ojQ7HNbc8ghRJ8qTJTZTMseRBi/CZYjSTn2iGU/LO
+oJWJCtWcVDNnp06jQoUamrT3rWTDp/9mSCxD+bUR3UrroUXuN9u3cOPdHXJTjL9ZApujxDKLYcTK
+MXbGMYwdQw1PPvmUg1AMGsXJUdZ15tlUUXX33YWElCWWWQmVlUFD5qFwzWvItOEWXO3RUdtG3+T2
+kSC7xWAOX/adFNxK/GVxzmHFJHbGTcdI5pOQ0AEDDDbTIUWdhNhBBQkrkFCF4ZRWRZGBlVemtRqI
+xJTn5UQTrRdXinPFd5eLe41k3yZsBnaASzwU419MyQ2BhJ02QZYgZZZNB+FmEjb1ZJQVUnlhWlle
+SR6XZSDTKGxtyNbeRXbZ1pFu9PElo31ZACdcfztm4eOPNTWX06lFKnNCUUIh9Wdn2EX/yZ2Uhh6K
+pZVoNeQlMl12CeYUFfUQV0bvdXQmjGmSVFKbwu1HmI5Z9Fjnj8dgEiSCCf7Up2VKWefUdduBVqt3
+5JlnLqLElNFaa9fAVlF7xNpVJm56hTSjX2v25elKLokqKmJZJGctc9fyBBRQRUlHXTWALvWtrIQ8
+Oe6h5a1msZcorMtuGz1EJJs0IGtkKb3z7VWfjPuZ1Cx/PMTZ0mE31TRggctle/Bl0y3J5FOfWWXh
+xFqV6yVrGVwDURnZjBgRxxbFZZc0c+EmH30j3cvmbzy82W9M/mISMBI11bxTT0YGheRlDzLlrWeD
+VvUz0EGz1hBa50FETDYbBxtpyCty/5QbmrzVGEOn+rEcbcswK0YtY0T6hGRlfhalM6w8U0gr3FqZ
+N3SX5qbraDaNglmRNNmA/LSx9ZpsdXBsBkdYy16fQctxAJZasMGpKoxUZpt9uxTEEmMumlkZmEUM
+roiudc3nE/UQaRsgqyjypYCLVKPKgaH0bDGwz95MZNYO2MwQ2ZrdINqTO1x5oW8LT4h5Vla8eQbK
+i7i0NMDCKy/qL+7lF42e2o9wXuevHx1mJuK7Hdlyx61XBSpclnOfVs5iFrOgJSFEKw/oOEaRKfCt
+WJbKS6YEUaO+BMccPBigS7gXrXMAaDEyCxJlEoSwbUmuYU9xUvskWCWvKMQrW1qNWv/KIKISxSZ/
+IIOa3/4GEvqs7iQCzALLeGSYH1nRMTnZSRp8MIZH2IET2ADBAgCBDQr4AQyaYYNSchCHdqyAECFQ
+BiQcEYo30mqHO/yOV2wBRLHMrTxpMRqYmNaeb1wkalID3Iz+8puTdOpZLoEJJmY3E5ss5nvM8QE2
+CuELRxTjGDjQBg+UcQlYQCIHxyBEKjVjgxlAoiiEqAYMAlGN0NgyKmwoVFbyGIKsIOSHwMSSWiAi
+EY8h0S4aoZdukGUvvthIX/mBExVpZ8UENgcJSNiGEnQxBkjU4RXACAEmIAEBZRACE4Q4gVSoIINq
+SKkTfdDDK51izqgooyq9xMotc2D/lRBUBSr5rFJCbPEV1HwIURkIHdOGFb2NwIeJJhvJfVSGkv1s
+zV/nIFWewke+cwCjGg/IQw2qUYMPLKEYhEiFCThRgAt0ox3tOMENUrCHFyxCBJDggywaQKgBMGAd
+exgGITCwCC5cYQ4iIMQVSsEFMcQhDn+wQhUIEQlVLOITi/CALwUykK6mBi0IbU3o1GO6NSgxPrcw
+QUhu4T/fBNB1w+GR7BD4I4LhZAzHWEEAfMEMZrzBAQtAQjBSoIc7pKAI4wDACwhRimmIYhcAaAcw
+cNEHO2qCCaQogSiKwAYsjGIOVBAFG1gQ2iJggAlUkAMWRFEVLsjBCgAwws+4SlCB/0ThlxhMKP0k
+UhHo1aZv1KvXIntD0ZVFkjgHnJ2AIhOZZgDjDDWgwSBy4YdG+GIb2GjHNDhxCCpwYhiuCAcEDrEF
+FyiDClcAwwZkUQ1ssOEJ6lDACwAgh1ZQIQyEUAUWCFEFAOCBFQlgghAI4QEqECIOpVgEE0ahFdra
+9pdnOShb2kBM6OlvDSLLzV2a6L98nfBGcIpWFQHUDEw4xlTFgMQBlOCJZozBEXnQACHQQQZMCKEI
+yrBGCsBxAlMo4ASGoIIzIIEGNMhqETaIQCSskQxEpKCXOuAFIfYgiqiEAQAFyMEE5HA5XVrFwbRN
+DQbB2hoU9DaJwFVm6khCXGYJZv9rmHgJgOrKmDsNCBuYQMV1IXEMMzigFspwBwEIkYJMcKIKKbAG
+oX/AiS6ooxwrkEQSVlAVK1jhM6x4LSG8IIorEMIKXIhKJpjgBUKAAhHs24ot1GAMB9/2K2cBUQaK
+KZGmHVIjaN0wsqoGRUcKsDj9CthLMopA2zFHJ2+QRBOqMYZT5AIYkOgFOULginFwQAgpIEQQ1FEC
+TlyhF5DQgCTgsIJakmIaCSBELq0wClYUgAqRIAQA5hCVRaiCFaygQhy8YwwSqIEEtgC4Gl6dGgk7
+pNYWzsjI4oOXXfPmPsGRUX5SeA7/yGmSirNT+HACjBpsQAVDAMYKVJAIYHwhHc7/4MQP1CGEabxA
+GdywgCUIAY1uDAEKbniFOFoQBB3rIBWfIAQ3tlAEKmzBC6fFQ1QUsAhCkDYC3vl3wG3R6trCWiEI
+FZ2tkSm1+XCYLySE4o1AvDWYnCGjGb0Jiquhi0IcAwnVsEMTgFEMZwwDG9S4QTLSgY4cWOIG5kzG
+zHnghAbMohLUYEUyruANRZizAJlQcg7YEIFc+iAMmmAFG/DrHYAbQw2u/mXxhojwSU0vkSUbCdiX
+BUWUvLniZwjYC89wycg4BhtDaAIkEp/XFXDiGEixBCCUIQNXOEMqSyGEOfHtpFpqZ5c+k1Iv8fmd
+f7N61QAnKFmy/pqJbD2ZDF8m5iOqpinfTPxThJErsX8UmWt9DxhjaEYxfgEJTIzBSEXxBgBcwQQX
+IIUQwKB8hEANUfELUhEl/lQhy+czbqNPF0IEREACEehvJPBq28caKCAR0pBwp4dWH5EpaiJAgyMc
+b1IctCBis7cYAhIkB1ILmYENx1AL8McJxcAK2CCA5nQCbGBOmsEKJzAVr8SDWeEDXkYI/EQlJNBv
+1vd5FhhhYIUCSGMiCUcH8uKBejF+1rMpFXUj21NF6wckBFMM1VALHlUtKzAEr7RKP8gJqyJHnMAG
+TwIV1QAJU+GD6mZLt6Ru0hd93hEQADs=
+
+------=_NextPart_000_0000_01C945A5.B996FBD0
+Content-Type: text/css;
+	charset="windows-1255"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://e-learn.jct.ac.il/upload/misc/CssFiles/styles.css
+
+A.reportDrillDownLink {
+	FONT-WEIGHT: bold; COLOR: black; FONT-FAMILY: arial; TEXT-DECORATION: =
+none
+}
+A.reportDrillDownLink:hover {
+	FONT-WEIGHT: bold; COLOR: blue; FONT-FAMILY: arial; TEXT-DECORATION: =
+underline
+}
+.reportNav {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; CURSOR: default; COLOR: #093071; =
+FONT-FAMILY: arial; TEXT-DECORATION: none
+}
+A.reportNavLink {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; COLOR: #093071; FONT-FAMILY: arial; =
+TEXT-DECORATION: underline
+}
+A.reportNavLink:hover {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; COLOR: blue; FONT-FAMILY: arial; =
+TEXT-DECORATION: underline
+}
+A.webFolder {
+	FONT-SIZE: 12px; BEHAVIOR: url(#default#AnchorClick); FONT-FAMILY: =
+Arial
+}
+A.listItemNoLine {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: arial; TEXT-DECORATION: =
+none
+}
+DIV.systemMessage {
+	FONT-SIZE: 16px; COLOR: black; font-familiy: arial
+    font-weight:Bold
+}
+SPAN.ColorobjectName {
+	COLOR: #ffffff
+}
+SPAN.field {
+	FONT-SIZE: 12px; FONT-FAMILY: arial
+}
+SPAN.SubTitleAdmin {
+	FONT-WEIGHT: bold; FONT-FAMILY: Arial
+}
+.Side {
+	SCROLLBAR-BASE-COLOR: whitesmoke; BACKGROUND-COLOR: whitesmoke
+}
+.PortalSide {
+	SCROLLBAR-BASE-COLOR: #78adde; BACKGROUND-COLOR: #eceffb
+}
+.Header {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-SIZE: 14px; COLOR: #ffffff; =
+BACKGROUND-COLOR: #70a7ac
+}
+BODY {
+	FONT-SIZE: 12px; COLOR: black; FONT-FAMILY: Arial; BACKGROUND-COLOR: =
+whitesmoke
+}
+.Header_Rec {
+	WIDTH: 20px; BACKGROUND-COLOR: #f6d94d
+}
+.Sorted_Table_Header_ON {
+	FONT-WEIGHT: bold; COLOR: #f6f17c; BACKGROUND-COLOR: #5f76bc; =
+TEXT-DECORATION: underline
+}
+.Sorted_Table_Header_ON_CATALOG {
+	FONT-WEIGHT: bold; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/grad_long.gif); COLOR: #f7fa08; =
+TEXT-DECORATION: underline
+}
+.Sorted_Table_Header_OFF {
+	FONT-WEIGHT: bold; COLOR: white; BACKGROUND-COLOR: #5f76bc; =
+TEXT-DECORATION: underline
+}
+.Sorted_Table_Header_MAIN_CATALOG_REGISTRATION {
+	FONT-WEIGHT: bold; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/grad_long.gif); COLOR: white
+}
+.Sorted_Table_Header_OFF_CATALOG_REGISTRATION {
+	FONT-WEIGHT: bold; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/grad_long.gif); COLOR: white; =
+TEXT-DECORATION: underline
+}
+.Regular_Table_Header {
+	FONT-WEIGHT: bold; COLOR: white; BACKGROUND-COLOR: #5f76bc
+}
+.Table_Content_Main {
+	BACKGROUND-COLOR: #c9daec
+}
+.Table_Content_Main_GREY {
+	BACKGROUND-COLOR: #e1e1e1
+}
+.Table_Content_Main_Item {
+	BACKGROUND-COLOR: #c6dbec
+}
+.Table_Content_Main_Question {
+	BACKGROUND-COLOR: #deedf2
+}
+.Table_Content_Main_Gray {
+	BACKGROUND-COLOR: #dce1e7
+}
+.Table_AssignmentContent_Main_old {
+	BACKGROUND-COLOR: #c9daec
+}
+.Table_AssignmentContent_Main {
+	BACKGROUND-COLOR: #dbe6f2
+}
+.Table_AssignmentContent_Main_Level_0 {
+	BACKGROUND-COLOR: #93b5d9
+}
+.Table_AssignmentContent_Main_level_1 {
+	BACKGROUND-COLOR: #b7cee6
+}
+.Table_AssignmentContent_Main_Level_2 {
+	BACKGROUND-COLOR: #c9daec
+}
+.Table_AssignmentContent_Main_Student {
+	BACKGROUND-COLOR: #c9daec
+}
+.AssignmentTableClass {
+	BORDER-RIGHT: medium none; BORDER-TOP: medium none; BORDER-LEFT: medium =
+none; BORDER-BOTTOM: medium none
+}
+.Table_Content_Secondary {
+	BACKGROUND-COLOR: #deedf2
+}
+.kishur {
+	CURSOR: hand; COLOR: blue; TEXT-DECORATION: underline
+}
+.Sub_Header {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; COLOR: black; BACKGROUND-COLOR: =
+#9fcadd
+}
+TD {
+	FONT-SIZE: 12px; FONT-FAMILY: Arial
+}
+.BorderTd {
+	BORDER-LEFT: white 2px solid; BORDER-BOTTOM: white 2px solid
+}
+.Sorted_Table_Header {
+	FONT-WEIGHT: bold; COLOR: #ffffff; BACKGROUND-COLOR: #5f76bc
+}
+.Sorted_Table_Header_CATALOG {
+	FONT-WEIGHT: bold; COLOR: #ffffff; BACKGROUND-COLOR: #3a9fda
+}
+.Search_Title {
+	BORDER-RIGHT: yellow 1px; BORDER-TOP: yellow 1px; BORDER-LEFT: yellow =
+1px; BORDER-BOTTOM: yellow 1px; BACKGROUND-COLOR: #fafbdb
+}
+.Search_Title_Forum {
+	BACKGROUND-COLOR: #f6f6fe
+}
+.Title_Forum {
+	BACKGROUND-COLOR: #e0edff
+}
+.New_Forum {
+	COLOR: mediumblue
+}
+SPAN.PortalTitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #ffffff; FONT-FAMILY: Arial; =
+BACKGROUND-COLOR: #5f76bc
+}
+.Description {
+	BACKGROUND-COLOR: #e6e6e6
+}
+INPUT {
+	FONT-SIZE: 12px; FONT-FAMILY: Arial
+}
+SELECT {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; FONT-SIZE: 12px; =
+BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid; FONT-FAMILY: Arial
+}
+TEXTAREA {
+	FONT-SIZE: 12px; COLOR: black; FONT-FAMILY: Arial
+}
+.buttons {
+	BORDER-RIGHT: #5d77bc 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: =
+#5d77bc 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; VERTICAL-ALIGN: =
+middle; BORDER-LEFT: #5d77bc 1px solid; CURSOR: hand; COLOR: #5e3fb4; =
+BORDER-BOTTOM: #5d77bc 1px solid; FONT-FAMILY: Arial; LETTER-SPACING: =
+normal; HEIGHT: 18px; BACKGROUND-COLOR: #f3ffc8
+}
+.Sub_Header_Rec {
+	WIDTH: 20px; BACKGROUND-COLOR: #f6d94d
+}
+.Table_Content_MainB {
+	BACKGROUND-COLOR: #bac6f8
+}
+.Buttons_With_Img {
+	BORDER-RIGHT: #5d77bc 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: =
+#5d77bc 1px solid; PADDING-LEFT: 2px; FONT-WEIGHT: normal; FONT-SIZE: =
+12px; VERTICAL-ALIGN: bottom; BORDER-LEFT: 0px; CURSOR: hand; COLOR: =
+#5e3fb4; BORDER-BOTTOM: #5d77bc 1px solid; FONT-FAMILY: Arial; =
+LETTER-SPACING: normal; HEIGHT: 18px; BACKGROUND-COLOR: #f3ffc8; =
+TEXT-DECORATION: none
+}
+.img {
+	BORDER-RIGHT: 0px; BORDER-TOP: #5d77bc 1px solid; VERTICAL-ALIGN: =
+bottom; BORDER-LEFT: #5d77bc 1px solid; CURSOR: hand; BORDER-BOTTOM: =
+#5d77bc 1px solid; HEIGHT: 16px; BACKGROUND-COLOR: #f3ffc8
+}
+.Link_Buttons {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: 1px solid; =
+PADDING-LEFT: 2px; FONT-WEIGHT: normal; FONT-SIZE: 12px; VERTICAL-ALIGN: =
+bottom; BORDER-LEFT: 1px solid; CURSOR: hand; COLOR: #5e3fb4; =
+BORDER-BOTTOM: 1px solid; FONT-FAMILY: Arial; LETTER-SPACING: normal; =
+HEIGHT: 18px; BACKGROUND-COLOR: #f3ffc8; TEXT-DECORATION: none
+}
+.textbox {
+	BORDER-RIGHT: #787878 1px solid; BORDER-TOP: #787878 1px solid; =
+VERTICAL-ALIGN: middle; BORDER-LEFT: #787878 1px solid; BORDER-BOTTOM: =
+#787878 1px solid; BACKGROUND-COLOR: #ffffff
+}
+.textboxBottomLine {
+	BORDER-RIGHT: #787878 0px solid; BORDER-TOP: #787878 0px solid; =
+BORDER-LEFT: #787878 0px solid; BORDER-BOTTOM: black 1px solid; =
+BACKGROUND-COLOR: #f5f5f5
+}
+A.TopMenuLink {
+	FONT-SIZE: 10pt; FONT-FAMILY: Arial; BACKGROUND-COLOR: #aac3d9; =
+TEXT-DECORATION: none
+}
+.OverLinkMenu {
+	FONT-SIZE: 10pt; FONT-FAMILY: Arial; BACKGROUND-COLOR: #aac3d9; =
+TEXT-DECORATION: underline
+}
+.TopBody {
+	BACKGROUND-COLOR: #aac3d9
+}
+.TopStick {
+	COLOR: #34608d
+}
+.CourseTopColor {
+	BACKGROUND-COLOR: #316594
+}
+.CourseTopColorA {
+	COLOR: #dcff60
+}
+.RemarkGray {
+	FONT-SIZE: 12px; COLOR: gray; FONT-FAMILY: Arial
+}
+.OLD_Sorted_Assignments_Table_ON {
+	FONT-WEIGHT: bold; COLOR: #f6f17c; BACKGROUND-COLOR: #70a7ac; =
+TEXT-DECORATION: underline
+}
+.Sorted_Assignments_Table_ON {
+	FONT-WEIGHT: bold; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/PersonalFiletop-back.jpg); COLOR: =
+#f6f17c; TEXT-DECORATION: underline
+}
+.Sorted_Assignments_Table_OFF {
+	FONT-WEIGHT: bold; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/PersonalFiletop-back.jpg); COLOR: =
+white; TEXT-DECORATION: underline
+}
+.OLD_Sorted_Assignments_Table_OFF {
+	FONT-WEIGHT: bold; COLOR: white; BACKGROUND-COLOR: #70a7ac; =
+TEXT-DECORATION: underline
+}
+.Assignments_Header_Sort_ON {
+	FONT-WEIGHT: bold; COLOR: #f6f17c; BACKGROUND-COLOR: #5f76bc
+}
+.MetaDataSection {
+	BORDER-RIGHT: #316594 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: =
+#316594 1px solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; MARGIN: 0px =
+0px 5px; BORDER-LEFT: #316594 1px solid; WIDTH: 100%; PADDING-TOP: 5px; =
+BORDER-BOTTOM: #316594 1px solid; BACKGROUND-COLOR: #e5e1e1
+}
+.Assignments_Header_Sort_OFF {
+	FONT-WEIGHT: bold; COLOR: white; BACKGROUND-COLOR: #5f76bc
+}
+.AssignmentsStudent_Header_Sort_OFF {
+	FONT-WEIGHT: bold; COLOR: white; BACKGROUND-COLOR: #5f76bc; TEXT-ALIGN: =
+center
+}
+.AdminNav {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #deedf2; CURSOR: hand; =
+COLOR: #1a4f7b; FONT-FAMILY: Arial
+}
+.AdminNavSelect {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #194f7b; CURSOR: hand; =
+COLOR: #ffffff; FONT-FAMILY: Arial
+}
+.AdminNavSelectPreferences {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #5599be; CURSOR: hand; =
+COLOR: #ffffff; FONT-FAMILY: Arial
+}
+.AdminNavPreferences {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #a2c9d0; CURSOR: hand; =
+COLOR: #045487; FONT-FAMILY: Arial
+}
+.AdminSubNav {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #b4c4d4; CURSOR: hand; =
+COLOR: #355fa9; FONT-FAMILY: Arial
+}
+.AdminSubNavSelect {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #355fa9; CURSOR: hand; =
+COLOR: #ffffff; FONT-FAMILY: Arial
+}
+A.listItemAdmin {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: arial; TEXT-DECORATION: =
+none
+}
+.Mandatory {
+	COLOR: #ff0000
+}
+.Search {
+	BACKGROUND-COLOR: whitesmoke
+}
+.Vcompetency {
+	BACKGROUND-COLOR: #7b8fd0
+}
+.Wcompetency {
+	BACKGROUND-COLOR: #e1707b
+}
+.Mcompetency {
+	BACKGROUND-COLOR: #d5d7e0
+}
+.NoFitnessPortal {
+	COLOR: red; TEXT-DECORATION: none
+}
+.LoginLinks {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: #5e7cb8
+}
+.CommBody {
+	BACKGROUND-COLOR: whitesmoke
+}
+.titleNotActiveComm {
+	FONT-SIZE: 16px; COLOR: #70a7ac; FONT-FAMILY: arial; TEXT-DECORATION: =
+none
+}
+.SubTitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 11pt; FONT-FAMILY: Arial
+}
+.CatalogList {
+	BACKGROUND-COLOR: #f6f6fe
+}
+.CatalogLE {
+	FONT-WEIGHT: bold; COLOR: #ffffff; BACKGROUND-COLOR: #5f76bc
+}
+.TopBoardTable {
+	BORDER-RIGHT: #70a7ac 1px solid; BORDER-TOP: #70a7ac 1px solid; =
+BORDER-LEFT: #70a7ac 1px solid
+}
+.TopBoardTableMessageNew {
+	BORDER-TOP: #c3daea 1px solid
+}
+.MessageBoardTable {
+	BORDER-RIGHT: #70a7ac 1px solid; BORDER-TOP: #70a7ac 1px solid; =
+BORDER-LEFT: #70a7ac 1px solid; BORDER-BOTTOM: #70a7ac 1px solid; =
+BACKGROUND-COLOR: #fcfdef
+}
+.TopSelect {
+	FONT-WEIGHT: bold; FONT-SIZE: 20px; CURSOR: default; COLOR: #362e5f; =
+FONT-FAMILY: Arial
+}
+.CourseTop1 {
+	COLOR: #dcff60
+}
+.CourseTop2 {
+	BACKGROUND-COLOR: #316594
+}
+.CourseTop3 {
+	COLOR: #316594
+}
+.CourseTop4 {
+	BACKGROUND-COLOR: #f7fbde
+}
+.TopNews {
+	BORDER-BOTTOM: #78adde 1px solid; BACKGROUND-COLOR: #d6dfff
+}
+.BottomNews {
+	BORDER-TOP: #78adde 1px solid; BACKGROUND-COLOR: #d6dfff
+}
+.TopBottomLine {
+	BACKGROUND-COLOR: #100159
+}
+.CalendarDatePickMonth {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; COLOR: white; =
+BORDER-BOTTOM: 0px; BACKGROUND-COLOR: #5f76bc; TEXT-ALIGN: center
+}
+.CatalogLEPath {
+	COLOR: #ffffff; BACKGROUND-COLOR: #5f76bc
+}
+.ButtonsLowZone {
+	COLOR: white; BACKGROUND-COLOR: #184c7b
+}
+.Addressbook_Search_Title {
+	BACKGROUND-COLOR: #fafad2
+}
+.ToolBarAssignmentOn {
+	COLOR: #ffffff; BACKGROUND-COLOR: #5998c1
+}
+.ToolBarAssignmentOff {
+	COLOR: #3258a3; BACKGROUND-COLOR: #a1c8cd
+}
+.AdminNavSecRow {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #bed0ed; CURSOR: hand; =
+COLOR: #4682b4; FONT-FAMILY: Arial
+}
+.AdminNavSelectSecRow {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #3a66a7; CURSOR: hand; =
+COLOR: #f0e68c; FONT-FAMILY: Arial
+}
+.Backbody {
+	BACKGROUND-POSITION: center center; BACKGROUND-REPEAT: no-repeat; =
+BACKGROUND-COLOR: transparent; background-scroll: fixed
+}
+.section-inner {
+	BORDER-RIGHT: #92a5b4 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: =
+#92a5b4 1px solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; BORDER-LEFT: =
+#92a5b4 1px solid; WIDTH: 100%; PADDING-TOP: 0px; BORDER-BOTTOM: #92a5b4 =
+1px solid; BORDER-COLLAPSE: collapse; HEIGHT: 25px
+}
+.RemarkTree-Div {
+	BORDER-RIGHT: #92a5b4 1px solid; BORDER-TOP: #92a5b4 1px solid; =
+Z-INDEX: 101; LEFT: 183px; VISIBILITY: visible; BORDER-LEFT: #92a5b4 1px =
+solid; WIDTH: 250px; COLOR: black; BORDER-BOTTOM: #92a5b4 1px solid; =
+POSITION: absolute; TOP: 150px; HEIGHT: 150px; BACKGROUND-COLOR: #bfd9f2
+}
+.inner-Table {
+	BORDER-RIGHT: #92a5b4 1px solid; BORDER-TOP: #92a5b4 1px solid; =
+BORDER-LEFT: #92a5b4 1px solid; WIDTH: 85%; BORDER-BOTTOM: #92a5b4 1px =
+solid; BACKGROUND-COLOR: white
+}
+.PF_Header {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-WEIGHT: bold; FONT-SIZE: =
+14px; COLOR: #093071
+}
+.PF_Header_Rec {
+	WIDTH: 20px; BACKGROUND-COLOR: #093071
+}
+.PF_AdminNavPreferences {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #d0e1f1; CURSOR: hand; =
+COLOR: #093071; FONT-FAMILY: Arial
+}
+.PF_AdminNavSelectPreferences {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #8db3d7; CURSOR: hand; =
+COLOR: #ffffff; FONT-FAMILY: Arial
+}
+.PF_AdminNavPreferencesNew {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #e1eaf3; CURSOR: hand; =
+COLOR: #5982ab; FONT-FAMILY: Arial
+}
+.PF_AdminNavSelectPreferencesNew {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; BACKGROUND: #8db3d7; CURSOR: hand; =
+COLOR: #285887; FONT-FAMILY: Arial
+}
+.PF_AdminNavPreferencesTable {
+	BORDER-RIGHT: #184d7b thin solid; BORDER-TOP: #184d7b thin solid; =
+BORDER-LEFT: #184d7b thin solid; BORDER-BOTTOM: #184d7b thin solid
+}
+.PF_PropertyName {
+	FONT-WEIGHT: bold; BACKGROUND: #adccea
+}
+.PF_PropertyValue {
+	FONT-WEIGHT: normal; BACKGROUND: #c5ddf4
+}
+.PF_PropertyValue_Button {
+	BORDER-RIGHT: #093071 1px solid; BORDER-TOP: #093071 1px solid; =
+FONT-WEIGHT: normal; BACKGROUND: #c5ddf4; BORDER-LEFT: #093071 1px =
+solid; COLOR: blue; BORDER-BOTTOM: #093071 1px solid
+}
+.ResponseGuidence {
+	BACKGROUND-COLOR: #e7e7e7
+}
+.FAV_NormalText {
+	FONT-SIZE: 9pt; COLOR: #285887; FONT-FAMILY: Arial
+}
+.FAV_NormalText_HREF {
+	FONT-SIZE: 9pt; COLOR: #285887; FONT-FAMILY: Arial; TEXT-DECORATION: =
+underline
+}
+A.MetaTypes {
+	COLOR: black; TEXT-DECORATION: none
+}
+A.MetaTypes:hover {
+	TEXT-DECORATION: underline
+}
+A.MetaTypesBold {
+	FONT-WEIGHT: bold; COLOR: black
+}
+A.MetaMatchTypes {
+	COLOR: black; TEXT-DECORATION: none
+}
+A.MetaMatchTypes:hover {
+	TEXT-DECORATION: underline
+}
+A.MetaMatchTypesBold {
+	FONT-WEIGHT: bold; COLOR: black
+}
+.PF_HeaderB {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-WEIGHT: bold; FONT-SIZE: =
+14px; BACKGROUND-ATTACHMENT: scroll; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/PersonalFiletop-back.jpg); COLOR: =
+#093071
+}
+.PF_Header_Sub {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-WEIGHT: bold; FONT-SIZE: =
+14px; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/SubHeaderImg.gif); COLOR: #093071
+}
+.PF_Header_Sub_Rec {
+	WIDTH: 20px; BACKGROUND-COLOR: #8a9cba
+}
+.PF_Header_Sub_MD {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-WEIGHT: bold; FONT-SIZE: =
+14px; COLOR: white; BACKGROUND-COLOR: #3e56a0
+}
+.PF_Header_Sub_MD {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-WEIGHT: bold; FONT-SIZE: =
+14px; COLOR: white; BACKGROUND-COLOR: #3e56a0
+}
+.MESSAGES_BACKGROUND_COLOR {
+	BORDER-RIGHT: #c3daea thin solid; BORDER-TOP: white thin solid; =
+BORDER-LEFT: #c3daea thin solid; BORDER-BOTTOM: #c3daea thin solid; =
+BACKGROUND-COLOR: #e5eef7
+}
+.MESSAGES_TD_COLOR {
+	BORDER-RIGHT: #e5eef7; BORDER-TOP: #e5eef7; BORDER-LEFT: #e5eef7; =
+BORDER-BOTTOM: #e5eef7; BACKGROUND-COLOR: #e5eef7
+}
+.PF_Header_Sub_Content {
+	BACKGROUND-COLOR: #e3edf7
+}
+.PF_Header_Content {
+	COLOR: #e3edf7
+}
+.Sorted_READNSIGN_Table_ON {
+	FONT-WEIGHT: bold; COLOR: #f6f17c; TEXT-DECORATION: underline
+}
+.Sorted_READNSIGN_Table_OFF {
+	FONT-WEIGHT: bold; COLOR: white; TEXT-DECORATION: underline
+}
+.Assignments_Header_Sort_OFF_InnerTable {
+	FONT-WEIGHT: bold; COLOR: white; BACKGROUND-COLOR: #8195d2
+}
+.Table_Content_Main_InnerTable {
+	BACKGROUND-COLOR: #dde7f2
+}
+.visible {
+	DISPLAY: block; VISIBILITY: visible
+}
+.invisible {
+	DISPLAY: none; VISIBILITY: hidden
+}
+.ltr {
+	DIRECTION: ltr
+}
+.TypeLink {
+	FONT-SIZE: 12px; CURSOR: hand; COLOR: black; TEXT-DECORATION: none
+}
+.AssMDSystemHeader {
+	BORDER-BOTTOM: #ffffff 1px solid; BACKGROUND-COLOR: #dedfe3
+}
+.AssMDCourseHeader {
+	BORDER-BOTTOM: #ffffff 1px solid; BACKGROUND-COLOR: #c9daec
+}
+.ItemLink {
+	CURSOR: hand; COLOR: blue; TEXT-DECORATION: none
+}
+A.ItemLink:hover {
+	CURSOR: hand; TEXT-DECORATION: underline
+}
+.ItemApprovalDescriptionBackground {
+	BACKGROUND-COLOR: #e7e7e7
+}
+.Table_ItemApproval_Content_Main {
+	BACKGROUND-COLOR: #e5e8ed
+}
+.Table_Content_Main_Light {
+	BACKGROUND-COLOR: #e9f0f8
+}
+.iframeDimensions {
+	WIDTH: 675px; HEIGHT: 300px
+}
+P {
+	PAGE-BREAK-AFTER: always
+}
+.buttons_With_Img_Disable {
+	BORDER-RIGHT: #5f76bc 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: =
+#5f76bc 1px solid; PADDING-LEFT: 2px; FONT-WEIGHT: normal; FONT-SIZE: =
+12px; VERTICAL-ALIGN: bottom; BORDER-LEFT: 0px; CURSOR: hand; COLOR: =
+#564da6; BORDER-BOTTOM: #5f76bc 1px solid; FONT-FAMILY: Arial; =
+LETTER-SPACING: normal; HEIGHT: 18px; BACKGROUND-COLOR: #bdc0ac; =
+TEXT-DECORATION: none
+}
+.ContentListHeader {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; COLOR: white; BACKGROUND-COLOR: =
+#315678
+}
+.ContentListTable {
+	BORDER-RIGHT: #315678 1px solid; BORDER-TOP: #315678 0px solid; =
+BORDER-LEFT: #315678 1px solid; BORDER-BOTTOM: #315678 1px solid
+}
+.DisableLinkableElementText {
+	FONT-SIZE: 12px; COLOR: black; FONT-FAMILY: Arial; TEXT-DECORATION: =
+none
+}
+.firebrick {
+	COLOR: firebrick
+}
+.Header_Border {
+	BORDER-RIGHT: whitesmoke thin solid; BORDER-TOP: whitesmoke thin solid; =
+BORDER-LEFT: whitesmoke thin solid; BORDER-BOTTOM: whitesmoke thin solid
+}
+.iframeDimensions600 {
+	WIDTH: 550px; HEIGHT: 300px
+}
+.img_Disable {
+	BORDER-RIGHT: 0px; BORDER-TOP: #5f76bc 1px solid; VERTICAL-ALIGN: =
+bottom; BORDER-LEFT: #5f76bc 1px solid; CURSOR: hand; BORDER-BOTTOM: =
+#5f76bc 1px solid; HEIGHT: 16px; BACKGROUND-COLOR: #bdc0ac
+}
+.ItemApprovalLink {
+	CURSOR: hand; COLOR: blue; TEXT-DECORATION: underline
+}
+.ItemPagesBar {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-WEIGHT: bold; FONT-SIZE: =
+14px; BACKGROUND-ATTACHMENT: scroll; MARGIN-LEFT: 1px; BACKGROUND-COLOR: =
+#dfe7f1
+}
+.ItemPageSelectedTD {
+	FONT-WEIGHT: bold; FONT-SIZE: 13px; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/SelectedPageBG.gif); BORDER-LEFT: white =
+1px solid; COLOR: #093071; FONT-FAMILY: Arial
+}
+.ItemPagesTable {
+	BORDER-TOP: white 2px solid
+}
+.ItemPageTD {
+	FONT-WEIGHT: normal; FONT-SIZE: 13px; BORDER-LEFT: white 1px solid; =
+COLOR: #093071; FONT-FAMILY: Arial
+}
+.ItemStyle {
+	WIDTH: 180px
+}
+.Option_Label {
+	BORDER-RIGHT: #5f76bc 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: =
+#5f76bc 1px solid; PADDING-LEFT: 2px; FONT-WEIGHT: normal; FONT-SIZE: =
+12px; BACKGROUND-IMAGE: none; VERTICAL-ALIGN: bottom; BORDER-LEFT: =
+#5f76bc 1px solid; COLOR: navy; BORDER-BOTTOM: #5f76bc 1px solid; =
+BACKGROUND-REPEAT: repeat; FONT-FAMILY: Arial; LETTER-SPACING: normal; =
+HEIGHT: 18px; BACKGROUND-COLOR: #dee2e3; TEXT-DECORATION: none
+}
+.RegularElementText {
+	FONT-SIZE: 12px; COLOR: #315678; FONT-FAMILY: Arial; TEXT-DECORATION: =
+none
+}
+.Remark {
+	FONT-SIZE: 11px; FONT-FAMILY: Arial
+}
+.Selected_subject {
+	FONT-WEIGHT: bold; COLOR: white
+}
+.Table_Content_MainC {
+	BACKGROUND-COLOR: #e3edf7
+}
+.TestTime {
+	BORDER-RIGHT: darkblue 1px solid; BORDER-TOP: darkblue 1px solid; =
+BORDER-LEFT: darkblue 1px solid; BORDER-BOTTOM: darkblue 1px solid; =
+BACKGROUND-COLOR: #deebff
+}
+.wait {
+	BORDER-RIGHT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; PADDING-LEFT: =
+0px; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-LEFT: 0px; WIDTH: 100%; =
+PADDING-TOP: 0px; BORDER-BOTTOM: 0px; POSITION: relative; TOP: 0px; =
+HEIGHT: 100%; TEXT-ALIGN: center
+}
+A.ItemApprovalLink {
+	CURSOR: hand; COLOR: blue; TEXT-DECORATION: underline
+}
+A.LinkableElementText {
+	FONT-SIZE: 12px; COLOR: blue; FONT-FAMILY: Arial; TEXT-DECORATION: none
+}
+A.LinkableElementText:hover {
+	FONT-SIZE: 12px; COLOR: blue; FONT-FAMILY: Arial; TEXT-DECORATION: =
+underline
+}
+A.PageLink {
+	COLOR: #093071; TEXT-DECORATION: none
+}
+A.PageLink:hover {
+	COLOR: #093071; TEXT-DECORATION: underline
+}
+A.PageLink:visited {
+	COLOR: #093071
+}
+A.PageLinkSelected {
+	COLOR: #093071; TEXT-DECORATION: none
+}
+A.PageLinkSelected:hover {
+	COLOR: #093071; TEXT-DECORATION: underline
+}
+A.PageLinkSelected:visited {
+	COLOR: #093071
+}
+A.SelectedElementText:hover {
+	FONT-SIZE: 12px; COLOR: #f95f0b; FONT-FAMILY: Arial; TEXT-DECORATION: =
+underline
+}
+A.SelectedElementText:link {
+	FONT-SIZE: 12px; COLOR: #f95f0b; FONT-FAMILY: Arial; TEXT-DECORATION: =
+none
+}
+.img2 {
+	BORDER-RIGHT: #5f76bc 1px solid; BORDER-TOP: #5f76bc 1px solid; =
+VERTICAL-ALIGN: bottom; BORDER-LEFT: 0px; CURSOR: hand; BORDER-BOTTOM: =
+#5f76bc 1px solid; HEIGHT: 16px; BACKGROUND-COLOR: #f6ffc0
+}
+.Buttons_With_Img2 {
+	BORDER-RIGHT: 0px; PADDING-RIGHT: 2px; BORDER-TOP: #5f76bc 1px solid; =
+PADDING-LEFT: 2px; FONT-WEIGHT: normal; FONT-SIZE: 12px; VERTICAL-ALIGN: =
+bottom; BORDER-LEFT: #5f76bc 1px solid; CURSOR: hand; COLOR: #564da6; =
+BORDER-BOTTOM: #5f76bc 1px solid; FONT-FAMILY: Arial; LETTER-SPACING: =
+normal; HEIGHT: 18px; BACKGROUND-COLOR: #f6ffc0; TEXT-DECORATION: none
+}
+.ItemPageLastTD {
+	FONT-WEIGHT: normal; FONT-SIZE: 13px; FONT-FAMILY: Arial
+}
+.mainPage {
+	BACKGROUND-COLOR: whitesmoke
+}
+.MastField {
+	FONT-SIZE: 12px; COLOR: red; FONT-FAMILY: Arial
+}
+.ReadNSignSide {
+	BACKGROUND-COLOR: #ffe38b
+}
+.RegularElement0 {
+	FONT-WEIGHT: bold; BACKGROUND-COLOR: #c6dbef
+}
+.RegularElement1 {
+	BACKGROUND-COLOR: #e5ecf3
+}
+.RegularElement2 {
+	BACKGROUND-COLOR: #f3f8fc
+}
+.Search_Title_ON {
+	FONT-WEIGHT: bold; COLOR: #585858; BACKGROUND-COLOR: #e6e6e6
+}
+.Search_Title_OFF {
+	FONT-WEIGHT: bold; COLOR: #a51414; BACKGROUND-COLOR: #e6e6e6
+}
+.bold {
+=09
+}
+A.MenuItem_Item_Name:link {
+=09
+}
+A.MenuItem_Item_Name:visited {
+=09
+}
+A.MenuItem_Item_Name:hover {
+=09
+}
+A.MenuItem_Item_Name:active {
+=09
+}
+A.MenuItem_Question_Name:link {
+=09
+}
+A.MenuItem_Question_Name:visited {
+=09
+}
+A.MenuItem_Question_Name:hover {
+=09
+}
+A.MenuItem_Question_Name:active {
+=09
+}
+.MenuItem_Item_Name {
+	COLOR: blue
+}
+.MenuItem_Question_Name {
+	COLOR: blue
+}
+.LowerMenu {
+	BACKGROUND-POSITION: center top; BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/lower_item.gif); BACKGROUND-REPEAT: =
+repeat-x; BACKGROUND-COLOR: transparent; background-scroll: fixed
+}
+.ExamQuesListFont {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #093071; TEXT-DECORATION: =
+underline
+}
+.Exam_Ques_List_Body {
+	BACKGROUND-COLOR: #eff3fe
+}
+.Exam_Nav_Ques_Body {
+	BACKGROUND-COLOR: #e9f1fb
+}
+A.ExamLink:link {
+	COLOR: navy
+}
+A.ExamLink:visited {
+	COLOR: navy
+}
+A.ExamLink:hover {
+	COLOR: navy
+}
+A.ExamLink:active {
+	COLOR: blue
+}
+.Exam_Ques_List {
+	BACKGROUND-COLOR: whitesmoke
+}
+.Exam_Ques_List_Done {
+	BACKGROUND-COLOR: #ffdfa0
+}
+.Exam_Ques_List_Wrong {
+	BACKGROUND-COLOR: #ff2626
+}
+.Exam_Ques_List_Active {
+	BACKGROUND-COLOR: #ffa800
+}
+.Exam_Ques {
+	FONT-SIZE: 16px; COLOR: firebrick
+}
+.Exam_Summary_Title {
+	COLOR: navy
+}
+.Exam_Ques_Embed_Option {
+	BORDER-RIGHT: white 3px ridge; PADDING-RIGHT: 2px; BORDER-TOP: white =
+3px ridge; PADDING-LEFT: 2px; PADDING-BOTTOM: 0px; BORDER-LEFT: white =
+3px ridge; COLOR: white; PADDING-TOP: 0px; BORDER-BOTTOM: white 3px =
+ridge; BACKGROUND-COLOR: #842010
+}
+.Table_Col_Header {
+	BACKGROUND-COLOR: #93badb
+}
+.Table_Col_Content {
+	BACKGROUND-COLOR: #c9daec
+}
+A.linkStyle:link {
+	COLOR: blue; TEXT-DECORATION: underline
+}
+A.linkStyle:visited {
+	COLOR: blue; TEXT-DECORATION: underline
+}
+A.linkStyle:hover {
+	COLOR: blue; TEXT-DECORATION: underline
+}
+A.linkStyle:active {
+	COLOR: #800080; TEXT-DECORATION: underline
+}
+A.linkStyleNoDecoration:link {
+	COLOR: blue; TEXT-DECORATION: none
+}
+A.linkStyleNoDecoration:visited {
+	COLOR: blue; TEXT-DECORATION: none
+}
+A.linkStyleNoDecoration:hover {
+	COLOR: blue; TEXT-DECORATION: underline
+}
+A.linkStyleNoDecoration:active {
+	COLOR: #800080; TEXT-DECORATION: none
+}
+.Tree1 {
+	COLOR: #000000; BACKGROUND-COLOR: #ffffff
+}
+.FontColor {
+	COLOR: navy
+}
+.Calendar_Sorted_Table_Header {
+	FONT-WEIGHT: bold; COLOR: yellow; BACKGROUND-COLOR: #5f76bc
+}
+.Calendar_DatePick_QuickAdd {
+	BACKGROUND-COLOR: #e9edf0
+}
+SPAN.textday {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; FONT-FAMILY: arial; =
+BACKGROUND-COLOR: #efeff7
+}
+SPAN.Title {
+	FONT-SIZE: 14px; FONT-FAMILY: arial
+}
+.over {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; FONT-SIZE: =
+12px; BORDER-LEFT-COLOR: red; BORDER-BOTTOM-COLOR: red; PADDING-BOTTOM: =
+0px; WIDTH: 22px; CURSOR: hand; BORDER-TOP-STYLE: solid; =
+BORDER-TOP-COLOR: red; PADDING-TOP: 0px; FONT-FAMILY: arial; =
+BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; HEIGHT: 18px; =
+BACKGROUND-COLOR: white; BORDER-RIGHT-COLOR: red; BORDER-BOTTOM-STYLE: =
+solid
+}
+.regular {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 12px; =
+BORDER-LEFT-COLOR: #efeff7; BORDER-BOTTOM-COLOR: #efeff7; =
+PADDING-BOTTOM: 0px; WIDTH: 22px; CURSOR: hand; BORDER-TOP-STYLE: solid; =
+BORDER-TOP-COLOR: #efeff7; PADDING-TOP: 0px; FONT-FAMILY: arial; =
+BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; HEIGHT: 18px; =
+BACKGROUND-COLOR: #efeff7; BORDER-RIGHT-COLOR: #efeff7; =
+BORDER-BOTTOM-STYLE: solid
+}
+.evented {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; FONT-SIZE: =
+12px; BORDER-LEFT-COLOR: #efeff7; BORDER-BOTTOM-COLOR: #efeff7; =
+PADDING-BOTTOM: 0px; WIDTH: 22px; CURSOR: hand; BORDER-TOP-STYLE: solid; =
+BORDER-TOP-COLOR: #efeff7; PADDING-TOP: 0px; FONT-FAMILY: arial; =
+BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; HEIGHT: 18px; =
+BACKGROUND-COLOR: #efeff7; BORDER-RIGHT-COLOR: #efeff7; =
+BORDER-BOTTOM-STYLE: solid
+}
+.bad {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; FONT-SIZE: =
+12px; BORDER-LEFT-COLOR: #efeff7; BORDER-BOTTOM-COLOR: #efeff7; =
+PADDING-BOTTOM: 0px; WIDTH: 22px; CURSOR: default; BORDER-TOP-STYLE: =
+solid; BORDER-TOP-COLOR: #efeff7; PADDING-TOP: 0px; FONT-FAMILY: arial; =
+BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; HEIGHT: 18px; =
+BACKGROUND-COLOR: #efeff7; BORDER-RIGHT-COLOR: #efeff7; =
+BORDER-BOTTOM-STYLE: solid
+}
+.marked {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; FONT-SIZE: =
+12px; BORDER-LEFT-COLOR: red; BORDER-BOTTOM-COLOR: red; PADDING-BOTTOM: =
+0px; WIDTH: 22px; CURSOR: hand; BORDER-TOP-STYLE: solid; =
+BORDER-TOP-COLOR: red; PADDING-TOP: 0px; FONT-FAMILY: arial; =
+BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; HEIGHT: 18px; =
+BACKGROUND-COLOR: white; BORDER-RIGHT-COLOR: red; BORDER-BOTTOM-STYLE: =
+solid
+}
+.PagerStyle {
+	BORDER-RIGHT: #5f76bc 2px solid; BORDER-TOP: #5f76bc 2px solid; =
+DISPLAY: inline; VERTICAL-ALIGN: middle; BORDER-LEFT: #5f76bc 2px solid; =
+CURSOR: hand; COLOR: #800080; BORDER-BOTTOM: #5f76bc 2px solid; HEIGHT: =
+18px; TEXT-DECORATION: none
+}
+.Response_Table {
+	BACKGROUND-COLOR: #eaeaea
+}
+.Response_TextArea {
+	BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; =
+BORDER-LEFT: black 1px solid; BORDER-BOTTOM: black 1px solid; =
+BACKGROUND-COLOR: #fefefe
+}
+.Correct_Answer {
+	BORDER-RIGHT: #787878 1px solid; BORDER-TOP: #787878 1px solid; =
+VERTICAL-ALIGN: middle; BORDER-LEFT: #787878 1px solid; BORDER-BOTTOM: =
+#787878 1px solid; BACKGROUND-COLOR: #daf8da
+}
+.BlueFontColor {
+	COLOR: #222090
+}
+.BlueBgColor {
+	BACKGROUND-COLOR: #e6edf7
+}
+.ShaharSheliButtonWithImg {
+	BORDER-RIGHT: #5d77bc 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: =
+#5d77bc 1px solid; PADDING-LEFT: 2px; FONT-WEIGHT: normal; FONT-SIZE: =
+12px; VERTICAL-ALIGN: bottom; BORDER-LEFT: 0px; CURSOR: hand; COLOR: =
+navy; BORDER-BOTTOM: #5d77bc 1px solid; FONT-FAMILY: Arial; =
+LETTER-SPACING: normal; HEIGHT: 18px; BACKGROUND-COLOR: #e6edf7; =
+TEXT-DECORATION: none
+}
+.ShaharSheliImg {
+	BORDER-RIGHT: 0px; BORDER-TOP: #5d77bc 1px solid; VERTICAL-ALIGN: =
+bottom; BORDER-LEFT: #5d77bc 1px solid; CURSOR: hand; BORDER-BOTTOM: =
+#5d77bc 1px solid; HEIGHT: 16px; BACKGROUND-COLOR: #e6edf7
+}
+.ShaharSheliLinkButton {
+	BORDER-RIGHT: #5d77bc 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: =
+#5d77bc 1px solid; PADDING-LEFT: 2px; FONT-WEIGHT: normal; FONT-SIZE: =
+12px; VERTICAL-ALIGN: bottom; BORDER-LEFT: #5d77bc 1px solid; CURSOR: =
+hand; COLOR: navy; BORDER-BOTTOM: #5d77bc 1px solid; FONT-FAMILY: Arial; =
+LETTER-SPACING: normal; HEIGHT: 18px; BACKGROUND-COLOR: #e6edf7; =
+TEXT-DECORATION: none
+}
+.DataTblDoubleHeaderR {
+	BACKGROUND-IMAGE: =
+url(/upload/misc/CssFiles/Images/double_bright_hl.gif); HEIGHT: 39px
+}
+.NewCalendarDatePickMonth {
+	FONT-WEIGHT: bold; FONT-SIZE: 13px; COLOR: black; TEXT-ALIGN: center
+}
+.DataTblHeaderR {
+	FONT-WEIGHT: bold; FONT-SIZE: 13px; BACKGROUND-IMAGE: =
+url(/Upload/misc/CssFiles/Images/bright_hl.gif); TEXT-ALIGN: center
+}
+.SecondTitle {
+	COLOR: black; BACKGROUND-COLOR: #e6edf7
+}
+.TestEditTable {
+	BACKGROUND-COLOR: #dddddd
+}
+.TestEditSubject {
+	BACKGROUND-COLOR: #cccccc
+}
+.TestEditItem {
+	BACKGROUND-COLOR: #a6caf0
+}
+.TestPreviewSubject {
+	BACKGROUND-COLOR: #cacfd4
+}
+.TestPreviewSubjectTR {
+	FONT-SIZE: 12px; HEIGHT: 20px
+}
+.TestPreviewSubjectTD {
+	FONT-SIZE: 12px; COLOR: #143e6e
+}
+.TestPreviewItemTR {
+	HEIGHT: 20px; BACKGROUND-COLOR: #dddddd
+}
+.TestPreviewItemTD {
+	COLOR: #143e6e
+}
+.TestPreviewItemQ {
+	BACKGROUND-COLOR: #eaeaea
+}
+.TestPreviewBorder {
+	BORDER-RIGHT: #c0c3c7 thin solid; BORDER-TOP: #c0c3c7 thin solid; =
+BORDER-LEFT: #c0c3c7 thin solid; BORDER-BOTTOM: #c0c3c7 thin solid
+}
+.QuestionBody {
+	FONT-SIZE: 16px
+}
+.Question_DropDown_Headers {
+	BORDER-RIGHT: white 3px ridge; PADDING-RIGHT: 2px; BORDER-TOP: white =
+3px ridge; PADDING-LEFT: 2px; FONT-SIZE: 16px; PADDING-BOTTOM: 0px; =
+BORDER-LEFT: white 3px ridge; COLOR: white; PADDING-TOP: 0px; =
+BORDER-BOTTOM: white 3px ridge; BACKGROUND-COLOR: #842010
+}
+
+------=_NextPart_000_0000_01C945A5.B996FBD0
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://e-learn.jct.ac.il/bareket/Icon.asp?random=21328&x=0&y=5
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>icon.asp</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1255"><LINK=20
+href=3D"http://e-learn.jct.ac.il/upload/misc/CssFiles/styles.css" =
+rel=3DSTYLESHEET>
+<META content=3D"MSHTML 6.00.6000.16735" name=3DGENERATOR></HEAD>
+<BODY class=3DLowerMenu vLink=3Dblue scroll=3Dno><IMG height=3D31 =
+hspace=3D0=20
+src=3D"http://e-learn.jct.ac.il/bareket/sysimages/100/vcampus/HL_DOWN.gif=
+"=20
+width=3D140 align=3Dtop vspace=3D5> <!-- AspEnd File --></BODY></HTML>
+
+------=_NextPart_000_0000_01C945A5.B996FBD0
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://e-learn.jct.ac.il/bareket/ItemFrames.asp?IH_Type=2&random=30824&sid=40169&iid=40067&AddLinkBoard=no&sentfrom=ItemMenu.asp&user=&rid=&qid=&TopSubject=40169&eid=&FromPortal=&vcCourseGUID=0xC59313594929B645BB0ABC9D02CB2EB5&FromLinkBoard=&GO_BACK=&LinkedItem=&VcCourseName=&VcCourseID=24232&CourseWareID=&RealItemID=40067&alone=&AssignmentID=&newwin=&Back2Eunit=&OptionID=&OrigCourseGUID=0xC59313594929B645BB0ABC9D02CB2EB5&FromResponses=
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN">
+<HTML><HEAD><TITLE>=F4=F8=E9=E8 =EE=E9=E3=F2</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1255">
+<SCRIPT language=3DJavaScript>
+			function refreshFrame()
+			 {
+				=09
+					//frames['ItemOptions'].window.location.href =3D =
+"ItemOptions.asp?random=3D23800&iid=3D40067&eid=3D&qid=3D&mode=3D&sid=3D4=
+0169&user=3D&sentfrom=3DItemMenu.asp&sign=3Dno&alone=3D&RealItemID=3D4006=
+7&ReqCourseGUID=3D0xC59313594929B645BB0ABC9D02CB2EB5";
+					=20
+							=
+frames['ItemOptions'].window.location.href=3D"ItemOptions2.asp?random=3D2=
+1960&tid=3D&eid=3D&iid=3D40067&qid=3D&mode=3D&sid=3D40169&order=3D&user=3D=
+&SentFrom=3DItemMenu.asp&DeleteSessions=3D&alone=3D&GO_BACK=3D&LinkedItem=
+=3D&newwin=3D&ReqCourseGUID=3D0xC59313594929B645BB0ABC9D02CB2EB5&IH_Type=3D=
+2&OriginalItemID=3D40067&FromResponses=3D"
+							=20
+	 			=
+frames['Icon'].window.location.href=3D"Icon.asp?random=3D17070&x=3D0&y=3D=
+5"
+	 			=20
+			=09
+			}
+		=09
+			function refreshFrameLTR()
+			{
+		=09
+				=
+frames['Icon'].window.location.href=3D"Icon.asp?random=3D25844&x=3D0&y=3D=
+5" ;
+			=09
+					=
+frames['ItemOptions'].window.location.href=3D"ItemOptions2.asp?random=3D2=
+1723&tid=3D&eid=3D&iid=3D40067&qid=3D&mode=3D&sid=3D40169&order=3D&user=3D=
+&sentfrom=3DItemMenu.asp&DeleteSessions=3D&alone=3D&GO_BACK=3D&LinkedItem=
+=3D&newwin=3D&ReqCourseGUID=3D0xC59313594929B645BB0ABC9D02CB2EB5&IH_Type=3D=
+2&OriginalItemID=3D40067&FromResponses=3D" ;
+			=09
+			}
+		=09
+			function refreshBody()
+			{
+				=
+frames['ItemBar'].window.location.href=3D"ItemBar.asp?OptionID=3D&random=3D=
+17782&tid=3D&eid=3D&iid=3D40067&qid=3D&mode=3D&cmode=3D&sid=3D40169&order=
+=3D&user=3D&sentfrom=3DItemMenu.asp&DeleteSessions=3D&vcCourseID=3D24232&=
+vcCourseName=3D&vcCourseGuid=3D0xC59313594929B645BB0ABC9D02CB2EB5&Assignm=
+entID=3D&AddLinkBoard=3Dno&newwin=3D&relatedItem=3D&ItemCount=3D&OrderID=3D=
+&FinalTest=3D&FinalTestMode=3D&WithBar=3D"
+				=
+frames['ItemBody'].window.location.href=3D"item.asp?OptionID=3D&random=3D=
+23710&tid=3D&eid=3D&iid=3D40067&qid=3D&mode=3D&cmode=3D&sid=3D40169&order=
+=3D&user=3D&sentfrom=3DItemMenu.asp&DeleteSessions=3D&vcCourseID=3D24232&=
+vcCourseName=3D&vcCourseGuid=3D0xC59313594929B645BB0ABC9D02CB2EB5&Assignm=
+entID=3D&AddLinkBoard=3Dno&newwin=3D&relatedItem=3D&ItemCount=3D&OrderID=3D=
+&FinalTest=3D&FinalTestMode=3D"
+			}
+		=09
+			function refreshBodyLTR()
+			{
+				=
+frames['ItemBar'].window.location.href=3D"ItemBar.asp?OptionID=3D&random=3D=
+28126&tid=3D&eid=3D&iid=3D40067&qid=3D&mode=3D&cmode=3D&sid=3D40169&order=
+=3D&user=3D&sentfrom=3DItemMenu.asp&DeleteSessions=3D&vcCourseID=3D24232&=
+vcCourseName=3D&vcCourseGuid=3D0xC59313594929B645BB0ABC9D02CB2EB5&Assignm=
+entID=3D&AddLinkBoard=3Dno&newwin=3D&relatedItem=3D&ItemCount=3D&OrderID=3D=
+&FinalTest=3D&FinalTestMode=3D&WithBar=3D"
+				=
+frames['ItemBody'].window.location.href=3D"item.asp?OptionID=3D&random=3D=
+20775&tid=3D&eid=3D&iid=3D40067&qid=3D&mode=3D&cmode=3D&sid=3D40169&order=
+=3D&user=3D&sentfrom=3DItemMenu.asp&DeleteSessions=3D&vcCourseID=3D24232&=
+vcCourseName=3D&vcCourseGuid=3D0xC59313594929B645BB0ABC9D02CB2EB5&Assignm=
+entID=3D&AddLinkBoard=3Dno&relatedItem=3D&ItemCount=3D&OrderID=3D&FinalTe=
+st=3D&FinalTestMode=3D"
+			}
+		=09
+</SCRIPT>
+<!-- Frames for RTL version -->
+<META content=3D"MSHTML 6.00.6000.16735" =
+name=3DGENERATOR></HEAD><FRAMESET=20
+id=3DResizeFrame border=3D0 frameSpacing=3D0 rows=3D0,*,35 =
+frameBorder=3D0=20
+onload=3DrefreshFrame();><FRAME name=3DItemBar=20
+src=3D"http://e-learn.jct.ac.il/bareket/ItemBar.asp?OptionID=3D&amp;rando=
+m=3D24885&amp;tid=3D&amp;eid=3D&amp;iid=3D40067&amp;qid=3D&amp;mode=3D&am=
+p;cmode=3D&amp;sid=3D40169&amp;order=3D&amp;user=3D&amp;sentfrom=3DItemMe=
+nu.asp&amp;DeleteSessions=3D&amp;vcCourseID=3D24232&amp;vcCourseName=3D&a=
+mp;vcCourseGuid=3D0xC59313594929B645BB0ABC9D02CB2EB5&amp;AssignmentID=3D&=
+amp;AddLinkBoard=3Dno&amp;newwin=3D&amp;relatedItem=3D&amp;ItemCount=3D&a=
+mp;OrderID=3D&amp;FinalTest=3D&amp;FinalTestMode=3D&amp;WithBar=3D"=20
+noResize scrolling=3Dno><FRAME name=3DItemBody=20
+src=3D"http://e-learn.jct.ac.il/upload/24232/library/40120/40169/I40067/s=
+erial-uartdepth.mht.htm"><FRAMESET=20
+frameSpacing=3D0 frameBorder=3D0 onload=3DrefreshFrame(); =
+cols=3D*,140><FRAME=20
+name=3DItemOptions marginWidth=3D0 frameSpacing=3D0 marginHeight=3D0=20
+src=3D"http://e-learn.jct.ac.il/bareket/ItemOptions2.asp?random=3D26218&a=
+mp;tid=3D&amp;eid=3D&amp;iid=3D40067&amp;qid=3D&amp;mode=3D&amp;sid=3D401=
+69&amp;order=3D&amp;user=3D&amp;SentFrom=3DItemMenu.asp&amp;DeleteSession=
+s=3D&amp;alone=3D&amp;GO_BACK=3D&amp;LinkedItem=3D&amp;newwin=3D&amp;ReqC=
+ourseGUID=3D0xC59313594929B645BB0ABC9D02CB2EB5&amp;IH_Type=3D2&amp;Origin=
+alItemID=3D40067&amp;FromResponses=3D"=20
+frameBorder=3DNo noResize scrolling=3Dno><FRAME name=3DIcon =
+marginWidth=3D0=20
+frameSpacing=3D0 marginHeight=3D0=20
+src=3D"http://e-learn.jct.ac.il/bareket/Icon.asp?random=3D21328&amp;x=3D0=
+&amp;y=3D5"=20
+frameBorder=3DNo noResize scrolling=3Dno></FRAMESET></FRAMESET></HTML>
+
+------=_NextPart_000_0000_01C945A5.B996FBD0--

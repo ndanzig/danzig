@@ -1,0 +1,44 @@
+<html>
+<head>
+<STYLE TYPE="text/css">  
+<!--
+P {
+width:60em;
+margin-left: 1em;
+}
+
+i:hover 
+{
+font-size:14pt; 
+color:red;
+}
+ 
+b:first-child
+{
+border: solid red;
+font-size:14pt;
+color:red;
+
+
+}
+
+
+-->
+</style>
+
+</head>
+
+
+<body>
+<h2>CSS - Pseudo Classes</h2>
+<p>
+This is <i>italic</i>.
+<p>
+This text is not all <b>bold</b>.
+<b>This text is!!</b>
+
+
+
+
+</body>
+</html>

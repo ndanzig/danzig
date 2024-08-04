@@ -1,0 +1,213 @@
+<head>
+<TITLE>Linked List Data Stucture in Java by Nachum Danzig</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>The Linked List Data Stucture in Java</H2></CENTER>
+
+<p>
+<span style="font-size: small;"><strong>Expressions, Conversion and Evaluation with C</strong></span><br />
+<strong>(All you need to know about Expressions)</strong><br /><br /><br />
+In this tutorial, I will be writing in detail about an important programming concept i.e. Algebraic Expressions, different expression notations like Prefix, Postfix and Infix evaluation of the expressions, how to convert an expression from one notation to another and how to evaluate Algebraic Expressions using computers.<br /><br />
+Each and every concept is backed by algorithms, illustrative examples and programs in C to help new programmers understand the concepts more clearly.<br /><br />
+
+We will be using the concepts of Stacks and Binary Trees to convert and evaluate the expressions, so the reader is required to be clear with the fundamentals of these concepts.<br /><br />
+<strong>Topics covered by this tutorial:</strong><br /><br />
+<ul><li>What is an Algebraic Expression?
+</li>
+<li>What are different notations of representing expressions like Infix, Prefix, and Postfix?
+</li>
+<li>Why do we need different notations for the same expression?
+</li>
+<li>Why do we need to convert the expressions from one notation to another?
+</li>
+<li>How can we convert the expressions from one notation to another? (Algorithms, Programs, examples)
+</li>
+<li>Expression Trees
+</li>
+<li>How can we evaluate an expression? (Algorithm, Program)
+
+</li>
+<li>Reader's Exercise.
+</li>
+</ul>
+<strong>Algebraic Expressions, an Introduction:</strong><br />
+An algebraic expression is a legal combination of operands and operators. Operand is the quantity (unit of data) on which a mathematical operation is performed. Operand may be a variable like x, y, z or a constant like 5, 4,0,9,1 etc. Operator is a symbol which signifies a mathematical or logical operation between the operands. Example of familiar operators include +,-,*, /, ^ ( throughout the tutorial '^' will be referred to as Exponential Operator ) etc. Considering these definitions of operands and operators now we can write an example of expression as x+y*z. Note the phrase "LEGAL combination" in the definition of an Algebraic Expression, in aforementioned example of expression x+y*z, the operands x , y, z and the operators +,* form some legal combination. Take another example +xyz*, in this expression operators and operands do not make any LEGAL combination; this expression is not a valid algebraic expression.<br /><br />
+An Algebraic Expression can be represented using three different notations:<br /><br />
+<strong>INFIX:</strong> From our school times we have been familiar with the expressions in which operands surround the operator, e.g. x+y, 6*3 etc this way of writing the Expressions is called infix notation.<br /><br />
+<strong>PREFIX:</strong> Prefix notation also Known as Polish notation, is a symbolic logic invented by Polish mathematician Jan Lukasiewicz in the 1920's. In the prefix notation, as the name only suggests, operator comes before the operands, e.g. +xy, *+xyz etc.<br /><br />
+
+<strong>POSTFIX: </strong>Postfix notation is also Known as Reverse Polish notation. They are different from the infix and prefix notations in the sense that in the postfix notation, the operator comes after the operands, e.g. xy+, xyz+* etc.<br /><br />
+Now, the obvious question that comes in our mind is, Why use these weird looking PREFIX and POSTFIX notations when we have a sweet and simple INFIX notation?<br /><br />
+<em>To our surprise INFIX notations are not as simple as they seem specially while evaluating them. To evaluate an infix expression we need to consider Operators' Priority and Associativity.</em><br /><br />
+For example, will expression 3+5*4 evaluate to 32 i.e. (3+5)*4 or to 23 i.e. 3+(5*4). To solve this problem Precedence or Priority of the operators were defined. Operator precedence governs evaluation order. An operator with higher precedence is applied before an operator with lower precedence.<br /><br />
+Following figure shows operator Precedence in descending order.<br /><br />
+<div style="text-align: center">http://www.programmersheaven.com/articles/images/expressionprecedence.gif</div><br /><br />
+Now, as we know the precedence of the operators, we can evaluate the expression 3+5*4 as 23. But wait, it doesn't end here what about the expression 6/3*2? Will this expression evaluate to 4 i.e. (6/3)*2 or to 1 i.e. 6/(3*2).As both * and the / have same priorities, to solve this conflict, we now need to use Associativity of the operators. Operator Associativity governs the evaluation order of the operators of same priority. For an operator with left-Associativity, evaluation is from left to right and for an operator with right-Associativity; evaluation is from right to left.<br /><br />
+<ul><li>, /, +, - have left Associativity. So the expression will evaluate to 4 and not 1.
+</li>
+
+</ul>
+<em>N.B: We use Associativity of the operators only to resolve conflict between operators of same priority.</em><br /><br />
+Due to the above mentioned problem of considering operators' Priority and Associativity while evaluating an expression using infix notation, we use prefix and postfix notations. Both prefix and postfix notations have an advantage over infix that while evaluating an expression in prefix or postfix form we need not consider the Priority and Associativity of the operators. E.g. x/y*z becomes */xyz in prefix and xy/z* in postfix. Both prefix and postfix notations make Expression Evaluation a lot easier. (we will discuss this in detail, later in this tutorial)<br /><br />
+But it is not easy to remember and manually write expressions in prefix or postfix form e.g. which one of following equations is easy to remember (x+y)/z*a (Infix) or xy+z/a* (Postfix)?<br /><br />
+So, what is actually done is that the expression is scanned from the user in infix form; it is converted into prefix or postfix form and then evaluated without considering the parenthesis and priority of the operators.<br /><br />
+Now let us move on the programming part, How to convert an expression from one notation to another? Well there are two ways to convert expression from one notation to another. First one uses <em>Stack</em> and second method uses <em>Expression trees.</em><br /><br />
+As there are 3 notations namely prefix, infix and postfix , there are a total of 6 conversions that can be done ,i.e. infix -&gt; prefix, infix -&gt; postfix, prefix -&gt; infix, prefix -&gt; postfix, postfix -&gt; prefix, postfix -&gt; infix. For the first 2 conversions we will be using stacks and for remaining 4 conversions we will be using Binary Expression Trees.<br /><br />
+
+To convert an expression from infix to prefix and postfix, we are going to use stacks. Those who do not know what a stack is, here are a few words about it. A stack is a special type of data structure in which items are removed in reverse order from which they are added. Stack follows Last In First Out (LIFO) pattern. Adding an element to a stack is called PUSH and removing an item from a stack is called POP.<br /><br />
+<strong>Converting Expression from Infix to Postfix using STACK</strong><br /><br /><br />
+To convert an expression from infix to postfix, we are going to use a stack.<br /><br />
+<strong>Algorithm</strong><br />
+1) Examine the next element in the input.<br />
+2) If it is an operand, output it.<br />
+3) If it is opening parenthesis, push it on stack.<br />
+4) If it is an operator, then<br />
+    i)    If stack is empty, push operator on stack.<br />
+
+    ii)   If the top of the stack is opening parenthesis, push operator on stack.<br />
+    iii)  If it has higher priority than the top of stack, push operator on stack.<br />
+    iv)  Else pop the operator from the stack and output it, repeat step 4.<br />
+5)      If it is a closing parenthesis, pop operators from the stack and output them until an opening parenthesis is encountered. pop and discard the opening parenthesis.<br />
+6)      If there is more input go to step 1<br />
+7)      If there is no more input, unstack the remaining operators to output.<br /><br /><br />
+<strong>Example</strong><br />
+
+Suppose we want to convert 2*3/(2-1)+5*(4-1) into Prefix form:
+Reversed Expression: )1-4(*5+)1-2(/3*2<br /><br />
+<table border=1> <tr>    <td><b>Char Scanned</b></td>    <td><b>Stack Contents(Top on right)</b></td>    <td><b>Postfix Expression</b></td>  </tr>  <tr>    <td>2</td>    <td>Empty</td>    <td>2</td>  </tr>  <tr>    <td>*</td>    <td>*</td>    <td>2</td>  </tr>  <tr>    <td>3</td>    <td>*</td>    <td>23</td>  </tr>  <tr>    <td>/</td>    <td>/</td>    <td>23*</td>  </tr>  <tr>    <td>(</td>    <td>/(</td>    <td>23*</td>  </tr>  <tr>    <td>2</td>    <td>/(</td>    <td>23*2</td>  </tr>  <tr>    <td>-</td>    <td>/(-</td>    <td>23*2</td>  </tr>  <tr>    <td>1</td>    <td>/(-</td>    <td>23*21</td>  </tr>  <tr>    <td>)</td>    <td>/</td>    <td>23*21-</td>  </tr>  <tr>    <td>+</td>    <td>+</td>    <td>23*21-/</td>  </tr>  <tr>    <td>5</td>    <td>+</td>    <td>23*21-/5</td>  </tr>  <tr>    <td>*</td>    <td>+*</td>    <td>23*21-/5</td>  </tr>  <tr>    <td>(</td>    <td>+*(</td>    <td>23*21-/5</td>  </tr>  <tr>    <td>4</td>    <td>+*(</td>    <td>23*21-/54</td>  </tr>  <tr>    <td>-</td>    <td>+*(-</td>    <td>23*21-/54</td>  </tr>  <tr>    <td>1</td>    <td>+*(-</td>    <td>23*21-/541</td>  </tr>  <tr>    <td>)</td>    <td>+*</td>    <td>23*21-/541-</td>  </tr>  <tr>    <td>&nbsp;</td>    <td>Empty</td>    <td>23*21-/541-*+</td>  </tr></table><br /><br />
+
+So, the Postfix Expression is 23*21-/541-*+<br /><br />
+Refer program #1 for infix to postfix Conversion<br /><br />
+<strong>Converting Expression from Infix to Prefix using STACK</strong><br /><br /><br />
+It is a bit trickier algorithm, in this algorithm we first reverse the input expression so that a+b*c will become c*b+a and then we do the conversion and then again the output string is reversed. Doing this has an advantage that except for some minor modifications the algorithm for Infix-&gt;Prefix remains almost same as the one for Infix-&gt;Postfix.<br /><br />
+<strong>Algorithm</strong><br />
+1) Reverse the input string.<br />
+2) Examine the next element in the input.<br />
+3) If it is operand, add it to output string.<br />
+
+4) If it is Closing parenthesis, push it on stack.<br />
+5) If it is an operator, then<br />
+i) If stack is empty, push operator on stack.<br />
+ii) If the top of stack is closing parenthesis, push operator on 
+            stack.<br />
+	    iii) If it has same or higher priority than the top of stack, push operator on stack.<br />
+	    iv) Else pop the operator from the stack and add it to output string, repeat step 5.<br />
+6) If it is a opening parenthesis, pop operators from stack and add them to output string until a closing parenthesis is encountered. Pop and discard the closing parenthesis.<br />
+
+7) If there is more input go to step 2<br />
+8) If there is no more input, unstack the remaining operators and add them to output string.<br />
+9) Reverse the output string.<br /><br /><br />
+<strong>Example</strong><br /><br /><br />
+Suppose we want to convert 2*3/(2-1)+5*(4-1) into Prefix form:
+Reversed Expression: )1-4(*5+)1-2(/3*2<br /><br />
+<table border=1>  <tr>    <td><b>Char Scanned</b></td>    <td><b>Stack Contents(Top on right)</b></td>    <td><b>Prefix Expression(right to left)</b></td>  </tr>  <tr>    <td>)</td>    <td>)</td>    <td>&nbsp;</td>  </tr>  <tr>    <td>1</td>    <td>)</td>    <td>1</td>  </tr>  <tr>    <td>-</td>    <td>)-</td>    <td>1</td>  </tr>  <tr>    <td>4</td>    <td>)-</td>    <td>14</td>  </tr>  <tr>    <td>(</td>    <td>Empty</td>    <td>14-</td>  </tr>  <tr>    <td>*</td>    <td>*</td>    <td>14-</td>  </tr>  <tr>    <td>5</td>    <td>*</td>    <td>14-5</td>  </tr>  <tr>    <td>+</td>    <td>+</td>    <td>14-5*</td>  </tr>  <tr>    <td>)</td>    <td>+)</td>    <td>14-5*</td>  </tr>  <tr>    <td>1</td>    <td>+)</td>    <td>14-5*1</td>  </tr>  <tr>    <td>-</td>    <td>+)-</td>    <td>14-5*1</td>  </tr>  <tr>    <td>2</td>    <td>+)-</td>    <td>14-5*12</td>  </tr>  <tr>    <td>(</td>    <td>+</td>    <td>14-5*12-</td>  </tr>  <tr>    <td>/</td>    <td>+/</td>    <td>14-5*12-</td>  </tr>  <tr>    <td>3</td>    <td>+/</td>    <td>14-5*12-3</td>  </tr>  <tr>    <td>*</td>    <td>+/*</td>    <td>14-5*12-3</td>  </tr>  <tr>    <td>2</td>    <td>+/*</td>    <td>14-5*12-32</td>  </tr>  <tr>    <td>&nbsp;</td>    <td>Empty</td>    <td>14-5*12-32*/+</td>  </tr></table><br /><br />
+
+Reverse the output string :          +/*23-21*5-41
+So, the final Prefix Expression is +/*23-21*5-41<br /><br />
+Refer program #1 For infix to prefix Conversion.<br /><br />
+<strong>Remaining Conversions</strong><br />
+All the remaining conversions can easily be done using a Binary Expressions Tree. In fact the above 2 conversions, viz Infix-&gt; Prefix and Infix -&gt; Postfix, can also be done using Binary Expression Trees but that is a very tricky thing and stacks can be used to handle the conversions easily. Now we will move a step ahead and define a Binary Expression Tree.<br /><br />
+<strong>Binary Expression Tree</strong><br /><br /><br />
+An Expression Tree is a strictly binary tree in which leaf nodes contain Operands and non-leaf nodes contain Operator, root node contain the operator that is applied to result of left and right sub trees. Once we obtain the Expression Tree for a particular expression, its conversion into different notations (infix, prefix, and postfix) and evaluation become a matter of Traversing the Expression Tree.
+The following Figure shows an expression tree for above expression 2*3/(2-1)+5*(4-1)<br /><br />
+<div style="text-align: center">http://www.programmersheaven.com/articles/images/expressionnode.gif</div>
+
+<div style="text-align: center">http://www.programmersheaven.com/articles/images/expressionexptree.gif</div><br /><br />
+<em>N.B. A binary expression tree does not contain parenthesis, the reason for this is that for evaluating an expression using expression tree, structure of tree itself decides order of the operations.</em><br /><br />
+When we run Pre-order traversal (visit root, left child and then right child) on the Binary Expression Tree we get prefix notation of the expression, similarly an Post-order traversal (visit left child, right child and then root) will yield postfix notation. What will we get from an in-order Traversal (visit left child, root and then right child)? Well, for the expressions which do not contain parenthesis, in-order traversal will definitely give infix notation of expression but expressions whose infix form requires parenthesis to override conventional precedence of operators can not be retrieved by simple in-order traversal.<br /><br />
+<strong>Doing the Conversions with Expression Trees</strong><br /><br /><br />
+<strong>Prefix -&gt; Infix</strong><br />
+The following algorithm works for the expressions whose infix form does not require parenthesis to override conventional precedence of operators.
+1) Create the Expression Tree from the prefix expression<br />
+2) Run in-order traversal on the tree.<br /><br /><br />
+<strong>Prefix -&gt; Postfix</strong><br />
+
+1) Create the Expression Tree from the prefix expression<br />
+2) Run post-order traversal on the tree.<br /><br /><br />
+Well you see how easy it is! Most important point here is to create Expression tree from Prefix expression, following algorithm does that for you:<br /><br />
+<strong>Algorithm for creating Expression Tree from a Prefix Expression</strong><br />
+1) Reverse the prefix expression<br />
+2) Examine the next element in the input.<br />
+3) If it is operand then <br />
+i) create a leaf node i.e. node having no child (node-
+         &gt;left_child=node-&gt;right_child=NULL) <br />
+
+	 ii) copy the operand in data part<br />
+	 iii) PUSH node's address on stack<br />
+4) If it is an operator, then<br />
+i) create a node <br />
+ii) copy the operator in data part<br />
+iii) POP address of node from stack and assign it to node-&gt;left_child<br />
+
+iv) POP address of node from stack and assign it to node-&gt;right_child<br />
+v) PUSH node's address on stack<br />
+5) If there is more input go to step 2<br />
+6) If there is no more input, POP the address from stack, which is the address of the ROOT node of Expression Tree.<br /><br /><br />
+Refer program #2 For prefix to infix and postfix conversion.<br /><br />
+<strong>Postfix -&gt; Infix</strong><br />
+
+The following algorithm works for the expressions whose infix form does not require parenthesis to override conventional precedence of operators.
+1) Create the Expression Tree from the postfix expression
+2) Run in-order traversal on the tree.<br /><br />
+<strong>Postfix -&gt; Prefix</strong><br />
+1) Create the Expression Tree from the postfix expression
+2) Run pre-order traversal on the tree.<br /><br />
+<strong>Algorithm for creating Expression Tree from a Postfix Expression</strong><br /> 
+1) Examine the next element in the input.<br />
+2) If it is operand then <br />
+i) create a leaf node i.e. node having no child (node-&gt;left_child=node-&gt;left_child=NULL) <br />
+
+ii) copy the operand in data part<br />
+iii) PUSH node's address on stack<br />
+3) If it is an operator, then<br />
+i) create a node <br />
+ii) copy the operator in data part<br />
+iii) POP address of node from stack and assign it to node-&gt;right_child<br />
+
+iv) POP address of node from stack and assign it to node-&gt;left_child<br />
+v) PUSH node's address on stack<br />
+4) If there is more input go to step 1<br />
+5) If there is no more input, POP the address from stack, which is the address of the ROOT node of Expression Tree.<br /><br /><br />
+Refer program #2 For postfix to infix and prefix conversion.<br /><br />
+Well, at last we are done with converting the expressions from one type to another. As a summary here is what we have done so far :
+1) Infix    -&gt; Prefix using stack<br />
+
+2) Infix    -&gt; Postfix using stack<br />
+3) Prefix  -&gt; Infix using Expression Trees<br />
+4) Prefix  -&gt; Postfix using Expression Trees<br />
+5) Postfix -&gt; Infix using Expression Trees<br />
+6) Postfix -&gt; Prefix using Expression Trees<br /><br /><br />
+
+Now all we are left with is Evaluating an Expression. Evaluating an expression involves two phases:
+1) Create an expression tree for given expression<br />
+2) Evaluate the tree recursively<br /><br /><br />
+We already know how to create an expression tree for prefix and postfix notations. Algorithm for creating  Expression Tree from Infix expression is left as reader exercise and some help can be found at <a href="http://www.seas.gwu.edu/~csci131/fall96/exp_to_tree.html">http://www.seas.gwu.edu/~csci131/fall96/exp_to_tree.html</a> <br /><br />
+Following procedure will evaluate an expression tree in a recursive fashion:<br /><br />
+<strong>Procedure Name: Evaluate Tree</strong>
+<strong>Arguments : Address of root of the tree</strong>
+int Evaluate Tree (struct node* root)<br /><br />
+<pre><span style="font-size: x-small;">IF root != NULL
+            IF current node contains an operator
+                        x = Evaluate Tree(root -&gt; left_child)
+                        y = Evaluate Tree(root -&gt; right_child)
+                        Perform operation on x and y, specified by the 
+                        operator and store result in z
+                        Return z
+            else Return root-&gt;data
+
+</span></pre><br /><br />
+Refer program #2 for evaluation of an Expression Tree.<br /><br />
+<hr />
+
+
+
+<p>
+&copy; Nachum Danzig January 2004
+
+
+</body>
+</html>
+
+
+
+

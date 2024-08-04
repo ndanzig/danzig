@@ -1,0 +1,37 @@
+<head>
+<TITLE>Programming - Linear Search</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Intoduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>Linear Search</H3></CENTER>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+
+Linear searching is a way to find if a certain element (number , string , etc. ) is in 
+a specified array.  The array can be in any order, or be completely
+jumbled and this search will find the element if it is there. If the element is found we
+ can return the <b> index</b> 
+where the element is located in the array.  If the element is not found we can return -1.  We can
+assume no array will ever have an negative number as an index.
+Our approach will be to check every element in the array to see if it is
+what we are looking for.  We will use a loop to cycle through the array.
+Here goes:
+<xmp>
+int findElement(int yourArray[], int tobefound)// method to find index of specified element
+{
+     final int notfound = -1;
+     int counter;
+     for( counter = 0; counter<yourArray.length; counter++ )
+          {
+	  if(tobefound == yourArray[counter])//check if we found the number we are looking for
+	       { return counter;  }
+	  }//end for loop
+     //if we got this far we must not have found the number
+     return notfound; 
+}
+
+</xmp>
+<p>
+&copy Nachum Danzig December 2003
+
+</body>
+</html>

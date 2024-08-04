@@ -1,0 +1,108 @@
+<head>
+<TITLE>Java - Introduction to Computer Science - Programming </TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - Java</H2></CENTER>
+<p>  Introduction to Computer Science - Java is a first year computer science 
+course designed to teach  the basic concepts of computer science and Object Oriented Programming.  
+A basic explanation of how a computer is built and runs is given.  Details of the syntax
+of the Java programming language including all structures and operators are taught.  Strings 
+and several standard packages are also covered including Swing.  The course also  covers the 
+fundamentals of structured programming, functional programming, and object oriented 
+programming design. Reading and writing to files are taught.
+Abstract classes and interfaces are also taught and their benefits explored.
+Different class relationships are covered, including inheritance and composition. Class
+diagramming and software design are introduced.  
+Method writing, sorting algorithms and recursion are strongly emphasized.  There 
+is an extensive accompanying lab which includes many serious projects and utilizes all subjects covered with practical examples. 
+
+<ol>
+<li>Introduction to Computers and the Internet
+<li>Introduction to Java Applications
+<li>Introduction to Java Applets
+<li>Control Structures in Java
+<li>Methods
+<li>Recursion
+<li>Arrays
+<li>Strings
+<li>Object Oriented Programming
+</ol>
+
+<h3>On-line textbook I am writing</h3>
+<ul>
+<li> <a href="sequence.html">What is an instruction?  &nbsp;  What is a variable?</a> 
+<li> <a href="user_io.html"> How can my program communicate with a person? </a>
+<li> <a href="using_if.html">How do I alternate what my program does? &nbsp;  Separating program flow.</a> 
+<li> <a href="loops.html">Repeating the same action more than once.</a> 
+<li> Let's do some algebra in my program.
+<li> <a href="caseswitch.html">More ways to alternate program flow </a>.
+<li> <a href="moreloops.html"> More ways to repeate actions </a>.
+<li> <a href="functions.html"> What if I need to do the same actions but with different data? Or what if I want to do the same action in different parts of my program?</a>
+<li> <a href="recursion.html">Fancy stuff using methods - <i>recursion</i></a>
+
+<li> <a href="arrays.html"> Let's create a whole set of variables.  </a>
+<li> <a href="dimensions.html"> Step into the next dimension.  </a>
+<li> <a href="linear.html"> Let's do a search on our array.  </a>
+<li> <a href="sorting.html"> Don't you want everything in order?.  </a>
+<li> <a href="binarySearch.html"> Let's find what we are looking for really fast.</a>
+<li> <a href="strings.html"> A closer look at Strings </a> or, How can I do stuff to Strings like check if two Strings are equal?.
+<li> <a href="readfile.html"> How can I read input from a file on disk? </a>
+<li> <a href="writefile.html"> O.K., now how can I write to a file? </a>
+<li> <a href="class.html"> Let me make my own class already! </a>
+<li> <a href="moreclass.html"> Now for some more details about classes. </a>
+<li> <a href="abstract.html"> Can I make a class which I intend never to instantiate?</a>
+</ul>
+
+<a href="scanner_example.txt">A simple scanner example</a>
+<br>
+<a href="intro_1.txt">Intro to arrays etc.</a>
+<br>
+<a href="class_Fifo.txt">Class Fifo</a>
+<br>
+<a href="http://java.sun.com/j2se/1.5.0/docs/api">j2se 1.5.0 Class listing </a>
+<br>
+<a href="http://java.sun.com/docs/books/tutorial/java/data/index.html">
+String Class and Number Class in detail</a>
+<br>
+<a href="http://math.hws.edu/eck/cs124/javanotes3/c8/s5.html">How arrays work in Java</a>
+<br>
+<a href="http://www.leepoint.net/notes-java/data/arrays/arrays-2D-2.html">
+Making Jagged arrays in Java</a>
+<br>
+<a href="technical.html">Some language specifications </a>
+<br>
+<a href="principles.html">Principles of Good Programming, Good Programming Practices, General Tips</a>
+<br>
+Use this function to get current time in milliseconds:  System.currentTimeMillis()
+<br>
+<h3><a href="homework.html">Homework assignments</a></h3>
+
+<h3><a href="http://www.cplusplus.com/doc/tutorial/">A well written C++ Tutorial </a> </h3>
+
+<h4>Quotes about software writing </h4>
+&nbsp; &nbsp; &nbsp; &nbsp; "If it was hard to write, it should be hard to read." - well known, and not a good idea
+<br>&nbsp; &nbsp; &nbsp; &nbsp; "Seldom is your first idea  a solution that works." -N.D.
+<br>&nbsp; &nbsp; &nbsp; &nbsp; "Seldom is the solution that works the best solution." -N.D.
+<br>&nbsp; &nbsp; &nbsp; &nbsp; "Debugging is twice as hard as writing the 
+code in the first place.
+Therefore, if you write the code 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; as cleverly as possible, you are,
+by definition, not smart enough to debug it." - Brian W. Kernighan
+<br>&nbsp; &nbsp; &nbsp; &nbsp; "The compiler is king." -ND
+<br>&nbsp; &nbsp; &nbsp; &nbsp; "Computers do what you tell them to do, not what you want them to do." -anonymous
+
+<p> &copy Nachum Danzig
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

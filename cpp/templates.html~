@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+<head>
+<TITLE>Programming - Template Functions in C++</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Template  Functions in C++</H3></CENTER>
+
+<p>
+Templates in C++ are used for making functions (or classes) that are defined to 
+work for an undefined type.  When the compiler sees a call to the function, it checks
+which types you have used in your call and makes a function definition for you.  
+So the compiler is writing the actual function definition for you.  
+In this way you can created several overloaded versions of a function but without having to 
+write them all explicity.
+<p>Here is the general format of template function , varTypeName is called the template parameter.
+
+<pre>
+<font color=blue>template</font> &lt;<font color=blue> typename  </font>   varTypeName &gt;
+type functionname ( varTypeName var1 , etc)
+{
+
+use varTypeName as much as you like
+
+return type;
+}
+</pre>
+
+Alternitively, you can write 
+
+<pre>
+<font color=blue>template</font> &lt;<font color=blue> class  </font>   varTypeName &gt;
+type functionname ( varTypeName var1 , etc)
+{
+
+use varTypeName as much as you like
+
+return type;
+}
+</pre>
+
+<p>
+Let's say you want to write a function to multiply 2 numbers, but you want to multiply either two ints
+or two floats or two longs etc.  So you could write a whole set of overloaded functions
+or you can write one template function and let the compiler do the work for you.
+Here is how:
+<pre>
+#include "iostream.h"
+
+template &lt;typename   var&gt;
+var multiply ( var var1 , var var2)
+{
+
+var result;
+
+result = var1 * var2;
+
+
+ return result;
+  }
+
+int main()
+{
+
+  int a=10, b=20;
+  float c=3.5, d=5.5;
+  a=multiply (a,b);
+  
+  cout&lt;&lt;a&lt;&lt;endl;
+  c=multiply(c,d);
+  cout&lt;&lt;c&lt;&lt;endl;
+  c=3.5;
+  c=multiply(c,a);
+  cout&lt;&lt;c&lt;&lt;endl;
+
+  return 1;
+}
+</pre>
+
+<p> In the code above, in the main() I call the function
+three times.  First I call it with two ints then I call it with two
+floats.  In both these cases the compiler will define the function for me.
+First it will define it as an int parameterized function and second as a 
+float parameterized function. But the third call will fail.  
+This is because I have made my template so that it only accepts
+two parameters of the same type. Of course they may be any type, but the two
+ of them must be the same type.  To create a template function 
+containing two different types I would write the following code
+
+
+<pre>
+
+template &lt;typename   var , typename varvar&gt;
+var  multiply ( var var1 , varvar var2)
+{
+
+var result;
+
+result = var1 * var2;
+
+
+ return result;
+  }
+
+
+</pre>
+
+<p>Now the main() I have written above will compile.  
+I can now call the function in the main with any two types, even two
+of the same type!
+
+
+<h3>Inheritance of Templates</h3>
+
+Inheritance is done like this:
+<blockquote>
+template &lt;class T&gt; class d : public b &lt;T&gt;
+
+<br>
+template &lt;typename T&gt;
+class a : public node &lt;typename T&gt; 
+</blockquote>
+
+<pre>
+template &lt; typename T &gt; class base{
+ /*  */
+};
+
+class derived : private base &lt;derived &gt;{
+ /*  */
+}; 
+
+
+
+
+<p>
+&copy Nachum Danzig November 2009 - 2012
+
+</body>
+</html>
+
+
+
+
+
+

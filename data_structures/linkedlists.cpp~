@@ -1,0 +1,63 @@
+#include <iostream.h>
+
+class Int
+{
+public:
+	int Integer;
+	Int* next;
+	Int ();
+	Int (int a);
+};
+Int::Int(int a)
+{
+	Integer=a;
+	next='\0';
+}
+Int::Int()
+{
+	Integer=0;
+	next='\0';
+}
+
+void addOne(Int** current, int Integer)
+{
+	//Int* current=Top;
+	if((*current) != '\0')
+	{
+		while ((*current)->next!='\0')//same as ((*current).next!='\0')
+		{
+			(*current)=(*current)->next;
+			//new         old
+		}
+		(*current)->next=new Int(Integer);
+		
+	}
+	else//curent is NULL, i.e. First link.
+		*current=new Int(Integer);
+
+
+}
+void print(Int* current)
+{
+	//Int* current=Top;
+	
+		while (current!='\0')//same as ((*current).next!='\0')
+		{
+			cout<<current->Integer;
+			current=current->next;
+			//new         old
+	
+		}
+	
+}
+int main()
+{
+	//Int a(7);
+	Int* Head='\0';
+	//Head=&a;//you could say (*Head).Integer=75 or a.Integer=78;
+	//(*Head).next=new Int(8);//a.next=new Int(8)
+	//(*((*Head).next)).next=new Int(9);
+	for (int x=0; x<10; x++)
+		addOne(&Head, x*75);
+		print(Head);
+}

@@ -1,0 +1,108 @@
+#include <iostream.h>
+
+class Int  //simple class containing one int
+{
+public:
+	int Integer;
+	Int* previous;
+	Int ();
+	Int (int a);
+	Int (int a, Int* temp);
+};
+Int::Int(int a)
+{
+	Integer=a;
+	previous='\0';
+}
+Int::Int(int a, Int* Previous)
+{
+	Integer=a;
+	previous=Previous;
+}
+
+Int::Int()// for use in a static Int declaration
+{
+	Integer=0;
+	previous='\0';
+}
+
+
+class Fifo
+{
+private:
+  Int* head; Int* tail;
+  int maxsize;
+  int currentsize;
+public:
+  void print();
+  Fifo();
+  Fifo(const int temp);
+  int push(int number);
+  Int* pop();
+};
+
+Fifo::Fifo()
+{
+  head=tail='\0';
+  maxsize=10;
+  currentsize=0;
+}
+Fifo::Fifo(const int size)
+{
+  head=tail='\0';
+  maxsize=size;
+  currentsize=0;
+}
+
+int Fifo::push(int number)
+{
+if(head==NULL)
+  {head=tail=new Int(number);
+  return 1;
+  }
+ if(currentsize<maxsize)
+   {
+     tail->previous=new Int(number);
+     currentsize++;
+     return 1;
+   }
+ return -1;
+}
+
+
+Int* Fifo::pop()
+{
+  Int* temp; 
+  if(head==NULL)
+    {
+      return (Int*)(-1);
+    }
+  temp = head;
+  head = head->previous;
+  currentsize--;
+  return temp;
+}
+
+
+void Fifo::print()
+{
+  Int* temp =head;
+		while (temp!='\0')
+		{
+			cout<<temp->Integer;
+			temp=temp->previous;
+		}
+	
+}
+int main()
+{
+  Fifo* myfifo = new Fifo(2);
+  myfifo->push(7);
+  myfifo->push(5);
+  myfifo->print();
+  myfifo->pop();
+  myfifo->print();
+  myfifo->pop();
+
+
+}

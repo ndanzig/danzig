@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<TITLE>JavaScript Example 7</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function MakeArray(size){
+   this.length = size;
+
+   for(var i=1; i<=size; i++) {
+      this[i] = '';
+   }
+
+   return this;
+}
+function convertDay(dayValue) {
+   // This function takes a dayValue (usually returned from the
+   // getDay() method) and converts that numeral into the string
+   // text for the day of the week.
+   var strDay = new MakeArray(7); // necessary to 'allocate' array space
+   strDay[0] = "Sunday";
+   strDay[1] = "Monday";
+   strDay[2] = "Tuesday";
+   strDay[3] = "Wednesday";
+   strDay[4] = "Thursday";
+   strDay[5] = "Friday";
+   strDay[6] = "Saturday";
+   return strDay[dayValue];
+}
+
+function convertMonth(monthValue) {
+   // This function converts a monthValue (usually returned from
+   // the getMonth() method) numeral into the string text for the
+   // month of the year.
+   var strMonth = new MakeArray(12); // necessary to 'allocate' array space.
+   strMonth[0] = "January";
+   strMonth[1] = "February";
+   strMonth[2] = "March";
+   strMonth[3] = "April";
+   strMonth[4] = "May";
+   strMonth[5] = "June";
+   strMonth[6] = "July";
+   strMonth[7] = "August";
+   strMonth[8] = "September";
+   strMonth[9] = "October";
+   strMonth[10] = "November";
+   strMonth[11] = "December";
+   return strMonth[monthValue];
+}
+
+function printNow()
+{
+   var now=new Date();
+   document.writeln(convertDay(now.getDay()).fontcolor("yellow") + ", ";
+   document.writeln(convertMonth(now.getMonth()).fontcolor("blue") + " ";
+  document.writeln(now.getDate() + " - " +( now.getHours()  + ":";
+  document.writeln(now.getMinutes()).fontcolor("red"));
+   return 1;
+}
+
+// -->
+</SCRIPT>
+<HEAD>
+<BODY>
+The current date/time is <SCRIPT LANGUAGE="JavaScript">printNow()</SCRIPT>
+</BODY>
+</HTML>
+

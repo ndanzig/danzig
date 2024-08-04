@@ -1,0 +1,550 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fcharset0 Arial;}{\f1\fnil\fcharset0 Courier New;}}
+{\colortbl ;\red128\green0\blue0;\red0\green128\blue128;\red0\green0\blue255;\red255\green0\blue0;\red0\green128\blue0;\red0\green0\blue0;}
+{\*\generator Msftedit 5.41.15.1507;}\viewkind4\uc1\pard\tx7380\ul\b\f0\fs20 body customization with css:\par
+\ulnone inputing a background color and text color:\b0\par
+body\par
+\{\par
+ background-color: black; // this one is for background color\par
+ color: white; // this one is for all text in the page\par
+\}\par
+\ul\b\par
+\ulnone inputing an image on the page background:\b0\par
+body\par
+\{\par
+ background-image: url("linktoimage/image.jpg");\par
+\}\par
+\ul\par
+using scroll or fix with background-attachment:\ulnone\par
+\par
+\b exemple if you want to use an image and you want it to scroll down while the \par
+the user is surfing the page up and down use:\b0\par
+  body\par
+  \{\par
+  background-image: url("image.jpg");\par
+  background-attachment: scroll;\par
+  \}\par
+\b  if you dont want it to go down with the page use:\b0\par
+  body\b\par
+   \b0\{\par
+    background-image: url("image.jpg");\b\par
+\b0     background-attachment: fixed;\par
+   \}\par
+\ul using background-repeat:\ulnone\par
+\b repeat - \b0 the image will be repeated by default.\b\par
+no repeat - \b0 the image will not be repeated.\par
+\b repeat-x \b0 - the image will be repeated on the horizontal line.\par
+\b repeat-y \b0 - the image will be repeated on the vertical line.\par
+\par
+exemple:\par
+body\par
+ \{\par
+  background-image: url("image.jpg");\par
+  background-attachment: scroll;\par
+  background-repeat: no-repeat;\par
+\}\par
+\par
+\ul using background-position:\par
+\ulnone\b top \par
+right \par
+left \par
+center\par
+bottom\par
+\par
+exemple:\b0\par
+body\par
+ \{\par
+   background-color: black;\par
+   background-image: url("image.jpg");\par
+\b    \b0 background-attachment: fixed;\par
+   background-repeat: no-repeat;\par
+   background-position: right; // can also be formated as background-position: top right; meaning the image will be on the top right of the screen.\par
+ \}\par
+\pard\par
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\par
+------------------------------------------------------- text modifications ----------------------------------------------------------------------------------------------------------------------------\par
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\par
+I will show how to modify a text using a paragraph.\par
+an id and a class.\par
+\par
+html code:\par
+\f1  <p>\par
+ The Writers Guild of America on Sunday asked members to vote on a contract to end <br>\par
+ a three-month walkout that has left viewers of U.S. television mired in reruns. <br>\par
+ Writers wh met on set Saturday voiced resounding support for the tentative agreement.<br>\par
+ </p>\par
+\f0  \f1 <p class="text2">\par
+ The Writers Guild of America on Sunday asked members to vote on a contract to end <br>\par
+ a three-month walkout that has left viewers of U.S. television mired in reruns. <br>\par
+ Writers wh met on set Saturday voiced resounding support for the tentative agreement.<br>\par
+ </p>\par
+ <p id="text3">\par
+ The Writers Guild of America on Sunday asked members to vote on a contract to end <br>\par
+ a three-month walkout that has left viewers of U.S. television mired in reruns. <br>\par
+ Writers wh met on set Saturday voiced resounding support for the tentative agreement.<br>\par
+ </p>\par
+------------------------------------------------------------------\par
+css code:\par
+The command color is presented: all the text will be modified red.\par
+p\par
+\{\par
+ color: red; // can also be seen as color: #FFFFF; diff way of telling what color you want.\par
+\}\par
+------------------------------------------------------------------\par
+text size: using the class now.\par
+.text2\par
+\{\par
+ font-size: 14px;\par
+\}\par
+there is 3 ways of writing a size: ( em , px or key words.)\par
+\par
+ exemple of em:\par
+\f0    .text2\par
+    \{\par
+     font-size: 100em;\par
+    \}\par
+   \par
+  exemple of pixel(px):\par
+  .text2\par
+   \{\par
+   font-size: 150px\par
+   \}\par
+   \par
+  exemple of keywords:\par
+   \b  what to use:\b0\par
+    * xx-small \par
+    * x-small \par
+    * small \par
+    * medium \par
+    * large  \par
+    * x-large  \par
+    * xx-large   \par
+   \par
+   .text2\par
+   \{\par
+    font-size: xx-large;\par
+   \}\par
+ \f1 ------------------------------------------------------------------\par
+different font type when it comes to choose if your text will be verdana arial or arial black etc..\par
+\par
+exemple of font family's:\par
+    * Arial\par
+    * Arial Black\par
+    * Comic Sans MS\par
+    * Courier New\par
+    * Georgia\par
+    * Impact\par
+    * Times New Roman\par
+    * Trebuchet MS\par
+    * Verdana\par
+\par
+exemple of use: (this time I will use an id)\par
+#text3\par
+\{\par
+ font-family: Arial, "Arial Black", serif;\par
+\}\par
+this is saying use arial if u cant use arial black and if you cant use serif (serif is always possible so always put it last.)\par
+-----------------------------------------------------------------------\par
+using text-align which tells us where our text will be located(\\_/)\par
+                                                              ('',)\par
+using key words:\par
+\pard\tx7380\b\f0 top \par
+right \par
+left \par
+center\par
+\pard bottom\par
+\b0\par
+ exemple:\par
+p\par
+\{\par
+ text-align: top right; // the text will be on the top right :D\par
+\}\par
+--------------------------------------------------------------------------------------------------------------------------------------------\par
+\fs24 using text-indent which means when you have a paragraph you want the pargraph first phrase to start a bit more on the right\par
+how to use:\par
+\par
+p\par
+\{\par
+ text-indent: 30px;\par
+\}\par
+------------------------------------------------------------------------------------------------------------------\par
+word spacing and letter spacing are two css codes that can be really usefull.\par
+your deciding in pixel how much spacing you have between your letters in a word and how much spacing you have between your words inside a phrase.\par
+\par
+.text2\par
+\{\par
+ word-spacing: 10px;\par
+ letter-spacing: 5px;\par
+\}\f1\fs20\par
+\f0 ----------------------------------------------------------------------------------------------------------------------------------------------\par
+making a text italic can be done with 2 css commands\par
+here they are:\par
+\par
+.text2\par
+\{ \par
+ font-style: oblique;\par
+\}\par
+#text3\par
+\{\par
+ font-style: italic;\par
+\}\par
+or to make it normal: \par
+p\par
+\{\par
+ font-style: normal;\par
+\}\par
+---------------------------------------------------------------------------------------------------------------------------------------------------\par
+use bold with css:\par
+font-weight:\par
+exemple:\par
+p\par
+\{\par
+ font-weight: bold;\par
+\}\par
+----------------------------------------------------------------------------------------------------------------------------------------------------\par
+all the text will be writen in small capitals letters.\par
+font-variant:\par
+exemple:\par
+p\par
+\{\par
+ font-variant: small-caps;\par
+\}\par
+------------------------------------------------------------------------------------------------------------------------------------------------------\par
+text-transform: can transformate text by using this command and those:\par
+    * uppercase : all the text will be capitalised.\par
+    * lowercase : all the text will be witen like if CAPS LOCK WAS off.\par
+    * capitalize : Every first word letter will be capitalized.\par
+    * none : default no transformation.\par
+exemple:\par
+p\par
+\{\par
+ text-transform: upercase;\par
+\}\par
+--------------------------------------------------------------------------------------------------------------------------------------------------------\par
+ using \b text-decoration:\b0\par
+you can choose to use\par
+\b *underline\par
+*line-through\par
+*overline\par
+*blink (dosen't work with internet explorer , works on firefox)\par
+*none\b0\par
+\par
+exemple:\par
+p\par
+\{\par
+\b  text-decoration: underline;\b0\par
+\}\par
+--------------------------------------------------------------------------------------------------------------------------------------------------------\par
+using first-letter , first-line , before or after\par
+\par
+\b exemple of first letter:\b0\par
+p:\cf1 first-letter\cf0\par
+\{\par
+ color: blue;\par
+\}\par
+\par
+\b exemple of first line:\b0\par
+p:\cf2 first-line\cf0\par
+\{\par
+ font-weight: bold;\par
+\}\par
+\par
+\b exemple of before and after:\par
+\par
+\b0 .text2:\cf3 before\cf0\par
+\{\par
+ content: "Question :"; will put this before every class called question(.text2)if you \par
+                        dont know what is a class make sure you studdy your cours.\par
+\}\par
+.question:\cf4 after\cf0\par
+\{\par
+ content: " ?"; Will put this contect after every class called question (.text2)\par
+\}\par
+------------------------------------------------------------------------------------------------------------------------------------------------\par
+Defininfg the width size of the paragraph:\par
+p\par
+\{\par
+   width: 50%;\par
+   text-align: justify;\par
+\}\par
+ the text will be 50% of his original width.\par
+p\par
+\{\par
+   width: 250px;\par
+   text-align: justify;\par
+\}\par
+ the text will be 250 pixel of width.\par
+-------------------------------------------------------------------------------------------------------------------------------------------------\par
+(X)HTML CODE TO USE:\par
+<html>\par
+ \cf5\b <!-- dont forget to link your css page -->\cf0\b0\par
+<body>\par
+\f1 <p class="cut">\par
+ The Writers Guild of America on Sunday asked members to vote on a contract to end <br>\par
+ a three-month walkout that has left viewers of U.S. television mired in reruns. <br>\par
+ Writers wh met on set Saturday voiced resounding support for the tentative agreement.<br>\par
+ </p>\par
+\f0  \f1 <p class="scroll_bar">\par
+ The Writers Guild of America on Sunday asked members to vote on a contract to end <br>\par
+ a three-month walkout that has left viewers of U.S. television mired in reruns. <br>\par
+ Writers wh met on set Saturday voiced resounding support for the tentative agreement.<br>\par
+ </p>\par
+ <p id="auto_scroll_bar">\par
+ The Writers Guild of America on Sunday asked members to vote on a contract to end <br>\par
+ a three-month walkout that has left viewers of U.S. television mired in reruns. <br>\par
+ Writers wh met on set Saturday voiced resounding support for the tentative agreement.<br>\par
+ </p>\par
+\f0 </body>\par
+</html>\par
+\par
+CSS(CASCADING STYLE SHEET):\par
+p\par
+\{ \par
+   width: 250px;\par
+   height: 100px;\par
+   text-align: justify;\par
+\} \par
+.cut\par
+\{\par
+   overflow: hidden; // this one will just skip line when reaching maximum.\par
+\}\par
+.scroll_bar\par
+\{ \par
+   overflow: scroll; // this one will will create a scroll\par
+\}\par
+.auto_scroll_bar\par
+\{\par
+   overflow: auto; //this one will create a scroll automatilcly :O\par
+\}\par
+  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\par
+    * padding : tells you the internal margin.\par
+    * margin : tells you the exterrior margin.\par
+\par
+example:\par
+CODE CSS:\par
+p\par
+\{\par
+   width: 350px;\par
+   border: 1px solid black;\par
+   text-align: justify;\par
+   padding: 12px; making a marge of 12px on the interrior\par
+   margin: 50px; making a marge of 50px on the exterior\par
+\}\par
+if you dont understand try it by doing this:\par
+\par
+CODE (X)HTML:\par
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam laci\par
+nia leo ac nunc. Nulla aliquet. Nullam quam leo, volutpat vitae, venenatis\par
+ eget, blandit eu, augue. Proin ac libero nec magna laoreet tempus. Nullam \par
+felis. Nam et libero. Sed velit dui, tempus in, nonummy venenatis, accumsan \par
+id, justo. Ut ullamcorper. Cras sem diam, vulputate nec, tempor at, pretium \par
+at, magna. Pellentesque habitant morbi tristique senectus et netus et malesu\par
+ada fames ac turpis egestas. Curabitur sapien pede, malesuada ac, ultricies \par
+in, dignissim eget, mauris. Nullam varius diam ac ligula. Morbi mattis posuere\par
+ odio. Ut mattis risus ac erat. Nam volutpat, nisl vitae venenatis mollis, \par
+erat tincidunt purus, nec ornare felis tellus sed purus. Phasellus orci.\par
+</p>\par
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam laci\par
+nia leo ac nunc. Nulla aliquet. Nullam quam leo, volutpat vitae, venenatis\par
+ eget, blandit eu, augue. Proin ac libero nec magna laoreet tempus. Nullam \par
+felis. Nam et libero. Sed velit dui, tempus in, nonummy venenatis, accumsan \par
+id, justo. Ut ullamcorper. Cras sem diam, vulputate nec, tempor at, pretium \par
+at, magna. Pellentesque habitant morbi tristique senectus et netus et malesu\par
+ada fames ac turpis egestas. Curabitur sapien pede, malesuada ac, ultricies \par
+in, dignissim eget, mauris. Nullam varius diam ac ligula. Morbi mattis posuere\par
+ odio. Ut mattis risus ac erat. Nam volutpat, nisl vitae venenatis mollis, \par
+erat tincidunt purus, nec ornare felis tellus sed purus. Phasellus orci.\par
+</p>   \par
+-----------------------------------------------------------------------------------------------------------------------------------------------\par
+using \cf5\b float: left;  \cf6\b0 or using \cf4\b float: right;\par
+\cf6\b0\par
+\ul possible uses:\ulnone  \par
+\b - left:\b0  \b\par
+- right:\par
+- both: \b0 the text continues under if its a float left or a float right.\par
+example:\par
+ p:first-letter;\par
+  \{\par
+  float: left;\par
+ \}\par
+-------------------------------------------------------------------------------------------------------------------------------------------\par
+\par
+    * the width : \par
+          o thin :\par
+          o medium : \par
+          o thick : \par
+border:\par
+          o none : \par
+          o solid : \par
+          o dotted : \par
+          o dashed : \par
+          o double : \par
+          o groove : \par
+          o ridge : \par
+          o inset : \par
+          o outset : \par
+using command by exemple:\par
+.nameofclass\par
+\{\par
+  border: 3px double red; saying border exprended of 3px using double border using red.\par
+\}\par
+\par
+to specidfy which side you want to modify use those border commands:\par
+    * border-top : \par
+    * border-bottom : \par
+    * border-left : \par
+    * border-right : \par
+\par
+exemple \par
+ .nameofclass\par
+\{\par
+ border-right: 3px double red;\par
+\}\par
+  -------------------------------------------------------------------------------------------------------------------------------------------\par
+  --------------------------------------------------------- modifying lists -----------------------------------------------------------\par
+  -------------------------------------------------------------------------------------------------------------------------------------------\par
+changing that a list goes a bit on the right or not.\par
+\{\par
+   list-style-position: inside; the list will not be indented\par
+\}\par
+\{\par
+   list-style-position: outside; the list will be indented\par
+\}\par
+-------------------------------------------------------------------------------------------------------------------------------------------\par
+\par
+\cf0 changing the sign before a listed item<li> inside an unordered list <ul>\par
+.list\par
+\{\par
+   list-style-type: circle; // will make circles unless of discs \par
+\}\par
+.list\par
+\{\par
+   list-style-type: square; // will make squares unless of discs\par
+\}\par
+.list\par
+\{\par
+   list-style-type: none; will make nothing apear before the <li> unless of discs\par
+\}\par
+xhtml code:\par
+<ul class="list">\par
+   <li>lists</li>\par
+   <li>of</li>\par
+   <li>noobs</li>\par
+</ul>\par
+css:on top u can also use disc which is default so no needs :D\par
+\cf6 -------------------------------------------------------------------------------------------------------------------------------------------\par
+# for ordered lists here the type of  you can use. :\par
+\par
+    * decimal : numbers 1, 2, 3, 4, 5... (default)\par
+    * decimal-leading-zero : (01, 02, 03, 04, 05...). dosent work with IE\par
+    * upper-roman : Capitalized Roman numbers (I, II, III, IV, V...)\par
+    * lower-roman : not capitalized roman numbers (i, ii, iii, iv, v...)\par
+    * upper-alpha : Capitalized letters  (A, B, C, D, E...)\par
+    * lower-alpha : not capitalized letters  (a, b, c, d, e...)\par
+    * lower-greek : greek numbers (dosent work on IE (works on firefox))\par
+\par
+XTML CODE:\par
+<ol class="toc"> // for type of classing.\par
+<li>Un</li>\par
+<li>Deux</li>\par
+<li>Trois</li>\par
+<li>Quatre</li>\par
+</ol>\par
+css code: \par
+.toc\par
+\{\par
+ list-style-type: upper-roman, lower-roman; // a bit of study I'm saying use upper roman\par
+                                                                 and if you cant, use lower-roman.\par
+\}\par
+--------------------------------------------------------------------------------------------------------------------------\par
+and now let me show you something pretty neat chaging the ul with an small image :D\par
+exemple:\par
+ul // unless of using a disc or a square or a circle im using a small image in front of my\par
+      listing content.\par
+\{\par
+   list-style-image: url("folder.png");\par
+\}\par
+--------------------------------------------------------------------------------------------------------------------------\par
+------------------------------------------------------ img tag with css ------------------------------------------\par
+--------------------------------------------------------------------------------------------------------------------------\par
+--------------------------------------------------------------------------------------------------------------------------\par
+\cf0\par
+\par
+img\par
+\{\par
+   display: block;\par
+\}\par
+makes every img become a block type unless of inline\par
+\par
+---------------------------------------------------------------------------------------------------------------------------\par
+ removing the border of a image link which is prety ugly:\par
+\par
+using the code by example:\par
+XHTML CODE:\par
+<p>\par
+<a href="http://www.siteduzero.com"><img src="images/hawai.jpg" alt="" title=""></a>\par
+</p>\par
+CSS CODE:\par
+a img // means every image inside a link\par
+\{\par
+   border: none; // dont use the border :D\par
+\}\par
+\par
+\par
+\par
+---------------------------------------\par
+how to modifiy the way anything when a mouse is over it with css. (hover)\par
+---------------------------------------\par
+---------------------------------------\par
+#1\par
+learning hover .. hover means when your mouse is over the link.\par
+exemple\par
+a:hover\par
+\{\par
+commands of css. :P\par
+\}\par
+funny exemple il make it when you put your mouse over alink it gets underlined\par
+ and become green. so here is the way to do it:\par
+\par
+a:hover // which means when i have hover(my mouse over) a(a link or adress)\par
+\{//do\par
+text-decoration: underline; // underline my link\par
+color: green; make my link become the color ( green in this case.)\par
+\par
+---------------------------------------\par
+p:hover // when I put my mouse over a paragraph \par
+\{\par
+   background-color: #CFE1EB; the takes a background of color light blue in this case :D\par
+   text-indent: 20px; and the paragraph starts are 20 pixel.\par
+\}\par
+---------------------------------------\par
+---------------------------------------\par
+Active means when im clicking wich is really fast. most of the time u wont even \par
+realise it :D\par
+---------------------------------------\par
+---------------------------------------\par
+a:active // when the client clicks on the link \par
+\{\par
+   background-color: #FFCC66; // it will get a back ground of this color which i think is \par
+                                 orange.\par
+\}\par
+u can also use a:focus to make it more obvious but it dosent work with IE so do it this way\par
+\par
+ a:active, a:focus meaning applicate this background color to active and focus(focus stays\par
+                                                                               longer)\par
+\{\par
+   background-color: #FFCC66;\par
+\}\par
+---------------------------------------\par
+visited means visited exemple :P\par
+a:visited will mean a link that as been used already will look like:\par
+\par
+use text decoration by exemple\par
+a:visited ( y default will change color :D )\par
+\{\par
+ text-decoration: none;\par
+\}\par
+ can also change font style the color by using color: red; or font-style: italic; or \par
+ oblique; just to remember you guys italic and oblique is the same ^^\par
+---------------------------------------\par
+}
+ 

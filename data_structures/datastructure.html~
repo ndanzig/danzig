@@ -1,0 +1,58 @@
+<head>
+<TITLE>Data Stuctures in Java by Nachum Danzig</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Data Structures</H2></CENTER>
+
+<p>What is a data structure anyway? We have been using data stuctures of some
+ type in all our programs so far.  Data are information stored in the computer's
+memory.  A byte is a structure of 8 bits.  A float is a structure of usually
+4 bytes.  We can say that data in its purest unstuctured form is a bit.  It is
+capable of only being 1 or 0 , "on" or "off".  When I use the relationship
+between different datum to signivfy something then I then I must structure
+the data as i choose.  The second bit of a byte means 0 or 2 because it
+is in the second place.  That is what is meant by structured data.
+The different bytes of a double have different meanings based on their 
+location. These are very simple data structures and not what is usually 
+meant by the term "data structures"
+<p>The next most complex data structure is the class.  In a class we group 
+attributes together in one package. This gives form to our data.
+Moreover, the definition of the class may impart meaning
+to a particular piece of data.  For example, the attribute "name"
+of type String in class dog would mean the name of the dog, but the
+ attribute "name"
+in a class called student would mean the name of the student.  Here we can
+see that the location of data can give it significance.  But this is also not
+the type of data structure we will be focusing on.  
+<p>In this course, we will deal with how we group primitive data types 
+together and how we 
+group classes together.  We have already grouped primitive data types 
+together when we made arrays.  An array of integers is a data stucture in
+its more common sense.  An array gives some structure to a set of data.
+This enables us to sort the data or search the data.  This would not
+be possible if the data were stored in variables having no relationship
+to each other. If I made 10 separate variable named something like "grade1",
+"grade2", I could not sort them because there would be no
+reference point by which to sort them.  However if I make an array called "grades"
+and use it to store the grades, then I can sort the grades.
+We can also make arrays of user-defined classes. In the example program
+<a href="../java_class/class.html>kennel.java </a> we created an
+array of dogs.
+So far  the array is the only data structure we have learned to create.
+
+&copy; Nachum Danzig December 2003
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

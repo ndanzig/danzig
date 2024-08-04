@@ -1,0 +1,45 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>Baud Rate</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>Baud Rate</H1> 
+ <P><UL>
+<LI><H2>The rate of transfer is in BPS. The UART 8250 has a clock that's rate is 1.8432 MHz. The UART divides the clock signal by 16, giving a maximum baud of 115,200 BPS. 
+</H2>
+</UL><UL>
+<LI><H2>But this rate might be too fast for some devices, so the rate is controllable.
+</H2>
+</UL><UL>
+<LI><H2>Lets say we want to communicate at 2400 BPS. We have to divide the clock rate by a number multiplied by 16 to get the desired rate. This number is called the baud rate. 
+</H2>
+</UL><UL>
+<LI><H2>Thus in our case 2400 = 1.8432*106/(baud rate * 16). 
+</H2>
+</UL><UL>
+<LI><H2>The baud rate = 1.8432*106/(2400 * 16) = 48
+</H2>
+</UL><UL>
+<LI><H2>The baud rate is stored in the DLL and DLM before transmission starts. The DLL Contains the 8 LSBs (Least Significant Bits) and the DLM contains the 8 MSBs (Most Significant Bits).</H2>
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld012.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld014.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld013.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

@@ -1,0 +1,21 @@
+public class point
+{
+
+     int xvalue;
+    int yvalue;
+
+    point(){
+	xvalue=0;
+	yvalue=0;
+
+    }
+
+    point(int x, int y)
+    {
+
+	xvalue=x;
+	yvalue=y;
+}
+
+
+};

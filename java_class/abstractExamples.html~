@@ -1,0 +1,84 @@
+<html>
+<body>
+<pre>
+
+<h2> Abstract Class  Example</h2>
+
+public abstract class myAbstract {
+    myAbstract(){};// this constructor is optional
+    public abstract void myMethod( ); //abstract method
+    public void myPrint( )    //defined method
+    { 
+	System.out.println("hello , I am abstract class");
+    }
+}
+
+
+public class myExtends extends myAbstract {
+    myExtends(){};  //constructor needed 
+    public void myMethod( )
+    {
+	System.out.println("extention of myAbstract myMethod");
+    }
+}
+
+
+public class testAbstract {
+    public static void main (String args[])
+    {
+	myExtends a = new myExtends();
+	//myAbstract c = new myAbstract();//illegal
+
+	myAbstract c = a;// a reference to the abstract parent can refer to child
+	c.myMethod();  // using the parent reference to refer to child
+	c.myPrint();
+	System.out.println("main ");
+	return;
+    }
+
+}
+
+
+<hr>
+<h2> Interface Example</h2>
+
+
+
+public interface myInterface {
+    public abstract void myMethod();
+    //    myInterface(int a){}; //illegal line - cannot have constructors in an interface
+
+}
+
+
+public class implementInterface implements myInterface {
+    public void myMethod()
+    {  
+	System.out.println("hello world");
+ 
+    }
+}
+
+
+
+public class testInterface {
+
+    public static void main (String args[])
+    {
+	myInterface a;
+	implementInterface b = new implementInterface();
+	//a.myMethod();//illegal -  a is a reference not an instance
+	b.myMethod();
+	System.out.println("main ");
+	return;
+    }
+
+}
+
+
+
+</pre>
+<p>
+&copy; Nachum Danzig December 2003
+</body>
+</html>

@@ -1,0 +1,79 @@
+<HTML>
+<head><title>Log Files</title>
+</head>
+<body>
+
+<h2>Log Files </h2>
+<p>When you attempt to run a servlet you may find it produces an error and you will see this error message in the browser.  You may see the cause of the 
+error and even the line number.  This is useful but may not help you
+in every circumstance.  For example, you will not see any of the print 
+statement outputs since the servelt never got created.
+
+<p>
+Various other  messages are put into the log file on the server when you run 
+a servlet.
+For example any System.out.println() or System.err.println()
+commands will have their output sent to the log files. This will occur even
+if the servlet fails in the middle.  
+<p> 
+Also, messages like
+
+<blockquote>
+<code>
+SAXParseException: Premature end of file
+<br>Exception MemberList init failed,exception massege:null
+<br>Error: URI=file:///usr/local/tomcat/users/ploni/library.xml Line=2: Document root element "Library", must match DOCTYPE root "null".
+</code>
+</blockquote>
+ will be printed in the log file.
+
+<p>
+This file is located on horayot (ise) here: <br>
+<b>/usr/local/tomcat/logs/catalina.out</b>
+<br>The file is viewable by all the students. Do not attempt to write to or 
+overwrite the file, this will not work.  All the servlets running on
+horayot will write to this file so you are likely to see error messages of 
+other students. 
+
+<p> 
+If you encounter a null pointer exception and want to see the value of
+certain variables before the exception occured, for example to see how far the program reached, you can use the System.err.printlin() function to print variables.  I suggest you print some kind of identifying string before the 
+variable so that you can easilly find it in the log file.  This file is big
+and will require searching through it.  For example, use a command like this: <br>
+System.err.printlin("Nachum Variable: a=" . a )
+<br>
+then open the file catalina.out with emacs or vi and search for Nachum Variable
+to see what a is.
+When you exit emacs or vi, you may be told that the file has changed on disk,
+do you  want to overwrite it?  Choose no, since you in fact will not be able 
+to overwrite the file since you do not have  permissions to do so and you will
+not be able to exit emacs or vi otherwise.
+<p>  
+Alternatively, you can grep the file for every line containing Nachum Variable like this:
+<br> grep "Nachum Variable" catalina.out
+<br>
+This will print every line in the log that contains the string Nachum Variable.
+
+
+
+
+<P>
+<!-- Horizontal Rule (Bar) -->
+<HR ALIGN=CENTER  SIZE=5  WIDTH=70%>
+<br>
+&copy; Nachum Danzig 2005
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

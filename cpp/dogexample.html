@@ -1,0 +1,172 @@
+<head>
+<TITLE>Example of a fully  defined class in Java</TITLE>
+</head>
+<BODY BGCOLOR="#ffffff" TEXT="#000044" link="#000099" vlink="#990000" alink="#0\
+0ff00">
+
+<h2>Example of a fully  defined class in Java</h2>
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+Here is an example of a simple class called "dog"
+and another class call "kennel" which uses the class "dog".
+Java requires that each class be in a separate file.
+No more than one class can be in any file. 
+Dog and kennel are in two separate files named dog.java and kennel.java.  
+They are saved in the same directory.
+When kennel.java is compiled, the compiler sees the reference to dog
+and looks for the dog.java file and compiles it as well.
+Both files must be in the same directory in order for the compiler to find them.
+Although this is an example of only two classes, the same principles 
+demonstrated here can be used for any number of classes. 
+<p>
+file <font color="blue"> dog.java </font> 
+<pre>
+
+public class dog
+{
+//Attributes  [i.e. data]
+private String name;
+private String owner;
+private String breed;
+private int age;
+
+
+//Behavior [i.e. methods]
+
+//Constructors
+public dog()  //constructor which takes no parameters, sets to default
+{
+name="";
+owner="";
+breed="";
+age=0;
+}
+
+//fully parameterized constructor
+public dog(String name, String owner, String breed, int age)
+{
+this.name=name;
+this.owner=owner;
+this.breed=breed;
+this.age=age;
+}
+
+//copy constructor
+public dog(dog someDog)
+{
+this.name=someDog.getName();
+this.owner=someDog.getOwner();
+this.breed=someDog.getBreed();
+this.age=someDog.getAge();
+}
+
+
+//other behavior (non-constructor behavior)
+public String getName()
+{
+return name;
+}
+public String getOwner()
+{
+return owner;
+}
+public String getBreed()
+{
+return breed;
+}
+public int getAge()
+{
+return age;
+}
+
+public int computeYearsToLive()
+{
+int toLive;
+if(breed.equalsIgnoreCase("german"))
+	{
+	toLive=15-age;
+	}
+else if(breed.equalsIgnoreCase("boxer"))
+	{
+        toLive=11-age;
+        }
+else if(breed.equalsIgnoreCase("terrier"))
+	{
+        toLive=8-age;
+        }
+else if(breed.equalsIgnoreCase("doberman"))
+	{
+        toLive=13-age;
+        }
+else
+	{
+        toLive=14-age;
+        }
+return toLive;
+}//end method computeYearsToLive()
+
+}//end class
+
+<p>
+file <font color="blue"> kennel.java </font>
+
+import javax.swing.JOptionPane;
+
+public class kennel
+{
+ public static void main( String args[] )
+ {
+     String tempName="",tempOwner="",  tempBreed="", output="";
+     int tempAge, c, counter;
+     dog dogArray[] = new dog[10];
+
+     for( c=0 ; c <10; c++)
+	 {
+	     tempName=JOptionPane.showInputDialog("Enter name of dog, type quit when done.");
+	     if(tempName.equalsIgnoreCase("quit"))
+		 {
+		     break; 
+		 }
+	     tempOwner=JOptionPane.showInputDialog("Enter name of owner of dog");
+	     tempBreed=JOptionPane.showInputDialog("Enter breed of dog");
+	     tempAge=Integer.parseInt(JOptionPane.showInputDialog("Enter age of dog"));
+	     dogArray[c] = new dog(tempName, tempOwner ,tempBreed, tempAge);
+	 }
+     while(true)
+	 {
+	     tempName=JOptionPane.showInputDialog("Enter name of dog to display, type quit to exit.");
+	     if(tempName.equalsIgnoreCase("quit"))
+		 {
+		     break;
+		 }
+	     for( counter =0 ; counter < c; counter++)
+		 {
+		     if(tempName.equalsIgnoreCase(dogArray[counter].getName()) )
+			 {
+			     JOptionPane.showMessageDialog(null, "Your dog info is:\n"
+			     + "Name: "+dogArray[counter].getName() +
+			     "\nOwner Name: "+dogArray[counter].getOwner() +
+			     "\nBreed: "+dogArray[counter].getBreed()+
+			     "\nAge: "+dogArray[counter].getAge()+
+			     "\nYear Left to Live: "+
+		      	     dogArray[counter].computeYearsToLive() );
+			     break; //exit for loop
+			 }//end if
+		 }
+	     if (counter==c)
+		 {
+		     JOptionPane.showMessageDialog(null, "Dog not found! He must have died.");
+		 }
+	 }//end while
+  JOptionPane.showMessageDialog(null, "So long!");
+  System.exit(0);
+ }//end main()
+}//end class
+</pre>
+
+<p>
+
+<p>
+&copy; Nachum Danzig December 2003
+</body>
+</html>

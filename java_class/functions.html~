@@ -1,0 +1,72 @@
+<head>
+<TITLE>Programming - Separating Program Flow</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>Methods ( or Functions )</H3></CENTER>
+<font size=+1>
+<ul>
+<li> "Black Box" metaphor
+<li> Scope of variables - variables are only recognized inside the block of code where they 
+are defined.  Thus a variable defined within a nested block of code is not known outside the inner nest.
+The same hold true for methods.  Varables in one method are not known by variables in other methods. The 
+variables defined by the method are not known by the calling method ( for example main() ).
+<br> So how can we <i>pass</i> values into methods and get values out of methods?
+<li> Parameters are the list of values as comma deliniated variables we can pass into the method.  We can
+have as many parameters (inputs) as we want.  Although it is true that these variables are defined 
+locally ( i.e. within a method ) the values they get are equal to the values the 
+calling function supplies in it argument list. 
+The order of the list determines which values are assigned to which varaibles.  For example, the method
+<font size=+2 color="green"> myMethod( int a, int b, float c )  </font> has three parameters, the first two
+are integers and the last one is a float. If I were to pass it the values 1 , 2, and 7.1234 to the method like this
+<font size=+2 color="green">myMethod( 1, 2, 7.1234 )  </font> 
+then a would get the value 1, b would get the value 2, and c would
+get the value 7.1234.  Order determines which value is assigned to which varaible.
+<li> Method call ( function call ) - when I try to run a method I simply write the name of the method
+followed by (  ).  inside the  (  )  I place the list of parameters I want to pass to the method.  This is 
+called a method call.
+<li> Return values - If a method outputs some value when it is done, this is called a return value.
+To return a value, use the key-word <font size=+2 color="green"> return  </font> followed by the 
+value you wish to return.  This 
+statement occurs inside the method and causes the method to exit immediately.
+The return value is sent back to the place where the method was called.  If there was an assignment operator
+there for example, the variable being assigned will get the value the method returns.
+<br>For example: <font size=+2 color="green">int a = myMethod( 1, 2, 7.1234) </font>.<br>
+a will be assigned the value myMethod returns.  Methods can return only one value. You must specify
+the type value the method returns, for example int or float or String.
+<li> Method definition - Writing the method is called defining it.  Some methods are built-in, but the
+programmer may write his own methods.  To do this, he must define the method.  That is, he must
+define what return value type he intends to return, what paramenters he can accept, and of course
+what the method will actually do with the values it receives when it is called.
+<br>
+Here is a method definition:
+<br>
+<br><font size=+2 color="blue">float </font><font size=+2 color="green">myMethod ( </font><font size=+2 color="blue">int </font><font size=+2 color="green"> a ,  </font><font size=+2 color="blue">int  </font><font size=+2 color="green">b ,  </font><font size=+2 color="blue">int </font><font size=+2 color="green"> c, 
+ </font><font size=+2 color="blue">float </font><font size=+2 color="green"> d)
+<br>{
+<br> </font><font size=+2 color="blue">return </font><font size=+2 color="green"> (  (
+ </font><font size=+2 color="blue">float </font><font size=+2 color="green">
+)a * ( </font><font size=+2 color="blue">float </font><font size=+2 color="green">
+)b * ( </font><font size=+2 color="blue">float </font><font size=+2 color="green">)c / d );
+
+<br>}
+ </font>
+<li> Method overloading (not on midterm)
+</ul>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+<br>
+&copy Nachum Danzig November 2003
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

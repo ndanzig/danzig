@@ -1,0 +1,116 @@
+<head>
+<TITLE>Programming Mathematics Operations</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<H3>Mathematical Operations</H3>
+
+<p> In the beginning computers were basically just large calculators.
+And even today, that is basically what they are.  They do thousands of
+calculations a second.  Because of this, the most basic part of
+any programming language is a set of mathematical operation.
+We have already seen some, like addition +.
+<p>
+Let me list the basic algebraic operators:
+<ul>
+<li> +&nbsp; add two values
+<li> -&nbsp; subtract two values
+<li> /&nbsp; divide two values
+<li> *&nbsp; multiply two values
+<li> %&nbsp; find the remainder after dividing the two values (called modulo or modulus 
+)</ul>
+<p>
+Let me show you some examples:<br>
+Assume I have the <b>int a</b>, then <br>
+<pre>
+a = 7 + 8;  // a is 15
+a = 10 - 8;  // a is 2
+a = 7 * 8;  // a is 56
+a = 16 / 8;  // a is 2
+a = 35 / 8;  // a is 4 (because <b>a</b> is an <b>int</b>, C++ rounds a down to the nearest integer, we lose the decimal)
+a = 19 % 8;  // a is 3 ( 19 / 8 is 2 remainder 3, using the % gives us the remainder) 
+</pre>
+
+
+<p>
+There are also bitwise operators.  What these operators do is manipulate the 
+bits of a variable or perform logical operations on values.
+Let me list the basic bitwise operators:
+<ul>
+ <li> & - bitwise and
+ <li> | - bitwise or
+ <li> ^ - bitwise exclusive or
+ <li> &lt; $lt; - left shift
+<li> &gt; &gt; - right shift operator
+
+</ul>
+<p> To understand this we need to remember that every char, int, float etc. is 
+actually a set of bits and bytes.  For instance, a char is 8 bits or one byte.
+Usually, and int is 32 bits or 4 bytes.  We can actually change variables
+on the level of their bits.  For example,
+assume I have the int a, then <br>
+<pre>
+a = 9 & 8; // a is 8
+
+Why is this?  Well, in reality 8 in bits looks like this
+0000 1000
+and 9 looks like this:
+0000 1001
+
+So, the above operation looks like this:
+  0000 1000
+& 0000 1001
+-------------
+  0000 1000
+
+What we are saying with the & operator is look for any place in the 2 sets of
+bits that are <b>both</b> 1 and mark that place 1 in the final answer.
+
+Similarly, 
+a = 19 | 5; a is 23  
+
+Becasue 19 is 0001 0011 and 5 is 0000 0101
+
+So what we actually wrote is:
+
+  0001 0011
+| 0000 0101
+--------------
+  0001 0111
+
+How did we get to this result? Well, | is logical or, so we look
+for any place in the 2 sets of bits where either one or both bits are 1
+and then place a 1 in the result.
+ 
+</pre>
+
+<p> Another thing to remember is that operations follow math's rules of 
+precedence or <i>Order of Operations</i>.  Thus multiplication occurs before 
+addition for example.  We can over-ride the order of operations by using
+paranthesis ().  So for example,
+<br>
+a = 2 + 12 * 5  ; //a is 62
+<br>But
+<br>
+a = (2 + 12) * 5 ; //a is 70
+
+
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+<br>
+&copy Nachum Danzig July 2005
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

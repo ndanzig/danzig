@@ -1,0 +1,209 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.7 [en] (X11; I; BSD/OS 4.1 i386) [Netscape]">
+   <title>Communication Lab</title>
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000FF" vlink="#FF0000" alink="#FF0000">
+
+<center>
+<h1>
+Communication Lab</h1></center>
+Welcome to the home page of the course:
+<br>Communication Lab. This lab will give you hands on experience on how
+the serial ports of a PC work. You will program the RS-232 interface and
+communicate between computers through it. This lab will give you an idea
+of how communication protocols work.
+<h3>
+<a NAME="1"></a>General Information</h3>
+
+<ul>
+<li>
+<b>Lab hours:</b></li>
+
+<ol>
+<li>
+Sunday 14:30 - 16:00.</li>
+
+<li>
+Sunday 16:15 - 17:45.</li>
+
+<li>
+Tuesday 18:00 - 19:30.</li>
+
+<li>
+Wednesday 14:30 - 16:00.</li>
+
+<li>
+Wednesday 18:00 - 19:30.</li>
+</ol>
+
+<li>
+<b>Lecturer: </b><a href="http://shekel.jct.ac.il/~citron">Donny Citron</a></li>
+
+<li>
+<b>E-mail: </b><a href="mailto:citron@mail.jct.ac.il">citron@mail.jct.ac.il</a></li>
+</ul>
+
+<h4>
+<font color="#FF0000">New Announcements</font> Updated 14:40, 10/7/00</h4>
+
+<ul>
+<li>The final date for having your assignment checked is Thursday July 13th,
+I will be in the Beren labs from 10:00 until 14:00.</li>
+<li>The grades will be passed to the "mazcirut" the following week, if you
+have a problem with your grade see me on thursday.</li>
+<li>The grades of ex4 and the final grades are online (for whoever submitted
+until July 4th). If your ex4 grade has a 'b' next to it, it is worth 50%, if not it is worth only 40%.</li>
+</ul>
+
+<h3>
+Course Outline</h3>
+
+<h3>
+Recommended Reading</h3>
+<a NAME="3"></a>Look at the following web sites for more info about serial
+ports and RS-232:
+<ul>
+<li>
+<a href="http://www.senet.com.au/~cpeacock">www.senet.com.au/~cpeacock</a></li>
+
+<li>
+<a href="http://www.lammertbies.nl/comm">www.lammertbies.nl/comm</a></li>
+</ul>
+
+<h3>
+<a NAME="4"></a>Grading Policy</h3>
+The final grade will be composed of:
+<ol>
+<li>
+Ex2 - 20%</li>
+
+<li>
+Ex3 - 40%</li>
+
+<li>
+Ex4 - 50% (for on time submission,&nbsp; for late submissions it is worth
+40%).</li>
+</ol>
+This gives all students a chance to improve their final grade.
+<h3>
+<a NAME="5"></a>Lecture Slides</h3>
+The slides are in 2 formats, HTML and Power Point. Download the PowerPoint
+version to your computer and print it through the PowerPoint application.
+It is possibleto print 1,2,3 or 6 slides to a page.
+<br><a href="http://shekel.jct.ac.il/~citron/comm/comm-lec1/index.htm">RS-232C
+and UART 8250</a>(HTML version),
+<a href="http://shekel.jct.ac.il/~citron/comm/comm-lec1/comm-lec1.ppt">Power
+Point version</a>.
+<br><a href="http://shekel.jct.ac.il/~citron/comm/comm-lec2/index.htm">The
+Control Lines</a>&nbsp; (HTML version),&nbsp;&nbsp; <a href="http://shekel.jct.ac.il/~citron/comm/comm-lec2/comm-lec2.ppt">PowerPoint
+Version</a>
+<h3>
+<a NAME="5.5"></a>Programming</h3>
+As you will be programming in C /C++ observe the C programming conventions
+such as:
+<ul>
+<li>
+Indentation of loops and <tt>if/else</tt> statements</li>
+
+<li>
+Proper sized functions which can be understood at a glance</li>
+
+<li>
+Meaningful variable and function names</li>
+
+<li>
+Use <tt>#define</tt> or <tt>const</tt> for constants and write them in
+upper-case</li>
+</ul>
+And of course observe other good programming practices such as
+<ul>
+<li>
+&nbsp;Don't use <font color="#3333FF">cool</font> tricks just to save a
+variable or line of code</li>
+
+<li>
+&nbsp;On the other hand don't go allocating MBs of memory if buffers can
+be reused</li>
+
+<li>
+&nbsp;Free unused memory allocations</li>
+</ul>
+
+<h4>
+<a NAME="Documentation"></a>Documentation</h4>
+Documentation is part of the assignment. Follow these rules:
+<ul>
+<li>
+Give a general description of the classes or data structures you use, their
+purpose and where they should be used.</li>
+
+<li>
+Document every function (class member or not), it's inputs, outputs and
+general description. The function should be written in a way that no documentation
+in the body of the function is needed</li>
+
+<li>
+Document untrivial (not i,j,k,sum ...) variables when defined</li>
+
+<li>
+Document "tricky" lines of code ( <tt>if (x = (y >> 2)) &amp;&amp; z?1:0)</tt>
+)</li>
+</ul>
+
+<h3>
+<a NAME="5.6"></a>Submission</h3>
+You are to submit one hard copy per pair. But only after the assignment
+has been tested by one of the lecturers in the lab. Thus don't print out
+a copy until your program has been tested successfully.
+<h3>
+<a NAME="5.7"></a>Exercise Grading</h3>
+The grade for each assignment is composed of :
+<ul>
+<li>
+&nbsp;<b>Programming:</b> 25% - Observation of "correct" programming techniques</li>
+
+<li>
+&nbsp;<b>Communications: </b>25% - Correctly use the material given in
+the theoretical course</li>
+
+<li>
+&nbsp;<b>Execution:</b> 35% - Correctly perform the program's goal</li>
+
+<li>
+&nbsp;<b>Documentation:</b> 15% - Clearly document your program</li>
+</ul>
+For late submissions the penalty is a reduction of <i>2<sup><font face="">n
+</font></sup></i>points
+for <i>n</i> days.
+<br>&nbsp;
+<h3>
+<a NAME="6"></a>Exercises</h3>
+Here are the <a href="http://shekel.jct.ac.il/~citron/comm/comm.grades">grades</a>
+sorted by ID (nameless of course).
+<ul>
+<li>
+<a href="http://shekel.jct.ac.il/~citron/comm/exercises/ex1.html">Assignment
+#1</a> Due week of 28/2 - 4/3/00.</li>
+
+<li>
+<a href="http://shekel.jct.ac.il/~citron/comm/exercises/ex2.html">Assignment
+#2</a> Due week of 5 - 11/3/00.</li>
+
+<li>
+<a href="http://shekel.jct.ac.il/~citron/comm/exercises/ex3.html">Assignment
+#3</a> Due 9/4/00</li>
+<li><a href="http://shekel.jct.ac.il/~citron/comm/exercises/ex4.html">Assignment
+#4</a> Due week of 28/5 - 4/6/00</li>
+</ul>
+
+<center>
+<hr WIDTH="100%"></center>
+
+<address>
+If you have comments or suggestions, email me at <a href="mailto:citron@mail.jct.ac.il">citron@mail.jct.ac.il</a></address>
+
+</body>
+</html>

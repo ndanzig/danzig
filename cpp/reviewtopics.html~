@@ -1,0 +1,77 @@
+\<head>
+<TITLE>Programming - Review Topics</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Review Topics</H3></CENTER>
+<h3>
+For the Final Exam you should know the following Topics:
+</h3>
+
+<ul>
+<li> Creating Functions and Using them.  Know what the function prototype
+is, the function definition and the function call.  You should be able 
+to write a function with any parameters I ask for and with what return values
+I ask for.  Given a problem, you should be able to decide for yourself 
+what functions you might need and what parametrs they will need, etc.
+You should also be able to overload a function and provide default variables.
+
+<hr>
+For help with this topic see chapter 3 of How to Program C++ and 
+do exercises 3.18, 3.21, 3.31, 3.41, 3.48
+<br>
+<br>
+
+<li>Creating Arrays. Know how to create an array of ints, chars, floats, etc.
+Beable to create one, two and three dimentional arrays and how to access and 
+change their elements.
+<hr>
+For help with this topic see chapter 4 of How to Program C++ and 
+do exercises 4.10, 4.15 (already assigned) , 4.22
+<br>
+<br>
+
+<li>Searching arrays. You should be able to search an array by writing a linear
+search for an unordered (unsorted) array and a binary search for an ordered
+ array.
+You should be able to find any element in an array and know is value and location in the array.  You should be able to do this for both one and two 
+dimentional arrays.
+<hr>
+For help with this topic see chapter 4 also of How to Program C++ and 
+do exercises 4.33 (linear search), 4.34 (binary search)
+<br>
+<br>
+
+
+<li>Sorting arrays. You should be able to sort an array of ints , floats, chars, strings, etc. by using the bubble sort algorithm or the select sort 
+algorithm.
+<br>
+<hr>
+For help with this topic see chapter 5.6 also of How to Program C++ 
+for bubble sort. 
+<br>
+<br>
+
+
+
+<li> String Manipulation. You should be able to copy strings one from the other(strcpy).  You should know how to compare strings to see which one would ealier in 
+a dictionary or phone book. (strcmp)
+You should know how to combine two strings into one longer string by 
+appending one string to the other one's end. (strcat) You should be able to find a smaller set of letters within a larger string and return 1 if it is found.
+In general you should be able to write any function which deals with strings
+like finding things in strings, copying things from strings, reversing the order of strings, capitalizing letters in strings, shuffling up strings.
+<hr>
+For help with this topic see chapter 5 of How to Program C++ and 
+do exercises 5.31, 5.32, 5.33, 5.36, 5.38 (already assigned).
+<br>
+<br>
+
+
+
+</ul>
+
+<p>
+&copy Nachum Danzig January 2006
+
+</body>
+</html>

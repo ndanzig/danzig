@@ -1,0 +1,85 @@
+
+
+
+
+
+#include "iostream.h"
+
+class MixedFraction {
+
+  int whole;
+  int numerator;
+  int denominator;
+public:
+  MixedFraction();
+  MixedFraction(int, int, int);
+  MixedFraction operator+(const MixedFraction& rvalue);
+  friend ostream &operator<<(ostream &mycout, const MixedFraction & inst);
+  MixedFraction &operator++();//preincrement  
+  MixedFraction operator++(int);  //postincrement
+
+
+};
+
+
+MixedFraction::MixedFraction()
+{
+  whole=1;
+  numerator=1;
+  denominator=1;
+
+}
+MixedFraction::MixedFraction(int w,int n, int d)
+{
+  whole=w;
+  numerator=n;
+  denominator=d;
+}
+
+
+
+MixedFraction&  MixedFraction::operator++()//preincrement
+{
+  (this->whole)++;
+
+  return *this;
+
+}
+
+MixedFraction  MixedFraction::operator++(int)//postincrement
+{
+ MixedFraction temp = *this;
+(this->whole)++;
+ return temp;//return copy of original instance
+
+}
+
+MixedFraction  MixedFraction::operator+(const MixedFraction& rvalue)
+{
+ int den = denominator * rvalue.denominator;
+ int num = numerator * rvalue.denominator + rvalue.numerator* denominator;
+ int whol = whole +rvalue.whole;
+ return MixedFraction(whol, num,den); 
+}
+
+ostream &operator<<(ostream &mycout, const MixedFraction & inst)
+{
+  mycout <<inst.whole<<" "<<inst.numerator<<"/"<<inst.denominator; 
+
+    return mycout;
+}
+
+
+int main()
+{
+  MixedFraction one(40,7,8);
+  MixedFraction two(5,1,2);
+  //MixedFraction * two= new MixedFraction(5,1,2);
+  MixedFraction three;
+  three = one + two;
+  cout<<three<<endl;
+  cout<<three++<<endl;
+  cout<<++three<<endl;
+  
+  return 1;
+}

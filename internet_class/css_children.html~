@@ -1,0 +1,51 @@
+<html>
+<head>
+<STYLE TYPE="text/css">  
+<!--
+P {
+width:60em;
+margin-left: 1em;
+}
+-->
+</style>
+
+</head>
+
+
+<body>
+<h2>CSS - Children</h2>
+
+
+<p>
+In CSS a parent element is an element that contains other elements. All elements that are contained within that parent are called "child" elements. Using the CSS child selector, you can define properties that only affect elements that are children of other specific elements. Every element is a child of another element except the root element, which has no parent.
+<p>
+To select all paragraphs that are children of the &lt;body&gt; tag, you would write:
+<blockquote>
+  body &gt; p { background-color : #00f; }
+</blockquote>
+
+This is similar to the decendant selector but can only define children, not grandchildren or lower.
+<p>
+You can combine the child selector with other selectors, such as decendants:
+  div ul&gt;li p { background-color : #00f; }
+This affects a p element that is a decendent of li which is a child of ul which is a decendant of div. 
+
+<p>
+Once you have defined a child selector you can refine that selection even further using the CSS pseudo-selector first child. 
+<p>
+Defining the first child:
+<blockquote>
+  div &gt; p:first-child { background-color : #00f; }
+</blockquote>
+This means that the first paragraph in a div element would have the background color of blue, but the rest would keep the default background color.
+<p>
+
+The first-child pseudo-selector is not supported in IE 6 and lower for Windows or Netscape 4 for Windows. It did work in Safari and Internet Explorer 5.2 for Macintosh.Children
+  
+
+
+
+
+
+</body>
+</html>

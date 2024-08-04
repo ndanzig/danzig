@@ -1,0 +1,59 @@
+<html>
+<head>
+	<title>Some example page with PHP!</title>
+	<style>
+	body { font-family: tahoma;  }
+	td.label { font-weight: bold; text-align: right; font-size: 10pt; }
+	td.input { font-size: 8pt; }
+	</style>
+</head>
+
+<body>
+	<h1>Let's get some data...</h1>
+	<form action="SubmitData.php" method="post"> 
+	<table>
+		<tr>
+			<td class="label">First Name:</td>
+			<td class="input"><input type="text" name="FirstName" /></td>
+		</tr>
+		<tr>
+			<td class="label">Last Name:</td>
+			<td class="input"><input type="text" name="LastName" /></td>
+		</tr>
+		<tr>
+			<td class="label">Enjoys Walks On The Beach:</td>
+			<td class="input"><input type="checkbox" name="BeachWalks" /></td>
+		</tr>
+		<tr>
+			<td class="label">Gender:</td>
+			<td class="input">
+				<input type="radio" value="Dude" name="Gender">Male</input><br />
+				<input type="radio" value="Chick" name="Gender">Female</input>
+			</td>
+		</tr>
+		<tr>
+			<td class="label">Hair Color:</td>
+			<td class="input">
+				<select name="HairColor">
+					<option value="Black">Black</option>
+					<option value="Blonde">Blonde</option>
+					<option value="Brown">Brown</option>
+					<option value="Red">Red</option>
+					<option value="Blue">Blue</option>
+					<option value="Bald">Bald</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="label">
+				<input type="submit" />
+			</td>
+		</tr>
+	</table>
+	</form>
+			
+
+</body>
+
+</html>
+

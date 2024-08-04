@@ -1,0 +1,42 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>Modem Communication Protocol</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>Modem Communication Protocol</H1> 
+ <P><UL>
+<LI><H2>This protocol is sender-oriented. The DTE must perform a “handshake” with the DCE in order to start sending. The DCE can send data to the DTE as soon as it (the DTE) sets the DTR line. The stages are:
+</H2>
+</UL><UL>
+<H2>1. The DTE starts communication be setting the DTR to 1.
+</H2>
+</UL><UL>
+<H2>2. The DCE detects this and sets the DSR to 1. A connection has been established between DTE to DCE. Both lines will remain set (1) until the end of communication. If the DTR is reset (if the computer is shut off, for example) the DSR will be reset as well.
+</H2>
+</UL><UL>
+<H2>3. The DTE sets the RTS and waits for the DCE to set the CTS. 
+</H2>
+</UL><UL>
+<H2>4. While CTS is set the DTE can send data. When the DCE can no longer accept data (full buffer, no connection to the remote DCE etc.) it resets the CTS until it can accept more data. When it can accept more data it sets the RTS again.</H2>
+</UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld008.htm">השקופית הקודמת</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld010.htm">השקופית הבאה</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">חזור אל השקופית הראשונה</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld009.htm">הצג גירסה גרפית</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

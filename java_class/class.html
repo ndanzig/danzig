@@ -1,0 +1,192 @@
+<head>
+<TITLE>Programming - User Defined Classes</TITLE>
+</head>
+<BODY BGCOLOR="#ffffff" TEXT="#000044" link="#000099" vlink="#990000" alink="#0\
+0ff00">
+<CENTER><H2>Introduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>Creating User Defined Classes</H3></CENTER>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+What is a class?  A class is a computer programming  model of a real-world 
+thing.  It is basically a program which can be run by another
+program.  Things in the real world
+have descriptions ( attributes )  and things they do (
+behavior or methodology). So classes have attributes and behavior.
+The attributes of a class are the data the class will store and use.
+The behavior is what the class is capable of doing with its data.
+Another program or class can then ask the class to perform one of its behaviors
+by running one of the methods in the class.   
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+But classes are not exactly programs though every program must contain at 
+least one class.  They are actually blueprints for creating objects.  To make 
+this clearer I will use as an example the data type <font color="blue">
+ int </font>.
+We call <font color="blue"> int </font> a data type because it defines a certain type of data that you can create.  You can make a variable of type <font color="blue"> int </font> if you want by writing something like this:
+<p>
+<tt>int myVariableName;</tt>
+<p>
+This will create a variable or object of type int. We can then use this 
+variable to store data.   But what if we wanted a data type which is 
+capable of storing two ints inside it, or, let's say, three ints and a string?
+Java has no data type like this, but we can create our own data type.
+This is called a user defined data type, or a class.
+
+<p>
+But this is not all.  The class we create can also have built-in methods.
+Just like String has many built-in methods, like for example charAt( ), our class can have its own methods which we define for it.  
+These methods are called the behavior of the class.  
+It is the possible behaviors the class can exhibit.
+
+<p>
+Here is the basic form of a class:
+<pre>
+class anyName
+{
+<b>//attributes</b>
+<i><font color="brown"> list of variables </font></i>
+type X; //The list will be composed of lines like this. The "type" could be int or float etc.
+<b>//behavior</b>
+anyName(<i><font color="brown"> parameter list</font></i>)//constructor method
+   {
+   <i><font color="brown"> some code</font></i>
+   }
+someMethodName( <i><font color="brown"> parameter list</font></i>  )
+   {
+   <i><font color="brown"> some code</font></i>
+   }
+
+}//end class
+</pre>
+<p>
+
+All classes should have this basic form though a class can have lack
+attributes or lack behaviors. <i>anyName</i> is the name of the class.
+The name is follow by a set of braces { }. Inside the braces
+the attributes are listed and the behavior is defined (i.e. the methods
+of the class are defined).  
+Every class must have at least one constructor method.
+Note that the constructor method has the same name 
+as the class and has no return type. (I will explain the constructor method
+later.) Here is a simple example of a class which follows the above format:
+<p>
+<pre>
+class aClass
+{
+//attributes
+int something;
+//behavior
+aClass(int a)//constructor method
+   {
+   something=a;
+   }
+someMethod( )
+   {
+   System.out.println("This is a simple behavior of the class anyName. \nThe 
+attribute of this class is only the String"+something);
+   }
+
+}//end class
+</pre>
+<p>
+Once I have defined this class, I can use it in my main class, in my main
+program. (Seperate classes are created in their own seperate files, one file
+per class.) Here is an example of a possible excerpt from the 
+main program that uses this class:
+<p>
+<pre>
+
+aClass myVariable;<i><font color="brown">//declare a variable (object) of type aClass</font></i>
+myVariable = new aClass("Hello, Mr. aClass"); <i><font color="brown">//run aClass's constructor method
+</font></i>
+myVariable.someMethod( );<i><font color="brown">//this will run the method someMethod in the object myVariable
+</font></i>
+</pre>
+
+<p>We created the object myVariable and assigned its attribute the String "Hello, Mr. aClass". 
+Then we ran the method someMethod( ).  Notice that we ran the method by first
+writing the name of the object we created followed by a period (.) and then the name of the 
+method.  This indicates that we wish to run the method someMethod( ) that is associated
+with (that is inside) the particular object myVariable.
+When this method executes, it will extract
+the data in myVariable which is the String "Hello, Mr. aClass" and use it.  
+The String will then  be part of what
+the method someMethod( ) will print.  In this code excerpt I created one object
+of type aClass.  I could have created several object of the type 
+class aClass but I chose not to.
+
+<p>
+There is no programming problem which requires the use of classes.  In fact many 
+computer languages do not have classes at all.  But it was found that
+programming problems can be broken down into component parts and solved
+with less confusion if classes are used.  In very small programs the 
+benefits of classes are small and hard to perceive.  But for programs
+that require large numbers of people to work on them and that contain
+millions of lines of code, classes make the job of
+organizing the program infinitely easier. When attempting to use classes in 
+a program, the first thing to do with the programming problem
+ is to try to see if there are any real world things which you can model.
+Then, make classes for them and give the classes useful behavior.
+This should help to organize your final program.
+
+
+<p>
+When a class is created ( instanciated ) and given data you must run the <font color="blue">
+new</font> command.  This will cause the constructor function to be run.
+Simple declaring an object (instance) of your class will not really create the class.
+All this will do is create a refernce to an object which can later be assigned a 
+real object to which to refer.
+The constructor function actually creates the object.  Therefore, it is run only 
+once per instance.  
+The purpose of the constuctor function is
+ to assign values to the attributes of the class and to actually create the object.
+ Normally all non-static 
+attributes  (the data of the class) are assigned initial values in this way.  
+Non-static attributes are different for each instance.  If you would be able to assign 
+them values in the class definition, then all instances ( objects ) of the class would have 
+the same values. This is not desireable since you want the attributes 
+to be different.   You can only give initial values when 
+the new instance is created, i.e. when the <font color="blue"> new </font> 
+command is run.  At that time the new instance will be created and assign
+it initial values. You can of course change the values of the attributes later
+by writing a method to do this and running that method later with new values.
+This method might be called setAttributes( ).
+<p>
+Class attributes cannot
+be assign values in the class definition (in the list of data in the class)
+ unless they are defined as static.
+Defining an attribute as static means that there is only one 
+attribute of this name per <b>class</b>.  In other words, no matter how 
+many instances of the class I make, that static attribute will 
+only have one value.  A static attribute will be created and initialized
+at compile time.  Therefore, it  exists even before any new is run.
+Static attributes might be useful if I wanted to keep tract of the number of 
+instaces of a particular class I have created. 
+<p> Similarly, static methods only exist once 
+per class.
+They are called class methods.  We saw an example of  one with Strings. It was
+called valueOf.  If you recall, to run this method we  write String.valueOf( ).
+We did not need to create a instance of type String to run this method.  
+We simply used the class name to call the method.
+Static methods are called in this way.
+We do not write <font color="green"> instance</font>.method( ) instead 
+we write <font color="green">Class</font>.method( ). Static methods can do 
+anything except access ( read or change ) instance attributes.  They can create variables, accept 
+parameters, and access static class attributes. 
+<p>
+<a href="./dogexample.html"> Here is an fully implemented example of a class which models a real world thing, a dog.
+</a>I did not fully implement it.  For example, I could have given it
+methods like goForAWalk( ) or bark( ).
+<p>
+<a href="./Ice_Cream.html"> Here is an example demonstrating the use of a 
+static method in a very simple class.</a>
+
+
+<p>
+Exercise: Think of any real world thing and model it with a class.
+
+
+
+<p>
+&copy; Nachum Danzig December 2003
+</body>
+</html>

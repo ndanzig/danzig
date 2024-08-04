@@ -1,0 +1,27 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+<LINK REL=STYLESHEET HREF="../cpp/style.css" TYPE="text/css">
+
+<title>Heaps  </title>
+</head>
+<BODY >
+<h2>Heaps</h2>
+
+<p> Usually a heap is implemented using an array.  Here is an implementation using a linked list binary tree.
+<p>
+
+<A href="heap.cpp">Heap Code</a>
+
+
+
+
+
+<p>
+&copy; Nachum Danzig 2010
+</body>
+</html>
+
+
+
+

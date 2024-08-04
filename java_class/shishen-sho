@@ -1,0 +1,70 @@
+Problem B
+Simplified Shisen-Sho
+
+ 
+
+ 
+
+Shisen-Sho is a chinese tile game similar to Mahjongg. You start with a square table with tiles with different pictures. You have to match them in pairs and the game ends when there is no tile left in the table.
+
+ 
+
+Shisen-Sho has different rules than Mahjongg. You remove tiles of the same picture if you can connect them using at most three connected lines in horizontal or vertical, not diagonal. The lines can only be drawn alongside the bounds of the board and through empty spaces left by previously removed tiles, but not through tiles. (As a side effect, this also means that you can remove two tiles of the same picture that are next to each other in horizontal or diagonal.)
+
+ 
+
+You have to write a program that resolves a Shisen-Sho table given as an input, giving as output the set of pairs made in order, or "No solution" in a line by itself if the table cannot be solved.
+The Input
+
+The input starts with a line with two integers (n and m), indicating the dimensions of the board (n columns and m rows). Next, the board as m lines of n characters each. The different tiles are represented with different ASCII characters, and there is no limit on the number of different tiles. The board can have a maximum of 20 rows by 20 columns. Each tile in the board is labeled after its position in the board, being (1,1) the upper left corner and (n,m) the lower left.
+The Output
+
+The output must be either "No solution" if the board has no solution or a sequence of pairs of tile positions, each pair in a different line:
+
+ 
+
+(x,y),(x',y')
+
+ 
+
+where (x,y) and (x',y') are the positions of the tiles. The sequence must lead to an empty board following the Shisen-Sho rules shown above.
+
+ 
+Sample input
+
+ 
+
+4 4
+
+#%@%
+
+%@$@
+
+%#$$
+
+#$@#
+
+ 
+Sample output
+
+ 
+
+(2,1),(4,1)
+
+(1,2),(1,3)
+
+(4,2),(3,1)
+
+(3,2),(3,3)
+
+(2,2),(3,4)
+
+(1,1),(1,4)
+
+(2,3),(4,4)
+
+(2,4),(4,3)
+
+ 
+
+ 

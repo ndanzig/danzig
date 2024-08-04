@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>
+Creating Tomcat Accounts
+</title>
+</head>
+
+<body bgcolor="white">
+<h2>Creating Tomcat Accounts
+</h2>
+
+
+<ul>
+
+<li>Edit the file horayot:/usr/local/tomcat/conf/user.list by adding usernames of the accounts you want to create.
+<li>Run the command /usr/local/bin/tomcataccount >temp
+<li>The passwords can be found at /usr/local/tomcat/conf/created.user.list
+
+<li>Cut and paste the host entries from the temp file into the file /usr/local/tomcat/conf/server.xml
+<li>Hand out the passwords to the students.  
+<li>Restart tomcat - /etc/init.d/tomcat restart
+</ul>
+<P>
+<!-- Horizontal Rule (Bar) -->
+<HR ALIGN=CENTER  SIZE=5  WIDTH=70%>
+<br>
+&copy; Nachum Danzig 2005
+
+
+
+
+</body>
+</html>

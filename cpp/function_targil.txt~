@@ -1,0 +1,126 @@
+Here is a function which adds two numbers
+
+int add ( int num1 , int num2)
+{
+int sum;
+sum = num1 + num2;
+return sum;
+}
+
+
+Write the following functions:
+
+1. a function which adds 3 numbers and returns their sum.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2. a function which adds 3 floats and returns their sum.
+
+
+
+
+
+
+
+
+
+ 
+
+3. a function which adds 3 floats and prints their sum.
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+4. a function which multiplies 2 doubles and returns their product.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+5. a function which finds the average of 2 floats.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6. a function which finds the average of 3 floats
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7. a void function which prints "The answer is" followed by a new line.
+
+
+
+
+
+
+
+
+
+
+
+
+8. a function which returns 1 if the number passed is larger than 1000
+and -1 if it is  less than 1000 and 0 if it is a 1000.
+
+
+
+
+
+

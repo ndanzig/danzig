@@ -1,0 +1,71 @@
+#include "stdio.h"
+#include "iostream.h"
+class Node {
+public:
+  int data;
+  Node();
+  Node(int a);
+};
+Node::Node()
+{
+  data=0;
+}
+
+Node::Node(int a)
+{
+  data=a;
+}
+
+class LifoArray{
+
+public:
+  Node array[10];
+  int count;
+  LifoArray();
+  int push(Node newNode);
+  Node pop();
+
+};
+
+  int LifoArray:: push(Node newNode)
+{
+  if (!(count < 10))
+    {
+      return -1;
+    }
+  array[count]=newNode;
+  count++;
+  return 1;
+
+}
+
+  Node LifoArray:: pop()
+{
+  if (count==0)
+    return (Node)(-1);
+  count--;
+  return array[count];
+}
+
+
+
+LifoArray::LifoArray()
+{
+  count=0;
+}
+
+
+
+
+int main()
+{
+  Node p(4);
+  LifoArray a;
+  a.push(p);
+  Node b = a.pop();
+  cout<<b.data;
+
+
+
+
+}

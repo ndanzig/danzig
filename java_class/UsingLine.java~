@@ -1,0 +1,23 @@
+
+public class UsingLine {
+
+
+	public static void main(String[] args) {
+		
+
+	    String one="hi mom ";
+	    System.out.println(one + one );
+
+
+
+
+	    point mypoint1 = new point(2,2);
+	    point mypoint2 = new point(4,4);
+
+	    line myline =new line (mypoint1, mypoint2);
+	    myline.print_linear_f();
+
+
+	}
+
+}

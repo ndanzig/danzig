@@ -1,0 +1,71 @@
+body
+{
+	font-family: Tahoma;
+	font-size: 10pt;
+}
+.myTable
+{
+	font-size: 10pt;
+	color:Black;
+	background-color:White;
+	border-color:#DEDFDE;
+	border-width:1px;
+	border-style:solid;
+	border-collapse:collapse;
+}
+.myTable .header
+{
+	text-align: left;
+	color:White;
+	background-color:#6B696B;
+	font-weight:bold;
+	border-bottom: 1px #DEDFDE solid;
+	border-collapse:collapse;
+	font-size: 14pt;
+}
+.myTable .header input
+{
+	text-align: left;
+	color:white;
+	background-color:#6B696B;
+	font-weight:bold;
+	font-size: 14pt;
+}
+.normalrow_alt
+{
+	background-color: #F7F7DE;
+}
+.normalrow_failing
+{
+	background-color: #FFCCCC;
+}
+.normalrow_new
+{
+	background-color: #CCCCFF;
+}
+.normalrow
+{
+	background-color: #FFFFFF;
+}
+.myTable td
+{
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+a.specialLink
+{
+	border: 1px tan solid;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-right: 3px;
+	padding-left: 25px;
+	background-color: #99FFFF;
+	background-repeat: no-repeat;
+	background-position: left;
+	text-decoration: none;
+	margin: 5px;
+}
+a.specialLink:hover
+{
+	text-decoration: underline;
+}

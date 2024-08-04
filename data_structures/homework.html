@@ -1,0 +1,88 @@
+<head>
+<TITLE>Data Structures Homework</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Data Structures - C++</H2></CENTER>
+<h3>
+Final Project 2006
+</h3>
+
+<p>
+Make a class called Node.  Have it inherit to two classes, one called
+student and one called teacher.  Create a binary tree class called 
+Generic_Tree. It should be able to contain Nodes   ( which in turn are actually
+teachers or students.) Node will <b> not </b> be pure virtual, hence it will
+ have a contructor. 
+
+<pre>
+  
+Here is a list of the functionality the classes should support.
+
+Node:
+char* toString()
+char* getType()
+     operators:  >, <, ==, =, <<
+
+Teacher and Student must have their own versions of these functions
+and operator overloads reflecting their attributes.
+
+Student will also have the function 
+setAverage(float )
+float getAverage()
+
+Generic_Tree:
+
+bool addNode( node &)
+Node* findNode(char *)
+bool deleteNode (Node*)  - must handle head deletion
+float getTotalStudentAverage() - computes combined average of all students in tree
+printTreeAscending()  - recursive
+printTreeDescending()  - recursive
+printTreeTopDown()  - recursive
+
+
+Here is a list of the attributes each class must have (you can add more)
+
+Node:
+char* type  -  <b>not</b> char type[20]
+Node *right
+Node *left 
+
+Tree:
+Node * head
+
+Teacher will also have:
+float monthlySalary
+char* firstName 
+char* lastName
+char* educationalLevel
+char* subject 
+
+Student will also have:
+float gradeAverage
+char* firstName 
+char* lastName
+char* gradeLevel
+
+ 
+
+
+
+
+</pre>
+<br>
+Due June 27.  
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

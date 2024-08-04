@@ -1,0 +1,138 @@
+<html>
+<head>
+<STYLE TYPE="text/css">  
+<!--
+P {
+width:60em;
+margin-left: 2em;
+}
+-->
+</style>
+
+</head>
+
+
+<body>
+
+
+<p style="position:relative;  width:1.2in;  left:2in;">
+Don't let your turtle outsmart you.  Be tough!
+</p>
+<p style="  width:4in; ">
+Once your turtle figures out you bring the food, he or she may be quite excited to see you. And if you don't have food, they sometimes swim back and forth frantically, and manage to look like are starving and need food -- now! Don't let them fool you, though, because obesity can be a big problem in turtles.
+</p>
+
+<p>
+To get this effect I have made the shorter test position:relative and float:left.  This will cause 
+the next paragraph to start at the same height position as the shorter text.  In order to show this clearly I 
+adjusted the widths of the paragraphs.
+I can adjust the space between the two sets of text using padding. 
+<p>
+What you should be asking is why does the shorter text start slightly lower than the longer text?
+  They should start at the same point.
+
+The answer is that all paragraphs have some default CSS settings that are generally good, but
+lead to undesirable behavior when we start playing around with CSS.
+I will fix this by setting the margin-top of the shorter paragraph to 0px. (It was previously set to
+something like 10 pixels.)  See the source code for this page.
+
+
+<p style="position:relative;  width:1.2in;  float:left; margin-top:0;">
+Don't let your turtle outsmart you.  Be tough!
+</p>
+
+<p style="  width:4in; ">
+
+Once your turtle figures out you bring the food, he or she may be quite excited to see you. And if you don't have food, they sometimes swim back and forth frantically, and manage to look like are starving and need food -- now! Don't let them fool you, though, because obesity can be a big problem in turtles.
+</p>
+
+
+<p>I can also have three columns by  adding a third paragraph and making the second one also float:left.
+When setting the paragraph width of the third paragraph , bear in mind that the width 
+must allow for the other two paragraphs plus the desired width.  Thus if the first two 
+paragraphs have a combined width of 5.2 inches, you will need to make the third 
+paragraph width  9 inches just to get an effective 3.8 inches to write in.
+<p style="position:relative; float:left;  width:1.2in; ">
+Don't let your turtle outsmart you.  Be tough!
+</p>
+<p style="width:3in; position:relative; float:left;  ">
+Once your turtle figures out you bring the food, he or she may be quite excited to see you. And if you don't have food, they sometimes swim back and forth frantically, and manage to look like are starving and need food -- now! Don't let them fool you, though, because obesity can be a big problem in turtles.
+</p>
+<p style="width:9in; " >
+Red eared sliders need a diet that is a mixture of animal and plant material. However, young red eared sliders eat more animal protein so babies are started off on a diet that is more on the carnivorous side. It is still a good idea to offer vegetation to young turtles although they may not really start eating it until they get older (offering it early on at least makes it less likely they will shy away from trying it as they age). For adult red eared sliders, vegetation should make up a significant part of the diet. 
+</p>
+
+
+<p>Here I make the third paragraph width only 6 inches, and I get a text wrap around.
+
+
+<p style="position:relative; float:left;  width:1.2in; ">
+Don't let your turtle outsmart you.  Be tough!
+</p>
+<p style="width:3in; position:relative; float:left;  ">
+Once your turtle figures out you bring the food, he or she may be quite excited to see you. And if you don't have food, they sometimes swim back and forth frantically, and manage to look like are starving and need food -- now! Don't let them fool you, though, because obesity can be a big problem in turtles.
+</p>
+<p style="width:6in; " >
+Red eared sliders need a diet that is a mixture of animal and plant material. However, young red eared sliders eat more animal protein so babies are started off on a diet that is more on the carnivorous side. It is still a good idea to offer vegetation to young turtles although they may not really start eating it until they get older (offering it early on at least makes it less likely they will shy away from trying it as they age). For adult red eared sliders, vegetation should make up a significant part of the diet. 
+</p>
+<p>
+
+
+
+<p>Here I am trying to get the text wrap around with three paragraphs.
+</p>
+
+<div style="position:relative; float:left; width:4in; ">
+<p style="position:relative; float:left;  width:1.2in; ">
+Don't let your turtle outsmart you.  Be tough!
+</p>
+<p style="width:3.6in; ">
+Once your turtle figures out you bring the food, he or she may be quite excited to see you. And if you don't have food, they sometimes swim back and forth frantically, and manage to look like are starving and need food -- now! Don't let them fool you, though, because obesity can be a big problem in turtles.
+</p>
+</div>
+<p style="position:relative;  width:6in;   ">
+
+Red eared sliders need a diet that is a mixture of animal and plant material. However, young red eared sliders eat more animal protein so babies are started off on a diet that is more on the carnivorous side. It is still a good idea to offer vegetation to young turtles although they may not really start eating it until they get older (offering it early on at least makes it less likely they will shy away from trying it as they age). For adult red eared sliders, vegetation should make up a significant part of the diet. 
+</p>
+
+
+<p style="float:left; width:3in;   ">
+
+This paragraph will be floated to the left.  Will that have any affect on it considering it is the last paragraph 
+on the page? <b>NO</b>
+
+
+
+
+
+<br>
+  
+&copy;Nachum Danzig 2010
+</p>
+
+
+<!----
+display: 
+none  The element will generate no box at all
+block The element will generate a block box (a line break before and after the element)
+inline The element will generate an inline box (no line break before or after the element). This is default
+inline-block The element will generate a block box, laid out as an inline box
+inline-table The element will generate an inline box (like <table>, with no line break before or after)
+list-item The element will generate a block box, and an inline box for the list marker
+run-in The element will generate a block or inline box, depending on context
+table  The element will behave like a table (like <table>, with a line break before and after)
+table-caption The element will behave like a table caption (like <caption>)
+table-cell The element will behave like a table cell
+table-column The element will behave like a table column
+table-column-group The element will behave like a table column group (like <colgroup>)
+table-footer-group The element will behave like a table footer row group
+table-header-group The element will behave like a table header row group
+table-row The element will behave like a table row
+table-row-group	The element will behave like a table row group
+inherit	Specifies that the value of the display property should be inherited from the parent element
+
+
+--->
+
+</body>
+</html>

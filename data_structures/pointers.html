@@ -1,0 +1,28 @@
+<head>
+<TITLE>Some Pointers</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Some Pointers about Linked lists</H2></CENTER>
+
+<p>
+A referenece which is passed to a method is a copy of the reference.
+If you run the new command on this copy all you get is 
+your new local reference to point to the new instance.
+when the method ends, the local copy of the reference is
+out of scope and the instance is left with no one pointing to him.
+He will then be deleted by the garbage collector.
+
+Therefore you must create the haed of the linked list outside of the 
+methods and run the new on a node's next pointer, not on it itself.
+
+Never run new on a local variable, the instance will be lost!
+<p>
+&copy; Nachum Danzig January 2004
+
+
+</body>
+</html>
+
+
+
+

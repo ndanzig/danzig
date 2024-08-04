@@ -1,0 +1,38 @@
+import java.io.*;
+import java.util.Vector;
+import java.util.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import dataList.*;
+
+public class UpdateServlet extends HttpServlet
+{
+
+    private dataList list;
+    protected void doPost (HttpServletRequest req, 
+			  HttpServletResponse res) throws ServletException, IOException{ 
+	PrintWriter out = res.getWriter();
+	res.setContentType("text/html");
+	ServletContext context = getServletConfig().getServletContext();
+	list = (dataList)context.getAttribute("shared-list");
+	{
+	    boolean ok;
+	    String[] details = new String[4];
+	    details[0] = req.getParameter("firstName");
+	    details[1] = req.getParameter("lastName");
+	    details[2] = req.getParameter("id");
+	    details[3] = req.getParameter("email");
+	    ok=list.updateList(details);
+	    if(ok=true)
+		{
+		    out.println("<H2>Your details have been recorded. Thank You.</H2>");
+		    out.println("<br><a HREF=\"HomeServlet\">Show Results</A>");
+		}
+	    else
+		{
+		    out.print("<H2>Sorry. The system failed to update.</H2>");
+		}
+	}//end stam {}
+    } //end doPost method 
+
+}//end UpdateServlet

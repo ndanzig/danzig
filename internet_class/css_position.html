@@ -1,0 +1,141 @@
+<html>
+<head>
+<STYLE TYPE="text/css">  
+<!--
+P {
+width:60em;
+margin-left: 1em;
+}
+-->
+</style>
+
+</head>
+
+
+<body>
+<h2>CSS - Positioning</h2>
+<p>The CSS attribute <em>postion</em> helps you position a block of
+ text or a picture on your html page.
+
+<p>
+When specifying the new location we need to specify how much to the 
+left  or right or down or up we want the text or picture to be.
+<p>
+We can use several different types of measurement units to describe the position.  There exist the following units:
+<ul><li>in  - inches
+<li>cm - cetimeters
+<li> mm - millimeters
+<li>em - font units, i.e. 1em equals the size of the current font. If the user changes his font setting in the browser then this size will change.
+<li>ex - x-height or about one half teh font size.
+<li>pt - point, 1 pt is 1/72 of an inch
+<li>pc - pica , 1 pica is 12 pts
+<li>px - pixel, one dot on the screen (this is the default measurement unit)
+<li>% - percentage of the current display
+</ul>
+
+
+<P>  There are five posible position types, relative, absolute, static, fixed,
+ and inherit.  We will focus on the first two.
+
+
+
+<p>Making the position  <i>relative</i> means  the text block or picture
+ will be positioned relative to where it would ordinarily have been.
+The space that the element would have taken up is still reserved for the
+ element in its normal position but its position is changed.
+This means that other elements will be placed as if the element were in its 
+normal place.
+<p>
+See this text for an example of using relative positioning:
+<div style="width:25em; position:relative; left: 12em; top:.5in;">
+
+This paragraph is created using the following
+command "width:25em; position:relative; left: 12em; top:.5in;"
+<br>
+Relative generates a relatively positioned element, positioned relative to its normal position,
+ so "left:12em" adds 12 letter-size space to the element's LEFT position.
+ "top:.5in" adds a half inch to the top of the element, i.e. moves it down a half inch.  
+</div>
+
+
+<P  style=" position:relative;  top:3em;" >If I specify the position to be  
+<i>absolute</i>
+ then I mean the position I define for the element is  relative to 
+the top of the page, not to its normal location.
+In this case, the element (paragraph) will be located with no regard to 
+the  preceding paragraph.
+Furthermore, unlike relative positioning, in absolute positioning
+other elements will be placed as if this element does not exist at all.
+
+If a browser window is made very narrow, absolute positioned elements will
+ remain in place, 
+relative positioned ones will move down.
+
+<br>See this example:
+
+<div style="width:25em; position:absolute; left:12em; top:8in; ">
+This paragraph is created using the following
+command "width:25em; position:absolute; left: 12em; top:8in;"
+<br>Absolute generates an absolutely positioned element, positioned relative to the first parent element that has a position other than static. The element's position is specified with the "left", "top", "right", and "bottom" properties 
+</div>
+
+
+<div style=" position:relative; top:2.7in;"> 
+    <p>Notice that the second paragraph is slightly more to the left than the first even though they are both placed 
+    12em from the left side.  How come they are not the same distance from the left then?
+    The answer is that the first paragraph is a relative position, so it is 12em from where it would have been.
+    The body tag has a built in style which has a left margin.  This margin is added to our 12em and pushed
+    the paragraph over
+    more to the right.  In absolute positioning , we ignore the body tag and we 
+    position thh paragraph relative to the actual
+    left side in the browser.
+
+    <p>When using positioning we can either intentionally or unintentionally cover other text or pictures with 
+    the positioned text. See the below text that is place on top of other text in a confusing manner.
+
+
+    <div style="width:25em; position:relative; left: 12em; top:.3in;">
+
+    This paragraph is created using the following
+    command "width:25em; position:relative; left: 12em; top:.3in;"
+    <br>
+    relative Generates a relatively positioned element, positioned relative to its normal position, 
+    so "left:20" adds 20 pixels to the element's LEFT position 
+    </div>
+
+
+<p style="position:relative;  top:1.2in;" >When you use positioning, often you will find that things are not where you thought they would be.
+This is usually because you have used relative positioning and have not taken into account the 
+space the moved text is still taking up in it original place.  
+
+Also, if you have used absolute positioning to lower a text , let's say, then 
+any following unpositioned text will act as though the positioned text is non-existent and will write over it.
+<em>You need to adjust <u>all</u> text that follows positioned text.</em>
+For this reasons, it is often a good idea instead to use the box model (i.e. margin, padding ..) to space out text and
+pictures.  Use positioning sparingly and only when you need to put an element in an
+unusual place, a place for which no obvious box modelling will work.
+
+
+</div>
+
+<div style="width:25em; position:absolute; left:12em; top:12.4in; color:red;">
+
+this paragraph is created using the following
+command "width:35em; position:absolute; left: 12em; top:12.4in; color:red;"
+<br>Note that 1em is relative to the previous text block.
+<br>absolute Generates an absolutely positioned element, positioned relative to the first parent element that has a position other than static. The element's position is specified with the "left", "top", "right", and "bottom" properties 
+</div>
+
+<p  style="position:relative;  top:4.5in;" >
+  
+&copy;Nachum Danzig 2010
+
+
+
+<!----
+fixed Generates an absolutely positioned element, positioned relative to the browser window. The element's position is specified with the "left", "top", "right", and "bottom" properties 
+
+--->
+
+</body>
+</html>

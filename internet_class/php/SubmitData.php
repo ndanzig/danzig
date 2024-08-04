@@ -1,0 +1,57 @@
+<html>
+<head>
+	<title>Some example page with PHP!</title>
+	<style>
+	body { font-family: tahoma;  }
+	td.label { font-weight: bold; text-align: right; font-size: 10pt; }
+	td.input { font-size: 8pt; }
+	</style>
+</head>
+
+<?php $fn=$_POST["FirstName"];   ?>
+
+<blkabajdjsqdj>
+
+<body>
+	<h1>So this is what we know about you...</h1>
+	<table>
+		<tr>
+			<td class="label">First Name:</td>
+			<td class="input"><?php print " $fn   &nbsp;    $fn    ";    print $fn ."<br>"   ;    print $fn; print $fn; print $fn; print $fn; 
+
+?></td>
+		</tr>
+		<tr>
+			<td class="label">Last Name:</td>
+			<td class="input"><?php echo $_POST["LastName"]; ?></td>
+		</tr>
+		<tr>
+			<td class="label">Enjoy Looks On The Beach:</td>
+			<td class="input">
+<?php 
+if  ( $_POST["BeachWalks"]  ) 
+	echo "Yes kookooo";
+else
+	echo "No"; 
+?>
+			</td>
+		</tr>
+		<tr>
+			<td class="label">Gender:</td>
+			<td class="input">
+				<?php echo $_POST["Gender"]; ?>
+			</td>
+		</tr>
+		<tr>
+			<td class="label">Hair Color:</td>
+			<td class="input">
+				<?php echo "<span style=\"color: " . $_POST["HairColor"] . "\">" . $_POST["HairColor"] . "</span>"; ?>
+			</td>
+		</tr>
+	</table>
+			
+
+</body>
+
+</html>
+

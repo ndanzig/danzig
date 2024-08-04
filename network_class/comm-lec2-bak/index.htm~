@@ -1,0 +1,43 @@
+
+<html>
+
+<head>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+<title>The Control Lines</title>
+</head>
+
+<BODY     >
+<CENTER>
+<h1>The Control Lines</h1>
+<h4>02/05/00</h4>
+<br><h2> <A HREF="sld001.htm">Start here</A>
+ </h2><br>  
+</center>
+<center>
+ <table width=90%>
+  <tr>
+   <td valign=top align=left width=50%>
+      <h3><u>The slides</u></h3>
+            <P ALIGN=LEFT><A HREF="sld001.htm">The 9-Pin Connector</A></P>
+        <P ALIGN=LEFT><A HREF="sld002.htm">Connecting Via Modems</A></P>
+        <P ALIGN=LEFT><A HREF="sld003.htm">The Control Lines</A></P>
+        <P ALIGN=LEFT><A HREF="sld004.htm">Full Handshake NULL Modem</A></P>
+        <P ALIGN=LEFT><A HREF="sld005.htm">The Modem Control Register (MCR)</A></P>
+        <P ALIGN=LEFT><A HREF="sld006.htm">The Modem Status Register (MSR)</A></P>
+        <P ALIGN=LEFT><A HREF="sld007.htm">The MSR (cont.)</A></P>
+        <P ALIGN=LEFT><A HREF="sld008.htm">Connecting Between PC and Modem</A></P>
+        <P ALIGN=LEFT><A HREF="sld009.htm">Modem Communication Protocol</A></P>
+        <P ALIGN=LEFT><A HREF="sld010.htm">Modem Communication Protocol (2)</A></P>
+        <P ALIGN=LEFT><A HREF="sld011.htm">Cyclic Redundancy Check (CRC)</A></P>
+
+   </td>
+   <td valign=top width=50%>
+   </td>
+  </tr>
+ </table>
+</center>
+
+</body>
+
+</html>

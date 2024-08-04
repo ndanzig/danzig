@@ -1,0 +1,53 @@
+
+<HTML>
+
+<HEAD>
+
+<meta name="GENERATOR" content="Microsoft Internet Assistant for PowerPoint 97">
+ <TITLE>The Line Control Register (LCR)</TITLE> 
+</HEAD>
+
+<BODY     >
+
+ <H1>The Line Control Register (LCR)</H1> 
+ <P><UL>
+<LI><H2>The LCR is a 8-bit register (as all 8250 registers) that controls the data that goes on the TD and RD lines. Its bits are:
+</H2>
+</UL><UL>
+<LI><H2>Bits 0,1: Select the word length, from 5 to 8 bits.
+</H2>
+<UL>
+<LI>00: 5 bit word
+<LI>01: 6 bit word
+<LI>10: 7 bit word
+<LI>11: 8 bit word
+</UL></UL><UL>
+<LI><H2>Bit 2: Sets the length of the stop bit.
+</H2>
+<UL>
+<LI>0: 1 bit length
+<LI>1: 1.5 bit  length if 5 bit word selected, 2 bit length if 6,7,8 bit word selected
+</UL></UL><UL>
+<LI><H2>Bit 6: Sets the break control bit. When this bit is set to 1 the TD line is permanently set to 0 (space).
+</H2>
+</UL><UL>
+<LI><H2>Bit 7: Sets the DLAB (Divisor Latch Access Bit).
+</H2>
+<UL>
+<LI>0: enables access to RBR, THR, and IER.
+<LI>1: enables access to DLL and DLM (to set the baud).</UL></UL></P>
+<P></P> 
+<P>
+<TABLE>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld014.htm">Previous slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=100> <A HREF="tsld016.htm">Next slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="tsld001.htm">Back to first slide</A> </TD>
+  <TD HEIGHT=100 WIDTH=150> <A HREF="sld015.htm">View graphic version</A> </TD>
+</TABLE>
+<BR>
+</P>
+
+
+
+</Body>
+</HTML>

@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class Ex1form extends HttpServlet{
+    public void init(ServletConfig config)
+	throws ServletException{
+    }
+
+
+    public void doGet (HttpServletRequest request,
+		       HttpServletResponse response) throws ServletException, IOException{
+	PrintWriter output = response.getWriter();
+	response.setContentType("text/html");
+	if(request.getParameter("action").equals("add") )
+	    {
+		output.println("<HTML><HEAD><Title>Calculator Add Page</Title></HEAD><body>");
+		output.println("<center><h3><font color=\"blue\">Please fill out the following fields and click \"add\".</font></h3></br>");
+		output.println("<form name=\"Add\" action=\"Ex1\" method=\"post\"> <input type=\"text\" name=\"firstoperand\" /></br><input type=\"text\" name=\"secondoperand\" /></br><input type=\"hidden\" name=\"action\" value=\"add\" /><input type=\"submit\" name=\"submit\" value=\"add\" />   </form></center></body></html>");
+	    }
+	else
+	    {
+		output.println("<HTML><HEAD><Title>Calculator Subtract Page</Title></HEAD><body>");
+		output.println("<center><h3><font color=\"blue\">Please fill out the following fields and click \"subtract\".</font></h3></br>");
+		output.println("<form name=\"subtract\" action=\"Ex1\" method=\"post\"> <input type=\"text\" name=\"firstoperand\" /></br><input type=\"text\" name=\"secondoperand\" /></br><input type=\"hidden\" name=\"action\" value=\"subtract\" /><input type=\"submit\" name=\"submit\" value=\"subtract\" />   </form></center></body></html>");
+	    }
+
+
+    }//end doGet
+}//end servlet

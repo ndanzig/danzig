@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+<head>
+<TITLE>Programming Mathematics Operations</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<H3>Mathematical Operations</H3>
+
+<p> In the beginning computers were basically just large calculators.
+And even today, that is basically what they are.  They do thousands of
+calculations a second.  Because of this, the most basic part of
+any programming language is a set of mathematical operation.
+We have already seen some, like addition +.
+<p>
+Let me list the basic algebraic operators (notice that there is no operator to 
+square a number or raise it to a power):
+<ul>
+<li> +&nbsp; add two values
+<li> -&nbsp; subtract two values
+<li> /&nbsp; divide two values
+<li> *&nbsp; multiply two values
+<li> %&nbsp; find the remainder after dividing the two values (called modulo or modulus 
+)</ul>
+<p>
+Just to make this clearer, let me show you some examples:<br>
+Assume I have the <b>int a</b>, then <br>
+<pre>
+a = 7 + 8;  // a is 15
+a = 10 - 8;  // a is 2
+a = 7 * 8;  // a is 56
+a = 16 / 8;  // a is 2
+a = 35 / 8;  // a is 4 (because <b>a</b> is an <b>int</b>, C++ rounds a down to the nearest integer, we lose the decimal)
+a = 19 % 8;  // a is 3 ( 19 / 8 is 2 remainder 3, using the % gives us the remainder) 
+</pre>
+
+
+<p>
+There are also bitwise operators.  What these operators do is manipulate the 
+bits of a variable or perform logical operations on values.&nbsp; To understand 
+this we need a little background about bits and bytes.&nbsp; You remember from 
+chapter 1 that primitive data types have different sizes.&nbsp; We expressed 
+this size difference in terms of how many bytes each data type had.&nbsp; A 
+short for example is composed of two bytes, a long of four bytes.&nbsp; But what 
+are bytes?&nbsp;
+<p>
+Normal mathematics that you have learned is decimal mathematics.&nbsp; The word 
+decimal comes from the Latin word for ten.&nbsp; This is because normal 
+mathematics is based a 10 digit number system.&nbsp; The digits start at 0 and 
+go to 9. If you want to write a number larger than 9 you need to create another 
+column and put a 1 in it.&nbsp; But imagine if you tried to express numbers with 
+only two digits.&nbsp; Such a system would be called binary mathematic, from the 
+Latin word for two.&nbsp; Your digits would go from 0 to 1.&nbsp; How would you 
+express a number larger than 1?&nbsp;&nbsp; You would have to put a 1 in the 
+next column (just as you did to express a number larger than 9). So, the number 
+2 would look like this 10. The number 3 would look like this 11.&nbsp; And the 
+number 4 would need another new column like this 100.&nbsp; As you can see, we 
+quickly need to start using a lot of columns.&nbsp; For example the number 255 
+would look like this 11111111.<p>
+Here is a list of some decimal numbers and their binary equivalents
+<table border="1" width="11%" id="table1">
+	<tr>
+		<td>1</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>10</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>11</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>100</td>
+	</tr>
+	<tr>
+		<td>5</td>
+		<td>101</td>
+	</tr>
+	<tr>
+		<td>6</td>
+		<td>110</td>
+	</tr>
+	<tr>
+		<td>7</td>
+		<td>111</td>
+	</tr>
+	<tr>
+		<td>8</td>
+		<td>1000</td>
+	</tr>
+	<tr>
+		<td>9</td>
+		<td>1001</td>
+	</tr>
+	<tr>
+		<td>10</td>
+		<td>1010</td>
+	</tr>
+	<tr>
+		<td>11</td>
+		<td>1011</td>
+	</tr>
+	<tr>
+		<td>12</td>
+		<td>1100</td>
+	</tr>
+	<tr>
+		<td>13</td>
+		<td>1101</td>
+	</tr>
+	<tr>
+		<td>14</td>
+		<td>1110</td>
+	</tr>
+</table>
+<p>
+Computers represent numbers as binary values.
+Even if you assign a variable the perfectly normal decimal value like 9, the 
+computer will store the value as a binary value ( 1001 )&nbsp; You may never 
+notice this because if you ever use the variable, the computer will convert the 
+representation of the number back into decimal.&nbsp;
+<p>
+Each column in a binary number is called a <b>bit </b>&nbsp;and a group of eight
+<b>bit</b>s is called a <b>byte</b>.&nbsp; So if a <b>short </b>has two bytes, 
+(16 bits) then the maximum value it can contain is 1111 1111 1111 1111 binary or 
+65535 decimal. Every <b>char</b>, <b>int</b>, <b>float</b> etc. is 
+actually a set of bits and bytes.  For instance, a <b>char</b> is 8 bits or one byte.
+Usually, and <b>int</b> is 32 bits or 4 bytes. We can actually change variables 
+on the level of their bits. You can perform mathematics on numbers in terms of 
+their bits.&nbsp; To do this you must use what are called <b>bitwise operators</b>. 
+The idea of bitwise operators is to perform logical operation on bits in 
+parallel columns of two different numbers.&nbsp;
+<p>
+Here is a list of the basic bitwise operators:
+<ul>
+ <li> & <b>bitwise and</b> operator<li> |&nbsp;&nbsp; <b>bitwise or</b> operator<li> ^&nbsp;
+	<b>bitwise exclusive or</b> operator<li> &lt; &lt;&nbsp; <b>left shift</b> 
+	operator<li> &gt; &gt;&nbsp; <b>right shift</b> operator
+
+</ul>
+<p> The <b>bitwise and ( &amp; ) </b>operator is like the regular<b> and ( &amp;&amp; ) </b>
+operator in that it evaluates two values and returns <b>true </b>or <b>false</b>.&nbsp; 
+Remember that <b>true</b> is equivalent to 1 and<b> false</b> to 0.&nbsp; So if&nbsp; 
+I write &quot;1 &amp; 1&quot; I am asking are both digits <b>true</b>.&nbsp; In this case they 
+are both <b>true</b> (1) so the result is <b>true </b>(1).&nbsp; Similarly, &quot;1 &amp; 
+0&quot; and &quot;0 &amp; 0&quot; both result in <b>false </b>since it is not so that both values 
+in each comparison are <b>true</b>.&nbsp; In one case only one value is <b>true</b>, 
+and in the second case neither values are <b>true</b>; they are both 0.What we 
+are saying with the <b>& operator</b> is look for any place in the 
+2 sets of bits where there is a 1 in the same column of each number.
+A column which has a 1 in both numbers will meet the <b>bitwise and</b>
+ ( & ) condition.  Therefore, that column in the resulting value will be
+marked with a 1.<p> The <b>bitwise or</b> is <b>true</b> if one or more of the 
+values is <b>true</b>.&nbsp; So therefore, &quot;1 | 1&quot; and &quot; 1| 0&quot; are both <b>true</b>.&nbsp; 
+But &quot; 0 | 0&quot; is <b>false</b>.&nbsp; <b>Bitwise exclusive or </b>is <b>true </b>
+when exactly one of the two values is <b>true</b>, but <b>false</b> if <i>both</i> 
+values are<b> true </b>or if <i>both</i> values are<b> false</b>.&nbsp; So,&nbsp; 
+&quot;0 ^ 1&quot; is <b>true </b>but &quot; 0 ^ 0&quot; and&nbsp;&nbsp; &quot;1 ^ 1&quot; are both <b>false</b>.<p> Let's see some examples.&nbsp; Assume I have the<b> 
+unsigned short a</b>, then <br>
+<xmp>a = 9 & 8; // a is 8
+</xmp>
+Why is this?  Well, in reality the decimal value 8 in binary looks like this
+<xmp>0000 0000 0000 1000
+</xmp>
+and 9 looks like this:
+<xmp>0000 0000 0000 1001 
+</xmp>
+You will notice that there a whole lot of leading zeros in these numbers. Don't 
+be startled.&nbsp; I can always add some leading zeros.&nbsp; 007 is equivalent 
+to 7 (Don't tell Mr Bond). I&nbsp;added the zeros to fill in the 2 byte length 
+of a short. When I do bitwise operations, I affect the whole data type, so I 
+need to think in terms of there being zeros there when I make calculations.&nbsp;
+So, the operation<pre>
+ 9 &amp; 8; </pre>
+looks like this:
+<pre>  0000 0000 0000 1000
+& 0000 0000 0000 1001
+-------------
+  0000 0000 0000 1000</pre>
+Similarly, 
+<xmp>a = 19 | 5; //a will get the value 23  
+</xmp>
+Because 19 is 0000 0000 0001 0011 and 5 is 0000 0000 0000 0101&nbsp;
+<br>
+So what we actually wrote is:
+<pre>
+  0000 0000 0001 0011
+| 0000 0000 0000 0101
+--------------
+  0000 0000 0001 0111
+</pre>
+How did we get to this result? Well, <b>|</b> is <b>bitwise or</b>, so we look
+for any place in the 2 sets of bits where either one or both bits in the 
+same column are 1. If there is a 1, then we  place a 1 in the resulting 
+value.
+
+<p>
+Similarly, 
+<xmp>a = 19 ^&nbsp; 5; //a will get the value 22  </xmp>&nbsp;<br>
+What we actually wrote is:
+<pre>
+  0000 0000 0001 0011
+^ 0000 0000 0000 0101
+--------------
+  0000 0000 0001 0110
+</pre>
+As we know,&nbsp; <b>^</b> is <b>bitwise exclusive or</b>, so we look for any 
+place in the 2 sets of bits where exactly one bit in the 
+same column is 1. If there is one 1, then we  place a 1 in the resulting 
+value. We get 10110&nbsp; (decimal value 22) as our result.<p> The last two 
+bitwise operators also work on the whole data type.&nbsp; What they do is to 
+move all the bits in the data type to the left or to the right.&nbsp; Thus, if I 
+have the <b>unsigned short a</b> =5;&nbsp; it would be represented in binary as 
+0000 0000 0000 0101.&nbsp; If I shifted the values one to the left I would get 
+0000 0000 0000 1010 or decimal value 10.&nbsp; If I reached the left most end of 
+the data type, I would shift the numbers right off the end and loose them.&nbsp; 
+Thus if I left shifted the number 1000 0000 0000 0000 (32768 decimal) I would 
+get 0000 0000 0000 00000 (0 decimal).&nbsp; Here is how to left shift a number 
+in C++:
+<pre> <b>unsigned short a</b> =5;
+ a&lt;&lt;1;// to shift the bits one space to the left
+ a&lt;&lt;2;// to shift the bits two space to the left
+
+</pre>
+
+<p> Right shifting is conceptually the same thing as left shifting, but we move the digits
+tot eh right.  This will result in making the value smaller.  For example, if I shift the value 8
+ (0000 1000 binary) one digit to the right I will get 4.  Here is how I would do it:
+<pre>
+short a = 8;
+a = a&gt;&gt;1; 
+</pre>
+If I shifted it 4 digits to the right I would get zero.
+<pre>
+short a = 8;
+a = a&gt;&gt;4; 
+</pre>
+
+
+
+
+<h3>Order of Operations</h3>
+<p>
+You may remember something called order of operations from mathematics. This is the relative
+precedence of the mathematical operations.   For example,
+if you were asked to solve this problem, what would you write as the answer?
+<pre>
+5+6*6</pre>
+If you remembered that multiplication comes before addition, you would get 5 + 36 or 41. But if
+you forgot that, you might do the addition first.  In that case you would get a wrong
+answer, 66. Knowing what operation to do first is called knowing the order of operations.
+
+
+We can over-ride the order of operations by using paranthesis ( ).  So for example, <br>
+a = 2 + 12 * 5  ; //a is 62 <br>But <br>
+a = (2 + 12) * 5 ; //a is 70 </pre>
+
+So without going into too many examples I will present here a list  of the 
+operators we have seen so far in order from highest precedence to lowest:
+<ul>
+<li>( )
+<li>!
+<li>* / %
+<li>+ -
+<li>&lt;&lt;  &gt;&gt;
+<li>< <=  >  >=
+<li>==  !=
+<li>^
+<li>|
+<li>&&
+<li>||
+<li>=
+</ul>
+
+<p>
+&copy Nachum Danzig July 2006
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

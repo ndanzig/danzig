@@ -1,0 +1,21 @@
+<HTML>
+<HEAD>
+<TITLE>JavaScript Exercise 2</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+//change picture on mouse over
+function mouseover() {
+  document.img1.src="../saskia1.gif";
+}
+function mouseout() {
+  document.img1.src="../sky3.gif";
+}
+// -->
+</SCRIPT>
+</HEAD>
+<BODY BGCOLOR=WHITE>
+<A HREF="javascript:mousover()" onMouseover=mouseover()
+onMouseout=mouseout()><IMG SRC="../sky3.gif" NAME="img1"></A>
+</BODY>
+</HTML>
+

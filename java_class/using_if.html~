@@ -1,0 +1,202 @@
+<head>
+<TITLE>Programming - Separating program flow</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - Java</H2></CENTER>
+<CENTER><H3>Separating Program Flow Using "if"</H3></CENTER>
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+We previously learned that  computer programs execute operations in
+sequence. &nbsp; &nbsp; This means that the computer will execute
+code one line after another. &nbsp; &nbsp; But what if for some
+reason we want to skip certain lines of code? &nbsp; &nbsp; In other words,
+what if there are certain lines of code we want to do only
+if a certain <b>condition</b> holds true? &nbsp; &nbsp; (A <i>condition</i> 
+is a programming concept which means if a certain state of affairs is 
+true.  &nbsp; &nbsp; A condition in everyday life might be "If it is
+rainy, I will stay indoors today." &nbsp; &nbsp; A condition in a computer 
+program might be, "If the variable is even, then print on the screen the
+sentence "Even number." ") &nbsp; &nbsp; Skipping lines of code in this way is 
+called  <b>altering program flow</b>. &nbsp; &nbsp; Skipping lines of code 
+is called altering program flow  because it allows a program  to have two 
+entirely different sequences, or program flows. &nbsp; &nbsp;
+In one sequence, certain code is skipped over and  in the other sequence,
+ the code is not skipped.  
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; So how do we skip lines of code? &nbsp; &nbsp;
+To skip lines of code we use the reserved word (also called a <i> keyword</i>)&nbsp;
+<b>if</b> &nbsp; . &nbsp; &nbsp; With the help of the reserved word <i>if</i>
+ we can write a line of code in which we say that if and only if  a certain 
+condition is
+ <b><i>true</i></b> 
+then execute the following commands.  &nbsp; &nbsp; What 
+I mean by "true" is -  if a certain state of affairs is occuring. &nbsp; &nbsp;
+If today is Monday. &nbsp; &nbsp; If you are over 18 years old. &nbsp; &nbsp;
+If your salary is less than $1,000 a month.  &nbsp; &nbsp; These are all conditions that may or may not be <i>true</i>. &nbsp; &nbsp;
+ 
+<p> &nbsp; &nbsp; &nbsp; &nbsp; Let's see an example in Java.
+<br>
+<blockquote>
+int nachumsNumber; <br>
+nachumsNumber = 15; <br>
+if (nachumsNumber < 10) <br>
+{ <br>
+ &nbsp; &nbsp;  &nbsp; &nbsp; System.out.println("Number is"); <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("smaller than 10"); <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; nachumsNumber = 20; <br>
+} <br>
+System.out.println("Number is"); <br>
+System.out.println("not smaller than 10"); <br>
+
+</blockquote>
+<br>
+I added in some commands which we have not learned yet, so 
+this should look confusing.   &nbsp; &nbsp; Anyway, let's still try to
+figure out  what is going on in the code.
+&nbsp; &nbsp; What is  the condition? &nbsp; &nbsp; 
+Is the condition true or not?  &nbsp; &nbsp;
+. . . . The condition is "nachumsNumber < 10".  &nbsp; &nbsp;
+This translates into English as "Is the variable
+nachumsNumber less than 10." &nbsp; &nbsp; If nachumsNumber is less than
+10, then the condition is true.  &nbsp; &nbsp; But if nachumsNumber is not 
+less than 10, then we have to admit that the condition is not true. &nbsp; &nbsp;
+In our case we initialized the variable nachumsNumber to the value 15.  
+&nbsp; &nbsp;  Is the conditon true?  &nbsp; &nbsp; The condition
+is not true.  &nbsp; &nbsp; Since the condition is not
+true, the computer will skip over the lines inside the opening and closing
+braces &nbsp;  { &nbsp; } &nbsp;. &nbsp; &nbsp;  
+Therefore the lines:
+
+
+<blockquote>
+<br>
+ &nbsp; &nbsp;  &nbsp; &nbsp; System.out.println("Number is"); <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; System.out.println("smaller than 10"); <br>
+ &nbsp; &nbsp; &nbsp; &nbsp; nachumsNumber = 20; <br>
+</blockquote>
+<br>
+
+will not be executed. &nbsp; &nbsp;  They will be skipped. &nbsp; &nbsp;
+(I am not bothering to explain what these lines do, or
+what the program does in general. &nbsp; &nbsp;  The only thing it 
+is important to understand is how the condition works. &nbsp; &nbsp; But you
+ should try to guess what this program does.)
+<p> &nbsp; &nbsp; &nbsp; &nbsp; The above example is really too simple to be 
+of interest.  &nbsp; &nbsp; Since nachumsNumber will always be 15,
+therefore the lines inside the braces will never be executed. &nbsp; &nbsp;
+Later we will see examples in which the variable will change its value and 
+therefore the condition will sometimes be true, and sometimes false.
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+The two lines at the end, namely:
+<blockquote>
+System.out.println("Number is"); <br>
+System.out.println("not smaller than 10"); <br>
+<br><br>
+</blockquote>
+will always execute. &nbsp; &nbsp; Why is this? &nbsp; &nbsp; The reason is 
+that  the only 
+section of code that is skipped is the that which lies between the braces.  &nbsp; &nbsp; ( A section of code inside braces is called a <b> block of 
+code</b>.) &nbsp; &nbsp;
+Since there is a closing brace before these two lines, they are not within the condition and are therefore not skipped. &nbsp; &nbsp;
+They will be executed regardless of whether the condition is true or false. &nbsp; &nbsp;
+These lines will write the words "Number is not smaller than 10" onto
+the screen. &nbsp; &nbsp;  Does it make sense to write this? &nbsp; &nbsp;
+In our example the variable is 15 so it makes sense to print "Number is not
+ smaller than 10." since this is true. 
+&nbsp; &nbsp;
+But what if nachumsNumber had a different value, say 5 ? &nbsp; &nbsp;
+If the variable is smaller than 10 then it would be wrong to write
+"Number is not smaller than 10"  on the screen. &nbsp; &nbsp;
+If you look carefully at the example, you will see that if the 
+condition is true, then  nachumsNumber gets
+a new value.  &nbsp; &nbsp; It gets the value 20. &nbsp; &nbsp;
+By the time the program  prints the sentence "Number is not smaller than 10"
+ on the
+screen, nachumsNumber is actually 20, so the message <b>is</b> true. 
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+Sometimes in life we have more complicated conditions.  &nbsp; &nbsp;
+We have two sided conditions.   &nbsp; &nbsp; For example I might say,
+"If today is rainy I will stay indoors, otherwise I will play football."
+ &nbsp; &nbsp;  This statement means that only if today is
+rainy will I stay indoors, but if today is not rainy then I will play football.  &nbsp; &nbsp;  If the day is sunny I will play football.  &nbsp; &nbsp; But also if the day is cloudy (but not rainy) I will play football.   &nbsp; &nbsp;
+If the day is cold I will play football.  &nbsp; &nbsp;  Even if the day is snowy I will
+playfootball.   &nbsp; &nbsp; Only if the day is rainy will I stay indoors.  &nbsp; &nbsp;  That is the meaning of otherwise. &nbsp; &nbsp;  Otherwise means, "in all other
+conditions" I will play football. &nbsp; &nbsp; In Java we use the keyword
+<b>else</b> to mean otherwise.
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;  A simple  programming example in English of the <i>if 
+else</i> combition is
+<blockquote>
+
+If variable is greater than 2,500,000,000  print "Number is too large", else 
+print "Number is acceptable size."
+<br><br>
+</blockquote>
+Let us see the above English (also called  psuedo-code because it
+is English which resembles computer languages or codes) translated into Java. 
+
+<blockquote>
+<br>
+if (variable > 2,500,000,000)<br>
+{<br>
+&nbsp; &nbsp; &nbsp; &nbsp;System.out.println("Number is too large."); <br>
+}<br>
+else<br>
+{<br>
+&nbsp; &nbsp; &nbsp; &nbsp;System.out.println("Number is acceptable size."); <br>
+}<br>
+<br><br>
+</blockquote>
+Notice that the else using braces &nbsp; { &nbsp; } the same way the
+if uses them. &nbsp; &nbsp; In this example only one of
+the two senteces will be printed.  &nbsp; &nbsp; Which sentence gets printed depends
+on whether the condition of the if is true.  If the condition is true, 
+then the first sentence will be printed, otherwise ( or <b>else</b> ) the
+second sentence will be printed. &nbsp; &nbsp; In any case, both sentences can
+never be printed. &nbsp; &nbsp; The program has two options of what to print
+and the option will be selected in accordance with the truth or falsehood of 
+the condition in the <i>if</i> statement.  
+p> &nbsp; &nbsp; &nbsp; &nbsp;
+In Java there is also a keyword true and a keyword false.
+the keyword true is always true in a condition statement and
+false is always false.
+Therefore,
+<br>
+<br>
+<tt>if(true)</tt>
+<br>
+is always true. 
+
+There is a primitive data type called <b>boolean</b> which can be assigned true
+or false.  It is useful as a variable in condition statements.
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+<i>If</i>s can be <b>nested</b> one in side the other.
+
+<p>Table of all <a href="conditions.html"> condition </a> symbols and their meanings.
+
+
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp; 
+Terms in this chapter: &nbsp; &nbsp; condition, if, true, psuedo-code, braces, block of code,  else, nesting, 
+<br>
+&copy Nachum Danzig September 2003
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

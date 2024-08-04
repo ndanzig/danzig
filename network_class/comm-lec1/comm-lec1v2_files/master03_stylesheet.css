@@ -1,0 +1,275 @@
+body
+	{width:534px;
+	height:400px;}
+.TB
+	{mso-special-format:nobullet\2022;}
+.T
+	{text-align:center;
+	font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	text-decoration:underline;
+	color:#0066FF;
+	font-size:190%;}
+.BB
+	{mso-special-format:bullet\2022;}
+.B
+	{text-align:left;
+	font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	color:black;
+	mso-color-index:1;
+	font-size:133%;}
+.B1B
+	{mso-special-format:bullet\2013;}
+.B1
+	{text-align:left;
+	font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	color:black;
+	mso-color-index:1;
+	font-size:114%;}
+.B2B
+	{mso-special-format:bullet\2022;}
+.B2
+	{text-align:left;
+	font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	color:black;
+	mso-color-index:1;
+	font-size:95%;}
+.B3B
+	{mso-special-format:bullet\2013;}
+.B3
+	{text-align:left;
+	font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	color:black;
+	mso-color-index:1;
+	font-size:95%;}
+.B4B
+	{mso-special-format:bullet\00BB;}
+.B4
+	{text-align:left;
+	font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	color:black;
+	mso-color-index:1;
+	font-size:95%;}
+.NB
+	{mso-special-format:nobullet\2022;}
+.N
+	{text-align:left;
+	font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	color:black;
+	mso-color-index:1;
+	font-size:57%;}
+.N1B
+	{mso-special-format:nobullet\2022;}
+.N1
+	{text-align:left;
+	font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	color:black;
+	mso-color-index:1;
+	font-size:57%;}
+.N2B
+	{mso-special-format:nobullet\2022;}
+.N2
+	{text-align:left;
+	font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	color:black;
+	mso-color-index:1;
+	font-size:57%;}
+.N3B
+	{mso-special-format:nobullet\2022;}
+.N3
+	{text-align:left;
+	font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	color:black;
+	mso-color-index:1;
+	font-size:57%;}
+.N4N
+	{mso-special-format:nobullet\2022;}
+.N4
+	{text-align:left;
+	font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	color:black;
+	mso-color-index:1;
+	font-size:57%;}
+.OB
+	{mso-special-format:nobullet\2022;}
+.O
+	{text-align:left;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman \(Hebrew\)";
+	color:black;
+	mso-color-index:1;
+	font-size:114%;}
+.O1
+	{font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman \(Hebrew\)";
+	font-size:114%;}
+.O2
+	{font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman \(Hebrew\)";
+	font-size:114%;}
+.O3
+	{font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman \(Hebrew\)";
+	font-size:114%;}
+.O4
+	{font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman \(Hebrew\)";
+	font-size:114%;}
+.CB
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	font-size:133%;}
+.CB1
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	font-size:114%;}
+.CB2
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	font-size:95%;}
+.CB3
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";}
+.CB4
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";}
+.CT
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	text-decoration:underline;
+	color:#0066FF;
+	font-size:190%;}
+.HB
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	font-size:114%;}
+.HB1
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	font-size:95%;}
+.HB2
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	font-size:85%;}
+.HB3
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";}
+.HB4
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";}
+.QB
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	font-size:95%;}
+.QB1
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	font-size:85%;}
+.QB2
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	font-size:76%;}
+.QB3
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";}
+.QB4
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";}
+.Tbl
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	font-size:114%;}
+.Tbl1
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	font-size:95%;}
+.Tbl2
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	font-size:85%;}
+.Tbl3
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";}
+.Tbl4
+	{font-family:"Times New Roman";
+	mso-ascii-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";}
+.defaultB
+	{mso-special-format:nobullet\2022;}
+.default
+	{text-align:left;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman \(Hebrew\)";
+	font-weight:normal;
+	font-style:normal;
+	text-decoration:none;
+	text-shadow:none;
+	text-effect:none;
+	mso-fareast-hint:no;
+	layout-flow:horizontal;
+	color:black;
+	mso-color-index:1;
+	font-size:114%;
+	mso-text-raise:0%;
+	mso-line-spacing:"100 0 0";
+	mso-margin-left-alt:0;
+	mso-text-indent-alt:0;
+	mso-char-wrap:0;
+	mso-kinsoku-overflow:0;
+	direction:ltr;
+	mso-word-wrap:1;
+	mso-vertical-align-special:baseline;
+	mso-ansi-language:EN-US;}
+a:link
+	{color:#CCCCFF !important;}
+a:active
+	{color:#3333CC !important;}
+a:visited
+	{color:#B2B2B2 !important;}

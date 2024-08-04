@@ -1,0 +1,110 @@
+
+H1 {
+font-size:36pt; 
+color:blue;
+
+}
+
+#top
+{
+position:relative;
+top: -120px;
+left: 250px;
+
+
+}
+
+b {
+color:black;
+}
+
+
+H2 { 
+font-family:'Comic Sans MS';
+font-size:6cm;
+ color:green; 
+ font-weight: bold
+
+}
+
+p {
+
+ font-family:'Courier';
+ font-size:16pt;
+ color:red; 
+ margin-left:0.5in;
+}
+
+
+P.two {
+background-color: #c1ffc1;
+font-family:arial;
+font-size: 14pt;
+margin-left: 1in;
+margin-right: 1in;
+}
+
+H1.two {
+font-size:36pt;
+color:red;
+}
+
+.three
+{
+font-size:14pt; 
+color:purple;
+margin-left: .75in;
+
+
+}
+
+#wiki
+{
+padding: 0px 0px 20px 0px;
+margin: 0px;
+position:relative;
+top: 0px;
+left: 0px;
+
+}
+#wiki_float
+{
+padding: 0px 0px 0px 0px;
+margin: 0px;
+position:relative;
+top: 0px;
+left: 0px;
+float: left;
+
+}
+
+#main
+{
+padding: 0px 0px 20px 0px;
+margin: 0px;
+position:relative;
+top: -100px;
+left: 0px;
+
+
+
+
+}
+
+
+
+ul {
+list-style-image: url(jewishstar.jpg);
+font-size: 16pt;
+}
+
+
+p.norma
+{
+background-color:white;
+font-family:times;
+font-size: 12pt;
+margin-left: 10px;
+margin-right: 10px;
+color:black;
+}

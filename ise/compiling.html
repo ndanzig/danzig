@@ -1,0 +1,61 @@
+<HTML>
+<head><title>Compiling</title>
+</head>
+<body>
+<pre>
+<h2>Compiling </h2>
+In order to compile you must first ssh to the server horayot.jct.ac.il
+You can login with your regular user name and password.
+Once you login you find you have all your UNIX homedirectory files.
+Your servlet will be in ~/javaserver/WEB-INF/classes
+The java compiler is called javac, so to compile all you really
+have to do is type javac myServlet.java
+Unfortunately, for two reasons, this may not work.
+First, you must tell the shell where to find the program javac.
+It is located here: /usr/java/jdk/bin
+So, you could type /usr/java/jdk/bin/javac
+Alternatively, you can set your path by adding a line like this 
+set path=( $path /usr/java/jdk/bin)  to your ~/.cshrc file.
+
+There is a second problem, you have to tell javac where to find
+the servlet class which you are extending.  You do this by specifying 
+the classpath (i.e. the location of extra classes for javac to include).
+The location of the class is here:
+/usr/local/tomcat/common/lib/servlet.jar
+But once you specify that javac should look here for classes, then javac will
+no longer look for classes in the local directory.  To get javac to look
+in more than one place, you must specify all the places for it to look,
+separating each one with a ":".
+
+Here is a complete example of how to compile:
+/usr/java/jdk/bin/javac  -classpath /usr/local/tomcat/common/lib/servlet.jar:. myServlet.java
+
+Alternatively, you could add an alias to your ~/.cshrc file.
+Add the following line:
+
+alias jc javac  -classpath /usr/local/tomcat/common/lib/servlet.jar:. \!:1 
+
+</pre>
+Good Luck!
+
+
+<P>
+<!-- Horizontal Rule (Bar) -->
+<HR ALIGN=CENTER  SIZE=5  WIDTH=70%>
+<br>
+&copy; Nachum Danzig 2004
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

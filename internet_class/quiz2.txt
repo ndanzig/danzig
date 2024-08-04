@@ -1,0 +1,70 @@
+HTML Quiz
+Please describe clearly, completely and in as short a way the following 
+HTML tags (how where and when it is used and what graphic effect it has):
+
+
+	<head>
+	
+
+
+
+	<tt>
+
+
+
+
+	<blockquote>
+
+
+
+        <strong>
+
+
+
+	<h6>
+
+
+
+
+	<p>
+
+
+	
+
+	&lt;
+
+
+
+
+	&amp; 
+
+
+	
+	<sup>
+
+
+
+
+	<pre>
+
+
+
+
+
+
+	<font>
+
+
+
+
+
+List and describe all the attributes and values of the following tags you can:
+
+	<ul> 
+
+
+
+
+	       
+	       
+        <div>

@@ -1,0 +1,49 @@
+#!/usr/local/bin/perl
+#
+# Subroutine to read CGI input.
+# Script stuck together from work by S.E.Brenner@bioc.cam.ac.uk
+# and ronnie@scs.leeds.ac.uk by nik@scs.leeds.ac.uk
+#
+# Subroutine &read_input takes and decodes data either from
+# QUERY_STRING (for GET method, default) or STDIN (for POST method)
+# Returned is an associative array of names and values.
+#
+# For the latest version of this script see Steve Brenner's page on
+# http://www.bio.cam.ac.uk/web/form.html
+
+
+sub read_input
+{
+    local ($buffer, @pairs, $pair, $name, $value, %FORM);
+    # Read in text
+    $ENV{'REQUEST_METHOD'} =~ tr/a-z/A-Z/;
+    if ($ENV{'REQUEST_METHOD'} eq "POST")
+    {
+	read(STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
+    } else
+    {
+	$buffer = $ENV{'QUERY_STRING'};
+    }
+    # Split information into name/value pairs
+    @pairs = split(/&/, $buffer);
+    foreach $pair (@pairs)
+    {
+	($name, $value) = split(/=/, $pair);
+	$value =~ tr/+/ /;
+	$value =~ s/%(..)/pack("C", hex($1))/eg;
+	$FORM{$name} = $value;
+    }
+    %FORM;
+}
+1; #Required for includes
+
+
+
+
+
+
+
+
+
+
+

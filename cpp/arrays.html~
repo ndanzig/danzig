@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<LINK REL=STYLESHEET HREF="style.css" TYPE="text/css">
+<head>
+<TITLE>Programming - Using Arrays</TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Introduction to Computer Science - C++</H2></CENTER>
+<CENTER><H3>Using Arrays</H3></CENTER>
+
+
+<p> 
+So far we have learned how to create variables to store information.
+But sometimes we need to store a lot of information. To do this,
+based on what we already know alone, we would need to create a lot of variables each with a 
+different name. To make the problem of creating large numbers of variables more convenient, arrays were invented.
+
+<p> 
+An array is  a set of variables of one type (int or char or float, etc.).
+The variables in the array all have the same name but are differentiated by different index numbers 
+(also called offsets or subscripts).  Let's see how this is done.
+
+<p>
+We  declare an array by writing the data type followed by the variable name and a set of brackets.
+Inside the brackets we write the number of variables we want.  This number must be an integer literal.
+<p>
+Here is the general format of an array declaration:
+<blockquote>
+<i>data_type identifier [integer_literal];</i>
+</blockquote>
+
+
+As a real example, we could write the following:
+<br><tt>int a[12] ;   </tt> <br>
+This will create an array named "a" containing 12 integers.
+
+<p>The different variables in the array are  called elements of the array.
+<em>These elements are located in contiguous spaces in memory</em>, i.e. one 
+after the other. In our example, the identifier "a" points to the first int in the set. 
+By using the number 12 we have instructed the computer to find us 12 new integer 
+locations in memory, all in one group location.   In this 
+case we specified 12 int's.  If an int is 4 bytes then the computer will look 
+for 12 * 4 or 48 bytes of memory in adjacent places (without any gaps between them).
+If we ask for a very large space, the computer might fail to find the space and 
+the command will fail at run time. But usually you won't have this problem.
+<p>
+The name of this array will be "a". By itself, "a" holds the <b>address</b> in memory
+of the <b>first</b> int in the array called "a".  In otherwords, <b>the name of the 
+array refers to the location in computer memory where the first element of the 
+array resides</b>. To get the contents of this memory space, i.e. the actual int that is
+at that place in memory,
+you need to <b>de-reference</b> the space. De-referencing means finding the content
+of a specific place in memory.  We will discuss this more in the next chapter. 
+ For now just read on about how to actually do this de-referencing.
+
+
+<p> 
+We can de-reference different parts of the array by using indexes, also called 
+offsets.  The first element in any array is at the beginning of the
+block of memory  assigned to the array. We refer to it as being in place 0. In some
+other programming languages it is referred to as being in place 1, but in C++ we start
+ counting array locations from 0 up. Here is how to
+ access the content of first or 0th element of the array and  to
+assign the element the value 18.
+
+<br><tt>a[0] = 18 ;   </tt> <br>
+
+
+Since we asked for 12 spaces, we got 12 spaces, but the indexes will 
+start with zero ( 0 ) and go until eleven ( 11 ). This simple point can confuse people.
+Remember, when we declare an array, we write the total
+number of elements we want.  We do not write the  index of the last element. 
+So, if we want to make an array of 12 elements, we declare it like this, for example,
+<br><tt>int arr[12];   </tt> <br>
+If we want to assign the first element the value 613 we would write:
+<br><tt>arr[0] = 613 ;   </tt> <br>
+
+
+And now if we want to assign the last element in the array the value 1625,
+ we would do the following.
+
+<br><tt>arr[11] = 1625 ;   </tt> <br>
+And similarly for all the middle elements of the array.
+<p>
+It would be a mistake to write this next line  since there is no location 12th in the array.
+<br><font color=red><tt>arr[12] = 625 ;   </tt> Wrong! </font><br>
+In fact, even though the above is an error, it would compile and that makes this error harder
+to detect.  
+<p>
+To reiterate, code which uses space beyond the end of the array will compile! But it
+is <b>always</b> a logical error. So be careful!
+A command like <br><tt>arr[12] = 625 ;   </tt> <br>
+or 
+<br><tt>arr[45] = 9925 ;   </tt> <br>
+will compile, but we are then accessing a place in memory which we have no right 
+to access.  Our program will compile, but will probably crash at run time.
+This means that
+if you do make this mistake, you may not discover it until your program fails to
+run as expected.
+ <p> We have now seen how in C++ we can create a large set of variables.  This set, called 
+an array can have any name we choose.  All the elements must be of the same data type.
+We can access these variables by refering to their location within the 
+array by an index number enclosed in brackets preceded by the array name.
+
+<p>
+One of the useful conveniences of having a set of
+variables with the same name and only differentiated by an index number is
+that we can use a loop to help us  assign different values to the different 
+elements in the array. 
+We can increment through all the indexes of the array by using a counter 
+as the index of the array.
+
+<p>
+ For example, 
+if we wanted to keep track of the total fees we charged cars for 
+parking in our garage we would need a set of variables for the fees we charged the  cars. 
+We would also need  another variable for 
+the total daily charges.  To do this we might write something like this.
+<br><tt>
+<br>double fee[ 12 ];
+<br>double total_fees = 0;
+<br>for(int counter =0; ! quit && counter < 12; counter++ )
+<br>&nbsp; &nbsp;{
+<br>&nbsp; &nbsp;cout&lt;&lt;"Enter a fee, 0 to quit";
+<br>&nbsp; &nbsp;cin&gt;&gt;fee[counter];
+<br>&nbsp; &nbsp;total_fees += fee[counter];
+
+<br>&nbsp; &nbsp;if (fee[counter] == 0)
+<br>&nbsp; &nbsp;&nbsp; &nbsp;{
+<br>&nbsp; &nbsp;&nbsp; &nbsp;quit = true;
+<br>&nbsp; &nbsp;&nbsp; &nbsp;}
+<br>&nbsp; &nbsp;}
+ </tt> <br> 
+ 
+In this example counter will start with the value of 0 and increment upwards
+till it reaches 12 and then exit the loop. (Note: it will actually stop at 11
+so we won't have a problem of overrunning the end of our array.)
+The first car will have its fee 
+stored in the variable
+fee [ 0 ].  
+The second car fee will be in fee[ 1 ] , and so on until the last or 12th
+car will have its fee assigned to fee[11] .
+If at some later time I wish to recall the fee of the 4th car I can 
+access it by writing <tt> fee [ 3 ] </tt> .
+This provides a simple way to store a large set of data in an easily
+accessible format.
+
+<p>
+If we didn't have arrays we would find this problem much harder to solve.
+
+We would need to store each fee in a different variable.  We could make
+a bunch of variables like this
+<br><tt>
+double fee, fee1,fee2,fee3,fee4,fee5;
+</tt> <br>
+Then we would have to copy each fee into the numbered fee variable for storing purposes.
+We would have to use a lot of if's to check which 
+iteration number we were on so we would know which fee number to assign.
+This would produce very messy code, but it could work.
+Here is a possible way of doing this.
+<br><tt>
+<br>double fee,fee1,fee2,fee3,fee4,fee5;
+<br>bool quit = false;
+<br>short counter = 1;
+<br>double total_fees = 0;
+<br>while( ! quit && counter &lt; 6 )
+<br>&nbsp; &nbsp;{
+<br>&nbsp; &nbsp;cout&lt;&lt;"Enter a fee, 0 to quit";
+<br>&nbsp; &nbsp;cin&gt;&gt;fee;
+<br>&nbsp; &nbsp;total_fees += fee;
+
+<br>&nbsp; &nbsp;if (fee == 0)
+<br>&nbsp; &nbsp;&nbsp; &nbsp;{
+<br>&nbsp; &nbsp;&nbsp; &nbsp;quit = true;
+<br>&nbsp; &nbsp;&nbsp; &nbsp;}
+
+<br>&nbsp; &nbsp;if( counter == 1 )
+<br>&nbsp; &nbsp;&nbsp; &nbsp;{
+<br>&nbsp; &nbsp;&nbsp; &nbsp;fee1 = fee;
+<br>&nbsp; &nbsp;&nbsp; &nbsp;}
+ 
+<br>&nbsp; &nbsp;if( counter == 2 )
+<br>&nbsp; &nbsp;&nbsp; &nbsp;{
+<br>&nbsp; &nbsp;&nbsp; &nbsp;fee2 = fee;
+<br>&nbsp; &nbsp;&nbsp; &nbsp;}
+
+<br>&nbsp; &nbsp;if( counter == 3 )
+<br>&nbsp; &nbsp;&nbsp; &nbsp;{
+<br>&nbsp; &nbsp;&nbsp; &nbsp;fee3 = fee;
+<br>&nbsp; &nbsp;&nbsp; &nbsp;}
+
+<br>&nbsp; &nbsp;if( counter == 4 )
+<br>&nbsp; &nbsp;&nbsp; &nbsp;{
+<br>&nbsp; &nbsp;&nbsp; &nbsp;fee4 = fee;
+<br>&nbsp; &nbsp;&nbsp; &nbsp;}
+
+<br>&nbsp; &nbsp;if( counter == 5 )
+<br>&nbsp; &nbsp;&nbsp; &nbsp;{
+<br>&nbsp; &nbsp;&nbsp; &nbsp;fee5 = fee;
+<br>&nbsp; &nbsp;&nbsp; &nbsp;}
+<br>&nbsp; &nbsp;counter++;
+<br>&nbsp; &nbsp;}
+ </tt> <br>
+Now I can recall what the first or fifth (etc.) car paid, but
+not only is this code long and overly complex, but also it would only work for 
+a maximum of 5 
+car fees. What if we wanted
+to keep track of a thousand cars? The code would get unreasonably long.
+To deal with problems such as  this one, arrays were created.
+
+
+<h3>Initializing Array Values</h3>
+<p>
+There are two basic ways to initialize the values stored in an array.
+The first way is to loop through all the values of the array and assign them some
+value, like this:
+<br><tt>
+<br>long myArray[ 10 ];
+<br>for(int counter =0; counter &lt; 10; counter++ )
+<br>&nbsp; &nbsp;{
+<br>&nbsp; &nbsp;myArray[ counter ]  = 0;
+<br>&nbsp; &nbsp;}
+ </tt> <br> 
+As count goes up, the program works it way throught the array 
+assigning each element the value zero.
+<p>
+The other way is to define the initial values when you delcare the array.
+If you want the all the elements of the array to have the value zero, you can do it
+very simply,like this:
+<br><tt>
+<br>long myArray[ 10 ]={0};
+ </tt> <br> 
+But this will only work for the value zero, not for any other value.
+So to initialize the array to the value 5 you need to do this:
+<br><tt>
+<br>long myArray[ 10 ]={5,5,5,5,5,5,5,5,5,5};
+ </tt> <br> 
+Or like this if you want different values in each element:
+<br><tt>
+<br>long myArray[ 10 ]={34,123,4355113,344,342,434,345,567,89,1238111};
+ </tt> <br> 
+This syntax is legal only when the array is first declared. 
+ You cannot
+at some later time use this syntax.  For example the following is illegal:
+<br><tt>
+<br> long myArray[10];
+<br> myArray ={34,123,4355113,344,342,434,345,567,89,1238111};
+ </tt> <br> 
+<p>
+In addition to these two methods, char arrays have a third way they can be initialized.
+Instead of the cumbersome:
+<br><tt>
+<br>char myArray[ 10 ]={'H','e','l','l','o',' ','B','e','n','y'};
+ </tt> <br> 
+
+You can declare a char array  and  give it all the characters in one quotation.
+Thus you may write:
+<br><tt>
+<br>char myArray[ 10 ]={"Hello Ben"};
+ </tt> <br> 
+
+ <p> Note that in the above example I only used 9 of my 10 array spaces.
+This is because if I use the double quote " " version of char array initialization
+the compiler will automatically add a zero (or null) as the final element in my array.
+If I were to insert "Hello Beny" then, since the sentence is 10 
+characters long, the zero would be placed in the 11th element
+ of my array.  Thus I would be over-reaching the end of my array.
+The zero at the end of the char array is useful, as we will see, in allowing
+ cout to know where the end of the array is.
+A char array with a null character indicating the end of the word is called a 
+<b>string</b>. We will discuss strings more in depth later.
+
+<p>You can also create an array of a much larger size than you need, and insert a 
+sentence in the beginning of it.
+For example,
+<br><tt>
+<br>char myArray[ 100 ]={"Hello, my name is Ben."};
+ </tt> <br> 
+<p>
+In this case myArray will only have its first 23 elements assigned.
+The other 77 will still contain junk.  The first element will contain 'H'
+and the 23rd element will contain a 0 (or null).
+<p> 
+There is one last way to declare and initialize arrays.
+You can create an array of the exact size you need without actually counting your
+ elements.  For example,  if I want to store a set of integers in an array of type
+long I can write the following:
+<br><tt>
+<br>long myArray[ ]={43,55113,344,342,434,345,567,89,1238111};
+ </tt> <br> 
+The computer will count the number of elements listed and, in this case,
+create an array of 9 longs.  But remember, I cannot extend the array size 
+later.  I have created exactly 9 spaces and I cannot add more longs to this array
+at any later time.
+<p>The same type of syntax exist for all array types.  Here is an example using
+a char array:
+<br><tt>
+<br>char myArray[ ]={"Hello, my name is Ben."};
+ </tt> <br> 
+  
+This example will create an array of exactly 23 space, no more.
+
+Another example
+
+<xmp>
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+void changeArray ( long long ppp[], int fff)
+{
+for (int i =0;i<fff;i++)
+{
+(ppp[i])++;
+}
+return;
+}
+
+void changeInt ( int fff[])
+{
+(fff[0])++;
+return;
+}
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+
+long long a [12]={1,2,3,6,79,32,4,4,56,75,8,67};// elements in this array
+//cin >>a;
+//cout<<a;//print with cout whole array
+for(int i=11;  i>-1;  i--)//print each char one by one, beyond the end of the array
+{
+cout<<a[i]  << "(" << a+i<< ")" ;
+cout<<"_";
+}
+changeArray(a,12);
+cout<<endl;
+for(int i=0;  i<12;  i++)//print each char one by one, beyond the end of the array
+{
+cout<<a[i]  ;//<< "(" << a+i<< ")" ;
+cout<<"_";
+}
+cout<<endl;
+int p[1]={9};
+changeInt(p);
+cout<<p[0];
+cout <<endl<<" hello";
+return 0;
+}
+</xmp>
+
+
+<h3>Arrays as Parameters of Functions (References)</h3>
+
+<p> &nbsp; &nbsp; &nbsp; &nbsp;
+The name of the array in the above example is "myArray".
+What is the type of this name?  It is not simply a char. It is 
+a <b>reference</b> to a set of chars.  As we have seen, if I want 
+to <b>dereference</b>
+a particular element in the array I must specify which element.
+I do this by using the braces [ ] and including a number
+inside them.  That number is called the index of the array, or the array 
+offset.
+
+<p>But what if I wanted to pass an entire array to a function? 
+Before I can pass an array to a function I need to know 
+ what type to write in the  function definition? 
+Clearly, I would have to specify that it is an array and
+ not just a simple char.  I would do this like this:
+
+<br><tt>
+<br>int myFunction ( char  someName[] )
+<br>{
+<br>
+<br>}
+ </tt> <br>  
+
+Or, if I am working with an array of doubles, I would write this:
+
+<br><tt>
+<br>int myFunction ( double  someName[] )
+<br>{
+<br>
+<br>}
+ </tt> <br>  
+
+This means that the function myFunction has a parameter which is an array
+of doubles. Notice how there is no number inside the braces.  This means
+that the function can be passed an array of any size.
+This is useful in a function where I do not know ahead of time
+what size array I will be given.
+
+<p>
+I would call the function like this:
+<br><tt>
+<br>int main()
+<br>{
+<br>double myArray[120];
+<br>myFunction ( myArray );
+<br>}
+ </tt> 
+<p>  
+
+The call will pass the whole array named myArray to the function myFunction.
+Now the function can access all the element in the array.
+In the function myFunction the elements will be referred to by the new 
+name I gave the array, someName.  I.e. to print the 
+4th element in the array inside the function I would write
+<br><tt>
+<br> cout&lt;&lt; someName [ 3 ]&lt;&lt;endl;
+ </tt> <br>  
+
+<p>A more complete function would look like this.  This function will
+print out all the elements of the array that is passed to it. Note: we
+ have to tell the function how large the array is, otherwise it won't know when to
+ stop printing.
+
+<br><tt>
+<br>int arrayPrint ( double  arrayName[], int arraySize )
+<br>{
+<br> for(int i = 0; i < arraySize; i++ )
+<br> &nbsp;&nbsp;  {
+<br>&nbsp;&nbsp; cout &lt;&lt; arrayName[i]  &lt;&lt; endl;
+<br>
+<br>&nbsp;&nbsp; }
+<br>}  
+ </tt>
+
+
+
+
+<p>  We have learned that in functions any 
+changes to the values that were passed as variables to the 
+function (through the parameters) if changed inside the function, do not affect
+the original variable in the calling function.  This is true because
+the variable itself is not passed to the function, but only the value of
+the variable is passed.  That value is then copied into 
+the variable which appears in the parameter list in the function defininition
+in the order it was written.
+<p>
+Thus, changes in the <i>function</i> variables do not affect the original 
+variables.
+This is not true with arrays.  Since an array name is a reference to the 
+variables inside it, when a copy of this reference is made, the copy still 
+refers to the same set of variables. In other words, the array name locates
+the real location where the array is stored in memory.  So even if I make a copy
+of the address location, it is still referring to the same real place in the computer
+memory.    So when I dereference the 
+elements of the function's copy of the array name, I am accessing the same variables as
+the calling function's array. In summary, all you have  to remember is this: 
+ <font color="red"> <b> Changes in the array 
+elements in a passed array will affect the array in the calling function.
+ </b></font>
+This is because the name of the array tells me exactly where in the computer's
+ memory  the data is being stored, its address in memory.  As a result, the function can go to the exact same place and change the data.  Since the calling function will then access
+this same location in memory, it will see the changes the called function
+ made. 
+
+<p> As we know in general, a function receives a copy of the data passed to it.
+If it changes the copy then the original stays the same.  But if the copy 
+tells me the location of the original, then I can change the original.
+For example, if I give a hit-man an address of a person to be killed,
+even if  the hit-man  makes a copy of the address on a separate paper,
+when he goes to the house at the address on the copied paper and 
+kills the man inside that house, the man who lives in the house is the same 
+man as the one who lives at the address on the original paper.  The address is
+the same after all. The paper is a copy, but the thing it refers to is 
+the same one thing. This is how array parameter work.
+
+<h3>COUT and CIN and Arrays</h3>
+To access the elements in an array I must use the dereference operator [].
+Thus if I want to print the first 10 elements in an int array named george,
+I could write this:
+<br><tt>
+<br>cout &lt;&lt; george[0];
+<br>cout &lt;&lt; george[1];
+<br>cout &lt;&lt; george[2];
+<br>cout &lt;&lt; george[3];
+<br>cout &lt;&lt; george[4];
+<br>cout &lt;&lt; george[5];
+<br>cout &lt;&lt; george[6];
+<br>cout &lt;&lt; george[7];
+<br>cout &lt;&lt; george[8];
+<br>cout &lt;&lt; george[9];
+</tt>
+<br>
+I could save space and do this with a loop like this:
+<br><tt>
+<br>for( int i=0; i &lt; 10; i++)
+<br>&nbsp;&nbsp;cout &lt;&lt; george[i];
+</tt>
+<br>
+But, what I cannot do is write:
+<br><tt>
+<br>&nbsp;&nbsp;cout &lt;&lt; george;
+</tt>
+<br>
+Cout does not know how to handle the printing of arrays.  It can
+only print
+single ints or floats or longs etc.  The one exception to this rule is
+that cout does know how to print char arrays.  Thus if I have a char array 
+named martha, I can print its entire contents like this:
+<br><tt>
+<br>&nbsp;&nbsp;cout &lt;&lt; martha;
+</tt>
+<br>
+But how does cout know when the word is finished?  How does it know not to 
+print characters beyond the end of the array?  The answer is that cout assumes there is
+a null character (numeric 0) at the end of the word.  Thus, if char array martha
+is created of size 10 and it contains  'b', 'y', 'e', 0 followed by junk,
+cout will know to print only the word "bye".  If I forget to insert the 0, cout will
+continue printing until it reaches a zero in the junk following the word "bye".
+<p>
+Fortunately, we have seen that if we use the double quotes to initialize an array, 
+a 0 will be inseted automatically.  In other cases I have to make sure to insert the 0
+ myself if I plan to print the char array.
+
+<p> cin also has a special way of treating char arrays.
+cin can accept an entire array of chars from the keyboard.  It will
+read until it sees
+a space or a null.  It will also read in an entire double quoted sentence including
+any internal spaces. It can then insert this content into a pre-declared char array.
+<p>
+
+For example, here is a program segment which allows the user to assign 
+values to a char array.
+<br><tt>
+<br> char someWord[200];
+<br>cin &gt;&gt; someWord;
+
+ </tt>
+<br>
+Characters inputted this way into an array will have a null character
+placed at the end automatically. This mean that strings inputted via
+cin can be printed by cout.
+<h3>Casting</h3>
+<b><i>Implicit Casting</i></b> is when you assign one data type value to a different data type variable.
+For example, if I were to assign a decimal point value to an int I would be doing
+and implicit cast:
+<cc>
+<br>
+int a = 3.5;
+<br>
+</cc>
+This means that although I think I am assigning 3.5 to variable a, before this assignment takes place, the 
+value 3.5 is cast in the role of being an Integer, and so becomes 3. Then 3 is assigned to variable a.
+Here is the same concept as above but using a variable in place of a literal.
+<cc>
+<br>
+float a = 3.5;
+<br>int b = a;
+<br>
+</cc>
+Here variable a is cast as an int of the value 3. What is important to remember is that the variable being cast
+is only temporarily cast.  That means that after the assignment takes place, variable a goes back to being 
+a float.  It only took on the role of being an Int during the assignment so that the assignment would work.
+Now that the assignment finished, a can go back to being a float.
+<p>I can do the same thing with any two different data types.
+For example, I can cast an int into a char, like this:
+<cc>
+<br>
+int a = 65;
+<br>char b = a;
+<br>cout&lt;&lt;b;
+
+</cc>
+Here I have cast variable a as a char type. When I cast a value like 65 to a char that happens is that the 
+value 65 is put into the one-byte data type char. When I try to print this variable ( b )
+I will see a capital A. 
+Since 65 is tha ascii value for capital A, variable a actually became a capital A at the moment it is assigned to b.
+So b was in fact assigned capital A.
+
+<p><i><b>Explicit Casting</b></i> is when you explicitly tell the compiler that you are casting.
+For example I can print out a capital A like this:
+<cc>
+
+<br>int a =65;
+<br>char b = static_cast&lt;char&gt; (a);
+
+<br>cout&lt;&lt;b;
+</cc>
+<p>Or in old style C 
+<cc>
+
+<br>int a =65;
+<br>char b = (char)a;
+
+<br>cout&lt;&lt;b;
+</cc>
+
+<p>But even more directly I can cast without assigning my value to a second variable.
+For example:
+<cc>
+
+<br>int a =65;
+<br>cout&lt;&lt;static_cast&lt;char&gt; (a);
+</cc>
+
+
+<p>This is very useful when I have two integers and I want to do float mathematics.
+For example, if I want to divide one int by another int but I want the result to be a 
+float (to preserve any decimal result). I should then cast one or both of the ints 
+to be floats and do the math. I will then get a float result.
+For example, the following will print 2.5 instead of the normal int result of 2.
+<cc>
+
+<br>int a = 5;
+<br>int b = 2;
+<br>cout&lt;&lt;static_cast&lt;float&gt; (a)/b;
+</cc>
+
+
+<h3>Exercises</h3>
+<ol>
+<li>Write a program which declares an array of 51 integers.
+Have the computer find the first 51 prime numbers and store them in the array.
+Then, using a
+loop (a 'for' loop) take the sum of the prime numbers. 
+Then print the median number.
+Be sure not to write more than 51 prime numbers in the array, that would be 
+writing past the end of the array and that is not good.
+<li>Write a program to allow a user to enter a bunch of characters (a word).
+Store it in an array of chars. Then, using cout, print the word.
+<li>Use the rand function to simulate the rolling of a six sided die.
+Roll the die 10,000 times.  Use an array of shorts to
+count how many times each face of the die appeared. Use index place 1 in the array
+to count how many times 1 came up, use index 2 of the array to store
+how many times 2 came up, etc.  Note that index place zero in the array
+will be wasted.
+<li>Allow the user to enter an integer.  Convert it to it binary equivalent and
+store it in a bool array.  Print out the bool array.
+<li>Write a function which is passed an array of integers, the size of the array, and an integer N.
+The function should print out those elements in the array which are evenly 
+divisible by the integer N. 
+<li>Re-write the pythagorian triples exercise.  This time however, store 
+the triples in an array.  Only store those triples which never occured before.
+Also, do not store any triple which is a multiple of a previously stored
+triple.
+
+<li> Use an array to allow a user to enter a string. Then print it back to him
+ in reverse order. 
+<li>Write a function which is passed two int arrays.  It should check if the 
+two arrays are identical.  If they are, it should return true, else it
+should return false.
+<li>Write a function which is passed two strings (character arrays). It should check if the
+two arrays are identical.  If they are, it should return true, else it
+should return false.
+<li>Write a function which is passed two strings (character arrays). It should 
+check which
+of the two arrays is later alphabetically. If the first array parameter
+is earlier in the alphabet, then it should return -1. If the second
+parameter is earlier in the alphabet, it should return 1. 
+If they are identical strings, it should return 0.
+For example,
+myStringCompare(zebra, albert); will return 1.
+But myStringCompare(zebra, zoo); will return -1.
+
+<li> Calculate the median number in an array of numbers without sorting the array.
+<li> Calculate the mode of an array of numbers   without sorting the array.
+<li> Given two words, determine if they are an anagram of each other  without sorting the strings.
+
+<li>Create two global int arrays containing 4 integers of the format strength
+,stamina, intelligence, hunger. Name them soldier1 and soldier2. Use a function setSoldiers() and a function
+fight.  SetSoldier() should give values to the 4 elements in teh two soldier arrays.  Fight should return either 1 or 2 depending on who wins the fight between the two soldiers.  Print out who won and allow the user to run another fight.\
+
+</ol>
+
+<p>
+&copy Nachum Danzig November 2003 - December 2006
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

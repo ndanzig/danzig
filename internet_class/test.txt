@@ -1,0 +1,43 @@
+css quiz
+
+
+1.  create a css file which causes the cells (boxes) of a table to
+have a dotted border 3 pixels thick and a blue background color.
+
+
+
+
+
+
+
+2 what does margin-left:60px; mean?
+
+
+
+
+
+3. what are the possible text-align values?
+
+
+
+
+ 
+4.  Make an h3 tag be blue and 24 point using css.
+
+
+
+
+
+
+
+
+5. make a class called "special" which when used in any tag will
+make the text bold and italic and red on a black background.
+
+
+
+
+6. use answers from 1 and 5 to create a table 
+with 4 row and 7 columns.  the columns should be labelled sunday
+monday etc.  Saturday should be "special" all other days dotted  (as in
+answer number one)
