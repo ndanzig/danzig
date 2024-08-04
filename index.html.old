@@ -1,0 +1,11 @@
+<html name="self">
+ <head>
+  <title>Nachum Danzig's HomePage</title>
+ </head>
+
+  <frameset cols= 20%,*>
+   <frame src = "left_side.html" name = "left">
+   <frame src = "myindex.html" name = "right">
+  </frameset>
+
+</html>

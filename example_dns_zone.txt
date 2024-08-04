@@ -1,0 +1,32 @@
+$ORIGIN .
+$TTL 7200	; 2 hours
+acad.jct.ac.il		IN SOA	zevach.acad.jct.ac.il. hostmaster.mail.jct.ac.il. (
+				2003032504 ; serial
+				7200       ; refresh (2 hours)
+				3600       ; retry (1 hour)
+				3628800    ; expire (6 weeks)
+				7200       ; minimum (2 hours)
+				)
+			NS	yad.acad.jct.ac.il.
+			NS	zevach.acad.jct.ac.il.
+$TTL 600	; 10 minutes
+			A      147.161.6.6
+$ORIGIN acad.jct.ac.il.
+
+
+$TTL 1200       ; 20 minutes
+yoma	 A	147.161.6.6
+
+
+$TTL 7200       ; 2 hours
+
+yad			A	147.161.1.15
+zevach			A	147.161.1.4
+
+;=============================================================
+;;; The following lines are local emacs variables
+;;; Local Variables:
+;;; mode: zone
+;;; auto-fill-function: t
+;;; abbrev-mode: t
+;;; End:

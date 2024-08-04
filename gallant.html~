@@ -1,0 +1,32 @@
+<html>
+<title>Notes from Gallant - Software Engineering
+</title>
+<body>
+<h2>Abstract Factory </h2>
+<p>
+Instead of creating in main the child Jet and Heater and tank
+which would mean that if I changed the child jet I would need to 
+change my main.
+<p>
+Instead main calls to factory instance  and that factory is tailored to 
+the new child jet,tank, heater.  It will in turn call the child jet
+ and child tank etc.
+<p>
+I make an instance of child factory (hackme factory)  in main and call its 
+functions to create the jet, tank, etc. .
+<p>
+The abtract factory is responsible to create an instance of his child. (you will need a predefinition of the children.)
+ <p>
+We can then add singleton to the abstract factory so that it will only create
+one child.
+<p>
+Now if I add a new Jet, I will change code in abstract factory to 
+create a different child factory instance. In
+
+ dishwasher class  the code looks like this
+<blockquote> itsHeater = AbstractFactory::theFactory(1)->createHeater() </blockquote>
+
+the only change you need to make is the 1 can be 2 if you want a different dishwasher. 
+
+</body>
+</html>

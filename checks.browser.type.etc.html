@@ -1,0 +1,42 @@
+<html><head>
+<TITLE>bc.asp</TITLE>
+</head><body bgcolor="#FFFFFF">
+<% Set bc = Server.CreateObject("MSWC.BrowserType") %> 
+Browser Name: <%=bc.browser %><p> 
+Browser Version: <%=bc.version%><p>
+<% if (bc.frames = TRUE) then %> 
+I  noticed you do frames<p>
+<% else %>
+I  noticed you are frame challenged<p>
+<% end if %>
+<% if (bc.tables = TRUE) then %> 
+I  noticed you do tables<p>
+<% else %>
+I  noticed you can't do tables<p>
+<% end if %>
+<% if (bc.BackgroundSounds = TRUE)then %>
+I  noticed you allow me to play music<p>
+<% else %>
+I  noticed you aren't a music listener<p>
+<% end if %>
+
+<% if (bc.vbscript = TRUE) then %>
+I  noticed you are VBscript capable<p>
+<% else %>
+I  noticed you can't understand VB Script<p>
+<% end if %>
+
+<% if (bc.javascript = TRUE) then %>
+I  noticed you understand JScript<p>
+<% else %>
+I  noticed you don't understand JScript<p>
+<%
+end if
+set bc=nothing
+%>
+</body></html>
+
+
+
+
+

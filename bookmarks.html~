@@ -1,0 +1,36 @@
+<html>
+<!--This appears in the title bar and if someone bookmarks it-->
+<TITLE>Nachum's Bookmarks</TITLE>
+
+<!--  background        text           new link       followed link   active link-->  
+      
+<BODY BGCOLOR="#ffffff" TEXT="#C86400" link="#000099" vlink="#A400A0" alink="#FF0000">
+<H1>My List of Bookmarks</H1></CENTER>
+<P>
+
+
+<ol>Programming Stuff
+<LI><A HREF = "http://www.cpan.org/">Perl Archive</A></LI>
+<li><a href="http://www.verisign.com/enterprise/rsc/gd/secure-ext/index.html">Securing Intra/extranet</a></li>
+</ol>
+<ol>Israel Stuff
+<li><a href="http://www.iguide.co.il">Israel Guide</a></li>
+<li><a href="http://www.hebcal.com/converter/?gd=18&gm=12&gy=1990&hd=6&hm=Tevet&hy=5751&h2g=Compute+Gregorian+Date">Hebrew Calender</a></li>
+</ol>
+</FONT>
+
+<!-- Horizontal Rule (Bar) -->
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
