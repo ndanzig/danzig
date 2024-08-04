@@ -1,0 +1,12 @@
+Raindrop:  Screen Saver
+
+To install this screen saver, DOUBLE CLICK on filename(RAINDROP.EXE).
+
+The installation will copy the screen saver file "RAINDROP.SCR"  to the "C:\WINDOWS\SYSTEM\" directory. Go to Control Panel > Display > Screen Saver to select the saver and adjust the settings to your preferences.
+
+To remove screen saver, delete the file "RAINDROP.SCR" from the "C:\WINDOWS\SYSTEM\" directory.
+
+This screen saver is FREEWARE. Distribute Freely.
+
+Note: For more information & help contact AOL screen name: User350044
+
