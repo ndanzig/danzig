@@ -1,0 +1,115 @@
+<html>
+<body>
+<!--simple table -->
+<table>
+<tr>
+     <td>one</td>
+     <td>two</td>
+</tr>
+<tr>
+     <td>first entry</td>
+     <td>Second entry</td>
+</tr>
+</table>
+
+
+<!----longer top row -->
+<table>
+<tr>
+     <td colspan = "2"><center>My Classes</center></td>
+         
+ </tr>
+  <tr>
+<td>first entry</td>
+<td>Second entry</td>
+</tr>
+ </table>
+
+
+<!-----border with color --> 
+ <table  border="3" bgcolor="magenta">
+  <tr>
+  <td colspan = "2"><center>My Classes</center></td>
+  </tr>
+  <tr>
+  <td>first entry</td>
+  <td>Second entry</td>
+   </tr>
+</table>
+               
+<!-- left side taller -->
+<br>
+left side taller 
+<table  border="3">
+ <tr>
+ <td rowspan = "2">Hours</td>
+ <td>Morning</td>
+</tr>
+<tr>
+ <td>Evening</td>
+  </tr>
+</table>  
+
+<br>
+<!-- forced bigger table -->
+ forced bigger table 
+ <table  border="3" width="80%">
+ <tr>
+<td colspan = "2"><center>My Classes</center></td>
+</tr>
+<tr>
+<td>first entry</td>
+<td>Second entry</td>
+ </tr>
+ </table>    
+
+
+<br>
+<!-- forced bigger left column data -->
+ forced bigger left column data
+  <table  border="3">
+<tr>
+ <td rowspan = "2" width="80%">Hours</td>
+  <td>Morning</td>
+  </tr>
+  <tr>
+   <td>Evening</td>
+     </tr>  
+
+     </table>
+                 
+
+
+ <table>
+ <tr>
+<td>one</td>
+ <td>two</td>
+</tr>
+<tr>
+     <td>first entry</td>
+     <td>Second entry</td>
+</tr>
+ </table>
+
+
+
+
+
+ <table>
+  <tr>
+  <td>one</td>
+   <td>two</td>
+   </tr>
+   <tr>
+<td>first entry</td>
+<td>Second entry</td>
+</tr>
+	      
+</table>
+
+<iframe src="table.html" width="400" height=200> hidden text </iframe>
+						            
+
+
+</body>
+</html>

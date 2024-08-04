@@ -1,0 +1,24 @@
+html {
+	
+	margin: 2em;
+	padding: 2em;
+}
+
+body { 
+	font: 175% georgia, sans-serif;
+	line-height: 1.88889;
+	color: #555753; 
+	background: #fff url(blossoms.jpg) no-repeat bottom right; 
+}
+p { 
+	background-color: red;
+	margin-top: 0; 
+	text-align: justify;
+	}
+h3 { 
+	font: italic normal 1.4em georgia, sans-serif;
+	letter-spacing: 1px; 
+	margin-bottom: 0; 
+	color: #7D775C;
+	}
+*/

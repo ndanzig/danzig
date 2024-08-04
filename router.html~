@@ -1,0 +1,20 @@
+<html>
+
+<h2>Setting up ssh access for clients at Machon lev<h2>
+<xmp>
+
+in server see files 
+/etc/hosts.allow
+/etc/ssh2/sshd2_config
+
+
+to restart sshd
+on linux
+service sshd restart
+
+on sun
+/etc/init.d/sshd2 restart
+
+</xmp>
+</html>
+

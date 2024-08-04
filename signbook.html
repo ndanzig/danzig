@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Sign Nachum's Guestbook</title>
+</head>
+
+<body bgcolor="#008080">
+
+<p align="center"><a name="Top"></a><font color="#800000"
+size="5"><strong>Welcome to Nachum's Guestbook</strong></font></p>
+
+<p>Here you can sign the GB... </p>
+
+<form action="/~danzig/cgi-bin/addbook.pl" method="POST" name="gbdata">
+    <input type="hidden" name="dirname" value="jctstaff/danzig">
+    <input type="hidden" name="targetdir" value="danzig">
+    <p>Your Name: <input type="text" size="25" name="uname"></p>
+    <p>Your Email: <input type="text" size="20" name="umail"></p>
+    <p>Your Sex: 
+    <input type="radio" checked name="usex" value="Male">Male
+    <input type="radio" name="usex" value="Female">Female</p>
+    <p>Your Age: <select name="uage" size="1">
+        <option>Under 6</option>
+        <option>6-10</option>
+        <option>11-15</option>
+        <option>16-19</option>
+        <option>20-24</option>
+        <option>25-29</option>
+        <option>30-34</option>
+        <option>35-39</option>
+        <option>40-44</option>
+        <option>45-49</option>
+        <option>50-54</option>
+        <option>55-59</option>
+        <option>60-64</option>
+        <option>65-69</option>
+        <option>70 and Above</option>
+    </select></p>
+    <p>How many stars do you give this site?</p>
+    <p><select name="urate" size="1">
+        <option selected value="5">5 Star - Incredible Site</option>
+        <option value="4">4 Star - Nice</option>
+        <option value="3">3 Star - Decent</option>
+        <option value="2">2 Star - Below Average</option>
+        <option value="1">1 Star - Very Poor</option>
+    </select></p>
+    <p><input type="submit" name="B1" value="Submit">
+    <input type="reset" name="B2" value="Reset"></p>
+</form>
+<p>Back <a href="index.html">home</a>...</p>
+</body>
+</html>

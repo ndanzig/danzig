@@ -1,0 +1,42 @@
+<!--This appears in the title bar and if someone bookmarks it-->
+<TITLE>Pictures1</TITLE>
+
+<!--  background        text           new link       followed link   active link-->  
+<FORM>      
+<BODY BGCOLOR="#ffffff" TEXT="#C86400" link="#000099" vlink="#A400A0" alink="#FF0000">
+<CENTER><H1>Even More Pictures</H1></CENTER>
+<P>
+
+<img src="nachum2.jpg">nachum2.jpg <br>
+<IMG SRC="BRIDGE.JPG">BRIDGE.JPG <BR>
+
+
+
+<IMG SRC="CAP2.JPG      ">CAP2.JPG       <BR>
+
+<IMG SRC="CUPBOARD.JPG">CUPBOARD.JPG <BR>
+
+<IMG SRC="MIRIJAM.JPG">MIRIJAM.JPG <BR>
+                   
+
+
+
+
+<LI><A HREF = "http://shekel.jct.ac.il:80/~danzig/pic3.html">NEXT</A></LI>
+</CENTER>
+</FONT>
+
+<!-- Horizontal Rule (Bar) -->
+<HR ALIGN=CENTER  SIZE=5  WIDTH=70%>
+</FORM>
+
+
+
+
+
+
+
+
+
+
+
