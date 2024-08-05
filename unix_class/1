@@ -1,0 +1,72 @@
+wiseman 1 > mkdir klum
+wiseman 2 > ls -l klum
+total 0
+wiseman 3 > ls -ld klum
+drwx------  2 wiseman       512 Oct 17 15:58 klum
+wiseman 4 > cd klum
+wiseman 5 > touch klum1 klum2 
+wiseman 6 > ls -l
+total 0
+-rw-------  1 wiseman         0 Oct 17 15:59 klum1
+-rw-------  1 wiseman         0 Oct 17 15:59 klum2
+wiseman 7 > tty
+/dev/ttys0
+wiseman 8 > ls -l /dev/ttys0
+crw-rw-rw-  1 root      20,  48 Oct 17 16:00 /dev/ttys0
+wiseman 9 > ls -l /dev/fd0c
+brw-rw-rw-  2 root      16,   2 Aug 23 15:59 /dev/fd0c
+wiseman 10 > ln -s klum1 klum3
+wiseman 11 > ls -l klum3
+lrwxrwxrwx  1 wiseman         5 Oct 17 16:05 klum3 -> klum1
+wiseman 12 > cd ..
+wiseman 13 >cat stt1.c
+#include <sys/types.h>
+#include <sys/stat.h>
+main()
+{
+        who_am_i ( "klum" );
+        who_am_i ( "klum/klum1" );
+        who_am_i ( "/dev/ttys0" );
+        who_am_i ( "/dev/fd0c" );
+        who_am_i ( "klum/klum3" );
+}
+who_am_i( char *s )
+{
+        struct stat *buf;
+
+        buf = ( struct stat * ) malloc ( sizeof ( struct stat ) );
+        if ( lstat ( s , buf ) != 0 ) {
+                printf ( "can't stat %s\n" ,s );
+		return;
+	}
+        switch ( buf->st_mode & _IFMT )
+        {
+        case _IFDIR:
+                printf ( "%s is a directory\n" ,s );
+                break;
+        case _IFCHR:
+                printf ( "%s is a character device\n" ,s );
+                break;
+        case _IFBLK:
+                printf ( "%s is a block device\n" ,s );
+                break;
+        case _IFREG:
+                printf ( "%s is a regular file\n" ,s );
+                break;
+        case _IFLNK:
+                printf ( "%s is a symbolic link\n" ,s );
+                break;
+        case _IFSOCK:
+                printf ( "%s is a socket\n" ,s );
+                break;
+        case _IFIFO:
+                printf ( "%s is a pipe\n" ,s );
+        }
+}
+wiseman 14 >gcc -o stt1 stt1.c
+wiseman 15 >stt1
+klum is a directory
+klum/klum1 is a regular file
+/dev/ttys0 is a character device
+/dev/fd0c is a block device
+klum/klum3 is a symbolic link

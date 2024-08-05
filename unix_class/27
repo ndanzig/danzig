@@ -1,0 +1,47 @@
+wiseman 13 >cat ipc5.c
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
+#define NUMOFSEM 3
+
+main()
+{
+        int semid,value,i;
+        union semun semarg,semarg1;
+
+        semid=semget ( IPC_PRIVATE , NUMOFSEM , 0600 );
+        semarg.array=( ushort * ) malloc ( NUMOFSEM*sizeof ( ushort ) );
+        semarg1.array=( ushort * ) malloc ( NUMOFSEM*sizeof ( ushort ) );
+        for ( i=0 ; i<NUMOFSEM ; i++ )
+                semarg.array[i]=1;
+        semctl ( semid , 0 , SETALL , semarg );
+        semctl ( semid , 0 , GETALL , semarg1 );
+        for ( i=0 ; i<NUMOFSEM ; i++ )
+                printf ( "semaphore %d: %d\n" , i , semarg1.array[i]);
+        semarg.val=0;
+        semctl ( semid , 0 , SETVAL , semarg );
+        value=semctl ( semid , 0 , GETVAL , semarg );
+        printf ( "\nsemaphore 0: %d\n" , value );
+}
+wiseman 14 >gcc -o ipc5{,.c}
+wiseman 15 >ipc5
+semaphore 0: 1
+semaphore 1: 1
+semaphore 2: 1
+
+semaphore 0: 0
+wiseman 16 >ipcs
+IPC status from sunlight as of Wed Jul 12 14:54:19 1995
+T     ID     KEY        MODE       OWNER    GROUP
+Message Queues:
+Shared Memory:
+Semaphores:
+s     40 0x00000000 --ra-------  wiseman    opers
+wiseman 17 >ipcrm -s 40
+wiseman 18 >ipcs
+IPC status from sunlight as of Wed Jul 12 14:54:44 1995
+T     ID     KEY        MODE       OWNER    GROUP
+Message Queues:
+Shared Memory:
+Semaphores:
+wiseman 19 >exit

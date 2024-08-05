@@ -1,0 +1,70 @@
+wiseman 1 >cd /Common/All/pub/opsys
+wiseman 2 >ls -lgR
+total 2
+drwxr-xr-x  2 wiseman  opers         512 Dec 11 14:37 haman
+drwxr-xr-x  2 wiseman  opers         512 Dec 11 14:38 zeresh
+
+haman:
+total 0
+-rw-r--r--  1 wiseman  daemon          0 Dec 11 14:37 adalya
+-rw-r--r--  2 wiseman  opers           0 Dec 11 14:37 aspata
+-rw-r--r--  1 wiseman  opers           0 Dec 11 14:37 dalfon
+-rwxr-xr--  1 wiseman  opers           0 Dec 11 14:37 parshendata
+-rw-r--r--  1 vovik    opers           0 Dec 11 14:37 porata
+
+zeresh:
+total 2
+lrwxrwxrwx  1 wiseman  opers          15 Dec 11 14:38 aridata -> ../haman/dalfon
+-rw-r--r--  1 wiseman  opers           0 Jan 22 17:26 ariday
+-rw-r--r--  1 wiseman  opers        1000 Dec 11 14:37 arisay
+-rw-r--r--  2 wiseman  opers           0 Dec 11 14:37 parmashta
+-rw-r--r--  1 wiseman  opers           0 Dec 18 16:43 vayizata
+wiseman 3 >find . -name dalfon -print
+./haman/dalfon
+wiseman 4 >find . -perm 754 -print
+./haman/parshendata
+wiseman 5 >find . -type l -print
+./zeresh/aridata
+wiseman 6 >find . -links 2 -print
+./zeresh
+./zeresh/parmashta
+./haman
+./haman/aspata
+wiseman 7 >find . -user vovik -print
+./haman/porata
+wiseman 8 >find . -group daemon -print
+./haman/adalya
+wiseman 9 >find . -size 2 -print
+./zeresh/arisay
+wiseman 10 >find . -mtime 0 -print
+./zeresh/ariday
+wiseman 11 >find . -newer zeresh/vayizata -print
+./zeresh/ariday
+wiseman 12 >find . -name dalfon -exec file {} \;
+./haman/dalfon: empty
+wiseman 13 >find . -name dalfon -exec file {} \; -print
+./haman/dalfon: empty
+./haman/dalfon
+wiseman 14 >find . -exec file {} \;
+.:              directory
+./zeresh:       directory
+./zeresh/aridata:       symbolic link to ../haman/dalfon
+./zeresh/parmashta:     empty
+./zeresh/arisay:        ascii text
+./zeresh/ariday:        empty
+./zeresh/vayizata:      empty
+./haman:        directory
+./haman/parshendata:    empty
+./haman/dalfon: empty
+./haman/aspata: empty
+./haman/porata: empty
+./haman/adalya: empty
+wiseman 15 >find . -links 2 -type d -print
+./zeresh
+./haman
+wiseman 16 >find . -name dalfon -ok file {} \;
+< file ... ./haman/dalfon >?   y
+./haman/dalfon: empty
+wiseman 17 >find . -name dalfon -ls
+122294    0 -rw-r--r--  1 wiseman  opers           0 Dec 11 14:37 ./haman/dalfon
+wiseman 18 >exit

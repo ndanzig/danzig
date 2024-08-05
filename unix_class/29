@@ -1,0 +1,42 @@
+brachot wiseman 1 >cat exp.c
+#include <signal.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <string.h>
+
+#define PORTNUM 50000
+#define MESG "shalom\n"
+
+main( argc , argv )
+int argc;
+char *argv[];
+{
+	struct sockaddr_in sa;
+	struct hostent *hp;
+	int a,s;
+
+	if (( hp = gethostbyname ( argv[1] ) ) == NULL ) {
+		fprintf ( stderr , "Problem with your hostname\n" );
+		exit ( 1 );
+	}
+
+	if ( ( s = socket ( AF_INET , SOCK_STREAM , 0 ) ) < 0 )
+		exit ( 1 );
+
+	memcpy ( &sa.sin_addr , hp->h_addr , hp->h_length );
+	sa.sin_family = AF_INET;
+	sa.sin_port = htons ( PORTNUM );
+	if ( connect ( s , &sa , sizeof ( sa ) ) < 0 ) {
+		close ( s );
+		exit ( 1 );
+	}
+
+	write ( s , MESG , strlen ( MESG ) + 1 );
+}
+
+brachot wiseman 2 >gcc -o exp{,.c}
+brachot wiseman 3 >exp sunlight.cs.biu.ac.il
+brachot wiseman 4 >exit

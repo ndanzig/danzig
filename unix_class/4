@@ -1,0 +1,56 @@
+wiseman 1 >cat dir1.c
+#include <dirent.h>
+
+main()
+{
+
+        DIR     *dirp;
+        struct dirent *d;
+
+        dirp=opendir ( "klum" );
+        while ( ( d=readdir ( dirp ) ) != NULL )
+                printf ( "%s\n" , d->d_name );
+        closedir ( dirp );
+}
+wiseman 2 >gcc -o dir1{,.c}
+wiseman 3 >dir1
+.
+..
+klum1
+klum2
+klum3
+wiseman 4 >cat dir2.c
+#include <dirent.h>
+
+main()
+{
+
+        DIR     *dirp;
+        struct dirent *d;
+        int loc;
+
+        dirp=opendir ( "klum" );
+        while ( ( d=readdir ( dirp ) ) != NULL )
+        {
+                printf ( "%s\n" , d->d_name );
+                if ( strcmp ( d->d_name , "klum1" ) == 0 )
+                        loc=telldir ( dirp );
+        }
+        seekdir ( dirp , loc);
+        d=readdir ( dirp );
+        printf ( "%s\n" , d->d_name );
+        rewinddir ( dirp );
+        d=readdir ( dirp );
+        printf ( "%s\n" , d->d_name );
+        closedir ( dirp );
+}
+wiseman 5 >gcc -o dir2{,.c}
+wiseman 6 >dir2
+.
+..
+klum1
+klum2
+klum3
+klum2
+.
+wiseman 7 >exit

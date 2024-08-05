@@ -1,0 +1,71 @@
+********************** 9 **************************
+#include <stdio.h>                                 
+                                                   
+main()                                             
+{                                                  
+  int   pid,pid1,pid2,status;                      
+                                                   
+  if ((pid1=fork())==0)                            
+     printf("in child   1\n");                     
+  else                                             
+     if ((pid2=fork())==0)                         
+           printf("in child 2\n");                 
+     else                                          
+         {                                         
+          pid=wait(&status);                       
+          if (pid==pid1)                           
+             printf("child 1 finished\n");         
+          if (pid==pid2)                           
+             printf("child 2 finished\n");         
+         }                                         
+}                                                  
+
+***************** 10 ******************************
+#include <stdio.h>                                 
+                                                   
+main()                                             
+{                                                  
+  int   pid,pid1,pid2,status;                      
+                                                   
+  if ((pid1=fork())==0)                            
+     printf("in child   1\n");                     
+  else                                             
+     if ((pid2=fork())==0)                         
+           printf("in child 2\n");                 
+     else                                          
+         {                                         
+          pid=wait(&status);                       
+          pid=wait(&status);                       
+          if (pid==pid1)                           
+             printf("child 1 finished\n");         
+          if (pid==pid2)                           
+             printf("child 2 finished\n");         
+         }                                         
+}                                                  
+                                                   
+***************** 11 ******************************
+#include <stdio.h>                                 
+                                                   
+main()                                             
+{                                                  
+  int   pid_a,pid_b,pid1,pid2,status;              
+                                                   
+  if ((pid1=fork())==0)                            
+     printf("in child   1\n");                     
+  else                                             
+     if ((pid2=fork())==0)                         
+           printf("in child 2\n");                 
+     else                                          
+         {                                         
+          pid_a=wait(&status);                     
+            if (pid_a==pid1 )                      
+                printf("child 1 finished\n");      
+            if (pid_a==pid2 )                      
+                printf("child 2 finished\n");      
+          pid_b=wait(&status);                     
+            if (pid_b==pid1)                       
+                printf("child 1 finished\n");      
+            if (pid_b==pid2)                       
+                printf("child 2 finished\n");      
+         }                                         
+}

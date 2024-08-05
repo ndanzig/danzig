@@ -1,0 +1,50 @@
+//by Nachum Danzig
+#include<sys/types.h> 
+#include <unistd.h>  
+#include <stdio.h>  
+//start of shell program 
+
+int main() 
+{
+  int status;
+  int i=0; 
+  char * buffer; // for command line
+  char * pointer; // for string tokenizer
+  char * array[10]; // array will be dynamically allocated with malloc
+  buffer =(char*)(malloc(235));
+  printf("give me a command (ls preferred) >");
+  fgets(buffer, 235, stdin);
+  buffer[strlen(buffer)-1]=0; //remove \n from buffer
+  printf("buffer is %s#\n",buffer); //debug code
+  pointer = (char *)strtok(buffer, " ");  //get first token
+  while(1)
+    {
+      if (pointer != NULL) //if there is a token
+	{
+	  array[i]=(char*)malloc(sizeof(char)*strlen(pointer));//give space for the token
+	  strcpy(array[i],pointer);//copy the token to the array 
+	  i++;
+	  pointer = (char*)strtok(NULL, " "); //next token
+	}
+      else{  //if no more tokens
+	array[i]=(char*)malloc(sizeof(char*));//make space for zero
+	array[i]=(char*)0; // assign zero to array (must cast to char*)
+	break;
+      }
+    }//end while
+
+  printf("\nA File in Directory is:\n"); 
+  if(fork()==0){//child does the work
+    execv("/bin/ls",array); // still left undone, must find correct path
+  }
+  wait(&status); 
+  printf("This line will print later.\n");
+}
+
+
+
+
+
+
+
+

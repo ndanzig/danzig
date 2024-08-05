@@ -1,0 +1,3 @@
+ls  | grep -v www | grep -v lib | xargs du | egrep "[0-9]+M"
+
+

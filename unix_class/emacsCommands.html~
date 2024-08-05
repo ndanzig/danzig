@@ -1,0 +1,122 @@
+<html>
+<head>
+<title>
+GNU Emacs Quick Reference Guide</title>
+</head>
+<body>
+<H2>GNU Emacs Quick Reference Guide</H2>
+
+<H3>  Moving around in the buffer</H3>
+
+<TABLE BORDER="0" CELLPADDING="4"><COL WIDTH="16%"></COL><COL WIDTH="16%"></COL><COL WIDTH="16%"></COL><COL WIDTH="16%"></COL><COL WIDTH="16%"></COL><COL WIDTH="16%"></COL><TR VALIGN="TOP"><TH ALIGN="LEFT">&nbsp;  </TH><TH ALIGN="LEFT">By char: </TH><TH ALIGN="LEFT">By word: </TH><TH ALIGN="LEFT">By line: </TH><TH ALIGN="LEFT">By S-exp: </TH><TH ALIGN="LEFT">By page:
+  </TH></TR><TR VALIGN="TOP"><TD ALIGN="LEFT">Forward:   </TD><TD ALIGN="LEFT"> <CODE>C-f</CODE>      </TD><TD ALIGN="LEFT"> <CODE>M-f</CODE>      </TD><TD ALIGN="LEFT"> <CODE>C-n</CODE>      </TD><TD ALIGN="LEFT"> <CODE>C-M-f</CODE>     </TD><TD ALIGN="LEFT"> <CODE>C-v</CODE>
+  </TD></TR><TR VALIGN="TOP"><TD ALIGN="LEFT">Backward:  </TD><TD ALIGN="LEFT"> <CODE>C-b</CODE>      </TD><TD ALIGN="LEFT"> <CODE>M-b</CODE>      </TD><TD ALIGN="LEFT"> <CODE>C-p</CODE>      </TD><TD ALIGN="LEFT"> <CODE>C-M-b</CODE>     </TD><TD ALIGN="LEFT"> <CODE>M-v</CODE>
+  </TD></TR><TR VALIGN="TOP"><TD ALIGN="LEFT">Beginning: </TD><TD ALIGN="LEFT">&nbsp;   </TD><TD ALIGN="LEFT">&nbsp;    </TD><TD ALIGN="LEFT"> <CODE>C-a</CODE>      </TD><TD ALIGN="LEFT">&nbsp;   </TD><TD ALIGN="LEFT"> <CODE>M-&lt;</CODE>
+  </TD></TR><TR VALIGN="TOP"><TD ALIGN="LEFT">End:       </TD><TD ALIGN="LEFT">&nbsp;          </TD><TD ALIGN="LEFT">&nbsp;          </TD><TD ALIGN="LEFT"> <CODE>C-e</CODE>      </TD><TD ALIGN="LEFT">&nbsp;           </TD><TD ALIGN="LEFT"> <CODE>M-&gt;</CODE></TD></TR></TABLE>
+
+<H3>  Deleting/Killing (cutting text)</H3>
+
+<TABLE BORDER="0" CELLPADDING="4"><COL WIDTH="16%"></COL><COL WIDTH="16%"></COL><COL WIDTH="16%"></COL><COL WIDTH="16%"></COL><COL WIDTH="16%"></COL><COL WIDTH="16%"></COL><TR VALIGN="TOP"><TH ALIGN="LEFT">&nbsp;         </TH><TH ALIGN="LEFT">By char: </TH><TH ALIGN="LEFT">By word: </TH><TH ALIGN="LEFT">By line: </TH><TH ALIGN="LEFT">By S-exp: </TH><TH ALIGN="LEFT">By region:
+  </TH></TR><TR VALIGN="TOP"><TD ALIGN="LEFT">Forward:  </TD><TD ALIGN="LEFT"> <CODE>C-d</CODE>      </TD><TD ALIGN="LEFT"> <CODE>M-d</CODE>      </TD><TD ALIGN="LEFT"> <CODE>C-k</CODE>      </TD><TD ALIGN="LEFT"> <CODE>C-M-k</CODE>     </TD><TD ALIGN="LEFT"> <CODE>C-w</CODE>
+  </TD></TR><TR VALIGN="TOP"><TD ALIGN="LEFT">Backward: </TD><TD ALIGN="LEFT"> <CODE>Del</CODE>      </TD><TD ALIGN="LEFT"> <CODE>M-Del</CODE>    </TD><TD ALIGN="LEFT">&nbsp;          </TD><TD ALIGN="LEFT">&nbsp;           </TD><TD ALIGN="LEFT">&nbsp;</TD></TR></TABLE>
+
+<P>  <STRONG>Note:</STRONG> Sometimes <CODE>Del</CODE> brings up Emacs
+  Help. If it does, use <CODE>C-h</CODE> instead.</P>
+
+<P>  Characters that have been deleted (as opposed to killed) can only be
+  restored by the undo command, either <CODE>C-x&nbsp;u</CODE> or
+  <CODE>C-_&nbsp;</CODE> (Ctrl-underscore).</P>
+
+<P>  In Emacs, cutting and pasting text is called killing and
+  yanking.  Killed items can be yanked back into the buffer
+  at any point with the yank command, <CODE>C-y&nbsp;</CODE>. This is the
+  preferred method of moving text. You can yank the text any number of
+  times.  <CODE>M-y</CODE> will bring back previous kills.</P>
+
+<P>  The region is the text between point (the cursor) and mark.  You can set the mark at the point's current position by typing
+  <CODE>C-Space</CODE> or
+  <CODE>C-@&nbsp;</CODE>. You can then move the point, leaving a
+  region between point and mark.</P>
+
+<H3>  Incremental searching</H3>
+
+<TABLE BORDER="0" CELLPADDING="4"><COL WIDTH="50%"></COL><COL WIDTH="50%"></COL><TR VALIGN="TOP"><TD ALIGN="LEFT"> Forward:  </TD><TD ALIGN="LEFT"> <CODE>C-s</CODE>
+  </TD></TR><TR VALIGN="TOP"><TD ALIGN="LEFT"> Backward: </TD><TD ALIGN="LEFT"> <CODE>C-r</CODE></TD></TR></TABLE>
+
+<P>  A prompt will open at the bottom of the screen.  Type enough of a
+  search string until an occurrence of the desired string appears in
+  the window. </P>
+
+<P>  To stop the search, press <CODE>Esc</CODE>.  To find the
+  next occurrence of the string, press <CODE>C-s</CODE> or
+  <CODE>C-r</CODE> again.</P>
+
+<P>  <STRONG>Note:</STRONG> <CODE>C-s</CODE> often causes
+  problems with flow control. If you try to use
+  <CODE>C-s</CODE> on a terminal with flow control, the
+  screen will freeze until you press <CODE>C-q&nbsp;</CODE>. If
+  you don't have flow control in your terminal connection, and
+  <CODE>C-s</CODE> does not do anything in Emacs, it may
+  be that <CODE>C-s</CODE> has been disabled because of
+  this problem. Try entering:</P>
+
+<PRE>  M-x unflow</PRE>
+
+<H3>  String replacement</H3>
+
+<P>  <CODE>M-%</CODE> executes the query-replace function.  You will be
+  prompted for two strings. Beginning at the point, Emacs will then
+  search for and stop at every occurrence of the first string. Press
+  the Spacebar to replace this instance of the first string with the
+  second. Press <CODE>Del</CODE> to skip replacement for this
+  occurrence. Press <CODE>&nbsp;!&nbsp;</CODE> (exclamation point) to
+  replace all matches in the buffer.  Press <CODE>Enter</CODE> to end
+  the query-replace, or press <CODE>&nbsp;.&nbsp;</CODE> (period) to make a
+  single replacement and stop.</P>
+
+<H3>  Moving from buffer to buffer and window to window</H3>
+
+<TABLE BORDER="0" CELLPADDING="4"><COL WIDTH="25%"></COL><COL WIDTH="75%"></COL><TR VALIGN="TOP"><TD ALIGN="LEFT"> <CODE>C-x C-b</CODE>  </TD><TD ALIGN="LEFT"> Prints a list of the available buffers
+  </TD></TR><TR VALIGN="TOP"><TD ALIGN="LEFT"> <CODE>C-x b</CODE>    </TD><TD ALIGN="LEFT"> Asks you which buffer to select
+  </TD></TR><TR VALIGN="TOP"><TD ALIGN="LEFT"> <CODE>C-x o</CODE>    </TD><TD ALIGN="LEFT"> Moves you into the other window on the screen
+  </TD></TR><TR VALIGN="TOP"><TD ALIGN="LEFT"> <CODE>C-x 1</CODE> (numeral 1)    </TD><TD ALIGN="LEFT"> Deletes all windows except the one with the cursor</TD></TR></TABLE>
+
+<H3>  Reading/Saving files and exiting Emacs</H3>
+
+<TABLE BORDER="0" CELLPADDING="4"><COL WIDTH="25%"></COL><COL WIDTH="75%"></COL><TR VALIGN="TOP"><TD ALIGN="LEFT"> <CODE>C-x C-f</CODE>   </TD><TD ALIGN="LEFT">  Reads a file into Emacs
+  </TD></TR><TR VALIGN="TOP"><TD ALIGN="LEFT"> <CODE>C-x C-s</CODE>   </TD><TD ALIGN="LEFT">  Saves the current buffer (See notes about <CODE>C-s</CODE> above)
+  </TD></TR><TR VALIGN="TOP"><TD ALIGN="LEFT"> <CODE>C-x C-c</CODE>   </TD><TD ALIGN="LEFT">  Saves all modified buffers and exits Emacs</TD></TR></TABLE>
+
+<H3>  Accessing online help</H3>
+
+<TABLE BORDER="0" CELLPADDING="4"><COL WIDTH="25%"></COL><COL WIDTH="75%"></COL><TR VALIGN="TOP"><TD ALIGN="LEFT"> <CODE>C-h</CODE>       </TD><TD ALIGN="LEFT">  Displays help window
+  </TD></TR><TR VALIGN="TOP"><TD ALIGN="LEFT"> <CODE>M-x help</CODE>  </TD><TD ALIGN="LEFT">  Displays help window (alternate method)
+  </TD></TR><TR VALIGN="TOP"><TD ALIGN="LEFT"> <CODE>C-h t</CODE>     </TD><TD ALIGN="LEFT">  Shows the tutorial
+  </TD></TR><TR VALIGN="TOP"><TD ALIGN="LEFT"> <CODE>C-h a</CODE>     </TD><TD ALIGN="LEFT">  Shows commands matching a string
+  </TD></TR><TR VALIGN="TOP"><TD ALIGN="LEFT"> <CODE>C-h i</CODE>     </TD><TD ALIGN="LEFT">  Enters the Gnu Info documentation browser</TD></TR></TABLE>
+
+<H3>  More information</H3>
+
+<P>  For more information, see the Emacs reference materials at:</P>
+
+<PRE>  <A HREF="http://www.geek-girl.com/emacs/emacs.html">http://www.geek-girl.com/emacs/emacs.html</A></PRE>
+
+<H3>Also see:</H3>
+<UL>  
+<LI><A HREF="http://kb.indiana.edu/data/aazx.html?cust=389480.80005.30">
+     For Emacs, where can I get documentation?</A>  
+<LI><A HREF="http://kb.indiana.edu/data/abau.html?cust=389480.80005.30">
+     For Emacs, how do I get online help?</A>  
+<LI><A HREF="http://kb.indiana.edu/data/abtx.html?cust=389480.80005.30">
+     Where can I find help with Emacs?</A>  
+<LI><A HREF="http://kb.indiana.edu/data/adzf.html?cust=389480.80005.30">
+     In Unix, how can I produce color, reverse video, and other effects?</A>  
+<LI><A HREF="http://kb.indiana.edu/data/aghb.html?cust=389480.80005.30">
+     In Emacs, how are keystrokes denoted?</A>  
+<LI><A HREF="http://kb.indiana.edu/data/adpc.html?cust=389480.80005.30">
+     In Pine, how do I change my editor?</A>
+</UL>
+
+ &copy Nachum Danzig 23 Oct 2002
+
+</BODY></HTML>

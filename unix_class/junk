@@ -1,0 +1,7 @@
+#!/bin/sh
+
+for i in `ls klum`; do
+        if [ -r klum/$i ]; then  #if readable
+                echo $i
+        fi
+done

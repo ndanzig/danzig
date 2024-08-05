@@ -1,0 +1,71 @@
+wiseman 16 >cat stt2.c
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <pwd.h>
+#include <time.h>
+main()
+{
+        struct stat *buf;
+        struct passwd *pw;
+
+        buf = ( struct stat * ) malloc ( sizeof ( struct stat ) );
+        pw = ( struct passwd * ) malloc ( sizeof ( struct passwd ) );
+        if ( lstat ( "klum/klum1" , buf ) != 0 ) {
+                printf ( "can't stat klum/klum1\n" );
+		exit (1);
+	}
+        printf ( "The size of klum1 is %d\n" , buf->st_size );
+        pw = getpwuid ( buf->st_uid );
+        printf ( "The owner of klum1 is %s\n" , pw->pw_name );
+        printf ( "klum1 last modify time is %s\n" , ctime ( &(buf->st_mtime) ) );
+}
+wiseman 17 >gcc -o stt2 stt2.c
+wiseman 18 >stt2
+The size of klum1 is 0
+The owner of klum1 is wiseman
+klum1 last modify time is Mon Oct 17 15:59:36 1994
+
+wiseman 19 >cd klum
+wiseman 20 >chmod u+x klum1
+wiseman 21 >ls -l klum1
+-rwx------  1 wiseman         0 Oct 17 15:59 klum1
+wiseman 22 >chmod o+r klum1
+wiseman 23 >ls -l klum1
+-rwx---r--  1 wiseman         0 Oct 17 15:59 klum1
+wiseman 24 >chmod go+x klum1
+wiseman 25 >ls -l klum1
+-rwx--xr-x  1 wiseman         0 Oct 17 15:59 klum1
+wiseman 26 >chmod a-x klum1
+wiseman 27 >ls -l klum1
+-rw----r--  1 wiseman         0 Oct 17 15:59 klum1
+wiseman 28 >chmod go-rx klum1
+wiseman 29 >ls -l klum1
+-rw-------  1 wiseman         0 Oct 17 15:59 klum1
+wiseman 30 >chmod ug=rx klum1
+wiseman 31 >ls -l klum1
+-r-xr-x---  1 wiseman         0 Oct 17 15:59 klum1
+wiseman 32 >chmod u+s klum1
+wiseman 33 >ls -l klum1
+-r-sr-x---  1 wiseman         0 Oct 17 15:59 klum1
+wiseman 34 >chmod 600 klum1
+wiseman 35 >ls -l klum1
+-rw-------  1 wiseman         0 Oct 17 15:59 klum1
+wiseman 36 >chmod 4751 klum1
+wiseman 37 >ls -l klum1
+-rwsr-x--x  1 wiseman         0 Oct 17 15:59 klum1
+wiseman 38 >chmod 600 klum3
+wiseman 39 >ls -l klum1
+-rw-------  1 wiseman         0 Oct 17 15:59 klum1
+wiseman 40 >ls -l klum3
+lrwxrwxrwx  1 wiseman         5 Oct 17 16:05 klum3 -> klum1
+wiseman 41 >cd ..
+wiseman 42 >cat chm1.c
+#include <sys/stat.h>
+main()
+{
+        chmod ( "klum/klum1" , 0751 );
+}
+wiseman 43 >gcc -o chm1 chm1.c
+wiseman 44 >chm1
+wiseman 45 >ls -l klum/klum1
+-rwxr-x--x  1 wiseman         0 Oct 17 15:59 klum/klum1

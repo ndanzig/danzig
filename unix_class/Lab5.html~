@@ -1,0 +1,623 @@
+<html>
+<head><title>
+UNIX Lab 5
+</title></head>
+<body>
+<h2>Lab Five (5)  Shared Memory and  Semaphores</h2>
+
+<xmp>
+
+Shared memory is system supplied resource which enables 
+two or more processes or threads to access the same 
+memory space.  It is a valuable method of enabling
+Inter Process Communication.
+
+
+NAME
+       shmget - allocates a shared memory segment
+
+SYNOPSIS
+       #include <sys/ipc.h>
+       #include <sys/shm.h>
+       int shmget(key_t key, int size, int shmflg);
+
+DESCRIPTION
+       shmget()  returns the identifier of the shared memory seg-
+       ment associated to the value of the argument key.   A  new
+       shared  memory segment, with size equal to the round up of
+       size to a multiple of PAGE_SIZE, is  created  if  key  has
+       value IPC_PRIVATE.
+
+
+NAME
+       shmop - shared memory operations
+
+SYNOPSIS
+       #include <sys/types.h>
+       #include <sys/shm.h>
+       void *shmat(int shmid, const void *shmaddr, int shmflg);
+       int shmdt(const void *shmaddr);
+
+DESCRIPTION
+       The  function  shmat  attaches  the shared memory segment identified by
+       shmid to the address space  of  the  calling  process.   The  attaching
+       address is specified by shmaddr with one of the following criteria:
+
+       If  shmaddr  is NULL, the system chooses a suitable (unused) address at
+       which to attach the segment.
+       
+       A pointer to the memory is returned.  A pointer of -1 indicated failure.
+
+
+NAME
+       shmctl - shared memory control
+
+SYNOPSIS
+       #include <sys/ipc.h>
+       #include <sys/shm.h>
+       int shmctl(int shmid, int cmd, struct shmid_ds *buf);
+
+DESCRIPTION
+       shmctl() allows the user to receive information on a shared memory seg-
+       ment, set the owner, group, and permissions of a shared memory segment,
+       or  destroy  a segment. The information about the segment identified by
+       shmid is returned in a shmid_ds structure:
+
+           struct shmid_ds {
+               struct ipc_perm shm_perm;  /* operation perms */
+               int shm_segsz;             /* size of segment (bytes) */
+               time_t shm_atime;          /* last attach time */
+               time_t shm_dtime;          /* last detach time */
+               time_t shm_ctime;          /* last change time */
+               unsigned short shm_cpid;   /* pid of creator */
+               unsigned short shm_lpid;   /* pid of last operator */
+               short shm_nattch;          /* no. of current attaches */
+	       }	       
+
+      IPC_RMID     is used to mark the segment as destroyed. It will  actually
+                   be  destroyed  after  the  last  detach.   (I.e.,  when the
+                   shm_nattch member of the associated structure  shmid_ds  is
+                   zero.)   The user must be the owner, creator, or the super-
+                   user.
+
+
+A program to illustrate the creation of a shared memory block of
+128000 bytes.
+
+//By Nachum Danzig
+#include<sys/types.h>
+#include<sys/ipc.h>
+#include<sys/shm.h>
+
+#define SHM_SIZE 128000
+#define SHM_MODE ( SHM_R  | SHM_W )
+
+int
+main(void) 
+{
+  int shm_id;
+  char * shm_ptr;
+
+  // allocates a shared memory segment & check
+  if(0 > (shm_id=shmget(IPC_PRIVATE , SHM_SIZE , SHM_MODE)))
+    {
+      perror("Can't create a shared memory.");
+      exit(1);
+    }
+  //attaches  the  shared  memory  segment & check 
+  if((void *)-1 == (shm_ptr = shmat(shm_id,0,0)) )
+    {
+    perror("can't do the mapping.");
+    exit(1);
+    }
+
+  printf("shared memory attached from %x to %x\n", shm_ptr, shm_ptr+SHM_SIZE);
+
+  if (0 > shmctl(shm_id, IPC_RMID, 0) )
+    perror("Could not remove the shared memory segment from the system.");
+  
+  exit(0); //finished the main
+}
+
+
+A program to illustrate the creation and accessing of a shared memory block.
+Note that changes made by the child process will be seen by the father when he
+reads the shared memory.
+
+//by Nachum Danzig
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <string.h>
+#include <signal.h>
+
+void cleanup();
+
+char str[]="Goodbye";
+char *sharestr;
+int shmid;
+
+main()
+{
+        int s,i;
+
+        shmid=shmget ( IPC_PRIVATE , strlen ( str ) , 0600 );//make shrmem
+        sharestr=(char *)shmat ( shmid , 0 , 0600 );//attach shrmem to this process
+		 for ( i=1 ; i < 19 ; i++ )         //trap all signals from 1->19 
+		 switch (i){
+		 case 1: case 2: case 3: case 4: case 6: case 8:
+		 case 9: case 11:  case 13: case 14: case 15:  case 18://17 is son died
+		     if((void *)-1==(signal ( i , &cleanup )));         //to make sure shrmem will be deleted
+		     perror("can't catch %d", i);
+		 }
+	
+        strcpy ( sharestr , str );         //copy our string into the shrmem location
+        if ( fork()==0 )//child
+	{  strcpy ( sharestr , "hello" );   // child copies "hello" into share memory 
+	 printf ( "debug: %s\n" , sharestr );
+	 shmdt ( sharestr );              //detach shared memory
+	 shmctl (shmid , IPC_RMID , 0); //remove shared memory segment
+
+	}
+        else
+        {
+          printf ( "debug: father\n");
+	  wait ( &s );                     //parent waits for child to finish
+	  printf ( "debug: father later\n");
+	  printf ( "%s\n" , sharestr );    //print the shared memory
+	  shmdt ( sharestr );              //detach shared memory
+	  shmctl (shmid , IPC_RMID , 0); //remove shared memory segment
+        }
+	//	printf ( "%s\n" , sharestr );    //print the shared memory (father and son)
+
+}
+
+void cleanup()
+{
+  perror ( "killed: cleanup\n");
+  shmdt ( sharestr );                  //detach 
+  shmctl ( shmid , IPC_RMID , 0 );     //remove shared memory segment
+  exit ( 1 );                          //die
+}
+
+
+
+Semaphores are a method for locking resources by one process.
+This allows for peer level control of system resource passing.
+While semaphores are essentially just a global value or flag which is
+checked to see if the resource is free (mutexes), in UNIX system 5
+they are far more complex and allow a wider range of uses. For example,
+sets of semaphores can be created.
+
+
+NAME
+       semget - get a semaphore set identifier
+
+SYNOPSIS
+       #include <sys/types.h>
+       #include <sys/ipc.h>
+       #include <sys/sem.h>
+
+       int semget(key_t key, int nsems, int semflg);
+
+DESCRIPTION
+       This  function returns the semaphore set identifier associated with the
+       argument key.  A new set of nsems semaphores is created if key has  the
+       value  IPC_PRIVATE.
+
+       The nsems field represents the number of semaphores desired in the set.
+       
+
+
+NAME
+       semop - semaphore operations
+
+SYNOPSIS
+       #include <sys/types.h>
+       #include <sys/ipc.h>
+       #include <sys/sem.h>
+
+       int semop(int semid, struct sembuf *sops, unsigned nsops);
+
+DESCRIPTION
+       A semaphore is represented by an anonymous structure including the 
+       following members:
+
+           unsigned short  semval;   /* semaphore value */
+           unsigned short  semzcnt;  /* # waiting for zero */
+           unsigned short  semncnt;  /* # waiting for increase */
+           pid_t           sempid;   /* process that did last op */
+
+       The function semop performs  operations  on  selected  members  of  the
+       semaphore set  indicated  by semid.  Each of the nsops elements in the
+       array pointed to by sops specifies an operation to be  performed  on  a
+       semaphore by a struct sembuf including the following members:
+
+sembuf ->  unsigned short sem_num;  /* semaphore number */
+           short sem_op;            /* semaphore operation */
+           short sem_flg;           /* operation flags */
+
+       Flags  recognized in sem_flg are IPC_NOWAIT and SEM_UNDO.  If an opera-
+       tion asserts SEM_UNDO, it will be undone when the process exits.
+
+       The set of operations contained in sops is performed  atomically,  that
+       is, the operations are performed at the same time, and only if they can
+       all be simultaneously performed.  The behaviour of the system  call  if
+       not all operations can be performed immediately depends on the presence
+       of the IPC_NOWAIT flag in  the  individual  sem_flg  fields,  as  noted
+       below.
+
+       Each  operation  is  performed  on  the  sem_num-th  semaphore  of  the
+       semaphore set, where the first semaphore of the  set  is  semaphore  0.
+       There  are  three  types  of  operation,  distinguished by the value of
+       sem_op.
+
+ -->   If sem_op is a positive integer, the operation adds this value to  the
+       semaphore  value  (semval). The calling process must have alter permission
+       on the semaphore set.
+
+ -->   If  sem_op is zero, the process must have read access permission on the
+       semaphore set.  This is a "wait-for-zero" operation: if semval is zero,
+       the  operation  can  immediately  proceed.
+
+ -->   If sem_op is less than zero, the process must have alter permission  on
+       the  semaphore set.  If semval is greater than or equal to the absolute
+       value of sem_op, the operation can proceed  immediately:  the  absolute
+       value of sem_op is subtracted from semval, and, if SEM_UNDO is asserted
+       for this operation, the system updates the process undo count  (semadj)
+       for  this  semaphore.   If the absolute value of sem_op is greater than
+       semval, and IPC_NOWAIT is asserted in sem_flg, the system  call  fails,
+       with  errno  set  to EAGAIN (and none of the operations in sops is per-
+       formed).  Otherwise semncnt (the counter of processes waiting for  this
+       semaphore's value  to  increase) is incremented by one and the process
+       sleeps until one of the following occurs:
+
+            1. semval becomes greater than or equal to the  absolute  value  of
+	       sem_op,  at  which time the value of semncnt is decremented, the
+	       absolute value of sem_op  is  subtracted  from  semval  and,  if
+	       SEM_UNDO  is asserted for this operation, the system updates the
+	       process undo count (semadj) for this semaphore.
+	    2. The semaphore set is removed from the system:  the  system  call
+               fails with errno set to EIDRM.
+            3. The  calling  process  catches a signal: the value of semncnt is
+               decremented and the system call fails with errno set to EINTR.
+
+       On successful completion, the sempid value for each semaphore specified
+       in the array pointed to by sops is set to the process ID of the calling
+       process.  In addition, the sem_otime is set to the current time.
+
+RETURN VALUE
+       If successful the system call returns 0, otherwise it returns  -1  with
+       errno indicating the error.
+
+
+NAME
+       semctl - semaphore control operations
+
+SYNOPSIS
+       #include <sys/types.h>
+       #include <sys/ipc.h>
+       #include <sys/sem.h>
+       int semctl(int semid, int semnum, int cmd, ...);
+
+DESCRIPTION
+       The  function semctl performs the control operation specified by cmd on
+       the semnum-th semaphore of the semaphore set identified by semid.
+       (Semaphores are numbered starting at 0.)
+
+       This  function  has  three  or four arguments. When there are four, the
+       call is semctl(semid,semnum,cmd,arg); where the fourth argument arg has
+       a type union semun defined as follows:
+
+ union semun {
+             int val;                  /* value for SETVAL */
+             struct semid_ds *buf;     /* buffer for IPC_STAT, IPC_SET */
+             unsigned short *array;    /* array for GETALL, SETALL */
+                                       /* Linux specific part: */
+             struct seminfo *__buf;    /* buffer for IPC_INFO */
+             };
+	     #endif
+
+
+       IPC_STAT   Copy  info  from  the semaphore set data structure into the
+                  structure pointed to by arg.buf.  The  argument  semnum  is  ignored.
+                  The  calling  process  must  have  read access privileges on the
+                  semaphore set.
+
+       IPC_SET     Write the values of some members of the semid_ds  structure
+                   pointed  to by arg.buf to the semaphore set data structure,
+                   updating also its  sem_ctime  member.   Considered  members
+                   from  the  user  supplied  struct  semid_ds  pointed  to by
+                   arg.buf are
+
+                        sem_perm.uid
+                        sem_perm.gidbits */
+
+                   The effective userbID of the calling process must  be  that
+                   of  the  superbuser,  or  match the creator or owner of the
+                   semaphore set.  The argument semnum is ignored.
+
+
+       IPC_RMID    Immediately remove the semaphore set and  its  data  structure
+		   awakening all waiting processes (with an error return
+                   and errno set to EIDRM).   The  effective  userbID  of  the
+                   calling  process  must  be that of the superbuser, or match
+                   the creator or owner of the semaphore  set.   The  argument
+                   semnum is ignored.
+
+       SETALL      Set  semval  for all semaphores of the set using arg.array,
+                   updating also the sem_ctime member of the  semid_ds  struc-
+	           ture  associated  to the set.  Undo entries are cleared for
+		   altered semaphores in all processes.  Processes sleeping on
+		   the   wait  queue  are  awakened if some semval becomes 0 or
+		   increases.  The argument semnum is  ignored.   The  calling
+		   process  must have alter access privileges on the semaphore
+		   set.
+
+       SETVAL      Set the value  of  semval  to  arg.val  for  the  semnum-th
+                   semaphore of the set, updating also the sem_ctime member of
+                   the semid_ds structure associated to the set.  Undo entries
+                   cesses sleeping on the wait queue are  awakened  if  semval
+                   becomes  0  or  increases.   The  calling process must have
+                   alter access privileges on the semaphore set.
+
+
+
+Example to illustrate the use of a single semaphore to stop one 
+process until the other process releases the semaphore.
+
+//by Nachum Danzig
+#include<sys/types.h>
+#include<sys/ipc.h>
+#include<sys/sem.h>
+
+#define SEM_MODE 0600 //( SEM_R  | SEM_A )
+
+union semun {
+  int val;                  /* value for SETVAL */
+  struct semid_ds *buf;     /* buffer for IPC_STAT, IPC_SET */
+  unsigned short *array;    /* array for GETALL, SETALL */
+  /* Linux specific part: */
+  struct seminfo *__buf;    /* buffer for IPC_INFO */
+};
+
+int
+main(void) 
+{
+  int  sem_id1;
+  struct sembuf sops[1];
+  union semun semarg;
+
+  //get a semaphore  identifier 
+  if((sem_id1=semget ( IPC_PRIVATE , 1 , SEM_MODE ))==-1)
+    {
+       perror("can't create sem_id\n");
+       exit(1);
+    }
+  
+  //=========================================================
+  
+  //semaphore control operations give an initial value to begin with
+  semarg.val=1;
+  semctl(sem_id1,0,SETVAL,semarg);    
+  sops[0].sem_num=0;
+  sops[0].sem_flg=0;
+
+  //=============================================================
+  if (fork()==0){//i am child  
+    sops[0].sem_op=-1;  //set semaphore, "occupied" 
+    semop(sem_id1,sops,1);//I lock semaphore 1
+    //do action like write to shared memory
+    printf("Now you are locked out.\n");
+    sleep(5);
+    printf("Now I will release it.\n");
+    sops[0].sem_op=1;
+    semop(sem_id1,sops,1);//release semaphore
+    printf("Child finished.\n");
+  }
+  else{
+    //parent
+    sleep(2);
+    sops[0].sem_op=-1;
+    printf("Waiting for child process to release semaphore.\n");
+    semop(sem_id1,sops,1);//try to "occupy" semaphore
+    //do action
+    printf("I got the semaphore. Do some action. Now finish.\n");
+    //Remove  immediately  the semaphore set
+    semctl(sem_id1,0,IPC_RMID,semarg);
+  }  
+  exit(0); //finished the main
+}
+
+
+
+Example to illustrate the use of a semaphore set to pass
+control back and forth between two processes.
+
+//by Nachum Danzig
+#include<sys/types.h>
+#include<sys/ipc.h>
+#include<sys/sem.h>
+#include <signal.h>
+#include <unistd.h>
+
+#define SEM_MODE 0600 //( SEM_R  | SEM_A )
+
+union semun {
+  int val;                  /* value for SETVAL */
+  struct semid_ds *buf;     /* buffer for IPC_STAT, IPC_SET */
+  unsigned short *array;    /* array for GETALL, SETALL */
+  /* Linux specific part: */
+  struct seminfo *__buf;    /* buffer for IPC_INFO */
+}semarg;
+
+
+int sem_id1;
+pid_t parent, child1;
+
+static void sig_int(int signo) ;
+
+int
+main(void) 
+{
+  int  sem_id1;
+  struct sembuf sops[1];
+
+  if (signal(SIGINT, sig_int) == SIG_ERR)
+      perror("can't catch SIGINT");
+
+  parent= getpid();
+
+  //get a semaphore  identifier for a set of 2
+  if((sem_id1=semget ( IPC_PRIVATE , 2 , SEM_MODE ))==-1)
+    {
+      perror("can't create sem_id\n");
+      exit(1);
+    }
+
+  //declare an array to control the 2 semaphores
+  semarg.array=(ushort*)malloc(2*sizeof(ushort));
+
+  //semaphore control operations give an initial value to begin with
+  semarg.array[0]=1;
+  semarg.array[1]=0;
+  
+  semctl(sem_id1,0,SETALL,semarg);
+  sops[0].sem_flg=0;
+
+  //=============================================================
+  if ((child1=fork())==0)//i am child  i go first
+    while(1)
+      {
+	printf("Child1:  Waiting to get semaphore.\n");
+	sops[0].sem_op=-1;  //set semaphore, "occupied" 
+	sops[0].sem_num=0;//that's me
+	semop(sem_id1,sops,1);//I lock semaphore 1
+
+	//do action like write to shared memory
+	printf("Child1: Now you are locked out.  I will sleep.\n");
+	sleep(2);
+
+	printf("Child1: Now loop and wait for my semaphore to free up.\n");
+
+	sops[0].sem_op=1;  //increment father by 1
+	sops[0].sem_num=1;//that's dad
+        semop(sem_id1,sops,1);//increment him too
+      }
+  else 
+    //parent
+    while(1)
+	  {
+	    
+	    printf("Parent:  Waiting to get semaphore.\n");
+	    sops[0].sem_op=-1;  //set semaphore, "occupied" 
+	    sops[0].sem_num=1;//that's me
+	    semop(sem_id1,sops,1);//I lock semaphore 1
+	    
+	    //do action like write to shared memory
+	    printf("Parent: Now you are locked out. I will sleep.\n");
+	    sleep(2);
+
+	    printf("Parent: Now loop and wait for my semaphore to free up.\n");
+
+	    sops[0].sem_op=1;  //increment child1 by 1
+	    sops[0].sem_num=0; //that's child1
+	    semop(sem_id1,sops,1);
+	  }
+}
+
+
+static void sig_int(int signo) 
+{
+
+  //Remove  immediately  the semaphore set
+  semctl(sem_id1,0,IPC_RMID,semarg);
+
+  kill(child1,9);
+  kill(parent,9);
+  
+  exit(0); //finished the main
+}
+
+
+Exercise:
+
+A. Repeat the father and sons assignment from lab 3 on pipes.  Except, this time
+have the sons send messages to the father.  To prevent the father from
+getting two different sons' messages at the same time, use a semaphore
+to control the sons' writing to the pipe.
+Also, use some kind of random waiting method so that the sons will write
+at random (and potentially conflicting) times.  The strings that the sons write
+should be hard-coded in and can be of your choosing.  However, they should 
+indicate which son is writing and which time he is writing (e.g. first time,
+second time, ....)
+
+B.  Air Traffic Controllers use software to determine if 
+two planes are on a collision course.  If they are, the operator
+in the tower will radio the pilots and tell them to change course.
+The software that calculates this gets input from a RADAR 
+machine (mak"am) which tells the location of the planes
+at various times. This information is stored in shared memory.
+A semaphore is needed in such cases in order to make sure
+that the calculation of one plane's trajectory is based on 
+data generated at the same time as the other plane's data.
+Only once the RADAR recording process has finished with
+shared memory for both planes can the collision calculating 
+software access the memory.  Furthermore, as long the collision
+calculating process is calculating, the RADAR should not be
+allowed to change the shared memory.  
+
+Write a program to simulate this.  Have two processes simulating 
+planes.  They will each run 2 for loops with x_counter and y_counter
+for the x,y coordinates.  The counters of the 2 planes  will run at 
+different rates to simulate different speeds. Plane_1 will write its 
+x,y coordinates to shared_memory_1 and plane_2 will write to 
+shared_memory_2.
+
+RADAR will read  data from shared_memory_1 and shared_memory_2 when 
+it is passed the semaphore and write it to shared_memory_3 then will
+release semaphore.  Then Collision software will read shared_memory_3
+when he gets the semaphore.  He will then release the semaphore to 
+RADAR.
+
+If there is a collision, print "Collision! Radio planes."
+This should be run in an infinite loop.
+Handle Ctrl-C interrupt.
+
+We can eliminate any reference to time, since our semaphore will
+guarantee that the times at which plane 1 and plane 2 are observed are the
+same. 
+
+So, collisions can be calculated as follows:
+
+           (Y2(plane1)-Y2(plane2))                (X2(plane1)-X2(plane2))
+       ---------------------------      =?=    ---------------------------
+       plane1(Y2-Y1)- plane2(Y2-Y1)           plane1(X2-X1)-plane2(X2-X1)
+
+Where Y2(plane1) is plane1's Y coordinate at the second observation 
+and plane1(Y2-Y1) is the difference between plane1's second and first observed
+Y coordinate.  The other symbols are similarly understood.
+
+Note:  You will need to store 2 sets of x,y coordinates for each plane.
+
+
+C. Write a simulation of a barber shop.  Assume there is one barber and two 
+seats for people to wait their turn.   Use a semaphore to simulate controlling the queue.
+New customers should come in at random intervals.
+If all the waiting chairs are taken they will not be able to take a seat until one frees up.
+Use child processes to simulate the clients and the parent process for the barber.
+
+Take this solution and add to it a semephore to simulate the barber chair.
+Clients shoule check if the barber's chair itself is available before waiting in the queue.
+Use sem_trywait.
+</xmp>
+<a href="barbershop.c">Partial solution to Barbershop exercise</a>
+<p><a  href="semaphores.doc">Another explanation on Semaphores with an exercise, By Avi Treistman</a>
+
+<p>
+
+Nachum Danzig&copy; 
+
+
+</body>
+</html>

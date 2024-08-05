@@ -1,0 +1,61 @@
+wiseman 1 >cat ensof.c
+main()
+{
+    while (1);
+}
+wiseman 2 >gcc -o ensof ensof.c
+wiseman 3 >ensof
+^Z
+Stopped
+wiseman 4 >jobs
+[1]  + Stopped              ensof
+wiseman 5 >jobs -l
+[1]  + 11068 Stopped              ensof
+wiseman 6 >fg %1
+ensof
+^Z
+Stopped
+wiseman 7 >bg %1
+[1]    ensof &
+wiseman 8 >jobs
+[1]    Running              ensof
+wiseman 9 >kill -STOP 11068
+wiseman 10 >
+[1]  + Stopped (signal)     ensof
+jobs
+[1]  + Stopped (signal)     ensof
+wiseman 11 >bg %1
+[1]    ensof &
+wiseman 12 >fg %1
+ensof
+^C
+wiseman 13 >jobs
+wiseman 14 >ensof &
+[1] 11173
+wiseman 15 >kill -KILL %1
+wiseman 16 >
+[1]    Killed               ensof
+
+wiseman 16 >jobs
+wiseman 17 >ps
+  PID TT STAT  TIME COMMAND
+ 7348 p3 S     0:02 -sh (tcsh)
+ 7697 p3 R     0:00 ps
+wiseman 18 >who | head
+ariel    console Jun 25 15:54
+shechory ttyp0   Jun 21 13:27   (sundai)
+amihood  ttyp1   Jun 21 13:28   (hds7)
+singer   ttyp2   Jun 22 07:53   (sunray)
+wiseman  ttyp3   Jun 25 07:50   (yahalom)
+amihood  ttyp4   Jun 21 13:28   (132.70.1.207:0.0)
+amihood  ttyp5   Jun 21 13:28   (sunlight)
+sarit    ttyp6   Jun 21 14:55   (sundai)
+sarit    ttyp8   Jun 22 07:55   (sundai)
+aradtzvi ttyp9   Jun 22 08:35   (bitsrv)
+wiseman 19 >ps -tp6
+  PID TT STAT  TIME COMMAND
+ 1858 p6 TW    0:00 ftp 128.8.120.84
+ 2108 p6 TW    0:00 telnet 128.8.120.84
+ 3214 p6 IW    0:09 -tcsh (tcsh)
+ 3960 p6 IW    0:45 emacs
+23103 p6 S     0:06 xbiff

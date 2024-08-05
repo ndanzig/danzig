@@ -1,0 +1,73 @@
+wiseman 1 >cat shc1
+#!/bin/sh
+
+for i in a b c; do
+        echo $i
+done
+wiseman 2 >shc1
+a
+b
+c
+wiseman 3 >cat shc2
+#!/bin/sh
+
+for i in `ls klum`; do
+        echo $i
+done
+wiseman 4 >shc2
+klum1
+klum2
+klum3
+wiseman 5 >cat shc3
+#!/bin/sh
+
+for i in `ls klum`; do
+        echo nothing$i
+done
+wiseman 6 >shc3
+nothingklum1
+nothingklum2
+nothingklum3
+wiseman 7 >cat shc4
+#!/bin/sh
+
+a=nothing
+for i in `ls klum`; do
+        echo $a$i
+done
+wiseman 8 >shc4
+nothingklum1
+nothingklum2
+nothingklum3
+wiseman 9 >cat shc5
+#!/bin/sh
+
+for i in `ls klum`; do
+        if [ $i != klum1 ]; then
+                echo $i
+        fi
+done
+wiseman 10 >shc5
+klum2
+klum3
+wiseman 11 >cat shc6
+#!/bin/sh
+
+for i in `ls klum`; do
+        if [ -r klum/$i ]; then
+                echo $i
+        fi
+done
+wiseman 12 >shc6
+klum2
+wiseman 13 >cat shc7
+#!/bin/sh
+
+for i in `ls klum`; do
+        if [ ! -r klum/$i ]; then
+                echo $i
+        fi
+done
+wiseman 14 >shc7
+klum1
+klum3

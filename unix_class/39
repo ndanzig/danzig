@@ -1,0 +1,66 @@
+wiseman 1 >cat pw
+root:auwiXbD1wUUOQ:0:1:System PRIVILEGED Account,,,:/:/bin/tcsh
+wiseman:Wp1fAwkvjueqo:97:100:Yair Wiseman,,,:/u/opers/wiseman:/bin/tcsh
+yedidya:pHPjDyQjc3d9A:100:100:& Israel,CS 115,035318953,:/u/opers/yedidya:/bin/tcsh
+muskat:WsaBZtMsglNj2:112:101:Prof. J. B. &,,,,:/u/segel/muskat:/bin/tcsh
+aradtzvi:p08lRq9NOKYz6:139:101:Prof. Arad Tzvi,,,,:/u/segel/aradtzvi:/bin/tcsh
+rafi:NF7jkxnxQvbc.:254:101:Dr. & Yechezkel:/u/segel/rafi:/bin/tcsh
+wiseman 2 >cat awk1
+#!/bin/awk -f
+
+{
+        FS=":"
+        print $3
+}
+wiseman 3 >awk1 < pw
+0
+97
+100
+112
+139
+254
+wiseman 4 >cat awk2
+#!/bin/awk -f
+
+{
+        FS=":"
+        if ( $3 == 97 )
+                print $5
+}
+wiseman 5 >awk2 < pw
+Yair Wiseman,,,
+wiseman 6 >cat awk3
+#!/bin/awk -f
+
+{
+        FS=":"
+        if ( $3 == 97 )
+                for ( i=0 ; i<2 ; i++ )
+                        print $5 i
+}
+wiseman 7 >awk3 < pw
+Yair Wiseman,,,0
+Yair Wiseman,,,1
+wiseman 8 >cat awk4
+#!/bin/awk -f
+
+{
+        FS=":"
+        a[0]=3
+        a[5]=4
+        for ( i in a )
+          print $a[i]
+}
+wiseman 9 >awk4 < pw
+1
+0
+100
+97
+100
+100
+101
+112
+101
+139
+101
+254

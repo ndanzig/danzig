@@ -1,0 +1,37 @@
+wiseman 1 >cat red1
+#!/bin/sh
+
+echo abc > red.out
+cat red.out
+wiseman 2 >red1
+abc
+wiseman 3 >cat red2
+#!/bin/sh
+
+echo abc >> red.out
+cat red.out
+wiseman 4 >red2
+abc
+abc
+wiseman 5 >cat red3
+#!/bin/sh
+
+cat < red.out
+wiseman 6 >red3
+abc
+abc
+wiseman 7 >cat red4
+#!/bin/sh
+
+cat abc > red.out
+wiseman 8 >red4
+cat: abc: No such file or directory
+wiseman 9 >cat red.out
+wiseman 10 >cat red5
+#!/bin/sh
+
+cat abc > red.out 2>&1
+wiseman 11 >red5
+wiseman 12 >cat red.out
+cat: abc: No such file or directory
+wiseman 13 >

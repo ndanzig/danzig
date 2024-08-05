@@ -1,0 +1,36 @@
+wiseman 4 >cat soc2.c
+#include <signal.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <string.h>
+
+#define SOCKNAME "sockfile"
+#define MESG "shalom\n"
+
+main( argc , argv )
+int argc;
+char *argv[];
+{
+	struct sockaddr sadd;
+	int a,s;
+
+	strcpy ( sadd.sa_data , SOCKNAME );
+	if ( ( s=socket ( AF_UNIX , SOCK_STREAM , 0 ) ) < 0 )
+		exit ( 1 );
+	if ( connect ( s , &sadd , sizeof ( sadd ) ) < 0 ) {
+		close ( s );
+		exit ( 1 );
+	}
+	write ( s , MESG , strlen ( MESG ) + 1 );
+}
+wiseman 5 >gcc -o soc2{,.c}
+wiseman 6 >soc2
+shalom
+wiseman 7 >ls -l sockfile
+srwsrwxrwx  1 wiseman         0 Jul 12 18:05 sockfile
+wiseman 8 >kill -KILL 4655
+
+[1]    Killed                        soc1
+wiseman 9 >exit

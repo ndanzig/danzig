@@ -1,0 +1,48 @@
+wiseman 1 >cat /tmp/map
+shalom
+wiseman 2 >cat map1.c
+#include <sys/types.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+main()
+{
+        int fd;
+        struct stat buf;
+        char *str;
+
+        fd=open ( "/tmp/map" , O_RDWR|O_CREAT , S_IRWXU );
+        fstat ( fd , &buf );
+        str=mmap ( 0 , buf.st_size , PROT_READ | PROT_WRITE , MAP_SHARED , fd , 0 );
+        printf ( "%s" , str );
+        munmap ( str , buf.st_size );
+        close ( fd );
+}
+wiseman 3 >gcc -o map1{,.c}
+wiseman 4 >map1
+shalom
+wiseman 5 >cat map2.c
+#include <sys/types.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+main()
+{
+        int fd;
+        struct stat buf;
+        char *str;
+
+        fd=open ( "/tmp/map" , O_RDWR|O_CREAT , S_IRWXU );
+        fstat ( fd , &buf );
+        str=mmap ( 0 , buf.st_size , PROT_READ | PROT_WRITE , MAP_SHARED , fd , 0 );
+        mprotect ( str , buf.st_size , PROT_WRITE );
+        printf ( "%s" , str );
+        munmap ( str , buf.st_size );
+        close ( fd );
+}
+wiseman 6 >gcc -o map2{,.c}
+wiseman 7 >map2
+Segmentation fault (core dumped)
+wiseman 8 >exit

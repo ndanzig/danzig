@@ -1,0 +1,404 @@
+<html>
+<head><title>
+UNIX Lab 4
+</title></head>
+<body>
+<h2>Lab Four (4)  Signals, alarm , pause, kill, raise </h2>
+
+<h4>See 'man 7 signal' for a list of all the signals</h4>
+<xmp>
+
+
+NAME
+       signal - ANSI C signal handling
+
+SYNOPSIS
+       #include <signal.h>
+
+       typedef void (*sighandler_t)(int);
+
+       sighandler_t signal(int signum, sighandler_t handler);
+
+DESCRIPTION
+       The signal() system call installs a new signal handler for
+       the signal with number signum.  The signal handler is  set
+       to  sighandler  which may be a user specified function, or
+       either SIG_IGN or SIG_DFL.
+
+       Upon arrival of a signal with number signum the  following
+       happens.   If the corresponding handler is set to SIG_IGN,
+       then the signal is ignored.  If  the  handler  is  set  to
+       SIG_DFL,  then the default action associated to the signal
+       (see signal(7)) occurs.  Finally, if the handler is set to
+       a  function  sighandler  then  first either the handler is
+       reset to SIG_DFL or an  implementation-dependent  blocking
+       of  the  signal is performed and next sighandler is called
+       with argument signum.
+
+       Using a signal handler function for  a  signal  is  called
+       "catching  the  signal".   The signals SIGKILL and SIGSTOP
+       cannot be caught or ignored.
+
+RETURN VALUE
+       The signal() function returns the previous  value  of  the
+       signal handler, or SIG_ERR on error.
+
+IMPORTANT NOTE:
+       What should the operating system do if a process receives
+       interupt (signal) X while it is in the middle of handling
+       interupt X? On some OS, it ignores the interupt until it
+       has finished the first interupt.  The more recent Linux 
+       versions do not do this, instead they immediately handle 
+       the 2nd interupt but instead of doing the interupt function
+       handler they do the default behaviour of the interupt 
+       (usually terminating the process). This can be a problem 
+       if your program is not properly synchronized.
+
+
+
+Program to demostrate the 'catching' or 'trapping' of the signal FPE 
+(divide-by-zero)
+
+//by Nachum Danzig
+#include <sys/types.h>
+#include <signal.h>
+
+static void sig_fpe(int signo) ;
+
+int main(void)
+{
+ int x = 0;
+ int y;
+
+
+ if (signal(SIGFPE, sig_fpe) == SIG_ERR)
+      perror("can't catch SIGFPE");
+ y= 7/x;
+ printf("hello");
+ return 1;
+}
+
+
+//our trap function
+static void sig_fpe(int signo) /*argument is signal number*/
+{
+ printf("You divided by zero, didn't you?\n");
+ raise(SIGALRM);
+ return;
+}
+
+
+
+Program to demostrate the 'catching' or 'trapping' of the signal crtl-c
+
+//by Nachum Danzig
+#include <sys/types.h>  
+#include <signal.h>
+
+static void sig_interupt(int signo) ;
+
+int main(void)
+{
+  if (signal(SIGINT, sig_interupt) == SIG_ERR)
+    perror("can't catch SIGINT");
+  for( ; ; )
+    pause();//wait for any signal (only needed so the loop does not waste CPU time)
+}
+
+//our trap function
+static void sig_interupt(int signo) /*argument is signal number*/
+{
+  printf("received SIGINT, but I ain't quitin'\n");
+  return;
+}
+
+
+
+NAME
+       pause - wait for signal
+
+SYNOPSIS
+       #include <unistd.h>
+
+       int pause(void);
+
+
+DESCRIPTION
+       The  pause  library function causes the invoking process (or thread) to
+       sleep until a signal is received that either terminates it or causes it
+       to call a signal-catching function.
+
+RETURN VALUE
+       The  pause  function only returns when a signal was caught and the sig-
+       nal-catching function returned. In this  case  pause  returns  Å‚àí1,  and
+       errno is set to EINTR.
+
+
+#include <sys/types.h>  
+#include <signal.h>
+
+static void sig_usr(int signo) ;
+
+
+int main(void)
+{ int counter=0;
+  if (signal(SIGUSR1, sig_usr) == SIG_ERR)
+    perror("can't catch SIGUSER1");
+
+  if (signal(SIGUSR2, sig_usr) == SIG_ERR)
+    perror("can't catch SIGUSER2");
+  for( ; ; )
+    {
+      printf("loop number:  %d\n", ++counter);
+      pause();//wait for any signal
+    }
+}
+
+//one trap which handles two different interrupts
+static void sig_usr(int signo) /*argument is signal number*/
+{
+  if (signo == SIGUSR1)
+    printf("received SIGUSR1\n");
+  else if (signo == SIGUSR2)
+    printf("received SIGUSR2\n");
+  return;
+}
+
+
+
+NAME
+       alarm - set an alarm clock for delivery of a signal
+
+SYNOPSIS
+       #include <unistd.h>
+
+       unsigned int alarm(unsigned int seconds);
+
+DESCRIPTION
+       alarm arranges for a SIGALRM signal to be delivered to the
+       process in seconds seconds.
+
+       If seconds is zero, no new alarm is scheduled.
+
+       In any event any previously set alarm is cancelled.
+
+RETURN VALUE
+       alarm returns the number of seconds  remaining  until  any
+       previously  scheduled  alarm  was  due to be delivered, or
+       zero if there was no previously scheduled alarm.
+
+
+
+
+An Example which demonstrates having a process sleep
+until the ALRM signal is registered
+
+//by Nachum Danzig
+#include <sys/types.h>  
+#include <signal.h>
+#include <unistd.h>  
+
+static void sig_alarm(int signo) ;
+unsigned int mysleep(unsigned int nsecs );
+
+
+//#define SIG_ERR (void (*)())-1
+
+int main(void)
+{ int unslept;
+
+  for( ; ; )
+    {
+      printf("go to sleep.\n");
+      unslept=mysleep(2);
+      printf("%s \n", unslept);
+    }
+}
+
+static void sig_alarm(int signo) /*argument is signal number*/
+{
+  return;//do nothing, just return to wake up the pause
+}
+
+  
+
+unsigned int mysleep(unsigned int nsecs )
+{
+ if (signal(SIGALRM, sig_alarm) == SIG_ERR)
+    return(nsecs);
+ alarm(nsecs);//start timer
+ pause();       //next caught signal wakes us up
+ return(alarm(0)); //turn off timer, return unslept time
+}   
+
+
+
+
+
+NAME
+       kill - send signal to a process
+
+SYNOPSIS
+       #include <sys/types.h>
+       #include <signal.h>
+
+       int kill(pid_t pid, int sig);
+
+DESCRIPTION
+       The  kill  system  call  can  be used to send any signal to any process
+       group or process.
+
+       If pid is positive, then signal sig is sent to pid.
+
+       If pid equals 0, then sig is sent to every process in the process group
+       of the current process.
+
+       If  pid equals -1, then sig is sent to every process except for process
+       1 (init), but see below.
+
+       If pid is less than -1, then sig is sent to every process in  the process group pid.
+
+       If  sig  is 0, then no signal is sent, but error checking is still 
+performed.
+
+RETURN VALUE
+       On success, zero is returned.  On error, -1 is returned, and  errno  is
+       set appropriately.
+       
+IMPORTANT NOTE:  If the signo argument is 0, then the normal error checking is
+       performed by kill, but no signal is sent.  This is a way to determine if a 
+       specific process exists.  If we send the process the null signal but the
+       process  does not exist, kill will return -1 and errno is set to ESRCH.
+       (Because of the recylcing of PID's in UNIX, the PID maybe be in use by
+       another process, so you can not be 100% sure the process you intend 
+       still exists)
+
+
+
+NAME
+       raise - send a signal to the current process
+
+SYNOPSIS
+       #include <signal.h>
+
+       int raise(int sig);
+
+DESCRIPTION
+       The  raise()  function  sends  a  signal to the current process.  It is
+       equivalent to
+
+              kill(getpid(), sig);
+
+RETURN VALUE
+       0 on success, nonzero for failure.
+
+
+
+
+An example demonstraing the sending of a signal to
+a child process.
+
+//by Nachum Danzig
+#include <sys/types.h>  
+#include <signal.h>
+#include <unistd.h>
+  
+static void sig_usr(int signo) ;
+
+int counter = 0;
+
+int main(void)
+{
+ 
+  int i, error, status;
+  pid_t child1;
+
+  error = kill(999999,0);//demonstrate checking if process exists
+  printf("error: %d\n", error);
+
+
+  if (signal(SIGUSR1, sig_usr) == SIG_ERR)
+    perror("can't catch SIGUSER1");              
+
+  child1=fork();
+
+  if(0==child1)
+    {
+    printf("child is running\n");
+    for(;;)
+      {
+      pause();//some code
+      }
+    }
+  else
+    {
+      //we are Dad
+      for( i=0;i<100000000;i++);//avoid race condition
+      for(counter=0;counter<3;counter++)
+	{
+	  kill(child1, SIGUSR1);//the real point of this example, send signal to child
+	}
+	 kill(child1, 9);//cleanup, really KILL the child (KILL==9) (but child will still be a zombie)
+	 wait(&status);//kill zombie child (see note on 'zombies' in Lab1)
+	 error = kill(child1,0);//make sure child process no longer exists
+         printf("error: %d\n", error);
+    }
+}
+
+
+static void sig_usr(int signo) /*argument is signal number*/
+{
+  
+  printf("child received SIGUSR1 by %d\n", getpid() );
+  
+}
+
+
+
+Exercise 3
+
+You are asked to create one pipe to be used as a communication exchange.
+A parent process creates 3 child processes. It will signal which child is
+to listen on the pipe at which time.  The parent process will allow the
+user to choose to which process he wants to send a message.  
+
+The user will be able to send a text message to any son he wants through 
+the pipe common to all processes.  The user will be able to kill any child 
+he desires, and at any time.  The program will keep running until the user kills
+all the 3 child processes.
+
+If user types 'quit' you must kill all children before exiting (otherwise they will
+not die until the system comes down).
+Do the same if the user types control-c (note: use a trap on control-c). 
+
+Also the father may send signals other than -KILL (-9) to the children.
+Implement 3 such signals of your choice. 
+'man 7 signal'  will list for you all the signals.
+
+Sample input and output:
+>
+> 1 hello 
+son 1: hello
+> 3 hello
+son 3: hello
+> 1 kill -KILL
+father: son 1 terminated.
+> 1 hello
+father: son 1 no longer alive.
+> 3 hello
+son 3: hello 
+> 3 kill -KILL
+father: son 3 terminated.   
+> 2 kill -KILL
+father: all sons died. Bye.
+>
+>   
+</xmp>
+<a name="answer"><a href="./exercise-alpha.c"> Partial answer to problem. </a>
+
+
+&copy; Ari Cirota, Nachum Danzig and Erick Fredj
+
+
+</body>
+</html>

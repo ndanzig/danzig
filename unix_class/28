@@ -1,0 +1,64 @@
+sunlight wiseman 1 >cat imp.c
+#include <signal.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+
+#define PORTNUM 50000
+struct sockaddr_in sa;
+
+main()
+{
+	int s,t,i,r,on_off=1;
+	char buf[BUFSIZ];
+
+	if ( ( s = socket ( AF_INET , SOCK_STREAM , 0 ) ) < 0 )
+		exit ( -1 );
+
+	setsockopt ( s , SOL_SOCKET , SO_REUSEADDR , &on_off , sizeof ( on_off ) );
+
+	sa.sin_family = AF_INET;
+	sa.sin_addr.s_addr = INADDR_ANY;
+	sa.sin_port = htons ( PORTNUM );
+	if ( bind ( s , &sa , sizeof ( sa ) ) < 0 ) {
+		close ( s );
+		exit ( -1 );
+	}
+
+	listen ( s , 3 );
+
+	signal ( SIGCHLD , SIG_IGN );
+
+	while ( 1 ) {
+
+		i = sizeof( sa );
+		t = accept ( s , &sa , &i );
+
+		switch ( fork() ) {
+			case -1:
+				close ( s );
+				close ( t );
+				exit ( 1 );
+			case 0:
+				if ( r = read ( t , buf , BUFSIZ ) > 0 )
+					printf ( "%s" , buf );
+				else
+					if ( r < 0 )
+						exit ( 1 );
+				exit ( 0 );
+			default:
+				close ( t );
+		}
+	}
+}
+
+sunlight wiseman 2 >gcc -o imp{,.c}
+sunlight wiseman 3 >imp &
+[1] 1080
+sunlight wiseman 4 >shalom
+
+sunlight wiseman 4 >kill -KILL 1080
+
+[1]    Killed                        imp
+sunlight wiseman 5 >exit

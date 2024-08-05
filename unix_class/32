@@ -1,0 +1,67 @@
+wiseman 1 >cat nic1.c
+main()
+{
+	nice(15);
+	while(1);
+}
+
+wiseman 2 >gcc -o nic1{,.c}
+wiseman 3 >nic1 &
+[1] 6229
+wiseman 4 >ps -l
+       F UID   PID  PPID CP PRI NI  SZ  RSS WCHAN    STAT TT  TIME COMMAND
+20488201  97  6173  6172  1  15  0 288  504 kernelma S    p8  0:00 -h -i (tcsh)
+20008001  97  6229  6173201 102 15  16  172          R N  p8  0:04 nic1
+20000001  97  6232  6173 14  28  0 272  520          R    p8  0:00 ps -l
+wiseman 5 >cat nic2.c
+#include <sys/time.h>
+#include <sys/resource.h>
+
+main()
+{
+	int pri;
+
+	pri=getpriority ( PRIO_PROCESS , getpid() );
+	printf ( "%d\n", pri );
+
+	nice(13);
+
+	pri=getpriority ( PRIO_PROCESS , getpid() );
+	printf ( "%d\n" , pri );
+}
+
+wiseman 6 >gcc -o nic2{,.c}
+wiseman 7 >nic2
+0
+13
+wiseman 8 >cat nic3.c
+#include <sys/time.h>
+#include <sys/resource.h>
+
+main()
+{
+	int pri;
+
+	setpriority( PRIO_PROCESS , getpid() , 19 );
+	pri=getpriority ( PRIO_PROCESS , getpid() );
+	printf ( "%d\n" , pri );
+}
+
+wiseman 9 >gcc -o nic3{,.c}
+wiseman 10 >nic3
+19
+wiseman 11 >cat nic4.c
+#include <sys/time.h>
+#include <sys/resource.h>
+
+main()
+{
+	int pri;
+
+	setpriority( PRIO_USER , getuid() , 1 );
+	pri=getpriority ( PRIO_USER , getuid() );
+	printf ( "%d\n" , pri );
+}
+wiseman 12 >gcc -o nic4{,.c}
+wiseman 13 >nic4
+1

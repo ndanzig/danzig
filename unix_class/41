@@ -1,0 +1,46 @@
+wiseman 1 >awk -F: '/Awk/ { print $3 }' pw
+97
+wiseman 2 >awk -F: '/Awk/,/Msg/ { print $3 }' pw
+97
+100
+112
+wiseman 3 >awk -F: '/^wis/ { print $3 }' pw
+97
+wiseman 4 >awk -F: '/n:\/bin\/tcsh$/ { print $3 }' pw
+97
+wiseman 5 >awk -F: '/W[ps]/ { print $3 }' pw
+97
+112
+wiseman 6 >awk -F: '/W[^ps]/ { print $3 }' pw
+97
+wiseman 7 >awk -F: '/11./ { print $3 }' pw
+100
+112
+wiseman 8 >awk -F: '/:10*:/ { print $3 }' pw
+0
+97
+100
+wiseman 9 >awk -F: '/,(:\/)*b/ { print $3 }' pw
+0
+wiseman 10 >awk -F: '/:[0-9][0-9]?:/ { print $3 }' pw
+0
+97
+wiseman 11 >grep wise pw
+wiseman:Wp1fAwkvjueqo:97:100:Yair Wiseman,,,:/u/opers/wiseman:/bin/tcsh
+wiseman 12 >grep -i israel pw
+yedidya:pHPjDyQjc3d9A:100:100:& Israel,CS 115,035318953,:/u/opers/yedidya:/bin/tcsh
+wiseman 13 >grep -v segel pw
+root:auwiXbD1wUUOQ:0:1:System PRIVILEGED Account,,,:/:/bin/tcsh
+wiseman:Wp1fAwkvjueqo:97:100:Yair Wiseman,,,:/u/opers/wiseman:/bin/tcsh
+yedidya:pHPjDyQjc3d9A:100:100:& Israel,CS 115,035318953,:/u/opers/yedidya:/bin/tcsh
+wiseman 14 >grep -c 100 pw
+2
+wiseman 15 >grep -vc 100 pw
+4
+wiseman 16 >grep -n 100 pw
+2:wiseman:Wp1fAwkvjueqo:97:100:Yair Wiseman,,,:/u/opers/wiseman:/bin/tcsh
+3:yedidya:pHPjDyQjc3d9A:100:100:& Israel,CS 115,035318953,:/u/opers/yedidya:/bin/tcsh
+wiseman 17 >grep -v segel pw | awk -F: '{ print $3 }'
+0
+97
+100

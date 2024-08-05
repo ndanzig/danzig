@@ -1,0 +1,207 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1255">
+<link rel="StyleSheet" href="articles.css">
+<title>פקודות בסיסיות בלינוקס</title>
+</head>
+<body><div dir="rtl"> <center><h1>פקודות בסיסיות בלינוקס</h1></center><a href="#Forum">לפורום המאמר</a><br><br>לינוקס לא מושתת על המערכת הגרפית שלה, כלומר ניתן לבצע הכל במצב טקסט משורת הפקודה, במאמר זה מוסברות חלק מן הפקודות הבסיסיות שמהערכת מציעה.<br>
+את הפקודות אתם מריצים משורת הפקודה משהו שנראה ככה: <span dir=ltr> user@host~:</span> במידה ואתם
+נמצאים בסביבה הגרפית תפתחו טרמינל ותוכלו להריץ ממנו את הפקודות.<br>
+בשביל לפתוח טרמינל לחצו ALT+f2 והקישו xterm<br><br><Br>
+<a href="man/pwd.html" class="cmd">pwd</a><br>
+הפקודה מדפיסה את שם הספריה הנוכחית
+<div align=left dir=ltr><pre>$ pwd</pre></div>
+הדפסה של הנתיב המלא
+<div align=left dir=ltr><pre>$ pwd -P</pre></div>
+<hr size=1 noshade><br>
+<a href="man/ls.html" class="cmd">ls</a><br>
+פקודה זו מדפיסה את התוכן של ספריה מסויימת.<br>
+במידה ונריץ את הפקודה ללא פרמטרים, היא תדפיס את תוכנה של הספריה הנוכחית<br>
+<div align=left dir=ltr><pre>
+$ ls
+..
+..
+..
+</pre></div>
+אם נציין שם של ספריה, יודפס התוכן של הספריה שציינו.
+<div align=left dir=ltr><pre>
+$ ls images/
+</pre></div>
+אם נוסיף את הפרמטים al יודפסו גם שמות הקבצים הנסתרים ונקבל פלט מורחב עם נתונים נוספים על הקבצים ותתי הספריות.
+<div align=left dir=ltr><pre>
+$ ls -al
+</pre></div>
+<hr size=1 noshade><br>
+<a href="man/cd.html" class="cmd">cd</a><br>
+פקודה זה משמשת למעבר מספריה לספריה<br>
+כניסה לספריה images
+<div align=left dir=ltr><pre>$ cd images</pre></div>
+מעבר מהספריה הנוכחית אל הספריה שמכילה אותה
+<div align=left dir=ltr><pre>$ cd ..</pre></div>
+חזרה לספריה הקודמת
+<div align=left dir=ltr><pre>$ cd -</pre></div>
+מעבר לספריה הבית של המשתמש
+<div align=left dir=ltr><pre>$ cd</pre></div>
+<hr size=1 noshade><br>
+<a href="man/cat.html" class="cmd">cat</a><br>
+פקודה המדפיסה תוכן של קובץ<br>
+הדפסת הקובץ myfile אל המסך
+<div align=left dir=ltr><pre>$ cat myfile</pre></div>
+הדפסת הקובץ myfile לתוך קובץ אחר
+<div align=left dir=ltr><pre>$ cat myfile > yourfile</pre></div>
+<hr size=1 noshade><br>
+<a href="man/cp.html" class="cmd">cp</a><br>
+פקודה המעתיקה קבצים<br>
+העתקת הקובץ myfile לתוך הספריה backups.
+<div align=left dir=ltr><pre>$ cp myfile backups/</pre></div>
+העתקת כל הקבצים בעלי הסיומת txt לתוך הספריה txts.
+<div align=left dir=ltr><pre>$ cp *.txt /home/aviran/txts</pre></div>
+<hr size=1 noshade><br>
+<a href="man/mv.html" class="cmd">mv</a><br>
+העברת קובץ<br>
+העברת הקובץ אל תוך הספריה backups
+<div align=left dir=ltr><pre>$ mv myfile backups/</pre></div>
+שינו שם הקובץ
+<div align=left dir=ltr><pre>$ mv myfile oldfile</pre></div>
+<hr size=1 noshade><br>
+<a href="man/rm.html" class="cmd">rm</a><br>
+מחיקת קובץ<br>
+מחיקת הקובץ myfile
+<div align=left dir=ltr><pre>$ rm myfile</pre></div>
+מחיקת כל הקבצים ותתי הספריות תחת הספריה backups בלי הצורך לאשר מחיקת כל קובץ.
+<div align=left dir=ltr><pre>$ rm -rf backups/*</pre></div>
+<hr size=1 noshade><br>
+<a href="man/rmdir.html" class="cmd">rmdir</a><br>
+מחיקת ספריה<br>
+מחיקת הספריה backups
+<div align=left dir=ltr><pre>$ rmdir backups</pre></div>
+<hr size=1 noshade><br>
+<a href="man/mkdir.html" class="cmd">mkdir</a><br>
+יצירה ספריה חדשה<br>
+יצירת הספריה backups מחדש.
+<div align=left dir=ltr><pre>$ mkdir backups</pre></div>
+<hr size=1 noshade><br>
+<a href="man/find.html" class="cmd">find</a><br>
+חיפוש קובץ או ספריה<br>
+חיפוש אחר הקובץ myfile בתוך ספרית הבית שלי
+<div align=left dir=ltr><pre>$ find /home/aviran/ -name myfile</pre></div>
+חיפוש אחר כל הקבצים ששם מכיל את המחרוזת myfile
+<div align=left dir=ltr><pre>$ find /home/aviran/ -name *myfile*</pre></div>
+
+<hr size=1 noshade><br>
+<a href="man/locate.html" class="cmd">locate</a><br>
+עוד פקודה חיפוש, אך זאת מסתמכת על בסיס נתונים שמכיל את מיקומי הקבצים על המחשב הנוכחי<br>
+מה שמביא לתוצאות חיפוש הרבה יותר מהירות,  אולם קבצים שנוצרו אחרי בסיס הנתונים או מאז העדכון<br>
+האחרון שלו, לא ימצאו.
+<div align=left dir=ltr><pre>$ locate ls</pre></div>
+<hr size=1 noshade><br>
+<a href="man/updatedb.html" class="cmd">updatedb</a><br>
+הפקודה מעדכנת את בסיס הנתונים של locate
+<div align=left dir=ltr><pre>$ updatedb</pre></div>
+<hr size=1 noshade><br>
+<a href="man/whereis.html" class="cmd">whereis</a><br>
+פקודת חיפוש נוספת, זאת רק בספריות שמצוינות במשתנה הסביבה PATH
+<hr size=1 noshade><br>
+<a href="man/whoami.html" class="cmd">whoami</a><br>
+הפקודה מדפיסה את שם המשתמש הנוכחי
+<div align=left dir=ltr><pre>$ whoami
+aviran</pre></div>
+<hr size=1 noshade><br>
+<a href="man/su.html" class="cmd">su</a><br>
+הפקודה su משמשת להחלפת משתמש, אך אינה יוצאת מהמשתמש הנוכחי<br>
+החלפה למשתמש david, כמובן שצריך לספק את ססמאת המשתמש
+<div align=left dir=ltr><pre>$ su david</pre></div>
+כאשר לא מציינים את שם המשתמש, su מניחה שאתה רוצה להחליף ל root
+<div align=left dir=ltr><pre>$ su
+password:
+$ whoami
+root
+$ exit
+$ whoami
+aviran
+</pre></div>
+ביצוע רק פעולה אחת כמשתמש אחר, מכיוון שלא צויין משתמש, המשתמש יהיה root
+<div align=left dir=ltr><pre>su -c "rm file"</pre></div>
+
+<hr size=1 noshade><br>
+<a href="man/head.html" class="cmd">head</a><br>
+הפקודה מדפיסה מספר שורות מתחילת הקובץ<br>
+אם לא מציינים את מספר השורות יודפסו 10 השורות הראשונות
+<div align=left dir=ltr><pre>$ head myfile</pre></div>
+הדפסת 20 השורות הראשונות
+<div align=left dir=ltr><pre>$ head --lines=20 myfile</pre></div>
+<hr size=1 noshade><br>
+<a href="man/tail.html" class="cmd">tail</a><br>
+הפקודה מדפיסה מספר שורות מסוף הקובץ.<br>
+אם לא מציינים את מספר השורות יודפסו 10 השורות האחרונות
+<div align=left dir=ltr><pre>$ tail myfile</pre></div>
+הדפסת 20 השורות האחרונות
+<div align=left dir=ltr><pre>$ tail --lines=20 myfile</pre></div>
+<hr size=1 noshade><br>
+<a href="man/more.html" class="cmd">more</a><br>
+תוכנית שימושית להצגת תוכן של קובץ, התוכנית בעלת מנגנון גלילה שמאפשר לך לעלות ולרדת לאורך הקובץ<br>
+הדפסת הקובץ myfile למסך, במידה והקובץ ארוך מכדי להיות מודפס במסך אחד תקבל אפשרות גלילה.
+<div align=left dir=ltr><pre>$ more myfile</pre></div>
+הפלט של ls ינותב אל less כקלט והיא תדפיס אותו.<br>
+במידה והפלט יהיה גדול ממסך אחד, נקבל אפשרות גלילה וכך לא נאבד מידע.
+<div align=left dir=ltr><pre>$ ls -al | more</pre></div>
+<hr size=1 noshade><br>
+<a href="man/less.html" class="cmd">less</a><br>
+less היא שידרוג של more, ההבדל העיקרי שב less אתה יכול לרדת שורה שורה ולעומת גלילה של מסך שלם ב more
+<div align=left dir=ltr><pre>$ less myfile</pre></div>
+
+<hr size=1 noshade><br>
+<a href="man/pico.html" class="cmd">pico</a><br>
+עורך קבצי טקסט שמגיע עם כל הפצת לינוקס<br>
+הפעלת העורך עם מסמך חדש
+<div align=left dir=ltr><pre>$ pico</pre></div>
+פתיחת הקובץ myfile בעורך הטקסט.
+<div align=left dir=ltr><pre>$ pico myfile</pre></div>
+<hr size=1 noshade><br>
+<a href="man/adduser.html" class="cmd">adduser</a><br>
+פקודת להוספת משתמש חדש למערכת, ניתן להשתמש בה רק כ root
+<div align=left dir=ltr><pre># adduser</pre></div>
+<hr size=1 noshade><br>
+<a href="man/passwd.html" class="cmd">passwd</a><br>
+שינוי ססמא של משתמש
+<div align=left dir=ltr><pre>$ passwd aviran
+Enter new password:
+Confirm new password:
+</pre></div>
+<hr size=1 noshade><br>
+<a href="man/df.html" class="cmd">df</a><br>
+הפקודה מציגה כמה מקום פנוי יש לכל מערכת קבצים
+<div align=left dir=ltr><pre>$ df</pre></div>
+<hr size=1 noshade><br>
+<a href="man/gcc.html" class="cmd">gcc</a><br>
+קומפיילר לשפת התכנות C<br>
+הידור הקובץ myprog.c שם הקובץ ההרצה יהיה a.out
+<div align=left dir=ltr><pre>$ gcc myprog.c</pre></div>
+הידור הקובץ myprog.c והפעם שם קובץ ההרצה יהיה myprog
+<div align=left dir=ltr><pre>$ gcc myprog.c -o myprog</pre></div>
+<hr size=1 noshade><br>
+<a href="man/gpp.html" dir=ltr>g++</a><br>
+קומפיילר לשפת התכנות <span dir=ltr>C++</span><br>
+הידור הקובץ myprog.cpp שם הקובץ ההרצה יהיה myprog.out
+<div align=left dir=ltr><pre>$ g++ myprog.cpp</pre></div>
+הידור הקובץ myprog.cpp והפעם שם קובץ ההרצה יהיה myprog
+<div align=left dir=ltr><pre>$ g++ myprog.cpp -o myprog</pre></div>
+<hr size=1 noshade><br>
+<a href="man/startx.html" class="cmd">startx</a><br>
+סקריפט הפעלה למערכת הגרפית של לינוקס ה X-Windows
+<div align=left dir=ltr><pre>$ startx</pre></div>
+<hr size=1 noshade><br>
+<a href="man/man.html" class="cmd">man</a><br>
+פקודה להצגת דפי הסבר על פקודות המערכת השונות<br>
+הצגת דף הסבר של הפקודה ls
+<div align=left dir=ltr><pre>$ man ls</pre></div>
+הצגת דף הסבר של הפקודה cp
+<div align=left dir=ltr><pre>$ man cp</pre></div>
+הצגת דף הסבר של הפקודה man
+<div align=left dir=ltr><pre>$ man man</pre></div></div><br>
+
+
+	<div dir=rtl><font size="-1">המאמר נכתב על ידי אבירן עבאדי ושייך לאתר לינוקס ישראל אין להעתיק או להפיץ אותו ללא רשות מפורשת מהנהלת האתר.</div><hr>
+
+</body>
+</html>

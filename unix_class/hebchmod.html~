@@ -1,0 +1,162 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1255">
+<link rel="StyleSheet" href="articles.css">
+<title>ניהול הרשאות, משתמשים, קבוצות וגישה לרכיבים</title>
+</head>
+<body><div dir="rtl"> <center><h1>ניהול הרשאות, משתמשים, קבוצות וגישה לרכיבים</h1></center><a href="#Forum">לפורום המאמר</a><br><br><h2>chmod</h2>
+לכל קובץ במערכת הקבצים של לינוקס בלינוקס יש הרשאות.<br>
+בעזרת הרשאות אתה יכול לקבוע מי יכול לקרוא, לכתוב או להריץ קובץ מסויים<br>
+וכך למנוע גישה ממשתמשים אחרים לקבצים הפרטיים שלך.<br>
+<br>
+הריצו <tt dir=ltr>ls -l</tt> בשורת הפקודה מסויים ותקבלו פלט כזה:<br>
+<div align=left><img src="chmod.gif"></div>
+שימו לב שיש שלוש קטגוריות - משתמש, קבוצה והרשאות ושלושה סוגי הרשאות - קריאה (r) כתיבה (w) והרצה <span dir=ltr>(x)</span><br>
+chmod מקבלת שני פרמטרים, הראשון הוא סוג ההרשאה והשני הוא שם הקובץ שעליו תתבצע הפעולה.
+פרמטר ההרשאה יכול לבוא בצורת מחרוזת תווים או בצורת מספר.<br>
+<h3>שיטת המספרים</h3>
+<table style="border-collapse: separate; color=#ffffff">
+<tr><td>ערך מספרי</td><td>מחרוזת</td><td>משמעות</td></tr>
+<tr><td>0</td><td>---</td><td>אין גישה</td></tr>
+<tr><td>1</td><td>x--</td><td>הרצה</td></tr>
+<tr><td>2</td><td>-w-</td><td>כתיבה</td></tr>
+<tr><td>3</td><td>-wx</td><td>כתיבה+הרצה</td></tr>
+<tr><td>4</td><td>--r</td><td>קריאה</td></tr>
+<tr><td>5</td><td>r-x</td><td>קריאה+הרצה</td></tr>
+<tr><td>6</td><td>-rw</td><td>קריאה+כתיבה</td></tr>
+<tr><td>7</td><td>rwx</td><td>קריאה+כתיבה+הרצה</td></tr>
+</table>
+
+כמו שרואים לכל סוג הרשאה יש יצוג מספרי ובשביל לשלב כמה סוגי הרשאות פשוט מחברים<br>
+את המספרים לדוגמא, הרצה = 1 ,כתיבה = 2 ,הרצה+כתיבה = 3.<br>
+דוגמא נוספת, אם נריץ 
+<div align=left><span class="code">chmod 750 file</span></div>
+
+7 - המשתמש יכול לקרוא, לכתוב ולהריץ את הקובץ.<br>
+5 - הקבוצה יכולה לקרוא ולהריץ את הקובץ.<br>
+0 - ולשאר המשתמשים אין שום גישה לקובץ.<br>
+<br>
+משמעות ההרשאות אצל ספריות שונה מאשר אצל קבצים,<br>
+r - הדפסת רשימת הקבצים שבספריה<br>
+w - הוספת קבצים לספריה<br>
+x - גישה לקבצים שבספריה<br>
+<Br>
+כך שניתן למנוע ממשתמשים אחרים לראות, להוסיף ולהריץ קבצים בספריות המכילות חומר פרטי.<br>
+<h3>שיטת ההתווים</h3>
+אפשר גם לשנות הרשאות על ידי שימוש בתווים המציינים את סוג ההרשאה במקום מספרים.<br>
+תחביר: <tt dir=ltr>chmod [ugo] [+ - =] [rwx] FILE</tt><br>
+<br>
+u - משתמש <span dir=ltr>(user)</span><br>
+g - קבוצה <span dir=ltr>(group)</span><br>
+o - כל השאר <span dir=ltr>(other)</span><br>
+<br>
+<div align=left><span class="code">chmod ugo+rwx file</span></div>
+ייתן גישה מלאה לקובץ (קריאה, כתיבה, הרצה) לכל המשתמשים<br>
+<div align=left><span class="code">chmod o-rwx file</span></div>
+יבטל לכל המשתמשים שהם לא בקבוצה ולא בעל הקובץ את הגישה.<br>
+כאשר משתמשים בתווי הפלוס\מינוס מוסיפים ומורידים הרשאות להרשאות הקיימות, אבל כשמשתמשים<br>
+בתו = ההרשאות הקודמות מתבטלות ורק החדשות נשארות (ולא מתווספות להרשאות הקודמות)<br>
+<h2>chown</h2>
+ניתן לשנות את בעליו של קובץ מסויים באמצעות הפקודה <tt>chown</tt>, לדוגמא:<br>
+<div align=left><span class="code">chown aviran index.html</span></div>
+תשנה את בעליו של הקובץ <tt>index.html</tt> למשתמש <tt>aviran</tt>.<br>
+דוגמא יותר מורכבת:<br>
+<div align=left><span class="code">chown -R aviran *.html</span></div>
+השימוש בפרמטר <tt>R</tt> אומר ל<tt>chown</tt> לשנות באופן ריקורסיבי את כל הקבצים ותתי הספריות מהמיקום הנוכחי למשתמש <tt>aviran</tt>,<br>
+ומשמעות המחרוזת "<tt>html.*</tt>" היא שהפקודה תחול על כל הקבצים עם סיומת <tt>html</tt>.<br>
+רק בעל הקובץ אל המשתמש <tt>root</tt> יכולים לשנות בעלים של קובץ.<br>
+<h2>groupadd</h2>
+יצירת קבוצת משתמשים חדשה.<br>
+<div align=left><span class="code">groupadd students</span></div>
+הוספת קבוצת משתמשים חדשה בשם <tt>students</tt>, הID של הקבוצה נקבע באופן אוטומטי על ידי המערכת.<br>
+<div align=left><span class="code">groupadd -gid 1000 developres</span></div>
+הוספת קבוצת משתמשים חדשה בשם <tt>developers</tt>, הID של הקבוצה יהיה 1000.<br>
+מקובל לשמור את הערכים מ0-99 לקבוצות בשימוש המערכת.<br>
+<h2>usermod</h2>
+באמצעות הפקודה <tt>usermod</tt> מבצעים שינויים בהגדרות המשתמש, אחד הדברים שניתן להגדיר הוא הקבוצות אליהן שייך המשתמש.<br>
+<div align=left><span class="code">usermod -G students,developers aviran</span></div>
+הוספת המתשמש <tt>aviran</tt> לקבוצות <tt>students</tt>, <tt>developers</tt>.<br>
+<h2>groupdel</h2>
+<div align=left><span class="code">groupdel developers</span></div>
+מחיקת הקבוצה <tt>students</tt>.<br>
+<h2>groups</h2>
+הפקודה מציגה את כל הקבוצות שהמשתמש שניתן כארגומנט שייך אליהן.<br>
+<br>
+בשביל להוציא משתמש מקבוצה צריך להשתמש בפקודה usermod ולמנות את כל הקבוצות שאליהן אנו רוצים שהמשתמש ישתייך.<br>
+כל הנתונים על הקבוצות מאוכסנים בקובץ <span dir=ltr>/etc/group</span>, ניתן לערוך את הקובץ ולעשות שינויים בקבוצות.<br>
+
+<h2>mount</h2>
+הפקודה mount מקשרת בין רכיב לבין ספריה מקומית, הרכיב יכול להיות דיסק קשיח, מחיצה על הדיסק הקשיח, CDROM\צורב, מפתח USB וכדומה. 
+לאחר העלאה (mount) מוצלחת גישה לספריה המקומית תתן גישה למערכת הקבצים של הרכיב.<br>
+ישנה אפשרות לציין את סוג הרכיב אותו אנחנו מעלים, למרות שברוב המקרים אין צורך מכיוון שהגרסאות החדשות של mount  מכילות מנגנון של זיהוי אוטומטי.<br>
+<br>
+רכיבים וסוגיהם:<br>
+<tt dir=ltr>vfat</tt> - FAT32<br>
+<tt dir=ltr>ntfs</tt> - NTFS<br>
+<tt dir=ltr>iso9660</tt> - CDROM<br>
+<tt dir=ltr>ext2</tt> - Linux ext2<br>
+<tt dir=ltr>ext3</tt> - Linux ext3<br>
+<br>
+
+רכיבי חומרה בלינוקס מיוצגים על ידי קבצים, זאת אומרת שאם אני רוצים לתקשר (לשלוח\לקבל נתונים) עם רכיב מסויים אני צריכים לקרוא ולכתוב<br>
+לקובץ מסויים, כאשר אנחנו רוצים לגשת לרכיב מסויים אנחנו צריכים לציין את שם הקובץ שמייצג אותו.<br>
+כל הקבצים שמייצגים רכיבים נמצאים תחת הספריה <tt dir=ltr>/dev</tt> לדוגמא כונן הCDROM מייוצג על ידי הקובץ <tt dir=ltr>/dev/cdrom</tt><br>
+בשביל לגלות את שמות הכוננים הקשיחים והמחיצות שלכם הריצו <tt dir=ltr>fdisk -l</tt> פקודה זה תדפיס לכם את המחיצות ואת שמות הקבצים שמייצגים אותם.<br>
+<br>
+גישה למחיצת: FAT32<br>
+<div align=left><span class="code">mount -t vfat /dev/hda1 /mnt/windows</span></div>
+במחשב הזה הקובץ שמייצג את המחיצה נקרא hda1 וקיימת ספריה בשם windows תחת הספריה mnt, משתמשים בפרמטר <tt dir=ltr>-t</tt> בשביל לציין<br>
+את סוג המחיצה.<br>
+הספריה אליה אתם מעלים את הרכיב חייבת להיות קיימת, אחרת תקבלו הודעת שגיאה.<br>
+ניתן להריץ <tt dir=ltr>mount /dev/hda1 /mnt/windows</tt> והתוכנה תזהה באופן אוטומטי שמדובר במחיצת FAT32 ותעלה את המחיצה.<br>
+יש אפשרות להריץ רק <tt dir=ltr>mount /dev/hda1</tt> או <tt dir=ltr>mount /mnt/windows</tt> במידה והגדרתם את המחיצה בקובץ <tt dir=ltr>/etc/fstab</tt><br>
+תהליך זה יוסבר בהמשך.<br>
+<br>
+גישה ל CDROM<br>
+בעיקרון, ההבדל הוא לא משמעותי<br>
+<div align=left><span class="code">mount -t iso9660 /dev/cdrom /mnt/cdrom</span></div>
+פה הקובץ שמייצג את הCDROM הוא <tt dir=ltr>/dev/cdrom</tt> הספריה שאליה מעלים את הקובץ היא <tt dir=ltr>/mnt/cdrom</tt> והסוג הוא <tt dir=ltr>iso9660</tt><br>
+גם פה אפשר לקצר ולהריץ רק <tt dir=ltr>mount /dev/cdrom</tt> בהנחה שהגדרנו את ה CDROM בקובץ <tt dir=ltr>/etc/fstab</tt><br>
+<br>
+
+גישה לכונן הדיסקטים<br>
+<tt dir=ltr>mount -t auto /dev/fd0 /mnt/floppy<br></tt>
+סוג הרכיב הוא <tt dir=ltr>auto</tt>, כלומר התוכנה תזהה את סוג הרכיב ומערכת הקבצים שלו לבד.<br>
+<br>
+<tt dir=ltr>umount</tt><br>
+בשביל לבטל את הקישור בין הספריה לרכיב משתמשים בפקודה umount ונותנים לה את כפרמטר את הקובץ שמייצג את הרכיב<br>
+<div align=left><span class="code">umount /dev/cdrom</span></div>
+יסיים את הגישה ל cdrom<br>
+<br>
+
+<h3><span dir=ltr>/etc/fstab</span></h3>
+בקובץ זה כתובים נתונים לגבי הרכיבים שניתן להעלות אותם, בקובץ זה אפשר להגדיר את הספריה<br>
+שדרכה ניגש לרכיב, גיבויים ובדיקות תקינות אוטומטים, סוג הגישה לרכיב ועוד.<br>
+הנתונים לגבי רכיב אחד נכתבים בשורה אחת וכל שורה מורכבת משש שדות<br>
+דוגמא לשורה מקובץ <tt dir=ltr>/etc/fstab</tt>:<br>
+<div align=left><span class="code" dir=ltr>/dev/hda1 &nbsp;&nbsp;&nbsp; /mnt/hda1 &nbsp;&nbsp;&nbsp; vfat&nbsp;&nbsp;&nbsp;noauto,ro&nbsp;0&nbsp;0</span></div>
+<br>משמעות השדות<br>
+<tt dir=ltr>/dev/hda1</tt> הקובץ שמייצג את המחיצה<br>
+<tt dir=ltr>/mnt/hda1</tt> המיקום בדיסק הקשיח שדרכו ניגש למחיצה<br>
+<tt dir=ltr>noauto,ro</tt> אפשרויות ההעלאה, <tt>noauto</tt> - המחיצה לא תעלה אוטומטית עם המערכת, <tt>ro</tt> המחיצה תהיה נגישה לקריאה בלבד<br>
+<tt dir=ltr>vfat</tt> סוג המחיצה במקרה הזה fat32<br>
+<tt dir=ltr>0</tt> הפרמטר הזה אומר למערכת ההפעלה אם הרכיב אמור לעבור גיבויים שיגרתיים, 0 = לא, 1 = כן.<br>
+<tt dir=ltr>0</tt> הפרמטר הזה אומר למערכת ההפעלה אם הרכיב אמור לעבור בדיקת תקינות שיגרתית<br>
+<br>
+<span dir=ltr>/etc/fstab</span> הוא אחד הקבצים שנבדקים כשהמערכת עולה, ועל פיו המערכת יודעת איזה רכיבים להעלות עם המערכת.</div><br><br><br><br><a name="Forum"></a><center><img src="images/articleforum.gif"></center><br><br><br><table width=100%>
+<tr><td align=center class="gray"><nobr>תגובות</nobr></td><td class="gray" align=center><nobr>עודכן לאחרונה</nobr></td><td class="gray" align=center><nobr>שם השולח</nobr></td><td class="gray" align=center><nobr>כותרת</nobr></td></tr><tr align=right><td align="center" class="white"><nobr>1</nobr></td><td class="white"  align="center"><nobr>24/07/03 20:30:44</nobr></td><td class="white" align="center"><nobr>guy</nobr></td><td class="white" width=100%><a href="forum/topic.php?ForumID=2&TopicID=3">ה - MOUNT אובד לאחר איתחול המחשב.</a></td></tr>
+</table><br><br><br><center><h2>הוסף תגובה</h2>
+	<form method=post action="forum/post.php">
+	<table>
+	<tr><td style="border: 1px solid  white"><input dir="rtl" type="text" name="Name" size=50 maxlength=15 value=""></td><td style="border: 1px solid white">שם: </td></tr>
+	<tr><td style="border: 1px solid white"><input dir="ltr" type="text" name="Email" size=50 maxlength=50 value=""></td><td style="border: 1px solid white">אימייל: </td></tr>
+	<tr><td style="border: 1px solid white"><input dir="rtl" type="text" name="Title" size=50 maxlength=50></td><td style="border: 1px solid white">כותרת: </td></tr>
+	<tr><td style="border: 1px solid white"><textarea dir="rtl" name="text" cols=85 rows=15></textarea ></td><td style="border: 1px solid white"></td></tr>
+	<tr><td align=center style="border: 1px solid white"><input type="submit" value=" שלח "></td><td style="border: 1px solid white"></td></tr>
+	</table>
+	<input type="hidden" name="ForumID" value="2">
+	</form></center><br><br><br>
+	<div dir=rtl><font size="-1">המאמר נכתב על ידי אבירן עבאדי ושייך לאתר לינוקס ישראל אין להעתיק או להפיץ אותו ללא רשות מפורשת מהנהלת האתר.</div><hr>
+
+</body>
+</html>

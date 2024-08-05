@@ -1,0 +1,57 @@
+wiseman 1 >cat var1
+#!/bin/sh
+
+x=ab
+y=${x}cd
+echo $y
+wiseman 2 >var1
+abcd
+wiseman 3 >cat var2
+#!/bin/sh
+
+echo $$ $# $1 $0 $*
+
+wiseman 4 >var2 a b c
+12702 3 a var2 a b c
+wiseman 5 >cat var3
+#!/bin/sh
+
+echo $x
+echo ${x:-a}
+echo $x
+echo ${x:=a}
+echo $x
+echo ${x:+b}
+x=
+echo ${x:+b}
+wiseman 6 >var3
+
+a
+
+a
+a
+b
+
+wiseman 7 >cat var4
+#!/bin/sh
+
+echo $HOME
+echo $PATH
+echo $MAIL
+wiseman 8 >var4
+/u/opers/wiseman
+/usr/lang:/usr/lang/AnswerBook/bin:/usr/openwin/bin:/usr/local/bin:/usr/hosts:/usr/local/hotjava/bin:/Common/All/bin:/u/opers/wiseman/bin:/usr/ucb:/usr/bin:/usr/5bin:/usr/etc:/Common/Sparcs/X11R5/bin:/usr/guide/bin:/usr/synopsys/sparc/sim/bin:/usr/synopsys/sparc/syn/bin:/usr/synopsys/sparc/sge/bin:.
+/usr/spool/mail/wiseman
+wiseman 9 >cat var5
+#!/bin/sh
+
+while [ $# -ne 0 ]; do
+        /usr/bin/echo -n "$# "
+        echo $1
+        shift
+done
+wiseman 10 >var5 a b c
+3 a
+2 b
+1 c
+wiseman 11 >

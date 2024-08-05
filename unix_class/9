@@ -1,0 +1,87 @@
+************ 1 **************				    
+main ()							    
+{							    
+int pid	;						    
+							    
+if ( (pid = fork()) == 0 )				    
+	printf("1") ;					    
+else							    
+	printf("2") ;					    
+}							    
+
+
+
+
+
+
+
+
+							    
+************ 2 ***************				    
+main ()							    
+{							    
+int pid	;						    
+							    
+if ( (pid = fork()) == 0 )				    
+	printf("1") ;					    
+else							   
+	printf("2") ;					    
+printf("3");						    
+}							    
+							    
+************ 3 ***************				    
+main ()							    
+{							    
+int pid	, stat;						    
+							    
+if ( (pid = fork()) == 0 )				    
+	printf("1") ;					    
+else							    
+  {							    
+	wait(&stat);					    
+	printf("2") ;					    
+  }							    
+}							    
+							    
+************ 4 **************				   
+/* executable file fork4 does not exist	*/		    
+#include <stdio.h>					    
+							    
+main ()							    
+{							    
+int pid	, stat;						    
+							    
+if ( (pid = fork()) == 0 )				    
+  {							    
+    execl("/u/grad/sasha/fork4","fork4",NULL);		    
+	printf("1") ;					    
+  }							    
+else							    
+  {							    
+	wait(&stat);					    
+	printf("2") ;					    
+  }							    
+}							    
+							    
+************ 5 **************				    
+/* there is no program called fork5 */			    
+#include <stdio.h>					   
+							    
+main ()							    
+{							    
+int pid	, stat;						    
+							    
+if ( (pid = fork()) == 0 )				    
+  {							    
+    execl("/u/grad/sasha/fork5","fork5",NULL);		    
+    printf("1")	;					    
+    exit(1);						    
+    }							    
+else							    
+  {							    
+    wait(&stat);					    
+    printf("2")	;					    
+    if (stat !=	0 )					    
+      printf("3");					    
+  }							    
+}							    

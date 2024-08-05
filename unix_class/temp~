@@ -1,0 +1,1 @@
+#!/bin/bash for i in a b c; do echo $i #refer to variable i as $i done

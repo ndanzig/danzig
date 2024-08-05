@@ -1,0 +1,52 @@
+wiseman 10 >cat ipc4.c
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
+#include <signal.h>
+
+void cleanup();
+int semid;
+union semun semarg;
+
+main()
+{
+        int i;
+        struct sembuf sops[1];
+
+        semid=semget ( IPC_PRIVATE , 1 , 0600 );
+        for ( i=1 ; i < 19 ; i++ )
+                signal ( i , &cleanup );
+        semarg.val=1;
+        semctl ( semid , 0 , SETVAL , semarg );
+        sops->sem_num = 0;
+        sops->sem_flg = 0;
+        if ( fork()==0 ) {
+                sops->sem_op = -1;
+                semop ( semid , sops , 1 );
+                printf ("now you are locked\n");
+                sleep( 2 );
+                sops->sem_op = 1;
+                semop ( semid , sops , 1 );
+                printf("son finished\n");
+        }
+        else {
+                sleep( 1 );
+                printf("waiting for son to release semaphore\n");
+                sops->sem_op = -1;
+                semop ( semid , sops , 1 );
+                printf("father finished\n");
+                semctl ( semid , 0 , IPC_RMID , semarg );
+        }
+}
+
+void cleanup()
+{
+        semctl ( semid , 0 , IPC_RMID , semarg );
+        exit ( 1 );
+}
+wiseman 11 >gcc -o ipc4{,.c}
+wiseman 12 >ipc4
+now you are locked
+waiting for son to release semaphore
+son finished
+father finished

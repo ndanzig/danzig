@@ -1,0 +1,70 @@
+<html>
+<head><title>
+UNIX Command Reference 
+</title></head>
+<body>
+<h2>
+UNIX Command Reference 
+</h2>
+
+<xmp>
+
+Directory Commands:
+
+Ls<options<directory/file name>                     Lists the contents of a directory
+                                                                               [options:  l (long) -a (all)]
+cd<directory name>                                          Change the current directory
+mkdir<directory name>                                     Make a sub-directory
+rm <options><file/directory name>                   Remove a file
+                                                                                 [options: -r (remove a directory)]
+chmod <options><permissions><file/direcory name>  Change the permissions of a                        
+                                                                                       file [permissions: see 
+                                                                                       permissions below]
+                                                                                       [options:-R (recursive)]
+mv <file/directory name><file/directory name>   Move a file (also rename a file)
+cp <file/directory name><file/directory name>       Copy a file
+
+Permissions:
+
+l=link (always has permissions lrwxrwxrwx)                           7  rwx
+d=directory                                                                                6 rw-
+r=permission to read                                                                  5 r-x
+w=permission to write                                                                4 r-
+x=permission to execute                                                              3 -wx
+-= no permission                                                                           2 -w-
+                                                                                                      1 -x
+
+Common Permissions:                               Look like this in ls-1 
+
+755 -rwxr-xr-x
+                                                   or drwxr-xr-x (good for directories and programs)
+         711                                        drwx-x-x (only good for directories - more
+                                                          private than 755)
+700 -rwx-----
+                                                            or drwx------(good for directories and 
+                                                               programs - most private)
+644 -rw-r-rr-(only good for files)
+600 -rw------(only good for files - most private)
+
+Useful Programs:
+
+   man <command>                      Show instructions on how to use <ommand>                                  
+   more <file>                                Show a text file on the screen
+    emacs                                         Text Editor
+
+Useful Hints:
+
+Ls -l | more                                    Long list of current directory, pause before end
+                                                        of each screenfull
+cd                                                     Return to home directory
+cd..                                                   Return to previous directory
+pine                                                  Mail
+pwd                                                   Print current working directory
+
+Copyright reserved to Yonah Russ and Nachum Danzig
+</xmp>
+</body>
+</html>   
+
+
+

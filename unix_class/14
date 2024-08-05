@@ -1,0 +1,66 @@
+wiseman 1 >cat sig1.c
+main()
+{
+	char *a;
+
+	*a=0;
+}
+wiseman 2 >gcc -o sig1 sig1.c
+wiseman 3 >sig1
+Segmentation fault (core dumped)
+wiseman 4 >cat sig2.c
+#include <signal.h>
+
+void funct();
+
+main()
+{
+	int sig=SIGSEGV;
+	char *a;
+
+	signal(sig, &funct);
+	*a=0;
+}
+
+void funct()
+{
+	printf("haha\n");
+	exit(1);
+}
+
+wiseman 5 >gcc -o sig2 sig2.c
+wiseman 6 >sig2
+haha
+wiseman 7 >cat sig3.c
+#include <signal.h>
+
+void funct();
+
+main()
+{
+	int sig=11;
+
+	signal(sig, &funct);
+	while(1);
+}
+
+void funct()
+{
+	printf("haha\n");
+	exit(1);
+}
+
+wiseman 8 >gcc -o sig3 sig3.c
+wiseman 9 >sig3 &
+[1] 19919
+wiseman 10 >kill -SEGV 19919
+wiseman 11 >haha
+
+[1]    Exit 1                 sig3
+Time taken is 0:16.51
+wiseman 11 >sig3 &
+[1] 19961
+wiseman 12 >kill -11 19961
+wiseman 13 >haha
+
+[1]    Exit 1                 sig3

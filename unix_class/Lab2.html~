@@ -1,0 +1,343 @@
+<html>
+<head><title>
+UNIX Lab 2
+</title></head>
+<body>          
+<h2>Lab Two (2)   Forks, Wait, getenv, strtok, execl </h2>
+<xmp>
+SYNOPSIS
+       #include <sys/types.h>
+       #include <unistd.h>
+       pid_t fork(void);
+DESCRIPTION
+       fork()  creates a child process that differs from the parent process only
+       in its Process Identification (PID) and Parent Process Identification (PPID),
+       and in the fact that resource utilizations are set to 0.  File locks and pending
+       signals are not inherited.
+       
+       A call to the fork() system call returns a zero (0) to the child process
+       and returns the child PID to the parent.
+
+Simple example calling fork().
+
+#include<sys/types.h>
+//example 1
+int main()
+{
+  pid_t pid;
+  pid=fork();
+  printf("my value of pid is %d\n",pid);
+}
+
+
+Another simple example showing that the father gets the son's PID.
+//example 2 
+int main()
+{
+  pid_t pid;
+  pid=fork();
+  if(pid==0)
+     printf("I am the son.  I don't know my own PID.  \n");
+  else
+    printf("I am the father. I don't know my own PID, but my son's PID is %d.\n" , pid);
+}
+
+
+An example showing that multiple calls to fork creates more processes by a factor of 2.
+(Question:  When will hello be printed?  Answer:  When son has a son.  Why?)
+// example 3
+void main()
+{
+	if(fork()==fork())
+		printf("hello\n");
+	printf("bye\n");
+}
+
+
+The wait system call.
+
+Use these libraries:
+       #include <sys/types.h>
+       #include <sys/wait.h>
+
+Function prototype:
+       pid_t wait(int *status)
+
+       wait() waits for process termination to occur.
+       The  wait  function  suspends  execution of the current process until a
+       child has exited, or until a signal is delivered  whose  action  is  to
+       terminate  the  current  process or to call a signal handling function.
+
+       If a child has already exited by the time  of  the  call  (a  so-called
+       "zombie"  process),  the  function  returns  immediately.   Any  system
+       resources used by the child are freed.  I.e. the child is not really dead
+       until his parent process 'waits' for him.  This is so in order to allow
+       the parent process to find out the child's exit status after he terminated.
+
+// example 4
+/*In the following example the father will wait until the child process
+terminates and returns its pid to its father.
+*/
+#include <sys/types.h>
+main()
+{
+        int status;
+        pid_t pid,child1;
+
+        if(fork()==0)
+                printf("child is running\n");
+        else
+        {
+                wait(&status);   //father will wait here
+                printf("child has terminated\n");
+        }
+}
+
+
+// example 5
+/*In the following example the father will wait until one of his child processes
+  terminates. That child's PID is returned to its father.  The first child to die
+  will have his PID stored in the variable pid in the father process.
+   */
+  
+main()
+{
+  int status;
+  pid_t pid,child1,child2;
+
+  if((child1=fork()==0))
+    printf("child 1 is running\n");
+  else
+    {
+      if ((child2=fork())==0)
+	   printf("child 2 is running\n"); 
+      else
+      {
+	pid=wait(&status);
+	if(pid==child1)
+	  printf("child1 has terminated first\n");
+	else
+	  printf("child2 has terminated first\n");
+	printf("goodbye\n");
+      }
+    }
+}
+
+// example 6
+/*In the following example the father will wait until
+  both child processes terminate.   The last child to die will have his PID
+  stored in the variable pid in the father process.
+*/
+#include <sys/types.h>  
+main()
+{
+  int status;
+  pid_t pid,child1,child2;
+
+  if((child1=fork()==0))
+    printf("child 1 is running\n");
+  else
+    {
+      if ((child2=fork())==0)
+	   printf("child 2 is running\n"); 
+      else
+      {
+	pid=wait(&status);
+	pid=wait(&status);
+	if(pid==child1)
+	  printf("child1 has terminated last\n");
+	else
+	  printf("child2 has terminated last\n");
+	printf("goodbye\n");// only father prints this
+      }
+    }
+}
+
+An environment variable is a variable inherited by the child
+process from his parent process.  It is usually used to set 
+parameters for how that child should run.  For example,
+the shell's child processes can be made to know the user's mode
+running his shell. (ex.  which editor he uses.)
+
+Non-system call  getenv.  The function gets an environment variable from
+the system.
+Library:
+       #include <stdlib.h>
+Functional prototype:
+       char *getenv(const char *name);
+
+Example to get the environment variable HOME (HOME is the home directory 
+of the user).
+# include <stdlib.h>
+int main(void)
+{
+  char  *s_ptr;
+  s_ptr=getenv("HOME");
+  printf("%s \n", s_ptr);
+} 
+ 
+
+Example to get the environment variable PATH
+# include <stdlib.h>
+int main(void)
+{
+  char *s_ptr;
+  s_ptr=getenv("PATH");
+  printf("%s \n",s_ptr);
+} 
+ 
+
+Non-system function  (found in section 3 of man pages)
+       strtok - extract tokens from strings
+
+SYNOPSIS
+       #include <string.h>
+
+       char *strtok(char *s, const char *delim);
+DESCRIPTION
+       A  `token'  is  a  nonempty  string  of characters not occurring in the
+       string delim, followed by \0 or by a character occurring in delim.
+
+       The strtok() function can be used to parse the string  s  into  tokens.
+       The  first call to strtok() should have s as its first argument. Subse-
+       quent calls should have the first  argument  set  to  NULL.  Each  call
+       returns  a  pointer  to the next token, or NULL when no more tokens are
+       found.
+
+       If a token ends with a delimiter, this delimiting  character  is  over-
+       written  with a \0 and a pointer to the next character is saved for the
+       next call to strtok().  The delimiter string delim may be different for
+       each call.
+
+/*	 strtok1.c by Ari Cirota 2002
+     This is a short example demonstrating the use of strtok.
+     The strtok function is used to split a string
+
+	 NOTE: This program must be compiled with  g++
+
+  */
+
+#include <iostream.h>
+#include <string.h>
+void main (void) 
+{
+    char string[]="This is just a boring sentence";
+    char Token[]=" ";
+    char* tokenPtr;
+
+    cout<<"The string to be tokenized is: "<<endl<<string<<endl;
+   
+    //send string as parameter for the first call of strtok
+    tokenPtr=strtok(string,Token);
+    
+    //from  now on send NULL as first parameter
+    while (tokenPtr != NULL)
+    { 
+      cout<<tokenPtr<<endl;
+      tokenPtr=strtok (NULL, Token);
+    }
+}
+
+Non-system call system.
+system - execute a shell command
+int system(const char *string);
+
+
+#include <sys/types.h>
+
+#include <stdio.h>
+
+main()
+
+{
+  int status;
+  //  char ch, str[20];
+
+      status=system("vmstat 1");
+      printf("hello");
+}
+
+
+
+Non-system call execl and execv.
+
+SYNOPSIS
+       #include <unistd.h>
+       int execl( const char *path, const char *arg, ...);  
+       int execv( const char *path, char *const argv[]);  
+       extern char **environ;   
+
+DESCRIPTION
+       The exec family of functions replaces the current process image with  a
+       new  process  image.  
+       The initial argument for these functions is  the  pathname  of  a  file
+       which is to be executed.
+       
+       execl expects a complete list of the commands and all the arguments
+       you want it to be run with, followed by NULL (or 0).
+       execv expects its second parameter to be a pointer to an array
+       where the array itself contains a list of the command and all the
+       arguments you want it to be run with, and followed by NULL.  
+
+Example to run ls inside a c program.
+Note: Program control passes to the program ls and none of the
+other statements (if there are any) in the original program are executed.
+If execl occurs in a fork, then, of course, the father will continue execution
+of the original program.
+
+main()
+{ 
+	printf("Files in Directory are:\n");
+		 execl("/bin/ls","ls", "-l",0);
+	printf("This line will not execute.\n");//this line will not execute
+}
+</xmp>
+<a href="execv.c">Example with execv</a>
+<xmp>
+Exercise 
+A.
+Write a C program where a parent process creates two zombie children,
+one child in a sleeping mode and a forth child which runs the ps -aux
+command every 2 seconds in order to show the states of all 4 of the children.
+(Use grep to show ONLY the 4 children processes and not all the 
+processes on the machine.) After 30 seconds the the zombies should 
+die and the sleeping process should wake up.  Then the 4th child
+should also finish and the parent should also finish.
+For full credit, have the 4th child make sure there are no other children
+before he dies. You can do this by checking the result of
+the ps command.
+
+
+B.
+Your mission is to write and run a shell.
+Your program must loop doing the following:
+
+1] Display a prompt on the screen
+2] Receive any shell command from user including parameters (like "ls -l file")
+3] Carry out the command using execv or execl and fork;
+   your shell must "wait" for its child to terminate before displaying the prompt.
+
+Exit loop upon receiving the string "Quit"
+
+You must find the location of the particular shell command requested by
+the user. This can only be done by looking for it in all of the addresses
+in your enviroment variable "PATH".
+You will need to use the getenv() function in order to get the PATH.
+In order to seperate the various libraries in it you must use the 
+strtok() function.
+
+If a given command was not found, display an error message 
+on the screen such as "Command not found." and return a prompt.
+
+The exercize may be done together in pairs.
+Each individual will be questioned on it!
+
+The exercize must be handed in one week.
+</xmp>
+
+For those who want some help on beginning the program, see <a href=myshell.txt> here</a>
+ 
+ &copy; Nachum Danzig 
+
+</body>
+</html>

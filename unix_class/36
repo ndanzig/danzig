@@ -1,0 +1,47 @@
+wiseman 25 >cat shc13
+#!/bin/sh
+ 
+i=0
+while [ $i -lt 5 ]; do
+        i=`expr $i + 1`
+        if [ $i -eq 3 ]; then
+                continue
+        else
+                echo $i
+        fi
+done
+wiseman 26 >shc13
+1
+2
+4
+5
+wiseman 27 >cat shc14
+#!/bin/sh
+ 
+i=0
+while [ $i -lt 5 ]; do
+        i=`expr $i + 1`
+        if [ $i -eq 3 ]; then
+                break
+        else
+                echo $i
+        fi
+done
+wiseman 28 >shc14
+1
+2
+wiseman 29 >cat shc15
+#!/bin/sh
+ 
+i=0
+while [ $i -lt 5 ]; do
+        i=`expr $i + 1`
+        if [ $i -eq 3 ]; then
+                exit
+        else
+                echo $i
+        fi
+done
+wiseman 30 >shc15
+1
+2
