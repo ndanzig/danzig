@@ -1,0 +1,953 @@
+<html><head>
+
+<!-- 
+  <base href="http://sukka.jct.ac.il/~roman/tcp-ip-lab/func-summary.html"> -->
+
+<TITLE>Summary of Socket Functions</TITLE>
+<H1><center>Summary of Socket Functions</center></H1>
+</head>
+
+<body>
+
+<H2><a name="toc">TABLE OF CONTENTS</a></H2>
+<ol>
+<li><a href="#intro">INTRODUCTION</a>
+<li><a href="#data">DATA</a>
+<li><a href="#create">SOCKET CREATION &amp; CLOSING</a>
+<li><a href="#names">SOCKET NAMES</a>
+<li><a href="#recv">READING (RECEIVING)</a>
+<li><a href="#send">WRITING (SENDING)</a>
+<li><a href="#connect">CONNECTIONS</a>
+<li><a href="#host">HOST NAME AND ADDRESS ROUTINES</a>
+<li><a href="#port">PORT (SERVICE) ROUTINES</a>
+<li><a href="#format">NETWORK- AND HOST-FORMAT CONVERSIONS</a>
+<li><a href="#opts">SOCKET OPTIONS</a>
+<li><a href="#ftnt">FOOTNOTES</a>
+</ol>
+
+<!-- ======================================================== -->
+<H2>EDIT HISTORY:</H2>
+<dl>
+
+<dt>09 Sivan 5761 (31/05/2001)
+<dd>Ntohs, etc.: fixed misspelling of one of the functions, and added
+some more notes.
+
+<dt>29 Shvat 5761 (22/02/2001)
+<dd>Start editing for this school year:
+    <ol>
+    <li>Added functions inet_aton, inet_pton, etc.
+    <li>Added links back to table of contents.
+    <li>Added footnotes section.
+    <li>Added horizontal lines between main sections.
+    </ol>
+
+<dt>02 Kislev 5760 (11/11/1999)
+<dd>Added getsockopt and setsockopt.
+
+<dt>02 Kislev 5760 (11/11/1999)
+<dd>Added getsockopt and setsockopt.
+
+<dt>30 Cheshvan 5760 (09/11/1999)
+<dd>Corrected 'INADR_ANY' to 'INADDR_ANY'.
+
+<dt>18 Cheshvan 5760 (28/10/1999)
+<dd><ol>
+    <li>More information about using the 'man' command.
+    <li>Expanded explanation of several the data def_protocol and
+        INADR_ANY.
+    <li>Expanded explanation of several functions, explaining the
+        differences in using it for TCP and for UDP.  Also added a few
+	programming examples (sometimes in pseudocode). 
+    </ol> 
+
+<dt>09 Cheshvan 5760 (19/10/1999)
+<dd>Added note in introduction about the ease of programming UPD
+    versus the ease of programming TCP.
+
+</dl>
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>
+
+<!-- ======================================================== -->
+<hr>
+<H2><a name="intro">1. INTRODUCTION</a></H2>
+
+
+<p>This document describes many of the functions used with sockets.  Some
+are functions that are only for sockets; others are more general
+functions, but have important uses for sockets.  
+
+<p>The purpose of this document is to learn the functions, what they do,
+and what sort of
+data they deal with.  However, the code needed to implement them is
+often verbose, which can hinder a basic understanding
+<a href="#ftnt-01">[1]</a>.
+Therefore, we:
+
+<ul>
+<li>specify the exact name of the function
+<li>specify the exact number of parameters.  
+<li>do NOT specify the exact data type or structure of each parameter
+</ul>
+
+<p>
+For more details on these functions, see the appropriate man(1)
+pages.  'man' is short for 'manual'.  The '(1)' means section 1 of the
+manual. You can view man pages via one of the following ways:
+
+<p><b>General notes:</b>
+<ol>
+<p><li>In this document, &quot;&amp;&quot; indicates a parameter that is
+modified by the function.  This is similar to its meaning in C.
+
+<p><li>It might seem from this document that UDP is easier to
+program than TCP, because less function calls are required.  
+For examples, see <a href="#recv">read/recv</a>, 
+<a href="#shutdown">shutdown</a>, and
+<a href="#listen">listen</a>.
+That is true, however, only if you <em>ignore the reliability issure</em>.
+Otherwise, if you use UDP, you'll have to program in reliability
+yourself, and this can be more complex that the extra function calls
+needed for TCP.
+
+<p><li>References to TCP/IP or the internet are to version 4 of TCP/IP,
+unless stated otherwise.  Version 4 is the version currently in
+widespread use.  Version 6, also called 'next generation', is already
+being implemented, but it is not nearly as common.  This lab deals
+only with version 4.
+</ol>
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>
+
+<!-- ======================================================== -->
+<hr>
+<H2><a name="data">2. DATA</a></H2>
+
+<p>Here are some terms we will commonly use to describe the data.
+Normally, words in all caps specify constants you actually write in
+the C code.
+
+<dl>
+<dt><a name="addr_fam">addr_fam</a>
+<dd>address family, also called a domain.  
+    An address family is a domain of possible addresses.  
+    The most frequently used values are:
+
+	<p>
+	<dl>
+	<dt><a name="AF_UNIX"><tt>AF_UNIX</tt></a> 
+	<dd>UNIX domain.  The address is a UNIX file pathname.
+		This domain is used only between processes running on
+		the same host.
+
+	<dt><a name="AF_INET"><tt>AF_INET</tt></a>
+	<dd> internet domain, for communicating between
+		processes on different hosts.  An address actually
+		consists of the triple
+		( ip_address, transport_protocol, port_number).
+		However, normally you specify only the ip_address &amp;
+		port_number.  The transport_protocol is indicated in
+		other ways (I think, whether or not you call 'connect').
+	</dl>
+
+    <p>
+    Note that the address family constants are often used where the <a
+    href="#proto_fam">protocol family</a> contstants are supposed
+    to be used.  This will work on many systems, but we will consider
+    it wrong in this lab <a href="#ftnt-02">[2]</a>.
+
+<p>
+<dt><a name="bytes_read">bytes_read</a>, 
+    <a name="bytes_written">bytes_written</a> 
+<dd>gets value returned by the read/recv
+	functions.  Set to number of bytes actuallyt read, or to -1 if
+	an error.
+
+<dt><a name="comm_type">comm_type</a>
+<dd>also called the style of communications
+
+	<p>
+	<dl>
+	<dt><a name="SOCK_STREAM"><tt>SOCK_STREAM</tt></a>
+	<dd>there is a connection, which is reliable,
+		error-free, &amp; (as in pipes) no message boundaries are
+		kept.  I believe that specifying this type in the
+		internet address family will cause it to use TCP.
+
+	<dt><a name="SOCK_DGRAM"><tt>SOCK_DGRAM</tt></a>
+	<dd>datagram.  No connection.  Each message
+		addressed individually.  Not guaranteed to be
+		reliable.  Usually used when a response is required;
+		if timeout waiting for a response, assume the original
+		message was NOT received.  In the internet address
+		family, I think this will cause it to use UDP.
+
+	<dt><a name="SOCK_RAW"><tt>SOCK_RAW</tt></a>
+	<dd>a low-level type of communications not normally
+		used by the average user.
+
+	</dl>
+
+<p>
+<dt><a name="def_protocol">def_protocol</a>
+<dd>default transport protocol.  A value meaning that the system
+	should assign the default protocol.  See the 
+	<a href="#socket">socket</a> function.  
+	In C code, this value is 0.  However, I recommend defining
+	some constant with a meaningful name and using that.  For example:
+
+	<blockquote><tt>
+	#define DEFAULT_PROTOCOL 0<br>
+	. . . <br>
+	<a href="#sd">sd</a> = <a href="#socket">socket</a> 
+	( <a href="#PF_INET">PF_INET</a>, 
+	<a href="#SOCK_STREAM">SOCK_STREAM</a>, 
+	DEFAULT_PROTOCOL);
+	</tt></blockquote>
+
+	<p>
+	Note that in TCP/IP, there
+	is only one transport protcol (TCP or UDP) for each communication type
+	(see <a href="#comm_type">comm_type</a>), so this is the value
+	you normally specify for the protocol parameter of the socket
+	function.  
+
+<dt><a name="INADDR_ANY"><tt>INADDR_ANY</tt></a>
+<dd>a special value of IP addresses that means any of the IP
+	addresses for the host.  Remember, a host has a separate IP
+	address for each network interface that it has.  So if you
+	want to be able to accept packets on any of your host's
+	network interfaces, you need to specify this as your host's
+	address.  If you want to accept packets only on one of your
+	host's network interfaces, then specify the IP address of that
+	interface.
+
+	<p>
+	Normally you specify this as your host's IP address, even if
+	your host has only one network interface.
+
+	<p>
+	This value, or your host's IP address, is normally used as
+	part of the <a href="#sname">socket name</a> (or socket address).
+
+<dt><a name="proto_fam">proto_fam</a>
+<dd>which family of protocols to use.  The most frequently used values are:
+
+	<p>
+	<dl>
+	<dt><a name="PF_UNIX"><tt>PF_UNIX</tt></a> 
+	<dd>UNIX domain.  The UNIX family of protocols.  Useful only
+	    if both processes are running on the same host.
+
+	<dt><a name="PF_INET"><tt>PF_INET</tt></a>
+	<dd> THe internet family of protocols, e.g. TCP and UDP.  Use
+	    this if the processes are running on different hosts.
+	</dl>
+
+    <p>
+    Note that sometimes <a href="#addr_fam">address family</a>
+    constants are used where the protocol family contstants are
+    supposed to be used.  This will work on many systems, but it is
+    wrong, and might cause you problems in the future.
+
+<dt><a name="sd">sd</a>
+<dd>socket descriptor.  This is basically a file descriptor that is
+	associated with a socket.  Thus, you can use it with almost
+	any route that deals with files (e.g., read, write, close).
+
+<dt><a name="sname">sname</a>
+<dd>socket name.  In <A HREF="#AF_UNIX"><TT>AF_UNIX</TT></A>, this is
+	a UNIX path name.  In <A HREF="#AF_INET"><TT>AF_INET</TT></A>, this is
+	an IP address &amp; IP port number. 
+
+<dt><a name="sname_len">sname_len</a>
+<dd>length of an <a href="#sname">sname</a>.  Usually, when this is an
+	argument to 
+	a function, then it is set to the maximum length of the 
+	<a href="#sname">sname</a> BEFORE the call.  After the call, it
+	will be set by the function to the actual length of the name. 
+
+<dt><a name="undef_port">undef_port</a>
+<dd>undefined port.  The system will assign an unused port
+	to the socket.  (In C code, this is 0).
+
+</dl>
+
+<!----------------------------------------------------------->
+<!-- In the description of the function call syntax, I put a
+<!-- non-blocking space (&nbsp;) after each parameter.  Without it,
+<!-- netscape put the parameters too close together, and it was
+<!-- sometimes hard to distinguish them.
+<!--
+<!-- To make the HTML more readable, I usually put the status return,
+<!-- function name, and each parameter on a separate line.  However,
+<!-- they will not necessarily appear that way in the browser.
+<!----------------------------------------------------------->
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>
+
+<!-- ======================================================== -->
+<hr>
+<H2><a name="create">3. SOCKET CREATION &amp; CLOSING</a></H2>
+
+<p><a href="#sd">sd</a> = 
+<b><a name="socket">socket</a></b> 
+( <a href="#proto_fam">proto_fam</a>, &nbsp; 
+<a href="#comm_type">comm_type</a>, &nbsp; 
+protocol )
+
+	<blockquote>
+	creates the socket.  For sockets, you use this instead of
+	the <b>open</b> function.  Unlike <b>open</b>, you do not specify the
+	name of the socket.  You can call the 
+	<a href="#bind"><b>bind</b></a> function to do
+	that.  However, there will be times when you do not need to
+	specify a name.
+
+	<p>
+	For the protocol, you usually specify the
+	'<a href="#def_protocol">def_protocol</a>' value
+	to have the system assign the protocol.
+
+	<p>
+	Note that in this call, you should use the
+	<a href="#proto_fam">protocol family</a> constants instead of
+	the address family constants.
+	</blockquote>
+
+<p>status = 
+<b>socketpair</b> 
+( <a href="#proto_fam">proto_fam</a>, &nbsp; 
+<a href="#comm_type">comm_type</a>, &nbsp; 
+&amp;sd_pair )
+
+	<blockquote>
+	<p>
+	This is only for the <A HREF="#PF_UNIX"><TT>PF_UNIX</TT></A>
+	address family, so it will not be used in the TCP/IP lab.
+
+	<p>
+	This function returns a pair of unnamed sockets in sd_pair.  This is
+	designed to be an extension of pipes, in that it allows 2-way
+	communication.  It is designed for communiction between parent
+	and child processes.
+
+	<p>
+	Note that in this call, you should use the
+	<a href="#proto_fam">protocol family</a> constants instead of
+	the address family constants.
+
+	</blockquote>
+
+<p>status = 
+<b>close</b> 
+(<a href="#sd">sd</a>)
+
+	<blockquote>
+	The same 'close' function that is used for files.  As with
+	files, sockets should be closed.
+
+	<p>
+	<b>TCP:</b> In addition, you might need to use the
+	<a href="#shutdown">shutdown</a> function.
+	</blockquote>
+
+<p>status = 
+<a name="shutdown"><b>shutdown</b></a>
+( <a href="#sd">sd</a>, &nbsp; 
+direction )
+
+	<blockquote>
+	Generally, this is sometimes used for TCP, and almost never
+	for UDP.  I'm not an expert in when exactly you need this and
+	when you don't.  To be safe, I usually add it to my TCP code.
+	Below is information based on my best understanding of what I
+	have read.
+	
+	<p><b>TCP</b>: Stops communication in one/both directions, and
+	informs the process you are connected with.  'direction' can
+	specify one ofthe following:
+
+	<ul>
+	<li>I no longer want to <em>receive</em> data
+	<li>I no longer want to <em>send</em> data
+	<li>I no longer want to either <em>receive</em> or <em>send</em> data
+	</ul>
+
+	<p>
+	<b>UDP:</b> stops communication on the socket, but does
+	<em>not</em> inform the process(es) you are communicating with.
+	</blockquote>
+
+<p>status = <b>unlink</b> 
+(socket_name)
+
+	<blockquote>
+	Thisis only for the <A HREF="#AF_UNIX"><TT>AF_UNIX</TT></A>
+	address family, so it will not be used in the TCP/IP lab.
+
+	<p>
+	In the AF_UNIX address family, if you specify a
+	name for the socket, an actual file is created.  In addition
+	to closing the socket, you must also delete it via the
+	<b>unlink</b> function (or the <b>rm</b> command). 
+	</blockquote>
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>
+
+<!-- ======================================================== -->
+<hr>
+<H2><a name="names">4. SOCKET NAMES</a></H2>
+
+<p>status = 
+<a name="bind"><b>bind</b> </a>
+( <a href="#sd">sd</a>, &nbsp; 
+<a href="#sname">sname</a>, &nbsp; 
+<a href="#sname_len">sname_len</a> )
+
+	<blockquote>
+	binds a name to a socket.  
+	For <A HREF="#AF_INET"><TT>AF_INET</TT></A>, name consists of
+	IP adress &amp; IP port.  The IP address is usually specified
+	as <a href="#INADDR_ANY"><tt>INADDR_ANY</tt></a>, which means
+	any of the host's IP address.  If the port is set to <a
+	href="#undef_port">undef_port</a>, then the system will assign
+	an unused IP port to the socket. 
+
+	<p>
+	Actually, in the internet, the protocol is also part of the
+	identification, but that was set in the 
+	<a href="#socket">socket</a> function.
+
+	<p>
+	This is normally called only by servers.  In clients, binding
+	occurs automatically the first time you call one of the
+	<a href="#send">write/send</a> or 
+	<a href="#connect">connect</a> functions.
+
+	<p>
+	For <A HREF="#AF_UNIX"><TT>AF_UNIX</TT></A>, you specify a UNIX path
+	name.  This will create an actual file (of a special type). 
+	</blockquote>
+
+<p>status = 
+<b>getsockname</b> 
+( <a href="#sd">sd</a>, &nbsp; 
+&amp;<a href="#sname">sname</a>, &nbsp; 
+&amp;<a href="#sname_len">sname_len</a> )
+
+	<blockquote>
+	Sometimes you did not set the name of the socket, for
+	example: 
+
+	<ul>
+	<li>if you called <a href="#bind"><b>bind</b></a> where
+	    the IP address = <a href="#INADDR_ANY"><tt>INADDR_ANY</tt></a>
+	    and/or the port = <a href="#undef_port">undef_port</a>.  
+	<li>OR if you bound a name to the socket implicitly via one of the
+	    <a href="#send">write/send</a> or 
+	    <a href="#connect">connect</a> functions.
+	</ul>
+
+	<p>
+	This function will return the name of the socket. 
+	</blockquote>
+
+<p>status = 
+<b><a name="getpeername">getpeername</a></b> 
+( <a href="#sd">sd</a>, &nbsp; 
+&amp;<a href="#sname">sname</a>, &nbsp; 
+&amp;<a href="#sname_len">sname_len</a> )
+
+	<blockquote>
+	<b>TCP:</b>
+	Gets the name of the <em>peer</em>, that is the socket you are
+	connected to.  See the section on
+	<a href="#connect">connections</a>.  Usually you run this after
+	executing the <a href="#accept">accept</a> function.  This
+	function will return the name of the socket.
+
+	<p>
+	<b>UDP:</b>
+	For connection<em>less</em> communication, you can get the
+	name of the remote socket via the
+	<a href="#recvfrom">recvfrom</a> or
+	<a href="#recvmsg">recvmsg</a> functions.
+	</blockquote>
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>
+
+<!-- ======================================================== -->
+<hr>
+<H2><a name="recv">5. READING (RECEIVING)</a></H2>
+
+<b>TCP:</b> when calling <a href="#send">write/send</a> to send a
+packet, the caller will pass a certain amount.  However, TCP might
+break that data up into more than one packet.  That means that the
+read/recv function at the other end might return before reading all
+of the data.  Thus, you'll have to <em>repeatedly</em> call that read/recv
+function until you get all the data.  Here is one way (in pseudocode):
+
+<pre>
+	clear buffer 'save_buffer'
+	bytes_read = read (sd, buf, max_bytes)
+	while ( bytes_read > 0 )
+		append contents of buf to save_buffer
+		bytes_read = read (sd, buf, max_bytes)
+</pre>
+
+<b>UDP:</b> the data the caller specifies is sent in one packet.
+Thus, you need to call read/recv only once for each packet.  However,
+if the packet is bigger than the read/recv call is willing to take, I
+believe that the excess data is <em>discarded</em>.
+
+<p>
+<a href="#bytes_read">bytes_read</a> = 
+<b>read</b> ( <a href="#sd">sd</a>, &nbsp; 
+&amp;buf, &nbsp; 
+max_bytes ) 
+
+	<blockquote>
+	the normal read function.  A maximum of max_bytes is read into
+	buf.  <a href="#bytes_read">bytes_read</a> is set to the
+	actual number of bytes read, or 
+	to -1 if there was an error.
+	</blockquote>
+
+<a href="#bytes_read">bytes_read</a> = 
+<b>readv</b> 
+( <a href="#sd">sd</a>, &nbsp; 
+&amp;buf_set, &nbsp; 
+num_bufs )
+
+	<blockquote>
+	like read, but reads into a set of buffers.  num_bufs = how
+	many buffers there are.
+	</blockquote>
+
+<a href="#bytes_read">bytes_read</a> = 
+<b>recv</b> 
+( <a href="#sd">sd</a>, &nbsp; 
+&amp;buf, &nbsp; 
+max_bytes, &nbsp; 
+flags )
+
+	<blockquote>
+	Like 'read', with the addtion of flags.  Flags can contain one
+	or more of the following:
+
+	<dl>
+	<dt><tt>MSG_OOB</tt>
+	<dd>read out of band data
+
+	<dt><tt>MSG_PEEK</tt>
+	<dd>peek at the data on the socket.  But the data will remain
+	    around, so the next 'recv' will also get it. 
+	</dl>
+
+	</blockquote>
+
+<a href="#bytes_read">bytes_read</a> = 
+<b><a name="recvfrom">recvfrom</a></b> ( <a href="#sd">sd</a>, &nbsp; 
+&amp;buf, &nbsp; 
+max_bytes, &nbsp; 
+flags, &nbsp; 
+&amp;sender_sname, &nbsp; 
+&amp;sender_<a href="#sname_len">sname_len</a> )
+
+	<blockquote>
+	Like recv, but also get the name of the sender.
+	the sender's name.
+	</blockquote>
+
+<a href="#bytes_read">bytes_read</a> = 
+<b><a name="recvmsg">recvmsg</a></b> 
+( <a href="#sd">sd</a>, &nbsp;  
+&amp;msg_header, &nbsp; 
+flags )
+
+	<blockquote>
+	msg_header is a special structure that contains the set of
+	buffers to write to, a buffer to get the access rights, plus
+	(optionally) the name of the socket to send to.
+	</blockquote>
+
+<p>
+Another way to get the name of the remote socket is via the 
+<a href="#getpeername">getpeername</a> function.
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>
+
+<!-- ======================================================== -->
+<hr>
+<H2><a name="send">6. WRITING (SENDING)</a></H2>
+
+<p>
+These functions can be understood by looking at their parallel
+read/recv functions above.
+
+<p>
+<a href="#bytes_written">bytes_written</a> = 
+<b>write</b> 
+( <a href="#sd">sd</a>, &nbsp; 
+buf, &nbsp; 
+buflen )
+
+<p>
+<a href="#bytes_written">bytes_written</a> = 
+<b>writev</b> 
+( <a href="#sd">sd</a>, &nbsp; 
+buf_set, &nbsp; 
+num_bufs )
+
+<p>
+<a href="#bytes_written">bytes_written</a> = 
+<b>send</b> 
+( <a href="#sd">sd</a>, &nbsp; 
+buf, &nbsp; 
+buflen, &nbsp; 
+flags )
+
+	<blockquote>
+	flags can be one or more of the following:
+
+	<dl>
+	<dt><tt>MSG_OOB</tt>
+	<dd>send out of band data
+
+	<dt><tt>MSG_DONTROUTE</tt>
+	<dd>usually used only by diagnostic or routing programs.
+	</dl>
+	</blockquote>
+
+<a href="#bytes_written">bytes_written</a> = 
+<b><a name="sendto">sendto</a></b> 
+( <a href="#sd">sd</a>, &nbsp; 
+buf, &nbsp; 
+buflen, &nbsp; 
+flags, &nbsp; 
+recv_sname, &nbsp; 
+recv_sname_len )
+
+<p>
+<a href="#bytes_written">bytes_written</a> = 
+<b>sendmsg</b> 
+( <a href="#sd">sd</a>, &nbsp; 
+msg_header, &nbsp; 
+flags ) 
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>
+
+<!-- ======================================================== -->
+<hr>
+<H2><a name="connect">7. CONNECTIONS</a></H2>
+
+<p>
+These functions are normally used in TCP, but not UPD.
+
+<p>status = 
+<b><a name="listen">listen</a></b>
+( <a href="#sd">sd</a>, &nbsp; 
+queue_max )
+
+	<blockquote>
+	Before a socket can accept connections, you must call this to
+	set up the queue of waiting connections.
+
+	<p>
+	queue_max specifies
+	the maximum length of the queue.  Once, it could not be more
+	than 5, but some systems now have a much higher maximum.  What
+	happens if you specify a value larger than the system can
+	handle?  On Linux and SunOS, the system maximum is used; no
+	error status is returned.  On Solaris, there is no system maximum.
+	</blockquote>
+
+<p>status = <b>connect</b> 
+( <a href="#sd">sd</a>, &nbsp; 
+other_sname, &nbsp; 
+other_sname_len )
+
+	<blockquote>
+	
+	<p>
+	<b>TCP:</b> Starts a connection between socket <a
+	href="#sd">sd</a> and another socket, other_sock_name.  A
+	socket is normally connected only once. This call starts a
+	connection. 
+
+	<p>
+	<b>UDP:</b> this does not really start a connection, since UDP
+	is connection<em>less</em>, but it can be used to set the
+	sending address.  Thus, after calling this, you can use the
+	<a href="#send">write</a> or <a href="#send">send</a>
+	functions instead of the <a href="#sendto">sendto</a> function.
+	You might call this several times to
+	change the association.  Then you can disconnect by calling
+	this, but specifying an invalid socket name.
+	</blockquote>
+
+<p>status = 
+<b><a name="accept">accept</a></b> 
+( <a href="#sd">sd</a>, &nbsp; 
+&amp;from_sname, &nbsp; 
+&amp;from_sname_len)
+
+	<blockquote>
+	socket <a href="#sd">sd</a> must have been bound to a name,
+	and you must have already run 'listen' on it.  This function
+	extracts the first waiting connection on the queue.
+	from_sname is the name of the socket that was accepted.
+
+	<p>
+	After this returns, you can get the name of the remote socket
+	via the <a href="#getpeername">getpeername</a> function.
+	</blockquote>
+
+<p>shutdown: see <a href="#shutdown">above</a>.
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>
+
+<!-- ======================================================== -->
+<hr>
+<H2><a name="host">8. HOST NAME AND ADDRESS ROUTINES</a></H2>
+
+<p>host_struct =
+<b>gethostbyname</b>
+(hostname)
+
+	<blockquote>
+	Given the host name, get the IP address.  Actually,
+	host_struct might contain more than one valid name and IP address for
+	the specified host.  We will not go into details of this
+	structure here.
+	</blockquote>
+	
+<p>host_struct =
+<b>gethostbyaddr</b>
+(address, &nbsp;
+address_length, &nbsp;
+<a href="#addr_fam">addr_fam</a>)
+
+	<blockquote>
+	Given an IP address, get the host name.  Actually,
+	host_struct might contain more than one valid name and IP address for
+	the specified host.  We will not go into details of this
+	structure here. 
+	</blockquote>
+
+<p>status = 
+<b>gethostname</b>
+( hostname, &nbsp; 
+hostname_len)
+
+	<blockquote>
+	get the name of the current host.
+	</blockquote>
+
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>
+
+<!-- ======================================================== -->
+<hr>
+<H2><a name="port">9. PORT (SERVICE) ROUTINES</a></H2>
+
+<p>
+A 'service' means the type of network service we want.  Examples include
+World Wide Web, telnet, FTP, and daytime.  Standard services are
+associated 'well known' ports.  These functions deal with converting
+service names or port numbers in text string to the binary format
+needed by the socket functions.
+
+<p>service_struct =
+<b>getservbyname</b>
+(service_name, transport_protocol)
+
+	<blockquote>
+	Given the names of a service and a transport protocol (UDP or
+	TCP), get the port number, which will be part of
+	service_struct.  We will not go into details of this structure
+	here. 
+	</blockquote>
+
+<p>service_struct =
+<b>getservbyport</b>
+(port_number, transport_protocol)
+
+	<blockquote>
+	Like <b>getservbyname</b> above, but you pass it a binary port
+	number instead of the name of a service. 
+	</blockquote>
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>
+
+<!-- ======================================================== -->
+<hr>
+<H2><a name="format">10. NETWORK- AND HOST-FORMAT CONVERSIONS</a></H2>
+
+<ol type="A">
+<p><li><b>Byte Order Conversions:</b>
+
+    Different types of computers can store data in different ways.  A
+    common data format was decided upon for communication between hosts
+    via TCP/IP.  These routines convert data from the host format to the
+    network format, or vice-versa.  We will not go into the details of the
+    data conversion here.  We merely list them so that you know that they
+    exist.
+    
+    <p>'long' here means 4 bytes, and 'short' means 2 bytes.
+
+    <p>Note the pattern of the function names.  For example:<br>
+    ntohs &nbsp; = &nbsp; n &nbsp; to &nbsp; h &nbsp; s &nbsp; = &nbsp;
+    network to host, short
+    
+    <p>
+    <table border=2>
+    
+    <tr>
+    <th>FUNCTION</th>
+    <th>FROM FORMAT</th>
+    <th>&quot;TO&quot;
+    <th>TO FORMAT</th>
+    <th>DATA LENGTH</th>
+    </tr>
+    
+    <tr>
+    <td><b>htonl</b></td>
+    <td><b>h</b>ost</td>
+    <td>to</td>
+    <td><b>n</b>etwork</td>
+    <td><b>l</b>ong</td>
+    </tr>
+    
+    <tr>
+    <td><b>htons</b></td>
+    <td><b>h</b>ost</td>
+    <td>to</td>
+    <td><b>n</b>etwork</td>
+    <td><b>s</b>hort</td>
+    </tr>
+    
+    <tr>
+    <td><b>ntohl</b></td>
+    <td><b>n</b>etwork</td>
+    <td>to</td>
+    <td><b>h</b>ost</td>
+    <td><b>l</b>ong</td>
+    </tr>
+    
+    <tr>
+    <td><b>ntohs</b></td>
+    <td><b>n</b>etwork</td>
+    <td>to</td>
+    <td><b>h</b>ost</td>
+    <td><b>s</b>hort</td>
+    </tr>
+    
+    </table>
+
+<p><li><b>IP Address Conversion:</b>
+
+    <ol type="i">
+    <p><li><b>TCP/IP version 4:</b>
+        <ul>
+	<li><b>inet_aton:</b> ASCII to number (string to binary)
+	<li><b>inet_ntoa</b>: number to ASCII (binary to string)
+	<li><b>inet_addr:</b> like inet_aton, but <em>deprecated</em>
+	    <a href="#ftnt-03">[3]</a>.
+	</ul>
+    <p><li><b>TCP/IP versions 4 and 6:</b>
+        <ul>
+	<li><b>inet_pton:</b> presentation to numeric (string to binary)
+	<li><b>inet_ntop:</b> numeric to presentation (binary to string)
+	</ul>
+    </ol>
+
+</ol>
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>
+
+<!-- ======================================================== -->
+<hr>
+<H2><a name="opts">11. SOCKET OPTIONS</a></H2>
+
+<p>
+You can set several socket options and get their current values.  I
+will not list all of the different options here.  See the man pages
+for these functions for more details.
+
+<p>status =
+<b><a name="getsockopt">getsockopt</a></b>
+( <a href="#sd">sd</a>, &nbsp; 
+  protocol_level, &nbsp;
+  socket_option, &nbsp;
+  &quot;value, &nbsp;
+  &quot;value_length )
+
+	<blockquote>
+	The protocol_level specifies to which level the option is
+	relevant.  Examples are the general socket level, the IP
+	level, and the TCP level.
+
+	<p>
+	The socket_option is the specific option we are interested
+	in.
+
+	<p>
+	The value is the data we store the option's value in.  The
+	value_length is the length of that data structure.  The type
+	of the data depends on the option.
+	</blockquote>
+
+<p>status =
+<b><a name="setsockopt">setsockopt</a></b>
+( <a href="#sd">sd</a>, &nbsp; 
+  protocol_level, &nbsp;
+  socket_option, &nbsp;
+  value, &nbsp;
+  value_length )
+
+	<blockquote>
+	Like getsockopt above, but we set the value of the option.
+	</blockquote>
+
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>
+
+<!-- ======================================================== -->
+<hr>
+<H2><a name="ftnt">FOOTNOTES</a></H2>
+
+<table border="2">
+
+<tr><a name="ftnt-01"></a><td align="right"> 1 </td>
+    <td> One reason is that the socket interface is designed not only for
+    normal TCP/IP [version 4], but also the next generation of TCP/IP
+    [version 6], 'UNIX' sockets [pipes], Novell IPX, and many others.
+    In Linux, see /usr/include/bits/socket.h for the different
+    protocol families defined for sockets. </td>
+    </tr>
+
+<tr><a name="ftnt-02"></a><td align="right"> 2 </td>
+    <td> In his book, <i>UNIX Network Programming</i>, 2nd Edition,
+    section 4.2, W. Richard Stevens argues that, for TCP/IP at least,
+    there is no need to distinguish between address and protocol
+    families.  However, in this lab, we require that you do.</td>
+    </tr>
+
+<tr><a name="ftnt-03"></a><td align="right"> 3 </td>
+    <td> <i>deprecated</i> means that its use is discouraged. </td>
+    </tr>
+
+</table>
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>
+
+<!-- ======================================================== -->
+<HR>
+This page maintained by Haim Roman 
+(<a href="mailto:roman@mail.jct.ac.il">roman@mail.jct.ac.il</a>).
+
+</body>
+</html>

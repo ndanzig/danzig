@@ -1,0 +1,358 @@
+/* FILE: udp_daytime_server.c
+ *
+ *   ========================================================
+ *   === NOTE: I have compiled this, but have not yet tested it.
+ *   ===
+ *   === (Haim Roman, 28 Cheshvan 5760, 07 Nov 1999)
+ *   ========================================================
+ *
+ * This demonstrates a simple UDP server for the daytime service.
+ * This service sends back the current date & time in string format.
+ **********************************************************************/
+
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/time.h>
+#include <time.h>
+#include <unistd.h>
+
+/* My error codes */
+#define MY_ERR_SOCKET      1  /* could not open the socket */
+#define MY_ERR_BIND        2  /* could not bind to a port */
+#define MY_ERR_RECV        3  /* receive error */
+#define MY_ERR_IP_TO_TEXT  4  /* error converting IP address to text */
+#define MY_ERR_TIME        5  /* error getting/converting time */
+#define MY_ERR_SEND        6  /* error getting/converting time */
+
+/*******************************************************************
+ *******************************************************************
+ * open_socket -- open a socket & return the socket descriptor.  If
+ *     this fails, print an error message and abort the process.
+ *******************************************************************
+ *******************************************************************/
+#define DEFAULT_PROTOCOL 0  /* use the default protocol (socket call) */
+
+int
+open_socket()
+{
+  int sd;  /* socket descriptor */
+
+  sd = socket (PF_INET, SOCK_DGRAM, DEFAULT_PROTOCOL);
+  if (sd < 0)
+    {
+      perror ("Could not create socket");
+      exit(MY_ERR_SOCKET);
+    }
+
+  return (sd);
+}
+
+/*******************************************************************
+ *******************************************************************
+ * init_socket -- initialize the socket address structure.  We'll
+ *      initialize to the standard daytime port.
+ *******************************************************************
+ *******************************************************************/
+#define DAYTIME 13          /* port # for daytime service */
+
+void
+init_socket (struct sockaddr_in *sap)
+{
+  /**********************************************************************/
+  /* initialize the socket address structure to all zeros */
+  /* */
+  /* Nowadays one is encouraged to use the memset(3) function instead  */
+  /* of bzero.  I maight change this later.  Note however, that memset  */
+  /* has a slightly different syntax in SunOS and Linux.  */
+  /**********************************************************************/
+  bzero ((char *)sap,                  /* starting location to initialize */
+	 sizeof(struct sockaddr_in) ); /* how many characters */
+
+  
+  /**********************************************************************/
+  /* Set the address family, IP address, & port*/
+  /**********************************************************************/
+  sap->sin_family = AF_INET;
+  /* bcopy ((const void *)INADDR_ANY,
+	 (void *)sap->sin_addr,
+	 4); */
+  sap->sin_addr.s_addr   = INADDR_ANY;  /* use any of my internet interfaces */
+  sap->sin_port   = htons (DAYTIME);
+
+  return;
+}
+
+/*******************************************************************
+ *******************************************************************
+ * bind_to_a_socket -- bind the socket to a port.  It's passed a
+ *     socket's descriptor and address.  The socket address is already
+ *     initialized, which means that it includes a port to bind to.
+ *     If we cannot bind to that port, then we'll try having the
+ *     system choose a port for us.  If we still cannot bind, then
+ *     we'll print a message on stderr and abort the process.
+ *******************************************************************
+ *******************************************************************/
+#define CHOOSE_A_PORT_FOR_ME  0  /* let system choose a port */
+
+void
+bind_to_a_socket (
+   int                 sd,   /* socket descriptor */
+   struct sockaddr_in *sap)  /* pointer to socket address */
+{
+  socklen_t sockaddr_len;
+  int       status;
+
+  /******************************************************************/
+  /* Note that bind expects a generic socket address, that is type */
+  /* 'sockaddr', so we must cast the socket address pointer to that type. */
+  /******************************************************************/
+  status = bind (sd,  (struct sockaddr *)sap,  sizeof (struct sockaddr_in) );
+
+  /******************************************************************/
+  /* if we could not bind to that port, then let the system choose one */
+  /******************************************************************/
+  if (status < 0)
+    {
+      perror ("could not bind to the default port");
+      sap->sin_port = CHOOSE_A_PORT_FOR_ME;
+      status = bind (sd,  (struct sockaddr *)sap,
+		     sizeof (struct sockaddr_in) );
+      if (status < 0)
+	{
+	  perror ("could not bind to a port");
+	  exit (MY_ERR_BIND);
+	}
+    }
+
+  /******************************************************************/
+  /* if we get this far, we've succeeded.  Get & print the port we are */
+  /* using.  Note that we have to convert the port from network order */
+  /* to host order.  */
+  /******************************************************************/
+
+  sockaddr_len = (socklen_t) sizeof (struct sockaddr_in);
+  status = getsockname (sd,
+			(struct sockaddr *) sap,
+			&sockaddr_len);
+  if (status < 0)
+    {
+      perror ("getsockname call");
+      exit (MY_ERR_BIND);
+    }
+
+  printf (">>> Bound to port %d\n",  ntohs (sap->sin_port) );
+  return;  
+}
+
+/*******************************************************************
+ *******************************************************************
+ * get_request -- get a request.  We don't care about the content of
+ *     the message, just who sent it.  So we return the socket address
+ *     of the client.  We'll also print on stdout who it is.
+ *******************************************************************
+ *******************************************************************/
+#define RECV_FLAGS 0        /* no flags for receiving a message */
+void
+get_request (
+     int                 sd,     /* my socket descriptor */
+     struct sockaddr_in *other)  /* other's socket address.  We set this. */
+{
+  char  buf[1];     /* buffer for receiving.  Essentially empty. */
+  char *ip_string;  /* points to text string containing the IP number */
+  int   num_bytes;
+  int   other_len;
+
+  /******************************************************************/
+  /* The recvfrom function requires that we initialize the length of */
+  /* the socket address */
+  /******************************************************************/
+  other_len = sizeof (struct sockaddr_in);
+
+  /******************************************************************/
+  /* Wait until we get a message.  We don't care about the contents */
+  /* of the message, so the max buffer size is 0.  If there is an */
+  /* error, print a message and abort.  */
+  /******************************************************************/
+  num_bytes = recvfrom (sd,
+			(void *)buf, 0,    /* receive buffer & its max len */
+			RECV_FLAGS,        /* receive flags */
+			other, &other_len); /* other's socket & length */
+  if (num_bytes < 0)
+    {
+      perror ("receive failed");
+      exit (MY_ERR_RECV);
+    }
+
+  /******************************************************************/
+  /* If got this far, we succeeded.  Now we print the IP and port */
+  /* of the client.  First, convert the IP to text. */
+  /* */
+  /* W. Richard Stevens, in his book __UNIX Network Programming__, */
+  /* suggests using the inet_ntop() function instead, since it also */
+  /* supports IP version 6 (the current version is 4).  inet_ntop() */
+  /* exists on our Linux Systems, but I could not find documentation. */
+  /* So I use inet_ntoa() instead. */
+  /******************************************************************/
+  ip_string = inet_ntoa (other->sin_addr);
+  if (ip_string == NULL)
+    {
+      fprintf (stderr, "Could not convert client's IP address to text\n");
+      exit (MY_ERR_IP_TO_TEXT);
+    }
+
+  /******************************************************************/
+  /* Now convert the port to a string and print. */
+  /* We have to convert the port from network to host order. */
+  /******************************************************************/
+ printf ("===============\n>>> Received request from IP %s, port %d\n",
+	  ip_string, ntohs (other->sin_port) );
+ return;
+}
+
+/*******************************************************************
+ *******************************************************************
+ * get_current_time -- get the current date and time, conver it to a
+ *       text string, and return a pointer to that string.
+ *******************************************************************
+ *******************************************************************/
+
+char *
+get_current_time ()
+{
+  /************************/
+  /* DATA                 */
+  /************************/
+
+  time_t           num_seconds;  /* time in number of seconds */
+  int              status;
+  char            *time_string;
+  struct timeval   time_value;
+  struct timezone  time_zone;
+
+  /************************/
+  /* Get the current time. */
+  /************************/
+  status = gettimeofday (&time_value, &time_zone);
+  if (status < 0)
+    {
+      perror ("Could not get current time");
+      exit (MY_ERR_TIME);
+    }
+
+  /************************/
+  /* Extract the field that gives the time in terms of number of */
+  /* seconds, and convert it to text. */
+  /************************/
+  time_string = ctime (&num_seconds);
+  if (time_string == NULL)
+    {
+      fprintf (stderr, "Converting time to string gives NULL pointer");
+      exit (MY_ERR_TIME);
+    }
+
+  /************************/
+  /* Print the current time */
+  /************************/
+  printf (">>> current time = /%s/\n", time_string);
+  return(time_string);    
+}
+
+/*******************************************************************
+ *******************************************************************
+ * reply_to_other -- send the time string to the client.
+ *******************************************************************
+ *******************************************************************/
+
+#define SEND_FLAGS 0  /* flags for sending a message */
+
+void
+reply_to_other (int sd,                    /* my socket descriptor */
+		struct sockaddr_in *other, /* other's socket address */
+		char *time_string)         /* time string */
+{
+  int num_bytes;  /* number of bytes actually sent */
+  int time_len;   /* length of time string */
+
+
+  time_len = strlen (time_string);
+
+  num_bytes =
+    sendto (sd,
+	    time_string,
+	    time_len,
+	    SEND_FLAGS,                    /* flags for sending */
+	    (struct sockaddr *)other,      /* must cast the socket address */
+	    sizeof (struct sockaddr_in) ); /* length of socket address */
+
+  if (num_bytes < 0)
+    {
+      perror ("Error sending time packet");
+      exit (MY_ERR_SEND);
+    }
+  else if (num_bytes < time_len)
+    {
+      fprintf (stderr,
+	       "Sent only %d out of %d chars of the time string\n",
+	       num_bytes, time_len);
+    }
+
+  return;
+}
+
+/*******************************************************************
+ *******************************************************************
+ * MAIN FUNCTION
+ *******************************************************************
+ *******************************************************************/
+int
+main ()
+{
+  /************************/
+  /* DATA                 */
+  /************************/
+
+  struct sockaddr_in   me;     /* my socket address */
+  struct sockaddr_in   other;  /* other's socket address */
+  int                  sd;     /* socket descriptor */
+  int                  status;
+  char                *time_str; /* pointer to current time, in text */
+
+  /**********************************************************************/
+  /* Open a socket.  If this fails, the routine will abort this process */
+  /**********************************************************************/
+  sd = open_socket();
+
+  /**********************************************************************/
+  /* Initialize the socket address.  The socket address will contain */
+  /* the standard port for the daytime service, even though we might */
+  /* might be forced to use a different port later. */
+  /**********************************************************************/
+  init_socket (&me);
+
+  /**********************************************************************/
+  /*  Bind to a socket.  We will attempt to bind to the standard */
+  /*  daytime port.  If we can't (which we won't be able to if we're */
+  /*  not super-user), then have the system pick a port for us.  Then */
+  /*  we print the port that we're using on stderr.  */
+  /* */
+  /*  If the 2nd bind attempt fails, abort the process. */
+  /**********************************************************************/
+  bind_to_a_socket (sd, &me);
+
+  /**********************************************************************/
+  /* infinite loop of getting and replying to requests.  The program */
+  /*  ends when it is killed.  As usual, errors will cause the program */
+  /*  to abort. */
+  /**********************************************************************/
+  while (1)
+    {
+      get_request (sd, &other);
+      time_str = get_current_time();
+      reply_to_other (sd, &other, time_str);
+    }
+}

@@ -1,0 +1,19 @@
+FILE: sockets/non-socket
+
+pipes -- designed for 1-way (half duplex) communication.  Can be used
+	for 2-way (full duplex), but it's very complicated.  Only on
+	same host.
+
+files -- can be across hosts if there is NFS.
+
+shared memory -- only on same host.
+
+signals -- only on same host.  limited amt of information.
+
+RPC -- between hosts.  Includes mechanism (XDR) for
+	architecture-independent data (sockets must use the byte-order
+	conversion macros described in byteorder(3n).  Don't know much
+	about it from programming perspective.
+
+
+

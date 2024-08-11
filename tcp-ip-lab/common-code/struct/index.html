@@ -1,0 +1,60 @@
+<!-- FILE: struct/index.html  -->
+<HTML>
+<HEAD>
+<TITLE>Structures, Holes, and Unions in C</TITLE>
+<H1>Structures, Holes, and Unions in C</H1>
+</HEAD>
+
+
+<BODY>
+   
+<b>LAST EDIT:</b> 10 Iyar 5761 (2001/05/03)
+
+<p>
+When you have a data area where you would like to access both as one
+long byte buffer, and as a data structure composed of different types,
+then you'll probably want to use a combination of the <em>struct</em>
+and <em>union</em> in C.  
+
+<p>
+Note that a struct can leave holes.  Some hardware platforms
+require that multi-byte variables (e.g., int, long int) start at
+addresses that are multiples of 2 or 4 bytes, and will insert unused
+bytes between adjacent variables to enforce this.
+
+<p>
+Here are some programs that demonstrate this.  They differ in the data
+structures used as an example:
+
+    <blockquote>
+    <ol>
+    <li><a href="struct-gen.c">General</a> data structure
+    <li>similar to a <a href="struct-tftp-data.c">TFTP data packet</a>
+    <li>similar to a <a href="struct-tftp-req.c">TFTP request packet</a>
+    </ol>
+    </blockquote>
+
+These programs also shows the following:
+
+    <blockquote>
+    <ul>
+    <li>the size of certain data types.
+    <li>the order that bytes are stored in multi-byte variables.
+    </ul>
+    </blockquote>
+
+<p>
+After studying the short program, you should compile and run the
+programs, and study the output.  Ideally, you should run them on
+different platforms, but currently JCT only makes Linux available to
+you.  
+
+<p>
+Some/most compilers have ways of telling the compiler <em>not</em> to
+insert holes between variables.  Here is how to do it in 
+<a href="packing-in-gcc.txt">GNU C</a>
+
+</BODY>
+</HTML>
+
+

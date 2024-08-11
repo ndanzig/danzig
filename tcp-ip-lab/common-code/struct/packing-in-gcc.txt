@@ -1,0 +1,70 @@
+		  HOW TO PACK VARIABLES IN GNU C/C++
+		  ==================================
+
+LAST EDIT: 10 Iyar 5761, 2001/05/03, Haim Roman
+
+gcc version egcs-2.91.66 19990314/Linux (egcs-1.1.2 release)
+
+The following is an excerpt from GNU C's documentation (emacs info
+format) explaining how to "pack" variables (i.e., prevent the compiler
+from inserting "holes", or unused bytes, between variables).
+
+NOTE: this is one of GNU's *extensions* to standard C/C++.  
+      Other C/C++ compilers will probably use different methods
+      (if they have one)
+
+=============================================================
+
+Specifying Attributes of Variables
+==================================
+
+   The keyword `__attribute__' allows you to specify special attributes
+of variables or structure fields.  This keyword is followed by an
+attribute specification inside double parentheses.  Eight attributes
+are currently defined for variables: `aligned', `mode', `nocommon',
+`packed', `section', `transparent_union', `unused', and `weak'.  Other
+attributes are available for functions (*note Function Attributes::) and
+for types (*note Type Attributes::).
+
+   You may also specify attributes with `__' preceding and following
+each keyword.  This allows you to use them in header files without
+being concerned about a possible macro of the same name.  For example,
+you may use `__aligned__' instead of `aligned'.
+
+`packed'
+     The `packed' attribute specifies that a variable or structure field
+     should have the smallest possible alignment--one byte for a
+     variable, and one bit for a field, unless you specify a larger
+     value with the `aligned' attribute.
+
+     Here is a structure in which the field `x' is packed, so that it
+     immediately follows `a':
+
+          struct foo
+          {
+            char a;
+            int x[2] __attribute__ ((packed));
+          };
+
+====================================================================
+
+Here are some examples from /usr/include/net/ethernet.h (Red Hat 6.2 Linux):
+
+/*-------------------------------------------------------
+  This is a name for the 48 bit ethernet address available on many systems.  
+  -------------------------------------------------------*/
+struct ether_addr
+{
+      u_int8_t ether_addr_octet[ETH_ALEN];
+} __attribute__ ((__packed__));
+
+/*-------------------------------------------------------
+  10Mb/s ethernet header   
+  -------------------------------------------------------*/
+struct ether_header
+{
+      u_int8_t    ether_dhost[ETH_ALEN];      /* destination eth addr */
+      u_int8_t    ether_shost[ETH_ALEN];      /* source ether addr    */
+      u_int16_t   ether_type;                 /* packet type ID field */
+} __attribute__ ((__packed__));
+

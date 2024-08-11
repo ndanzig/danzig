@@ -1,0 +1,15 @@
+#!/usr/bin/perl -w
+# FILE: pvt-to-pub
+
+use English:
+
+while ($line = <>)
+{
+    if ($line !~ /^<tr bgcolor=/)  {print ($line);}
+    else
+    {
+	@array = split (' ', $line);
+	$array[3] = $array[4] = "";
+	print ( join (' ', @array) );
+    }
+}

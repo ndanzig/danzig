@@ -1,0 +1,52 @@
+<!-- FILE: tcp-fragmenting.html -->
+<HTML>
+<HEAD>
+<TITLE>Example of TCP Stream Fragmenting</TITLE>
+<H1>Example of TCP Stream Fragmenting</H1>
+</HEAD>
+
+
+<BODY>
+   
+<b>LAST EDIT:</b> 25 Aug 2003
+
+<p>
+As mentioned in the function summary (in pseudo-code), in the 
+<a href = "../func-summary.html#recv">section on reading and receiving</a>,
+when reading or receiving a stream in a TCP application, you cannot
+know in advance how TCP will fragment the stream of data.
+Thus, what is sent in one write/send call, might need several
+read/recv calls.  See 
+<a href = "../func-summary.html#recv">there</a>.
+
+<p>
+The code here shows an example.  Here are the files:
+
+<ul>
+<li>The <a href="large-stream-cli.c">client</a>, or sender.
+<li>The <a href="large-stream-serv.c">server</a>, or receiver.
+<li>The <a href="Makefile">Makefile</a>, to show you how to compile
+    them.  If you are not familiar with the 'make' command, you can type 'man
+    make', or, better, read about 'make' via emacs' info mode.
+<li>Here are other files that are needed to build these programs:
+    <ul>
+    <li>Code to convert <a href="../common-code/socket_address.c">strings
+        to socket addresses</a>, and vice-versa.
+    <il>Code to check for <a href="../common-code/null_str.c">null
+        strings and pointers</a>.
+    </ul>
+</ul>
+
+<HR>
+Lab Instructor: Nachum Danzig
+
+<p>
+Mr. Danzig can be reached at:<br>
+<A HREF="mailto:danzig@jct.ac.il">danzig@jct.ac.il</A>.<br>
+Wyler Building, room 232, Sun-Thur 13:30 - 14:30<br>
+Telephone at work: 02-675-1218
+
+</BODY>
+</HTML>
+
+

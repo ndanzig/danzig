@@ -1,0 +1,152 @@
+<html><head>
+
+<!-- <base href="http://shekel.jct.ac.il/~roman/tcp-ip-lab/related-functions"> -->
+<TITLE>Functions and Include Files Related to Socket Programming</TITLE>
+<H1>Functions and Include Related to Socket Programming</H1>
+</head>
+
+<body>
+<HR>
+
+<b>LAST EDIT:</b> 15 Tevet 5761, 2001/12/30
+
+<h1>FUNCTIONS</h1>
+
+<p>
+These are functions that don't directly work with sockets, but that
+one often needs when programming sockets.
+
+    <blockquote>
+    NOTE: some of these functions have since been added to the
+    document describing the socket functions in pseudo-code.
+    </blockquote>
+
+<ol type="I">
+<p><li>HOSTS: Converting between host name and IP address
+    <ul>
+    <li><a href="gethostbyname.c">gethostbyname:</a>
+        converting from host name to IP address
+    <li><a href="gethostbyaddr.c">gethostbyaddr:</a>
+        converting from IP address to host name
+    </ul>
+
+<p><li>IP address manipulation:
+    <ul>
+    <li>inet_ntoa: convert IP address from binary format to text string:
+        <ul>
+	<li>In <a href="gethostbyname.c">gethostbyname</a>
+	<li>In <a href="gethostbyaddr.c">gethostbyaddr</a>
+	</ul>
+    <li>inet_addr: convert IP address from text string to binary format.
+        In  <a href="gethostbyaddr.c">gethostbyaddr</a>
+    </ul>
+
+<p><li>PORTS: Mapping service names to ports (e.g., on which port is TFTP?)
+    <ul>
+    <li><a href="getservbyname.c">getservbyname:</a>
+        given a service name (& protocol), find its port.
+    <li><a href="getservbyport.c">getservbyport:</a>
+        given a TCP/UDP port (& protocol), find the service name.
+    </ul>
+
+<p><li>INTERRUPTS: Signals and alarms
+   <ul>
+   <li><a href="signal.c">signal</a> function.
+   <li><a href="alarm.c">Setting alarms:</a> the alarm and signal functions.
+   </ul>
+
+<p><li>TIME: Getting and displaying the current time: the gettimeofday and
+    ctime functions.   In <a href="alarm.c">alarm.c</a>.
+
+<p><li>CHILD PROCESSES
+
+    <ul>
+    <li>fork function.  Demonstrated in <a href="wait.c">wait.c</a>.
+    <li>wait function: if the child dies before the parent calls the
+        wait function, the child becomes a zombie (or defunct).  The
+        program <a href="wait.c">wait.c</a> lets you demonstrate
+        this.
+    </ul>
+
+<p><li><tt>select</tt>: when waiting for input from more than one possible
+    source.  This is one way for a server to handle more than one client
+    at a time.
+    
+
+    <p>In POSIX-compliant systems, there is a similar function called
+    <tt>pselect</tt>. 
+
+<p><li>VARARGS/STDARG: how to write functions that accept a variable number of
+    arguments.
+    The famous <tt>printf</tt> function is a example of a
+    function that needs one of these mechanisms, because it does not know in
+    advance how many arguments it will be passed, nor what type they
+    will be.
+
+    <p>
+    <em>varargs</em> is an older mechanism, and is supported both by
+    SunOS cc and GNU C (gcc).  Do <tt>man varargs</tt> for more
+    information.  <em>stdarg</em> has similar syntax.
+    It is part of the ANSI C standard, and
+    thus is supported by GNU C.  However, it is NOT supported by SunOS cc.
+
+    <ul>
+    <li>varargs
+        <ul>
+	<li><a href="http:varargs-regular.c">Regular Example</a>
+	<li><a href="http:varargs-pass-it-on.c">Pass it on:</a>
+            a function that receives varargs and passes it on to another
+	    function.
+	<li><a href="http:varargs-for-macros.c">For macros:</a>
+	    a GNU C extension defining varargs for macros.
+        </ul>
+    <li><a href="stdarg-regular.c">stdarg: regular example</a>
+    </ul>
+
+<p><li>BYTE MANIPULATION: these are similar to functions
+<tt>strncpy</tt>, <tt>strncmp</tt>, etc.  However the str* functions
+are for text.  The following are either for text or for binary data:
+
+    <ol type="A">
+    <li>b*
+        <ul>
+	<li><tt>bzero:</tt> initialize a block of bytes to zero
+	<li><tt>bcopy:</tt> copies a block of bytes to another address
+	<li><tt>bcmp:</tt>  compares 2 blocks of bytes
+	</ul>
+    <li>mem*
+        <ul>
+	<li><tt>memset:</tt> initialize a block of memory to a given
+	value.  This is more flexible than  <tt>bzero</tt> above,
+	because you can choose the initial value.
+	<li><tt>memcpy:</tt> similar to bcopy.
+	<li><tt>memove:</tt> similar to memcpy.
+	<li><tt>memcp:</tt> similar to bcmp.
+	</ul>
+    </ol>
+
+</ul>
+
+<!------------------------------------------------------>
+
+<hr>
+<h1>INCLUDE FILES</h1>
+
+<p>
+Here are some include files you might find useful in writing programs
+for this lab.  Most of them are under the directory /usr/include, but
+some might be under /usr/local/include.  These files are for <b>SunOS</b>; I
+can't guarantee that they exist on other flavors of UNIX.  
+
+<p>
+In addition, I do not necessarily mention include files that are
+mentioned in the man pages of the various functions you might call.
+
+<ul>
+<li>#include &lt;arpa/tftp.h&gt;
+<li>#include &lt;sys/socket.h&gt;
+<li>#include &lt;sys/param.h&gt;
+</ul>
+
+</body>
+</html>

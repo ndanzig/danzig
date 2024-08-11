@@ -1,0 +1,122 @@
+<html><head>
+
+<!-- <base href="http://shekel.jct.ac.il/~roman/tcp-ip-lab/"> -->
+<TITLE>TFTP: Trivial File Transfer Protocol</TITLE>
+<H1>TFTP: Trivial File Transfer Protocol</H1>
+</head>
+
+<body>
+
+<!---------------------------------------------------------->
+
+<p>
+You are probably familiar with FTP, the File Transfer Protocol.  TFTP
+is a much simpler protocol for transferring files between machines.
+One use of TFTP is when a machine boots up and needs to get a file
+from another machine (e.g., the Axil stations in the JCT UNIX lab).
+
+<p>
+This page contains links to information about TFTP, since you will be
+required to write a TFTP server.  
+
+<!---------------------------------------------------------->
+<HR>
+<h2><a name="rfc">RFCs</a></h2>
+
+<p>
+<a href="rfc1350.txt">RFC 1350</a> is the document describing the
+protocol.  'RFC' stands for 'Request For Comments'; most/all of the
+standard TCP/IP protocols are described in an RFC. If you  prefer, read the 
+<a href="rfc1350-french.html">RFC in French</a>.
+
+
+<p>
+In addition, we have the other RFCs related to TFTP.  You will
+probably <em>not</em> need them for this lab, but I am including them
+in case you are interested:
+
+<dl>
+
+<dt><a href="rfc906.txt">RFC 906</a>
+<dd>Bootstrap loading using TFTP.
+
+<dt><a href="rfc1785.txt">RFC 1785</a>
+<dd>TFTP Option Negotiation Analysis.
+
+<dt><a href="rfc2090.txt">RFC 2090</a>
+<dd>TFTP Multicast Option.
+
+<dt><a href="rfc2347.txt">RFC 2347</a>
+<dd>TFTP Option Extension.
+
+<dt><a href="rfc2348.txt">RFC 2348</a>
+<dd>TFTP Blocksize Option.
+
+</dl>
+
+<!---------------------------------------------------------->
+<HR>
+<h2>TFTP Clients</h2>
+
+<p>
+There are TFTP clients that you can use to test the server you write.
+There is one called <tt>atftp</tt> (or just <tt>tftp</tt>) on the UNIX
+lab workstations.  The 'a' stands for advanced; it supports various
+extensions to TFTP (see the <a href="#rfc">RFCs</a> above).
+
+<p>
+The client in interactive.  Inside the command, you'll probably want
+to run the following commands:
+
+<ul>
+<li>mode &nbsp;&nbsp; octet
+<li>trace
+<li>verbose
+<li>connect &nbsp;&nbsp; <i>host</i>  &nbsp;&nbsp; <i>port</i>  &nbsp;&nbsp;
+(can also specify this on the command line)
+<li>get &nbsp;&nbsp; <i>file_on_server</i>  &nbsp;&nbsp; <i>file_on_client</i>
+<li>put &nbsp;&nbsp; <i>file_on_server</i>  &nbsp;&nbsp; <i>file_on_client</i>
+</ul>
+
+
+<p>
+There is also a client on host beitza.  This is a different version of
+the client, but the user interface is almost the same.  The advantage
+of the beitza client is that you can type abbreviations of the above
+commands. 
+
+<p>
+If you want to get a feel for using TFTP, there is a TFTP server
+running on host p-roman.  You can read the file r-00, r-01, and r-02.
+You can write to the files w-00, w-01, ..., w-19.  You can also read
+these files, so you can check the write was done correctly.
+
+<!---------------------------------------------------------->
+<HR>
+<h2>The TFTP Server Project</h2>
+
+Your project is to write a TFTP server.  Click 
+<a href="../admin/project.html">here</a> for information about the
+project.
+
+<!---------------------------------------------------------->
+<HR>
+<h2>Edit History</h2>
+
+<dl>
+
+<dt>2001/05/15, 22 Iyar 5761, Haim Roman
+<dd><ol>
+    <li>Updated info about the TFTP clients.
+    <li>Added link to info about project.
+    <li>Deleted info about the instructors.  It was out of date.
+    We'll provide that info in one place: the lab's home page.
+    </ol>
+
+<dt>1998/12/03, 14 Kislev 5759, Haim Roman
+<dd>???????????
+
+</dl>
+
+</body>
+</html>

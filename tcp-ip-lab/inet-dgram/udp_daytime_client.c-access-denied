@@ -1,0 +1,147 @@
+/* FILE: upd_daytime_client.c
+ *
+ * SYNOPSIS:  upd_daytime_client host port
+ *
+ * DESCRIPTION:
+ *
+ *	Sends a packet to the specified host & gets the time of day
+ *	as an ASCII string.  If host not specified, use "avoda".
+ ***************************************************************/
+
+#include <netinet/in.h>
+#include <netdb.h>
+#include <stdio.h>
+#include <stdlib.h>     /* for atoi() */
+#include <sys/types.h>
+#include <sys/socket.h>
+
+#define DAYTIME 13  /* port # for daytime service */
+#define DEFAULT_PROTOCOL 0  /* use the default protocol (socket call) */
+
+#ifndef HOST_NAME_MAX
+#define HOST_NAME_MAX 256
+#endif
+
+#ifndef PORT_NAME_MAX
+#define PORT_NAME_MAX 7   /* 6 digits + a null character */
+#endif
+
+#define RECV_BUFF_MAX 256
+#define SEND_FLAGS 0  /* no flags for sending a message */
+
+char default_host[] = "avoda";
+
+int
+main (int argc, char **argv)
+{
+  struct hostent     *hep;   /* Host Entry Pointer (gethostbyname) */
+  char                host_str [HOST_NAME_MAX];
+  int                 iport;   /* port # in integer format */
+  int	              num_bytes;   /* # bytes sent/received */
+  char		      port_str [PORT_NAME_MAX];
+  char                recv_buff [RECV_BUFF_MAX];
+  struct sockaddr_in  sadd;  /* socket address */
+  int                 sd;    /* socket descriptor */
+
+  /*****************************************/
+  /* parse the command line */
+  /*****************************************/
+
+  if (argc != 3)
+    {
+      fprintf (stderr, "ERR: Usage: upd_daytime_client host port\n");
+      exit (2);
+    }
+  strncpy (host_str, argv[1], HOST_NAME_MAX);
+  printf ("    Host name = %s\n", host_str);
+
+  strncpy (port_str, argv[2], PORT_NAME_MAX);
+  printf ("    Port name = %s\n", port_str);
+
+  /*****************************************/
+  /* Create the socket */
+  /*****************************************/
+  sd = socket (PF_INET, SOCK_DGRAM, DEFAULT_PROTOCOL);
+  if (sd < 0)
+    {
+      perror ("ERR: Could not create the socket");
+      exit (1);
+    }
+  printf ("    socket descriptor = %d\n", sd);
+
+  /*****************************************/
+  /* Compile the receiver's socket address */
+  /*****************************************/
+
+  /* initialize */
+  bzero ( (char *)&sadd, sizeof(sadd) );
+
+  /* address family: internet */
+  sadd.sin_family = AF_INET;            
+
+  /* server's IP address */
+  hep = gethostbyname (host_str);       
+  if (hep == NULL)
+    {
+      perror ("ERR: gethostbyname failed");
+      exit (3);
+    }
+  bcopy ( (char *)hep->h_addr,    /* copy IP address from host entry struct */
+	  (char *)&(sadd.sin_addr),  /* to the socket address struct */
+	  hep->h_length );        /* this many bytes */
+
+  /* Port of server */
+  iport = atoi (port_str);
+  if (iport <= 0)
+    {
+      fprintf (stderr, "Invalid port # %d\n", iport);
+      exit (1);
+    }
+  sadd.sin_port = htons ( (u_short) iport );
+
+  /*****************************************/
+  /* Send an empty message to the daytime server */
+  /*****************************************/
+  num_bytes = sendto (
+		      sd,            /* socket descriptor */
+		      "",            /* empty message */
+		      0,             /* # bytes to send */
+		      SEND_FLAGS,    /* flags for sending */
+		      &sadd,         /* address of receiving socket */
+		      sizeof(sadd)); /* length of socket struct */
+  if (num_bytes < 0)
+    {
+      perror ("Error sending the message");
+      exit (4);
+    }
+
+  /*****************************************/
+  /* Get the reply */
+  /*****************************************/
+  num_bytes = read (sd, recv_buff, RECV_BUFF_MAX);
+  if (num_bytes  < 0)
+    {
+      perror ("Error reading reply");
+      exit (5);
+    }
+
+  /*****************************************/
+  /* Display the reply*/
+  /*****************************************/
+  if ( recv_buff [num_bytes-1] == '\0' )
+    {printf ("    Reply WAS null-terminated\n");}
+  else
+    {
+      printf ("    Reply was NOT null-terminated\n");
+      recv_buff [num_bytes] = '\0';
+    }
+
+  printf ("    Received %d bytes\n", num_bytes);
+  printf (recv_buff);
+
+  /*****************************************/
+  /* FInish up */
+  /*****************************************/
+  close (sd);
+  exit (0);
+}	  

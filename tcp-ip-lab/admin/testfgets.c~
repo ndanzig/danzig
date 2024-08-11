@@ -1,0 +1,12 @@
+#include <stdio.h>
+
+int main()
+{
+  char array[100];
+
+  printf("enter string ");
+  fgets(array,100, stdin);
+  printf("\n%s", array)
+
+  return 1;
+}

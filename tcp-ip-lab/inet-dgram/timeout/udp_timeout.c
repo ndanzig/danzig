@@ -1,0 +1,284 @@
+/* FILE: udp_timeout.c -- this program demonstrates the use of
+   timeouts with UDP socket programming (you should be able to easily
+   apply this to TDP applications, too).
+
+   In his book, 'UNIX Network Programming', Vol. 1: 'Networking APIs:
+   Sockets and XTI' (2nd edition), W. Richard Stevens explains 3 ways
+   to implement timeouts.  In order to give examples of each method,
+   with a minimum of duplication, we'll use the same main function
+   (this file) for each method.  The actual receiving with timeout
+   will be implemented in the function 'receive_or_timeout' function,
+   which will be defined in a second file.  There will be different
+   versions of this second file: one for each timeout method.
+
+   Note that there might be a third file: functions called by more
+   than one version of the 'receive_or_timeout' function.
+   
+   This program does the following.
+
+   	I.  Create a socket, bind it to a port, and print the port
+
+	II. loop forever:
+
+		A. wait for a message, with a timeout set.
+
+		B. if a message arrives before we time out:
+
+			1. print the message
+
+			2. if the message begins with 'quit' or 'exit',
+			   then the program exits
+
+		C. else print ar message saying that we timed out
+
+   This program is called withOUT any arguments.
+   =========================================================
+*/
+
+#include <netinet/in.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+
+#define TIME_OUT  15  /* time out limit, in seconds */
+
+/*===================================================
+  == socket_to_str -- given a socket address, extact the host and
+  ==     port, and convert them to text strings.
+  ===================================================
+*/
+extern void
+socket_to_str (
+    struct sockaddr_in *sap, /* pointer to the socket addrss structure */
+    char *str_host_ip,       /* host IP address string */
+    char *str_host_name,     /* host name string - might not 
+				be implemented yet. */
+    char *str_port);         /* port # string */
+
+
+/*===================================================
+  == receive_or_timeout -- receive a message from the client, or
+  ==     time out.  Possible return values are:
+  ==
+  ==         0 or more -- # bytes received
+  ==         -1        -- timed out
+  ==         -2        -- socket error
+  ==
+  ==     This function will print any error or informational messages
+  ==     necessary.  It will NOT abort the process upon an error.
+  ===================================================
+*/
+
+extern int
+receive_or_timeout (const int           my_socket_descriptor,
+		    struct sockaddr_in *sender_socket_address, /* output arg */
+		    char               *mesg,                  /* output arg */
+		    const int           mesg_max,
+		    const int           timeout_in_seconds);
+
+/*===================================================
+  == create_and_bind_socket -- creates the socket, binds it to a port,
+  ==     and prints the port on stdout.  If unsuccessful, prints an
+  ==     error message & exits.
+  ==
+  ==     If successful, returns the socket descriptor of the socket.
+  ===================================================
+*/
+
+/* for socket(): let system choose a transport protocol for us */
+#define DEFAULT_PROTOCOL 0
+
+/* for bind(): let system choose a port for me */
+#define CHOOSE_PORT_FOR_ME 0
+
+int
+create_and_bind_socket ()
+{
+  /*-----------------------------------------
+    --- DATA
+    -----------------------------------------
+  */
+
+  u_int16_t           my_port;
+  struct sockaddr_in  my_sockaddr; 
+  int                 sd;
+  socklen_t	      sockaddr_len; /* length of socket address */
+  int                 status;
+
+  /*-----------------------------------------
+    --- CREATE THE SOCKET
+    -----------------------------------------
+  */
+
+  sd = socket (PF_INET, SOCK_DGRAM, DEFAULT_PROTOCOL);
+  if (sd < 0)
+    {
+      perror ("Could not create socket");
+      exit (1);
+    }
+
+  /*-----------------------------------------
+    --- BIND IT TO A PORT.  NEED TO INITIALIZE THE SOCKET ADDRESS STRUCTURE.
+    -----------------------------------------
+  */
+
+
+  /* initialize socket address to all zeros */
+  bzero ((char *)&my_sockaddr,  sizeof (my_sockaddr) );
+
+  /* Now set the values of the fields */
+  my_sockaddr.sin_family      = AF_INET;
+  my_sockaddr.sin_port        = CHOOSE_PORT_FOR_ME;
+  my_sockaddr.sin_addr.s_addr = htonl (INADDR_ANY);
+
+  /* bind to a port.  Abort if cannot. */
+  status = bind (sd,                              /* socket descriptor */
+		 (struct sockaddr *)&my_sockaddr, /* socket address */
+		 sizeof (my_sockaddr) );          /* socket address length */
+
+  if (status < 0)
+    {
+      perror ("Could not bind");
+      exit (1);
+    }
+
+  /*-----------------------------------------
+    --- GET THE PORT WE BOUND TO & PRINT IT
+    -----------------------------------------
+  */
+
+  /* Initialize the length of the socket address, for getsockname().  
+     We need to store it in a variable, because getsockname() will
+     change this value */
+  sockaddr_len = (socklen_t) sizeof (my_sockaddr);
+
+  /* Get the full name (address) of my socket.  If can't, print a
+     message and abort */
+  status = getsockname (sd,  &my_sockaddr,  &sockaddr_len);
+  if (status < 0)
+    {
+      perror ("Could not get socket name (address)");
+      exit (1);
+    }
+
+  /* Extract the port from the socket address structure, & print it. */
+  my_port = ntohs (my_sockaddr.sin_port);
+  printf ("Bound to port # %u\n", my_port);
+
+  /*-----------------------------------------
+    --- IF WE'VE GOTTEN THIS FAR, EVERYTHING'S OK.  RETURN THE SOCKET
+    --- DESCRIPTOR. 
+    -----------------------------------------
+  */
+
+  return (sd);
+}
+
+/*===================================================
+  == print_sender_and_message
+  ===================================================
+*/
+
+void
+print_sender_and_message (struct sockaddr_in *sender_sockaddr,
+			  char *mesg)
+{
+  /*-----------------------------------------------
+    --- DATA
+    -----------------------------------------------*/
+
+  char str_host_name[500];
+  char str_host_ip[20];  /* NNN.NNN.NNN.NNN, & a little extra for safety */
+  char str_port[10];
+
+  /*-----------------------------------------------
+    --- ACTION
+    -----------------------------------------------*/
+
+  /* Print the machine we received from. */
+  socket_to_str (sender_sockaddr,
+		 str_host_ip,  str_host_name,  str_port);
+  printf ("Received from host %s, port %s\n", str_host_ip,  str_port);
+  
+
+  /* print the message & exit */
+  printf ("Message = /%s/\n", mesg);
+  return;
+}
+
+/*===================================================
+  == exit_if_appropriate -- exit if the client has sent the
+  ==     appropriate command.
+  ===================================================
+*/
+
+/* Different versions  of the exit/quit command.  I have to declare the
+   bound of the second dimension, but we don't reference this value
+   below.  */
+char exit_cmd [] [5] = {
+  "quit", "QUIT", "Quit",
+  "exit", "EXIT", "Exit",
+  "" };
+
+void
+exit_if_appropriate (char *mesg)
+{
+  int i;
+
+  /* see if the first part of the message matches any of the versions
+     of the exit/quit command */
+  for ( i = 0;  strlen (exit_cmd[i]) > 0;  i++)
+    {
+      if ( strcmp (exit_cmd[i], mesg) == 0 )
+	{
+	  printf ("Received %s command: exiting\n", exit_cmd[i]);
+	  exit (0);
+	}
+    }
+
+  /* if got this far, then do NOT exit */
+  return;
+}
+
+/*===================================================
+  == MAIN FUNCTION
+  ===================================================
+*/
+
+#define MESG_MAX 256
+
+int
+main ()
+{
+  /*-----------------------------------------
+    --- DATA
+    -----------------------------------------
+  */
+
+  char                mesg [MESG_MAX];
+  struct sockaddr_in  sender_sockaddr;
+  int 		      sd; /* socket descriptor */
+  int                 num_bytes;
+
+  /*-----------------------------------------
+    --- ACTION
+    -----------------------------------------
+  */
+
+  sd = create_and_bind_socket();  /* if error, print message & abort */
+
+  while (1)
+    {
+      num_bytes = receive_or_timeout (sd, &sender_sockaddr,
+				   mesg, MESG_MAX-1,
+				   TIME_OUT);
+      if (num_bytes >= 0)
+	{
+	  mesg [num_bytes] = '\0';
+	  print_sender_and_message (&sender_sockaddr, mesg);
+
+	  exit_if_appropriate (mesg);
+	}
+    }
+}

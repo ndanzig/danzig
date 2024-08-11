@@ -1,0 +1,133 @@
+<title>Footnotes</title>
+<strong><a name=footnote0>**** Footnote: 0***</a></strong><br>
+<a name=index582>Some</a> of these protocols, particularly those dated April 1,
+can be described as impractical at best.  For instance, RFC 1149 (dated 1990
+April 1) describes the transmission of IP datagrams by carrier pigeon and RFC
+1437 (dated 1993 April 1) describes the transmission of people by electronic
+mail.
+<hr>
+<strong><a name=footnote1>**** Footnote: 1***</a></strong><br>
+<a name=index675>Prior</a> to 1993, the NIC function was performed by the DDN
+NIC (nic.ddn.mil).  See RFC 1400 for more information about this transition.
+<hr>
+<strong><a name=footnote2>**** Footnote: 2***</a></strong><br>
+Older implementations, such as TCP/IP for MVS prior to Version 3 Release 1 and
+TCP/IP for VM prior to Version 2 Release 3 used 14.0.0.0 as the loopback
+address. Where an implementation supports both, such as the current MVS and VM
+versions, 127.0.0.1 is to be preferred to 14.0.0.0.
+<hr>
+<strong><a name=footnote3>**** Footnote: 3***</a></strong><br>
+In IPv6 (see <a href="3376c216.html#ipv6">IP Version 6 (IPv6)</a>) IGMP is
+integrated into ICMP, since all IPv6 hosts will be required to support
+multicasting. In IPv4, multicasting support is optional so, unlike IP and ICMP,
+IGMP is not required.
+<hr>
+<strong><a name=footnote4>**** Footnote: 4***</a></strong><br>
+In general, the distance will be measured in hops, but strictly speaking the
+TTL value is, as always,  ``the time in seconds, with each hop being a minimum
+of one second''.
+<hr>
+<strong><a name=footnote5>**** Footnote: 5***</a></strong><br>
+The ATM Forum is a worldwide organization, aimed at promoting ATM within the
+industry and the end-user community. The membership includes more than 500
+companies representing all sectors of the communications and computer
+industries as well as a number of government agencies, research organizations
+and users.
+<hr>
+<strong><a name=footnote6>**** Footnote: 6***</a></strong><br>
+Internet-Drafts may be obtained using anonymous FTP from directory
+Internet-Drafts from a number of sites, including ds.internic.net. The status
+of draft documents can be found in the file 1id-abstracts.txt in the same
+directory.
+<hr>
+<strong><a name=footnote7>**** Footnote: 7***</a></strong><br>
+Topologically, header translators, or other IPv6-capable routers, connected to
+multiple IPv6-complete areas have the effect of combining these areas into a
+single IPv6-complete area. The same applies to IPv4-complete areas as well.
+<hr>
+<strong><a name=footnote8>**** Footnote: 8***</a></strong><br>
+Daemon, pronounced ``demon'', is a UNIX term for a background server process.
+Usually, daemons have names ending with a ``d''. An analogous concept for MVS
+is a server running in a separate address space from TCP/IP, for VM it is a
+separate service virtual machine, for OS/2 it is a separate OS/2 session, and
+so on.  Although TCP/IP servers are often implemented differently on different
+platforms, the <i>routed</i> daemon is implemented like this on each of these
+platforms.
+<hr>
+<strong><a name=footnote9>**** Footnote: 9***</a></strong><br>
+This keepalive message is implemented in the application layer, and is
+independent of the keepalive message available in many TCP implementations.
+<hr>
+<strong><a name=footnote10>**** Footnote: 10***</a></strong><br>
+RFC 1267 uses uppercase to name BGP messages, so we shall do the same in this
+section.
+<hr>
+<strong><a name=footnote11>**** Footnote: 11***</a></strong><br>
+At the time of writing there were nine root servers.  The current list is
+available by anonymous FTP from ftp.rs.internic.net in the file
+netinfo/root-servers.txt
+<hr>
+<strong><a name=footnote12>**** Footnote: 12***</a></strong><br>
+VM also supports 14.0.0.0 as a loopback address for compatibility with older
+releases.
+<hr>
+<strong><a name=footnote13>**** Footnote: 13***</a></strong><br>
+MVS also supports 14.0.0.0 as a loopback address for compatibility with older
+releases.
+<hr>
+<strong><a name=footnote14>**** Footnote: 14***</a></strong><br>
+Use of the *ANY *ANY entry to route mail for unknown recipients via SMTP is not
+recommended because it may cause the mail to loop indefinitely.
+<hr>
+<strong><a name=fnuuencod>**** Footnote: 15***</a></strong><br>
+<a name=index1611>UUencode</a> and UUdecode are a pair of UNIX  utilities for
+encoding 8-bit binary data in a form that is safe for use with the UUCP
+program.  This approach is in common use, but is not an Internet standard.  It
+is inferior to MIME in most respects, but will safely transmit encoded 8-bit
+binary data through 7-bit ASCII gateways.  It is not reliable through all
+gateways that perform ASCII-EBCDIC translation.
+<hr>
+<strong><a name=footnote16>**** Footnote: 16***</a></strong><br>
+RFC 822 format messages are not restricted to SMTP (RFC 821) networks but may
+be transmitted over any network supporting 7-bit ASCII (for example, UUCP
+networks).  STD 11/RFC 822 format messages can also be encoded in EBCDIC and
+transmitted over RSCS/NJE networks, although problems arise with the mapping of
+certain characters such as ``['' and ``]'' which are syntactically important in
+RFC 822 header fields.
+<hr>
+<strong><a name=footnote17>**** Footnote: 17***</a></strong><br>
+The reason for this departure is that MIME allows for deeply nested
+encapsulation, but encodes text in such a way as to reversibly spill text lines
+at or before column 76 to avoid the lines being spilled irreversibly by
+non-conforming SMTP agents.  The RFC 934 quoting mechanism can result in lines
+being lengthened with each level of encapsulation, possibly past column 76.
+<hr>
+<strong><a name=footnote18>**** Footnote: 18***</a></strong><br>
+The underscore character is not strictly mail-safe, but it is used because the
+use of any other character to indicate a SPACE would seriously hamper
+readability.
+<hr>
+<strong><a name=footnote19>**** Footnote: 19***</a></strong><br>
+System Object Model is the technology used to implement the object-oriented
+Workplace Shell Environment in OS/2 Version 2 and OS/2 Warp Version 3.
+<hr>
+<strong><a name=footnote20>**** Footnote: 20***</a></strong><br>
+A MIB view is a subset of the set of all instances of all object types defined
+according to SMI.
+<hr>
+<strong><a name=footnote21>**** Footnote: 21***</a></strong><br>
+snmpEventID.i is an SNMPv2 manager-to-manager MIB object which shows the
+authoritative identification of an event.
+<hr>
+<strong><a name=footnote22>**** Footnote: 22***</a></strong><br>
+ASN.1 BER specifies the Basic Encoding Rules according to ISO 8825 which are
+used in OSI Abstract Syntax Notation one.
+<hr>
+<strong><a name=footnote23>**** Footnote: 23***</a></strong><br>
+ILMI (Interim Local Management Interface) defined by ATM Forum to provide
+standardized management information and formats until the official ITU-T
+(former CCITT) standard is produced.
+<hr>
+<strong><a name=footnote24>**** Footnote: 24***</a></strong><br>
+UNI(User Network Interface)
+<hr>

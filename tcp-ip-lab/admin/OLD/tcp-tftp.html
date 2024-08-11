@@ -1,0 +1,117 @@
+<!-- FILE: tcp-tftp.html  -->
+<HTML>
+<HEAD>
+<TITLE>TCP TFTP: Protocol and Requirements</TITLE>
+<H1>TCP TFTP: Protocol and Requirements</H1>
+</HEAD>
+
+
+<BODY>
+   
+<b>LAST EDIT:</b> 21 Tevet 5760  (30/12/1999)
+     
+<ol type="I">
+<p><li><b>INTRODUCTION</b> --
+    This project is to write a TFTP-like server that is based on TCP
+    instead of UDP.  Other differences between this server and the UDP
+    one are as follows:
+
+    <ol type="A">
+    <p><li>We let TCP worry about reliability, so this protocol does not
+        have to.
+
+    <p><li>We'll use the telnet client as the client for this server.
+        For this reason, this protocol will use text commands, and
+        we'll assume that all the files we transfer will be text.
+
+    <p><li>Your server must be able to handle more than one client at a time.
+    </ol>
+
+<p><li><b>PROTOCOL</b>
+    After starting the server, telnet to the server's host and port.
+    This starts the connection.  At this point, the user types one of
+    the following commands at the telnet client:
+
+    <ol type="A">
+    <p><li><tt>get</tt> <i>filename</i> -- the server will then transfer
+        the specified file to the client.  The telnet client will
+        simply display this on the screen (this is one reason we will
+        deal only with text files).  After transferring the file, the
+        server will write one additional line containing only the word
+        'eof' (end of file) to the client.  Note that this last line
+        cannot have any spaces before the 'eof'.
+
+    <p><li><tt>put</tt> <i>filename</i> -- the client intends to send a
+        file to the server.  The telnet client will not actually read
+        a file; instead the user types in a message at the screen of
+        the telnet client (this is another reason we will deal only
+        with text files).  This message can be more than one line.
+	The client signals that he is done by
+        typing a line containing only the word 'eof'.
+
+    <p><li><tt>bye</tt> -- this ends the connection.  Note that the
+        server does <em>not</em> exit.  Rather, he just ends the
+        connection with this client.
+    </ol>
+
+    <p>
+    When appropriate, the server can send an error message to the
+    client.  Each line of the error message should start with
+    <tt>ERR:</tt>.
+
+<p><li><b>OTHER REQUIREMENTS</b>
+
+    <ol type="A">
+    <p><li>The server must log the following:
+        <ol type="1">
+	<li>the port it is listening on
+
+	<li>beginning of each connection, and the IP number and port
+	    of the client.
+
+	<li>end of each session.
+
+	<li>each file transfer, including the name of the file.
+
+	</ol>
+
+    <p><li>Prevent buffer overflows.  For example, use
+        <tt>str</tt><b>n</b><tt>cpy()</tt> instead of <tt>strcpy()</tt>.
+
+    <p><li>If you use <tt>fork()</tt> to handle more than one client
+       at a time, output from different child processes might get
+       mixed up in the output.  Don't worry about that.
+
+    <p><li>The server must respond appropriately to invalid requests.
+
+    </ol>
+
+<p><li><b>SUGGESTIONS</b>
+    <ol type="A">
+    <p><li>I suggest using <tt>fork()</tt> instead of
+       <tt>select()</tt> to handle more than one client at a time.
+
+    <p><li>The telnet client appends carriage return and linefeed
+        characters at the end of each line it sends.  Be aware of this
+        when you extract the file name from the requests.  I hope to
+        post a function that will help in this.
+
+    </ol>
+
+</ol>
+
+<p>
+Good luck.
+
+<HR>
+Lab Instructor: Haim [Howard] Roman  
+<A HREF="mailto:roman@mail.jct.ac.il">roman@mail.jct.ac.il</A>.<br>
+Wyler Building, rooms 230 or 225, Sun-Thur 13:30 - 14:30<br>
+Telephone at work: 02-675-1207/1160, at home: 02-996-3502
+        
+    
+
+</BODY>
+</HTML>
+
+

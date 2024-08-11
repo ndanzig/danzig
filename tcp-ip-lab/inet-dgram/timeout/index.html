@@ -1,0 +1,120 @@
+<!-- FILE: index.html  -->
+<HTML>
+<HEAD>
+<!-- <base 
+href="http://www-cc.jct.ac.il/~danzig/tcp-ip-lab/inet-dgram/timeout/index.html"> -->
+<TITLE>Implementing Timeouts in UDP</TITLE>
+<H1>Implementing Timeouts in UDP</H1>
+</HEAD>
+
+
+<BODY>
+   
+<b>EDIT HISTORY:</b>
+<dl>
+<dt>09 Kislev 5760 (18/11/1999)
+<dd>Created.
+</dl>
+
+<p>
+Because UDP does not provide any reliabilty services for protocols
+that are built on top of it,
+such higher-level protocols have to implement reliability themselves.
+For an example, see <a href="../../tftp/index.html">TFTP</a>.
+
+<p>
+One type of reliability mechanism is called 'timeout'.  When you wait
+for a request/reply, you might be waiting forever.  Thus, you'll
+probably want to implement a timeout, so that after a certain amount
+of time, you'll assume that you'll never get one.  
+
+<p>
+In his book, <i>UNIX Network Programming (volume 1: Networking APIs:
+Sockets and XTI)</i>, W. Richard Stevens presents the following ways
+to implement timeouts:
+
+<dl>
+<dt><b>select(2) function</b>
+<dd>select is normally used when you are expecting I/O to/from more
+    than one file/socket.  You tell it which file/socket descriptors
+    that you are waiting for, and it returns when I/O is ready on at
+    least one of them.  But is also has a parameter specifying a
+    timeout; if that time expires <em>before</em> any I/O is ready,
+    select will also return.
+
+    <p>
+    Thus, when waiting for a request/reply on a socket, you can all
+    collect specifying only that socket, and a timeout.
+
+<dt><b>alarm(2) function</b>
+<dd>You pass the alarm function a time.  When that time is up, it will
+    generate an alarm signal (called SIGALRM).  If the process is
+    <em>blocked</em> in a read/recv function call (that is, it called
+    the function, and it is waiting for input), then the alarm signal
+    will cause it to return.
+
+    <p>
+    There are 2 problems with this approach:
+    <ol>
+    <li>exactly how signals are handled can differ between different
+        types of UNIX.  Also, not all system call functions might be
+        interrupted by an alarm signal.
+    <li>If the program calls alarm in more than one place, the
+        different calls might interfere with each other.
+    </ol>
+
+<dt><b>socket options: SO_RCVTIMEO and SO_SNDTIMEO</b>
+<dd>These represent timeouts for reading/receiving (SO_RCVTIMEO) and
+    writing/sending (SO_SNDTIMEO).  You set these options via the
+    setsockopt(2) function.  Note that once you set them, they apply
+    to all subsequent read/recv (or write/send) calls.
+
+    <p>
+    The problem is that not all UNIX versions implement these options.
+</dl>
+
+<p>
+The goal of this document is to demonstrate all 3 approaches.  The C
+code consists of 3 layers:
+
+<ol>
+<li>The top layer (the main function), which is common to all
+    approaches.  This is the file 
+    <a href="udp_timeout.c">udp_timeout.c</a>.
+
+<li>The middle layer, which is different from each approach.  In each
+    approach, I have the same function, 'receive_or_timeout' 
+    with the same parameters, but the implementation is different.
+    This function is called by the top layer.
+
+    <p>
+    Currently, I have code only for one approach: using select.  The
+    file is: <a href="via_select.c">via_select.c</a>.
+
+<li>The bottom layer, which is also common to all approaches.  These
+    contain functions that are called by more than one of the
+    different versions of the 'receive_or_timeout' function.  The
+    files are:
+
+    <ul>
+    <li><a href="socket_address.c">socket_address.c</a> -- converting
+        from strings to the sockaddr_in structure, and vice-versa.
+    <li><a href="common.c">common.c</a> -- other functions common to
+        more than one approach.
+    </ul>
+</ol>
+
+<p>
+To see how to compile and link the program, here is the 
+<a href="Makefile">Makefile</a>.
+
+<HR>
+Lab Instructor: Nachum Danzig 
+<A HREF="mailto:problems@jct.ac.il">problems@jct.ac.il</A>.<br>
+Wyler Building, rooms 232, Sun-Thur 13:30 - 14:30<br>
+Telephone at work: 02-675-1218
+        
+</BODY>
+</HTML>
+
+

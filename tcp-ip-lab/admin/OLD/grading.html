@@ -1,0 +1,327 @@
+<!-- FILE: grading.html  -->
+<HTML>
+<HEAD>
+<!-- <base href="http://shekel.jct.ac.il/~roman/grading"> -->
+<TITLE>Grading for the TCP/IP Lab (Fall 4760)</TITLE>
+<H1>Grading for the TCP/IP Lab (Fall 4760)</H1>
+</HEAD>
+
+
+<BODY>
+
+<b>EDIT HISTORY:</b>
+<dl>
+<dt>09 Shvat 5760 (16/01/2000)
+<dd>Added more explanation to the test of writing the function that
+    converts strings to a socket address structure.
+
+<dt>04 Shvat 5760 (11/01/2000)
+<dd>Revised how many points for each piece of work.
+
+<dt>04 Shvat 5760 (11/01/2000)
+<dd>Added link to results of projects and tests.
+
+<dt>21 Tevet 5760 (30/12/1999)
+<dd>Added link to the a href="tcp-tftp.html">TCP-TFTP protocol</a>.
+
+<dt>07 Tevet 5760 (16/12/1999)
+<dd>Eliminated the last project and the last 2 tests.
+
+<dt>29 Cheshvan 5760 (08/11/1999)
+<dd>Added an explanation how being
+    <a href="#early-late">early or late</a> affects the grade.
+
+<dt>28 Cheshvan 5760 (07/11/1999)
+<dd>Added that in project 1, one does not need to worry about 
+    <a href="#timeout">timeouts</a>.
+
+<dt>21 Cheshvan 5760   (31/10/1999)
+<dd>Created.
+</dl>
+
+<hr>
+Related sites:
+<ul>
+<li><a href="schedule.html">lab schedule</a>
+<li><a href="results.html">project and test results</a>
+</ul>
+
+<hr>
+<ol type = "I">
+<li><b>INTRODUCTION</b><br>
+       Grading will be based on projects and a few small tests.  These
+       are described below.  Your grade will be divided up as follows:
+
+       <!-- Note that if you change the table below, change it also in
+         -- the results/grades document. -->
+       <p>
+       <table border="2">
+       <tr><th>Points</th>
+           <th>Unit</th>
+           <th>Description</th>
+       </tr>
+
+       <tr></tr>  <!-- create thicker line between rows -->
+
+       <tr><td align="right">25</td>
+           <td>Project 1</td>
+           <td><a href="#tftp-1">TFTP server (small files)</a></td>
+       </tr>
+
+       <tr><td align="right">25</td>
+           <td>Project 2</td>
+           <td><a href="#tftp-2">TFTP server (regular files)</a></td>
+       </tr>
+
+       <tr><td align="right">25</td>
+           <td>Project 3</td>
+           <td><a href="#tftp-tcp">TCP-based TFTP-like server (more than one
+               client at a time)</a></td>
+       </tr>
+
+       <tr></tr>  <!-- create thicker line between rows -->
+
+       <tr><td align="right">10</td>
+           <td>Test 1</td>
+           <td><a href="#test-1">converting socket address to/from
+	       text</a></td>
+       </tr>
+
+       <tr></tr>  <!-- create thicker line between rows -->
+
+       <tr><td align="right">5</td>
+           <td>Attendance (nochachut)</td>
+           <td>These are the points you get if you have attended at
+               least 7 sessions.  Those who are exempt from this
+               requirement will not be penalized.</td>
+       </tr>
+
+       <tr><td align="right">10</td>
+           <td>Being on time</td>
+           <td>You get these points if you turn all your projects and
+               do the test on time.  That means that being late for a
+               project will result in losing 3 points.  Being late for
+               the test means losing 1 point. You still get 5 extra
+	       points for submitting a project early (see below). </td>
+       </tr>
+
+       </table>
+
+       <p>
+       The basic idea of grading is that you will more or less master
+       each project/test.  Thus, your grade is mostly dependent upon how many
+       of the units above you complete.  Someone who decided that
+       getting an 80 in this class was enough might choose to just do
+       projects 1-3 and test 2.  There are 2 ways to vary how many
+       points you get on any one unit:
+
+       <ul>
+       <li><a name="early-late">Being late or early:</a>
+           <ol type="A">
+	   <li>If you are do all the following before the project is due:
+               <ol type="1">
+	       <li><a href="#submit">submit</a> the project <em>and</em> 
+	       <li>are tested orally on the project <em>and</em> 
+	       <li>take associated test on it
+	           (e.g., writing basic servers and clients)
+	       </ol>
+
+	       <p>
+               then you will get an additional 5 points.  The test
+               should be arranged in advance; if you come to be tested 
+               without scheduling in advance, the instructor might not
+               have time.
+
+	   <li>See the schedule for what is considered 
+	       <a href="schedule.html#deadlines">on time</a>.
+	   <li>If you are upto one week late, 5 points will be
+	       deducted from your grade.
+	   <li>If you are later than that, 10 points will be deducted
+	       from your grade.
+	   <li>If you have miluim or some other good reason why you
+	       will be absent for part of the time, tell me as soon as
+	       possible.  You can send e-mail to
+	       <a href="mailto:roman@mail.jct.ac.il">roman@mail.jct.ac.il</a>.
+	   </ol>
+       <li>There might be some variation on how many points you get
+           for a particular project, based on the criteria
+	   <a href="#improve-proj-grade">below</a>.
+       </ul>
+
+<li><b>PROJECTS</b><br>
+    <ol type = "A">
+    <li><b>The code</b><br>
+           Each project consists of a program to write.  The program
+           must be in C or C++, and it must compile and run under
+           one of the following versions of UNIX:
+
+           <p>
+	   <ul>
+	   <li>Linux -- which is what the PCs in the UNIX room run.
+	   <li>SunOS -- which is what the Axil computers in the UNIX
+               room run.  
+           </ul>
+
+	   <p>
+	   I recommend Linux.
+
+    <li><b><a name="submit">Submitting</a></b><br>
+           Send each of your source files to:
+	   <a href="mailto:roman@mail.jct.ac.il">roman@mail.jct.ac.il</A>.
+	   The words 'TCP/IP project' should be in the subject line.  Each
+           source file should be in a different mail message.  One
+           mail message should contain explanations (see below).
+
+	   <p>
+	   Let's say that your program is in 3 files: main.c, sub.c,
+	   and local.h.  Then, use the following command on Linux to
+	   mail them to me:
+
+	   <pre>
+/bin/mail -s 'TCP/IP project: 1 of 4: main.c' roman@mail &lt; main.c
+/bin/mail -s 'TCP/IP project: 2 of 4: sub.c' roman@mail &lt; sub.c
+/bin/mail -s 'TCP/IP project: 3 of 4: local.h' roman@mail &lt; local.h
+	   </pre>
+
+	   Then the 4th mail message would contain compilation and
+	   running instructions, whether to compile and run under
+	   Linux or SunOS, who wrote the program, and a list of
+	   files that I should have received.  If mailing from SunOS
+	   (zara21-27), use <tt>/usr/ucb/mail</tt> instead of
+	   <tt>/bin/mail</tt>. 
+
+    <li><b>Testing on the project</b><br>
+           Each student will be tested <em>individually</em> to make
+           sure that he understands the entire program, including why
+           the program was written the way it was.  If he wrote the
+           program together with someone else, then each student must
+           understand what his partner did.
+
+    <li><b><a name="improve-proj-grade">How to improve your grade</a></b><br>
+           <ol type="1">
+	   <li>You code should be easily understandable.  This means 
+	       not only comments, but self-commenting code (e.g.,
+	       meaningful variable names), good use of subroutines,
+	       and doing things in a straight-forward way.
+	   <li>Your program should work.
+	   <li>Good error handling.  I don't mind if your program
+	       aborts on many errors, but there should at least be an
+	       error message that explains why it is aborting.
+	   <li>Do <em>not</em> allow buffer overrun.  For example, use
+	       <tt>str<b>n</b>cpy</tt> instead of <tt>strcpy</tt>.
+	       Buffer overruns are one of the most common sources of
+	       security holes in UNIX systems.
+	   <li>Do <em>not</em> complicate your program with unrelated
+	       features (e.g., MS-Windows or X Windows GUI).  
+	   </ol>
+
+    <li><b><a name="tftp-1">Project 1: TFTP Server, Stage
+           1</a></b><br> First, you'll have to learn the <a
+           href="../tftp">TFTP protocol</a>.  Then you'll write the
+           server.  We'll test the serer using the 'tftp' command,
+           which is a TFTP client that comes with SunOS (e.g., hosts
+           beitza, avoda, zara21-27).  We'll simplify the task in the
+           following ways:
+
+	   <ol type="1">
+	   <li>Do not worry about the different modes (e.g., octet or
+	       netascii).  Do not bother to convert the format of the
+	       contents of the file.  (this is true for all stages of
+	       the project).
+	   <li>Assume that all files fit into one packet (i.e., 512
+	       bytes or less).  Note that you'll still have to deal
+	       with acknowledgement packets.
+	   <li>In fact, the server does not need to actually
+	       read/write files.  When it sends a file to the client,
+	       it can just send the contents of a pre-defined buffer.
+	       When it receives a file from the client, it can log the
+	       first several bytes and then throw the data away.
+	   <li>It need handle only one client at a time.
+	   <li>Do not bother with
+	       <a name="timeout">timeouts</a>
+	       (i.e., with handling the
+	       case where the client does not respond after a long time).
+	   </ol>
+
+	   <p>
+	   Aside from implementing the rest of the protocol, the TFTP
+	   server should log every packet it sends or receives,
+	   decoding the contents of the packet, including:
+	   <ul>
+	   <li>receiving a request.  The log should include the IP and
+               port of the client, what type of request, and the file and
+	       mode requested (log these, even though we ignore them).
+	   <li>sending/receiving an acknowledgement, including the IP and port
+               of the client, and the block #.
+	   <li>sending/receiving a packet of data, including all the
+               above, plus the first 20 bytes of data (assume it's text).
+	   </ul>
+
+	   <p>
+	   You may write the log messages to a file or to stdout, or
+	   to stderr.
+
+    <li><b><a name="tftp-2">Project 2: TFTP Server, Stage 2</a></b><br>
+           In this stage, you add the following:
+	   <ol type="1">
+	   <li>The server must deal with real files, including
+	       checking whether or not they exist.
+	   <li>The files might require more than one packet to transfer.
+	   </ol>
+
+	   <p>
+	   All other simplifying assumptions above stil hold.  The
+	   requirement for logging is still the same.  That means that
+	   if a file requires more than one packet to transfer, each
+	   packet should be logged.
+
+    <li><b><a name="tftp-tcp">Project 3: TCP-based TFTP Server</a></b><br>
+           <p>
+	   There is no such thing (that I am aware of).  One of the
+	   purposes of this exercise is to allow you to compare using
+	   TCP to using UDP.  Using TCP means that you can simplify
+	   the TFTP protocol.  I leave it to you to figure it out.
+
+	   <p>
+	   More details are in the
+	   <a href="tcp-tftp.html">TCP-TFTP protocol</a>.
+
+    </ol>
+
+<li><b>TEST: <a name="test-1">Socket Addresses to/from Text</a></b><br>
+    A client, at least, will usually need to input the host
+    name or IP address, and the port number or
+    service name of the server.  Furthermore, when logging
+    transactions, a program will have to convert a binary
+    socket address to text.  So the user has to show that he
+    knows which functions he needs to do this, and what
+    parameters to pass to them.
+
+    <p>
+    The function you are to write will be the following:
+
+        <blockquote>
+	<tt>str_to_socket (char *host, char *port, struct sockaddr_in *s)</tt>
+	</blockquote>
+
+    <p>
+    Where the function is passed the host name (or IP address) and the
+    port number (or service name) as strings.  The function converts
+    them to the appropriate binary form and sets sockaddr_in structure.
+    
+    <p>
+    This test will be closed-book (chomer sagur).
+
+</ol>
+
+<HR>
+Lab Instructor: Haim [Howard] Roman  
+<A HREF="mailto:roman@mail.jct.ac.il">roman@mail.jct.ac.il</A>.<br>
+Wyler Building, rooms 230 or 225, Sun-Thur 13:30 - 14:30<br>
+Telephone at work: 02-675-1207/1160, at home: 02-996-3502
+        
+
+</BODY>
+</HTML>
+
+

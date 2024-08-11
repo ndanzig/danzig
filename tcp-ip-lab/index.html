@@ -1,0 +1,313 @@
+<html><head>
+
+<TITLE>The JCT TCP/IP Lab</TITLE>
+<CENTER><H1>The JCT TCP/IP Lab</H1></CENTER>
+</head>
+
+<body>
+
+<H2><a name="notes">NOTES</a></H2>
+
+<ol type="I">
+
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+<p><li><a name="gen"></a><b>A Few General Notes:</b>
+<dl>
+
+<dt><b>compiling</b>
+<dd>You must write your code in C (not C++) and use either the cc or 
+gcc compilers.    When compiling on a Linux machine simply write:
+<br><code>gcc -o myprgrm myprogram.c </code>
+<br>This will create an executable file named myprgrm.
+ <br>If you compile on a Solaris machine you must add two additional 
+arguments like this:
+<br><code>gcc -lsocket -lnsl  -o myprgrm myprogram.c</code>
+
+<dt><b>running</b>
+<dd>You should run the client and server on two different machines.
+If you are copying a file have the client in a seperate folder from the server.
+
+
+
+<dt><b>versions</b>
+<dd> You can use the Linux servers shana9, shana10, or ise. You can also use
+     the Solaris machines srs1, srs2, or ketubot (solapp).
+
+  
+    <p>
+    Some of the definitions and structures are different between the
+    two types of systems, so what compiles on one might not compile on
+    the other.  But you can easily adapt the examples.
+
+<dt><b>firewall</b>
+<dd>Because of firewall configurations at JCT, TCP/IP communication on 
+non-standard ports is blocked for machines on different subnets. This means
+your client and server must be on the same subnet.  
+srs1 and srs2 are on subnet 103, shana9 and shana10 are on subnet 3 
+and ise and ketubot are on subnet 37. Subnet 103 and 3 should be considered
+ the same subnet.
+
+
+
+
+<dt><b>pseudo-code</b>
+<dd>Some of the documentation and examples are in pseudo-code instead
+    of real C code, because the real C code is very verbose, and I thought
+    it would be easier to understand the socket functions in
+    pseudo-code. 
+
+
+
+</dl>
+
+
+<p><li><b><a name="admin">Administrative Information:</a>
+</b><table border="2"> <tr> <td>  Nachum Danzig</td> <td>
+            Email: danzig<img src="../amp.jpg">jct.ac.il
+
+               </td>
+	       </tr>
+	       <tr><td>
+Office:  Weiler 232</td> <td> telephone: 02-675-1218</td></tr>
+</table>
+
+
+    <p><li><a href="admin/homework.html">Assignments</a>
+    <p><li><a href="admin/project.html">TFTP Project</a>
+    <p><li><a href="/~yedidia/tcpip/">Theory Questions</a>
+
+    </ol> <!-- Administrative Information -->
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+
+<p><li><b><a name="socket-funcs">Socket Functions</a></b>
+    <ol type = "A">
+    <li><A HREF="func-summary.html">
+        Summary of socket functions in pseudo-code.
+        </A>
+        <a name="func-summ"></a>  <!-- so one can link TO here -->
+    
+        <blockquote>
+        I suggest that you start here.  These notes were designed for use
+        with a lecture, but they should be helpful even by themselves.
+        Please e-mail me comments about them (see e-mail address below).
+        </blockquote>
+    
+    <!-- <p><A HREF="inet-dgram/">
+    <!--     Examples of internet datagrams 
+    <!--     </A>
+    <!--     (pseudo-code and/or C code)
+    -->
+
+    <li><a name="sock-examples">Here are some pseudocode and
+        C code examples:</a>
+
+        <ol type="1">
+        <li>Common to both UDP and TCP
+            <ol type="a">
+
+            <li><a href="common-code/socket_address.c">Socket address
+                conversion functions</a> -- convert between text and the
+                sockaddr_in structure.
+     
+                <p>
+                Here is a
+                <a href="common-code/test_socket_address.c">program</a>
+                to test it.
+
+            <li><a href="common-code/null_str.c">null_str function</a>
+                -- used by some of the other routines.  This simply treats
+                a NULL pointer as a an empty string.
+
+            <li><a href="common-code/create_socket.c">Create socket 
+                function</a>
+                -- Socket code is complex because the socket interface was
+                designed to handle a lot more than just TCP/IP.  This is
+                an example of a wrapper function that makes TCP/IP socket
+                programming simpler.
+
+            <li><a href="common-code/struct">Structures, Holes,
+                and Unions in C</a>
+                <a name="struct"></a>
+                -- This is not specific to sockets, but you look at
+                this information anyway.  It is <em>not</em> long.
+
+		<LI> <a href="http://www.cplusplus.com/ref/cstdio/printf.html">How to use printf</a>.
+
+
+            </ol> <!-- Common to both UDP and TCP -->
+
+        <li>UDP
+            <ol type="a">
+            <li>Simple server and client
+                <ul>
+
+                <li><a href="inet-dgram/simple.html">Pseudocode Description</a>
+
+                <li><a href="inet-dgram/simple-receiver.c">Simple server</a>
+
+                <li><a href="inet-dgram/simple-sender.c">Simple client</a>
+		<li><a href="basicTFTPsolution.txt">TFTP solution in Psuedo Code</a>
+
+                </ul>
+
+            <li>UDP daytime example (another simple example)
+                <ul>
+                
+                <li><a href="inet-dgram/time.html">Pseudocode Description</a>
+
+                <li><a href="inet-dgram/udp_daytime_client.c">client</a>
+                    -- As of 30 Cheshvan 5760 (09/11/1999), 
+                    this tries only the well-known port for the
+                    'daytime' service.  If you want, you can try to
+                    change it so that you can specify which port it
+                    should try.
+
+                <li><a href="inet-dgram/udp_daytime_server.c">server</a>
+                    -- As of 30 Cheshvan 5760 (09/11/1999), I have not
+                    yet tested this, because the client is not
+                    flexible enough (see above).  I could have used the
+                    <a href="inet-dgram/simple-sender.c">simple client</a>
+                    above, but I have not yet.
+
+                </ul>
+
+            <li><a href="inet-dgram/sync-receiver.c">Synchronization tester</a>
+                -- this server allows you test what happens when you
+                send a message to a UDP server before it is ready to
+                accept it.  Use the
+                <a href="inet-dgram/simple-sender.c">simple client</a>
+                to test it.
+
+            <li><a href="inet-dgram/timeout/">Timeouts</a>
+                <a name="timeouts"></a> -- how to
+                implement timeouts.  We show how for UDP, though you
+                can then figure out how to use it for TCP.
+
+            </ol>  <!-- UDP -->
+
+        <li>TCP --
+            <a name="tcp-frag">Here</a>
+            is code that demonstrates
+            <a href="inet-stream/tcp-fragmenting.html">TCP fragmenting
+            of streams</a>.
+
+        </ol>  <!-- pseudocode & C code examples -->
+
+    <p><li><A HREF="related-functions/">
+        Related Functions and include files.
+        </A>
+        <a name="rel-funcs"></a>  <!-- so one can link TO here -->
+    
+        <blockquote>
+        These are functions that do not work directly with sockets, but are
+        often needed when programming sockets.  There are links to C
+        programs that use these functions.
+
+        <p>
+        Some of these functions are also mentioned in the main
+        socket function above.  I have left them in here.
+        </blockquote>
+
+    </ol>  <!-- Scoket Functions -->
+    
+    <!-- <p><A HREF="exercises.html">
+    <!--     The exercises for the lab
+    <!--     </A>
+    --> 
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+
+<p><li><a name="other"></a><b>Other Links:</b>
+
+    <ol type="A">
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+<p><li><A HREF="https://beej.us/guide/bgnet/"> Beej's Guide to Network Programming</a>.
+
+      <p><li><A HREF="tcpip_long.html">
+      <b>Lecture Notes on TCP/IP and UDP/IP</b>.</A>
+      <blockquote>                    
+      This is a detailed summery of the theory part of Dr. Bloch's TCP/IP class.
+    </blockquote>     
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <p><li><A HREF="ibm-tutorial">
+	<b>IBM's TCP/IP tutorial</b>.
+	</A>
+	<a name="ibm-tut"></a> <!-- so one can link TO here -->
+    
+	<blockquote>
+	This is an excellent tutorial on TCP/IP.  While it does not
+	deal with programming with sockets, I recommend this as material
+	for learning or reviewing the principles of TCP/IP.
+    
+
+</blockquote>
+<p><li>
+<A HREF="http://www.tcpipguide.com/free/index.htm">Another TCP/IP Guide</a>
+
+    
+    <p><li><A HREF="http://wiht.link/internet-sockets">And another guide </a> 
+
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <p><li><A HREF="using-unix">
+	 <b>How to use UNIX</b>
+	 </A>
+	 <a name="use-unix"></a> <!-- so one can link TO here -->
+	 for this lab.  This includes editing, compiling, and running more
+	 than one process at once.
+    
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <p><li><A HREF="tftp">
+	<b>TFTP</b> 
+	</A>
+	(the Trivial File Transfer Protocol)
+	<a name="tftp-link"></a> <!-- so one can link TO here -->
+    
+	    <ul>
+	    <li><a href="tftp">RFCs and how to use the client</a>
+	    <li><a href="admin/project.html">Info about the
+	    TFTP server project</a>
+	    </ul>
+    
+    <!-- <p><A HREF="unix-datagram.txt">
+    <!--     Examples of UNIX datagrams 
+    <!--     </A>
+    <!--     (pseudo-code)
+    -->
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <p><li><A HREF="non-socket.txt">
+	<b>Interprocess communication mechanisms other than sockets</b>
+	</A>
+	<a name="non-socket"></a> <!-- so one can link TO here -->
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <p><li><A HREF="outside-sites.html">
+	<b>Get more info about TCP/IP and sockets</b>
+	</A>
+	<a name="outside"></a> <!-- so one can link TO here -->
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <p><li><A HREF="dr_seuss.txt">
+       <b>Dr. Seuss's Guide to the Internet</b>
+       </A>
+       (humor)
+	<a name="humor"></a> <!-- so one can link TO here -->
+
+<!--     I retrieved the table of contents for the FAQ, but it does
+<!--     not work, because the links are relative.
+<!--     
+<!-- <p><A HREF="books-amazon.html">
+<!--     Some books on sockets that you can order through amazon.com
+<!--     </A>
+<!--  -->
+
+    </ol><!-- other links -->
+</ol>
+
+</body>
+</html>

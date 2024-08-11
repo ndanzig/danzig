@@ -1,0 +1,112 @@
+<!-- FILE: homework.html  -->
+<HTML>
+<HEAD>
+<TITLE>TCP/IP Lab Homework: 5765 (2005)</TITLE>
+<CENTER><H1>TCP/IP Lab Homework: Ellul 5767 (2007)</H1></CENTER></HEAD>
+
+
+<BODY>
+<p> <h3>These homework assignments.
+</h3>
+
+note: To compile sockets on commandline in solaris, write something like this: 
+ cc -o mySocket -lsocket -lnsl mysocket.c
+<ol>
+
+<li>
+Copy my simple_sender and simple_receiver but add to them the feature that you can write several messages to the server and he will print them all.  The client is to be ended simply by ctrl-c.  There server will not exit when client ends, but will be ready to handle new clients.
+
+<li>Write two programs (one server one client) using unix tcp sockets to allow characters typed 
+on one computer to be sent to another computer.  Use tcp connection oriented communication. For a very detailed tutorial on sockets try <a href="http://www.ecst.csuchico.edu/~beej/guide/net/"> Beej's Guide </a> and if you want a Hebrew translation try<a href="http://www.geocities.com/uv1st/netguide-heb/"> here.</a>
+<br>Points of clarification for this and the 2nd exercise:
+<ul>
+<li>Do not specify port for server. Let the system choose a port for you.
+<br>i.e. <tt>server </tt>
+<br><tt>Server connected to port 3405!</tt>
+<li>Specify server name and port as argument in command line of client.
+<br>i.e. <tt>client shana3.jct.ac.il 3405</tt>
+<li>Server should be able to accept a new client while the previous client 
+is still communicating (maximum of 3 clients simultaneously !!).
+<li>client should be able to send several lines of text.
+<li> Use fgets() to read line.
+<li>Handle the signal control-c in server and client.  First close sockets and then exit program.
+<li>If client sends string quit or <b>disconnects</b>, server should disconnect from him.
+</ul>
+
+<li>
+
+Write a <b>very</b> simple http server using TCP functions. The server will listen on a free port, not 80.  You will therefore need to specify in the url the port number preceded by a colon. The server needs to do the following things:
+<ul>
+<li>Print the port on which it is listening.
+<li>Send date to client (use function gmtime).<!--  strftime). -->
+<li>Send file index.html to client.  You will have to write such an html file in the directory where you run the server. 
+
+</ul>
+You do not need to check all the headers that the browser will send you.  Simply check for this:
+<br>
+
+GET/HTTP/1.1
+
+<br>Optional: If the browser specifies a file name like this "http://loccalhost/file.html" the server will send that file and not index.html.
+
+<br>
+For information on the http headers see <a href="http://wiki.jct.ac.il/unix_highschool/index.php/%D7%A4%D7%A8%D7%95%D7%98%D7%95%D7%A7%D7%95%D7%9C_HTTP_%D7%A2%D7%9C_%D7%A8%D7%92%D7%9C_%D7%90%D7%97%D7%AA"> explanation of http protocol</a>
+
+
+ 
+
+</li>
+
+
+<li>
+
+
+
+
+Make a small protocol using udp transmission to copy files from the "server" to the "client" computer.
+<ol >
+<li>Write a  udp server with the limitation that the sending and receiving 
+buffer is only 18 bytes long.  Only the last 13 bytes of which can be used to 
+put the string or file in, therefore a string or file will be sent sometimes in many 
+send calls.  
+
+<li>The first two bytes of the 18 byte "packet" will contain the 
+number
+of the packet so that the  server can assemble them in order.  
+<li>The 3rd 4th and 5th  bytes will be a special ID number assigned by the server to make 
+sure he is  still
+talking to the same client. (Use all possible binary values for number, i.e.
+maximum number is not 999, but is 2 to the 24th power.) 
+<li>On the first 
+connection, the client  will send 0 as the packet number and the remaining
+17 bytes of the packet will be used for the file name followed by \0.
+Since this is the first packet, there will be no special ID  number.
+
+<li>Client will only read files from the server.
+
+<li>After each  data packet from the server, the client will send an acknowledgement that he received the 
+ packet (for example packet number 1, or 2 or 3 etc.) and the server will check this packet number and
+ know to then send the next packet in order. 
+<li>Check that packets do not
+arrive out of order.  If the client sends a wrong packet  number, the server will resend the last data packet he sent.  
+<li> Write a modified version of your client to test the error handling.
+<li>You can choose how the client's acknowledge 
+packet will be made up.
+<li>Print out the entire  packet (including all headers) on each receive.
+<li>Use the open and  write commands in UNIX to write the data of each packet to the file of the name given by the 0th packet.
+<li>The end of a file is indicated to the server when he receives a packet 
+whose size is less than 18. After receiving such a packet, the client should send
+an acknowledge and exit. The server should receive the acknowledge and return to a state where he waits for a new file to be requested.
+
+<li>Nothing the client does should cause the server to stop running.
+<li> Use fork() to handle up to 3 clients at once.
+</ol>
+</li>
+
+</ol>
+
+    
+</BODY>
+</HTML>
+
+
