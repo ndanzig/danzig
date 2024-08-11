@@ -1,0 +1,3165 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./filelist.xml">
+<title>Maimonides and Nissim of Gerona on Prophecy</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Nachum Danzig</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>danzig</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>6</o:TotalTime>
+  <o:Created>2001-03-22T16:08:00Z</o:Created>
+  <o:LastSaved>2001-03-22T16:08:00Z</o:LastSaved>
+  <o:Pages>18</o:Pages>
+  <o:Words>9798</o:Words>
+  <o:Characters>55851</o:Characters>
+  <o:Company> </o:Company>
+  <o:Lines>465</o:Lines>
+  <o:Paragraphs>111</o:Paragraphs>
+  <o:CharactersWithSpaces>68588</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:ActiveWritingStyle Lang="EN-US" VendorID="8" DLLVersion="513" NLCheck="0">1</w:ActiveWritingStyle>
+  <w:DoNotShowRevisions/>
+  <w:DoNotPrintRevisions/>
+  <w:DisplayHorizontalDrawingGridEvery>0</w:DisplayHorizontalDrawingGridEvery>
+  <w:DisplayVerticalDrawingGridEvery>0</w:DisplayVerticalDrawingGridEvery>
+  <w:UseMarginsForDrawingGridOrigin/>
+  <w:Compatibility>
+   <w:FootnoteLayoutLikeWW8/>
+   <w:ShapeLayoutLikeWW8/>
+   <w:AlignTablesRowByRow/>
+   <w:ForgetLastTabAlignment/>
+   <w:LayoutRawTableWidth/>
+   <w:LayoutTableRowsApart/>
+  </w:Compatibility>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:16792199 0 0 0 65791 0;}
+@font-face
+	{font-family:Miriam;
+	panose-1:0 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:177;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:6145 0 0 0 32 0;}
+@font-face
+	{font-family:David;
+	panose-1:0 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:177;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:6145 0 0 0 32 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:right;
+	mso-pagination:widow-orphan;
+	direction:rtl;
+	unicode-bidi:embed;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:David;}
+h1
+	{mso-style-next:Normal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-indent:36.0pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-bidi-font-family:David;
+	mso-font-kerning:0pt;}
+h2
+	{mso-style-next:Normal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	line-height:150%;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:14.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-bidi-font-family:David;
+	font-weight:normal;}
+p.MsoFootnoteText, li.MsoFootnoteText, div.MsoFootnoteText
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:right;
+	mso-pagination:widow-orphan;
+	direction:rtl;
+	unicode-bidi:embed;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:David;}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:right;
+	mso-pagination:widow-orphan;
+	tab-stops:center 207.65pt right 415.3pt;
+	direction:rtl;
+	unicode-bidi:embed;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:David;}
+span.MsoFootnoteReference
+	{vertical-align:super;}
+p.MsoTitle, li.MsoTitle, div.MsoTitle
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	line-height:150%;
+	mso-pagination:widow-orphan;
+	font-size:18.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:David;}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:right;
+	line-height:150%;
+	mso-pagination:widow-orphan;
+	direction:rtl;
+	unicode-bidi:embed;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:David;}
+p.MsoBodyTextIndent, li.MsoBodyTextIndent, div.MsoBodyTextIndent
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-indent:36.0pt;
+	line-height:150%;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:David;}
+p.MsoBodyText2, li.MsoBodyText2, div.MsoBodyText2
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	line-height:150%;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:David;}
+p.MsoBodyText3, li.MsoBodyText3, div.MsoBodyText3
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	line-height:150%;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:David;}
+p.MsoDocumentMap, li.MsoDocumentMap, div.MsoDocumentMap
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:right;
+	mso-pagination:widow-orphan;
+	background:navy;
+	direction:rtl;
+	unicode-bidi:embed;
+	font-size:12.0pt;
+	font-family:Tahoma;
+	mso-fareast-font-family:"Times New Roman";
+	mso-hansi-font-family:"Times New Roman";
+	mso-bidi-font-family:Miriam;}
+ins
+	{mso-style-type:export-only;
+	text-decoration:none;}
+ /* Page Definitions */
+@page
+	{mso-endnote-numbering-style:alpha-lower;}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-title-page:yes;
+	mso-even-footer:url("./header.htm") ef1;
+	mso-footer:url("./header.htm") f1;
+	mso-paper-source:0;
+	mso-gutter-direction:rtl;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="2050"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-US style='tab-interval:36.0pt'>
+
+<div class=Section1 dir=RTL>
+
+<p class=MsoTitle align=left dir=RTL style='text-align:right;direction:rtl;
+unicode-bidi:embed'><span lang=HE style='font-size:12.0pt;font-family:David'>בס&quot;ד</span><span
+dir=LTR></span><span dir=LTR style='font-size:12.0pt'><span dir=LTR></span><o:p></o:p></span></p>
+
+<p class=MsoTitle dir=LTR style='margin-left:324.0pt;text-align:justify'><span
+style='font-size:12.0pt'>December, 2000<o:p></o:p></span></p>
+
+<p class=MsoTitle align=right dir=LTR style='text-align:right'><span
+style='font-size:12.0pt'>By Nachum Danzig<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'><span style='font-size:20.0pt;mso-bidi-font-size:12.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 dir=LTR><span style='font-size:20.0pt;mso-bidi-font-size:12.0pt'>Maimonides
+and Nissim of Gerona on <o:p></o:p></span></h2>
+
+<h2 dir=LTR><span style='font-size:20.0pt;mso-bidi-font-size:12.0pt'>The Nature
+of Prophecy</span><span style='font-size:16.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></h2>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'>The tenet that the Torah possessed by the
+Jews was dictated by G-d to Moses has been firmly established as part Jewish
+belief at least since mediaeval times.<a style='mso-footnote-id:ftn1'
+href="#_ftn1" name="_ftnref1" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[1]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span>The Bible is then a prophetic
+book.<span style="mso-spacerun: yes">&nbsp; </span>Implicit in this assertion
+is the belief that, in deed, prophecy exists.<span style="mso-spacerun:
+yes">&nbsp; </span>From a political perspective, it is obvious why mediaeval
+Jewish philosophers claimed that the Bible is a work of prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>This claim gives the Bible binding and
+immutable authority.<span style="mso-spacerun: yes">&nbsp; </span>However, from
+a theological perspective, it may still be questioned, why is there a need to
+insist upon the existence of Divine communication with man?<span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span>Could not a true religion believe
+in one G-d who does not communicate with man?<span style="mso-spacerun:
+yes">&nbsp; </span>Simply put, why must prophecy exist?<span
+style="mso-spacerun: yes">&nbsp; </span></p>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'>A possible answer to this question is that
+prophecy exists simply as a means, a means of communicating true ideas and laws
+to man.<span style="mso-spacerun: yes">&nbsp; </span>It is a method G-d employs
+to tell human beings information about which they would otherwise be
+ignorant.<span style="mso-spacerun: yes">&nbsp; </span>It would then appear
+that the state of prophecy, of itself, has no intrinsic value; it is a means to
+the end of revealing law and truth.<span style="mso-spacerun: yes">&nbsp;
+</span>If prophecy has any intrinsic value according to this view, it is as a
+proof to the existence of G-d.<span style="mso-spacerun: yes">&nbsp;
+</span>When G-d speaks to man, man is compelled, at least, to believe in G-d’s
+existence.<span style="mso-spacerun: yes">&nbsp; </span>It is, then, not the
+information of prophecy that gives prophecy its significance, but the very fact
+of its occurrence.<span style="mso-spacerun: yes">&nbsp; </span>In either case,
+prophecy exists because it has a specific external use. </p>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'>Alternatively, prophecy may exist as an
+integral part of the natural world.<span style="mso-spacerun: yes">&nbsp;
+</span>Just as all nature exists as a complex intricacy in which every part is
+necessary for the proper functioning of the whole, prophecy, too, exists as a
+necessary part of nature.<span style="mso-spacerun: yes">&nbsp; </span>It is
+the culmination of human existence.<span style="mso-spacerun: yes">&nbsp;
+</span>Prophecy is the state of being in which man can truly claim to be a
+man.<span style="mso-spacerun: yes">&nbsp; </span>Prophecy is then an ideal
+existence irrespective of what external benefits it may produce.<span
+style="mso-spacerun: yes">&nbsp; </span>It is the natural human perfection of
+man.<span style="mso-spacerun: yes">&nbsp; </span>This is not to deny that
+incumbent with this individual perfection is the perfection of man’s social
+arrangements.<span style="mso-spacerun: yes">&nbsp; </span>It is natural to man
+to live in a political community and to be governed by a system of laws.<span
+style="mso-spacerun: yes">&nbsp; </span>Therefore, mediaeval philosophers infer
+from Aristotle that the natural perfection of man includes as a byproduct the
+establishment of laws.<a style='mso-footnote-id:ftn2' href="#_ftn2"
+name="_ftnref2" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[2]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>If prophecy is man at his perfection,
+it must generate perfect social laws. In this view, laws are the necessary
+outcome of prophecy, but not the reason for the existence of prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>In fact, the laws may be designed to
+facilitate prophecy for a certain class of society.<span style="mso-spacerun:
+yes">&nbsp; </span>Thus, the goal in itself is prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span></p>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'>Rabbi Nissim of Gerona presents the first of
+these two views of the purpose of the existence of prophecy in his fifth
+homily.<span style="mso-spacerun: yes">&nbsp; </span>Maimonides takes the
+second view, which, generally speaking, is an Aristotelian view, and, more
+precisely, a mediaeval Arabic Neo-Platonic view.<span style="mso-spacerun:
+yes">&nbsp; </span>Although Ran never actually states this explicitly, it can
+be seen from his writing that his opinion that prophecy is a means derives from
+his desire to assert G-d’s freedom to act in the world.<span
+style="mso-spacerun: yes">&nbsp; </span>According to this view, G-d is not
+bound to act by any rules of nature.<span style="mso-spacerun: yes">&nbsp;
+</span>That all the supposed laws of nature are, in fact, the result of G-d’s
+constant decision making is a proposition that preceded Ran by several years.<a
+style='mso-footnote-id:ftn3' href="#_ftn3" name="_ftnref3" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[3]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>Natural prophecy is hereby ruled
+out.<span style="mso-spacerun: yes">&nbsp; </span>Ran instead is able to affirm
+the belief in the freedom of G-d’s action.<span style="mso-spacerun:
+yes">&nbsp; </span>Maimonides, on the other hand, by his claim for the
+existence of natural prophecy is able to assert the perfect and unchanging
+nature of G-d. </p>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'>These two starting points carry though many
+of the issues Ran and Maimonides differ on.<span style="mso-spacerun:
+yes">&nbsp; </span>For example, the desire to affirm the principle of G-d’s
+freedom explains Ran’s choice of the prerequisites of prophecy, which includes
+things that are inessential to natural prophecy, but are instead concessions to
+the preference of G-d’s will.<span style="mso-spacerun: yes">&nbsp; </span>The
+assertion of the principle of G-d’s freedom of action justifies, for Ran, G-d’s
+overlooking imperfections in man, such as His overlooking the speech impediment
+of Moses, the paradigmatic prophet, when granting him prophecy.<a
+style='mso-footnote-id:ftn4' href="#_ftn4" name="_ftnref4" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[4]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>It also explains his assertion that all
+the Israelites had prophecy at Mount Sinai.<span style="mso-spacerun:
+yes">&nbsp; </span>And more subtly, the principle of G-d’s freedom of action
+underlies Ran’s reliance on proof through miracles, miracles being the clearest
+display of G-d ability to act.</p>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'>Maimonides asserts the unchanging perfect
+nature of G-d and therefore Maimonides sees it as man’s job to emulate G-d in
+this perfection.<span style="mso-spacerun: yes">&nbsp; </span>Thus, Moses, the
+“Divine man,” is the man who has perfected himself.<span style="mso-spacerun:
+yes">&nbsp; </span>The process of this perfection is perceived as occurring in
+a natural way.<span style="mso-spacerun: yes">&nbsp; </span>In fact, nature,
+too, is perfect and unchanging, and therefore miracles, which are aberrations
+in nature, are signs of imperfection and do not teach man true knowledge.</p>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'>The topics that relate to the question of the
+need for prophecy from a theological perspective are treated diversely by Ran
+and Maimonides.<span style="mso-spacerun: yes">&nbsp; </span>These topics
+include the following: Is the purpose of prophecy to allow man to serve G-d, or
+to elevate man;<span style="mso-spacerun: yes">&nbsp; </span>Does prophecy come
+to those people who most please G-d or to those who possess natural preparedness;<span
+style="mso-spacerun: yes">&nbsp; </span>Is the restraining of prophecy from
+those who are naturally worthy explainable, or is it inexplicable;<span
+style="mso-spacerun: yes">&nbsp; </span>Are the prerequisites for prophecy more
+than just moral and intellectual;<span style="mso-spacerun: yes">&nbsp;
+</span>May G-d over-look the prerequisites;<span style="mso-spacerun:
+yes">&nbsp; </span>Was Moses unique in his lack of fitness for prophecy or
+unique in his exceptionally high level of preparedness for prophecy;<span
+style="mso-spacerun: yes">&nbsp; </span>Is the authority of Moses derived from
+witnessing his prophecy or from experiencing his wisdom;<span
+style="mso-spacerun: yes">&nbsp; </span>Should one<span style="mso-spacerun:
+yes">&nbsp; </span>rely on empirical or logical proof;<span
+style="mso-spacerun: yes">&nbsp; </span>Does G-d consider aesthetics when
+granting prophecy.<span style="mso-spacerun: yes">&nbsp; </span>Ran and
+Maimonides answer these questions differently from each other but in a
+consistent fashion such that come to light two different understandings of the
+necessity for prophecy. </p>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'>Although neither Ran nor Maimonides claims to
+be lead to his opinion by anything other that the plain meaning of Biblical and
+Talmudic dictum and logical reasoning, there is a consistency to the
+explanation each philosopher chooses which indicates each is conforming to a
+preconceived opinion.<span style="mso-spacerun: yes">&nbsp; </span>At the core
+of Ran’s reasoning is the idea of an unlimited G-d.<span style="mso-spacerun:
+yes">&nbsp; </span>A G-d that is not bound by any rules whether self imposed or
+otherwise is an assumption upon which Ran bases his answers to the above
+questions.<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>Alternatively,
+Maimonides bases his approach on a conception of an unchanging G-d.<span
+style="mso-spacerun: yes">&nbsp; </span>This paper will show that the debate
+between Ran and Maimonides can be explained in this framework.<span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style="mso-spacerun: yes">&nbsp; </span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'><b>Purpose of Prophecy:<o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'>In order to conduct an intelligent
+investigation of the nature of prophecy a definition of the term prophecy is
+needed.<span style="mso-spacerun: yes">&nbsp; </span>As might be expected, Ran
+and Maimonides have different definitions for prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>In fact, what is prophecy corresponds
+to what is the purpose of prophecy.<span style="mso-spacerun: yes">&nbsp;
+</span>Neither Ran nor Maimonides tries to define prophecy by describing its
+outward signs as demonstrated by empirical examination.<span
+style="mso-spacerun: yes">&nbsp; </span>Rather, they define it by its
+theological use, just as one may define a chair by its use, i.e. sitting
+on.<span style="mso-spacerun: yes">&nbsp; </span>Prophecy is whatever is its
+role in the theological system of Ran and Maimonides.<span style="mso-spacerun:
+yes">&nbsp; </span><span style="mso-spacerun: yes">&nbsp;</span></p>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'>Ran begins his discussion of prophecy in the
+beginning of the fifth homily by describing the purpose of prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>Ran quotes the Talmud:<span
+style="mso-spacerun: yes">&nbsp; </span><span dir=RTL></span><span lang=HE
+dir=RTL style='font-family:David'><span dir=RTL></span>&quot;אמר רבי יונתן אין
+הקב&quot;ה משרה שכינתו אלא על חכם,<span style="mso-spacerun: yes">&nbsp;
+</span>גיבור ועשיר<span style="mso-spacerun: yes">&nbsp; </span>ועניו, וכולם
+ממשה.&quot;<a style='mso-footnote-id:ftn5' href="#_ftn5" name="_ftnref5"
+title=""><span class=MsoFootnoteReference><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[5]<![endif]></span></span></a></span><span
+dir=LTR></span><span dir=LTR></span><span style="mso-spacerun:
+yes">&nbsp;&nbsp; </span>Ran continues:<span style="mso-spacerun:
+yes">&nbsp;&nbsp; </span>“It is well known that since G-d wanted to create this
+world for His glory, and that His objective in our regard is that the human
+species should serve Him.<span style="mso-spacerun: yes">&nbsp; </span>It was
+thus necessary that He should give to man an emanation/overflow that is beyond
+the intellect, an emanation which is called prophecy.<span style="mso-spacerun:
+yes">&nbsp; </span>Its goal is to perfect the soul so that it should be
+illuminated with the Light of Life.<span style="mso-spacerun: yes">&nbsp;
+</span>A mere intellectual emanation is insufficient for this [goal].”<a
+style='mso-footnote-id:ftn6' href="#_ftn6" name="_ftnref6" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[6]<![endif]></span></span></a></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>Ran sees prophecy as the
+means to bring man information about how he can serve G-d.<span
+style="mso-spacerun: yes">&nbsp; </span>Since, after all, man was created for
+G-d’s service, he has to know how to serve and glorify G-d, and therefore he
+needs a mechanism to tell him what to do.<span style="mso-spacerun: yes">&nbsp;
+</span>What this mechanism reveals is beyond the human intellect because G-d’s
+service is not necessarily fathomable by the human being.<span
+style="mso-spacerun: yes">&nbsp; </span>Perhaps, Ran continues, one might say
+that a human being can come to know how to attend to his body but he certainly
+cannot on his own come to know how to attend to his soul or how to attend to
+G-d.<span style="mso-spacerun: yes">&nbsp; </span>Man cannot come to know on
+his own those things that G-d desires nor that which remedies his soul.<span
+style="mso-spacerun: yes">&nbsp; </span>As Ran puts it:<span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=RTL style='text-indent:36.0pt;line-height:150%'><span
+lang=HE style='font-family:David'>הדברים הנרצים אצל השם יתברך והעושים רושם
+בנפש.<a style='mso-footnote-id:ftn7' href="#_ftn7" name="_ftnref7" title=""><span
+class=MsoFootnoteReference><span dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[7]<![endif]></span></span></a><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'>Thus, Ran does not perceive of prophecy as man’s
+evolution into a perfect state, but only as the conveying of a knowledge
+external to himself.<span style="mso-spacerun: yes">&nbsp; </span>Since G-d’s
+will is completely free, there are no signs in nature of what G-d desires.<span
+style="mso-spacerun: yes">&nbsp; </span>Man cannot learn what G-d wants because
+G-d’s desires are not bound to any natural or logical rules.<span
+style="mso-spacerun: yes">&nbsp; </span>It is the freedom of G-d’s action that
+forces Ran to conclude that man can never determine G-d’s will.<span
+style="mso-spacerun: yes">&nbsp; </span>G-d’s will is inherently undetermined.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>When Ran writes, “Its goal
+is to perfect the soul” he means that via prophecy man can come to know things
+that will, in turn, enable him to perfect his soul.<span style="mso-spacerun:
+yes">&nbsp; </span>Thus, receiving prophecy is not conceived of as a
+constituting a state of<span style="mso-spacerun: yes">&nbsp;
+</span>perfection, but only as leading to one.<span style="mso-spacerun:
+yes">&nbsp; </span>Quite the contrary, the fact that prophecy comes to perfect
+a man implies that the man is not yet perfect.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>Because man cannot perfect
+himself on his own, he also cannot work up to being a prophet.<span
+style="mso-spacerun: yes">&nbsp; </span>Prophecy, when it does occur, must come
+to the imperfect and serve as a vehicle to bring him to perfection.<span
+style="mso-spacerun: yes">&nbsp; </span>But Ran is equivocal on this
+point.<span style="mso-spacerun: yes">&nbsp; </span>He writes that the purpose
+of prophecy is to allow man to fulfill his purpose which is to serve G-d by
+observing the Torah.<span style="mso-spacerun: yes">&nbsp; </span>In this way
+Ran de-emphasizes prophecy’s role as bringing human perfection in isolation.<span
+style="mso-spacerun: yes">&nbsp; </span>Prophecy is for G-d’s sake more than it
+is for man’s.<span style="mso-spacerun: yes">&nbsp; </span>In fact, it is
+conceivable that an imperfect man can also serve G-d.<span style="mso-spacerun:
+yes">&nbsp; </span>So, if prophecy is only to enable man to serve G-d,
+logically, it does not necessarily bring him perfection.<span
+style="mso-spacerun: yes">&nbsp; </span>Whatever perfection prophecy does
+bring, it is only because Ran has defined perfection as observing the
+Torah.<span style="mso-spacerun: yes">&nbsp; </span>Serving G-d is man’s
+perfection and prophecy affords this.<span style="mso-spacerun: yes">&nbsp;
+</span>We will see that prophecy has a very different role for Maimonides.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>In Maimonides’ discussion of
+prophecy in <i><span lang=HE dir=RTL style='font-family:David'>מורה נבוכים</span><span
+dir=LTR></span><span dir=LTR></span>,</i> he describes prophecy:</p>
+
+<p class=MsoFooter dir=RTL style='line-height:150%;tab-stops:36.0pt'><span
+lang=HE style='font-family:David'>וזאת היא היותר עליונה שבמדרגות האדם בתכלית
+השלמות אשר אפשר שימצא במינו, והענין הוא,<span style="mso-spacerun: yes">&nbsp;
+</span>הוא תכלית שלימות הכח<span style="mso-spacerun: yes">&nbsp; </span>המדמה<a
+style='mso-footnote-id:ftn8' href="#_ftn8" name="_ftnref8" title=""><span
+class=MsoFootnoteReference><span dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[8]<![endif]></span></span></a>
+</span><span dir=LTR></span><span dir=LTR><span dir=LTR></span></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;tab-stops:
+right 411.1pt;direction:ltr;unicode-bidi:embed'>Prophecy is the highest level
+that man can attain. It, itself, is the perfection of man. This is in contrast
+to what Ran writes, that prophecy is a method for gaining the <span lang=HE
+dir=RTL style='font-family:David'>מצוות</span><span dir=LTR></span><span
+dir=LTR></span> so that man can then know how to serve G-d.<span
+style="mso-spacerun: yes">&nbsp; </span>Prophecy is not, as Ran contends,
+merely a means towards the end of human perfection that is only achieved by
+serving G-d by observing the <span lang=HE dir=RTL style='font-family:David'>מצוות</span><span
+dir=LTR></span><span dir=LTR></span>.<span style="mso-spacerun: yes">&nbsp;
+</span>For Maimonides, being in the prophetic state <i>is</i> the perfection
+itself.<span style="mso-spacerun: yes">&nbsp; </span>It is the highest level
+that man can attain.<span style="mso-spacerun: yes">&nbsp; </span>Once a given
+person is a prophet, he has achieved perfection.<span style="mso-spacerun:
+yes">&nbsp; </span>The prophetic state itself is the perfection of man; it is
+the goal.<span style="mso-spacerun: yes">&nbsp; </span>It is not that man is
+created to serve G-d and therefore needs information on how to do so, but that
+man is created to elevate himself toward G-d; his goal is to be a prophet as an
+end in itself.<span style="mso-spacerun: yes">&nbsp; </span>Of course, once a
+prophet is a prophet Maimonides will concur that he will bring laws and share
+his perfection with others, since that is an expressing his perfection.<span
+style="mso-spacerun: yes">&nbsp; </span>But first and foremost, it is the
+self-perfection that prophecy is synonymous with, that makes prophecy a
+valuable goal.<span style="mso-spacerun: yes">&nbsp; </span>G-d as an
+unchanging perfect being cannot initiate any communication with man.<span
+style="mso-spacerun: yes">&nbsp; </span>The most that can occur is that man can
+achieve an affinity with G-d.<span style="mso-spacerun: yes">&nbsp; </span>He
+can rise to G-d’s level, but G-d cannot lower Himself to man’s level.<span
+style="mso-spacerun: yes">&nbsp; </span>G-d can be likened to a radio
+transmitter that is always broadcasting.<span style="mso-spacerun: yes">&nbsp;
+</span>Once a man builds himself a receiver, he can tune in to G-d.<span
+style="mso-spacerun: yes">&nbsp; </span>All the while, G-d never changes.<span
+style="mso-spacerun: yes">&nbsp; </span>Prophecy is then the highest expression
+of the natural state of man;<span style="mso-spacerun: yes">&nbsp; </span>it is
+the sate where man has built himself into the perfect receiver.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;tab-stops:right 411.1pt;
+direction:ltr;unicode-bidi:embed'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;tab-stops:right 411.1pt;
+direction:ltr;unicode-bidi:embed'><b>Prophecy as Part of the Natural Order:<o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;tab-stops:right 411.1pt;
+direction:ltr;unicode-bidi:embed'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;tab-stops:
+right 411.1pt;direction:ltr;unicode-bidi:embed'><span style='mso-tab-count:
+1'>&nbsp;&nbsp; </span><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Later in this same
+chapter, chapter thirty-six, Maimonides discusses the natural character of
+prophecy.<span style="mso-spacerun: yes">&nbsp; </span>Prophecy can be said to
+be natural if it conforms to observable and rational laws.<span
+style="mso-spacerun: yes">&nbsp; </span>Maimonides writes that just as all
+natural perfections require certain preparations, prophecy too requires
+preparations.<span style="mso-spacerun: yes">&nbsp; </span>Since it is a
+natural occurrence, but does not come to everyone, it is necessary to identify
+its particular causes or conditions.<span style="mso-spacerun: yes">&nbsp;
+</span>These conditions must be in place before prophecy can obtain in any
+person.<span style="mso-spacerun: yes">&nbsp; </span>Thus, Maimonides writes in
+talking about the coming of prophecy to a person:<span style="mso-spacerun:
+yes">&nbsp; </span><a style='mso-footnote-id:ftn9' href="#_ftn9" name="_ftnref9"
+title=""><span class=MsoFootnoteReference><span style='mso-special-character:
+footnote'><![if !supportFootnotes]>[9]<![endif]></span></span></a><span
+dir=RTL></span><span lang=HE dir=RTL style='font-family:David'><span dir=RTL></span>&quot;ואז
+ישפיע עליו קצת שפע כפי ההכנה.&quot;</span><span dir=LTR></span><span dir=LTR></span><span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span>Here <span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><span
+style="mso-spacerun: yes">&nbsp;</span>&quot;ההכנה&quot;</span><span dir=LTR></span><span
+dir=LTR></span> is the point bearing emphasis.<span style="mso-spacerun:
+yes">&nbsp; </span>The person has to be prepared for prophecy, and the better
+his preparation, the more pure and perfect will his prophecy be.<span
+style="mso-spacerun: yes">&nbsp; </span>This kind of explanation gives prophecy
+a causal character, like other natural phenomena.<span style="mso-spacerun:
+yes">&nbsp; </span>Just as certain physical abilities have causes that must be
+prepared, prophecy as well, has causes.<span style="mso-spacerun: yes">&nbsp;
+</span>This makes prophecy natural and not spontaneous and without cause.<span
+style="mso-spacerun: yes">&nbsp; </span></p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:0cm;mso-text-indent-alt:0cm;
+mso-list:none;mso-list-ins:WIN95ENB 20010103T1531;tab-stops:right 411.1pt'><span
+style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Maimonides then makes a comparison worth noting.<span
+style="mso-spacerun: yes">&nbsp; </span>He asserts that the true dream that is
+fulfilled, is the same as prophecy.<span style="mso-spacerun: yes">&nbsp;
+</span>That, just as dreams, in a sense, are natural occurrences, since one dreams
+about what he sees in the day<a style='mso-footnote-id:ftn10' href="#_ftn10"
+name="_ftnref10" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[10]<![endif]></span></span></a>,
+so too prophecy is a natural occurrence in the mind of a prophet.<span
+style="mso-spacerun: yes">&nbsp; </span>He writes: “<span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David'><span dir=RTL></span> אמנם יתחלף ברב
+או במעט, לא במין.<a style='mso-footnote-id:ftn11' href="#_ftn11"
+name="_ftnref11" title=""><span class=MsoFootnoteReference><span dir=LTR
+style='mso-special-character:footnote'><![if !supportFootnotes]>[11]<![endif]></span></span></a></span><span
+dir=LTR></span><span dir=LTR></span>”<span style="mso-spacerun: yes">&nbsp;
+</span>The difference between prophecy and dreams is in purity, in level, and
+in quality but not in class.<span style="mso-spacerun: yes">&nbsp; </span>They
+are the same type of thing; they are both<span style="mso-spacerun: yes">&nbsp;
+</span>natural.<span style="mso-spacerun: yes">&nbsp; </span>This seems to
+imply that prophecy too is dependent on the imperfect qualities of the natural
+creature, and not the direct product of a perfect God.<span
+style="mso-spacerun: yes">&nbsp; </span>This may lead us to question the
+authority of prophecy but, at the same time, to strengthen the belief in an
+unchanging perfect G-d.<span style="mso-spacerun: yes">&nbsp; </span>For G-d to
+directly communicate with man in the framework of time would imply change in
+G-d, something that Maimonides considers impossible.<span style="mso-spacerun:
+yes">&nbsp; </span>Rather, it is man who must change and understand the Divine
+Truths.<span style="mso-spacerun: yes">&nbsp; </span></p>
+
+<p class=MsoBodyText2 dir=LTR style='line-height:normal;tab-stops:right 411.1pt'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;tab-stops:right 411.1pt;
+direction:ltr;unicode-bidi:embed'><b>Prophecy as Super-Natural:<o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;tab-stops:right 411.1pt;
+direction:ltr;unicode-bidi:embed'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;tab-stops:
+right 411.1pt;direction:ltr;unicode-bidi:embed'><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>Ran does not view prophecy as a natural
+occurrence.<span style="mso-spacerun: yes">&nbsp; </span>He views it as direct
+communication from G-d, but he does agree that certain conditions must hold for
+prophecy to come to a person:<span dir=RTL></span><span lang=HE dir=RTL
+style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=RTL style='line-height:150%;tab-stops:right 411.1pt'><span
+lang=HE style='font-family:David'>&quot;ואין ספק שלמי שיבוא<span
+style="mso-spacerun: yes">&nbsp; </span>עליו זה השפע, יצטרך שיהיה שלם במעלות
+השכליות, ובמעלות המידות, מצד שאין ראוי שיחול [שפע] רוח השם יתברך</span><span
+dir=LTR></span><span dir=LTR><span dir=LTR></span> על</span><span dir=RTL></span><span
+lang=HE style='font-family:David'><span dir=RTL></span> איש חסר</span><span
+dir=LTR></span><span dir=LTR><span dir=LTR></span> המ</span><span lang=HE
+style='font-family:David'>ידות, כי תועבת השם נלוז&quot;<a style='mso-footnote-id:
+ftn12' href="#_ftn12" name="_ftnref12" title=""><span
+class=MsoFootnoteReference><span dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[12]<![endif]></span></span></a></span><span
+dir=LTR></span><span dir=LTR><span dir=LTR></span></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;tab-stops:
+right 411.1pt;direction:ltr;unicode-bidi:embed'>Here we see that on the surface
+Ran agrees, that one has to be perfect to receive prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>But his reason is that it is not
+“fitting” for a person who is not perfect to get prophecy, because a disgusting
+person is an abomination to G-d.<span style="mso-spacerun: yes">&nbsp;
+</span>Ran’s reason is not that the person cannot possibly have prophecy, but
+that the person would be a disgrace to G-d if he were to have prophecy, i.e. he
+is an unfit representative of G-d.<span style="mso-spacerun: yes">&nbsp;
+</span>The only reason why a person needs to be perfect to have prophecy is
+because it is aesthetically pleasing to men or to G-d. The imperfect man is not
+essentially unfit for prophecy.<span style="mso-spacerun: yes">&nbsp;
+</span>There is no essential necessity in being perfect, it is merely “
+fitting”.<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>In Maimonides’
+view, if there were such a thing as an aesthetic consideration to receive
+prophecy it would be completely irrelevant.<span style="mso-spacerun:
+yes">&nbsp; </span>If a person has the necessary “<span lang=HE dir=RTL
+style='font-family:David'>הכנות</span><span dir=LTR></span><span dir=LTR></span>”<span
+style="mso-spacerun: yes">&nbsp; </span>it<span style="mso-spacerun:
+yes">&nbsp; </span>does not matter if he is a disgrace, or is not a disgrace,
+all that matters is whether he is technically prepared.<span
+style="mso-spacerun: yes">&nbsp; </span>Therefore Maimonides will <i>require</i>
+a person to be not disgraceful as an essential requirement.<a style='mso-footnote-id:
+ftn13' href="#_ftn13" name="_ftnref13" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[13]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>A disgraceful person is incapable of
+receiving prophecy because he is imperfect, not because G-d chooses not to
+grace him with prophecy.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;tab-stops:
+right 411.1pt;direction:ltr;unicode-bidi:embed'><span style='mso-tab-count:
+1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Maimonides’ position can be illustrated be the following example.<span
+style="mso-spacerun: yes">&nbsp; </span>An Olympic champion needs to be
+physically fit and able in order to represent his country.<span
+style="mso-spacerun: yes">&nbsp; </span>Ran contends that even so, the country
+may choose not to allow him to go to the Olympics if he is an immoral person
+even though being immoral will not prevent him from competing effectively.<span
+style="mso-spacerun: yes">&nbsp; </span>To say that he cannot go because he is
+not moral, is to say that going is not determined by inherent ability.<span
+style="mso-spacerun: yes">&nbsp; </span>We can call this type of exclusion artificial.<span
+style="mso-spacerun: yes">&nbsp; </span>Only if we conceive of his role in the
+Olympics differently, if he becomes a moral representative of the State, can we
+understand the need to choose someone who is honorable.<span
+style="mso-spacerun: yes">&nbsp; </span>Nevertheless, the fact that he is
+immoral has nothing to do with how fast he runs. By adding this requirement, we
+add an inessential meaning to the Olympics games.<span style="mso-spacerun:
+yes">&nbsp; </span>Maimonides believes that there is no external reason to
+prohibit a person.<span style="mso-spacerun: yes">&nbsp; </span>For Maimonides,
+the Olympics would have to be a morality competition, as well, in order for a
+person’s morality to be relevant.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;tab-stops:
+right 411.1pt;direction:ltr;unicode-bidi:embed'><span style='mso-tab-count:
+1'> </span><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>These two type of bases upon which to exclude someone are distinguished
+as aesthetic versus natural.<span style="mso-spacerun: yes">&nbsp; </span>Ran
+believes that prophecy has to conform to aesthetic principles.<span
+style="mso-spacerun: yes">&nbsp; </span>It has to come to a person who is
+aesthetically pleasing, not just to one who is naturally deserving. When Ran
+does justify intellectual and moral perfections on a natural basis he does so
+only as a secondary reason, and as what seems to be a concession to
+appearances.<a style='mso-footnote-id:ftn14' href="#_ftn14" name="_ftnref14"
+title=""><span class=MsoFootnoteReference><span style='mso-special-character:
+footnote'><![if !supportFootnotes]>[14]<![endif]></span></span></a></p>
+
+<p class=MsoBodyText2 dir=LTR style='line-height:normal;tab-stops:right 411.1pt'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;tab-stops:right 411.1pt;
+direction:ltr;unicode-bidi:embed'><b>Granting Prophecy:<o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;tab-stops:right 411.1pt;
+direction:ltr;unicode-bidi:embed'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>Maimonides also restrains
+the granting of prophecy only to those whom G-d <i>chooses</i>.<span
+style="mso-spacerun: yes">&nbsp; </span>However, there is a difference from
+Ran’s view.<span style="mso-spacerun: yes">&nbsp; </span>Maimonides writes in
+the <i>Moreh Nevuchim</i>:<a style='mso-footnote-id:ftn15' href="#_ftn15"
+name="_ftnref15" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[15]<![endif]></span></span></a></p>
+
+<p class=MsoNormal dir=RTL style='line-height:150%'><span dir=LTR><span
+style="mso-spacerun: yes">&nbsp; </span></span><span lang=HE style='font-family:
+David'>והדעת השלישי והוא דעת תורתנו ויסוד דתנו הוא כמו זה הדעת הפילוסופי<a
+style='mso-footnote-id:ftn16' href="#_ftn16" name="_ftnref16" title=""><span
+class=MsoFootnoteReference><span dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[16]<![endif]></span></span></a>
+בעצמו אלא בדבר אחד - וזה שאנחנו נאמין שהראוי לנבואה המכין עצמו לה, אפשר שלא
+יתנבא, וזה ברצון אלוהי, וזה אצלי הוא כדמות הנפלאות כלם ונמשך כמנהגם.<span
+style="mso-spacerun: yes">&nbsp; </span>שהענין הטבעי - שכל מי שהוא ראוי לפי
+בריאתו והתלמד לפי גידולו ולימודו, שיתנבא, והנמנע מזה אמנם הוא כמי שנמנע מהניע
+ידו<span style="mso-spacerun: yes">&nbsp; </span></span><span dir=LTR></span><span
+dir=LTR><span dir=LTR></span><span style="mso-spacerun:
+yes">&nbsp;&nbsp;</span></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'>Here, Maimonides agrees that a prophet must not only be
+physically fit, not only have the necessary conditions that the philosophers
+say, but also must meet a seemingly extraneous requirement.<span
+style="mso-spacerun: yes">&nbsp; </span>The prophet must be chosen by G-d to
+get prophecy.<span style="mso-spacerun: yes">&nbsp; </span>Thus, Maimonides
+also adds conditions to prophecy that are not part of the conception of natural
+prophecy.<span style="mso-spacerun: yes">&nbsp; </span>However, there is a
+difference between Ran and Maimonides.<span style="mso-spacerun: yes">&nbsp;
+</span>Ran disqualifies a potential prophet if he is a despicable person.<span
+style="mso-spacerun: yes">&nbsp; </span>This is why G-d will not choose him,
+and this is a logical understandable reason, a Divine preference.<span
+style="mso-spacerun: yes">&nbsp; </span>On the other hand, Maimonides gives no
+reason why G-d does not want this person to have prophecy other than G-d’s
+will.<span style="mso-spacerun: yes">&nbsp; </span>For Maimonides, it is just
+as possible for prophecy to be prevented as for any miracle to occur.<a
+style='mso-footnote-id:ftn17' href="#_ftn17" name="_ftnref17" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[17]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>Just as Maimonides believes that G-d
+can do miracles in nature, here too G-d does a miracle; G-d prevents someone
+from getting the prophecy that is due him according to the rules of
+nature.<span style="mso-spacerun: yes">&nbsp; </span>Maimonides does not try to
+explain this in any logical way.<span style="mso-spacerun: yes">&nbsp;
+</span>For Maimonides, this preventing really should not happen whereas for Ran
+it is quite logical a person may not get granted prophecy since it is always
+dependent on G-d’s will in any case. </p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>It is because Ran has a view
+of prophecy as an aesthetic achievement that he asserts that G-d may <i>will</i>
+not to grant prophecy to a person.<span style="mso-spacerun: yes">&nbsp;
+</span>For Ran, it is not an exception to G-d’s rules, or a miracle, when G-d does
+not grant prophecy;<span style="mso-spacerun: yes">&nbsp; </span>a disgusting
+person <i>should</i> not be a prophet;<span style="mso-spacerun: yes">&nbsp;
+</span>it is not pleasing to G-d.<span style="mso-spacerun: yes">&nbsp;
+</span>G-d is exercising his freedom to act and is following no other rule than
+doing that which is pleasing to Him.<a style='mso-footnote-id:ftn18'
+href="#_ftn18" name="_ftnref18" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[18]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>This is derived from Ran’s initial
+axiom that the purpose of prophecy is to glorify G-d.<span style="mso-spacerun:
+yes">&nbsp; </span>Thus, only that which better glorifies G-d can be allowed.</p>
+
+<p class=MsoBodyTextIndent dir=LTR>If, on the other hand, the purpose of
+prophecy is to perfect man and prophecy is the perfection of man, then if being
+disgusting, by definition, is an imperfection and therefore a prophet cannot be
+disgusting, then a disgusting person <i>cannot</i> receive prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>This is not subject to G-d’s will and,
+in fact, denies G-d’s freedom.<span style="mso-spacerun: yes">&nbsp; </span>For
+Maimonides, to be a prophet is to be perfect.<span style="mso-spacerun:
+yes">&nbsp; </span>There is no such concept as being a prophet and being
+disgusting at the same time.<span style="mso-spacerun: yes">&nbsp;
+</span>Therefore, Maimonides agrees with Ran that such a person will not be a
+prophet, but this is by nature and not by G-d’s free will decision.<span
+style="mso-spacerun: yes">&nbsp; </span>Moreover, any prevention of a worthy
+man from being a prophet is completely inexplicable.<span style="mso-spacerun:
+yes">&nbsp; </span>He is perfect after all.<span style="mso-spacerun:
+yes">&nbsp; </span>Ran however leaves room for the prophet to be
+imperfect.<span style="mso-spacerun: yes">&nbsp; </span>G-d may overlook one
+perfection, but not another, this being subject to G-d’s free will.<span
+style="mso-spacerun: yes">&nbsp; </span>There are certain aesthetic
+imperfections that are the reason G-d may not wish to give an individual
+prophecy.<span style="mso-spacerun: yes">&nbsp; </span>There is thus an
+expanded list of criteria that G-d prefers when selecting a prophet , but a
+shortened list of criteria that are required to become a prophet.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><b>The Prerequisites of Prophecy:<o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>In determining the
+prerequisites for prophecy, Maimonides quotes the same statement that Ran
+quotes: </p>
+
+<p class=MsoFooter dir=RTL style='line-height:150%;tab-stops:right 212.65pt'><span
+lang=HE style='font-family:David'>אין הנבואה שורה אלא על (1)חכם, (2)גיבור
+(3)ועשיר<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'>This teaches, Maimonides asserts, that a person has to
+be perfect in his intellect and mostly in his morals<a style='mso-footnote-id:
+ftn19' href="#_ftn19" name="_ftnref19" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[19]<![endif]></span></span></a>.<span
+style="mso-spacerun: yes">&nbsp; </span>Maimonides divides up these three terms
+the following way.<span style="mso-spacerun: yes">&nbsp; </span>He claims that
+a person needs all the intellectual perfections and most of the moral
+perfections.<span style="mso-spacerun: yes">&nbsp; </span><span lang=HE
+dir=RTL style='font-family:David'>חכם </span><span dir=LTR></span><span
+dir=LTR></span><span style="mso-spacerun: yes">&nbsp;</span>implies all the
+intellectual perfections and <span lang=HE dir=RTL style='font-family:David'>עשיר</span><span
+dir=LTR></span><span dir=LTR></span> is one of the moral, or non-intellectual
+perfections.<span style="mso-spacerun: yes">&nbsp; </span>Being rich one of the
+moral perfections because being rich means one is satisfied with what he has –
+in accord with what appears in <span lang=HE dir=RTL style='font-family:David'>פרקי
+אבות</span><span dir=LTR></span><span dir=LTR></span> –<span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David'><span dir=RTL></span>&quot; איזה הוא עשיר,
+השמח בחלקו. &quot;<span style="mso-spacerun: yes">&nbsp; </span></span><span
+dir=LTR></span><span dir=LTR></span><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span lang=HE dir=RTL
+style='font-family:David'>גבור<span style="mso-spacerun: yes">&nbsp; </span></span><span
+dir=LTR></span><span dir=LTR></span><span style="mso-spacerun:
+yes">&nbsp;</span>is also a moral perfection because it is “one who conquers
+his desires.”<span style="mso-spacerun: yes">&nbsp; </span>Based on these
+passages, Maimonides constructs a short but strictly adhered to list of
+prerequisites to natural prophecy. </p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>As regards the ignorant man,
+Maimonides writes in summing up<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>- <span lang=HE dir=RTL style='font-family:David'>שינבא אחד מהם אלא כאפשרות
+הינבא חמור או צפרדע.<span style="mso-spacerun: yes">&nbsp; </span>זה יסודנו:<span
+style="mso-spacerun: yes">&nbsp; </span>שאי אפשר מבלתי ההתלמדות והשלמות, ואז יהיה
+האפשרות הנתלית בו - גזרת האלוה<a style='mso-footnote-id:ftn20' href="#_ftn20"
+name="_ftnref20" title=""><span class=MsoFootnoteReference><span dir=LTR
+style='mso-special-character:footnote'><![if !supportFootnotes]>[20]<![endif]></span></span></a></span><span
+dir=LTR></span><span dir=LTR></span><span style="mso-spacerun:
+yes">&nbsp;&nbsp; </span>If first a man has the <span lang=HE dir=RTL
+style='font-family:David'>הכנות</span><span dir=LTR></span><span dir=LTR></span>,
+then G-d can choose to give him prophecy.<span style="mso-spacerun: yes">&nbsp;
+</span>However, an ignorant man or a frog cannot prophesy because he is
+imperfect and there is no way that he can be ready.<span style="mso-spacerun:
+yes">&nbsp; </span>It is as though he is physically not fit for it.<span
+style="mso-spacerun: yes">&nbsp; </span>A frog or an <span lang=HE dir=RTL
+style='font-family:David'>עם הארץ</span><span dir=LTR></span><span dir=LTR></span>
+does not have the necessary preparations and therefore cannot be a
+prophet.<span style="mso-spacerun: yes">&nbsp; </span>A worthy person who does
+not get prophecy can only be understood as being prevented because of something
+completely external to him, such as his being in Exile or his generation not
+being fit but nothing to do with him personally.<span style="mso-spacerun:
+yes">&nbsp; </span>If he is a prophet, then by definition he is perfect in
+every way and is fitting to prophecy, otherwise he is not a prophet at all and
+therefore, there cannot be any logical reason why he will not receive prophecy.
+</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>Since for Ran prophecy is a
+non-natural occurrence he can add requirements other than moral and
+intellectual perfection.<span style="mso-spacerun: yes">&nbsp; </span>But Ran
+agrees with Maimonides about what constitutes natural readiness.<span
+style="mso-spacerun: yes">&nbsp; </span>Yet, he feels the need to add aesthetic
+considerations.<span style="mso-spacerun: yes">&nbsp; </span>How does Ran
+explain the list of requirements for a prophet?<span style="mso-spacerun:
+yes">&nbsp; </span>He agrees that <span lang=HE dir=RTL style='font-family:
+David'>חכם</span><span dir=LTR></span><span dir=LTR></span> is intellectual
+perfection, and he finishes the quote that Maimonides left un-finished, with
+the word <span lang=HE dir=RTL style='font-family:David'>עניו</span><span
+dir=LTR></span><span dir=LTR></span>.<span style="mso-spacerun: yes">&nbsp;
+</span>Ran claims <span lang=HE dir=RTL style='font-family:David'>עניו</span><span
+dir=LTR></span><span dir=LTR></span> refers to all moral perfections. He brings
+a proof from the Talmud, <a style='mso-footnote-id:ftn21' href="#_ftn21"
+name="_ftnref21" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE dir=RTL style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[21]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'>.וענוה גדולה מכולם</span><span
+dir=LTR></span><span dir=LTR></span><span style="mso-spacerun: yes">&nbsp;
+</span>He learns from this that the <span lang=HE dir=RTL style='font-family:
+David'>עניו</span><span dir=LTR></span><span dir=LTR></span> has all other
+subordinate moral qualities as well. Having derived the need for all moral
+perfections and all intellectual perfections, Ran is left with the
+question:<span style="mso-spacerun: yes">&nbsp; </span>What are<span lang=HE
+dir=RTL style='font-family:David'>גבור </span><span dir=LTR></span><span
+dir=LTR></span><span style="mso-spacerun: yes">&nbsp;&nbsp;</span>and <span
+lang=HE dir=RTL style='font-family:David'>עשיר</span><span dir=LTR></span><span
+dir=LTR></span>?<span style="mso-spacerun: yes">&nbsp; </span></p>
+
+<p class=MsoNormal dir=RTL style='line-height:150%'><span lang=HE
+style='font-family:David'>גבור ועשיר צריך טעם. . .קצת המפרשים פירשו שרצה באמרו
+גבור שמגביר שכלו על תאותו.<span style="mso-spacerun: yes">&nbsp; </span>ועשיר
+שתהיה לו מדת ההסתפקות. . . ואין דבריהם נכונים.</span><span dir=LTR></span><span
+class=MsoFootnoteReference><span lang=HE dir=LTR><span dir=LTR></span> </span></span><a
+style='mso-footnote-id:ftn22' href="#_ftn22" name="_ftnref22" title=""><span
+class=MsoFootnoteReference><span dir=LTR><span style='mso-special-character:
+footnote'><![if !supportFootnotes]>[22]<![endif]></span></span></span></a><span
+dir=RTL></span><span lang=HE style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'>Once Ran defines <span lang=HE dir=RTL
+style='font-family:David'>עניו</span><span dir=LTR></span><span dir=LTR></span>
+as all moral perfections, then <span lang=HE dir=RTL style='font-family:David'>גבור</span><span
+dir=LTR></span><span dir=LTR></span> and <span lang=HE dir=RTL
+style='font-family:David'>עשיר</span><span dir=LTR></span><span dir=LTR></span>
+cannot also be moral perfections.<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>Since Rabbi Yonatan’s statement includes <span lang=HE dir=RTL
+style='font-family:David'>עניו</span><span dir=LTR></span><span dir=LTR></span>,
+the other qualities in the list must be something other than moral
+perfections.<span style="mso-spacerun: yes">&nbsp; </span>Ran uses this
+Talmudic proof to promote his contention that there are criteria to prophecy
+other than what the philosophers would require for natural prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>Thus, prophecy is not natural.<span
+style="mso-spacerun: yes">&nbsp; </span>Ran’s need to include such criteria is
+consistent with his view that prophecy is given at G-d’s will and therefore
+shows G-d’s freedom to act. </p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><b>Over-Looking the Prerequisites:<o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><b><span style="mso-spacerun: yes">&nbsp;
+</span><o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>One problem facing the claim
+that there are pre-requisites to receiving prophecy is the apparent meaning of
+the Torah to the effect that all the Israelites heard the Decalogue.<span
+style="mso-spacerun: yes">&nbsp; </span>This implies that everyone had some
+level of prophecy.<span style="mso-spacerun: yes">&nbsp; </span>Maimonides in
+the <i>Moreh Nevuchim</i> (2:32) writes: <span lang=HE dir=RTL
+style='font-family:David'>לא הגיע למדרגת הנבואה אלא הראוי לה </span><span
+dir=LTR></span><span dir=LTR></span>.<span style="mso-spacerun: yes">&nbsp;
+</span>He asserts the text does not mean what it seems.<span
+style="mso-spacerun: yes">&nbsp; </span>In reality, only those people who were
+fit for prophecy achieved prophecy at that time at Mount Sinai, but those who
+were not fit for it, did not receive prophecy since, as he explains, G-d cannot
+do the impossible.<span style="mso-spacerun: yes">&nbsp; </span>Someone who is
+not fit cannot receive prophecy.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>In chapter thirty-three,
+Maimonides claims that not everything that went to Moses went to all the
+Israelites.<span style="mso-spacerun: yes">&nbsp; </span><span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+<p class=MsoBodyText dir=RTL><span lang=HE style='font-family:David'>אבל הדיבור
+- למשה לבדו.<span style="mso-spacerun: yes">&nbsp; </span>... הדיבור היה לו והם
+ישמעו הקול ההוא העצום, ללא הבדל הדברים.<o:p></o:p></span></p>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'>As Maimonides explains, at Mount Sinai the Israelites heard some kind of
+noise but they did not hear clearly the words of G-d.<a style='mso-footnote-id:
+ftn23' href="#_ftn23" name="_ftnref23" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[23]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>Maimonides is compelled to say that
+those who were not fit did not have prophecy, because natural prophecy requires
+human perfection and readiness.<span style="mso-spacerun: yes">&nbsp;
+</span>There is no other concern than being perfect.<span style="mso-spacerun:
+yes">&nbsp; </span>The explanation for this is that prophecy is not so much
+something that happens to a person, but something that one does to
+oneself.<span style="mso-spacerun: yes">&nbsp; </span>It is a self-elevation, a
+self-perfection, a going up to G-d and into a state of prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>If one has not elevated himself, he
+cannot be made elevated, just as the frog cannot be made to think.<span
+style="mso-spacerun: yes">&nbsp; </span>There is no room for an exception.<span
+style="mso-spacerun: yes">&nbsp; </span>The requirements cannot be
+overlooked.<span style="mso-spacerun: yes">&nbsp; </span>One must train himself
+to become ready.<span style="mso-spacerun: yes">&nbsp; </span>G-d can prevent,
+but He cannot allow a thing that is inherently impossible.<span
+style="mso-spacerun: yes">&nbsp; </span>One who is not ready, cannot have
+prophecy, and G-d, himself, is bound to this rule.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>Thus, Maimonides explains
+that the first two <span lang=HE dir=RTL style='font-family:David'>דיברות</span><span
+dir=LTR></span><span dir=LTR></span> were not actually heard by everyone.<span
+style="mso-spacerun: yes">&nbsp; </span>Since these <span dir=RTL></span><span
+dir=RTL style='font-family:David'><span dir=RTL></span><span
+style="mso-spacerun: yes">&nbsp;</span><span lang=HE>דיברות</span></span>were
+intellectual apprehensions, once they were explained to everyone then they are
+as valid as if heard through prophecy.<span style="mso-spacerun: yes">&nbsp;
+</span>Whenever prophecy is purely intellectual, then when one knows it, he
+knows it in the same way that the prophet knows it, and hence is equal to the
+prophet as regards this particular prophecy.<span style="mso-spacerun:
+yes">&nbsp; </span>In a similar way, if a prophet knows a <i>halacha</i>
+through his intellect, he knows it the same way that the <i>chacham </i>knows
+it and this justifies his being able to teach it in the Sanhedrin.<a
+style='mso-footnote-id:ftn24' href="#_ftn24" name="_ftnref24" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[24]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>To the extent that he knows something
+through his wisdom, he and the wise man are the same.<span style="mso-spacerun:
+yes">&nbsp; </span>If Moses teaches every Israelite the idea of G-d’s unity,
+then they know it just as well as Moses, since it is a provable thing, and so,
+their knowledge of it is no different than Moses’.<span style="mso-spacerun:
+yes">&nbsp; </span>Essentially, <i>neither</i> is based on prophecy any longer,
+but on the intellect.<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>The
+prophet has superior knowledge of only those things which the human intellect
+cannot understand by reason and which are revealed to him.<span
+style="mso-spacerun: yes">&nbsp; </span>These things the prophet has a surer
+knowledge of than one who merely hears them from the prophet and not directly
+from G-d.<span style="mso-spacerun: yes">&nbsp; </span>Maimonides therefore
+explains the equation of Moses to all the Israelites in the first two <span
+lang=HE dir=RTL style='font-family:David'>דיברות</span><span dir=LTR></span><span
+dir=LTR></span> as derived from the intellectual nature of these <span lang=HE
+dir=RTL style='font-family:David'>דיברות</span><span dir=LTR></span><span
+dir=LTR></span>.<span style="mso-spacerun: yes">&nbsp; </span>They know it via
+prophecy just as much as Moses knows it via prophecy; in reality it is know via
+the intellect.<span style="mso-spacerun: yes">&nbsp; </span>Thus, the prophecy
+of Moses has become redefined as wisdom.<a style='mso-footnote-id:ftn25'
+href="#_ftn25" name="_ftnref25" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[25]<![endif]></span></span></a>
+<span dir=RTL></span><span lang=HE dir=RTL style='font-family:David'><span
+dir=RTL></span><o:p></o:p></span></p>
+
+<p class=MsoBodyText2 dir=RTL style='text-align:right;direction:rtl;unicode-bidi:
+embed'><span lang=HE style='font-family:David'>במציאות האלוה והיותו אחד, אמנם
+יושגו בעיון האנושי. וכל משיוודע במופת, משפט הנביא בו<span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp; </span>ומשפט כל מי שידעהו </span><span dir=LTR></span><span
+dir=LTR><span dir=LTR></span>–</span><span dir=RTL></span><span lang=HE
+style='font-family:David'><span dir=RTL></span> שווה, אין יתרון.<a
+style='mso-footnote-id:ftn26' href="#_ftn26" name="_ftnref26" title=""><span
+class=MsoFootnoteReference><span dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[26]<![endif]></span></span></a><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'>Something that is logically provable is understood
+equally by the prophet and one who understands it from a prophet.<span
+style="mso-spacerun: yes">&nbsp; </span>This is the meaning of all the
+Israelites hearing the first two<span lang=HE dir=RTL style='font-family:David'>דיברות
+</span><span dir=LTR></span><span dir=LTR></span>.<span style="mso-spacerun:
+yes">&nbsp; </span>It is not that they received it through prophecy, but
+through wisdom, through Moses teaching them as a teacher and this puts them on
+the same level of understanding as Moses.<span style="mso-spacerun: yes">&nbsp;
+</span>This is not the case with a law like <i>tefillin </i>that one cannot
+understand purely intellectually.<span style="mso-spacerun: yes">&nbsp;
+</span>Maimonides forces this interpretation on Scripture in order to maintain
+his principle of natural prophecy and reject the idea that the untutored can
+prophesy.<span style="mso-spacerun: yes">&nbsp; </span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>Ran totally disagrees with
+this approach.<span style="mso-spacerun: yes">&nbsp; </span>Ran claims that all
+the Israelites heard the first two <span lang=HE dir=RTL style='font-family:
+David'>דיברות</span><span dir=LTR></span><span dir=LTR></span> and G-d made an
+exception to the requirement that a prophet meet certain prerequisites:</p>
+
+<p class=MsoNormal dir=RTL style='text-indent:36.0pt;line-height:150%'><span
+dir=LTR><span style="mso-spacerun: yes">&nbsp; </span></span><span lang=HE
+style='font-family:David'>כדי שידעו באמת שהוא נביא השם<span
+style="mso-spacerun: yes">&nbsp; </span>יתברך ולא מצד האותות<span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'>They should believe that Moses is a prophet of G-d not
+just because they see that he did miracles, but because they themselves
+experienced the prophecy together with Moses.<span style="mso-spacerun:
+yes">&nbsp; </span>Just as the witness who witnesses an event sees the other
+witnesses who are witnessing that event, so too did they, as prophets, see Moses
+as a prophet.<span style="mso-spacerun: yes">&nbsp; </span>They then knew that
+anything else he would tell them would be true and they would not listen to the
+philosophers if the philosophers would disagree with Moses.<span
+style="mso-spacerun: yes">&nbsp; </span>Ran goes on to write:</p>
+
+<p class=MsoNormal dir=RTL style='line-height:150%'><span lang=HE
+style='font-family:David'>ואע&quot;פ שלא היו ראויים לאותו השגה, וגם שהיו רבים
+ביניהם שלא היו ראויים למדרגת נבואה כלל, היה זה כדי שתתחזק אצלנו נבואתו<a
+style='mso-footnote-id:ftn27' href="#_ftn27" name="_ftnref27" title=""><span
+class=MsoFootnoteReference><span dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[27]<![endif]></span></span></a>
+<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'>The people were not at the right level but they were
+made at the level for a moment so that they could understand that Moses was a
+prophet.<span style="mso-spacerun: yes">&nbsp; </span>For Maimonides this
+contention is untenable.<span style="mso-spacerun: yes">&nbsp; </span>Although
+G-d can prevent someone from being a prophet through a miracle, He cannot grant
+someone understanding, i.e. prophecy, that he cannot understand in any
+way.<span style="mso-spacerun: yes">&nbsp; </span>If, however, prophecy is for
+G-d’s glory, then it is logical that He can grant it whenever it is glorious
+for Him.<span style="mso-spacerun: yes">&nbsp; </span>Moreover, to the extent
+that prophecy is to perfect an imperfect soul, it primarily comes to the
+imperfect.<span style="mso-spacerun: yes">&nbsp; </span>Additionally, granting
+prophecy to the undeserving demonstrates G-d’s freedom to act.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>However, if, as Maimonides<span
+dir=RTL></span><span dir=RTL style='font-family:David'><span dir=RTL></span> </span>holds,
+the state of prophecy is man’s self-perfection, then by definition, one who is
+imperfect cannot be in this state.<span style="mso-spacerun: yes">&nbsp;
+</span>G-d cannot give him prophecy; G-d’s actions would then be imperfect.<span
+style="mso-spacerun: yes">&nbsp; </span>A teacher may give a student an A on a
+test that he failed, but he cannot make him know the information.<span
+style="mso-spacerun: yes">&nbsp; </span>If the grade is just an honor from the
+teacher, then the teacher can give any grade, but if it shows what the student
+knows, then the teacher is not free to grade as he wishes.<span
+style="mso-spacerun: yes">&nbsp; </span>If the teacher would give the A, it
+would show the teacher’s lack of constancy and perfection.<span
+style="mso-spacerun: yes">&nbsp; </span>G-d is also not free to grant prophecy
+to the untutored.<span style="mso-spacerun: yes">&nbsp; </span>Ran understands
+prophecy as being for G-d’s glory whereas Maimonides understands it as man’s self
+perfection.<span style="mso-spacerun: yes">&nbsp; </span>Ran stresses G-d
+freedom whereas Maimonides stresses G-d’s constancy. </p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoBodyText2 dir=LTR style='line-height:normal'><b>The Uniqueness of
+Moses:<o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>Ran writes that Moses was unique in that
+he attained a level not humanly possible, at least not possible by natural
+means.<a style='mso-footnote-id:ftn28' href="#_ftn28" name="_ftnref28" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[28]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>His proof is the verse:<span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David;layout-grid-mode:line'><span dir=RTL></span><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=RTL style='text-align:justify'><span lang=HE
+style='font-family:David;layout-grid-mode:line'>ספר דברים פרק לד:<span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span>וְלֹא קָם נָבִיא עוֹד
+בְּיִשְׂרָאֵל כְּמשֶׁה אֲשֶׁר יְדָעוֹ יְהֹוָה פָּנִים אֶל פָּנִים</span><span
+dir=LTR></span><span dir=LTR><span dir=LTR></span></span></p>
+
+<p class=MsoBodyText2 dir=LTR>Ran argues that if this level were attainable
+naturally, then the Torah could not guarantee that no one would ever again
+reach that level, since G-d will not hold back a benefit from one who deserves
+it.<a style='mso-footnote-id:ftn29' href="#_ftn29" name="_ftnref29" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[29]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>He thus uses Moses’ uniqueness to prove
+that his level of prophecy is super-natural.<span style="mso-spacerun:
+yes">&nbsp; </span>Maimonides uses this same uniqueness to prove the opposite.<span
+style="mso-spacerun: yes">&nbsp; </span>Moses’ uniqueness is based on the very <i>naturalness</i>
+of his prophecy.<span style="mso-spacerun: yes">&nbsp; </span></p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>In chapter thirty-five
+of <i>Moreh Nevuchim</i>, Maimonides writes:</p>
+
+<p class=MsoNormal dir=RTL style='line-height:150%'><span lang=HE
+style='font-family:David'>ששם נביא אמנם יאמר אצלי על משה ועל זולתו בסיפוק וכן
+הענין אצלי עוד<span style="mso-spacerun: yes">&nbsp; </span>לפעולותיו בנפלאות
+זולתו כי אותותיו אינם מכת נפלאות שאר הנביאים<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'>Maimonides believes that Moses and other prophets are
+both called prophets but the word “prophet” has distinct meanings in the two
+instances.<a style='mso-footnote-id:ftn30' href="#_ftn30" name="_ftnref30"
+title=""><span class=MsoFootnoteReference><span style='mso-special-character:
+footnote'><![if !supportFootnotes]>[30]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>In reference to Moses the term
+“prophet” does not mean prophet as it does for every other person.<span
+style="mso-spacerun: yes">&nbsp; </span>What exactly is different about Moses’
+prophecy?<span style="mso-spacerun: yes">&nbsp; </span>Shem Tov Ibn Shem Tov<a
+style='mso-footnote-id:ftn31' href="#_ftn31" name="_ftnref31" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[31]<![endif]></span></span></a>
+and Moses Narboni<a style='mso-footnote-id:ftn32' href="#_ftn32"
+name="_ftnref32" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[32]<![endif]></span></span></a>
+in their commentaries write that Moses is unique because he did not use the
+imaginative faculty.<span style="mso-spacerun: yes">&nbsp; </span>Narboni lists
+four differences in Moses’ prophetic level<a style='mso-footnote-id:ftn33'
+href="#_ftn33" name="_ftnref33" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[33]<![endif]></span></span></a>:<span
+style="mso-spacerun: yes">&nbsp; </span>(1) Moses had prophecy not by means of
+an angel, (2) Moses was awake, (3) Moses was in control of his senses, and (4)
+Moses had prophecy whenever he willed to.<span style="mso-spacerun: yes">&nbsp;
+</span>In this connection let us refer to Aristotle’s only description of the
+possibility of direct prophetic communication from G-d to man.<a
+style='mso-footnote-id:ftn34' href="#_ftn34" name="_ftnref34" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[34]<![endif]></span></span></a>
+</p>
+
+<p class=MsoBodyTextIndent dir=LTR style='margin-top:0cm;margin-right:32.55pt;
+margin-bottom:0cm;margin-left:35.45pt;margin-bottom:.0001pt;text-indent:0cm;
+line-height:normal'>And these stimuli produce mental pictures from which men
+predict what will happen about such events.<span style="mso-spacerun:
+yes">&nbsp; </span>This is why this affection occurs more readily to ordinary
+men and not to those who are specially intelligent.<span style="mso-spacerun:
+yes">&nbsp; </span>If it were G-d who sent them, they would appear by day also
+and to the wise; but as it is, it is natural that ordinary men should
+foresee;<span style="mso-spacerun: yes">&nbsp; </span>for the minds of such men
+are not given to deep thought, but are empty and vacant of all thoughts, and
+when once stimulated are carried away by the impulse.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoBodyTextIndent dir=LTR style='text-indent:0cm'>Aristotle, like
+Maimonides, divides prophecy into two distinct types.<span style="mso-spacerun:
+yes">&nbsp; </span>Aristotle believes that normal prophecy only occurs in
+unwise people because unwise people have more vacant minds, and therefore are
+influenced more by small stimuli that they apprehend.<span style="mso-spacerun:
+yes">&nbsp; </span>Whereas, thinking persons, people full of thought, have no
+room for prophecy in the sense of foreseeing the future based on small stimuli,
+because their minds are cluttered with all their deep thoughts.<span
+style="mso-spacerun: yes">&nbsp; </span>Simple people, who have empty minds
+have the room to know about the future.<span style="mso-spacerun: yes">&nbsp;
+</span>This is what Aristotle calls prophecy.<span style="mso-spacerun:
+yes">&nbsp; </span>Aristotle also entertains the possibility that there could
+be a second type of prophecy, some kind of a real communication from G-d.<span
+style="mso-spacerun: yes">&nbsp; </span>He writes that if it would be from G-d,
+then it would be by day and to the wise.<span style="mso-spacerun: yes">&nbsp;
+</span>Since the minds of the wise are in tune with G-d, they can perceive true
+thoughts while awake.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>Aristotle’s second type of
+prophecy is distinguished by two characteristics.<span style="mso-spacerun:
+yes">&nbsp; </span>It is by day and it only comes to a wise person.<span
+style="mso-spacerun: yes">&nbsp; </span>Only then is it called communication with
+G-d.<span style="mso-spacerun: yes">&nbsp; </span>G-d will communicate by day
+and to the wise since the mind of a wise man may be <b>more</b> perfect by
+day.<span style="mso-spacerun: yes">&nbsp; </span>Maimonides stresses that
+Moses prophesies in the day, and that he is a different kind of a prophet from
+the other prophets.<a style='mso-footnote-id:ftn35' href="#_ftn35"
+name="_ftnref35" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[35]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>Maimonides also frequently writes that
+Moses is wise.<a style='mso-footnote-id:ftn36' href="#_ftn36" name="_ftnref36"
+title=""><span class=MsoFootnoteReference><span style='mso-special-character:
+footnote'><![if !supportFootnotes]>[36]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>Perhaps Maimonides believes Moses is
+unique in that his prophecy is directly from G-d.<span style="mso-spacerun:
+yes">&nbsp; </span>Aristotle defines prophecy as that type which he is familiar
+with which comes to ordinary people and which is predicting the future in
+dreams.<a style='mso-footnote-id:ftn37' href="#_ftn37" name="_ftnref37" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[37]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>This is the normal meaning of the term
+“prophecy” that Maimonides applies to ordinary prophets.<span
+style="mso-spacerun: yes">&nbsp; </span>It is regular people finding out about
+the future, and those people do not have to be the extremely wise people.<span
+style="mso-spacerun: yes">&nbsp; </span>Moses is a completely different
+prophet.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>Moses is that kind of
+prophet that Aristotle refers to as the prophet who really speaks with
+G-d.<span style="mso-spacerun: yes">&nbsp; </span>This is why Maimonides
+emphasizes that Moses communicates with G-d during the day; it shows that his
+is true prophecy and not just the result of the vacancy of his mind.<span
+style="mso-spacerun: yes">&nbsp; </span>Rather, his mind is full because he is
+a wise person, and thus the uniqueness of Moses’ prophecy is that Moses is
+really a wise man. Moses is not truly a <span lang=HE dir=RTL style='font-family:
+David'>נביא</span><span dir=LTR></span><span dir=LTR></span> in the normal
+sense of the word.<span style="mso-spacerun: yes">&nbsp; </span>According to
+Maimonides’ claim, in reference to Moses, <span lang=HE dir=RTL
+style='font-family:David'>נביא</span><span dir=LTR></span><span dir=LTR></span>
+is used amphibolously.<span style="mso-spacerun: yes">&nbsp; </span>Moses is
+not a <span lang=HE dir=RTL style='font-family:David'>נביא</span><span dir=LTR></span><span
+dir=LTR></span> in the same sense that all the other <span lang=HE dir=RTL
+style='font-family:David'>נביאים</span><span dir=LTR></span><span dir=LTR></span>
+are.<span style="mso-spacerun: yes">&nbsp; </span>His prophecy is the result of
+what he thinks about in his conscious mind all day.<span style="mso-spacerun:
+yes">&nbsp; </span>Moses is, or represents, pure wisdom.<a style='mso-footnote-id:
+ftn38' href="#_ftn38" name="_ftnref38" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[38]<![endif]></span></span></a></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>Moses as the most wise is
+the one capable of knowing and disseminating the law.<span style="mso-spacerun:
+yes">&nbsp; </span>This giving of wisdom from the wise man is the practical
+meaning of his communicating directly with G-d.<span style="mso-spacerun:
+yes">&nbsp; </span>Moses has become the lawgiver rather than the law
+receiver.<span style="mso-spacerun: yes">&nbsp; </span>In what sense can we say
+Moses’ law is Divine?<span style="mso-spacerun: yes">&nbsp; </span>Joseph Kaspi
+in his commentary equates the intellect of the perfect individual with G-d
+Himself.<span class=MsoFootnoteReference> <a style='mso-footnote-id:ftn39'
+href="#_ftn39" name="_ftnref39" title=""><span style='mso-special-character:
+footnote'><![if !supportFootnotes]>[39]<![endif]></span></a></span><span
+style="mso-spacerun: yes">&nbsp; </span>Real prophecy is the wisdom of the
+individual.<span style="mso-spacerun: yes">&nbsp; </span>The other prophets
+fall into the category that Aristotle describes as people who do not
+communicate with G-d but merely apprehend things because their minds are
+vacant.<span style="mso-spacerun: yes">&nbsp; </span>Surely no binding,
+valuable or even coherent law system can be based on their vacuous ravings. <span
+style="mso-spacerun: yes">&nbsp;</span>Perhaps this is the reason Maimonides
+puts such an emphasis on the difference between the prophecy of Moses and the
+other prophets.<span style="mso-spacerun: yes">&nbsp; </span>Moses is the
+prophet whose prophecy is equated with wisdom - to quote Kaspi, Moses “has G-d
+in his head.”<a style='mso-footnote-id:ftn40' href="#_ftn40" name="_ftnref40"
+title=""><span class=MsoFootnoteReference><span style='mso-special-character:
+footnote'><![if !supportFootnotes]>[40]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>Maimonides’ explanation of
+the first two <span lang=HE dir=RTL style='font-family:David'>דיברות</span><span
+dir=LTR></span><span dir=LTR></span> supports this hypothesis.<span
+style="mso-spacerun: yes">&nbsp; </span>The first two <span lang=HE dir=RTL
+style='font-family:David'>דיברות</span><span dir=LTR></span><span dir=LTR></span>
+were accepted not on the basis of Moses’ authority as a prophet, but on the
+basis of the intellect of the individual.<span style="mso-spacerun: yes">&nbsp;
+</span>The sages of the Talmud claim that all the Israelites heard the first
+two <span lang=HE dir=RTL style='font-family:David'>דיברות</span><span dir=LTR></span><span
+dir=LTR></span> on the same level as Moses<a style='mso-footnote-id:ftn41'
+href="#_ftn41" name="_ftnref41" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[41]<![endif]></span></span></a>.<span
+style="mso-spacerun: yes">&nbsp; </span>If Moses’ level is distinguished by
+being human wisdom, then the Israelites having been on the same level as Moses
+means they, too, understood the <span lang=HE dir=RTL style='font-family:David'>דיברות</span><span
+dir=LTR></span><span dir=LTR></span> via wisdom.<span style="mso-spacerun:
+yes">&nbsp; </span>This is in deed what Maimonides believes.<span
+style="mso-spacerun: yes">&nbsp; </span>Moses’ communication of the content of
+the first two <span lang=HE dir=RTL style='font-family:David'>דיברות</span><span
+dir=LTR></span><span dir=LTR></span> was education.<span style="mso-spacerun:
+yes">&nbsp; </span>Moses is foremost <span lang=HE dir=RTL style='font-family:
+David'>משה <u>רבנו</u></span><span dir=LTR></span><span dir=LTR></span>, the
+paradigm teacher.<span style="mso-spacerun: yes">&nbsp; </span>This is the
+meaning of real prophecy.<span style="mso-spacerun: yes">&nbsp; </span>Moses’
+authority is based on the intellect.<span style="mso-spacerun:
+yes">&nbsp;&nbsp; </span>The basis for the law of the ideal society is
+intellect and wisdom.<span style="mso-spacerun: yes">&nbsp; </span>Consistent
+to this view is the principle that Maimonides codifies in the<i> Mishneh Torah<a
+style='mso-footnote-id:ftn42' href="#_ftn42" name="_ftnref42" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[42]<![endif]></span></span></a>
+</i>that a future prophet cannot explain a <i>halacha</i> on the basis of
+prophecy but only based on his wisdom.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<h1 dir=LTR style='text-indent:0cm'>The Authority of Moses:</h1>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>As stated previously, Ran
+writes that the Israelites experienced the first two <span lang=HE dir=RTL
+style='font-family:David'>דיברות</span><span dir=LTR></span><span dir=LTR></span>
+as <span lang=HE dir=RTL style='font-family:David'>נבואה</span><span dir=LTR></span><span
+dir=LTR></span> in order that they should believe in Moses as a true prophet
+and that they should not listen to the philosophers if they contradict
+Moses.<span style="mso-spacerun: yes">&nbsp; </span>Maimonides presents a
+similar argument.<span style="mso-spacerun: yes">&nbsp; </span>He, however,
+qualifies his argument that the prophecy of the Israelites and the prophecy of
+Moses were unequal.<span style="mso-spacerun: yes">&nbsp; </span>Moses’
+prophecy was a real communication with G-d whereas the Israelites’ prophecy was
+from “in front of G-d,” i.e., they heard just the voices that were created for
+this purpose.<span style="mso-spacerun: yes">&nbsp; </span>Nevertheless, they <u>did</u>
+experience Moses speaking with G-d.<span style="mso-spacerun: yes">&nbsp;
+</span>In <i>Mishneh Torah<a style='mso-footnote-id:ftn43' href="#_ftn43"
+name="_ftnref43" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[43]<![endif]></span></span></a></i>,
+Maimonides writes:</p>
+
+<p class=MsoBodyText3 dir=RTL style='text-align:right;direction:rtl;unicode-bidi:
+embed'><span lang=HE style='font-family:David'>משה רבנו לא האמינו בו ישראל מפני
+האותות שעשה שהמאמין על פי אותות יש בלבו דופי שאפשר שיעשה האות בלט וכישוף, אלא
+כל האותות שעשה משה במדבר לפי הצורך עשאם <o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'>Moses did all the miracles not to convince the
+Israelites of the authenticity of his prophecy but to help them survive the
+difficulties of the desert.<span style="mso-spacerun: yes">&nbsp; </span>What
+really did cause them to believe in Moses? </p>
+
+<p class=MsoBodyText dir=RTL><span lang=HE style='font-family:David'>במה האמינו
+בו?<span style="mso-spacerun: yes">&nbsp; </span>מעמד הר סיני שעינינו ראו ולא
+זר, ואוזננו שמעו ולא אחר, האש והקולות והלפידים והוא ניגש אל הערפל והקול מדבר
+אליו ואנו שומעים &quot;משה, משה, לך אמור להם כך וכך.&quot;<span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span>וכן הוא אומר:<span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span>פנים בפנים דיבר ה'<span
+style="mso-spacerun: yes">&nbsp; </span>עמכם.<span style="mso-spacerun:
+yes">&nbsp; </span>ונאמר: לא את אבותינו כרת ה' את הברית הזאת.</span><span
+dir=LTR></span><span dir=LTR><span dir=LTR></span></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'>Maimonides writes that the proof that caused the
+Israelites to believe in Moses was</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'>that they experienced Mount Sinai with Moses.<span
+style="mso-spacerun: yes">&nbsp; </span>He goes on to compare this to two
+witnesses, witnessing the same event.<span style="mso-spacerun: yes">&nbsp;
+</span>This explanation is very similar to Ran except that according to
+Maimonides explanation here, the Israelites did not actually attain the level
+of Moses’ prophecy.<span style="mso-spacerun: yes">&nbsp; </span>They attained
+a level that can be attained without any special preparation; anyone can see or
+hear voices.<span style="mso-spacerun: yes">&nbsp; </span>One might suggest
+that this hearing of voices might actually be what Ran means when he says that
+the Israelites experienced prophecy even though they did not deserve it.<span
+style="mso-spacerun: yes">&nbsp; </span>This would imply that Ran’s conception
+of prophecy includes a type of occurrence that Maimonides would not call
+prophecy, but would only call hearing voices.<span style="mso-spacerun:
+yes">&nbsp; </span>Ran calls prophecy something that anybody can have if G-d
+wills it.<span style="mso-spacerun: yes">&nbsp; </span>G-d may not give it to
+certain people because it is not fitting to His glory, but He can break those
+rules for certain purposes.<span style="mso-spacerun: yes">&nbsp;
+</span>Perhaps, according to Ran, prophecy is something almost physical and
+therefore as with a physical phenomenon, anyone who can see and hear, can
+experience it.<span style="mso-spacerun: yes">&nbsp; </span>This is what Maimonides
+describes as hearing a created voice in front of G-d, but not true prophecy.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>Maimonides would also agree
+that one can hear a voice that G-d creates, but he would not call that prophecy
+because prophecy is a special type of occurrence where one understands
+something via the active intellect and with a perfected imaginative
+faculty.<span style="mso-spacerun: yes">&nbsp; </span>One has to be prepared
+for this, has to actively perfect these faculties.<span style="mso-spacerun:
+yes">&nbsp; </span>It is not a purely physical experience.<span
+style="mso-spacerun: yes">&nbsp; </span>It may be that the distinction between
+Maimonides and Ran is one of terminology.<span style="mso-spacerun: yes">&nbsp;
+</span>Ran is willing to call things prophecy that Maimonides would not call
+prophecy at all.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'><span style="mso-spacerun:
+yes">&nbsp;</span>In the eleventh homily Ran’s treatment of believing in Moses
+based on joint prophecy is more complex.<span style="mso-spacerun: yes">&nbsp;
+</span>He writes that there are two reasons why Moses was believed:</p>
+
+<p class=MsoBodyText dir=RTL><span lang=HE style='font-family:David'>וידוע הוא
+שנבואת משה רבינו עליו השלום נתאמתה בשני דרכים: הראשונה מצד האותות שהספיקו
+להאמין בו במה שהודיע לישראל שפקדם ה' יתברך וכי ראה את ענים, והוא הקדמת<span
+style="mso-spacerun: yes">&nbsp; </span>הידיעה במה שיקרה להם כמו שאמר:<span
+style="mso-spacerun: yes">&nbsp; </span>ויעש האותות לעיני העם ויאמין העם וישמעו
+כי פקד ה' את בני ישראל וכי ראה את ענים.<span style="mso-spacerun: yes">&nbsp;
+</span>והספיקו<span style="mso-spacerun: yes">&nbsp; </span>עוד אותות ההם
+להאמין בו במצוות שעה, והוא הפסח שעשו על פיו, תכלית כל מה שראוי שיאמין בו הנביא
+המתחדש בכל דור ודור אבל משה נתיחד בענין<span style="mso-spacerun: yes">&nbsp;
+</span>האמנת נבואתו יותר במה שראו אבותינו שספרו לנו ענינים במעמד הר סיני</span><span
+dir=LTR></span><span dir=LTR><span dir=LTR></span></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'>First, the belief in Moses was no different from the
+belief in any prophet.<span style="mso-spacerun: yes">&nbsp; </span>The prophet
+is believed when he predicts a future occurrence which then happens.<span
+style="mso-spacerun: yes">&nbsp; </span>This was the purpose of the miracles
+that occurred in Egypt; but they were only enough for the people to follow only
+the temporary <span lang=HE dir=RTL style='font-family:David'>מצוות</span><span
+dir=LTR></span><span dir=LTR></span>.<span style="mso-spacerun: yes">&nbsp;
+</span>When Moses was to become a permanent lawgiver, that no future prophet
+could ever uproot, he needed a more convincing proof of his authenticity.<span
+style="mso-spacerun: yes">&nbsp; </span>This was Mount Sinai:</p>
+
+<p class=MsoBodyText dir=RTL><span lang=HE style='font-family:David'>והיה זה
+כדי שלא יהא אפשר לנו לספק בנבואתו כלל בשום אות שיתן מתנבא עתיד כנגד תורתו וזה
+שאמר:<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>הנה אנוכי בא אליך בעב
+הענן בעבור ישמע העם בדברי עמך וגם בך יאמינו לעולם. <o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'>G-d says to Moses that He comes to the Israelites in
+His great wonders so they should believe in Moses forever.<span
+style="mso-spacerun: yes">&nbsp; </span>Ran has found a way to distinguish the
+belief in Moses from the belief in other prophets which is not based on Moses’
+wisdom, but on G-d’s demonstration of His choice of Moses.<span
+style="mso-spacerun: yes">&nbsp; </span>Ran hereby emphasizes G-d’s will
+instead of emphasizing nature’s order.<span style="mso-spacerun: yes">&nbsp;
+</span>Let us note the differences from Maimonides’ understanding.</p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><b>Empirical Versus A Priori Proof:<o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+line-height:150%;direction:ltr;unicode-bidi:embed'>Ran understands the proof of
+G-d at Sinai as being through the senses, through seeing and hearing.<span
+style="mso-spacerun: yes">&nbsp; </span>This accords with the view that G-d’s
+essential quality is his freedom to act.<span style="mso-spacerun: yes">&nbsp;
+</span>To show His freedom of action, G-d must act in the world and man must
+observe His actions.<span style="mso-spacerun: yes">&nbsp; </span>Thus, Ran’s
+disciple, Hasdai Crescas, also bases belief on witnessing G-d’s freedom of
+action.<span style="mso-spacerun: yes">&nbsp; </span>In Or Hashem he writes:</p>
+
+<p class=MsoBodyText dir=RTL><span dir=RTL></span><span lang=HE
+style='font-family:David'><span dir=RTL></span>&quot;אנוכי ה'
+אלוהיך&quot;.<span style="mso-spacerun: yes">&nbsp; </span>הנה פרש שם<span
+style="mso-spacerun: yes">&nbsp; </span>האלוהות<span style="mso-spacerun:
+yes">&nbsp; </span>היותו פועל לכל הנמצאות, ויהיה לפי זה אמרו &quot;אשר הוצאתיך
+מארץ מצרים&quot; כדמות ראיה על זאת האמונה, וזה, שמשם נעמוד על יכולת השם, וכי
+הנמצאות כולם בערכו כחומר ביד היוצר.<a style='mso-footnote-id:ftn44'
+href="#_ftn44" name="_ftnref44" title=""><span class=MsoFootnoteReference><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[44]<![endif]></span></span></a><o:p></o:p></span></p>
+
+<p class=MsoBodyText2 dir=LTR>Crescas is thus saying that the Israelites know
+that G-d can do anything and is the creator of the world because they saw in
+Egypt what He did.<span style="mso-spacerun: yes">&nbsp; </span>Crescas also
+holds, like his teacher Ran, that we rely on our senses to know that G-d is
+truly the creator and truly the controller of the world.</p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>Maimonides, in <i>The
+Guide for the Perplexed</i>, asserts that the people believed in Moses because
+they experienced the first two<span lang=HE dir=RTL style='font-family:David'>דיברות
+</span><span dir=LTR></span><span dir=LTR></span><span style="mso-spacerun:
+yes">&nbsp;</span>in the same intellectual way as Moses.<span
+style="mso-spacerun: yes">&nbsp; </span>This was possible since these two are
+intellectual <span lang=HE dir=RTL style='font-family:David'>דיברות</span><span
+dir=LTR></span><span dir=LTR></span>.<span style="mso-spacerun: yes">&nbsp;
+</span>Therefore, the people believed in Moses because they prophesied his
+prophecy.<span style="mso-spacerun: yes">&nbsp; </span>Their prophecy and his,
+however, were not exactly the same.<span style="mso-spacerun: yes">&nbsp;
+</span>His prophecy was direct prophecy from G-d whereas theirs was through
+proof, but as Maimonides explains this is equivalent.<span style="mso-spacerun:
+yes">&nbsp; </span>However, Maimonides in <i>Hilchot Yesodeh Hatora</i>h is
+much closer to Ran’s conception of an experiential proof.<span
+style="mso-spacerun: yes">&nbsp; </span>There, Maimonides seems to rely on the
+senses and not the intellect as a proof of G-d. </p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>On the one hand in the
+<i>Mishneh Torah</i> Maimonides seems to say, similarly, that belief in G-d is
+based on what was seen at Mount Sinai.<span style="mso-spacerun: yes">&nbsp;
+</span>The people saw that Moses was having prophecy with G-d so therefore they
+believed in Moses’ prophecy.<span style="mso-spacerun: yes">&nbsp; </span>In
+the <i>Moreh Nevuchim</i> the event is conceived of much more as an
+intellectual experience.<span style="mso-spacerun: yes">&nbsp; </span>The
+people had the same intellectual experience as Moses.<span style="mso-spacerun:
+yes">&nbsp; </span>If we leave this as a contradiction, we can argue that since
+the <i>Moreh Nevuchim</i> presents a more thorough treatment of the subject we
+can assume this view is closer to Maimonides’ true opinion.<a style='mso-footnote-id:
+ftn45' href="#_ftn45" name="_ftnref45" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[45]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>Moreover, the view in the <i>Moreh
+Nevuchim</i> seems more reasonable since logically one can only believe in
+something that one understands.<span style="mso-spacerun: yes">&nbsp;
+</span>Therefore intellectual belief is really on a higher level. </p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>Alternatively, if we
+try to resolve the conflict between the two different explanations of
+Maimonides’ we may explain:</p>
+
+<p class=MsoNormal dir=RTL style='line-height:150%'><span lang=HE
+style='font-family:David'>שהמאמין על<span style="mso-spacerun: yes">&nbsp;
+</span>פי האותות יש בלבו דפי.<span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;line-height:150%;direction:
+ltr;unicode-bidi:embed'>The mind is not fully convinced just because the eye
+sees.<span style="mso-spacerun: yes">&nbsp; </span>The simple understanding of
+why there is this lack of surety is that a person may see something later that
+contradicts his first observation, whereas an intellectual proof can never be
+disproved if it really was an intellectual proof in the first place.<span
+style="mso-spacerun: yes">&nbsp; </span>Therefore, intellectual proofs have a
+far greater hold.<span style="mso-spacerun: yes">&nbsp; </span>Thus, even in
+Yesodeh Hatorah, it is not the sensual experience of Mount Sinai, as it is for
+Ran and Crescas, but the intellectual experience of Mount Sinai that causes the
+Israelites to believe in Moses.<span style="mso-spacerun: yes">&nbsp;
+</span>When Maimonides writes that the Israelites saw the voices he intends
+that they intellectually experienced the prophecy, just as he write in the <i>Guide</i>.<span
+style="mso-spacerun: yes">&nbsp; </span></p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>But there is a more
+essential explanation of Maimonides’ position.<span style="mso-spacerun:
+yes">&nbsp; </span>Maimonides’ dislike for relying on miracles as a proof of a
+prophet’s being a true prophet may be related to a dislike for relying on
+miracles as a proof of G-d’s very existence. Maimonides writes in the <i>Moreh
+Nevuchim </i>that far from looking to miracles, we actually look to G-d’s
+routine creation to know something about Him:</p>
+
+<p class=MsoBodyText2 dir=LTR style='margin-top:0cm;margin-right:32.55pt;
+margin-bottom:0cm;margin-left:1.0cm;margin-bottom:.0001pt;line-height:normal'>I
+have already told you that nothing exists except G-d in this Universe, and that
+there is no other evidence for his existence but this Universe in its entirety
+and in its several parts.<span style="mso-spacerun: yes">&nbsp;
+</span>Consequently the Universe must be examined as it is, the propositions
+must be derived from those properties of the Universe which are clearly
+perceived and hence you must know its<span style="mso-spacerun: yes">&nbsp;
+</span>visible form and its nature.<span style="mso-spacerun: yes">&nbsp;
+</span>Then only will you find in the Universe evidence for the existence of a
+Being not included therein.<a style='mso-footnote-id:ftn46' href="#_ftn46"
+name="_ftnref46" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[46]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span></p>
+
+<p class=MsoBodyText2 dir=LTR><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoBodyText2 dir=LTR>The way to understand G-d is through studying the
+world, because <u>that</u> is the one thing we know for sure; by definition G-d
+created the world, and by studying the world we find out about G-d.<span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span>One of the main things we find
+out is that G-d follows normal, orderly rules:<span style="mso-spacerun:
+yes">&nbsp; </span>the sun travels its course, the stars travel their course,
+everything is fixed and constant.<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>Thus, we learn that G-d’s creation follows unchanging laws.<span
+style="mso-spacerun: yes">&nbsp; </span>The thing that most goes against this
+is miracles.<span style="mso-spacerun: yes">&nbsp; </span>Miracles show that
+G-d does unusual things; that He is erratic.<span style="mso-spacerun:
+yes">&nbsp; </span>This is directly opposed to the unchanging, perfect
+Aristotelian G-d of Maimonides.<span style="mso-spacerun: yes">&nbsp;
+</span>Therefore, Maimonides has to explain that miracles were intended originally
+from the beginning of creation.<span style="mso-spacerun: yes">&nbsp;
+</span>But in general, the miracles teach the wrong thing about G-d.<span
+style="mso-spacerun: yes">&nbsp; </span>They teach that He is inconsistent;
+that He changes. Thus any person who believes based on <span lang=HE dir=RTL
+style='font-family:David'>אותות</span><span dir=LTR></span><span dir=LTR></span>,
+based on miracles,<span style="mso-spacerun: yes">&nbsp; </span>“<span lang=HE
+dir=RTL style='font-family:David'>יש בלבו דופי</span><span dir=LTR></span><span
+dir=LTR></span>”, he has doubt in his heart.<span style="mso-spacerun:
+yes">&nbsp; </span>He has incorrect thoughts in his heart; he thinks that G-d
+is typified by miracles, that G-d does unusual things, that G-d is irrational
+or that G-d is erratic.<span style="mso-spacerun: yes">&nbsp; </span>He does
+one time, one thing, and another time, another thing.<span style="mso-spacerun:
+yes">&nbsp; </span>Thus the believer does not learn the constancy of G-d.<span
+style="mso-spacerun: yes">&nbsp; </span>This is the <span lang=HE dir=RTL
+style='font-family:David'>דופי</span><span dir=LTR></span><span dir=LTR></span>
+in his heart.<a style='mso-footnote-id:ftn47' href="#_ftn47" name="_ftnref47"
+title=""><span class=MsoFootnoteReference><span style='mso-special-character:
+footnote'><![if !supportFootnotes]>[47]<![endif]></span></span></a></p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>Similarly, learning
+from miracles to believe in Moses is also problematic.<span
+style="mso-spacerun: yes">&nbsp; </span>Belief in Moses should not be based on
+what Moses did, or because of what was observed, but on intellectual perception
+alone.<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>What the
+historical Moses did is time-connected.<span style="mso-spacerun: yes">&nbsp;
+</span>Moses’ one-time actions do not teach anything about his essential nature
+and his authenticity.<span style="mso-spacerun: yes">&nbsp; </span>The reason
+not to rely on miracles as the basis for belief in prophets is not that another
+prophet doing a contrary miracle could refute the belief, or that the senses
+could be playing a trick on the observer.<span style="mso-spacerun: yes">&nbsp;
+</span>Rather, miracles are an invalid basis for belief because just as one
+must learn about G-d from His <i>normal</i> actions, from His creation, so must
+one learn about the prophet from his essential unchanging essence.<span
+style="mso-spacerun: yes">&nbsp; </span>The only truly unchanging part of the
+life of the prophet is his teaching.<span style="mso-spacerun: yes">&nbsp;
+</span>The events of his life are not constant, but his true teachings
+are.<span style="mso-spacerun: yes">&nbsp; </span>Thus, the Israelites must
+learn about Moses’ authenticity through a critical analysis of his
+teachings.<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>Just as
+investigating G-d’s creation teaches about His existence, investigating the
+prophet’s creation, his teachings, teaches about his authenticity and
+validity.<span style="mso-spacerun: yes">&nbsp; </span>This is why a belief in
+Moses that is based on the miracles he performed, and because of the
+circumstances of his life, and not on the intellectual proofs of his essential
+teachings is inherently flawed.<span style="mso-spacerun: yes">&nbsp;
+</span>Only his teachings are constant. That is the difference between
+Maimonides on the one hand, and Crescas and Ran on the other.<span
+style="mso-spacerun: yes">&nbsp; </span>Crescas and Ran affirm G-d’s freedom of
+action as demonstrated by His persistent involvement in the peculiarities of
+history.<span style="mso-spacerun: yes">&nbsp; </span>Maimonides stresses G-d’s
+perfect unfaltering constancy.</p>
+
+<p class=MsoBodyText2 dir=LTR style='line-height:normal'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoBodyText2 dir=LTR style='line-height:normal'><b>Aesthetic
+Consideration:</b></p>
+
+<p class=MsoBodyText2 dir=LTR style='line-height:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>Ran still has to
+explain why a <span lang=HE dir=RTL style='font-family:David'>נביא</span><span
+dir=LTR></span><span dir=LTR></span> has to be strong and rich, granted that
+these are not moral or intellectual perfections.</p>
+
+<p class=MsoBodyText2 dir=RTL style='text-align:right;direction:rtl;unicode-bidi:
+embed'><span lang=HE style='font-family:David'>אבל צריך ביאור מדוע יצטרך הנביא
+להיותו עשיר ובעל קומה, כי בגבור נוכל לפרש שצריך להיות אמיץ לבו בגבורים מי שהוא
+שלוח להוכיח עם רב ולא<span style="mso-spacerun: yes">&nbsp; </span>ישוב מפני
+כל, כמו שהזהיר השם יתברך לירמיה:<span style="mso-spacerun: yes">&nbsp;
+</span>ואתה תאזור מתנין וקמת ודברת אליהם את כל אשר אנוכי אצווך אל תחת מפניהם פן
+אחתך לפניהם, אבל בעשיר ובעל קומה צריך טעם.<a style='mso-footnote-id:ftn48'
+href="#_ftn48" name="_ftnref48" title=""><span class=MsoFootnoteReference><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[48]<![endif]></span></span></a><o:p></o:p></span></p>
+
+<p class=MsoBodyText2 dir=LTR>Ran writes that<span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David'><span dir=RTL></span> גבור </span>means
+that the prophet has to be brave-hearted so that he should be able to speak to
+the people things that they do not want to hear.<span style="mso-spacerun:
+yes">&nbsp; </span>But how can he explain the requirement to be rich and tall?</p>
+
+<p class=MsoBodyText2 dir=RTL style='text-align:right;direction:rtl;unicode-bidi:
+embed'><span lang=HE style='font-family:David'>והתשובה בזה:<span
+style="mso-spacerun: yes">&nbsp; </span>שאם יצטרך הנביא הנבואה להשלים לעצמו לבד
+לא לזולתו היה ראוי שינבא מי שימצאו בו השלמיות אשר תשלם הנפש בם יהיה הגוף שלם או
+חסר, אבל הנביא שינבא להמון ומודיע מה שצווהו השם יתברך יצטרך שיהיו נבחר ונרצה
+מכל הכתות מאוהבי החכמה ואוהבי העושר ואוהבי הגיבורה, ושישלימו לו מעלות המידות.<span
+style="mso-spacerun: yes">&nbsp; </span>וכבר ידוע שאינו נקרא נביא רק להיותו
+משמיע ומדבר תמיד להמון מה שיצוהו ה' יתברך.<a style='mso-footnote-id:ftn49'
+href="#_ftn49" name="_ftnref49" title=""><span class=MsoFootnoteReference><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[49]<![endif]></span></span></a><o:p></o:p></span></p>
+
+<p class=MsoBodyText2 dir=LTR>Ran explains that the prophet needs to be rich
+and tall so that people will listen to him; so people who value things other
+than <span lang=HE dir=RTL style='font-family:David'>חכמה</span><span dir=LTR></span><span
+dir=LTR></span> will also listen to the <span lang=HE dir=RTL style='font-family:
+David'>נביא</span><span dir=LTR></span><span dir=LTR></span>. The prophet must
+be able to transmit his message.<a style='mso-footnote-id:ftn50' href="#_ftn50"
+name="_ftnref50" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[50]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>Upon hearing that the prophet is rich,
+the masses will assume that he must have something worthwhile to say.<span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span>If he is tall and looks
+important, they will also listen to him.<span style="mso-spacerun: yes">&nbsp;
+</span>Not everyone values wisdom. </p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>In determining the
+fitness of a given person to receive prophecy, Ran considers qualities external
+to the person.<span style="mso-spacerun: yes">&nbsp; </span>Just as Ran accepts
+physical experience as a proof of G-d, he realizes that people value different
+aspects of the physical world.<span style="mso-spacerun: yes">&nbsp;
+</span>Therefore, the <span lang=HE dir=RTL style='font-family:David'>נביא</span><span
+dir=LTR></span><span dir=LTR></span> must exemplify various physical
+perfections.<span style="mso-spacerun: yes">&nbsp; </span>People trust their
+senses and the <span lang=HE dir=RTL style='font-family:David'>נביא</span><span
+dir=LTR></span><span dir=LTR></span> should acquiesce to that state of
+being.<span style="mso-spacerun: yes">&nbsp; </span>He must be pleasing to
+their senses.<span style="mso-spacerun: yes">&nbsp; </span>People do look up to
+wealth and to good stature and physical form.<span style="mso-spacerun:
+yes">&nbsp; </span>Therefore, the <span lang=HE dir=RTL style='font-family:
+David'>נביא</span><span dir=LTR></span><span dir=LTR></span> has to fit into
+those categories that the people admire.</p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>Maimonides totally
+rejects giving into this tendency of valuing physical outward appearances and
+therefore he does not accept this explanation for <span lang=HE dir=RTL
+style='font-family:David'>גבור</span><span dir=LTR></span><span dir=LTR></span>
+and <span lang=HE dir=RTL style='font-family:David'>עשיר</span><span dir=LTR></span><span
+dir=LTR></span>.<span style="mso-spacerun: yes">&nbsp;&nbsp; </span><span
+lang=HE dir=RTL style='font-family:David'>גבור</span><span dir=LTR></span><span
+dir=LTR></span> and <span lang=HE dir=RTL style='font-family:David'>עשיר</span><span
+dir=LTR></span><span dir=LTR></span> must be something moral because, a priori,
+Maimonides disregards the physical appearance of the prophet. He accepts only
+attributes that logically prepare one for natural prophecy.<span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span>Prophecy is the perfection of
+man’s intellect and character.<span style="mso-spacerun: yes">&nbsp;
+</span>What leads to this perfection is relevant, but what the prophet looks
+like is irrelevant to determining his readiness to receive prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>The causes for the existence of
+prophecy must be essential to prophecy.<span style="mso-spacerun: yes">&nbsp;
+</span>Thus, aesthetic considerations are rejected.<span style="mso-spacerun:
+yes">&nbsp; </span>This is in distinction to Ran who considers prophecy a gift,
+not something necessarily earned.<span style="mso-spacerun: yes">&nbsp;
+</span>Therefore, just as one can choose to give a gift to someone one likes
+even for some inessential reason, like his height, so to prophecy can be given
+based on aesthetic considerations.<span style="mso-spacerun: yes">&nbsp;
+</span>Even though height may be essential in the sense that it facilitates
+conveying the prophecy, it is nevertheless inessential to <u>receiving</u>
+prophecy.</p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>Maimonides in <i>Moreh
+Nevuchim</i> (3:54) quotes Jeremiah to support his thesis that wisdom is only
+perfection of man.<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>This
+passage is reminiscent of Ran’s discussion because it deals with people’s
+valuing wealth and courage.</p>
+
+<p class=MsoBodyText2 dir=RTL style='text-align:right;direction:rtl;unicode-bidi:
+embed'><span lang=HE style='font-family:David'>הנה בארו לנו הנביאים גם הם אלו
+הענינים בעצמם ופירשו אותם לנו כמו שפרשום הפילוסופים ואמרו לנו בפרוש:<span
+style="mso-spacerun: yes">&nbsp; </span>שאין שלימות הקנין, ולא שלימות בריאות
+הגוף, ולא שלימות המדות, שלימות שראוי להתפאר ולהתהלל בו, ולא לבקש אותו, ושהשלמות
+שראוי להתהלל בו ולבקשו הוא - ידיעת האלוה יתברך, שהיא החכמה האמיתית.<a
+style='mso-footnote-id:ftn51' href="#_ftn51" name="_ftnref51" title=""><span
+class=MsoFootnoteReference><span dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[51]<![endif]></span></span></a><o:p></o:p></span></p>
+
+<p class=MsoBodyText2 dir=LTR>The true praise of a person should only be for
+his wisdom.</p>
+
+<p class=MsoBodyText2 dir=RTL style='text-align:right;direction:rtl;unicode-bidi:
+embed'><span lang=HE style='font-family:David'>אמר ירמיה: באלו השלמיות
+הארבע:<span style="mso-spacerun: yes">&nbsp; </span>&quot;כה אמר ה'<span
+style="mso-spacerun: yes">&nbsp; </span>אל יתהלל חכם בחכמתו, ואל יתהלל הגבור
+בגבורתו, ואל יתהלל עשיר בעושרו, כי אם בזאת יתהלל המתהלל, השכל וידע אותי.<a
+style='mso-footnote-id:ftn52' href="#_ftn52" name="_ftnref52" title=""><span
+class=MsoFootnoteReference><span dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[52]<![endif]></span></span></a></span><span
+dir=LTR></span><span dir=LTR><span dir=LTR></span></span></p>
+
+<p class=MsoBodyText2 dir=LTR>Jeremiah derides praise of external qualities in
+men; he extols only praise of true wisdom.<span style="mso-spacerun:
+yes">&nbsp; </span>Maimonides understands from this, that the highest
+perfection of man is wisdom.<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span></p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>Jeremiah’s statement
+unsettles Ran’s opinion. Ran views prophecy as a gift that G-d gives to man and
+therefore G-d can choose to give it to people who fit criteria that are not
+necessarily intrinsic to attaining prophecy.<span style="mso-spacerun:
+yes">&nbsp; </span>According to Ran, Jeremiah himself had to be tall and brave
+in order to become a prophet, and yet he tells the people not to value these
+qualities.<span style="mso-spacerun: yes">&nbsp; </span>Jeremiah, instead,
+lauds only wisdom.<span style="mso-spacerun: yes">&nbsp; </span>Jeremiah was
+also wise, but the listener could question, reasoning that G-d chose Jeremiah
+not only for his wisdom but, for example, also for his bravery, height and
+strength.<span style="mso-spacerun: yes">&nbsp; </span>It must be, then, that
+G-d does value these things.<span style="mso-spacerun: yes">&nbsp;
+</span>Bravery, height and strength are valuable.<span style="mso-spacerun:
+yes">&nbsp; </span>This undermines Jeremiah’s own argument.<span
+style="mso-spacerun: yes">&nbsp; </span>The <span lang=HE dir=RTL
+style='font-family:David'>נביא</span><span dir=LTR></span><span dir=LTR></span>
+should not be an example of that which he<span dir=RTL></span><span dir=RTL
+style='font-family:David'><span dir=RTL></span> </span>comes to disparage.<span
+style="mso-spacerun: yes">&nbsp; </span>If the only thing that is valuable is
+ones intellect, the prophet cannot be required to have other qualities; he
+should not be a counter-example to his own argument.<a style='mso-footnote-id:
+ftn53' href="#_ftn53" name="_ftnref53" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[53]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>Maimonides avoids this weakness by excluding
+bravery, height and strength from his requirements for prophecy.</p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>Maimonides believes
+there is no need for the prophet to have qualities that are themselves
+unimportant qualities.<span style="mso-spacerun: yes">&nbsp; </span>Maimonides
+considers prophecy to be a perfection that man has to attain; it is man moving
+up towards G-d.<span style="mso-spacerun: yes">&nbsp; </span>Therefore, what is
+required for prophecy is whatever brings man closer to G-d whether that be
+wisdom or some other essential trait, but not things such as wealth<a
+style='mso-footnote-id:ftn54' href="#_ftn54" name="_ftnref54" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[54]<![endif]></span></span></a>or
+tallness that are not essential in bringing one closer to G-d.<span
+style="mso-spacerun: yes">&nbsp; </span>Maimonides writes quite clearly:<a
+style='mso-footnote-id:ftn55' href="#_ftn55" name="_ftnref55" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[55]<![endif]></span></span></a><span
+dir=RTL></span><span lang=HE dir=RTL style='font-family:Miriam;layout-grid-mode:
+line'><span dir=RTL></span><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=RTL style='text-align:justify'><span lang=HE
+style='font-family:David;layout-grid-mode:line'>וכבר השיגו ה'חכמים ז&quot;ל'</span><span
+dir=LTR></span><span dir=LTR style='layout-grid-mode:line'><span dir=LTR></span>…</span><span
+lang=HE style='font-family:David;layout-grid-mode:line'>שה'חכמה' הנאמרת סתם בכל
+מקום, והיא התכלית, היא השגתו ית', ושאלו הקנינים שיקנם האדם, שישימם סגולתו
+ויחשבם שלמות, אינם שלמות;<o:p></o:p></span></p>
+
+<p class=MsoBodyText2 dir=LTR>The only perfection is wisdom, whereas other
+things that some people consider as perfection are, in fact, unimportant.<span
+style="mso-spacerun: yes">&nbsp; </span>It is part of the prophet’s mission to
+convince people of this.<span style="mso-spacerun: yes">&nbsp; </span>Surely
+he, himself, is not an example to the contrary.</p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>On the one hand, what
+causes Ran to assert that the prerequisites for prophecy are not really
+required is his premise that G-d is free to do anything, but on the other hand,
+there is also a more immediate cause. Ran takes the statements that all the
+Israelites, even the lowly maidservants, had a prophetic vision at the Sea of
+Reeds on leaving Egypt literally.<span style="mso-spacerun: yes">&nbsp;
+</span>Even the nursing infant saw G-d.<span style="mso-spacerun: yes">&nbsp;
+</span>That maid was not necessarily wise and morally perfect and yet she saw
+this.<span style="mso-spacerun: yes">&nbsp; </span>Ran is faced with unmet
+requirements.<span style="mso-spacerun: yes">&nbsp; </span>How could the
+prophecy occur in people without these perfections?<span style="mso-spacerun:
+yes">&nbsp; </span>Ran answers this by asserting that just as the secondary
+criteria such as wealth and tallness are not essential, so too the primary
+criteria such as wisdom are not essential and G-d can overlook any deficiencies
+in these areas when granting prophecy.<span style="mso-spacerun: yes">&nbsp;
+</span>Ran turns the list of requirements into a list of preferences.<span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span>The only essential criteria left
+is G-d’s will and desire that such and such a person should have prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>Thus by adding inessential criteria Ran
+effectively diluted all the criteria to the extent that they are all
+categorized as inessential.<span style="mso-spacerun: yes">&nbsp; </span>Thus,
+anyone, even a maidservant and all the people at Mount Sinai can have
+prophecy.<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>In this way, Ran
+is able to firmly assert G-d’s unlimited freedom and the dependency of all
+events purely on His will.</p>
+
+<p class=MsoBodyText2 dir=LTR style='line-height:normal'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoBodyText2 dir=LTR style='line-height:normal'><b>Ran’s Forced
+Arguments:<o:p></o:p></b></p>
+
+<p class=MsoBodyText2 dir=LTR style='line-height:normal'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>Ran explains the
+requirement for a prophet to be of tall stature in the following way:<span
+dir=RTL></span><span lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+<p class=MsoBodyText2 dir=RTL style='text-align:right;direction:rtl;unicode-bidi:
+embed'><span lang=HE style='font-family:David'>&quot;בעל קומה&quot;, להיותו
+יותר נראה אל ההמון בענין ההדור כמו שאמרו בבכורות:<span style="mso-spacerun:
+yes">&nbsp; </span>מניין שהקב&quot;ה משתבח בבעל קומה, ולזה אין ראוי לדבר ברבים
+אלא איש שיהיה בעל קומה שיהיו דבריו נשמעים יותר.</span><span dir=LTR></span><span
+dir=LTR><span dir=LTR></span></span></p>
+
+<p class=MsoBodyText2 dir=LTR>G-d is more glorified with good-looking, perfect
+people.<a style='mso-footnote-id:ftn56' href="#_ftn56" name="_ftnref56" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[56]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>But regarding Moses, Ran asks the
+following question:</p>
+
+<p class=MsoBodyText2 dir=RTL style='text-align:right;direction:rtl;unicode-bidi:
+embed'><span lang=HE style='font-family:David'>ויש כאן שאלה, היות משה אדון
+הנביאים ערל שפתיים, עד שהוצרך אהרון אחיו להיות מתורגמנו.<a style='mso-footnote-id:
+ftn57' href="#_ftn57" name="_ftnref57" title=""><span
+class=MsoFootnoteReference><span dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[57]<![endif]></span></span></a><o:p></o:p></span></p>
+
+<p class=MsoBodyText2 dir=LTR>After explaining the requirement of the prophet
+to be physically perfect, and to possess physical characteristics needed to
+convince the masses, Ran must explain how the greatest prophet, the
+representative of G-d in the world be lacking in such a critical requirement
+for communicating G-d’s message – his being <span lang=HE dir=RTL
+style='font-family:David'>ערל שפתיים</span><span dir=LTR></span><span dir=LTR></span>?<span
+style="mso-spacerun: yes">&nbsp; </span>Ran asserts that nature could not have
+been an obstacle for Moses, because everything that G-d did with Moses was
+beyond the rules of nature.<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>G-d could have healed Moses supernaturally. </p>
+
+<p class=MsoBodyText2 dir=RTL style='text-align:right;direction:rtl;unicode-bidi:
+embed'><span lang=HE style='font-family:David'>ושהשלימו השם יתברך בענין נסיי</span><span
+dir=LTR></span><span dir=LTR><span dir=LTR></span> </span></p>
+
+<p class=MsoBodyText2 dir=LTR>Ran holds that Moses could not have reached his
+high level naturally, so one would expect G-d to have removed his speech
+impediment miraculously also.<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>Why was Moses left with this problem?<span style="mso-spacerun:
+yes">&nbsp; </span>According Ran, Moses was left with his speech impediment
+precisely to show that he was on a miraculous level of existence.<span
+style="mso-spacerun: yes">&nbsp; </span></p>
+
+<p class=MsoBodyText2 dir=RTL style='text-align:right;direction:rtl;unicode-bidi:
+embed'><span lang=HE style='font-family:David'>איך אמר ולא קם נביא עוד בישראל
+כמשה, והשם יתב' לא ימנע טוב מבעליו לבלתי ישיג האדם המעלה שהיא לו אפשרית<a
+style='mso-footnote-id:ftn58' href="#_ftn58" name="_ftnref58" title=""><span
+class=MsoFootnoteReference><span dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[58]<![endif]></span></span></a>,
+אבל ענין הפסוק הוא להודיע כי ענין משה עליו השלום היה מכח הנסים והנפלאות, ויצא
+מגדר הענינים הטבעיים.</span><span dir=LTR></span><span dir=LTR><span dir=LTR></span></span></p>
+
+<p class=MsoBodyText2 dir=LTR>Ran contends that if prophecy descends on people
+in a natural way, then they would lose bodily control and would go into a
+trance.<span style="mso-spacerun: yes">&nbsp; </span>But if prophecy comes to a
+person while he is awake and on his feet, perfect in all his facilities,<a
+style='mso-footnote-id:ftn59' href="#_ftn59" name="_ftnref59" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[59]<![endif]></span></span></a>
+just as a person speaks to his friend - this is impossible according to nature
+because this is as if he is a person and an abstract intellect at once.<span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span>But this is how Moses’ prophecy
+occurred.<span style="mso-spacerun: yes">&nbsp; </span>G-d wanted the Torah to
+be beyond nature and so he wanted the prophecy to be beyond nature.<span
+style="mso-spacerun: yes">&nbsp; </span>To show the truth of the Torah it must
+be shown that Moses’ giving the Law is not just a natural occurrence but that
+it is from G-d.<span style="mso-spacerun: yes">&nbsp; </span>So no one should
+think that Moses was naturally coming up with these ideas and was naturally
+able to persuade a whole nation, G-d chose a person to be leader who had
+natural deficiencies in being a leader.<span style="mso-spacerun: yes">&nbsp;
+</span>And the fact he succeeded shows that G-d was directing him and that the
+Torah is really from G-d.<span style="mso-spacerun: yes">&nbsp; </span>Ran is
+willing to violate his own rules and assumptions about how G-d runs the world,
+for other considerations. </p>
+
+<p class=MsoBodyText2 dir=RTL style='text-align:right;direction:rtl;unicode-bidi:
+embed'><span lang=HE style='font-family:David'>ולזאת הסבה נשלם משה בכל שלימות
+נביא, להאמין שענינו בכח אלהי, והוסר ממנו בהשגחה גמורה הדבור הצח, יען לא יחשב
+שהיות [כלל] ישראל וגדוליהם נמשכים אחריו, היה לצחות דברו כמו שאמר על מי שהוא צח
+הדבור שימשיך ההמון אחריו, ושהשקר ממנו יחשב אמת, והדבר [כלו] בהפך למי שהוא כבד
+פה וכבד לשון, שהאמת לא יקובל ממנו רק לחוזק הגלותו, ולזה הוסר בהשגחה לא היה דבר
+נופל במקרה.<a style='mso-footnote-id:ftn60' href="#_ftn60" name="_ftnref60"
+title=""><span class=MsoFootnoteReference><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[60]<![endif]></span></span></a></span><span
+dir=LTR></span><span dir=LTR><span dir=LTR></span></span></p>
+
+<p class=MsoBodyText2 dir=LTR>Moses was left with his speech impediment so that
+no one should think he inveigled the Israelites into accepting the Torah.<span
+style="mso-spacerun: yes">&nbsp; </span>Since he was incapable of beguiling any
+one, and they still listened to him, it must be that they really did see the
+events of Mount Sinai, and the Torah must really be Divine.<span
+style="mso-spacerun: yes">&nbsp; </span>Moses could not have convinced them had
+it not been true.<span style="mso-spacerun: yes">&nbsp; </span>Ran ignores
+criteria he himself set up.<span style="mso-spacerun: yes">&nbsp; </span>His
+premise before was that a prophet needs to lead the people and therefore he
+must be a good communicator and therefore he must be brave, tall, and
+presumably able to speak well.<span style="mso-spacerun: yes">&nbsp; </span>Ran
+breaks this rule for the greatest prophet. G-d is conceived of as acting counter
+to His own expected rational behavior.<span style="mso-spacerun: yes">&nbsp;
+</span>Ran is faced with a difficulty, and not only does he apologize for it,
+he tries to incorporate it into his argument, but the argument is forced.<span
+style="mso-spacerun: yes">&nbsp; </span>Ran is able to show G-d’s freedom of
+action.<span style="mso-spacerun: yes">&nbsp; </span>By granting the blemished
+person prophecy, G-d show his ability to do anything.<span style="mso-spacerun:
+yes">&nbsp; </span>It is ironic that the quote from R. Yonaton that Ran brings
+at the start of his homily derives the prerequisites of prophecy from Moses.<span
+style="mso-spacerun: yes">&nbsp; </span>The paradigm of prophecy is thus
+himself an exception to the rules he generates.</p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>Homily eleven also
+presents G-d as acting counter to his perfection would seem to dictate. Ran
+asks, why did G-d ask the Israelites to borrow valuables from their neighbors
+before leaving Egypt?<span style="mso-spacerun: yes">&nbsp; </span>Why use this
+trick to get their valuables?<span style="mso-spacerun: yes">&nbsp; </span>If
+G-d is all-powerful, let Him force the Egyptians to give away their
+things?<span style="mso-spacerun: yes">&nbsp; </span>He writes:</p>
+
+<p class=MsoBodyText2 dir=RTL style='text-align:right;direction:rtl;unicode-bidi:
+embed'><span lang=HE style='font-family:David'>וכל שכן אחר שיד השם יתברך תקיפה
+וחזקה עליהם, למה הוצרכו לעשות כן, כי אם לומר תנו לנו שכרינו שנשתעבדתם בנו כך
+וכך ממון, ...<span style="mso-spacerun: yes">&nbsp; </span>היתר אלו שני הקשרים
+הוא דבר אחד, שדרכי השם יתברך הוא להביא עצות מרחוק להפיל שונאתו בדינו.<a
+style='mso-footnote-id:ftn61' href="#_ftn61" name="_ftnref61" title=""><span
+class=MsoFootnoteReference><span dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[61]<![endif]></span></span></a></span><span
+dir=LTR></span><span dir=LTR><span dir=LTR></span></span></p>
+
+<p class=MsoBodyText2 dir=LTR>G-d wanted to trick the Egyptians.<span
+style="mso-spacerun: yes">&nbsp; </span>The Egyptians should think there is no
+G-d protecting the Israelites, and therefore the Israelites were forced to
+trick them.<span style="mso-spacerun: yes">&nbsp; </span>G-d’s objective is
+that the Egyptians should pursue them to try to destroy them so that G-d can
+punish the Egyptians for this attempt.<span style="mso-spacerun: yes">&nbsp;
+</span>G-d tricks the Egyptians so that He can punish them.<span
+style="mso-spacerun: yes">&nbsp; </span>The flaw in this line of reasoning is
+that the mere fact that He creates a justification to punish them causes that
+justification to lose all claim on legitimacy.<span style="mso-spacerun:
+yes">&nbsp; </span>Obviously, G-d just wants to punish the Egyptian.<span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span>Ran presents a G-d acting counter
+to His true nature - in this case, His omnipotent nature - in order to achieve
+some tangential aim.<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>Similar
+to the counterintuitive argument in Ran’s fifth homily regarding Moses’ flaws,
+the argument here shows that G-d can do anything, even things which are
+seemingly illogical.<span style="mso-spacerun: yes">&nbsp; </span></p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>Whether having to
+trick the Egyptians or providing a leader with basic inadequacies, G-d, in the
+thought of Ran, exercises his freedom of will in ways inconsistent to His
+perfection.<span style="mso-spacerun: yes">&nbsp; </span>G-d breaks the very
+rules of logic Ran set up for Him.<span style="mso-spacerun: yes">&nbsp;
+</span>Ran does succeed in showing that G-d is all-able or free to act, since
+G-d is not bound by even His own rules.<span style="mso-spacerun: yes">&nbsp;
+</span>His freedom to act overshadows His nature and the rules of logic.<span
+style="mso-spacerun: yes">&nbsp; </span>This concept is repeated by Crescas and
+foreshadows M. H. Luzzatto in <i>Daat T’vunot</i> and other cabalists.<span
+style="mso-spacerun: yes">&nbsp; </span>G-d’s freedom and His being beyond
+logic are the paramount example of G-d’s perfection.<span style="mso-spacerun:
+yes">&nbsp; </span>Perfection is not the static state Maimonides describes, but
+it is limitless freedom to act.</p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt'>A weakness in Ran’s
+position it is that his explanations for difficulties do not flow in a
+straightforward manner from his claims.<span style="mso-spacerun: yes">&nbsp;
+</span>In reality, Ran is faced with contradictions to his theological system,
+for example, the theory of the requirements of prophecy, that he then manages
+to incorporate based on this principle of freedom of action.<span
+style="mso-spacerun: yes">&nbsp; </span>It does not appear that he develops his
+theory of prophecy based on the exceptions to the rules of prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>Rather, once given the fact that Moses
+had a speech impediment, Ran explains it, or apologizes for it.<span
+style="mso-spacerun: yes">&nbsp; </span>By saying that G-d will do the opposite
+of what He should do just to prove He can do anything, he loses the ability to
+say anything meaningful about G-d.<span style="mso-spacerun: yes">&nbsp;
+</span>G-d may do a thing and its opposite.<span style="mso-spacerun:
+yes">&nbsp; </span>There is no longer a concept of Divine behavior since
+perhaps G-d should do the opposite.<span style="mso-spacerun: yes">&nbsp;
+</span>G-d’s behavior has become unknowable;<a style='mso-footnote-id:ftn62'
+href="#_ftn62" name="_ftnref62" title=""><span class=MsoFootnoteReference><span
+style='mso-special-character:footnote'><![if !supportFootnotes]>[62]<![endif]></span></span></a>
+nature also reveals nothing about Him.<span style="mso-spacerun: yes">&nbsp;
+</span>All that can be investigated is G-d’s essence.<span style="mso-spacerun:
+yes">&nbsp; </span>Prophecy also becomes unknowable since it has not fixed set
+of conditions and parameters.<span style="mso-spacerun: yes">&nbsp; </span>It,
+like all of creation, is dependent on the momentary will of G-d.<span
+style="mso-spacerun: yes">&nbsp; </span>Ran holds that the nature of prophecy
+cannot be characterized.</p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt;line-height:normal'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoBodyText2 dir=LTR style='line-height:normal'><b>Conclusion:<o:p></o:p></b></p>
+
+<p class=MsoBodyText2 dir=LTR style='text-indent:36.0pt;line-height:normal'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'>Maimonides who conceives of G-d as a perfect
+unchanging being must understand prophecy as man developing a union between his
+mind and G-d.<span style="mso-spacerun: yes">&nbsp; </span>Some action must
+take place for this union to occur.<span style="mso-spacerun: yes">&nbsp;
+</span>Action implies change and therefore G-d cannot act.<span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span>Therefore, the burden of
+establishing a link with G-d rests on man who can change.<span
+style="mso-spacerun: yes">&nbsp; </span>Only the man who has brought himself up
+to G-d’s level of perfection can commune with G-d in a state of prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>There is no possibility of this type of
+communion between G-d and an unperfected being.<span style="mso-spacerun:
+yes">&nbsp; </span>Therefore,</p>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'>Maimonides cannot admit the possibility of prophecy where the conditions
+for it are absent.<span style="mso-spacerun: yes">&nbsp; </span>This would be
+as if an improperly build radio receiver could nevertheless receive
+signals.<span style="mso-spacerun: yes">&nbsp; </span>By affirming G-d’s
+perfection, Maimonides is forced to limit G-d’s freedom to act.</p>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'>Ran considers the aspect of G-d that is of
+utmost importance to be His freedom of action.<span style="mso-spacerun:
+yes">&nbsp; </span>For G-d to be truly free to act, He must be able to do even
+that which contradicts the bounds of reason.<span style="mso-spacerun:
+yes">&nbsp; </span>Therefore, there cannot be any necessary conditions for the
+state of prophecy to obtain in a person.<span style="mso-spacerun: yes">&nbsp;
+</span>The existence of necessary conditions would imply that G-d is bound to a
+set of rules.<span style="mso-spacerun: yes">&nbsp; </span>This would limit His
+freedom of action.<span style="mso-spacerun: yes">&nbsp; </span>Rather,
+prophecy, like all other events in Creation, is solely subject to the will of
+G-d.<span style="mso-spacerun: yes">&nbsp; </span>Whatever pleases and
+glorifies G-d and serves His purposes can and will occur.<span
+style="mso-spacerun: yes">&nbsp; </span>Therefore, any person can prophesy and
+there are no real necessary conditions to engender prophecy.</p>
+
+<p class=MsoBodyText dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'>These two different starting points are at
+the core of the debate between Maimonides and Ran.<span style="mso-spacerun:
+yes">&nbsp; </span>Since Ran believes prophecy occurs due to the will of G-d,
+he is lead to believe there must always be a specific reason why prophecy will
+come to a man.<span style="mso-spacerun: yes">&nbsp; </span>Therefore, prophecy
+has an objective, the revealing of law to man.<span style="mso-spacerun:
+yes">&nbsp; </span>It may also have the objective of convincing people of a
+certain individual’s genuineness.<span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp; </span>Whenever Divine will is the cause for something
+there must be an objective or goal to that will.<span style="mso-spacerun:
+yes">&nbsp; </span>Alternatively, if events of the world are natural
+consequences of a perfect system, as Maimonides believes, there may be no
+specific goal for a certain occurrence.<span style="mso-spacerun: yes">&nbsp;
+</span>The spheres revolve because that is their perfect nature, not because
+G-d has a specific reason why each day they must revolve.<span
+style="mso-spacerun: yes">&nbsp; </span>To quote Maimonides in a slightly
+different context, “they do the truth because it is true.”<a style='mso-footnote-id:
+ftn63' href="#_ftn63" name="_ftnref63" title=""><span
+class=MsoFootnoteReference><span style='mso-special-character:footnote'><![if !supportFootnotes]>[63]<![endif]></span></span></a><span
+style="mso-spacerun: yes">&nbsp; </span>Similarly, it is inconceivable that
+prophecy could come to a person for some external reason.<span
+style="mso-spacerun: yes">&nbsp; </span>The Universe does not run based on will
+but based on causes.<span style="mso-spacerun: yes">&nbsp; </span>A person must
+fulfill the necessary criteria in order to prophesy.<span style="mso-spacerun:
+yes">&nbsp; </span>It is equally inconceivable that a person could have
+prophecy withheld when the necessary causes for prophecy exist.<span
+style="mso-spacerun: yes">&nbsp;&nbsp; </span>Maimonides firmly establishes G-d
+unchanging perfection but must sacrifice G-d’s ability to act freely.<span
+style="mso-spacerun: yes">&nbsp; </span>These two contradictory assertions,
+G-d’s perfection and G-d’s freedom, underlie the two different views of the
+function and nature of prophecy held by Maimonides and Ran.</p>
+
+</div>
+
+<div style='mso-element:footnote-list'><![if !supportFootnotes]><br clear=all>
+
+<hr align=right size=1 width="33%">
+
+<![endif]>
+
+<div style='mso-element:footnote' id=ftn1>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn1'
+href="#_ftnref1" name="_ftn1" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[1]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> ראה אמונות ודעות 3:5</span><span dir=LTR></span><span
+dir=LTR><span dir=LTR></span>;</span><span dir=RTL></span><span lang=HE
+style='font-family:David'><span dir=RTL></span><span style="mso-spacerun:
+yes">&nbsp; </span>ספר כוזרי 1:19-25, 3:23-39</span><span dir=LTR></span><span
+dir=LTR><span dir=LTR></span>;</span><span dir=RTL></span><span lang=HE
+style='font-family:David'><span dir=RTL></span><span style="mso-spacerun:
+yes">&nbsp; </span>הקדמה לפירוש המשנה להרמב&quot;ם 1</span><span dir=LTR></span><span
+dir=LTR><span dir=LTR></span>;</span><span dir=RTL></span><span lang=HE
+style='font-family:David'><span dir=RTL></span><span style="mso-spacerun:
+yes">&nbsp; </span>הקדמה למשנה תורה להרמב&quot;ם (תחילתו)</span><span dir=LTR></span><span
+dir=LTR><span dir=LTR></span>;</span><span dir=RTL></span><span lang=HE
+style='font-family:David'><span dir=RTL></span><span style="mso-spacerun:
+yes">&nbsp; </span>ספר עקרים 3:22.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn2>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn2' href="#_ftnref2"
+name="_ftn2" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[2]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>Politics of Aristotle, Loeb
+Edition, 1:1:9 1253a2 ff.<span style="mso-spacerun: yes">&nbsp; </span>“From
+these things therefore it is clear that the city state is a natural growth and
+that man by nature is a political animal.”<span dir=RTL></span><span lang=HE
+dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn3>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn3' href="#_ftnref3"
+name="_ftn3" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[3]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span><span dir=LTR></span><span
+dir=LTR></span>“And from the great and well-known miracles a man comes to admit
+to hidden miracles which are the foundation of the whole Torah.<span
+style="mso-spacerun: yes">&nbsp; </span>A person has no portion in the Torah of
+Moshe Rabeinu unless he believes that all our matters and circumstances are
+miracles and they do not follow nature or the general custom of the world
+…rather, if one does <b>mitzvot</b> he will succeed in his finances …” Ramban <i>Perush
+leTorah</i>, Exodus 13:16 end.<span dir=RTL></span><span lang=HE dir=RTL
+style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn4>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn4'
+href="#_ftnref4" name="_ftn4" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[4]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> י&quot;ב דרשות להר&quot;ן, רבינו ניסים בן
+ראובן גירונדי, עורך אריה ל. פלדמן, הוצאת מכון שלם, ירושלים תשל&quot;ז, עמ'
+ס&quot;ד.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn5>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn5'
+href="#_ftnref5" name="_ftn5" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[5]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'>נדרים לח עמ' א' מצוטט בספר י&quot;ב דרשות
+להר&quot;ן, כנ&quot;ל, עמ' ס&quot;א.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn6>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn6'
+href="#_ftnref6" name="_ftn6" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[6]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> י&quot;ב דרשות להר&quot;ן, כנ&quot;ל, עמ'
+ס&quot;א.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn7>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn7'
+href="#_ftnref7" name="_ftn7" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[7]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> כנ&quot;ל. <o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn8>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn8'
+href="#_ftnref8" name="_ftn8" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[8]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> מורה הנבוכים 2:36 בתרגומו של ר' שמואל אבן תיבון
+הוצאת מוסד הרב קוק עמ' שכ&quot;ה.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn9>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn9'
+href="#_ftnref9" name="_ftn9" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[9]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> כנ&quot;ל עמ' שכ&quot;ו.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn10>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn10' href="#_ftnref10"
+name="_ftn10" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[10]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>This point may be taken from
+Maimoides’ own experience, but it also appears in Aristotle’s <i>On Prophecy In
+Sleep </i>“the stimulus arising from the first causes in the daytime has paved
+the way for [the dream]’463a lines 26-27.<span style="mso-spacerun: yes">&nbsp;
+</span>The prophet may be someone who thinks all day about G-d, one whose every
+waking moment is concerned with G-d, as Maimonides describes in the <i>Guide </i>2:36,
+3:51, and therefore dreams at night also about G-d.<span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn11>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn11'
+href="#_ftnref11" name="_ftn11" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[11]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> מורה נבוכים כנ&quot;ל.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn12>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn12'
+href="#_ftnref12" name="_ftn12" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[12]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> ר&quot;ן כנ&quot;ל.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn13>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn13' href="#_ftnref13"
+name="_ftn13" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[13]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>It is interesting to note
+that Maimonides actually only requires “most” of the moral perfections (see
+chapter 7 of the <i>Eight Chapters</i>).<span style="mso-spacerun: yes">&nbsp;
+</span>Thus, a person with certain moral flaws, a disgraceful person, can get
+prophecy.<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>I do not mean to
+imply that Maimonides actually conceives of prophecy occurring in a person
+without the perfections the philosophers speaks of, but I am only making a
+point in terminology.<span style="mso-spacerun: yes">&nbsp; </span>Maimonides
+terms perfection a “requirement” whereas Ran terms it “<span lang=HE dir=RTL
+style='font-family:David'>ראוי</span><span dir=LTR></span><span dir=LTR></span>,”
+a preference.<span style="mso-spacerun: yes">&nbsp; </span>For Maimonides,
+since prophecy is natural there cannot be any “preferences.”<span
+style="mso-spacerun: yes">&nbsp; </span>For Ran, since it is the will of G-d,
+it is <i>only</i> His preferences.<span style="mso-spacerun: yes">&nbsp;
+</span>Our starting point is G-d’s desires, and only if we can explain them can
+we explain the prerequisites for prophecy.<span style="mso-spacerun:
+yes">&nbsp; </span>Maimonides staring point is man’s perfection.<span
+style="mso-spacerun: yes">&nbsp; </span>When we understand that, we can
+determine what the prerequisites for prophecy are.<span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn14>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn14'
+href="#_ftnref14" name="_ftn14" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[14]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> &quot;ולא מזה הצד לבד אבל מצד המשך הדברים
+כפי טבעיהם&quot; הר&quot;ן כנ&quot;ל עמ' ס&quot;א.<span style="mso-spacerun:
+yes">&nbsp; </span>הוא שם טבע כהסבר משני.<span style="mso-spacerun:
+yes">&nbsp;&nbsp; </span>וגם שומעים מהשימוש ב-&quot;המשך הטבע&quot; שהר&quot;ן
+סובר שבאמת ה' מעל הטבע וכל מעשיו רק מתאימים לטבע מפני <b><i>רצונו</i></b>.<span
+style="mso-spacerun: yes">&nbsp; </span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn15>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn15'
+href="#_ftnref15" name="_ftn15" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[15]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> מורה נבוכים 2:32.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn16>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn16' href="#_ftnref16"
+name="_ftn16" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[16]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>Maimonides here seems to
+identify his opinion with Aristotle’s explanation of prophecy with no
+difference other than the one stated, that G-d can withhold prophecy from one
+who deserves it.<span style="mso-spacerun: yes">&nbsp; </span>But, the only
+prophecy we find Aristotle admitting to is a natural hypersensitivity (see
+footnote 37), but no prophecy directly from G-d is admitted to as actually
+occurring.<span style="mso-spacerun: yes">&nbsp; </span>Based on the fact that
+Maimonides identifies his opinion as the same as a non-existent opinion,
+Aristotle’s, one could make a Straussian type argument that Maimonides is
+hinting his own denial of the direct divine character of prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>However, in II:13 where Maimonides
+discusses the various views on the eternity of the world,<span
+style="mso-spacerun: yes">&nbsp; </span>we find Maimonides lists Aristotle
+separately from the other philosophers.<span style="mso-spacerun: yes">&nbsp;
+</span>This may mean that here too by <span lang=HE dir=RTL style='font-family:
+David'>דעת הפילוסופים</span><span dir=LTR></span><span dir=LTR></span> he means
+not Aristotle but other Neo-platonic Arabic philosophers.<span
+style="mso-spacerun: yes">&nbsp; </span>If Maimonides is identifying the Sages’
+view with these philosophers, who do conceive of a direct divine prophecy, then
+the Straussian type argument looses its force.<span style="mso-spacerun:
+yes">&nbsp; </span>On the other hand, in II:14 Maimonides writes: “I shall pay
+no attention to anyone who besides Aristotle has engaged in speculative
+discourse, for it is his opinions that ought to be considered.”<span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn17>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn17' href="#_ftnref17"
+name="_ftn17" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[17]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>For a discussion of whether
+Maimonides believes in the possibility of miracles see A. Reines, <i>Maimonides’
+Concept of Miracles</i>, HUCA, 1968.<span style="mso-spacerun: yes">&nbsp;
+</span>Maimonides’ referral to G-d’s freedom to prevent prophecy as miraculous
+could be considered a tacit denial of this freedom. <span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn18>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn18' href="#_ftnref18"
+name="_ftn18" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[18]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>See end of note 59 where I
+discuss Ran’s redefinition of natural as meaning following G-d’s usual rules,
+however miraculous they may be.<span dir=RTL></span><span lang=HE dir=RTL
+style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn19>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn19'
+href="#_ftnref19" name="_ftn19" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[19]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> מבוא למשנה אבות, פרק ז.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn20>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn20'
+href="#_ftnref20" name="_ftn20" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[20]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> מורה הנבוכים חלק ב, פ' ל&quot;ב.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn21>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn21'
+href="#_ftnref21" name="_ftn21" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[21]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> תלמוד בבלי ע&quot;ז כ:. <o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn22>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn22'
+href="#_ftnref22" name="_ftn22" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[22]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> ר&quot;ן, עמ' ס&quot;ב ושם הוא מצטט משמונה
+פרקים, פרק ז'.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn23>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><a style='mso-footnote-id:ftn23' href="#_ftnref23" name="_ftn23" title=""><span
+dir=RTL></span><span class=MsoFootnoteReference><span lang=HE dir=RTL
+style='font-family:David'><span dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[23]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>Maimonides brings proof to the fact that people did
+not really have prophecy.<span style="mso-spacerun: yes">&nbsp; </span>In 2:33,
+Maimonides says that they only heard a created voice; they did not really hear
+G-d.<span style="mso-spacerun: yes">&nbsp; </span>He quotes Onqelos to prove
+his point.<span style="mso-spacerun: yes">&nbsp; </span>Onqelos, in general,
+translates “</span><span lang=HE dir=RTL style='font-size:10.0pt;font-family:
+David'>וידבר ה' אל משה לאמר</span><span dir=LTR></span><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt'><span dir=LTR></span> “ as: “</span><span
+lang=HE dir=RTL style='font-size:10.0pt;font-family:David'>ומליל ה' עם משה</span><span
+dir=LTR></span><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><span
+dir=LTR></span>” which means G-d speaks with Moses, but in our section where it
+says:</span><span style="mso-spacerun: yes">&nbsp; </span><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-bidi-font-family:
+David'><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=RTL><span dir=RTL></span><span lang=HE style='font-size:
+10.0pt;font-family:David;mso-ascii-font-family:Arial;mso-hansi-font-family:
+Arial'><span dir=RTL></span>&quot;ואל ידבר עימנו אלהים&quot;<span
+style="mso-spacerun: yes">&nbsp; </span>תרגמו:<span style="mso-spacerun:
+yes">&nbsp; </span>&quot;ולא יתמלל עמנו מן קדם ה' &quot;<span
+style="mso-spacerun: yes">&nbsp; </span>הנה הבדיל לך עליו</span><span lang=HE
+style='mso-ansi-font-size:10.0pt;font-family:David;mso-ascii-font-family:Arial;
+mso-hansi-font-family:Arial'> </span><span lang=HE style='font-size:10.0pt;
+font-family:David;mso-ascii-font-family:Arial;mso-hansi-font-family:Arial'>השלום</span><span
+dir=LTR></span><span dir=LTR style='font-size:10.0pt;font-family:Arial;
+mso-bidi-font-family:David'><span dir=LTR></span><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=RTL><span lang=HE style='font-size:10.0pt;font-family:
+David;mso-ascii-font-family:Arial;mso-hansi-font-family:Arial'>הכלל אשר
+הבדלנוהו.</span><span lang=HE style='font-family:David'><o:p></o:p></span></p>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'>Maimonides believes that Onqelos means there was a voice
+from in front of G-d, <span lang=HE dir=RTL style='font-family:David'>קדם ה'</span><span
+dir=LTR></span><span dir=LTR></span>.<span style="mso-spacerun: yes">&nbsp;
+</span>It was not from G-d directly.<span style="mso-spacerun: yes">&nbsp;
+</span>The people did not hear G-d speaking, they heard something from in front
+of G-d, i.e. G-d created something external and that’s what they heard.<span
+style="mso-spacerun: yes">&nbsp; </span>They heard a created voice for the
+purpose of talking to them but that is not called prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>His proof is from Onqelos that the
+Israelites did not hear the voice in the sense of prophecy but, just in the
+sense of normal hearing.</p>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><span dir=RTL></span><span lang=HE dir=RTL
+style='font-family:David'><![if !supportEmptyParas]>&nbsp;<![endif]><span
+dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn24>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn24'
+href="#_ftnref24" name="_ftn24" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[24]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> הל' יסודי התורה פ' ט'.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn25>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn25' href="#_ftnref25"
+name="_ftn25" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[25]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>I will discuss this special
+definition of Moses' prophecy as wisdom, and thus its ability to establish law
+(just as any law created in future generations must be based on wisdom) later
+in this paper.<span dir=RTL></span><span lang=HE dir=RTL style='font-family:
+David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn26>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn26'
+href="#_ftnref26" name="_ftn26" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[26]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> מורה נבוכים, בתרגומו של ש. אבן תיבון, ח' ב'
+פרק ל&quot;ג.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn27>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn27'
+href="#_ftnref27" name="_ftn27" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[27]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> דרשה החמישי נוסח ב'<span
+style="mso-spacerun: yes">&nbsp; </span>עמ' פ&quot;ג.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn28>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn28'
+href="#_ftnref28" name="_ftn28" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[28]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> דרשות הר&quot;ן עמ' ס&quot;ד.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn29>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn29' href="#_ftnref29"
+name="_ftn29" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[29]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>It is worth noting that
+Maimonides says precisely this, that G-d does hold back the benefit of prophecy
+from those deserving it.<span style="mso-spacerun: yes">&nbsp; </span>Since Ran
+presumably agrees that prophecy is with held for various reasons, it seems he
+must then hold that no one ever really deserves prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>This fits to his overall theory that
+prophecy can be bestowed on anyone G-d wishes and not on the basis of deservedness.<span
+dir=RTL></span><span lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn30>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn30' href="#_ftnref30"
+name="_ftn30" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[30]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>The word <span lang=HE
+dir=RTL style='font-family:David'>סיפוק</span><span dir=LTR></span><span
+dir=LTR></span> appears also in 1:3 and 1:56.<span style="mso-spacerun:
+yes">&nbsp; </span>In all three places it is translated in Pines Ed. as
+“amphibolous.”<span style="mso-spacerun: yes">&nbsp;&nbsp; </span><span
+dir=RTL></span><span lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn31>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn31'
+href="#_ftnref31" name="_ftn31" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[31]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> מורה נבוכים להרמב&quot;ם בהעתקת שמואל אבן
+תיבון, אופסט שץ מונזון בע&quot;מ, ירושלים, תש&quot;ן עמ, 74</span><span
+dir=LTR>a</span><span dir=RTL></span><span lang=HE style='font-family:David'><span
+dir=RTL></span>.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn32>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn32' href="#_ftnref32"
+name="_ftn32" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[32]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>Moses Narbonensis,
+Philosophen aus dem XIV. Jahrhundert, z.d.w. More Nebuchim des Maimonides.<span
+style="mso-spacerun: yes">&nbsp; </span>Dr. J. Goldenthal Ed., Vienna, Austria,
+1852, p.41b.<span dir=RTL></span><span lang=HE dir=RTL style='font-family:David'><span
+dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn33>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn33' href="#_ftnref33"
+name="_ftn33" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[33]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span><i>Ibid.</i><span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn34>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn34' href="#_ftnref34"
+name="_ftn34" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[34]<![endif]></span></span></span></a><i>Op.
+Cit.</i> Aristotle, 464a lines 18 –24.<span style="mso-spacerun: yes">&nbsp;
+</span><span dir=RTL></span><span lang=HE dir=RTL style='font-family:David'><span
+dir=RTL></span><span style="mso-spacerun: yes">&nbsp;</span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn35>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn35' href="#_ftnref35"
+name="_ftn35" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[35]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>See for example Guide 2:35,
+Commentary to Perek Helek, Laws of Foundations of Torah 7:6.<span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn36>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn36' href="#_ftnref36"
+name="_ftn36" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[36]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>See for example Guide 2:35,
+end, see also Guide 3:51.<span dir=RTL></span><span lang=HE dir=RTL
+style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn37>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn37' href="#_ftnref37"
+name="_ftn37" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[37]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span><span dir=LTR></span><span
+dir=LTR></span><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;</span>This
+comparison between prophecy and dreams occurs in Aristotle’s <i>On Prophecy in
+Sleep</i>(463a8 ff.).<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>He
+writes: “Stimuli occurring in the daytime if they are not very great and
+powerful, pass unnoticed because of greater waking impulses.<span
+style="mso-spacerun: yes">&nbsp; </span>But in the time of sleep, the opposite
+takes place, for then small stimuli seem to be great.”<span
+style="mso-spacerun: yes">&nbsp; </span>He then writes that if a person hears
+in his dreams small sounds, he may think in his dream that it is lightning or
+there is a great war taking place. Things are exaggerated in dreams but are
+based on what one experiences.<span style="mso-spacerun: yes">&nbsp;
+</span>Subtle sensations are detected because the senses are at rest.<span
+style="mso-spacerun: yes">&nbsp; </span>Aristotle continues(462a18): “Since the
+beginnings of all things are small, obviously the beginnings of diseases and
+other distempers which are about to visit the body must also be small.<span
+style="mso-spacerun: yes">&nbsp; </span>Clearly then, these must be more
+evident in sleep than in the waking state.”<span style="mso-spacerun:
+yes">&nbsp; </span>Aristotle explains that dreams may contain truth about the
+future because of a hypersensitivity of man.<span style="mso-spacerun:
+yes">&nbsp; </span>Man is more sensitive in his sleeping state and therefore
+can sense things coming in a natural way.<span dir=RTL></span><span lang=HE
+dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn38>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn38' href="#_ftnref38"
+name="_ftn38" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[38]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>See Guide 2:36 for a
+discussion of the constant involvement of the perfect man’s thoughts in divine
+matters.<span style="mso-spacerun: yes">&nbsp; </span>See also Guide 3:51 in
+this regard.<span style="mso-spacerun: yes">&nbsp; </span>It seems that Moses prophecy
+is the (natural) result of intense contemplation.<span style="mso-spacerun:
+yes">&nbsp; </span>Moses may be equated with the Active Intellect (G-d).<span
+style="mso-spacerun: yes">&nbsp; </span>This idea is developed in Kaspi’s
+commentary.<span style="mso-spacerun: yes">&nbsp; </span>See following
+footnote.<span style="mso-spacerun: yes">&nbsp; </span><span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn39>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn39' href="#_ftnref39"
+name="_ftn39" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[39]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>Josephi Kaspi, Grammatici
+&amp; Philosophi saeculo XIII, Commentaria Hebraica in R. Mosis Maimonidis
+Tractum Dalalat al Haiirin, sive Doctor Perplexorum.<span style="mso-spacerun:
+yes">&nbsp; </span>E Codicis M’ss Bibliothecae regiae Monachii &amp; senatus,
+Lipsiae.<span style="mso-spacerun: yes">&nbsp; </span>Edidit Salomo Werbluner,
+Francofurti ad Moenum, 1848 p.98 Book 2, Chapter 12. <span lang=HE dir=RTL
+style='font-family:David'>כי נמצא אנחנו שכלינו בפועל אנחנו מביאים האל בתוך
+ראשינו כי השכל הוא האל, והאל הוא השכל.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn40>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn40'
+href="#_ftnref40" name="_ftn40" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[40]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> כנ&quot;ל.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn41>
+
+<p class=MsoNormal dir=RTL style='text-align:justify;text-justify:inter-ideograph'><a
+style='mso-footnote-id:ftn41' href="#_ftnref41" name="_ftn41" title=""><span
+dir=RTL></span><span class=MsoFootnoteReference><span lang=HE style='font-size:
+10.0pt;mso-ansi-font-size:12.0pt;font-family:David'><span dir=LTR
+style='mso-special-character:footnote'><![if !supportFootnotes]>[41]<![endif]></span></span></span></a><span
+lang=HE style='font-size:10.0pt;mso-ansi-font-size:12.0pt;font-family:David'>
+תלמוד בבלי מכות, כד. &quot; <span style='layout-grid-mode:line'>שית מאה וחד סרי
+הוי אנכי ולא יהיה לך מפי הגבורה&quot;<span style="mso-spacerun: yes">&nbsp;
+</span></span>ונזכר במורה נבוכים ב:לג.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn42>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn42'
+href="#_ftnref42" name="_ftn42" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[42]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> הל' יסודי התורה פ' ט'.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn43>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn43'
+href="#_ftnref43" name="_ftn43" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[43]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> כנ&quot;ל, פ' ח'.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn44>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn44'
+href="#_ftnref44" name="_ftn44" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[44]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> אור ה' עורך שלומו פישר, תש&quot;ן, עמ'
+י&quot;א.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn45>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn45' href="#_ftnref45"
+name="_ftn45" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[45]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>According to the 5<sup>th</sup>
+reason Maimonides lists in his introduction, an author may contradict himself
+because in one place he is giving only an abbreviated treatment of the matter.</p>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'>See <span lang=HE dir=RTL style='font-family:David'>מורה
+נבוכים כנ&quot;ל עמ' ט&quot;ז</span><span dir=LTR></span><span dir=LTR></span>.<span
+dir=RTL></span><span lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn46>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn46' href="#_ftnref46"
+name="_ftn46" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[46]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>The Guide of the Perplexed,
+Friedlander Ed. Book I Chapter 71, end.<span dir=RTL></span><span lang=HE
+dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn47>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn47' href="#_ftnref47"
+name="_ftn47" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[47]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span><span dir=LTR></span><span
+dir=LTR></span><span style="mso-spacerun: yes">&nbsp;</span>By recommending
+study of the natural world, Maimonides does rely on the senses but only to
+establish true logical axioms, in accordance with reason, and not to learn
+things beyond reason.<span style="mso-spacerun: yes">&nbsp; </span>Thus reason
+remains the ultimate arbiter of truth, and not the senses.<span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn48>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn48'
+href="#_ftnref48" name="_ftn48" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[48]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> ר&quot;ן כנ&quot;ל עמוד ס&quot;ג.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn49>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn49'
+href="#_ftnref49" name="_ftn49" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[49]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> כנ&quot;ל.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn50>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn50' href="#_ftnref50"
+name="_ftn50" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[50]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>Maimonides conceives of a
+type of prophecy with no communication.</p>
+
+<p class=MsoNormal dir=RTL style='text-align:justify;text-justify:inter-ideograph'><span
+lang=HE style='font-size:10.0pt;font-family:David;layout-grid-mode:line'>ספר
+מורה נבוכים - חלק ב פרק לז <o:p></o:p></span></p>
+
+<p class=MsoBodyText2 dir=RTL style='text-align:justify;text-justify:inter-ideograph;
+line-height:normal;direction:rtl;unicode-bidi:embed'><span lang=HE
+style='font-size:10.0pt;font-family:David;layout-grid-mode:line'>שאפשר שיגיע
+ממנו מעט לאיש אחד ויהיה שיעור הדבר ההוא המגיע לו שיעור שישלימהו, לא זולת זה;
+ואפשר שיהיה הדבר המגיע אל האיש שיעור שישפע משלמותו להשלים זולתו. כמו שקרה הענין
+בנמצאות כולם, אשר מהם - שהגיע לו מן השלמות מה שינהיג בו זולתו, ומהם - שלא יגיע
+לו מן השלמות אלא כשיעור שיהיה מנהיג בו עצמו, ולא זולתו, כמו שבארנו:</span><span
+dir=LTR></span><span dir=LTR style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><span
+dir=LTR></span><o:p></o:p></span></p>
+
+<p class=MsoBodyText2 dir=LTR style='text-align:justify;text-justify:inter-ideograph;
+line-height:normal'><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>A
+person may receive a level of prophecy enabling him to perfect himself but not
+others.<span style="mso-spacerun: yes">&nbsp; </span>There can be an overflow
+to a person even if it will not lead to any communication to other men.<span
+style="mso-spacerun: yes">&nbsp; </span>Ran would have to deny this kind of
+overflow.<span style="mso-spacerun: yes">&nbsp; </span>Since it lacks any
+purpose in communicating to mankind and thus lacks the fundamental purpose of
+prophecy, G-d would not <i>desire</i> to bestow it.</span><span dir=RTL></span><span
+lang=HE dir=RTL style='mso-ansi-font-size:10.0pt;font-family:David'><span
+dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn51>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn51'
+href="#_ftnref51" name="_ftn51" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[51]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> כנ&quot;ל, ג:נד.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn52>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn52'
+href="#_ftnref52" name="_ftn52" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[52]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> כנ&quot;ל.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn53>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn53' href="#_ftnref53"
+name="_ftn53" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[53]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>The argument might be made:
+people would never listen to someone who says, “Do not value wealth” if he
+himself is poor.<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>But if a
+rich person says, “Do not value wealth,” then people will respect him and say,
+“Even though he has money, he still says it is worthless.”<span
+style="mso-spacerun: yes">&nbsp; </span>Thus Jeremiah had to be wealthy to
+legitimately criticize it.<span style="mso-spacerun: yes">&nbsp; </span>On the
+other hand, one might equally argue that if he is wealthy, he is
+insincere.<span style="mso-spacerun: yes">&nbsp; </span>He is saying not to
+value wealth but he has wealth and he is saying this only because he does not
+know what poverty is.<span style="mso-spacerun: yes">&nbsp; </span>It is easy
+for a person who has these things to say they are not important, but for
+someone who does not have them, they <i>are</i> important.<span
+style="mso-spacerun: yes">&nbsp; </span>The most convincing<span
+style="mso-spacerun: yes">&nbsp; </span>argument, in our view, is that it is
+inconsistent for a prophet to be counter-example of the kind of perfection he
+preaches.<span dir=RTL></span><span lang=HE dir=RTL style='font-family:David'><span
+dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn54>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn54' href="#_ftnref54"
+name="_ftn54" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[54]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>In the <i>Mishneh Torah</i>,
+Maimonides does consider wealth vital.<span style="mso-spacerun: yes">&nbsp;
+</span>But perhaps this is as a preparatory need, providing the free time to
+explore intellectual matters.<span dir=RTL></span><span lang=HE dir=RTL
+style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn55>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn55'
+href="#_ftnref55" name="_ftn55" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[55]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> מורה נבוכים, כנ&quot;ל 3:54.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn56>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn56' href="#_ftnref56"
+name="_ftn56" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[56]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>This is similar to the
+Scriptural law that a priest must have no blemishes.<span dir=RTL></span><span
+lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn57>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn57'
+href="#_ftnref57" name="_ftn57" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[57]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> ר&quot;ן, עמ' ס&quot;ד.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn58>
+
+<p class=MsoBodyText2 dir=LTR style='line-height:normal'><a style='mso-footnote-id:
+ftn58' href="#_ftnref58" name="_ftn58" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE dir=RTL style='mso-ansi-font-size:
+10.0pt;font-family:David'><span dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[58]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='mso-ansi-font-size:10.0pt;font-family:David'> </span><span
+dir=LTR></span><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><span
+dir=LTR></span><span style="mso-spacerun: yes">&nbsp;</span>This seems to
+contradict idea that even if one is perfect he may not get prophecy if he is in
+<i>galut</i> etc. Moreover, Ran holds that prophecy is no</span><span
+style='font-size:10.0pt'>t </span><span lang=HE dir=RTL style='font-size:10.0pt;
+font-family:David'>אפשרית</span><span dir=LTR></span><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt'><span dir=LTR></span> but is a gift in the
+first place, so G-d certainly may prevent one from having prophecy.<span
+style="mso-spacerun: yes">&nbsp; </span>Ran should assert that it is not
+denying him that which is his but only refraining from giving him a gift.<span
+style="mso-spacerun: yes">&nbsp; </span>This seems to be an inconsistency.</span><span
+dir=RTL></span><span lang=HE dir=RTL style='mso-ansi-font-size:10.0pt;
+font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn59>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn59' href="#_ftnref59"
+name="_ftn59" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[59]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>As we showed earlier,
+Maimonides, based on Aristotle, used the conscious character of Moses’ prophecy
+to prove it was a natural state, one of heightened wisdom, and truly connected
+with the abstract intellect.<span style="mso-spacerun: yes">&nbsp; </span>Thus
+it is trustworthy.<span style="mso-spacerun: yes">&nbsp; </span>Ran uses this
+same fact to claim that Moses’ prophecy was totally unnatural. The normal
+prophecy, as it occurs in nature, is a kind of trance where a person goes out
+of the natural world and into the Divine world.<span style="mso-spacerun:
+yes">&nbsp; </span>Moses’ not being this way, but being so in-this- world,
+being so within nature, makes his prophecy unnatural!<span style="mso-spacerun:
+yes">&nbsp;&nbsp; </span>But there is ambiguity in the use of the term natural
+for Ran.<span style="mso-spacerun: yes">&nbsp; </span>What Ran really means is
+out-of-the-ordinary.<span style="mso-spacerun: yes">&nbsp; </span>The normal
+prophet has a prophecy in a supernatural trance.<span style="mso-spacerun:
+yes">&nbsp; </span>To be in a conscious state and to understand things from G-d
+is thus out-of-the-ordinary in its being so natural.<span style="mso-spacerun:
+yes">&nbsp; </span>For both Maimonides and Ran, Moses’ “natural” prophecy
+proves his uniqueness, and gives him his authority.<span style="mso-spacerun:
+yes">&nbsp; </span>For Maimonides this<span style="mso-spacerun: yes">&nbsp;
+</span>means that Moses spoke with true wisdom, for Ran that he truly spoke
+with G-d. <span dir=RTL></span><span lang=HE dir=RTL style='font-family:David'><span
+dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn60>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn60'
+href="#_ftnref60" name="_ftn60" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[60]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> הר&quot;ן כנ&quot;ל עמוד ס&quot;ה.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn61>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn61'
+href="#_ftnref61" name="_ftn61" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[61]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'> הר&quot;ן כנ&quot;ל עמודים
+ר&quot;ט-ר&quot;י.<o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn62>
+
+<p class=MsoFootnoteText dir=LTR style='text-align:left;direction:ltr;
+unicode-bidi:embed'><a style='mso-footnote-id:ftn62' href="#_ftnref62"
+name="_ftn62" title=""><span dir=RTL></span><span class=MsoFootnoteReference><span
+lang=HE dir=RTL style='font-family:David'><span dir=LTR style='mso-special-character:
+footnote'><![if !supportFootnotes]>[62]<![endif]></span></span></span></a><span
+lang=HE dir=RTL style='font-family:David'> </span>M<span style='mso-bidi-font-size:
+8.0pt'>aimonides, however, argues that G-d’s essence must be fundamentally
+unknowable, whereas His behavior is all that can be known.<span
+style="mso-spacerun: yes">&nbsp; </span>Ran implies the opposite.<span
+style="mso-spacerun: yes">&nbsp; </span>G-d’s true behavior is unknowable.<span
+style="mso-spacerun: yes">&nbsp; </span>Perhaps His essence is knowable.</span><span
+dir=RTL></span><span lang=HE dir=RTL style='font-family:David'><span dir=RTL></span><o:p></o:p></span></p>
+
+</div>
+
+<div style='mso-element:footnote' id=ftn63>
+
+<p class=MsoFootnoteText dir=RTL><a style='mso-footnote-id:ftn63'
+href="#_ftnref63" name="_ftn63" title=""><span dir=RTL></span><span
+class=MsoFootnoteReference><span lang=HE style='font-family:David'><span
+dir=LTR style='mso-special-character:footnote'><![if !supportFootnotes]>[63]<![endif]></span></span></span></a><span
+lang=HE style='font-family:David'>משנה תורה, הל' תשובה 10:2.<o:p></o:p></span></p>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
