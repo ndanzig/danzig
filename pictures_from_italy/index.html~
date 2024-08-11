@@ -1,0 +1,16 @@
+<html>
+<head>
+<title>italy</title>
+</head>
+<body>
+<h3>Choose a Photo Album</h3>
+<ul>
+<li><a href="photos1">Album 1</a>
+<li><a href="photos2">Album 2</a>
+<li><a href="photos3">Album 3</a>
+<li><a href="photos4">Album 4</a>
+<li><a href="photos5">Album 5</a>
+
+</ul>
+</body>
+</html>
