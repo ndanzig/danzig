@@ -1,0 +1,433 @@
+<html><head>
+
+<TITLE>Using UNIX for the JCT TCP/IP Lab</TITLE>
+<H1>Using UNIX for the JCT TCP/IP Lab</H1>
+</head>
+
+<body bgcolor="white">
+<HR>
+<h2>EDIT HISTORY:</h2>
+
+<dl>
+<dt>20 Adar 5761 (15/03/2001)
+<dd>Updated to reflect the situation of this year.
+<dt>18 Cheshvan 5760 (28/10/1999)
+<dd>Updated to reflect the situation of this year.
+</dl>
+
+<!---------------------------------------------------------------------->
+<HR>
+<h2>TABLE OF CONTENTS:</h2>
+
+<ol>
+<li><a href="#intro">Introduction</a>
+<li><a href="#unix">Working in the UNIX lab</a>
+    <ol>
+    <li><a href="#unix-login">Logging into a Station in UNIX</a>
+    <li><a href="#unix-edit">Editing Programs in UNIX</a>
+    <li><a href="#compiling-unix">Compiling Programs in UNIX</a>
+    <li><a href="#unix-debug">Debugging</a>
+    <li><a href="#unix-multi">Running More Than One Program at a 
+        Time in UNIX</a>
+    <li><a href="#unix-copy">Copying Programs from the TCP/IP Lab 
+        Web Site in UNIX</a>
+    <li><a href="#unix-doc">Documentation</a>
+    </ol>
+<li><a href="#winnt">Working from a Microsoft Windows/NT station</a>
+</ol>
+
+<!---------------------------------------------------------------------->
+<hr>
+<h2><a name="intro">1. INTRODUCTION</a></h2>
+
+For the TCP/IP lab, you will have to know how to do the following on
+UNIX computers:
+
+<ol>
+<li>log into UNIX computers
+<li>edit programs
+<li>compile programs
+<li>run more than one program at a time
+<li>copy programs from the TCP/IP lab web site
+</ol>
+
+<p>
+I recommend that you do as much of your work as possible on the
+stations in the UNIX room, because the editor will be easier to use,
+and because you will be able to use more than 1 window at a time
+easily.
+Nevertheless, you can work in one of the Microsoft Windows labs and
+telnet to the UNIX lab machines (names: shana200, shana201, etc.).
+
+	<blockquote><font color="red">
+	<b>NOTE:</b> although you may work in pairs, it is <b>absolutely
+	forbidden</b> to give your password to your partner!  It is
+	also forbidden to log into your account and leave, letting
+	your partner work in your account.
+
+	<p>
+	If you have already given your password to your partner,
+	change it immediately.  On UNIX, you can change it via the
+	<tt>passwd</tt> command.  If you have the same password on
+	Lev/Midot, you'll also have to change it there.
+
+	<p>
+	You can make files in your account accessible to your partner,
+	via the <tt>chmod</tt> and/or <tt>chgrp</tt> commands.  Or you
+	can mail each other copies of your source code.  See me if you
+	have problems with this.
+	</font></blockquote>
+
+<!---------------------------------------------------------------------->
+
+<hr>
+<H2><a name="unix">2. WORKING IN THE UNIX LAB (WYLER BUILDING, ROOM 160)</a></H2>
+
+
+<h3><a name="unix-login">2.1 Logging into a Station in UNIX</a></h3>
+
+Each station displays a login window.  Type in your user name (login
+name) and password.  If you have forgotten it, go to Nachum Danzig
+(Wyler 232) to get a new UNIX password.  Currently, his office hours
+are Sunday - Thursday 13:30 - 14:30.
+
+<h3><a name="unix-edit">2.2 Editing Programs in UNIX</a></h3>
+
+I recommend that you use 'emacs' for editing your files.
+It has nice support for editing programs, including color-coding
+different parts of the program (e.g., comments are in red),
+automatically indenting, etc.
+
+<ol>
+<li>Emacs on-line help
+    <ol type="A">
+    <li>Note the following conventions:
+        <table border="2" bgcolor="#DDDDDD">
+	<tr><th>Convention</th>  <th>Meaning</th> <th>Example</th> </tr>
+	<tr><td><tt>C-</tt></td> <td>control key (CTRL)</td>
+	    <td> <tt>C-s</tt> = control-s </td>
+	    </tr>
+	<tr><td><tt>M-</tt></td>
+	    <td>meta key (in the UNIX lab, this is the ALT key).
+	        Alternatively, you can use the ESC (escape) key.  But
+		it works a little differently:
+		<ol>
+		<li>When using the <tt>ALT</tt> key, you press it
+	            <em>at the same time</em> as the other key.
+		<li>When using the <tt>ESC</tt> key, you first press
+	            the <tt>ESC</tt> key, and afterwards the other key.
+		</ol></td>
+	    <td><tt>M-x</tt> = meta-x = <br>
+	        <ol>
+		<li>press <tt>ALT</tt> and <tt>x</tt> at the same time.
+		<li>press <tt>ESC</tt>, and afterwards press <tt>x</tt>.
+		</ol>
+	    </tr>
+	<tr><td><tt>RET</tt></td>
+	    <td>RETURN (ENTER) key</td>
+	    <td> To go to line 25 of the file: <br>
+	         <tt>M-x goto-line RET 25 RET</tt> <br>
+		 which is:
+		 <ol>
+		 <li>meta-x, 
+		 <li>followed by the string &quot;goto-line&quot;,
+		 <li>followed by ENTER, 
+		 <li>followed by the string &quot;25&quot;,
+		 <li>followed by ENTER
+		 </ol></td>
+	    </tr>
+	</table>
+
+    <li>Emacs/Xemacs has its own <a name="emacs-tutorial">tutorial</a>.
+	You can probably access it via the Help menu.  Alternatively, you
+	can access it via typing <tt>C-h</tt> (control-h)
+	followed by <tt>t</tt>.
+	
+		<blockquote>
+		NOTE: below are other types of emacs help.  These also you can
+		probably access via the Help menu.  However, I will list how
+		to access them via the keyboard.
+		</blockquote>
+	
+    <li>After the tutorial, you can get more information about emacs, the GNU
+	C compiler, and other programs via 
+	<a name="emacs-info">emacs' 'info'</a> system.  To enter
+	info, type <tt>C-h i</tt>.
+	
+    <li>In fact, <tt>C-h</tt> is how you access many help facilities of
+	emacs.  There are many others besides the tutorial and info mentioned
+	above.  Type <tt>C-h ?</tt> to see the list of help facilities.
+    </ol>
+
+<li>There is also what emacs calls the META key.  On
+    the PCs, the ALT key is the META key.
+    <tt>M-x</tt> means META-x.
+
+<li>To get the colors, click with the mouse on Help --&gt; Options
+    --&gt; Global Font Lock.
+
+        <blockquote>
+	NOTE: in the shiur on 20 Adar 5761, 15/3/2001, I mentioned
+	another method to get colors.  Forget it.  This method is
+	simpler and better.  For example, this method automatically
+	updates the colors; you don't have to type C-l (control-L).
+	</blockquote>
+
+<li>Besides the normal editing commands, here are some commands that will
+    probably be useful for this lab:
+    
+    <dl>
+    
+    <dt><tt>C-x 2</tt>
+    <dd>Split the emacs windows into 2 sub-windows.
+    
+    <dt><tt>M-x goto-line</tt> RET <i>number</i>
+    <dd>Emacs does not display line numbers.  Use this command to jump to
+	a certain line.  This is useful, because when the C compiler
+	detetcs an error, it will say on which line it is.
+
+    <dt><a name="m-x-compile"></a><tt>M-x compile</tt>
+    <dd>If you are viewing/editing C code and run this command from
+        that buffer, this will compile it.  The default command it
+	uses is <tt>make</tt>.  If you do not know the UNIX
+	<tt>make</tt> command, you can change the command line to a
+	<tt>gcc</tt> command line (see <a href="#gcc">below</a>).
+
+	<p>The compilation, and any messages it generates, will take
+	place in other emacs buffer.  If there are any error messages,
+	click on the error message with both the right and left mouse
+	buttons at the same time, and you'll jump to the line of C
+	code where the error was reported.
+
+	    <blockquote>
+	    NOTE: if there are 3 buttons on the mouse, click on the
+	    middle mouse button instead of left and right togther.
+	    </blockquote>
+    
+    </dl>
+
+</ol>
+
+<h3><a name="compiling-unix">2.3 Compiling Programs in UNIX</a></h3>
+
+<ol>
+<li><a name="gcc"></a>Compiling with GNU C compiler (<tt>gcc</tt>)
+    <ol type="A">
+    <li>When your entire program is in one source code file, then 
+        compiling is
+	trivial.  If the name of the file is myprogram.c, then, to compile:
+
+	<blockquote>
+	<tt>gcc -o myprogram  myprogram.c</tt>
+	</blockquote>    
+
+	<p>
+	The <tt>-o myprogram</tt> option means to store the program in a file
+	called myprogram (without the '.c' at the end).
+
+    <li>Now let's say that your program is distributed among two files, main.c
+	and utilities.c, and
+	that you want to call the program 'communicate'.  Then you would use
+	the following sequence of commands:
+	
+	<blockquote><tt>
+	gcc -c main.c<br>
+	gcc -c utilities.c<br>
+	gcc -o communicate  main.o  utilities.o
+	</tt></blockquote>  
+
+	<p>
+	The first 2 lines compile source files but does not link them.
+	Thus, the output is not ready to run.  Instead, it produces
+	<em>object</em> files that have the same name as the source files, but
+	with '.o' at the end.  The third line links the object files &
+	produces a ready to run executable.  Note that in the previous
+	example with myprogram.c, the compiling and linking were done
+	via one command. 
+
+    <li>You can compile a gcc program from within emacs.  Go the window that
+        contains the program you want to compile.  Then I think you
+        type <tt>M-x compile</tt>.
+
+    <li>You can get more information about gcc via emacs info mode, and via 
+        <tt>man gcc</tt>.
+
+    </ol>  <!-- type="A" -->
+
+<li>If you want to write in C++, then use the command g++.  This calls
+    the GNU C compiler, but in a way suitable for C++.
+
+<li>When you hand in an assignment, you must indicate the exact
+command(s) used to compile it. 
+
+<li>See <a href="#m-x-compile">above</a> for compiling the program
+from within emacs. 
+
+<li>You may use the UNIX <tt>make</tt> command if you want.  But we
+won't have time in this lab to teach you how to use it.
+
+</ol>
+
+<h3><a name="unix-debug">2.4 Debugging</a></h3>
+
+<p>
+If you compile with gcc, you can use the 'gdb' command to debug.
+Read about this command in emacs' 'info' mode.
+
+<p>
+There should also be a debugger command called 'ddd'.  This has a
+graphical interface.
+
+<p>
+Of course, you can always use 'printf' or 'fprintf' to display debug and error
+messages.
+
+<h3><a name="unix-multi">2.5 Running More Than One Program at a Time 
+    in UNIX</a></h3>
+
+This is very simple when sitting at a UNIX station: simply open 2 or
+more windows, and run a program in each of them.
+
+<h3><a name="unix-copy">2.6 Copying Programs from the TCP/IP Lab 
+    Web Site in UNIX</a></h3>
+
+Simple.  View the program via Netscape.  Then save the file in text format.
+
+<h3><a name="unix-doc">2.7 Documentation</a></h3>
+
+<p>
+There are several ways to get documentation about UNIX commands and
+functions (including socket functions):
+
+<dl>
+<dt>Gnome Help Browser
+<dd>If this does not start automatically, then look at the panel at
+    the bottom of the screen.  There should be an icon with a question
+    mark on it.  Click that.  From this browser you can access all (or
+    almost all) of the other types of documents listed below.
+
+<dt>man pages
+<dd>This is the classic UNIX documentation.  The 'manual' is divided
+    into several sections.  For example, section 1 are normal user
+    commands.  Section 2 are system calls (including the socket
+    interface).  Section 3 are other standard routines, etc.
+
+    <p>
+    Here are different ways to view the man pages:
+    <ol>
+    <li>From the unix command line, type the 'man' command.  Here are
+	examples:
+	<ul>
+	<li><tt>man xterm</tt> -- learn about the xterm (X windows
+	    terminal emulation) program.
+	<li><tt>man 2 socket</tt> -- learn about the 'socket' function
+	    (which is in section 2 of the manual).
+	<li><tt>man 4 socket</tt> -- learn about the socket programming
+	    interface (in section 4 of the manual).
+	<li><tt>man -k socket</tt> or <tt>apropos socket</tt>-- 
+	    get a list of all man pages dealing
+	    with sockets (actually, get a list of all man pages whose
+	    summary lines contain the word 'socket').
+	</ul>
+    
+    <li>Type <tt>xman</tt> to get an X windows interface to the
+	'man' command.  From there, you can click on 'Getting
+	Started' to learn how to use xman, or 'Manual Page' to see
+	the man pages.  The sections of the manual are the same as
+	for the 'man' command above.
+
+    <li>From within emacs, type
+            <blockquote>
+	    <tt>M-x RET man RET</tt> <i>man_page</i>.
+	    </blockquote>
+        If you want specify the manual section, do it like this:
+	<ul>
+	<li><tt>socket(2)</tt>
+	<li><tt>socket(4)</tt>
+	</ul>    
+    </ol>
+
+<dt>Emacs info
+<dd>See the section on <a href="#emacs-info">emacs info</a> above.
+
+</dl>
+
+<!---------------------------------------------------------------------->
+
+<hr>
+<H2><a name="winnt">3. WORKING FROM A MICROSOFT WINDOWS/NT STATION</a></H2>
+
+<p>
+Again, I strongly urge you to work in the UNIX lab, or at least from a
+UNIX station.  But there might be times when that is not practical.
+
+<h3>3.1 Logging into a Station on a PC</h3>
+
+I assume that you know how to log into a PC.  After that, however, you
+will have to telnet to one of the UNIX lab stations (shana200,
+shana201, ..., shana220). 
+I suggest that you use the EWAN telnet program instead of the standard
+Microsoft telnet program. You enter the same user name (login name)
+and password as you do when sitting at a UNIX station.
+
+<h3>3.2 Editing Programs on a PC</h3>
+
+<p>
+You'll still run emacs.  However, you should run it with the
+<tt>-nw</tt> option.  This option stands for 'no windowing'; it will
+prevent emacs from trying to start up an X window (X is the windowing
+system on UNIX).  Instead, it will take over your telnet window.
+
+<p>
+Alternatively, if you know the <tt>vi</tt> editor, you might want to
+use that.  
+
+<p>
+There might not be a META key when working like this.  In this case,
+use the ESCAPE key.  See the 
+<a href="#emacs-tutorial">emacs tutorial</a> 
+for how to use the escape key.
+
+<h3>3.2 Compiling Programs on a PC</h3>
+
+Same as compiling programs <a href="#compiling-unix">for UNIX</a>.
+
+<h3>3.4 Running More Than One Program at a Time on a PC</h3>
+
+There are 2 ways:
+
+<ol>
+<li>You can run the telnet program more than once.
+
+<li>Use emacs.Emacs can split the screen of an
+    ordinary text terminal or of a telnet window.  Type 
+    <tt>C-x 2</tt> to split the screen into 2.  Type 
+    <tt>C-x o</tt> to move the cursor to the 'other' window.
+    
+    <p>
+    You can run normal UNIX commands from within emacs.  Type 
+    <tt>M-x shell</tt> to start a UNIX shell.  This shell buffer will be
+    called '*shell*'.  To create another shell buffer, you must 
+    rename the first shell buffer via the 
+    <tt>M-x rename-buffer</tt> command and then typing
+    <tt>M-x shell</tt> to start a second shell.
+
+<h3>3.5 Copying Programs from the TCP/IP Lab Web Site on a PC</h3>
+
+Viewing the program via Netscape or Internet Explorer and then saving
+it will save it on the PC (either on the local disk or in your LEV home
+directory).  But you need the file in your UNIX directory.  
+
+<p>
+You cannot run Netscape from UNIX and have it display on your PC
+screen.  But, from UNIX you can run 'lynx'.  THis is a web browser
+that works in text mode, so you can use if from within the telnet
+window.  After you view the file via lynx, save it; the file will be
+in your UNIX home directory.
+
+<hr>
+This document maintained by Haim Roman,
+<a href="mailto:roman@mail.jct.ac.il">roman@mail.jct.ac.il</a>
+
+</body>
+</html>

@@ -1,0 +1,394 @@
+<html><head>
+
+<!-- <base href="http://sukka.jct.ac.il/~roman/tcp-ip-lab/"> -->
+<TITLE>The JCT TCP/IP Lab</TITLE>
+<H1>The JCT TCP/IP Lab</H1>
+</head>
+
+<body>
+
+<!----------------------------------------------------------------->
+<HR>
+<H2><a name="toc">TABLE OF CONTENTS</a></H2>
+<ul>
+<li><a href="#history">Edit History</a> --
+    you should check this, since this site is updated frequently.
+<li><a href="#gen">General Notes</a>
+<li><a href="#notes">Course Notes and Links</a>
+    <ol type="I">
+    <li><a href="#admin">Administrative Information</a>
+    <li><a href="#socket-funcs">Socket Functions</a>
+        <ol type="A">
+	<li><A HREF="#func-summ">Summary of socket functions
+	    in pseudo-code</A>
+        <li><a href="#sock-examples">pseudocode and C code examples</a>
+        <li><a href="#rel-funcs">Related Functions and include files</a>
+	</ol>
+    <li><a href="#ibm-tut">IBM's TCP/IP tutorial</a>
+    <li><a href="#use-unix">Using UNIX for this lab</a>
+    <li><a href="#tftp-link">TFTP</a>
+    <li><a href="#non-socket">Communication other than TCP/IP</a>
+    <li><a href="#outside">Links to outside this site</a>
+    <li><a href="#humor">Humor</a>
+    </ol>
+</ul>
+
+<!----------------------------------------------------------------->
+<HR>
+<H2><a name="history">EDIT HISTORY</a> 
+    (for the entire site, not just this page)</H2>
+
+<i>Check this site frequently because it will probably change frequently</i>
+
+<dl>
+<dt><font color="red">30 Sivan 5761, 2001/06/21</font>
+<dd> <font color="red">
+     <ol>
+     <li>Added <a href="admin/test-sched.html">schedule of tests</a>
+     that Haim Roman is giving students. 
+     <li>Added <a href="admin/proj-status.html">status of projects</a>
+     for each student.
+     </ol>
+     
+     </font>
+
+<dt>22 Iyar 5761, 2001/05/15
+<dd> Added info on the requirements for the TFTP
+server project</font>
+
+<dt>10 Iyar 5761, 2001/05/03
+<dd> Expanded the section on using structures, the
+possiblity of 'holes' between the fields of the structures.
+
+<dt>27 Adar 5761, 2001/03/22
+<dd> Updated the 'Links to outside this site' page, including a new
+socket programming tutorial discovered by Yitzchak Teichtel.
+
+<dt>20 Adar 5761, 2001/03/15
+<dd> Updating the Using UNIX page.
+
+<dt>09 Adar 5761, 2001/03/04
+<dd> Checked and updated the UDP examples.
+
+<dt>28 Shvat 5761, 2001/02/21
+<dd> Started editing for this year's lab.
+
+</dl>
+
+
+<!----------------------------------------------------------------->
+<HR>
+<H2><a name="gen">GENERAL NOTES</a></H2>
+
+<dl>
+<dt><b>pseudo-code</b>
+<dd>Some of the documentation and examples are in pseudo-code instead
+    of real C code, because the real C code is very verbose, and I thought
+    it would be easier to understand the socket functions in
+    pseudo-code. 
+
+<dt><b>versions</b>
+<dd>Some of the C code examples were compiled on hosts running the
+    SunOS 4 version of UNIX (e.g., hosts 'avoda' and 'beitza').
+    Others have been compiled under Linux (Red Hat distribution,
+    versions 6.0, 6.1, 6.2, or 7).  The PCs in the UNIX lab currently
+    run Red Hat 7.  These are the PCs in the UNIX lab.  Their names
+    are shana200-shana220.
+    
+    
+    <p>
+    Some of the definitions and structures are different between the
+    two types of systems, so what compiles on one might not compile on
+    the other.  But you can easily adapt the examples.
+
+    <p>
+    All code in this site been compiled with the GNU C (not C++)
+    compiler (command 'gcc').
+
+    <p>
+    For several reasons, you should compile all code you write on
+    Linux (unless told otherwise). 
+
+</dl>
+
+
+<!----------------------------------------------------------------->
+<HR>
+<H2><a name="notes">Course Notes and Links</a></H2>
+
+<ol type="I">
+<li><b><a name="admin">Administrative Information:</a></b>
+    <ol type="A">
+    <p><li>All labs are in the UNIX lab, Weiler 160.
+    <p><li>There are 3 groups.
+           <ol type="1">
+	   <p><li>One group meets Sundays 18:00 - 18:45.  It meets
+	   every week.  Haim Roman is the instructor.
+
+	   <p><li>The other 2 groups meets Thursdays 18:00-19:30.
+	   Each group meets every other week.  Some weeks, Haim Roman
+	   will teach.  Other weeks, Izhak Teichtel will teach.
+	   </ol><!-- 3 groups -->
+
+     
+    <p><li><b>Testing and Grading:</b>
+           <ol type="1">
+	   <p><li>It does not matter whether you attend the lab sessions of
+	   your group or another group.  However, for testing, each student
+	   will be assigned to either Haim or Yitzchak, and he must be tested
+	   by that person.  (Otherwise, you might have one person testing
+	   many students, and the other only a few).
+
+	   <p><li><b><a href="admin/project.html">Project
+	   requirements, grading, and suggestions</a>.</b>
+
+	   <p><li><b><a href="admin/test-sched.html"><font color="red">
+	   Schedule of students testing with Haim</font></a>.</b>
+
+	   <p><li><b><a href="admin/proj-status.html"><font color="red">
+	   Status of student projects</font></a>.</b>
+
+	   </ol><!-- testing & grading -->
+    
+    <p><li>Contact:
+        <table border="2">
+	<tr><th> Instructor </th> 
+            <th> e-mail </th>
+	    <th> Where </th>
+	    <th> When </th>
+	    </tr>
+
+	<tr><td> Haim Roman </td><!-- Instructor  -->
+            <td> <a href="mailto:roman@mail.jct.ac.il">
+	         mailto:roman@mail.jct.ac.il </a> </td><!--  e-mail -->
+	    <td> Weiler 232 </td><!--  Where -->
+	    <td> most days 13:30-14:30, but best by appointment
+	    (02-675-1218, 058-592-599) </td><!-- When -->
+	    </tr>
+
+	<tr><td> Yitzchak Teichtel </td><!-- Instructor  -->
+            <td> <a href="mailto:teichtel@mail.jct.ac.il">
+	         mailto:teichtel@mail.jct.ac.il </a>  </td><!--  e-mail -->
+	    <td> UNIX lab </td><!--  Where -->
+	    <td> Thu, 19:30 onward </td><!-- When -->
+	    </tr>
+
+	</table>
+
+    </ol> <!-- Administrative Information -->
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>
+
+<p><li><b><a name="socket-funcs">Socket Functions</a></b>
+    <ol type = "A">
+    <li><A HREF="func-summary.html">
+	Summary of socket functions in pseudo-code.
+	</A>
+	<a name="func-summ"></a>  <!-- so one can link TO here -->
+    
+	<blockquote>
+	I suggest that you start here.  These notes were designed for use
+	with a lecture, but they should be helpful even by themselves.
+	Please e-mail me comments about them (see e-mail address below).
+	</blockquote>
+    
+    <!-- <p><A HREF="inet-dgram/">
+    <!--     Examples of internet datagrams 
+    <!--     </A>
+    <!--     (pseudo-code and/or C code)
+    -->
+
+    <li><a name="sock-examples">Here are some pseudocode and
+        C code examples:</a>
+
+        <ol type="1">
+	<li>Common to both UDP and TCP
+	    <ol type="a">
+
+	    <li><a href="common-code/socket_address.c">Socket address
+		conversion functions</a> -- convert between text and the
+		sockaddr_in structure.
+     
+		<p>
+		Here is a
+		<a href="common-code/test_socket_address.c">program</a>
+		to test it.
+
+	    <li><a href="common-code/null_str.c">null_str function</a>
+		-- used by some of the other routines.  This simply treats
+		a NULL pointer as a an empty string.
+
+	    <li><a href="common-code/create_socket.c">Create socket 
+	        function</a>
+		-- Socket code is complex because the socket interface was
+		designed to handle a lot more than just TCP/IP.  This is
+		an example of a wrapper function that makes TCP/IP socket
+		programming simpler.
+
+	    <li><a href="common-code/struct">Structures, Holes,
+	        and Unions in C</a>
+		<a name="struct"></a>
+		-- This is not specific to sockets, but you look at
+	        this information anyway.  It is <em>not</em> long.
+
+	    </ol> <!-- Common to both UDP and TCP -->
+
+	<li>UDP
+	    <ol type="a">
+	    <li>Simple server and client
+	        <ul>
+
+		<li><a href="inet-dgram/simple.html">Pseudocode Description</a>
+
+		<li><a href="inet-dgram/simple-receiver.c">Simple server</a>
+
+		<li><a href="inet-dgram/simple-sender.c">Simple client</a>
+
+		</ul>
+
+	    <li>UDP daytime example (another simple example)
+	        <ul>
+		
+		<li><a href="inet-dgram/time.html">Pseudocode Description</a>
+
+		<li><a href="inet-dgram/udp_daytime_client.c">client</a>
+		    -- As of 30 Cheshvan 5760 (09/11/1999), 
+		    this tries only the well-known port for the
+		    'daytime' service.  If you want, you can try to
+		    change it so that you can specify which port it
+		    should try.
+
+	        <li><a href="inet-dgram/udp_daytime_server.c">server</a>
+		    -- As of 30 Cheshvan 5760 (09/11/1999), I have not
+		    yet tested this, because the client is not
+		    flexible enough (see above).  I could have used the
+		    <a href="inet-dgram/simple-sender.c">simple client</a>
+		    above, but I have not yet.
+
+		</ul>
+
+            <li><a href="inet-dgram/sync-receiver.c">Synchronization tester</a>
+	        -- this server allows you test what happens when you
+	        send a message to a UDP server before it is ready to
+	        accept it.  Use the
+		<a href="inet-dgram/simple-sender.c">simple client</a>
+		to test it.
+
+            <li><a href="inet-dgram/timeout/">Timeouts</a>
+	        <a name="timeouts"></a> -- how to
+                implement timeouts.  We show how for UDP, though you
+                can then figure out how to use it for TCP.
+
+            </ol>  <!-- UDP -->
+
+        <li>TCP --
+	    <a name="tcp-frag">Here</a>
+	    is code that demonstrates
+	    <a href="inet-stream/tcp-fragmenting.html">TCP fragmenting
+	    of streams</a>.
+
+	</ol>  <!-- pseudocode & C code examples -->
+
+    <li><A HREF="related-functions/">
+	Related Functions and include files.
+	</A>
+	<a name="rel-funcs"></a>  <!-- so one can link TO here -->
+    
+	<blockquote>
+	These are functions that do not work directly with sockets, but are
+	often needed when programming sockets.  There are links to C
+	programs that use these functions.
+
+	<p>
+	Some of these functions are also mentioned in the main
+	socket function above.  I have left them in here.
+	</blockquote>
+
+    </ol>  <!-- Scoket Functions -->
+    
+    <!-- <p><A HREF="exercises.html">
+    <!--     The exercises for the lab
+    <!--     </A>
+    --> 
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>
+
+<p><li><A HREF="ibm-tutorial">
+    <b>IBM's TCP/IP tutorial</b>.
+    </A>
+    <a name="ibm-tut"></a> <!-- so one can link TO here -->
+
+    <blockquote>
+    This is an excellent tutorial on TCP/IP.  While it does not
+    deal with programming with sockets, I recommend this as material
+    for learning or reviewing the principles of TCP/IP.
+
+    <p>
+    If, for some reason, there is a problem with the local copy of
+    this document, click
+    <A HREF="http://www.austin.ibm.com/resource/aix_resource/Pubs/redbooks/htmlbooks/gg243376.04/3376fm.html">
+    here
+    </A>
+    to get to IBM's copy.
+    </blockquote>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+<p><li><A HREF="using-unix">
+     <b>How to use UNIX</b>
+     </A>
+     <a name="use-unix"></a> <!-- so one can link TO here -->
+     for this lab.  This includes editing, compiling, and running more
+     than one process at once.
+
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+<p><li><A HREF="tftp">
+    <b>TFTP</b> 
+    </A>
+    (the Trivial File Transfer Protocol)
+    <a name="tftp-link"></a> <!-- so one can link TO here -->
+
+        <ul>
+	<li><a href="tftp">RFCs and how to use the client</a>
+	<li><a href="admin/project.html">Info about the TFTP server project</a>
+	</ul>
+
+<!-- <p><A HREF="unix-datagram.txt">
+<!--     Examples of UNIX datagrams 
+<!--     </A>
+<!--     (pseudo-code)
+-->
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+<p><li><A HREF="non-socket.txt">
+    <b>Interprocess communication mechanisms other than sockets</b>
+    </A>
+    <a name="non-socket"></a> <!-- so one can link TO here -->
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+<p><li><A HREF="outside-sites.html">
+    <b>Get more info about TCP/IP and sockets</b>
+    </A>
+    <a name="outside"></a> <!-- so one can link TO here -->
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+<p><li><A HREF="dr_seuss.txt">
+   <b>Dr. Seuss's Guide to the Internet</b>
+   </A>
+   (humor)
+    <a name="humor"></a> <!-- so one can link TO here -->
+
+<!--     I retrieved the table of contents for the FAQ, but it does
+<!--     not work, because the links are relative.
+<!--     
+<!-- <p><A HREF="books-amazon.html">
+<!--     Some books on sockets that you can order through amazon.com
+<!--     </A>
+<!--  -->
+
+</ol>
+
+</body>
+</html>
