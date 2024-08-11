@@ -1,0 +1,129 @@
+<html><head>
+<!--  META HTTP-EQUIV="Content-Type"   CONTENT="text/html; CHARSET=iso8859-8-i" -->
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-8-i">
+  </head>
+<body>
+<form action=setpassword.php method=POST>
+<?php
+
+function get_login($secret, $fname, $last, $file)
+{
+$login="not found";
+// reverse the hebrew since we store the names in accout.status.hebrew
+// as visual hebrew not logical hebrew
+//$last=strrev($last);
+//$fname=strrev($fname);
+	  echo "<br>last name: $last<br>";
+	  echo "<br>first name: $fname<br>";
+$lines = file($file);
+
+// Loop through our array 
+foreach ($lines as $line) 
+{
+  echo "1";
+  if (substr_count($line, $last) > 0)  //if( ereg( $last, $line ))
+	{
+	  echo "<br>last name found<br>";
+	  if(substr_count($line, $last) > 0)  //  if (ereg ($fname, $line))
+	    {
+	      echo "<br>first name found<br>";
+
+	      // Delimiters may be colon or hyphen
+	      //	list($login, $fullname, $ID) = split('[:-]', $line);
+		list($hebrewnames, $login, $fullname, $longID) = split(':', $line);
+
+		list ($ID, $junk)= split('-',$longID);
+		$temp=17*$ID;
+		$oursecret = substr($temp,0, 5);   
+		echo "<br>oursecret is $oursecret<br>";
+		if ($secret==$oursecret)
+		  {
+		    return $login;
+		  }
+	    }
+	}
+}
+return $login;
+}
+
+$quit=0;
+@extract($_POST);
+$israeliLaw= stripslashes($israeliLaw);
+$rules = stripslashes($rules);
+$fname = stripslashes($fname);
+$last = stripslashes($last);
+$secret = stripslashes($secret);
+
+if($israeliLaw != yes)
+{
+echo "You must accept the rules. ";
+$quit=1;
+}
+elseif($rules != yes)
+{
+echo "You must accept the rules. ";
+$quit=1;
+}
+
+elseif (strlen($fname) < 2)
+{
+echo "firstname not valid! Press Back and try again. ";
+//sleep(1);
+$quit=1;
+}
+
+elseif (strlen($last) < 2)
+{
+echo "lastname not valid! Press Back and try again.";
+//sleep(1);
+$quit=1;
+}
+elseif (strlen($secret) < 5)
+{
+echo "secret not valid! Press Back and try again.";
+//sleep(1);
+$quit=1;
+
+}
+
+else
+{
+  $login = get_login($secret, $fname, $last, "account.status.hebrew" );
+  echo "\n<br><b>Login is $login</b><br>\n";
+  if (strcmp($login, "not found") == 0)
+    {
+      echo "\n<br> User Not found.  Go back and make sure you filled in the names and secret as they are printed on the form you received.";
+    }
+  else 
+    {
+
+
+
+//session_start();
+	//  	$_SESSION["hissecret"]=$secret;
+	  //	$_SESSION["hislogin"]=$login;
+
+	echo "Your username is <b>$login</b>.  Please write it down. <br><p>\n";
+	echo " Please choose two (2) <b>different</b> passwords.  They each must be
+	 8 (Latin) letters long and must 
+	contain at least one capital letter and one lowercase letter and one digit.<br><br>\n";
+
+	echo "Main Password <input type=text name=passwd size=12 maxlength=8> <br>";
+	echo "\nInternet Proxy Password <input type=text name=proxy size=12 maxlength=8> <br>\n";
+	echo "<input type=submit value=\"Set Passwords\"></form>\n";
+	}
+
+}
+
+
+
+//if($quit==1  )
+//{
+//header("location:index.php?fail=1");
+//}
+?>
+
+
+</body>
+</html>
