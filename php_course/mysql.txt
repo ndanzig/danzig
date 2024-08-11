@@ -1,0 +1,101 @@
+Script started on Thu Feb 20 14:05:40 2003
+]0;root@esp:~[root@esp root]# mysql -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 4 to server version: 3.23.53a
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql> \u abautomatic
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_abautomatic |
++-----------------------+
+| prg_data              |
+| programs              |
++-----------------------+
+2 rows in set (0.00 sec)
+
+mysql> desc prg_data;
++--------------+----------------------+------+-----+---------+-------+
+| Field        | Type                 | Null | Key | Default | Extra |
++--------------+----------------------+------+-----+---------+-------+
+| prg_id       | int(12) unsigned     |      | PRI | 0       |       |
+| date         | timestamp(10)        | YES  | PRI | NULL    |       |
+| correct_lus  | varchar(200)         | YES  |     | NULL    |       |
+| total_lus    | tinyint(3) unsigned  |      |     | 0       |       |
+| teacher_id   | smallint(6) unsigned |      |     | 0       |       |
+| progress_flg | tinyint(3) unsigned  | YES  |     | NULL    |       |
++--------------+----------------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc programs;
++-------------+------------------+------+-----+---------+----------------+
+| Field       | Type             | Null | Key | Default | Extra          |
++-------------+------------------+------+-----+---------+----------------+
+| prg_id      | int(12) unsigned |      | PRI | NULL    | auto_increment |
+| std_id      | int(12) unsigned |      |     | 0       |                |
+| materials   | varchar(100)     |      |     |         |                |
+| prompt      | varchar(100)     |      |     |         |                |
+| behavior    | varchar(100)     |      |     |         |                |
+| help_level  | tinyint(3)       |      |     | 0       |                |
+| correction  | varchar(100)     |      |     |         |                |
+| last_update | timestamp(14)    | YES  |     | NULL    |                |
++-------------+------------------+------+-----+---------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> Bye
+]0;root@esp:~[root@esp root]# exit
+Script done on Thu Feb 20 14:07:52 2003
+-- MySQL dump 8.22
+--
+-- Host: localhost    Database: abautomatic
+---------------------------------------------------------
+-- Server version	3.23.53a
+
+--
+-- Table structure for table 'prg_data'
+--
+
+CREATE TABLE prg_data (
+  prg_id int(12) unsigned NOT NULL default '0',
+  date timestamp(10) NOT NULL,
+  correct_lus varchar(200) default NULL,
+  total_lus tinyint(3) unsigned NOT NULL default '0',
+  teacher_id smallint(6) unsigned NOT NULL default '0',
+  progress_flg tinyint(3) unsigned default NULL,
+  PRIMARY KEY  (prg_id,date)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table 'prg_data'
+--
+
+
+
+--
+-- Table structure for table 'programs'
+--
+
+CREATE TABLE programs (
+  prg_id int(12) unsigned NOT NULL auto_increment,
+  std_id int(12) unsigned NOT NULL default '0',
+  materials varchar(100) NOT NULL default '',
+  prompt varchar(100) NOT NULL default '',
+  behavior varchar(100) NOT NULL default '',
+  help_level tinyint(3) NOT NULL default '0',
+  correction varchar(100) NOT NULL default '',
+  last_update timestamp(14) NOT NULL,
+  PRIMARY KEY  (prg_id)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table 'programs'
+--
+
+
+

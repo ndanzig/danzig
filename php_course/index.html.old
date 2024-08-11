@@ -1,0 +1,1432 @@
+<HTML>
+<HEAD>
+<TITLE>Programing Languages for Internet Applications</TITLE>
+<link rel="stylesheet" type="text/css" href="inet2.css" >
+</HEAD>
+<BODY>
+<H1>Programming Languages for Internet Applications</H1>
+<h2>Nachum Danzig  and  Yonah Russ</h2>
+<h3>Last Updated: 13/2/2003</h3>
+
+<ol TYPE=I>
+<li>Introduction</li>
+<ol TYPE=A>
+<li>Dynamic Web Pages</li>
+<p>In the beginning, man created the Internet. And the Internet was basically 
+text and had to be updated manually. And the programmers said "There shall be 
+Dynamic Web Pages" and there were Dynamic Web Pages.</p>
+<p>The page you are currently viewing is a classic example of a dynamic web
+page. If you look at the top of the page you see the words 'Last Updated:' 
+followed by a date. If you looked at the source of the page you might think 
+that I actually edit that date every time I make an update to the page but
+in reality, the web page checks to see when it was last updated and writes in
+the date <i>DYNAMICALLY</i>.</p> 
+<h3>Implementation</h3>
+<p>There are several methods for implementing dynamic web pages each of which 
+usually falls into one of the following categories:</p>
+<ol TYPE=1>
+<li>CGI Programs</li>
+<p>Dynamic web pages began with the creation of the <b>C</b>ommon 
+<b>G</b>ateway <b>I</b>nterface. This let people point their web browsers 
+at a program on a webserver and see the output inside their browser window.</p>
+<p>For example the following Perl program is <a href="hw.pl">here</a></p>
+<code>
+<pre>
+#!/usr/bin/perl
+print "Content-Type: text/html\n\n";
+print "Hello World\n";
+</pre>
+</code>
+<p>The advantages of CGI programs are that they are run on the server itself 
+(aka Server Side). This means that:
+<p><ul>
+<li>They can be written in <i>any</i> programming language understood 
+by the webserver.</li>
+<li>They also have access to all the resources available to the server 
+itself.</li>
+<li>The program code is hidden from people visiting the web site.</li>
+</ul>
+</p>
+<p>The disadvantages of CGI programs are that they are regular computer 
+programs, in every way. This means that:
+<p><ul>
+<li>They must output an <i>entire</i> webpage including the HTML Headers
+(ie. the first line of the CGI above- Content-Type, blah blah).
+<li>CGI programs are also slow and consume resources because they spawn
+a new process for every time they are run.
+</ul>
+</p>
+<li>Client Side Scripting</li>
+<p>Client Side Scripting languages like JavaScript and vbscript came next.
+Without changing anything about how web pages were handled by web servers, 
+browser companies started competing by adding script processing capabilities 
+into their browsers. They hoped that the more wizardry their browsers could 
+manage,the more websites would force people to use their web browsers. They 
+were right.</p>
+<p>The long and short of it is that you can write a script inside your web
+page, known as <i>inline</i>, and the web browser will process it before it 
+shows the website in the web browser. 
+Since the processing happens inside the web browser, this is called a 
+<i>Client</i> Side Script.</p>
+<p>The upside of this is that it costs no processing time on the Server Side. 
+<p>The downside of this Client Side processing is that on the client side the
+access to Server Side resources is necessarily limited and the web browser
+must be able to see the code of my script.</p>
+<li>Server Side Scripting</li>
+<p>Both the CGI programs and the Client Side Scripts still have their places
+but they each have advantages and disadvantages.</p>
+<p>Server Side Scripts combine the best of both worlds. They are processed on 
+the <i>server</i> so the code is hidden from the web browser and they have 
+access to everything the server does (just like CGI programs). They are written
+inline, so they only need to handle the dynamic parts of the web page, taking 
+up less resources (like Client Side Scripts).</p></ul>   
+</ol>
+<li>Web Programming with Databases</li>
+<p>Dynamic Web Pages are often used to provide a Database interface. Some 
+common examples are:
+<p>
+<ul>
+<li><a href="http://www.amazon.com">Amazon.Com</a></li>
+<li><a href="http://www.dosidate.co.il">Dosidate</a></li>
+</ul>
+</p>
+<p>These examples are called "Extranet Database Applications". They allow
+the World to access some of the data located in Amazon.Com's Databases. 
+The nature of this access requires a Server Side implementation of Dynamic Web 
+Pages in other words- if you want your web page to use a database think 
+<b>Server Side Scripting</b>.</p>
+<li>Project</li>
+<ol type="1">
+<li>In General</li>
+<p>Dynamic Web Pages can also be used to build "Intranet Database 
+Applications." These allow many people <i>inside</i> an organization to use the
+same centrally located database from anywhere in the world. It is basically the
+same as an <i>Extranet</i> Application except that its use is not open to 
+people outside the organization.</p>
+<p>In this course, you will be writing a complete Intranet Database 
+Application. You will use HTML to create an interface. You will learn the 
+Server Side Scripting language <b>PHP</b> which you will use to connect your
+HTML Interface to a <b>MySQL</b> database.</p>
+<li>Project Specifics (5763)</li>
+<p>There are many methods for teaching autistic children. One method called ABA
+(Applied Behavioral Analysis) takes a very scientific approach to the 
+child's learning.</p>
+<p>Everything the child is taught is organized into Learning 
+Programs. Each program consists of several components such as the materials 
+required, the response expected from the child, the correction that is to be 
+made in the case of an incorrect response.</p>
+<p>Each time a program is taught, it is repeated some number of times. Each 
+repetition is called a Learning Unit. During the lesson the teacher records on
+a data sheet the correct or incorrect responses.</p>
+<p>This data is graphed and used to chart the child's progress. If the 
+child succeeds in achieving 90% accuracy two days in a row, The Learning 
+Program is changed for the positive- it is made harder, etc. If the child does
+not improve or shows dropping accuracy, the Learning Program is changed for
+the negative- it is made easier, etc.
+<p>In an ABA school, two or more teachers may be teaching one child. All 
+teachers who teach a child, record data on the same data sheets.</p>
+<p>With an Intranet Database Application:</p>
+<p>
+<ul>
+<li>All the teachers could use a web interface to input their data straight 
+into one database.</li>
+<li>The data could be graphed automatically by the computer instead of by 
+hand.</li>
+<li>The computer could notify the teacher automatically when the child has
+succeeded or failed a Learning Program.</li>
+</ol>      
+	</ol>
+	<li>PHP 1</li>
+<p>PHP stands for "PHP: Hypertext Processor" it is one of the two major Server Side scripting languages. The other is ASP. PHP is partially based on Perl, C, and Java. You can find more information on PHP at the PHP Website: <a href="http://www.php.net">http://www.php.net</a></p>
+	<ol TYPE=A>
+		<li>Inline Scripting</li>
+<p>As we said, one of the major advantanges to Server Side scripting languages is that you can include your code inline with the HTML of your web pages.</p>
+<p>If you haven't already guessed, we do this by enclosing our code in some special tags.
+This is called <b>Escaping from HTML</b>. This is similar to what we do for regular HTML Tags where we <i>escape</i> from the text. The only difference is that the tags we use to include our PHP code are meant to be interpreted by our web server unlike HTML Tags which are interpreted by our web browsers.</p>
+		<ol TYPE=1>
+			<li>Escaping from HTML &lt;?php ..... ?&gt;</li>
+<p>We must begin any of our inline PHP code with &lt;?php</p>
+<p>We must end any of our inline PHP code with ?&gt;</p>
+<p>Let's see an example:</p>
+<xmp>
+<html>
+<head>
+<title>My First PHP Example</title>
+</head>
+<body>
+
+<!--
+     Here I escape from the HTML inside the body and print 
+     something into the web page. It should show up like regular
+     Body text
+-->
+
+<?php print "Hello World"; ?>
+
+<h1>
+<!--
+     Here I escape from the HTML inside the h1 and print 
+     something into the web page. It should show up like h1 text
+-->
+
+<?php print "Hello World"; ?>
+
+</h1>
+</body>
+</html>
+</xmp>
+<p>Click <a href="ex1.php">here</a> to see how this example would appear in your browser.</p>
+			<li>Statement Separation &lt;?php statement 1; statement 2; ?&gt;</li>
+<p>Just like it's "Parent" languages, statements in PHP are separated by semi-colons. 
+Here is an example of multiple statements:</p>
+<xmp>
+<html>
+<head>
+<title>My Second PHP Example</title>
+</head>
+<body>
+
+<?php
+
+// btw: comments in PHP are like comments in C
+
+print "Hello World";          //Statement #1
+print "<br>Hello World";      //Statement #2
+
+/*
+   Notice the <br> tag- without it I would have printed
+   Hello WorldHelloWorld
+*/
+
+?>
+
+</body>
+</html>
+</xmp>
+<p>Click <a href="ex2.php">here</a> to see how this example would appear in your browser.</p>
+		</ol>
+		<li>Variables</li>
+<p>In any programming language, there are two types of data:
+<b>Variables</b> and <b>Constants</b>.</p>
+<p><b>Constants</b> stay constant. In the PHP example above, the text
+which we gave the print function ("Hello World") was a constant. From
+the time the PHP script began to run until it finished, that text
+stayed exactly the same.</p>
+<p><b>Variables</b> are more interesting. They are the heart of any programming language. When the programmer creates a variable named 'x', he tells the computer to set aside a piece of memory and call it 'x'. From then on he can <b>assign</b> a value to the variable 'x' and the computer will place that value in the memory set aside for the variable.</p>
+		<ol TYPE=1>
+			<li>Syntax</li>
+<p>Variables in PHP are represented by a dollar sign followed by the name of the variable. The variable name is case-sensitive. Variable names follow the same rules as other labels in PHP. A valid variable name starts with a letter or underscore, followed by any number of letters, numbers, or underscores.</p>
+<p>Exactly how much memory the computer sets aside for a variable and how that memory is used is dependant on a characteristic of the variable called the <b>Variable Type</b>. We'll discuss types in a little bit.</p>
+<p>Let's see an example:</p>
+<xmp>
+<html>
+<head>
+<title>My Third PHP Example</title>
+</head>
+<body>
+
+<?php
+
+$var="Hello World";   //Assign the value 'Hello World' to the variable $var 
+print "Aren't you glad I didn't print $var?\n"; //use the variable
+
+?>
+
+</body>
+</html>
+</xmp>
+<p>Click <a href="ex3.php">here</a> to see how this example would appear in your browser.</p> 
+			<li>Scope</li>
+<p>Variables necessarily have a characteristic called <b>Scope</b>,
+that is where in a program the variable name is recognized and where
+it isn't. When a variable is in scope, it's like Norm going to
+"Cheers" - a place where everybody knows your name. If you would
+scream Norm in The Underground, chances are people wouldn't have a
+clue what your were talking about. The same thing is true of a
+variable. If you try to use a variable in scope- no problem. If you
+try to use a variable out of scope, your program won't work if you're
+lucky. If you're unlucky, your program will work incorrectly and you
+won't know why.</p>
+<p>The scope of a variable is the context within which it is
+defined. For the most part all PHP variables only have a single Global
+scope. However, within user-defined functions a local function scope
+is introduced. Any variable used inside a function is by default
+limited to the local function scope. You can get around this if you
+really have to by declaring to PHP that you want to use the Global
+version of a variable.</p>
+<p>Let's see an example:</p> 
+<xmp>
+<html>
+<head>
+<title>My Fourth PHP Example</title>
+</head>
+<body>
+
+<?php
+
+$var="Global";   //Assign the value 'Global' to the variable $var 
+
+print "Printing the $var scoped variable.\n<br>"; //use the variable
+
+//write a function to change $var
+function Test_1()
+{
+  $var="Local"; 
+}
+Test_1();
+
+//did my function change $var?
+print "Printing the $var scoped variable.\n<br>"; 
+
+//write a better function to change $var
+function Test_2()
+{
+  global $var;
+  $var="Local"; 
+}
+Test_2();
+
+//did my new function change $var?
+print "Printing the $var scoped variable.\n<br>"; 
+
+?>
+
+</body>
+</html>
+</xmp>
+<p>Click <a href="ex4.php">here</a> to see how this example would appear in your browser.</p> 
+		</ol>
+		<li>Types</li>
+<p>PHP is a softly typed language but don't worry- that doesn't mean
+you loose points for typing loudly. What it does mean is that the
+programmer does not usually worry about the format which PHP uses to
+store data in memory. Where a programmer in Java or C would be
+required to tell the compiler what kind of memory to allocate, in PHP
+that is usually not necessary.</p>
+<p>On the other hand, it is still important to realize that data is
+stored in one of several formats (traditionally called
+<b>types</b>). PHP will automagically handle certain operations
+differently depending on the data types involved (similar to
+overloaded functions in C).</p> <ol TYPE=1> <li>Booleans</li>
+<p>Booleans are the simplest type. They express a <b>truth value</b>,
+and can contain either <b>TRUE</b> or
+<b>FALSE</b>.
+<p>$var=TRUE; $var=true; $var=FALSE; $var=false;</p>
+<p>When other types are evaluated as truth values, they automatically
+get converted (aka casted) as a boolean. See each type for it's
+True/False values.</p> <li>Integers</li>
+<p>An Integer is a number of the set <b>Z= {...-2, -1, 0, 1, 2...}</b>.</p>
+<p>$var = 613; $var = -100;</p>
+<p>The size of an Integer is platform dependant. On 32 bit systems
+like ours, the maximum value is about 2 billion. PHP does not support
+unsigned integers.</p>
+<p>If you specify a value for an integer that is out of bounds, it
+will be converted to a float.  The same is true if you perform an
+operation between integers that results in a value out of bounds for
+an integer.</p>
+<p>The integer 0 is considered false. Any non-zero integer is
+considered true.</p> 
+<li>Floating Points</li>
+<p>Floating Point numbers (aka floats) are any numbers in the set R
+(real numbers).</p>
+<p>$var = 1.234; $var = 1.2e3; $var = 7E-10;</p>
+<p>The size of a float is platform dependant. The maximum value is
+commonly about 1.8e308 with a precision of 14 decimal places.</p>
+<p>The float 0.0 is considered false. Any non-zero float is considered true.</p> 
+<li>Strings</li>
+<p>A string is a series of characters, each character taking up
+exactly 1 byte.</p>
+<p>PHP imposes no size limit on strings so they can be any size you
+want (until your webserver runs out of memory). Strings are enclosed
+in either single quotes (') or double quotes (&quot;). As in Perl,
+strings enclosed within single quotes will be not be interpreted- they
+will be accepted as is. Strings enclosed in double quotes, on the
+other hand, will be interpreted and may contain variables or other
+special characters.</p>
+<p>Single Quote examples:</p>
+<pre>
+print 'this is a simple string';
+print 'You can also have embedded newlines in strings
+this way';
+print 'Arnold once said: "I\'ll be back"';
+// output: ... "I'll be back"
+print 'I am trying to include at this point: \n a newline';
+// output: ... this point: \n a newline
+</pre>
+<p>You may recognize some of the following special characters which can be 
+used within a double quoted string:</p>
+<table border="1" cellpadding="2">
+<tr>
+<td>\n</td><td>linefeed (LF or 0x0A (10) in ASCII)</td>
+</tr>
+<tr>
+<td>\r</td><td>carriage return (CR or 0x0D (13) in ASCII)</td>
+</tr>
+<tr>
+<td>\t</td><td>horizontal tab (HT or 0x09 (9) in ASCII)</td>
+</tr>
+<tr>
+<td>\\</td><td>backslash<td>
+</tr>
+<tr>
+<td>\$</td><td>dollar sign<td>
+</tr>
+<tr>
+<td>\&quot;</td><td>double-quote<td>
+</tr>
+<tr>
+<td>\[0-7]{1,3}</td><td>the sequence of characters matching the regular expression is a character in octal notation<td>
+</tr>
+<tr>
+<td>\x[0-9A-Fa-f]{1,2}</td><td>the sequence of characters matching the regular expression is a character in hexadecimal notation<td>
+</tr>
+</table>
+<p>Double Quote Examples(mixed with some more variable syntax):</p>
+<pre>
+$beer = 'Heineken';
+print "$beer's taste is great"; // works, "'" is an invalid character for varnames
+print "He drank some $beers";   // won't work, 's' is a valid character for varnames
+print "He drank some ${beer}s"; // works
+</pre>
+<p>The empty string "" as well as the string "0" are considered false. Any other string is considered true.</p>
+			<li>Arrays</li>
+<p>An array in PHP is actually an ordered map. A map is a type that maps values to keys. This type is optimized in several ways, so you can use it as a real array, or a list (vector), hashtable (which is an implementation of a map), dictionary, collection, stack, queue and probably more. Because you can have another PHP-array as a value, you can also quite easily simulate trees.</p>
+<p>Unlike the other types we discussed, arrays must be created or declared. To create an array we use the array construct as follows:</p>
+<pre>
+//Numeric Keys(simple arrays like in C/Java)
+$var = array('a', 'b', 'c');
+print $var[0];  //outputs a
+print $var[1];	//outputs b
+
+//Change the starting key(index number)
+$var = array(1 => 'a', 'b', 'c');
+print $var[1];  //outputs a
+print $var[2];  //outputs b
+
+//Associative Arrays
+$var = array('Moshe Rabeinu' => 'Navi', 'Rashi' => 'Rishon');
+print $var['Moshe Rabeinu'];  //outputs Navi
+
+//mix up the key types - no problem
+var = array(1 => 'a', 'Willy' => 'Wonka');
+			
+//Two Dimensional (Simple) Arrays
+
+$var = array(
+             array(1,2,3,4),
+             array(1,2,3,4),
+             array(1,2,3,4),
+             array(1,2,3,4)
+	     );
+
+//This is the same as:
+
+$col1 = array(1,2,3,4);
+$col2 = array(1,2,3,4);
+$col3 = array(1,2,3,4);
+$col4 = array(1,2,3,4);
+
+$var = array($col1, $col2, $col3, $col4);
+
+//Two Dimensional (Associative) Arrays
+$var = array( 'Joe Bloggs' => array( 'ID' => '00001',
+                                     'STREET' => '123 Sesame St.',
+				     'CITY' => 'Yourtown',
+				     'COUNTRY' => 'Nowhere Land')
+				     );
+print $var['Joe Bloggs']['ID']; //outputs 00001
+</pre>
+<p>An array with 0 elements is considered false. Any other array is considered true.</p>
+		</ol>
+	</ol>
+	<li>PHP 2</li>
+	<ol TYPE=A>
+		<li>Operators</li>
+<p>Operators make the programmer's life easier. If it weren't for
+		operators, even the simplest action would require a
+		full fledged function.</p>
+<p>We will digress to briefly discuss functions. A function is basically
+		a set of actions which is executed whenever the
+		function is called. Functions can accept parameters
+		and return values. For instance, a function 'add()'
+		might accept two parameters 'a' and 'b' ( now we have
+		add(a,b) ) and the function might return a value 'c' (
+		c=add(a,b) meaning c=a+b).</p>
+<p>We see directly from this example how operators make the
+		programmer's job easier. It is much easier to write
+		a+b as opposed to add(a,b). 
+<p>On a deeper level, I challenge anyone in the class to write the function
+		add(a,b) without using any of arithmetic operators we
+		learn in class. Anyone with a working function by the
+		end of the semester will recieve a bonus on their
+		final grade.</p>
+<p>Luckily for us, most of the operators we would want are already
+		part of php.</p>
+		<ol TYPE=1>
+			<li>Arithmetic (+, -, *, /, %)</li>
+<p>The arithmetic operators will do what you expect them to most of
+			the time. '+' adds, '-' subtracts, '*' multiplies, '/'
+			divides, '%' performs the modulus operation-
+			that is (a % b) divides a by b and returns the
+			remainder.</p>
+<p>The <b>precedence</b> of the operators is the same as you would expect:
+			(*,/,%) are performed first followed by (+,-)
+			so that 1+5*3 is the same as 1+(5*3)=16. Even
+			if the precedence of the operators says that
+			your equation should work, you should still
+			put parenthesis in the correct places to make
+			your code more readable.
+			<li>String</li>
+<p>There is one main <i>String</i> Operator which is the '.'. The '.'
+			Operator performs string concatenation which
+			means that it glues strings together. In Java
+			this is done with the '+' operator. For
+			example:</p>
+<pre>
+$var = "Hello"." "."World";
+print $var; //outputs Hello World
+
+$var = $var."!";
+print $var; //ouputs Hello World!
+</pre>
+
+			<li>Assignment (=, +=, -=, *=, /=, .=)</li>
+<p>We've been using Assignment Operators since we learned about
+			variables. '=' is the simplest of the
+			Assignment Operators. It takes the value on
+			the right hand side and assigns it to whatever
+			is on the left hand side.</p>
+<p>This brings up the issue of <b>Left Hand Values</b> and <b>Right
+			Hand Values</b>. A Left Hand Value is anything
+			that can have a value assigned to it. A Right
+			Hand Value is anything with a value. <b>Every
+			Left Hand Value is a Right Hand Value but NOT
+			every Right Hand Value is a Left Hand
+			Value.</b></p>
+<pre>
+$var = 5;  //works - $var is a LHV, 5 is a RHV
+5 = $var;  //BAD! - 5 is a RHV only, I can't assign it a value
+$a = $b = $c = 5; /*    works, I assign RHV 5 to LHV $c which becomes a
+			RHV to be assigned to $b... */
+</pre>
+<p>Now that you know that the '=' sign is an Operator, we understand
+how we can write something like $var = $var."!"; in the example
+above. The '.' Operator has higher <b>precedence</b> than the '='
+operator. As a matter of fact, since we almost always want the entire RHV to
+be calculated before it's assigned we have to give the '=' Operator
+(and all the other Assignment Operators) very low precedence. If you
+have a precedence problem or you want to be sure that something is
+interpreted in a specific order, <b>use parenthesis</b></p>
+<p>Other than the '=' Operator, we have some more complex Assignment
+			Operators. All of them follow the same modus
+			operandi. 'a += b' translates into a = a + b
+			for example:</p>
+<pre>
+$a=5;
+$a+=6;  // $a = 5 + 6
+print $a; //outputs 11
+</pre>
+<p>The same is true for the '-=', '*=', '/=', and '.=' Operators.</p>
+<li>Incrementation Operators(++,--)</li>
+<p>Incrementation Operators are just shortcuts for incrementing a value. The ++ operator is the equivalent of adding 1 to a value while the -- operator is the equivalent of subtracting 1 from a value. For example:</p>
+<pre>
+$a=5;
+$a++;     //$a=$a+1; OR $a+=1;
+print $a; //outputs 6
+$a--;     //$a=$a-1; OR $a-=1;
+print $a  //outputs 5
+</pre>
+<p>An important thing to note about incrementation operators is that
+they are unary operators, meaning that they only have one operand. The
+operators + and - can also be unary operators, for example -5 meaning
+negative 5. In this case the - is the unary operator - and the 5 is
+its only operand. In the case of 5 - 4, on the other hand, we are
+using the binary operator - and its two operands 5 and 4.</p>
+<p>Another important thing to note about incrementation operators have
+both a prefix syntax and a postfix syntax. What does that mean? The
+other unary operator we just discussed, -, only has a meaning when you
+<i>prefix</i> it to a number; -5 means negative 5 while 5- is
+meaningless. With incrementation operators, this is not the case. --$a
+means something slightly different from $a--. The easiest way to see
+this is in an example:</p>
+<pre>
+$a=5;
+print $a++;  //outputs 5, THE SAME AS: print $a; $a=$a+1; 
+print $a;    //outputs 6
+print ++$a;  //outputs 7, THE SAME AS: $a=$a+1; print $a;
+</pre> 
+			<li>Comparison (==,!=, &lt;, &gt;, &lt;=,
+			&gt;=, ?:)</li>
+<p>Comparison Operators return <b>Truth Values</b>. 
+<ul>
+<li>'a == b' tests if a is equal to b
+<li>'!=' - not equal</li>
+<li> '&lt;' - less than</li>
+<li> '&gt;' - greater than</li>
+<li> '&lt;=' - less than or equal to</li>
+<li> '&gt;=' - greater than or equal to.</li>
+</ul>
+<p>The operator ?: is a special kind of operator called the Ternary
+Operator. It takes three operands and is used as follows:</p>
+<pre>
+$a=1;
+$b = ($a > 0) ? "Positive" : "Negative";
+print $b; //outputs Positive
+</pre>
+<p>Read the above as "If ($a > 0) then assign 'Positive' to $b else
+assign 'Negative' to $b"</p>
+<p><b>Beware</b> using the comparison operators on strings. You might
+		get unexpected answers. For instance if you
+		compare the number 0 to the string
+		"0000000000" php will consider them the same
+		because it converts the string to a number and
+		the numbers are equal. If you compare the
+		string "01" and "001", they will also match
+		for the same reason- that numerically they are
+		equal. The correct way to compare strings is
+		by using the function strcmp() which we'll
+		learn later.</p>
+			<li>Logical (!, &amp;&amp;, ||)</li>
+<p>Logical Operators are used to manupulate <b>Truth Values</b>. The
+		three basic logical operators are:</p>
+<ul>
+<li>! - NOT</li>
+<li>&amp;&amp; - AND</li>
+<li>|| - OR</li>
+</ul>
+<p>The following truth table shows all the possible combinations of
+output(0 is false, 1 is true):
+<table border="1" cellpadding="3">
+<tr>
+<td>a</td><td>b</td><td>!a</td><td>a&&b</td><td>a||b</td>
+</tr><tr> <td>0</td> <td>0</td> <td>1</td> <td>0</td> <td>0</td> </tr><tr> <td>0</td> <td>1</td> <td>1</td> <td>0</td> <td>1</td> </tr><tr> <td>1</td> <td>0</td> <td>0</td> <td>0</td> <td>1</td> </tr><tr> <td>1</td> <td>1</td> <td>0</td> <td>1</td> <td>1</td> </tr></table>		</ol>
+		<li>Conditionals</li>
+		<ol TYPE=1>
+			<li>if(true){statements}elseif(true){statements}else{statements}</li>
+<p><b>Conditionals</b> allow the programmer to perform different sets
+of statements based on the values of relavent parameters. The syntax
+is:</p>
+<pre>
+if(Truth Value == TRUE)
+{
+  //statements to do seperated by ';'
+}
+elseif(Truth Value == TRUE)
+{
+  //statements to do seperated by ';'
+}
+else
+{
+  //statements to do seperated by ';'
+}
+</pre>
+<p>Using an <b>if</b> statement does not require using an
+			<b>elseif</b> statement nor does it require
+			using an <b>else</b> statement.</p>
+<p>You may have as many <b>elseif</b> statements as you want following an
+			<b>if</b> statement.</p>
+<p>You may only have <i>ONE</i> <b>else</b> statement following an
+			<b>if</b> statement.</p>
+<p>Let's see an example:</p>
+<xmp>
+<?php
+
+$a=-1;
+if($a>0)
+{
+  print "Positive";
+}
+elseif($a == 0)
+{
+  print "Zero";
+}
+else
+{
+  print "Negative";
+}
+
+?> 
+</xmp>
+<p>Click <a href="ex6.php">here</a> to see how this example would appear in your browser.</p> 
+			<li>switch($var){case x: statements; break;
+			default: statements; break;}</li>
+<p><b>Switch Case</b> statements are like <b>if</b> statements that
+		have been optimised for the situation where the
+		programmer wants to test the same expression for many
+		possible values. The syntax is:</p>
+<pre>
+switch(RHV1)  //if RHV1 ==
+{
+   case RHV2:  //this RHV then
+   //do the folowing statements seperated by ';' 
+     break;   //leave the switch
+   case RHV3:  
+     break;
+   ...
+   case RHVn:
+     break;
+   default:   //if nothing else matches do this
+     //do the folowing statements seperated by ';' 
+}
+</pre>
+<p>Any expression can go inside the <b>switch</b>. The computer goes
+		through the <b>case</b>s in order looking for a case
+		that returns TRUE for the comparison ((expression from
+		switch)&nbsp;==&nbsp;(value from case)).</p>
+<p>If the computer reaches a <b>case</b> which matches, it performs
+		the set of statements beneath it until it finds a
+		<b>break</b> statement. <b>BEWARE</b> if you forget to
+		put a <b>break</b> statement at the end of your case
+		the computer will continue with the statements under
+		the next <b>case</b> statement. If this is used
+		properly, it is a feature- not a bug. See the example
+		above.
+<p>The programmer can also use a <b>default</b> case. This case is put
+		at the end of all the cases and it will always match
+		in case no other cases matched.
+<p>Let's see an example:</p>
+<xmp>
+<?php
+
+$lucky_number=7;
+switch($lucky_number)
+{
+ case -1:
+ case -2:
+ case -3:   //for all these cases do this
+   print "Don't be so negative!";
+   break;   //the break tells me to leave the switch
+ case 0:
+   print "You're a 0!";
+   break;   
+ case 1:
+   print "You're Number 1!";
+   break;
+ case 2:
+   print "Two's Company!";
+   break;
+ case 3:
+   print "Three's a crowd!";
+   break;
+ case 4:
+   print "Why have you 4saken me?";
+   break;
+ case 5:
+   print "High 5!";
+   break;
+ case 6:
+   print "Pickup Stix!";
+   break;
+ case 7:
+   print "That's MY Lucky Number!";
+   break;
+ case 8:
+   print "Crazy Eights!";
+   break;
+ case 9:
+   print "Only cats have 9 lives!";
+   break;
+}
+
+?></xmp>
+<p>Click <a href="ex7.php">here</a> to see how this example would appear in your browser.</p>  
+		</ol>
+		<li>Loops</li>
+<p><b>Loops</b> allow the programmer to perform the same set of statements a
+		multiple number of times. The most common problem with
+		<b>loops</b> is the <i>infinite</i> loop in which the
+		computer is caught in a loop which never ends. In order to
+		prevent infinite loops, we say that every loop must
+		have three elements:
+<ol type="1">
+<li>Initialization</li>
+<p>Initialize the variables on which the loop is dependant(usually a
+variable used in the <b>continue condition</b>.</p>
+<li>Continue Condition</li>
+<p>In each iteration, this condition is checked to see whether or
+not the computer should perform another iteration.</p>
+<li>Incrementation</li>
+<p>In each iteration, something must be incremented to bring the loop
+closer to completion(usually the variable used in the <b>continue
+condition</b>.</p>
+</ol>
+<p>There are several ways to implement loops:</p>
+		<ol TYPE=1>
+			<li>while(true){statements}</li>
+<p>The <b>While</b> loop is the simplest of all loops. It's syntax is
+			as follows:</p>
+<pre>
+while(continue_condition == TRUE)
+{
+   //do some statements seperated by ';'
+}
+</pre>
+<p>The <b>Initialization</b> usually takes place before the while loop
+actually begins. The <b>Continue Condition</b> is located within the
+parenthesis. As long as that condition evaluates to TRUE, the loop
+will continue to iterate. The <b>Incrementation</b> in a while loop
+usually takes place at the beginning or the end of the loop but it can
+take place anywhere inside.</p>
+<p>Let's see an example:</p>
+<xmp>
+<?php
+
+//Initialization
+$i=1;
+
+//Continue Condition
+while($i<=10)   //Is $i <= 10????
+{
+
+  print "$i\n"; //print $i
+
+  //Incrementation
+  $i++;
+  
+}
+
+?></xmp>
+<p>Click <a href="ex8.php">here</a> to see how this example would appear in your browser.</p>  
+
+			<li>do{statements}while(true);</li>
+<p>A <b>do..while</b> loop is basically the same as a <b>while</b>
+			loop except that the continue condition is
+			only checked at the end of each iteration and
+			therefore the set of commands within the loop
+			will always be executed at least once. For example:</p>
+<xmp>
+<?php
+
+print "<br>Doing first loop<br>";
+//Initialization
+$i = 1;
+do {
+  /*
+    There is no Incrementation in this loop
+  */
+   print $i;
+} while ($i>1); //Continue Condition
+
+print "<br>Doing second Loop<br>";
+
+//Initialization
+$i = 1;
+do {
+  
+   print "$i\n";
+   $i++;     //Incrementation
+
+} while ($i<=10); //Continue Condition
+
+?></xmp>
+<p>Click <a href="ex9.php">here</a> to see how this example would appear in your browser.</p>  
+			<li>for(init;continue;increment){statements}</li>
+<p>A <b>for</b> loop is more complex than the <i>while</i> style
+			loops. It contains all three elements of a
+			loop in it's opening clause. It's syntax is as
+			follows:</p>
+<pre>
+for(Initialization;Continue Condition;Incrementation)
+{
+  //statements seperated by ';'
+}
+</pre>
+<p>When the <b>for</b> loop begins it performs the initialization in
+			the first section of the opening clause and
+			checks the Continue Condition. If the Continue
+			condition returns TRUE then the program
+			performs the statements in the loop. When it
+			reaches the end of the iteration, it performs
+			the incrementation in the third section of the
+			opening clause and checks the Continue
+			Condition again.</p>
+<p>Let's see an example:</p>
+<xmp>
+<?php
+
+for($i=1;$i<=10;$i++)
+{
+  print "$i\n";
+}
+
+?></xmp>
+<p>Click <a href="ex10.php">here</a> to see how this example would appear in your browser.</p>  
+			<li>foreach(array as $value){statements}</li>
+<p>The <b>foreach</b> loop is optimized for looping through
+			arrays. Since arrays in PHP have a complex
+			syntax, the <b>foreach</b> loop has two
+			syntaxes. 
+<p>The simple syntax is most usefull for numerically indexed arrays
+			where the index of the array is not of any
+			significance to the program. In such a
+			situation, a programmer would most likely have
+			used a <b>for</b> loop with an incremented
+			variable to reference each index of the
+			array.With the <b>foreach</b> loop, there is
+			no need for an extra variable to track the
+			index of the array because it is done
+			internally.</p>
+<p>With a regular <b>for</b> loop the programmer would also have to
+reference the element of the array using array syntax,
+ie. $array[$index]. With a <b>foreach</b> loop, the value of each element is
+automagically assigned to a variable for use within the loop.</p>
+<p>The <i>simple</i> syntax of a <b>foreach</b> loop is as
+follows:</p>
+<pre>
+foreach($array_name as $current_element_value)
+{
+  //statements seperated by ';'
+}
+</pre>
+<p>The corresponding <b>for</b> loop would look like:</p>
+<pre>
+for($i=0;$i<=LAST_INDEX_OF_ARRAY;$i++)
+{
+  $current_element_value=$array_name[$i];
+  //statements seperated by ';'
+}
+</pre>
+<p>Let's see an example:</p>
+<xmp>
+<html>
+<head>
+<title>My Fifth PHP Example</title>
+<body>
+<table border="1" cellpadding="3">
+<tr>
+<td>Date</td>
+<td colspan="10">Correct/Incorrect Answers</td>
+<td>% Correct</td>
+</tr>
+<?php //escape into php
+
+$results=array(
+	       array('21/1',0,0,1,1,1,1,1,1,1,1),
+	       array('22/1',0,1,1,1,1,1,1,1,1,1),
+	       array('23/1',0,1,1,1,1,1,1,1,1,1),
+	       array('24/1',0,0,0,0,0,1,1,1,1,1),
+	       array('25/1',0,0,0,0,0,1,1,1,1,1),
+	       array('26/1',0,1,1,1,1,1,1,1,1,1),
+	       array('27/1',0,0,0,0,0,1,1,1,1,1)
+	       );
+foreach($results as $date_record)
+{
+
+  $total=-1;
+  $correct=0;
+  foreach($date_record as $value)
+    {
+      if($total<0)
+	{
+	  $total++;
+	  continue;
+	}
+      elseif($value)
+	{
+	  $correct++;
+	}
+      $total++;
+    }
+  if(( $correct / $total)>=.9)
+    {
+      $color="lightgreen";
+    }
+  elseif(( $correct / $total)<=.6)
+    {
+      $color="red";
+    }
+  else
+    {
+      $color="yellow";
+    }
+  
+  print "<tr bgcolor=\"$color\">\n";
+
+  foreach($date_record as $value)
+    {
+     print "
+<td>$value</td>
+";
+    }
+  print "<td>".($correct/$total)."</td>\n";
+ print "</tr>\n";
+}
+ ?>
+</table>
+</body>
+</html>
+</xmp>
+<p>Click <a href="ex5.php">here</a> to see how this example would
+appear in your browser.</p>
+			<li>foreach(array as $key=&gt;$value){statements}</li>
+<p>When the programmer is interested in the <i>index</i> or <b>key</b>
+			of the array as well as the value of the
+			element, the complex foreach syntax is a good
+			choice. It will store the value of the current
+			key and the current element in variables for
+			use inside the loop.</p>
+<p>The <i>complex</i> syntax of a <b>foreach</b> loop is as
+follows:</p>
+<pre>
+foreach($array_name as $key => $current_element_value)
+{
+  //statements seperated by ';'
+}
+</pre>
+<p>There is <b>NO</b> corresponding <b>for</b> loop.</p>
+<p>Let's see the same example as above:</p>
+<xmp>
+<html>
+<head>
+<title>PHP Example</title>
+<body>
+<table border="1" cellpadding="3">
+<tr>
+<td>Date</td>
+<td colspan="10">Correct/Incorrect Answers</td>
+<td>% Correct</td>
+</tr>
+<?php //escape into php
+
+$results=array(
+	       '21/1' => array(0,0,1,1,1,1,1,1,1,1),
+	       '22/1' => array(0,1,1,1,1,1,1,1,1,1),
+	       '23/1' => array(0,1,1,1,1,1,1,1,1,1),
+	       '24/1' => array(0,0,0,0,0,1,1,1,1,1),
+	       '25/1' => array(0,0,0,0,0,1,1,1,1,1),
+	       '26/1' => array(0,1,1,1,1,1,1,1,1,1),
+	       '27/1' => array(0,0,0,0,0,1,1,1,1,1)
+	       );
+foreach($results as $date => $date_record)
+{
+
+  $total=0;
+  $correct=0;
+  foreach($date_record as $value)
+    {
+      if($value)
+	{
+	  $correct++;
+	}
+      $total++;
+    }
+  if(( $correct / $total)>=.9)
+    {
+      $color="lightgreen";
+    }
+  elseif(( $correct / $total)<=.6)
+    {
+      $color="red";
+    }
+  else
+    {
+      $color="yellow";
+    }
+  
+  print "<tr bgcolor=\"$color\">\n";
+  print "<td>$date</td>";
+  foreach($date_record as $value)
+    {
+     print "
+<td>$value</td>
+";
+    }
+  print "<td>".($correct/$total)."</td>\n";
+ print "</tr>\n";
+}
+ ?>
+</table>
+</body>
+</html>
+</xmp>
+<p>Click <a href="ex14.php">here</a> to see how this example would
+appear in your browser.</p>
+<p>NOTE: This way we save ourselves making total equal -1 and the continue which we needed so we don't mess up and count the date as one of the answers.</p> 
+			<li>break, continue</li>
+<p>The <b>break</b> statement simply exits the current loop or switch statement. For example:</p>
+<pre>
+$a=1;
+while($a<=10)
+{
+  if($a>5)
+  {
+   break;
+  }
+  print $a++;
+}
+</pre>
+<p>break also takes a numeric argument which is the number of levels to exit from. In the above example we could also have typed 'break 1;' to break out of one level of loops.</p>
+<p>The <b>continue</b> statement skips to the next iteration of a loop. Like the <b>break</b> statement, it also works inside switch statements but you should never use it there because it doesn't make sense.</p>
+<p>Let's see an example:</p>
+<pre>
+$a=1;
+while($a<=10)
+{
+  if($a>5)
+  {
+   continue;
+  }
+  print $a++;
+} 
+</pre>
+		</ol>
+	</ol>
+<li>Getting User Input</li>
+	<ol TYPE=A>
+	<li>HTML Forms</li>
+<p>An <b>HTML Form</b> allows a user to pass input through the web
+browser to the web server where it can be processed. HTML Forms make
+it possible to build an <b>Intranet Database Application</b>,
+specifically they compose the <b>User Interface</b> of the application.</p>
+<p>A form is defined with the &lt;form&gt; tag. A form must have both
+	an opening tag and a closing tag. All form elements that
+	belong to a form must be enclosed within the opening and
+	closing tags. You <i>may</i> have more than one form on a
+	page. You may <b>NOT</b> have a form within a form.</p>
+<p>In the opening form tag, you must define two attributes for the
+	form to work properly, the <b>method</b> and the
+	<b>action</b>.</p>
+<p>The <b>action</b> defines where to send the information for processing. In
+	our case this will be a PHP page.</p>
+<p>The <b>method</b> defines <i>how</i> to send the information. This
+	can be either <b>get</b> or <b>post</b>.</p>
+<ul>
+<p>The <b>get</b> method sends the form contents in the address like:
+	http://www.somewhere.com/myphp.php<b>?name=value&name=value</b>. This
+	has several limitations.</p>
+	<ol>
+	<li>Everyone can see what you send in your form</li>
+	<li>The form values may not contain non-ASCII characters</li>
+	<li>The form values may not exceed 100 characters</li>
+	</ol>
+<p>The <b>post</b> method sends the form contents in the body of the
+request. This means that you can send anything you want this way. The
+only downside is that most browsers are unable to bookmark post
+requests.</p>
+</ul>
+<p>In most cases we will use the <b>post</b> method although sometimes
+it is useful to send information to pages via the <b>get</b> method.</p>
+<li>Form Elements</li>
+<p><b>Form Elements</b> define the types of information for
+processing by the web server. There are several types of Form
+Elements which, together, can be used to build a fully functional
+interface:</p>
+<ol type="1">
+   <li>Text Fields - For entering one line of text</li>
+   <p>To put a Text Field into our page we place the following
+   <b>input</b> tag inside our form tags:
+<xmp>
+<input type="text" name="firstname">
+</xmp>
+<input type="text" name="firstname">
+<p>This puts a default sized text field on the web
+   page(type="text"). It gives the field the name 'firstname' which
+   means that when we send the information to our PHP page, we will
+   send it inside the variable $firstname.</p>
+<p>In addition we could use the <b>value</b> attribute to give our
+   text field a default value. We could use the <b>size</b> attribute
+   to define how many characters wide the text field should be. We
+   could use the <b>maxlength</b> attribute to define how many
+   characters the field is willing to accept. For example:</p>
+<xmp>
+<input type="text" name="country" size="3" maxlength="2" value="IL">
+</xmp>
+<input type="text" name="country" size="3" maxlength="2" value="IL">
+   <li>Textarea Fields - For entering multiple lines of text</li>
+   <p>To put a Textarea Field into our page we place the following
+   <b>textarea</b> tag inside our form tags:
+<xmp>
+<textarea rows="10" cols="30" name="comment">Default Text</textarea>
+</xmp>
+<textarea rows="10" cols="30" name="comment">Default Text</textarea>
+<p>This puts a 10 row by 30 column textarea on the web page. It gives the
+   field the name 'comment' which means that when we send the
+   information to our PHP page, we will send it inside the variable
+   $comment. <b>NOTE:</b> A textarea must be opened an closed. Default
+   text may be placed in between the opening and closing tags.</p> 
+   <li>Select Boxes - For selecting a choice from a list</li>
+<p>To put a Select Box on our web page we place the following series
+   of tags inside our form tags:</p>
+<xmp>
+<select name="area_code">
+    <option value="Cellcom">058</option>
+    <option value="Cellcom">052</option>
+    <option value="Cellcom">053</option>
+    <option value="Cellcom">064</option>
+    <option value="Pelephone">051</option>
+    <option value="Pelephone">056</option>
+    <option value="Pelephone">050</option>
+</select>
+</xmp>
+<select name="area_code">
+    <option value="Cellcom">058</option>
+    <option value="Cellcom">052</option>
+    <option value="Cellcom">053</option>
+    <option value="Cellcom">064</option>
+    <option value="Pelephone">051</option>
+    <option value="Pelephone">056</option>
+    <option value="Pelephone">050</option>
+</select>
+<p>This creates a drop down menu with 7 options. The options that
+   appear in the list are written in between the <b>option</b>
+   tags. Which ever choice is selected, the <i>VALUE</i> of that
+   option is put into the variable, in this case $area_code.</p>
+<p>We could also have used the <b>multiple</b> attribute of the select
+   tag to allow multiple choices to be selected(multiple="true").</p>
+   <li>Radio Buttons - For selecting one of a limited number of
+   choices</li>
+<p>To put a <b>set</b> of Radio Buttons on our web page we place the
+   following <b>set</b> of input tags inside our form tags:</p>
+<xmp>
+Male: <input type="radio" name="Sex" value="Male" checked>
+Female: <input type="radio" name="Sex" value="Female">
+</xmp>
+Male: <input type="radio" name="Sex" value="Male" checked>
+Female: <input type="radio" name="Sex" value="Female">
+<p><b>NOTE:</b> Both input tags have the same name. This is what
+   connects them so that only one of the choices can be selected at a
+   time. Which ever one is checked when the form is sent to be
+   processed will send it's value inside the variable. The
+   <b>checked</b> attribute selects a default selection.</p>
+   <li>Checkboxes - For selecting one or more of a limited number of
+   choices</li>
+<p>To put a Checkbox on our web page, we put the following input tag
+   inside our forms tags:</p>
+<xmp>
+Check Me <input type="checkbox" name="user_listens_to_anything_we_tell_him" value="yes">
+</xmp>
+Check Me <input type="checkbox" name="user_listens_to_anything_we_tell_him" value="yes">
+<p>We can also use the <b>checked</b> attribute here to make default
+   selections.</p>
+   <li>Buttons - For submiting or reseting the form</li>
+<p>To put a button in our web page we use the input button tags. There two
+button types: <b>submit</b>, and <b>reset</b>.
+<p>A submit button will take the information in the form and send it
+to be processed by the action defined by the form using the method
+defined by the form. Without at least a submit button, your form won't
+do anything.</p>
+<p>A reset button will reset all the values of the fields in your
+form.</p>
+<p>Let's see an example:</p>
+<xmp>
+<input type="submit" value="Click Me!">
+</xmp>
+<input type="submit" value="Click Me!">
+</ol>
+<p>Let's see a real life example:</p>
+<img src="images/hotmail.png" alt="Hotmail's Compose Screen"
+border="0" align="center" width="75%">
+<p>This page is littered with forms and form elements. The only form
+element missing is the Radio Button.</p>
+</ol>
+<li>PHP and HTML Forms</li>
+<p>Really there is very little to know about using PHP with forms. PHP
+was made for this so it doesn't get easier. Three easy steps:
+<ol type="1">
+<li>Make your form in HTML</li>
+<p>Remember that the names you give your form elements will be the
+variable names in PHP with which you can access the values of the
+input. That means you <b>MUST</b> use valid PHP variable names.</p>
+<li>Write a PHP page that uses the input variables</li>
+<li>Point your form at your PHP page</li>
+</ol>
+<p>Let's see an example. The following PHP script belongs to the
+feedback page on the ESP website You can find it <a href="http://esp.jct.ac.il/contact/feedback.html">here</a>.</p>
+<xmp>
+<?php
+$date=`date`;   //this puts the current date in the $date variable
+
+switch($box)    //Find out what was sent in the form element box
+{
+ case "E":     
+   $rating="Excellent";   //save a meaningful value for rating
+   break;
+ case "Good":
+   $rating="Good";
+   break;
+ case "m":
+   $rating="Moderate";
+   break;
+ case "ns":
+   $rating="Nothing Special";
+   break;
+ case "ng":
+   $rating="Bad";
+   break;
+}	
+
+switch($subjects)   //Find out what was sent in the form element subjects
+{
+ case "comp":
+   $sub="Compliments";    //save a meaningful value for subject
+   break;
+ case "links":
+   $sub="Broken Links";
+   break;
+ case "info":
+   $sub="Missing Information";
+   break;
+ case "date":
+   $sub="Out of Date Information";
+   break;
+ case "compl":
+   $sub="Complaints";
+   break;
+ case "other":
+   $sub="ESP Web site feedback";
+   break;
+}
+/*
+  form a complete message for email including information directly
+  from the form: $name, $email, $comments
+  and information which we proccessed: $sub, $rating
+*/
+ 
+$message="
+Name: $name
+Email: $email
+Rating: $rating
+Comments:
+
+$comments
+";
+mail("yonah@jct.ac.il",$sub,$message,"From: ESP Feedback <apache@esp.jct.ac.il>\n");
+print "Thank you for your comments!"; //give some output back to the
+				      //web browser</xmp>
+<li>Databases</li>
+<ol type="A">
+<li>Introduction</li>
+<p>What is a <b>Database</b>? According to the official definition, a
+database is any organized body of related information. Several
+examples might include a dictionary, a telephone book, a shopping
+list, etc.</p>
+<p>The most prevalent type of database is the relational database, a
+tabular database in which data is defined so that it can be
+reorganized and accessed in a number of different ways. The relational
+database was invented by E. F. Codd at IBM in 1970.</p>
+<li>Relational Database Tables</li>
+<p>In a relational database is a set of tables containing data fitted
+into predefined categories. Each table (which is sometimes called a
+relation) contains one or more data categories in columns. Each row
+contains a unique instance of data for the categories defined by the
+columns.</p>
+<p>For example, a typical business order entry database would
+include a table that described a customer with columns for name,
+address, phone number, etc. It might look as follows:</p>
+<table border="1">
+<tr>
+<td>Name</td><td>Address</td><td>Phone Number</td>
+</tr>
+<tr>
+<td>Yonah Russ</td><td>123 Sesame Street</td><td>01-234-5678</td>
+</tr>
+</table>
+<p>Another table would describe an order: product, customer, date, sales
+price, etc. It might look as follows:</p>
+<table border="1">
+<tr>
+<td>Product</td><td>Customer</td><td>Date</td><td>Price</td>
+</tr>
+<tr>
+<td>Computer</td><td>Yonah Russ</td><td>10/02/03</td><td>$1000</td>
+</tr>
+</table>
+<p>One user of the database could obtain a view of the database that fitted
+the user's needs. For example, a branch office manager might like a
+view or report on all customers that had bought products after a
+certain date. A financial services manager in the same company could,
+from the same tables, obtain a report on accounts that needed to be
+paid.</p>
+<li>Data Modeling</li>
+<ol type="1">
+<li>Entities</li>
+<p>The first step in modeling a service or process, is to identify the
+entities involved in that process. An entity is a thing or object of
+significance to the business, whether real or imagined, about which
+the business must collect and maintain data, or about which
+information needs to be known or held. An entity may be a tangible or
+real object like a person or a building; it may be an activity like an
+appointment or an operation; it may be conceptual as in a an
+organizational unit.</p> 
+<p>Whatever is chosen as an entity must be described in real terms. It
+must be uniquely identifiable. That is, each instance or occurrence of
+an entity must be separate and distinctly identifiable from all other
+instances of that type of entity.</p>
+<p>For example, if we were designing a computerized application for
+the care of plants in a greenhouse, one of its processes might be
+tracking plant waterings. Within that process, there are two entities:
+the Plant entity and the Watering entity. The Plant has
+significance. Each Plant is uniquely identified by its biological
+name, or some other unique reference to it. A Watering has
+significance as an application of water to a plant. Each Watering is
+uniquely identified by the date and time of its application.</p>
+<li>Attributes</li>
+<p>After you identify an entity, then you describe it in real terms, or
+through its attributes. An attribute is any detail that serves to
+identify, qualify, classify, quantify, or otherwise express the state
+of an entity occurrence or a relationship. Attributes are specific
+pieces of information which need to be known or held.</p>
+<p>An attribute is either required or optional. When it's required, we
+must have a value for it, a value must be known for each entity
+occurrence. When it's optional, we could have a value for it, a value
+may be known for each entity occurrence. For example, some attributes
+for Plant are: description, date of acquisition, flowering or
+non-flowering, and pot size. The description is required for every
+Plant. The pot size is optional since some plants do not come in
+pots. Again, some of Watering's attributes are: date and time of
+application, amount of water, and water temperature. The date and time
+are required for every Watering. The water temperature is optional
+since we do not always check it before watering some plants.</p>
+<p>The attributes reflect the need for the information they provide. In
+the analysis meeting, the participants should list as many attributes
+as possible. Later they can weed out those that are not applicable to
+the application, or those the client is not prepared to spend the
+resources on to collect and maintain. The participants come to an
+agreement on which attributes belong with an entity, as well as which
+attributes are required or optional.</p>
+<p>The attributes which uniquely define an occurrence of an entity are
+called primary keys. If such an attribute doesn't exist naturally, a
+new attribute is defined for that purpose, for example an ID number or
+code.</p>
+<li>Relationships</li>
+<p>After two or more entities are identified and defined with attributes,
+the participants determine if a relationship exists between the
+entities. A relationship is any association, linkage, or connection
+between the entities of interest to the business; it is a
+two-directional, significant association between two entities, or
+between an entity and itself. Each relationship has a name, an
+optionality (optional or mandatory), and a degree (how many). A
+relationship is described in real terms.</p>
+<p>Rarely will there be a relationship between every entity and every
+other entity in an application. If there are only two or three
+entities, then perhaps there will be relationships between them
+all. In a larger application, there are not always relationships
+between one entity and all of the others.</p>
+<p>Assigning a name, an optionality, and a degree to a relationship helps
+confirm the validity of that relationship. If you cannot give a
+relationship all these things, then perhaps there really is no
+relationship at all. For example, there is a relationship between
+Plant and Watering. Each Plant may be given one or more
+Waterings. Each Watering must be for one and only one specific
+Plant.</p>
+<li>Entity Relationship Diagrams</li>
+<p>A picture is worth 1000 words. We can define a schema for
+describing the Entity Relationship model in the form of a diagram.</p>
+<table border="1">
+<tr>
+<td>Entities</td><td>Attributes</td><td>Relationships</td>
+</tr>
+<tr>
+<td><img src="images/entity.gif" border="0"></td>
+<td><img src="images/attribute.gif" border="0"></td>
+<td><img src="images/relationship.gif" border="0"></td>
+</tr>
+</table>
+
+</ol>
+
+
+</ol>
+</ol>
+</BODY>
+</HTML>
