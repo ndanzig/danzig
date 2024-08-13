@@ -1,0 +1,3451 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0056)http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html -->
+<HTML><HEAD>
+<META content="text/html; charset=windows-1255" http-equiv=Content-Type>
+<META content="MSHTML 5.00.2919.6307" name=GENERATOR></HEAD>
+<BODY aLink=#0000ff bgColor=white link=#0000ff text=black vLink=#840084>
+<DIV class=slidesinfo>
+<H1 align=center class=title><FONT size=48><I>XSL Concepts and Practical 
+Use</I></FONT> </H1>
+<H1 align=center class=author><FONT size=48>
+<H1 class=author><SPAN class=author>Paul Grosso</SPAN> </H1></FONT></H1>
+<DIV align=center>
+<DIV class=mediaobject><IMG src="XSLtutorial_files/atilogo.gif"></DIV></DIV>
+<H1 align=center class=author><FONT size=48>
+<H1 class=author><SPAN class=author>Norman Walsh</SPAN> </H1></FONT></H1>
+<DIV align=center>
+<DIV class=mediaobject><IMG src="XSLtutorial_files/sunlogo.png"></DIV></DIV>
+<H4 align=center class=date>Monday, 12 June 2000</H4>
+<H4 align=center class=releaseinfo>XML Europe 2000, Paris, France</H4>
+<H4 align=center class=releaseinfo>Version 1.5</H4>
+<H4 align=center class=date>Last Update: Monday, 06 July 2000</H4>
+<DIV align=center>
+<P class=copyright>Copyright © 1999, 2000 by <A href="http://www.arbortext.com/" 
+target=_top>Arbortext, Inc.</A> (http://www.arbortext.com/), <A 
+href="http://www.sun.com/" target=_top>Sun Microsystems, Inc.</A> 
+(http://www.sun.com/)</P></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N73><A name=N73></A>
+<H1 class=title>Slide 1: What's with stylesheets in the first place?</H1>
+<P>XML is not a fixed tag set (like HTML)</P>
+<P>XML by itself has no (application) semantics</P>
+<P>A generic XML processor has no idea what is "meant" by the XML</P>
+<P>XML markup does not (usually) include formatting information</P>
+<P>The information in an XML document may not be in the form in which it is 
+desired to present it</P>
+<P>Therefore there must be something in addition to the XML document that 
+provides information on how to present or otherwise process the XML</P></DIV>
+<HR>
+
+<DIV class=foil id=N88><A name=N88></A>
+<H1 class=title>Slide 2: Advantages to separating content from style</H1>
+<P>Contrary to when style information is hard-coded into the content, separation 
+of style from content allows for the same data to be presented in different 
+ways. This enables:</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N94></A>
+  <P>reuse of fragments of data: the same content should look different in 
+  different contexts</P>
+  <LI><A name=N97></A>
+  <P>multiple output formats: different media (paper, online), different sizes 
+  (manuals, reports), different classes of output devices (workstations, 
+  hand-held devices)</P>
+  <LI><A name=N100></A>
+  <P>styles tailored to the reader's preference (e.g., accessibility): print 
+  size, color, simplified layout for audio readers</P>
+  <LI><A name=N103></A>
+  <P>standardized styles: corporate stylesheets can be applied to the content at 
+  any time</P>
+  <LI><A name=N106></A>
+  <P>freedom from style issues for content authors: technical writers needn't be 
+  concerned with layout issues because the correct style can be applied 
+  later</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N109><A name=N109></A>
+<H1 class=title>Slide 3: Options for displaying XML</H1>
+<DIV class=mediaobject><IMG src="XSLtutorial_files/xslproc1.gif"></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N119><A name=N119></A>
+<H1 class=title>Slide 4: What Does a Stylesheet Do?</H1>
+<P>A stylesheet specifies the presentation of XML information using two basic 
+categories of techniques:</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N125></A>
+  <P>An optional transformation of the input document into another structure</P>
+  <LI><A name=N128></A>
+  <P>A description of how to present the transformed information (i.e., a 
+  specification of what properties to associate to each of the various parts of 
+  the transformed information)</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N131><A name=N131></A>
+<H1 class=title>Slide 5: Transformation capabilities</H1>
+<P>Transformation capabilities include:</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N137></A>
+  <P>generation of constant text</P>
+  <LI><A name=N140></A>
+  <P>suppression of content</P>
+  <LI><A name=N143></A>
+  <P>moving text (e.g., exchanging the order of the first and last name)</P>
+  <LI><A name=N146></A>
+  <P>duplicating text (e.g., copying titles to make a table of contents)</P>
+  <LI><A name=N149></A>
+  <P>sorting</P>
+  <LI><A name=N152></A>
+  <P>more complex transformations that "compute" new information in terms of the 
+  existing information</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N155><A name=N155></A>
+<H1 class=title>Slide 6: Description of information</H1>
+<P>Description of how to present the (possibly transformed) data includes three 
+levels of formatting information:</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N161></A>
+  <P>Specification of the general screen or page (or even audio) layout</P>
+  <LI><A name=N164></A>
+  <P>Assignment of the transformed content into basic "content container types" 
+  (e.g., lists, paragraphs, inline text)</P>
+  <LI><A name=N167></A>
+  <P>Specification of formatting properties (spacing, margins, alignment, fonts, 
+  etc.) for each resulting "container"</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N170><A name=N170></A>
+<H1 class=title>Slide 7: The components of the XSL language</H1>
+<P>The full XSL language logically consists of three component languages which 
+are described in three W3C (World Wide Web Consortium) Recommendations:</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N176></A>
+  <P>XPath: XML Path Language--a language for referencing specific parts of an 
+  XML document</P>
+  <LI><A name=N179></A>
+  <P>XSLT: XSL Transformations--a language for describing how to transform one 
+  XML document (represented as a tree) into another</P>
+  <LI><A name=N182></A>
+  <P>XSL: Extensible Stylesheet Language--XSLT plus a description of a set of 
+  Formatting Objects and Formatting Properties</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N185><A name=N185></A>
+<H1 class=title>Slide 8: XML to result tree</H1>
+<P>An XSLT "stylesheet" transforms the input (source) document's tree into a 
+structure called a <I><FONT color=green>result tree</FONT></I> consisting of 
+result objects</P>
+<DIV class=mediaobject><IMG src="XSLtutorial_files/xslproc2.gif"></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N200><A name=N200></A>
+<H1 class=title>Slide 9: Result tree doctypes</H1>
+<P>The result tree's structure is that of an XML document, and its objects 
+correspond to elements with attributes</P>
+<P>The result tree's structure and "tag set" can match that of any XML document 
+or doctype. In particular, the result tree could be:</P>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N208></A><SPAN class=term>HTML/XHTML</SPAN> 
+  <DD>
+  <P>result tree is easily written out as an HTML document</P>
+  <DT><A name=N214></A><SPAN class=term>other XML doctype</SPAN> 
+  <DD>
+  <P>result tree is easily written out as an XML document in this other doctype 
+  (for some further application-specific processing)</P>
+  <DT><A name=N220></A><SPAN class=term>FO result tree</SPAN> 
+  <DD>
+  <P>result tree's structure (and element and attribute names) matches the set 
+  of <I><FONT color=green>formatting objects</FONT></I> and formatting <I><FONT 
+  color=green>properties</FONT></I> defined by the (non-transformation) part of 
+  XSL</P></DD></DL></DIV>
+<P>Serialization of the result tree is not necessary for further processing of 
+the result tree.</P></DIV>
+<HR>
+
+<DIV class=foil id=N234><A name=N234></A>
+<H1 class=title>Slide 10: An XSL stylesheet</H1>
+<P>An XSL stylesheet basically consists of a set of templates</P>
+<P>Each template "matches" some set of elements in the source tree and then 
+describes the contribution that the matched element makes to the result tree</P>
+<P>Generally, elements in a stylesheet in the "xsl" namespace are part of the 
+XSLT language, and non-xsl elements within a template are what get put into the 
+result tree</P></DIV>
+<HR>
+
+<DIV class=foil id=N250><A name=N250></A>
+<H1 class=title>Slide 11: HTML vs. XSL Formatting Objects</H1>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N254></A>
+  <P>Transformation is independent of the target result type</P>
+  <LI><A name=N257></A>
+  <P>Most people are more familiar with HTML so many of the examples in this 
+  tutorial use HTML</P>
+  <LI><A name=N260></A>
+  <P>The XSL implementation in IE5 is incomplete. The examples in this tutorial 
+  will not work in IE5</P>
+  <LI><A name=N263></A>
+  <P>The techniques apply equally well to XSL Formatting Objects or other tag 
+  sets</P>
+  <LI><A name=N266></A>
+  <P>XSLT is a tree-to-tree transformation process</P>
+  <LI><A name=N269></A>
+  <P>Serialization may vary depending on the selected output method</P>
+  <LI><A name=N272></A>
+  <P>There is a distinction between HTML element names and 
+HTML</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N275><A name=N275></A>
+<H1 class=title>Slide 12: The Structure of a Stylesheet</H1>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N279></A>
+  <P>XSLT Stylesheets are XML documents; <A 
+  href="http://www.w3.org/TR/REC-xml-names" target=_top>namespaces</A> 
+  (http://www.w3.org/TR/REC-xml-names) are used to identify semantically 
+  significant elements.</P>
+  <LI><A name=N286></A>
+  <P>Most stylesheets are stand-alone documents rooted at &lt;xsl:stylesheet&gt; 
+  or &lt;xsl:transform&gt;. It is possible to have "single template" 
+  stylesheet/documents.</P>
+  <LI><A name=N289></A>
+  <P>&lt;xsl:stylesheet&gt; and &lt;xsl:transform&gt; are completely 
+  synonymous.</P></LI></UL></DIV>
+<P>Note that it is the mapping from namespace abbreviation to URI that is 
+important, not the literal namespace abbreviation "xsl:" that is used most 
+commonly.</P></DIV>
+<HR>
+
+<DIV class=foil id=N294><A name=N294></A>
+<H1 class=title>Slide 13: Stylesheet Examples</H1>
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N297></A><B>Figure 1. A Stylesheet</B> </P><PRE class=screen>&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+               version="1.0"&gt;
+    ...
+&lt;/xsl:stylesheet&gt;</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N304></A><B>Figure 2. A Transformation Sheet</B> </P><PRE class=screen>&lt;eg:transform xmlns:eg="http://www.w3.org/1999/XSL/Transform"
+               version="1.0"&gt;
+    ...
+&lt;/eg:transform&gt;</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N311></A><B>Figure 3. Document as Stylesheet</B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;html xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+&lt;head&gt;
+&lt;title&gt;Silly Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Silly Example&lt;/h1&gt;
+&lt;p&gt;You'd probably use extension elements, or somthing
+more interesting in real life: 3+4 is &lt;xsl:value-of select="3+4"/&gt;.
+&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</SPAN>
+</PRE></DIV></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N322><A name=N322></A>
+<H1 class=title>Slide 14: A Complete Example</H1>
+<P>This is a simple stylesheet that transforms source &lt;para&gt; and 
+&lt;emphasis&gt; elements into HTML:</P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version='1.0'?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0"&gt;
+
+&lt;xsl:template match="para"&gt;
+  &lt;p&gt;&lt;xsl:apply-templates/&gt;&lt;/p&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="emphasis"&gt;
+  &lt;i&gt;&lt;xsl:apply-templates/&gt;&lt;/i&gt;
+&lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;
+</SPAN>
+</PRE>
+<P>With this stylesheet, the following XML document:</P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version='1.0'?&gt;
+&lt;para&gt;This is a &lt;emphasis&gt;test&lt;/emphasis&gt;.&lt;/para&gt;
+</SPAN>
+</PRE>
+<P>Would be transformed into:</P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;p&gt;This is a &lt;i&gt;test&lt;/i&gt;.&lt;/p&gt;</SPAN>
+</PRE>
+<P>Note that this has been <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#serialize">serialized</A> 
+as XML.</P></DIV>
+<HR>
+
+<DIV class=foil id=N358><A name=N358></A>
+<H1 class=title>Slide 15: Understanding A Template</H1>
+<P>Most templates have the following form:</P><PRE class=screen>&lt;xsl:template match="emphasis"&gt;
+  &lt;i&gt;&lt;xsl:apply-templates/&gt;&lt;/i&gt;
+&lt;/xsl:template&gt;</PRE>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N367></A>
+  <P>The whole <TT>&lt;xsl:template&gt;</TT> element is a <I><FONT 
+  color=green>template</FONT></I> </P>
+  <LI><A name=N376></A>
+  <P>The <I><FONT color=green>match pattern</FONT></I> determines where this 
+  template applies</P>
+  <LI><A name=N382></A>
+  <P><I><FONT color=green>Literal result element(s)</FONT></I> come from non-XSL 
+  namespace(s)</P>
+  <LI><A name=N387></A>
+  <P>XSLT elements come from the XSL namespace</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N390><A name=N390></A>
+<H1 class=title>Slide 16: Match Patterns (Locating Elements)</H1>
+<P>One critical capability of a stylesheet language is to locate source elements 
+to be styled. CSS, for example, does this with "selectors." FOSIs do it with 
+"e-i-c's", elements in context. XSLT does it with "match patterns" defined by 
+the <A href="http://www.w3.org/TR/xpath" target=_top>XML Path Language 
+(XPath)</A> (http://www.w3.org/TR/xpath).</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N401></A>
+  <P>XPath has an extensible string-based syntax</P>
+  <LI><A name=N404></A>
+  <P>It describes "location paths" between parts of a document or documents</P>
+  <LI><A name=N407></A>
+  <P>One inspiration for XPath was the common "path/file" file system 
+  syntax</P></LI></UL></DIV>
+<P>Two things to remember about XPath expressions:</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N413></A>
+  <P>Pattern matching occurs in a context; XPath expressions and XSLT elements 
+  can change the current context and consequently the nodes which match</P>
+  <LI><A name=N416></A>
+  <P>XPath is inclusive or greedy, it addresses all matching elements. You must 
+  use predicates to refine the set of nodes selected.</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N419><A name=N419></A>
+<H1 class=title>Slide 17: Pattern Examples</H1>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N423></A><SPAN class=term><TT>para</TT></SPAN> 
+  <DD>
+  <P>Matches all &lt;para&gt; children in the current context</P>
+  <DT><A name=N431></A><SPAN class=term><TT>para/emphasis</TT></SPAN> 
+  <DD>
+  <P>Matches all &lt;emphasis&gt; elements that have a parent of 
+&lt;para&gt;</P>
+  <DT><A name=N439></A><SPAN class=term><TT>/</TT></SPAN> 
+  <DD>
+  <P>Matches the root of the document</P>
+  <DT><A name=N447></A><SPAN class=term><TT>para//emphasis</TT></SPAN> 
+  <DD>
+  <P>Matches all &lt;emphasis&gt; elements that have an <I><FONT 
+  color=green>ancestor</FONT></I> of &lt;para&gt;</P>
+  <DT><A name=N458></A><SPAN class=term><TT>section/para[1]</TT></SPAN> 
+  <DD>
+  <P>Matches the first &lt;para&gt; child of all the &lt;section&gt; children in 
+  the current context</P>
+  <DT><A name=N466></A><SPAN class=term><TT>//title</TT></SPAN> 
+  <DD>
+  <P>Matches <I><FONT color=green>all</FONT></I> &lt;title&gt; elements anywhere 
+  in the document</P>
+  <DT><A name=N477></A><SPAN class=term><TT>.//title</TT></SPAN> 
+  <DD>
+  <P>Matches all &lt;title&gt; elements that are descendants of the current 
+  context</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N485><A name=N485></A>
+<H1 class=title>Slide 18: More Complex Patterns</H1>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N489></A><SPAN class=term><TT>section/*/note</TT></SPAN> 
+  <DD>
+  <P>Matches &lt;note&gt; elements that have &lt;section&gt; grandparents.</P>
+  <DT><A name=N497></A><SPAN class=term><TT>stockquote[@symbol]</TT></SPAN> 
+  <DD>
+  <P>Matches &lt;stockquote&gt; elements that have a "symbol" attribute</P>
+  <DT><A name=N505></A><SPAN 
+  class=term><TT>stockquote[@symbol="XXXX"]</TT></SPAN> 
+  <DD>
+  <P>Matches &lt;stockquote&gt; elements that have a "symbol" attribute with the 
+  value "XXXX"</P>
+  <DT><A name=N513></A><SPAN class=term><TT>emphasis|strong</TT></SPAN> 
+  <DD>
+  <P>Matches &lt;emphasis&gt; or &lt;strong&gt; elements</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N521><A name=N521></A>
+<H1 class=title>Slide 19: Pattern Syntax</H1>
+<P>The XPath pattern syntax is described formally in the XPath specification. 
+Here we're going to look at the syntax in abstract, but less formal terms:</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N527></A>
+  <P>An XPath pattern is a 'location path', a location path is absolute if it 
+  begins with a slash ("/") and relative otherwise</P>
+  <LI><A name=N530></A>
+  <P>A relative location path consists of a series of steps, separated by 
+  slashes</P>
+  <LI><A name=N533></A>
+  <P>A step is an axis specifier, a node test, and a predicate</P></LI></UL></DIV>
+<P>The formal syntax is made more complicated by the fact that it must describe 
+both the abbreviated and unabbreviated syntaxes</P></DIV>
+<HR>
+
+<DIV class=foil id=N538><A name=N538></A>
+<H1 class=title>Slide 20: Node Tests</H1>
+<P>Node tests are most frequently element names, but other node tests are 
+possible:</P>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N544></A><SPAN class=term><TT>name</TT></SPAN> 
+  <DD>
+  <P>Matches &lt;name&gt; element nodes</P>
+  <DT><A name=N552></A><SPAN class=term><TT>*</TT></SPAN> 
+  <DD>
+  <P>Matches any element node</P>
+  <DT><A name=N560></A><SPAN class=term><TT>namespace:name</TT></SPAN> 
+  <DD>
+  <P>Matches &lt;name&gt; element nodes in the specified namespace</P>
+  <DT><A name=N568></A><SPAN class=term><TT>namespace:*</TT></SPAN> 
+  <DD>
+  <P>Matches any element node in the specified namespace</P>
+  <DT><A name=N576></A><SPAN class=term><TT>comment()</TT></SPAN> 
+  <DD>
+  <P>Matches comment nodes</P>
+  <DT><A name=N584></A><SPAN class=term><TT>text()</TT></SPAN> 
+  <DD>
+  <P>Matches text nodes</P>
+  <DT><A name=N592></A><SPAN class=term><TT>processing-instruction()</TT></SPAN> 
+
+  <DD>
+  <P>Matches processing instructions</P>
+  <DT><A name=N600></A><SPAN 
+  class=term><TT>processing-instruction('target')</TT></SPAN> 
+  <DD>
+  <P>Matches processing instructions with the specified target (&lt;?target 
+  ...?&gt;</P>
+  <DT><A name=N608></A><SPAN class=term><TT>node()</TT></SPAN> 
+  <DD>
+  <P>Matches any node</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N616><A name=N616></A>
+<H1 class=title>Slide 21: Predicates</H1>
+<P>Predicates occur after the node test in square brackets. A wide range of 
+expressions are possible.</P>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N622></A><SPAN class=term><TT>nodetest[1]</TT></SPAN> 
+  <DD>
+  <P>Matches the first node</P></DD></DL></DIV>
+<P>Most node tests return nodes in document order, only the tests which select 
+ancestor or preceding elements return nodes in reverse document order. The 
+practical result of this is that the "first" node is almost always the one 
+closest to the context node, although parenthesis can change the effective 
+order.</P>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N633></A><SPAN 
+  class=term><TT>nodetest[position()=last()]</TT></SPAN> 
+  <DD>
+  <P>Matches the last node</P>
+  <DT><A name=N641></A><SPAN class=term><TT>nodetest[position() mod 2 = 
+  0]</TT></SPAN> 
+  <DD>
+  <P>Matches even nodes</P>
+  <DT><A name=N649></A><SPAN class=term><TT>element[@id='foo']</TT></SPAN> 
+  <DD>
+  <P>Matches the element(s) with id attributes whos value is "foo"</P>
+  <DT><A name=N657></A><SPAN class=term><TT>element[not(@id)]</TT></SPAN> 
+  <DD>
+  <P>Matches elements that don't have an id attribute</P>
+  <DT><A name=N665></A><SPAN 
+  class=term><TT>author[firstname="Norman"]</TT></SPAN> 
+  <DD>
+  <P>Match &lt;author&gt; elements that have &lt;firstname&gt; children with the 
+  content "Norman".</P>
+  <DT><A name=N673></A><SPAN 
+  class=term><TT>author[normalize-space(firstname)="Norman"]</TT></SPAN> 
+  <DD>
+  <P>Match "Norman" without regard to leading and trailing 
+space.</P></DD></DL></DIV>
+<P>Predicate expressions can be more-or-less arbitrarily complex.</P></DIV>
+<HR>
+
+<DIV class=foil id=N683><A name=N683></A>
+<H1 class=title>Slide 22: Axis Specifiers</H1>
+<P>The axis of a node test determines what general category of nodes may be 
+considered for the following node test. There are thirteen axes:</P>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N689></A><SPAN class=term><TT>ancestor</TT></SPAN> 
+  <DD>
+  <P>Ancestors of the current node</P>
+  <DT><A name=N697></A><SPAN class=term><TT>ancestor-or-self</TT></SPAN> 
+  <DD>
+  <P>Ancestors, including the current node</P>
+  <DT><A name=N705></A><SPAN class=term><TT>attribute</TT></SPAN> 
+  <DD>
+  <P>Attributes of the current node (abbreviated "@")</P>
+  <DT><A name=N713></A><SPAN class=term><TT>child</TT></SPAN> 
+  <DD>
+  <P>Children of the current node (the default axis)</P>
+  <DT><A name=N721></A><SPAN class=term><TT>descendant</TT></SPAN> 
+  <DD>
+  <P>Descendants of the current node</P>
+  <DT><A name=N729></A><SPAN class=term><TT>descendant-or-self</TT></SPAN> 
+  <DD>
+  <P>Descendants, including the current node (abbreviated "//")</P>
+  <DT><A name=N737></A><SPAN class=term><TT>following</TT> / 
+  <TT>following-sibling</TT></SPAN> 
+  <DD>
+  <P>Elements which occur after the current node, in document order</P>
+  <DT><A name=N749></A><SPAN class=term><TT>preceding</TT> / 
+  <TT>preceding-sibling</TT></SPAN> 
+  <DD>
+  <P>Elements which occur before the current node, in document order (returned 
+  in reverse-document order)</P>
+  <DT><A name=N761></A><SPAN class=term><TT>namespace</TT></SPAN> 
+  <DD>
+  <P>The namespace nodes of the current node</P>
+  <DT><A name=N769></A><SPAN class=term><TT>parent</TT></SPAN> 
+  <DD>
+  <P>The parent of the current node (abbreviated "..")</P>
+  <DT><A name=N777></A><SPAN class=term><TT>self</TT></SPAN> 
+  <DD>
+  <P>The current node (abbreviated ".")</P></DD></DL></DIV>
+<P>The following graphic, courtesy of Crane Softwrights, demonstrates the axes 
+graphically:</P>
+<DIV class=mediaobject><IMG src="XSLtutorial_files/axes.gif"></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N794><A name=N794></A>
+<H1 class=title>Slide 23: A Few More Patterns</H1>
+<P>Now that we've seen the unabbreviated syntax, let's look at a few more 
+patterns</P>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N800></A><SPAN class=term><TT>ancestor::table</TT></SPAN> 
+  <DD>
+  <P>Matches ancestor &lt;table&gt; elements</P>
+  <DT><A name=N808></A><SPAN 
+  class=term><TT>following-sibling::paramdef</TT></SPAN> 
+  <DD>
+  <P>Matches the following &lt;paramdef&gt; siblings</P>
+  <DT><A name=N816></A><SPAN 
+  class=term><TT>ancestor-or-self::*/@sepchar</TT></SPAN> 
+  <DD>
+  <P>Matches the sepchar attribute on the current element or any ancestor of the 
+  current element</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=recstyle><A name=recstyle></A>
+<H1 class=title>Slide 24: Applying Style Recursively</H1>
+<P>One model for applying style is to allow the process to run recursively, 
+driven primarily by the document. A series of templates is created, such that 
+there is a template to match each context, then these templates are recursively 
+applied starting at the root of the document.</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N831></A>
+  <P>&lt;xsl:template&gt;</P><PRE class=screen>&lt;xsl:template match="section/title"&gt;
+  &lt;h2&gt;&lt;xsl:apply-templates/&gt;&lt;/h2&gt;
+&lt;/xsl:template&gt;</PRE>
+  <LI><A name=N837></A>
+  <P>&lt;xsl:apply-templates&gt;</P><PRE class=screen>&lt;xsl:apply-templates select="th|td"/&gt;</PRE></LI></UL></DIV>
+<P>There are two obstacles to overcome when using the recursive model, how to 
+arbitrate between multiple patterns that match and how to process the same nodes 
+in different contexts.</P></DIV>
+<HR>
+
+<DIV class=foil id=N845><A name=N845></A>
+<H1 class=title>Slide 25: Recursive Example</H1>
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N848></A><B>Figure 4. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/recursive.xml" 
+target=_top>recursive.xml</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;doc&gt;
+&lt;para&gt;This is a &lt;emphasis&gt;test&lt;/emphasis&gt;.
+&lt;emphasis&gt;Nested &lt;emphasis&gt;emphasis&lt;/emphasis&gt;&lt;/emphasis&gt;.&lt;/para&gt;
+&lt;/doc&gt;
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N861></A><B>Figure 5. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/recursive.xsl" 
+target=_top>recursive.xsl</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+&lt;xsl:template match="doc"&gt;
+  &lt;html&gt;&lt;head&gt;&lt;title&gt;A Document&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;&lt;xsl:apply-templates/&gt;&lt;/body&gt;&lt;/html&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="para"&gt;
+  &lt;p&gt;&lt;xsl:apply-templates/&gt;&lt;/p&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="emphasis"&gt;
+  &lt;i&gt;&lt;xsl:apply-templates/&gt;&lt;/i&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="emphasis/emphasis"&gt;
+  &lt;b&gt;&lt;xsl:apply-templates/&gt;&lt;/b&gt;
+&lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N874></A><B>Figure 6. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/recursive.html" 
+target=_top>recursive.html</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;A Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;This is a &lt;i&gt;test&lt;/i&gt;.
+&lt;i&gt;Nested &lt;b&gt;emphasis&lt;/b&gt;&lt;/i&gt;.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</SPAN>
+</PRE></DIV></DIV></DIV>
+<HR>
+
+<DIV class=foil id=conflict><A name=conflict></A>
+<H1 class=title>Slide 26: Conflict Resolution</H1>
+<P>The problem of multiple patterns that match is handled by conflict 
+resolution:</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N894></A>
+  <P>Matching templates from imported modules are not considered if there is a 
+  matching template in the current module</P>
+  <LI><A name=N897></A>
+  <P>Matching templates with a lower <TT>priority</TT> are not considered. The 
+  default priority is determined as follows:</P>
+  <DIV class=itemizedlist>
+  <UL>
+    <LI><A name=N905></A>
+    <P>Unqualified child or attribute names have a priority of 0.</P>
+    <LI><A name=N908></A>
+    <P>Processing-instructions with a target have a priority of 0.</P>
+    <LI><A name=N911></A>
+    <P>A namespace-qualified "*" child or attribute name has a priority of 
+    -0.25.</P>
+    <LI><A name=N914></A>
+    <P>An unqualified "*" has a priority of -0.5</P>
+    <LI><A name=N917></A>
+    <P>Any other template has a default priority of 0.5</P>
+    <LI><A name=N920></A>
+    <P>Template priority may be specified explicitly with the <TT>priority</TT> 
+    attribute on &lt;xsl:template&gt;</P></LI></UL></DIV></LI></UL></DIV>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N928></A>
+  <P>"<TT>emphasis</TT>", "<TT>html:p</TT>", and "<TT>@foo</TT>" have a priority 
+  of 0</P>
+  <LI><A name=N943></A>
+  <P>"<TT>html:*</TT>" has a priority of -0.25</P>
+  <LI><A name=N950></A>
+  <P>"<TT>*</TT>" has a priority of -0.5</P>
+  <LI><A name=N957></A>
+  <P>"<TT>para/emphasis</TT>" has a priority of 0.5</P>
+  <LI><A name=N964></A>
+  <P>"<TT>emphasis/emphasis</TT>" has a priority of 0.5</P>
+  <LI><A name=N971></A>
+  <P>"<TT>emphasis[@role]</TT>" has a priority of 0.5</P></LI></UL></DIV>
+<P>It is technically an error if the conflict resolution process yields more 
+than one template, however, XSLT processors may (silently) recover from this 
+error by selecting the template that occurs last in the stylesheet.</P>
+<P>Effectively, this means that stylesheet template order is the final 
+arbiter.</P></DIV>
+<HR>
+
+<DIV class=foil id=modes><A name=modes></A>
+<H1 class=title>Slide 27: Changing the Template Set</H1>
+<P>Now we have an algorithm for selecting exactly which pattern matches, but 
+what happens if the same elements must be processed in multiple contexts? This 
+happens, for example, when dealing with cross references, automatic tables of 
+contents, and multiple views of the same data.</P>
+<P>Consider the following example:</P>
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N991></A><B>Figure 7. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/modes.xml" 
+target=_top>modes.xml</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version='1.0'?&gt;
+&lt;chapter id="foo"&gt;&lt;title&gt;Chapter Title&lt;/title&gt;
+
+&lt;para&gt;This chapter is self-referential:
+&lt;xref linkend="foo"/&gt;.&lt;/para&gt;
+&lt;/chapter&gt;</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<P>And a stylesheet that produces:</P>
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N1006></A><B>Figure 8. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/modes.html" 
+target=_top>modes.html</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;h2&gt;Chapter Title&lt;/h2&gt;
+
+&lt;p&gt;This chapter is self-referential:
+&lt;i&gt;Chapter Title&lt;/i&gt;.&lt;/p&gt;
+
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<P>The chapter title must be processed twice, once to produce the title and once 
+to produce the cross reference.</P>
+<P>There is no dynamic mechanism for adjusting template priority, but there is a 
+mechanism for selecting specific sets of templates. That mechanism is called 
+"modes".</P></DIV>
+<HR>
+
+<DIV class=foil id=N1023><A name=N1023></A>
+<H1 class=title>Slide 28: Modes Example (Broken)</H1>
+<P>Without modes, you always get the same template:</P>
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N1028></A><B>Figure 9. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/modes-broken.xsl" 
+target=_top>modes-broken.xsl</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version='1.0'?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0"&gt;
+
+&lt;xsl:template match="chapter/title"&gt;
+  &lt;h2&gt;&lt;xsl:apply-templates/&gt;&lt;/h2&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="xref"&gt;
+  &lt;xsl:variable name="linkend" select="@linkend"/&gt;
+  &lt;xsl:apply-templates select="//*[@id=$linkend]/title"/&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="para"&gt;
+  &lt;p&gt;&lt;xsl:apply-templates/&gt;&lt;/p&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="emphasis"&gt;
+  &lt;i&gt;&lt;xsl:apply-templates/&gt;&lt;/i&gt;
+&lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;
+
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N1041></A><B>Figure 10. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/modes-broken.html" 
+target=_top>modes-broken.html</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;h2&gt;Chapter Title&lt;/h2&gt;
+
+&lt;p&gt;This chapter is self-referential:
+&lt;h2&gt;Chapter Title&lt;/h2&gt;.&lt;/p&gt;
+</SPAN>
+</PRE></DIV></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N1054><A name=N1054></A>
+<H1 class=title>Slide 29: Modes Example</H1>
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N1057></A><B>Figure 11. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/modes.xsl" 
+target=_top>modes.xsl</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version='1.0'?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0"&gt;
+
+&lt;xsl:output method="html"/&gt;
+
+&lt;xsl:template match="chapter/title"&gt;
+  &lt;h2&gt;&lt;xsl:apply-templates/&gt;&lt;/h2&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="chapter/title" mode="crossref"&gt;
+  &lt;i&gt;&lt;xsl:apply-templates/&gt;&lt;/i&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="xref"&gt;
+  &lt;xsl:variable name="linkend" select="@linkend"/&gt;
+  &lt;xsl:apply-templates select="//*[@id=$linkend]/title"
+                       mode="crossref"/&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="para"&gt;
+  &lt;p&gt;&lt;xsl:apply-templates/&gt;&lt;/p&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="emphasis"&gt;
+  &lt;i&gt;&lt;xsl:apply-templates/&gt;&lt;/i&gt;
+&lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;
+
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N1070></A><B>Figure 12. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/modes.html" 
+target=_top>modes.html</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;h2&gt;Chapter Title&lt;/h2&gt;
+
+&lt;p&gt;This chapter is self-referential:
+&lt;i&gt;Chapter Title&lt;/i&gt;.&lt;/p&gt;
+
+</SPAN>
+</PRE></DIV></DIV></DIV>
+<HR>
+
+<DIV class=foil id=procstyle><A name=procstyle></A>
+<H1 class=title>Slide 30: Applying Style Procedurally</H1>
+<P>The other model for applying style is to select each action procedurally. A 
+series of templates is created, such that each template explicitly selects and 
+processes the necessary elements.</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N1090></A>
+  <P>&lt;xsl:for-each&gt;</P><PRE class=screen>&lt;xsl:for-each select="row"&gt;
+  &lt;tr&gt;&lt;xsl:apply-templates/&gt;&lt;/tr&gt;
+&lt;/xsl:for-each&gt;</PRE>
+  <LI><A name=N1096></A>
+  <P>Named Templates</P>
+  <DIV class=itemizedlist>
+  <UL>
+    <LI><A name=N1100></A>
+    <P>&lt;xsl:param&gt;</P><PRE class=screen>&lt;xsl:param name="type"&gt;warning&lt;/xsl:param&gt;</PRE></LI></UL></DIV>
+  <LI><A name=N1106></A>
+  <P>&lt;xsl:call-template&gt;</P><PRE class=screen>&lt;xsl:call-template name="admonition"/&gt;</PRE>
+  <DIV class=itemizedlist>
+  <UL>
+    <LI><A name=N1113></A>
+    <P>&lt;xsl:with-param&gt;</P><PRE class=screen>&lt;xsl:call-template name="admonition"&gt;
+  &lt;xsl:with-param name="type"&gt;caution&lt;/xsl:with-param&gt;
+&lt;/xsl:call-template&gt;</PRE></LI></UL></DIV></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N1119><A name=N1119></A>
+<H1 class=title>Slide 31: For-each Example</H1>
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N1122></A><B>Figure 13. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/foreach.xml" 
+target=_top>foreach.xml</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version='1.0'?&gt;
+&lt;table&gt;
+  &lt;row&gt;&lt;entry&gt;a1&lt;/entry&gt;&lt;entry&gt;a2&lt;/entry&gt;&lt;/row&gt;
+  &lt;row&gt;&lt;entry&gt;b1&lt;/entry&gt;&lt;entry&gt;b2&lt;/entry&gt;&lt;/row&gt;
+  &lt;row&gt;&lt;entry&gt;c1&lt;/entry&gt;&lt;entry&gt;c2&lt;/entry&gt;&lt;/row&gt;
+&lt;/table&gt;
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N1135></A><B>Figure 14. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/foreach.xsl" 
+target=_top>foreach.xsl</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version='1.0'?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+&lt;xsl:output method="html"/&gt;
+
+&lt;xsl:template match="table"&gt;
+  &lt;table&gt;
+    &lt;xsl:for-each select="row"&gt;
+      &lt;tr&gt;
+        &lt;xsl:for-each select="entry"&gt;
+          &lt;td&gt;&lt;xsl:apply-templates/&gt;&lt;/td&gt;
+        &lt;/xsl:for-each&gt;
+      &lt;/tr&gt;
+    &lt;/xsl:for-each&gt;
+  &lt;/table&gt;
+&lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N1148></A><B>Figure 15. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/foreach.html" 
+target=_top>foreach.html</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;a1&lt;/td&gt;&lt;td&gt;a2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;b1&lt;/td&gt;&lt;td&gt;b2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;c1&lt;/td&gt;&lt;td&gt;c2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<P>Challenge: rewrite this stylesheet in recursive terms</P></DIV>
+<HR>
+
+<DIV class=foil id=N1163><A name=N1163></A>
+<H1 class=title>Slide 32: Named Template Example</H1>
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N1166></A><B>Figure 16. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/namedtemplate.xml" 
+target=_top>namedtemplate.xml</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;chapter&gt;
+
+&lt;warning&gt;
+&lt;para&gt;Using a damaged extension cord may cause a fire.&lt;/para&gt;
+&lt;/warning&gt;
+
+&lt;caution&gt;
+&lt;para&gt;Freshly brewed coffee is hot.&lt;/para&gt;
+&lt;/caution&gt;
+&lt;/chapter&gt;
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N1179></A><B>Figure 17. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/namedtemplate.xsl" 
+target=_top>namedtemplate.xsl</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+&lt;xsl:output method="html"/&gt;
+
+&lt;xsl:template name="admonition"&gt;
+  &lt;xsl:param name="type"&gt;Warning&lt;/xsl:param&gt;
+  &lt;table border="1"&gt;
+    &lt;tr&gt;&lt;th&gt;&lt;xsl:value-of select="$type"/&gt;:&lt;/th&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;&lt;xsl:apply-templates/&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="warning"&gt;
+  &lt;xsl:call-template name="admonition"/&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="caution"&gt;
+  &lt;xsl:call-template name="admonition"&gt;
+    &lt;xsl:with-param name="type"&gt;Caution&lt;/xsl:with-param&gt;
+  &lt;/xsl:call-template&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="para"&gt;
+  &lt;p&gt;&lt;xsl:apply-templates/&gt;&lt;/p&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="emphasis"&gt;
+  &lt;i&gt;&lt;xsl:apply-templates/&gt;&lt;/i&gt;
+&lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N1192></A><B>Figure 18. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/namedtemplate.html" 
+target=_top>namedtemplate.html</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;table border="1"&gt;
+&lt;tr&gt;
+&lt;th&gt;Warning:&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;p&gt;Using a damaged extension cord may cause a fire.&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;table border="1"&gt;
+&lt;tr&gt;
+&lt;th&gt;Caution:&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;p&gt;Freshly brewed coffee is hot.&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+
+</SPAN>
+</PRE></DIV></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N1205><A name=N1205></A>
+<H1 class=title>Slide 33: Creating the Result Tree</H1>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N1209></A><SPAN class=term>Literal Result Elements</SPAN> 
+  <DD>
+  <P>Any element in a template rule that is not in the XSL (or other extension) 
+  namespace is copied literally to the result tree</P>
+  <DT><A name=N1215></A><SPAN class=term><TT>&lt;xsl:text&gt;</TT></SPAN> 
+  <DD>
+  <P>The content of &lt;xsl:text&gt; elements is copied directly to the result 
+  tree; whitespace is preserved by default</P><PRE class=screen>&lt;xsl:text&gt;Literal result text&lt;/xsl:text&gt;</PRE>
+  <DT><A name=N1226></A><SPAN class=term><TT>&lt;xsl:value-of&gt;</TT></SPAN> 
+  <DD>
+  <P>Inserts the value of an expression into the result tree, converting it to a 
+  string first if necessary</P><PRE class=screen>&lt;xsl:value-of select="$count + 1"/&gt;</PRE>
+  <DT><A name=N1237></A><SPAN class=term><TT>&lt;xsl:copy&gt;</TT> and 
+  <TT>&lt;xsl:copy-of&gt;</TT></SPAN> 
+  <DD>
+  <P>Copies the current node or, in the case of xsl:copy-of, the selected nodes, 
+  into the result tree without first converting them to a string</P><PRE class=screen>&lt;xsl:copy-of select="title"/&gt;</PRE>
+  <DT><A name=N1252></A><SPAN class=term><TT>&lt;xsl:element&gt;</TT></SPAN> 
+  <DD>
+  <P>Instantiates the named element</P><PRE class=screen>...
+&lt;xsl:param name="header"&gt;h3&lt;/xsl:param&gt;
+...
+&lt;xsl:element name="{$header}"&gt;
+  &lt;xsl:apply-templates/&gt;
+&lt;/xsl:element&gt;</PRE>
+  <DT><A name=N1263></A><SPAN class=term><TT>&lt;xsl:attribute&gt;</TT></SPAN> 
+  <DD>
+  <P>Adds the named attribute to the nearest containing element</P><PRE class=screen>&lt;table&gt;
+  &lt;xsl:if test="@pgwide='1'"&gt;
+    &lt;xsl:attribute name="width"&gt;100%&lt;/xsl:attribute&gt;
+  &lt;/xsl:if&gt;
+  ...
+&lt;/table&gt;</PRE></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N1274><A name=N1274></A>
+<H1 class=title>Slide 34: Conditional Processing</H1>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N1278></A><SPAN class=term><TT>&lt;xsl:if&gt;</TT></SPAN> 
+  <DD>
+  <P>Simple conditional (no "else")</P><PRE class=screen>&lt;xsl:if test="$somecondition"&gt;
+  &lt;xsl:text&gt;this text only gets used if $somecondition is true()&lt;/xsl:text&gt;
+&lt;/xsl:if&gt;</PRE>
+  <DT><A name=N1289></A><SPAN class=term><TT>&lt;xsl:choose&gt;</TT></SPAN> 
+  <DD>
+  <P>Select among alternatives with &lt;xsl:when&gt; and 
+  &lt;xsl:otherwise&gt;</P><PRE class=screen>&lt;xsl:choose&gt;
+  &lt;xsl:when test="$count &gt; 2"&gt;&lt;xsl:text&gt;, and &lt;/xsl:text&gt;&lt;/xsl:when&gt;
+  &lt;xsl:when test="$count &gt; 1"&gt;&lt;xsl:text&gt; and &lt;/xsl:text&gt;&lt;/xsl:when&gt;
+  &lt;xsl:otherwise&gt;&lt;xsl:text&gt; &lt;/xsl:text&gt;&lt;/xsl:otherwise&gt;
+&lt;/xsl:choose&gt;</PRE></DD></DL></DIV>
+<P>To report errors, use &lt;xsl:message&gt;.</P><PRE class=screen>&lt;xsl:message&gt;
+  &lt;xsl:text&gt;Error: no ID found for linkend: &lt;/xsl:text&gt;
+  &lt;xsl:value-of select="@linkend"/&gt;
+  &lt;xsl:text&gt;.&lt;/xsl:text&gt;
+&lt;/xsl:message&gt;</PRE></DIV>
+<HR>
+
+<DIV class=foil id=variables><A name=variables></A>
+<H1 class=title>Slide 35: Declaring Variables</H1>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N1310></A>
+  <P>&lt;xsl:variable&gt; allows you to associate a variable with a string, node 
+  list, or result tree fragment.</P>
+  <LI><A name=N1313></A>
+  <P>Variables are "single assignment" (no side effects)</P>
+  <LI><A name=N1316></A>
+  <P>Variables are lexically scoped</P>
+  <LI><A name=N1319></A>
+  <P>Variables assigned inside a conditional only apply inside that conditional. 
+  This is rarely correct:</P><PRE class=screen>&lt;xsl:if test="$foo"&gt;
+  &lt;xsl:variable name="bar"&gt;...&lt;/xsl:variable&gt;
+&lt;/xsl:if&gt;</PRE>
+  <P>Usually, you want to put the conditional inside the variable</P><PRE class=screen>&lt;xsl:variable name="bar"&gt;
+  &lt;xsl:if test="$foo"&gt;...&lt;/xsl:if&gt;
+&lt;/xsl:variable&gt;</PRE></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N1330><A name=N1330></A>
+<H1 class=title>Slide 36: Using Variables</H1>
+<P>After variables (or parameters) have been declared, they can be used in two 
+places:</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N1336></A>
+  <P>In XSL element attributes that expect an expression. These are summarized 
+  in the following table:</P>
+  <DIV class=informaltable id=N1339>
+  <P></P><A name=N1339></A>
+  <TABLE border=1 width="100%">
+    <COLGROUP>
+    <COL>
+    <COL></COLGROUP>
+    <THEAD>
+    <TR>
+      <TH>XSLT Element</TH>
+      <TH>Attribute</TH></TR></THEAD>
+    <TBODY>
+    <TR>
+      <TD>xsl:apply-templates</TD>
+      <TD>select</TD></TR>
+    <TR>
+      <TD>xsl:value-of</TD>
+      <TD>select</TD></TR>
+    <TR>
+      <TD>xsl:number</TD>
+      <TD>value</TD></TR>
+    <TR>
+      <TD>xsl:for-each</TD>
+      <TD>select</TD></TR>
+    <TR>
+      <TD>xsl:if</TD>
+      <TD>test</TD></TR>
+    <TR>
+      <TD>xsl:when</TD>
+      <TD>test</TD></TR>
+    <TR>
+      <TD>xsl:sort</TD>
+      <TD>select</TD></TR></TBODY></TABLE>
+  <P></P></DIV>
+  <LI><A name=N1385></A>
+  <P>In attribute value templates; attribute value templates have the form 
+  "{$variable}". They are allowed in the following places:</P>
+  <DIV class=informaltable id=N1388>
+  <P></P><A name=N1388></A>
+  <TABLE border=1 width="100%">
+    <COLGROUP>
+    <COL>
+    <COL></COLGROUP>
+    <THEAD>
+    <TR>
+      <TH>Element</TH>
+      <TH>Attribute</TH></TR></THEAD>
+    <TBODY>
+    <TR>
+      <TD>Literal result elements</TD>
+      <TD>any attribute</TD></TR>
+    <TR>
+      <TD rowSpan=2>xsl:element</TD>
+      <TD>name</TD></TR>
+    <TR>
+      <TD>namespace</TD></TR>
+    <TR>
+      <TD rowSpan=2>xsl:attribute</TD>
+      <TD>name</TD></TR>
+    <TR>
+      <TD>namespace</TD></TR>
+    <TR>
+      <TD rowSpan=7>xsl:number</TD>
+      <TD>level</TD></TR>
+    <TR>
+      <TD>count</TD></TR>
+    <TR>
+      <TD>from</TD></TR>
+    <TR>
+      <TD>format</TD></TR>
+    <TR>
+      <TD>lang</TD></TR>
+    <TR>
+      <TD>grouping-separator</TD></TR>
+    <TR>
+      <TD>grouping-size</TD></TR>
+    <TR>
+      <TD rowSpan=4>xsl:sort</TD>
+      <TD>order</TD></TR>
+    <TR>
+      <TD>lang</TD></TR>
+    <TR>
+      <TD>data-type</TD></TR>
+    <TR>
+      <TD>case-order</TD></TR>
+    <TR>
+      <TD>xsl:processing-instruction</TD>
+      <TD>name</TD></TR></TBODY></TABLE>
+  <P></P></DIV>
+  <LI><A name=N1493></A>
+  <P>To insert a literal "{" character in a context where attribute value 
+  templates are expanded, use "{{".</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N1496><A name=N1496></A>
+<H1 class=title>Slide 37: Numbering</H1>
+<P>The &lt;xsl:number&gt; element performs two functions:</P>
+<DIV class=orderedlist>
+<OL>
+  <LI><A name=N1504></A>
+  <P>It evaluates a numeric expression and converts the result into a formatted 
+  string:</P><PRE class=screen>&lt;xsl:number value="3" format="A. "/&gt;
+&lt;xsl:number value="count(listitem)" format="01"/&gt;</PRE>
+  <LI><A name=N1510></A>
+  <P>It counts elements in the <I><FONT color=green>source</FONT></I> tree and 
+  converst the result into a formatted string:</P><PRE class=screen>&lt;xsl:number count="listitem" format="i. "/&gt;
+&lt;xsl:number count="chapter" from="book" level="any" format="1. "/&gt;
+&lt;xsl:number count="h1|h2|h3" level="multiple" from="chapter|appendix" format="1."/&gt;</PRE></LI></OL></DIV>
+<P>The details of number to string conversion is spelled out in great detail in 
+<A href="http://www.w3.org/TR/xslt.html#convert" target=_top>Section 7.7.1</A> 
+(http://www.w3.org/TR/xslt.html#convert) of the <A 
+href="http://www.w3.org/TR/xslt.html" target=_top>XSLT Recommendation</A> 
+(http://www.w3.org/TR/xslt.html). See also, <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-decimal-format">&lt;xsl:decimal-format&gt;</A> 
+and the Java JDK 1.1 <A 
+href="http://java.sun.com/products/jdk/1.1/docs/api/java.text.DecimalFormat.html" 
+target=_top>DecimalFormat</A> 
+(http://java.sun.com/products/jdk/1.1/docs/api/java.text.DecimalFormat.html) 
+class.</P></DIV>
+<HR>
+
+<DIV class=foil id=N1537><A name=N1537></A>
+<H1 class=title>Slide 38: Sorting</H1>
+<P>The &lt;xsl:sort&gt; element sorts a set of nodes according to the criteria 
+specified:</P><PRE class=screen>&lt;xsl:apply-templates select="row"&gt;
+  &lt;xsl:sort data-type="number" select="entry[2]"/&gt;
+&lt;/xsl:apply-templates&gt;</PRE>
+<P>It can appear as a child of &lt;xsl:apply-templates&gt; or 
+&lt;xsl:for-each&gt;. It can also be nested.</P></DIV>
+<HR>
+
+<DIV class=foil id=N1547><A name=N1547></A>
+<H1 class=title>Slide 39: Sorting Example</H1>
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N1550></A><B>Figure 19. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/sort.xml" 
+target=_top>sort.xml</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;doc&gt;
+&lt;para&gt;Here's a table of sales:&lt;/para&gt;
+&lt;table&gt;
+&lt;row&gt;&lt;cell&gt;3000&lt;/cell&gt;&lt;cell&gt;Widgets 'R' Us&lt;/cell&gt;&lt;/row&gt;
+&lt;row&gt;&lt;cell&gt;2400&lt;/cell&gt;&lt;cell&gt;Widget Design and Implementation&lt;/cell&gt;&lt;/row&gt;
+&lt;row&gt;&lt;cell&gt;10000&lt;/cell&gt;&lt;cell&gt;Widgets for Dummies&lt;/cell&gt;&lt;/row&gt;
+&lt;row&gt;&lt;cell&gt;101&lt;/cell&gt;&lt;cell&gt;101 Uses for a Dead Widget&lt;/cell&gt;&lt;/row&gt;
+&lt;/table&gt;
+&lt;/doc&gt;
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N1563></A><B>Figure 20. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/sort.xsl" 
+target=_top>sort.xsl</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version='1.0'?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0"&gt;
+
+&lt;xsl:import href="element.xsl"/&gt;
+
+&lt;xsl:template match="table"&gt;
+  &lt;xsl:if test="@id"&gt;&lt;a name="{@id}"/&gt;&lt;/xsl:if&gt;
+  &lt;table&gt;
+    &lt;xsl:apply-templates select="row"&gt;
+      &lt;xsl:sort data-type="number" select="./cell[1]"/&gt;
+    &lt;/xsl:apply-templates&gt;
+  &lt;/table&gt;
+&lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N1576></A><B>Figure 21. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/sort.html" 
+target=_top>sort.html</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;p&gt;Here's a table of sales:&lt;/p&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;101&lt;/td&gt;&lt;td&gt;101 Uses for a Dead Widget&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2400&lt;/td&gt;&lt;td&gt;Widget Design and Implementation&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3000&lt;/td&gt;&lt;td&gt;Widgets 'R' Us&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;10000&lt;/td&gt;&lt;td&gt;Widgets for Dummies&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</SPAN>
+</PRE></DIV></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N1593><A name=N1593></A>
+<H1 class=title>Slide 40: Formatting objects and properties</H1>
+<P><TT>XSL = XSLT + vocabulary of FOs and properties</TT> </P>
+<P>XSL defines a powerful set of formatting objects</P>
+<P>XSL uses (and extends) a set of Common Formatting Properties developed 
+jointly with the CSS&amp;FP (Cascading Style Sheet and Formatting Property) 
+Working Group</P>
+<P>When a result tree uses this standardized set of formatting objects and 
+properties, then an XSL-compliant formatter can process that result tree to 
+produce the specified output</P></DIV>
+<HR>
+
+<DIV class=foil id=N1606><A name=N1606></A>
+<H1 class=title>Slide 41: Sample FO result tree</H1><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"&gt;
+...
+&lt;fo:page-sequence&gt;
+  &lt;fo:flow&gt;
+    &lt;fo:block font-size="18pt" font-weight="bold"
+              text-align="centered"&gt;
+      Preface
+    &lt;/fo:block&gt;
+    &lt;fo:block font-size="12pt" space-before="1pc"
+              text-align="justified"&gt;
+      This is a simple test document.  It shows a 
+      &lt;fo:inline font-style="italic"&gt;partial&lt;/fo:inline&gt;
+      fo-result tree (page layout missing).
+    &lt;/fo:block&gt;
+  &lt;/fo:flow&gt;
+&lt;/fo:page-sequence&gt;
+...
+&lt;/fo:root&gt;
+</SPAN>
+</PRE></DIV>
+<HR>
+
+<DIV class=foil id=N1616><A name=N1616></A>
+<H1 class=title>Slide 42: Some XSL-FO templates</H1><PRE class=screen><SPAN class=inlinemediaobject>&lt;xsl:template match="chapter"&gt;
+  &lt;fo:flow&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:flow&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="chapter/title"&gt;
+  &lt;fo:block font-size="18pt" font-weight="bold"
+            text-align="centered"&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:block&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="para"&gt;
+  &lt;fo:block font-size="12pt" space-before="1pc"
+            text-align="justified"&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:block&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="emphasis"&gt;
+  &lt;fo:inline font-style="italic"&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:inline&gt;
+&lt;/xsl:template&gt;
+</SPAN>
+</PRE></DIV>
+<HR>
+
+<DIV class=foil id=N1626><A name=N1626></A>
+<H1 class=title>Slide 43: Formatting Object Basics</H1>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N1630></A>
+  <P>Inline versus block objects</P>
+  <LI><A name=N1633></A>
+  <P>Common formatting properties--harmonized with CSS</P>
+  <LI><A name=N1636></A>
+  <P>Inheritance of properties within the result tree--inheritable and 
+  non-inheritable properties</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N1639><A name=N1639></A>
+<H1 class=title>Slide 44: Common Formatting Objects</H1>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N1643></A>
+  <P>page-sequence--a major part (such as front or body) in which the basic page 
+  layout may differ from other parts</P>
+  <LI><A name=N1646></A>
+  <P>flow--a chapter- or section-like division within a page-sequence</P>
+  <LI><A name=N1649></A>
+  <P>block--a paragraph (or title or block quote, etc.)</P>
+  <LI><A name=N1652></A>
+  <P>inline--e.g., a font change within a paragraph</P>
+  <LI><A name=N1655></A>
+  <P>wrapper--a "transparent" object usable as either a block or inline object 
+  that has no effect other than to provide a place to hang inheritable 
+  properties</P>
+  <LI><A name=N1658></A>
+  <P>list FOs--list-block, list-item, list-item-label, list-item-body</P>
+  <LI><A name=N1661></A>
+  <P>graphic--references an external graphic object</P>
+  <LI><A name=N1664></A>
+  <P>table FOs--mostly analogous to the standard (CALS, OASIS, HTML) table 
+  models</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N1667><A name=N1667></A>
+<H1 class=title>Slide 45: Basic properties</H1>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N1671></A>
+  <P>font properties</P>
+  <LI><A name=N1674></A>
+  <P>margin and spacing properties</P>
+  <LI><A name=N1677></A>
+  <P>border and padding properties</P>
+  <LI><A name=N1680></A>
+  <P>keeps/breaks</P>
+  <LI><A name=N1683></A>
+  <P>horizontal alignment/justification</P>
+  <LI><A name=N1686></A>
+  <P>indentation</P>
+  <LI><A name=N1689></A>
+  <P>more formatting object specific properties</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N1692><A name=N1692></A>
+<H1 class=title>Slide 46: Overall XSL formatting capabilities</H1>
+<P>XSL FO formatting capabilities in XSL 1.0 are approximately the union of:</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N1698></A>
+  <P>HTML + CSS capabilities</P>
+  <LI><A name=N1701></A>
+  <P>most high quality print output capabilities including internationalization 
+  features</P></LI></UL></DIV>
+<P>Not included are complex page layouts (e.g., magazine and newspaper layout), 
+complex layout-driven formatting (e.g., copyfitting and complex floats), and 
+looseleaf pagination (change page production)</P></DIV>
+<HR>
+
+<DIV class=foil id=N1706><A name=N1706></A>
+<H1 class=title>Slide 47: Chapter, title, para example</H1><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version="1.0"?&gt;
+&lt;xsl:stylesheet
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:fo="http://www.w3.org/1999/XSL/Format"
+&gt;
+
+&lt;xsl:include href="fo-root.xsl"/&gt;
+
+&lt;xsl:template match="article"&gt;
+  &lt;fo:page-sequence font-family="serif" font-size="12pt"&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:page-sequence&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="chapter"&gt;
+  &lt;fo:flow&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:flow&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="para"&gt;
+  &lt;fo:block space-before="6pt"&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:block&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="chapter/title"&gt;
+  &lt;fo:block font-family="sans-serif" color="blue"
+         font-weight="bold" font-size="18pt"
+         space-after="0.5em"&gt;
+    &lt;xsl:number level="multiple" count="chapter"/&gt;
+    &lt;xsl:text&gt; &lt;/xsl:text&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:block&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="section/title"&gt;
+  &lt;fo:block font-family="sans-serif"
+         font-weight="bold" font-size="16pt"
+         space-after="0.5em"&gt;
+    &lt;xsl:number level="multiple" count="chapter|section"/&gt;
+    &lt;xsl:text&gt; &lt;/xsl:text&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:block&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="article/title"&gt;
+  &lt;fo:block font-family="sans-serif" font-size="24pt"
+         space-after="2pc"&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:block&gt;
+&lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;
+</SPAN>
+</PRE></DIV>
+<HR>
+
+<DIV class=foil id=modularize><A name=modularize></A>
+<H1 class=title>Slide 48: Modularizing Stylesheets</H1>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N1727></A><SPAN class=term>&lt;xsl:include&gt;</SPAN> 
+  <DD>
+  <P>Performs a roughly textual include of the referenced stylesheet</P>
+  <DT><A name=N1733></A><SPAN class=term>&lt;xsl:import&gt;</SPAN> 
+  <DD>
+  <P>The importing stylesheet "extends" the imported 
+stylesheet</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-import><A name=xsl-import></A>
+<H1 class=title>Slide 49: &lt;xsl:import&gt;</H1>
+<P>An &lt;xsl:import&gt; statement loads an auxilary stylesheet</P><PRE class=screen>&lt;xsl:import 
+  href = uri-reference /&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N1749></A><SPAN class=term>href</SPAN> 
+  <DD>
+  <P>The URI of the stylesheet to import</P></DD></DL></DIV>
+<P>Templates imported from another stylesheet have a different <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#conflict">import 
+precedence</A>.</P></DIV>
+<HR>
+
+<DIV class=foil id=xsl-include><A name=xsl-include></A>
+<H1 class=title>Slide 50: &lt;xsl:include&gt;</H1>
+<P>An &lt;xsl:include&gt; statement performs a "textual include" of another 
+stylesheet:</P><PRE class=screen>&lt;xsl:include 
+  href = uri-reference /&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N1771></A><SPAN class=term>href</SPAN> 
+  <DD>
+  <P>The URI of the stylesheet to import</P></DD></DL></DIV>
+<P>Templates included from another stylesheet have the same <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#conflict">import 
+precedence</A> and behave exactly as if they had been literally inserted where 
+the &lt;xsl:include&gt; statement occurs.</P></DIV>
+<HR>
+
+<DIV class=foil id=whitespace><A name=whitespace></A>
+<H1 class=title>Slide 51: Controlling Input Whitespace</H1>
+<P>XSLT has to handle whitespace in both the stylesheet and the source document 
+in a reasonable and controllable way.</P>
+<P>To deal with whitespace in the stylesheet, it employs the following 
+rules:</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N1792></A>
+  <P>If a text node contains non-whitespace characters, it is preserved</P>
+  <LI><A name=N1795></A>
+  <P>If a text node occurs inside &lt;xsl:text&gt; it is preserved</P>
+  <LI><A name=N1798></A>
+  <P>If the nearest ancestor <TT>xml:space</TT> attribute has the value 
+  <TT>preserve</TT>, it is preserved</P>
+  <LI><A name=N1809></A>
+  <P>Otherwise it is stripped (discarded from the tree before any transformation 
+  begins)</P></LI></UL></DIV>
+<P>The rules for whitespace in the source document are the same, with the 
+exception that you can specify the default stripping rules with 
+&lt;xsl:preserve-space&gt; and &lt;xsl:strip-space&gt;:</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N1815></A>
+  <P>If a text node contains non-whitespace characters, it is preserved</P>
+  <LI><A name=N1818></A>
+  <P>If a text node occurs inside an element listed in 
+  &lt;xsl:preserve-space&gt;, it is preserved</P>
+  <LI><A name=N1821></A>
+  <P>If the nearest ancestor <TT>xml:space</TT> attribute has the value 
+  <TT>preserve</TT>, it is preserved</P>
+  <LI><A name=N1832></A>
+  <P>Otherwise it is stripped (discarded from the tree before any transformation 
+  begins)</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-preserve-space><A name=xsl-preserve-space></A>
+<H1 class=title>Slide 52: &lt;xsl:preserve-space&gt;</H1>
+<P>The &lt;xsl:preserve-space&gt; element lists the source tree elements in 
+which input whitespace is to be preserved.</P><PRE class=screen>&lt;xsl:preserve-space 
+  elements = tokens /&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N1845></A><SPAN class=term>elements</SPAN> 
+  <DD>
+  <P>The list of elements in which whitespace should be preserved by 
+  default</P></DD></DL></DIV>
+<P>Note that namespace:* and * can be used to incorporate all elements or all 
+elements from a particular namespace by default.</P></DIV>
+<HR>
+
+<DIV class=foil id=xsl-strip-space><A name=xsl-strip-space></A>
+<H1 class=title>Slide 53: &lt;xsl:strip-space&gt;</H1>
+<P>The &lt;xsl:strip-space&gt; element lists the source tree elements in which 
+input whitespace is to be discarded.</P><PRE class=screen>&lt;xsl:strip-space 
+  elements = tokens /&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N1863></A><SPAN class=term>elements</SPAN> 
+  <DD>
+  <P>The list of elements in which whitespace should be discarded by 
+  default</P></DD></DL></DIV>
+<P>Note that namespace:* and * can be used to incorporate all elements or all 
+elements from a particular namespace by default.</P></DIV>
+<HR>
+
+<DIV class=foil id=serialize><A name=serialize></A>
+<H1 class=title>Slide 54: Controlling Output Serialization</H1>
+<P>XSLT is a tree-to-tree transformation. It isn't specifically the job of the 
+XSLT processor to write out a text representation (serialization) of the tree. 
+However, XSLT does allow the stylesheet author to suggest the desired 
+serialization procedure:</P>
+<P>The selection of namespace aliases is controlled by 
+&lt;xsl:namespace-alias&gt;.</P></DIV>
+<HR>
+
+<DIV class=foil id=xsl-output><A name=xsl-output></A>
+<H1 class=title>Slide 55: &lt;xsl:output&gt;</H1><PRE class=screen>&lt;xsl:output
+  method = "xml" | "html" | "text" | qname-but-not-ncname 
+  version = nmtoken 
+  encoding = string 
+  omit-xml-declaration = "yes" | "no"
+  standalone = "yes" | "no"
+  doctype-public = string 
+  doctype-system = string 
+  cdata-section-elements = qnames 
+  indent = "yes" | "no"
+  media-type = string /&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N1887></A><SPAN class=term>method</SPAN> 
+  <DD>
+  <P>The serialization method</P>
+  <DT><A name=N1893></A><SPAN class=term>version</SPAN> 
+  <DD>
+  <P>The version of the serializer</P>
+  <DT><A name=N1899></A><SPAN class=term>encoding</SPAN> 
+  <DD>
+  <P>The encoding to use, if possible</P>
+  <DT><A name=N1905></A><SPAN class=term>omit-xml-declaration</SPAN> 
+  <DD>
+  <P>Do not output the &lt;?xml ...?&gt; declaration</P>
+  <DT><A name=N1911></A><SPAN class=term>standalone</SPAN> 
+  <DD>
+  <P>Identify the result as a standalone document (in the XML sense)</P>
+  <DT><A name=N1917></A><SPAN class=term>doctype-public</SPAN> 
+  <DD>
+  <P>The public identifier to use on the output &lt;!DOCTYPE&gt; declaration</P>
+  <DT><A name=N1923></A><SPAN class=term>doctype-system</SPAN> 
+  <DD>
+  <P>The system identifier to use on the output &lt;!DOCTYPE&gt; declaration</P>
+  <DT><A name=N1929></A><SPAN class=term>cdata-section-elements</SPAN> 
+  <DD>
+  <P>A list of element names; the content of these element should be escaped 
+  with CDATA sections if possible</P>
+  <DT><A name=N1935></A><SPAN class=term>indent</SPAN> 
+  <DD>
+  <P>Add additional space to the serialized result tree for readability</P>
+  <DT><A name=N1941></A><SPAN class=term>media-type</SPAN> 
+  <DD>
+  <P>The media type of the serialized result</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-namespace-alias><A name=xsl-namespace-alias></A>
+<H1 class=title>Slide 56: &lt;xsl:namespace-alias&gt;</H1>
+<P>Allows the stylesheet to alias one namespace prefix for another in the result 
+tree</P><PRE class=screen>&lt;xsl:namespace-alias
+  stylesheet-prefix = prefix | "#default"
+  result-prefix = prefix | "#default" /&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N1957></A><SPAN class=term>stylesheet-prefix</SPAN> 
+  <DD>
+  <P>The prefix used in the stylesheet</P>
+  <DT><A name=N1963></A><SPAN class=term>result-prefix</SPAN> 
+  <DD>
+  <P>The desired prefix in the result</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N1969><A name=N1969></A>
+<H1 class=title>Slide 57: Applying Style</H1>
+<P>Suppose that you have a stylesheet which customizes another stylesheet, 
+perhaps changing the formatting of a few elements. Suppose that one of these 
+elements is formatted by a complex template in the base stylesheet, and all you 
+want to change is one small, special case. How can you do this?</P>
+<P>The answer is with &lt;xsl:apply-imports&gt;:</P><PRE class=screen>...
+&lt;xsl:import href="basestyle.xsl"/&gt;
+...
+&lt;xsl:template match="table"&gt;
+  &lt;xsl:choose&gt;
+    &lt;xsl:when test="@role='something-special'"&gt;
+      &lt;xsl:call-template name="special-table-handler"/&gt;
+    &lt;/xsl:when&gt;
+    &lt;xsl:otherwise&gt;
+      &lt;xsl:apply-imports/&gt;
+    &lt;/xsl:otherwise&gt;
+  &lt;/xsl:choose&gt;
+&lt;/xsl:template&gt;</PRE></DIV>
+<HR>
+
+<DIV class=foil id=xsl-apply-imports><A name=xsl-apply-imports></A>
+<H1 class=title>Slide 58: &lt;xsl:apply-imports&gt;</H1>
+<P>Process the context node with the "next matching" pattern from an <I><FONT 
+color=green>imported</FONT></I> stylesheet.</P><PRE class=screen>&lt;xsl:apply-imports/&gt;</PRE></DIV>
+<HR>
+
+<DIV class=foil id=advresulttree><A name=advresulttree></A>
+<H1 class=title>Slide 59: Creating the Result Tree</H1>
+<P>There are several more elements that can be used in creating the result 
+tree:</P>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N1998></A><SPAN class=term>&lt;xsl:attribute-set&gt;</SPAN> 
+  <DD>
+  <P>Names a collection of attributes for use as a set</P>
+  <DT><A name=N2004></A><SPAN class=term>&lt;xsl:comment&gt;</SPAN> 
+  <DD>
+  <P>Creates an XML comment (&lt;!-- like this --&gt;) in the result tree</P>
+  <DT><A name=N2010></A><SPAN 
+  class=term>&lt;xsl:processing-instruction&gt;</SPAN> 
+  <DD>
+  <P>Creates an XML processing instruction (&lt;?pitarget like="this"?&gt;) in 
+  the result tree</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-attribute-set><A name=xsl-attribute-set></A>
+<H1 class=title>Slide 60: &lt;xsl:attribute-set&gt;</H1>
+<P>The &lt;xsl:attribute-set&gt; element gives a name to a collection of 
+attribute/value pairs.</P><PRE class=screen>&lt;xsl:attribute-set 
+  name = qname 
+  use-attribute-sets = qnames&gt;
+  &lt;!-- Content: xsl:attribute* --&gt;
+&lt;/xsl:attribute-set&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N2026></A><SPAN class=term>name</SPAN> 
+  <DD>
+  <P>The attribute set name</P>
+  <DT><A name=N2032></A><SPAN class=term>use-attribute-sets</SPAN> 
+  <DD>
+  <P>Uses another collection of attributes as the default set for this attribute 
+  set</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-comment><A name=xsl-comment></A>
+<H1 class=title>Slide 61: &lt;xsl:comment&gt;</H1>
+<P>A &lt;xsl:comment&gt; element inserts an XML comment into the result 
+tree.</P><PRE class=screen>&lt;xsl:comment&gt;
+  &lt;!-- Content: template --&gt;
+&lt;/xsl:comment&gt;
+</PRE></DIV>
+<HR>
+
+<DIV class=foil id=xsl-processing-instruction><A 
+name=xsl-processing-instruction></A>
+<H1 class=title>Slide 62: &lt;xsl:processing-instruction&gt;</H1>
+<P>A &lt;xsl:processing-instruction&gt; element inserts an XML processing 
+instruction into the result tree.</P><PRE class=screen>&lt;xsl:processing-instruction 
+  name = { ncname }&gt;
+  &lt;!-- Content: template --&gt;
+&lt;/xsl:processing-instruction&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N2057></A><SPAN class=term>name</SPAN> 
+  <DD>
+  <P>The processing instruction target name</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N2063><A name=N2063></A>
+<H1 class=title>Slide 63: Attribute Set Example</H1>
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N2066></A><B>Figure 22. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/attrset.xsl" 
+target=_top>attrset.xsl</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version='1.0'?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0"&gt;
+
+&lt;xsl:output method="html"/&gt;
+
+&lt;xsl:attribute-set name="table-cell-attrs"&gt;
+  &lt;xsl:attribute name="align"&gt;left&lt;/xsl:attribute&gt;
+  &lt;xsl:attribute name="valign"&gt;top&lt;/xsl:attribute&gt;
+  &lt;xsl:attribute name="bordercolor"&gt;blue&lt;/xsl:attribute&gt;
+&lt;/xsl:attribute-set&gt;
+
+&lt;xsl:template match="doc"&gt;
+  &lt;xsl:apply-templates/&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="table"&gt;
+  &lt;xsl:if test="@id"&gt;&lt;a name="{@id}"/&gt;&lt;/xsl:if&gt;
+  &lt;xsl:comment&gt;Attributes created with xsl:attribute-set&lt;/xsl:comment&gt;
+  &lt;table border="1"&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/table&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="head|cell"&gt;
+  &lt;xsl:variable name="output-element"&gt;
+    &lt;xsl:choose&gt;
+      &lt;xsl:when test="local-name(.)='head'"&gt;th&lt;/xsl:when&gt;
+      &lt;xsl:otherwise&gt;td&lt;/xsl:otherwise&gt;
+    &lt;/xsl:choose&gt;
+  &lt;/xsl:variable&gt;
+  &lt;xsl:element name="{$output-element}" use-attribute-sets="table-cell-attrs"&gt;
+    &lt;xsl:copy-of select="@*"/&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/xsl:element&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="row"&gt;
+  &lt;tr&gt;
+    &lt;xsl:copy-of select="@*"/&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/tr&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="link"&gt;
+  &lt;a&gt;
+    &lt;xsl:attribute name="href"&gt;
+      &lt;xsl:text&gt;#&lt;/xsl:text&gt;
+      &lt;xsl:value-of select="@linkend"/&gt;
+    &lt;/xsl:attribute&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/a&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="para"&gt;
+  &lt;p&gt;&lt;xsl:apply-templates/&gt;&lt;/p&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="emphasis"&gt;
+  &lt;i&gt;&lt;xsl:apply-templates/&gt;&lt;/i&gt;
+&lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N2079></A><B>Figure 23. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/attrset.html" 
+target=_top>attrset.html</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;p&gt;This is some paragraph of text. See 
+&lt;a href="#foo"&gt;the table&lt;/a&gt;.&lt;/p&gt;
+
+&lt;a name="foo"&gt;&lt;/a&gt;&lt;!--Attributes created with xsl:attribute-set--&gt;
+&lt;table border="1"&gt;
+&lt;tr&gt;
+&lt;th align="left" valign="top" bordercolor="blue"&gt;Head 1&lt;/th&gt;&lt;th align="left" valign="top" bordercolor="blue"&gt;Head 2&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center" valign="top" bordercolor="blue"&gt;Value 1&lt;/td&gt;&lt;td align="left" valign="top" bordercolor="blue"&gt;Value 2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="left" valign="top" bordercolor="blue"&gt;Value 3&lt;/td&gt;&lt;td align="left" valign="top" bordercolor="blue"&gt;Value 3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="left" valign="top" bordercolor="blue"&gt;Value 5&lt;/td&gt;&lt;td align="left" valign="top" bordercolor="blue"&gt;Value 4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</SPAN>
+</PRE></DIV></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N2092><A name=N2092></A>
+<H1 class=title>Slide 64: Disabled Escaping Example</H1>
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N2095></A><B>Figure 24. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/disable-escaping.xml" 
+target=_top>disable-escaping.xml</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;doc&gt;
+This document is &lt;copyright&gt;No One In Particular&lt;/copyright&gt;.
+&lt;/doc&gt;</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N2108></A><B>Figure 25. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/disable-escaping.xsl" 
+target=_top>disable-escaping.xsl</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version='1.0'?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0"&gt;
+
+&lt;xsl:output method="xml"/&gt;
+
+&lt;xsl:template match="doc"&gt;
+  &lt;p&gt;&lt;xsl:apply-templates/&gt;&lt;/p&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="copyright"&gt;
+  &lt;xsl:text&gt;Copyright &lt;/xsl:text&gt;
+  &lt;xsl:text disable-output-escaping="yes"&gt;&amp;amp;copy;&lt;/xsl:text&gt;
+  &lt;xsl:text&gt; 1999 &lt;/xsl:text&gt;
+  &lt;xsl:apply-templates/&gt;
+&lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;
+
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N2121></A><B>Figure 26. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/disable-escaping.html" 
+target=_top>disable-escaping.html</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;p&gt;
+This document is Copyright &amp;copy; 1999 No One In Particular.
+&lt;/p&gt;</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<P>A better technique for this particular example would be simply to use the 
+numeric character reference for the Copyright symbol (&amp;#xA9;) and allow the 
+serializer to "do the right thing."</P></DIV>
+<HR>
+
+<DIV class=foil id=decformat><A name=decformat></A>
+<H1 class=title>Slide 65: Sorting and Numbering</H1>
+<P>The conversion of numbers from their internal, binary representation to a 
+text representation is controlled by the &lt;xsl:decimal-format&gt; 
+element.</P></DIV>
+<HR>
+
+<DIV class=foil id=N2142><A name=N2142></A>
+<H1 class=title>Slide 66: Multiple Documents</H1>
+<P>A stylesheet can load additional documents with the document() function. In 
+the following example, we recast the sorted table example using several features 
+we have learned:</P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version='1.0'?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0"&gt;
+
+&lt;xsl:import href="element.xsl"/&gt;
+
+&lt;xsl:variable name="tabledoc"&gt;sorttable.xml&lt;/xsl:variable&gt;
+
+&lt;xsl:template match="insert-table"&gt;
+  &lt;xsl:if test="@id"&gt;&lt;a name="{@id}"/&gt;&lt;/xsl:if&gt;
+  &lt;xsl:apply-templates select="document($tabledoc)"/&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="table"&gt;
+  &lt;table&gt;
+    &lt;xsl:apply-templates select="row"&gt;
+      &lt;xsl:sort data-type="number" select="./cell[1]"/&gt;
+    &lt;/xsl:apply-templates&gt;
+  &lt;/table&gt;
+&lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;
+
+</SPAN>
+</PRE></DIV>
+<HR>
+
+<DIV class=foil id=keys><A name=keys></A>
+<H1 class=title>Slide 67: Keys</H1>
+<P>The ID/IDREF mechanism for locating elements in XML documents has been 
+generalized in XSL to the notion of keys.</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N2161></A>
+  <P>ID/IDREF is only useful when:</P>
+  <DIV class=itemizedlist>
+  <UL>
+    <LI><A name=N2165></A>
+    <P>The document has declarations that identify the ID and IDREF attributes 
+    and</P>
+    <LI><A name=N2168></A>
+    <P>The processor is capable of processing the declarations</P></LI></UL></DIV>
+  <LI><A name=N2171></A>
+  <P>Using select expressions (XPath) to locate elements may be 
+  inefficient</P></LI></UL></DIV>
+<P>Declaring keys gives the stylesheet processor an indication of what elements 
+should be cached for fast access.</P></DIV>
+<HR>
+
+<DIV class=foil id=N2176><A name=N2176></A>
+<H1 class=title>Slide 68: Key Example</H1>
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N2179></A><B>Figure 27. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/keys.xsl" 
+target=_top>keys.xsl</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version='1.0'?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0"&gt;
+
+&lt;xsl:key name="bibkey" match="//biblio/bib" use="@abbrev"/&gt;
+
+&lt;xsl:template match="doc"&gt;
+  &lt;xsl:apply-templates/&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="biblio"&gt;
+  &lt;!-- suppressed --&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="para"&gt;
+  &lt;xsl:apply-templates/&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="bibref"&gt;
+  &lt;xsl:variable name="bib" select="key('bibkey',string(.))"/&gt;
+  &lt;xsl:choose&gt;
+    &lt;xsl:when test="$bib"&gt;
+      &lt;i&gt;&lt;xsl:apply-templates select="$bib"/&gt;&lt;/i&gt;
+    &lt;/xsl:when&gt;
+    &lt;xsl:otherwise&gt;
+      &lt;b&gt;NO BIB FOR &lt;xsl:apply-templates/&gt;&lt;/b&gt;
+    &lt;/xsl:otherwise&gt;
+  &lt;/xsl:choose&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="bib"&gt;
+  &lt;xsl:apply-templates/&gt;
+&lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;
+
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N2192></A><B>Figure 28. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/keys.xsl" 
+target=_top>keys.xml</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;doc&gt;
+&lt;para&gt;See &lt;bibref&gt;xyzzy&lt;/bibref&gt;.&lt;/para&gt;
+&lt;biblio&gt;
+&lt;bib abbrev="xyzzy"&gt;The Great Grue&lt;/bib&gt;
+&lt;bib abbrev="abcde"&gt;That Alphabet Song&lt;/bib&gt;
+&lt;/biblio&gt;
+&lt;/doc&gt;
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N2205></A><B>Figure 29. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/keys.xsl" 
+target=_top>keys.html</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+See &lt;i&gt;The Great Grue&lt;/i&gt;.
+
+</SPAN>
+</PRE></DIV></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N2218><A name=N2218></A>
+<H1 class=title>Slide 69: Extending XSLT</H1>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N2222></A>
+  <P>Extension Functions</P>
+  <LI><A name=N2225></A>
+  <P>Extension Elements</P>
+  <LI><A name=N2228></A>
+  <P>&lt;xsl:fallback&gt;</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N2231><A name=N2231></A>
+<H1 class=title>Slide 70: Extension Examples</H1>
+<P>These examples are from James' XT distribution:</P>
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N2236></A><B>Figure 30. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/ext-func.xsl" 
+target=_top>ext-func.xsl</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;xsl:stylesheet
+  version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:date="http://www.jclark.com/xt/java/java.util.Date"&gt;
+
+&lt;xsl:template match="/"&gt;
+  &lt;html&gt;
+    &lt;xsl:if test="function-available('date:to-string') and function-available('date:new')"&gt;
+      &lt;p&gt;&lt;xsl:value-of select="date:to-string(date:new())"/&gt;&lt;/p&gt;
+    &lt;/xsl:if&gt;
+  &lt;/html&gt;
+&lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;
+</SPAN>
+</PRE></DIV></DIV>
+<HR>
+
+<DIV class=figure>
+<DIV class=figure>
+<P><A name=N2249></A><B>Figure 31. <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/examples/ext-elem.xsl" 
+target=_top>ext-elem.xsl</A></B> </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+		version="1.0"
+                xmlns:xt="http://www.jclark.com/xt"
+                extension-element-prefixes="xt"&gt;
+
+&lt;xsl:output method="text"/&gt;
+
+&lt;xsl:template match="file"&gt;
+  &lt;xt:document href="{@name}" method="xml"&gt;
+    &lt;xsl:fallback&gt;This should not happen.&lt;/xsl:fallback&gt;
+    &lt;xsl:apply-templates mode="copy"/&gt;
+  &lt;/xt:document&gt;
+  &lt;xsl:text&gt;Created file &lt;/xsl:text&gt;
+  &lt;xsl:value-of select="@name"/&gt;
+  &lt;xsl:text&gt;&amp;#xA;&lt;/xsl:text&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template mode="copy" match="*|@*"&gt;
+  &lt;xsl:copy&gt;
+    &lt;xsl:apply-templates select="@*" mode="copy"/&gt;
+    &lt;xsl:apply-templates select="node()" mode="copy"/&gt;
+  &lt;/xsl:copy&gt;
+&lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;
+</SPAN>
+</PRE></DIV></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N2267><A name=N2267></A>
+<H1 class=title>Slide 71: Nested list example</H1><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version="1.0"?&gt;
+&lt;xsl:stylesheet
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:fo="http://www.w3.org/1999/XSL/Format"
+&gt;
+
+&lt;xsl:template match="doc"&gt;
+  &lt;fo:block&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:block&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="p"&gt;
+  &lt;fo:block&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:block&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="list"&gt;
+  &lt;fo:list-block space-before="10pt"
+                 provisional-distance-between-starts="3pc"
+                 provisional-label-separation="1pc"&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:list-block&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="list//list"&gt;
+  &lt;fo:list-block space-before="8pt"
+                 provisional-distance-between-starts="3pc"
+                 provisional-label-separation="1pc"
+                 start-indent="3pc"&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:list-block&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="list/item"&gt;
+  &lt;fo:list-item space-before="6pt"&gt;
+    &lt;fo:list-item-label&gt;
+      &lt;fo:block&gt;
+        &lt;xsl:number count="item" format="1."/&gt;
+      &lt;/fo:block&gt;
+    &lt;/fo:list-item-label&gt;
+    &lt;fo:list-item-body&gt;
+      &lt;fo:block&gt;
+        &lt;xsl:apply-templates/&gt;
+      &lt;/fo:block&gt;
+    &lt;/fo:list-item-body&gt;
+  &lt;/fo:list-item&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="list//list/item" priority="1"&gt;
+  &lt;fo:list-item space-before="6pt"&gt;
+    &lt;fo:list-item-label&gt;
+      &lt;fo:block&gt;
+        &lt;xsl:number count="item" format="a."/&gt;
+      &lt;/fo:block&gt;
+    &lt;/fo:list-item-label&gt;
+    &lt;fo:list-item-body&gt;
+      &lt;fo:block&gt;
+        &lt;xsl:apply-templates/&gt;
+      &lt;/fo:block&gt;
+    &lt;/fo:list-item-body&gt;
+  &lt;/fo:list-item&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="list//list//list/item" priority="2"&gt;
+  &lt;fo:list-item space-before="6pt"&gt;
+    &lt;fo:list-item-label&gt;
+      &lt;fo:block&gt;
+        &lt;xsl:number count="item" format="i."/&gt;
+      &lt;/fo:block&gt;
+    &lt;/fo:list-item-label&gt;
+    &lt;fo:list-item-body&gt;
+      &lt;fo:block&gt;
+        &lt;xsl:apply-templates/&gt;
+      &lt;/fo:block&gt;
+    &lt;/fo:list-item-body&gt;
+  &lt;/fo:list-item&gt;
+&lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;
+</SPAN>
+</PRE></DIV>
+<HR>
+
+<DIV class=foil id=N2277><A name=N2277></A>
+<H1 class=title>Slide 72: Pagination basics</H1>
+<DIV class=mediaobject><IMG src="XSLtutorial_files/pagetree.gif"></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N2284><A name=N2284></A>
+<H1 class=title>Slide 73: Pagination example</H1><PRE class=screen><SPAN class=inlinemediaobject>&lt;fo:layout-master-set&gt;
+  &lt;fo:simple-page-master page-master-name="right"&gt;
+    &lt;fo:region-body margin-bottom="50pt"/&gt;
+    &lt;fo:region-after extent="25pt"/&gt;
+  &lt;/fo:simple-page-master&gt;
+
+  &lt;fo:simple-page-master page-master-name="left"&gt;
+    &lt;fo:region-body margin-bottom="50pt"/&gt;
+    &lt;fo:region-after extent="25pt"/&gt;
+  &lt;/fo:simple-page-master&gt;
+&lt;/fo:layout-master-set&gt;
+
+&lt;fo:page-sequence&gt;
+  &lt;fo:static-content flow-name="xsl-after"&gt;
+    &lt;fo:block&gt;&lt;fo:page-number/&gt;&lt;/fo:block&gt;
+  &lt;/fo:static-content&gt;
+
+  &lt;fo:flow&gt;
+   . . .
+  &lt;/fo:flow&gt;
+&lt;/fo:page-sequence&gt;
+</SPAN>
+</PRE></DIV>
+<HR>
+
+<DIV class=foil id=N2294><A name=N2294></A>
+<H1 class=title>Slide 74: Defining the semantics of FOs and properties</H1>
+<P>The final result of an XSL processor is the FO result tree that would then be 
+passed to an XSL-enabled formatter for the final composition</P>
+<P>To allow for the precise definition of the semantics of each formatting 
+object and property, the XSL specification describes an <I><FONT 
+color=green>area structure</FONT></I> that is approximately analogous to a 
+formatter's unpaginated "galley" structure</P></DIV>
+<HR>
+
+<DIV class=foil id=N2304><A name=N2304></A>
+<H1 class=title>Slide 75: The area structure</H1>
+<P>The area structure is conceptually one of nested boxes laid out with spaces 
+around them and with formatting traits attached</P>
+<P>There are two types of areas: block areas and inline areas</P>
+<P>A line area is an example of a block are; a glyph area (for a "character") is 
+an example of an inline area</P>
+<P>The areas are separated by display space and inline space</P>
+<P>The areas are placed within area containers (e.g., those corresponding to 
+pages)</P>
+<P>Areas have traits which are derived from the FO's properties (often directly, 
+but sometimes via some computation)</P></DIV>
+<HR>
+
+<DIV class=foil id=N2319><A name=N2319></A>
+<H1 class=title>Slide 76: Basic Formatting Model</H1>
+<P>The XSL formatting model consists of converting an fo-result tree into a 
+structure of areas and traits</P>
+<DIV class=mediaobject><IMG src="XSLtutorial_files/areafig.gif"></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N2331><A name=N2331></A>
+<H1 class=title>Slide 77: Inheritance of properties</H1>
+<P>Properties are either inheritable or not--inheritance occurs within the 
+result tree</P>
+<P>Inheritable properties may not have any effect on a particular formatting 
+object on which they are set but their values may affect descendant objects</P>
+<P>Properties have some initial (default) value</P>
+<P>Therefore, there is always a value defined for every property on every 
+formatting object (either inherited, defaulted, or assigned), though not every 
+property will be relevant to every formatting object</P>
+<P>The description of each FO says which properties are relevant to it and 
+how</P></DIV>
+<HR>
+
+<DIV class=foil id=N2344><A name=N2344></A>
+<H1 class=title>Slide 78: Refinement of properties</H1>
+<P>Some properties can have values that require <I><FONT 
+color=green>refinement</FONT></I> to compute their value</P>
+<P>Refinement occurs after inheritance</P>
+<P>Examples of refinement:</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N2357></A>
+  <P>shortcuts such as font which map to multiple properties such as font-size, 
+  font-weight, etc.</P>
+  <LI><A name=N2360></A>
+  <P>cases where multiple properties can affect similar traits such as 
+  padding-left and padding-start or space-before and margin-top</P>
+  <LI><A name=N2363></A>
+  <P>values (e.g., margins) that can be specified in terms of percentage of the 
+  column width need to be resolved to a distance</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N2366><A name=N2366></A>
+<H1 class=title>Slide 79: Space specifiers</H1>
+<P>Properties such as space-before, space-after, and others are given as a 
+<I><FONT color=green>space specifier</FONT></I> </P>
+<P>A space specifier consists of five parts:</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N2376></A>
+  <P>a length giving the <I><FONT color=green>optimum</FONT></I> spacing 
+  amount</P>
+  <LI><A name=N2382></A>
+  <P>a length giving the <I><FONT color=green>minimum</FONT></I> spacing 
+  permissible</P>
+  <LI><A name=N2388></A>
+  <P>a length giving the <I><FONT color=green>maximum</FONT></I> spacing 
+  permissible</P>
+  <LI><A name=N2394></A>
+  <P>an integer giving the <I><FONT color=green>precedence</FONT></I> of this 
+  spacing amount</P>
+  <LI><A name=N2400></A>
+  <P>a boolean indicating the <I><FONT color=green>conditionality</FONT></I> of 
+  this spacing</P></LI></UL></DIV>
+<P>Consecutive space specifiers are "merged" or "collapsed" according to an 
+algorithm that takes their precedence and lengths into account</P>
+<P>Space at the boundary of an area container (e.g., a page) gets discarded if 
+its conditionality indicates that it is discardable</P></DIV>
+<HR>
+
+<DIV class=foil id=N2410><A name=N2410></A>
+<H1 class=title>Slide 80: Block spacing example</H1><PRE class=screen><SPAN class=inlinemediaobject>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;xsl:stylesheet
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:fo="http://www.w3.org/1999/XSL/Format"&gt;
+
+&lt;xsl:template match="chapter"&gt;
+  &lt;fo:block break-before="page"&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:block&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="chapter/title"&gt;
+  &lt;fo:block text-align="center" space-after="8pt"
+            space-before="16pt" space-after.precedence="3"&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:block&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="section"&gt;
+  &lt;xsl:apply-templates/&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="section/title"&gt;
+  &lt;fo:block text-align="center" space-after="6pt"
+            space-before="12pt" space-before.precedence="0"
+            space-after.precedence="3"&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:block&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="paragraph[1]" priority="1"&gt;
+  &lt;fo:block text-indent="0pc" space-after="7pt"
+            space-before.minimum="6pt" space-before.optimum="8pt"
+            space-before.maximum="10pt"&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:block&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="paragraph"&gt;
+  &lt;fo:block text-indent="2pc" space-after="7pt"
+            space-before.minimum="6pt" space-before.optimum="8pt"
+            space-before.maximum="10pt"&gt;
+    &lt;xsl:apply-templates/&gt;
+  &lt;/fo:block&gt;
+&lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;
+</SPAN>
+</PRE>
+<P>When the above stylesheet is applied to the following document, spacing will 
+resolve as described below the following document. </P><PRE class=screen><SPAN class=inlinemediaobject>&lt;chapter&gt;
+&lt;title&gt;Chapter title&lt;/title&gt;
+&lt;section&gt;
+&lt;title&gt;First section title&lt;/title&gt;
+&lt;para&gt;Section one's first paragraph.&lt;/para&gt;
+&lt;para&gt;Section one's second paragraph.&lt;/para&gt;
+&lt;/section&gt;
+&lt;section&gt;
+&lt;title&gt;Second section title&lt;/title&gt;
+&lt;para&gt;Section two's only paragraph.&lt;/para&gt;
+&lt;/section&gt;
+&lt;/chapter&gt;
+</SPAN>
+</PRE>
+<P>Chapter title appears at the top of the page (its space-before is discarded). 
+</P>
+<P>Space between Chapter title and First section title is (8pt,8pt,8pt): the 
+chapter title's space-after has a higher precedence than the section title's 
+space-before (which takes on the initial value of zero), so the latter is 
+discarded. </P>
+<P>Space between First section title and Section one's first paragraph is 
+(6pt,6pt,6pt): the section title's space-after has higher precedence than the 
+paragraph's space-before, so the latter is discarded. </P>
+<P>Space between the two paragraphs is (6pt,8pt,10pt): the space-after the first 
+paragraph is discarded because its precedence is equal to that of the 
+space-before the next paragraph, and the optimum of the space-after of the first 
+paragraph is greater than the optimum of the space-before of the second 
+paragraph. </P>
+<P>Space between the second paragraph of the first section and the title of the 
+second section is (12pt,12pt,12pt): the space-after the paragraph is discarded 
+because its precedence is equal to that of the space-before of the section 
+title, and the optimum of the space-after of the paragraph is less than the 
+optimum of the space-before of the section title. </P>
+<P>The indent on the first line of the first paragraph in section one and the 
+only paragraph in section two is 2pc; the indent on the first line of the second 
+paragraph in section one is zero. </P></DIV>
+<HR>
+
+<DIV class=foil id=N2441><A name=N2441></A>
+<H1 class=title>Slide 81: Borders, padding, box model</H1>
+<P>XSL has a box model that includes CSS's border, padding, and margin 
+concepts.</P>
+<DIV class=mediaobject><IMG 
+src="XSLtutorial_files/rectsformodel.gif"></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N2453><A name=N2453></A>
+<H1 class=title>Slide 82: Other formatting objects</H1>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N2457></A>
+  <P>graphic</P>
+  <LI><A name=N2460></A>
+  <P>rule</P>
+  <LI><A name=N2463></A>
+  <P>float, footnote</P>
+  <LI><A name=N2466></A>
+  <P>simple-link</P>
+  <LI><A name=N2469></A>
+  <P>multi-switch, multi-case, multi-toggle</P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N2475><A name=N2475></A>
+<H1 class=title>Slide 83: Related Links</H1>
+<DIV class=variablelist>
+<P><B>Other Information</B> </P>
+<DL>
+  <DT><A name=N2481></A><SPAN class=term><A 
+  href="http://nwalsh.com/docs/tutorials/xsl/" target=_top>XSL Concepts and 
+  Practical Use</A> (http://nwalsh.com/docs/tutorials/xsl/)</SPAN> 
+  <DD>
+  <P>An online version of this tutorial</P>
+  <DT><A name=N2489></A><SPAN class=term><A 
+  href="http://www.cranesoftwrights.com/links/training3.htm" target=_top>Crane 
+  Softwrights Ltd.</A> 
+  (http://www.CraneSoftwrights.com/links/training3.htm)</SPAN> 
+  <DD>
+  <P>Ken Holman offers a number of commercial tutorials</P></DD></DL></DIV>
+<DIV class=variablelist>
+<P><B>Specifications</B> </P>
+<DL>
+  <DT><A name=N2500></A><SPAN class=term><A href="http://www.w3.org/TR/xpath" 
+  target=_top>XPath</A> (http://www.w3.org/TR/xpath)</SPAN> 
+  <DD>
+  <P>XML Path Language 1.0, W3C Recommendation</P>
+  <DT><A name=N2508></A><SPAN class=term><A href="http://www.w3.org/TR/xslt" 
+  target=_top>XSLT</A> (http://www.w3.org/TR/xslt)</SPAN> 
+  <DD>
+  <P>XSL Transformations 1.0, W3C Recommendation</P>
+  <DT><A name=N2516></A><SPAN class=term><A href="http://www.w3.org/TR/xsl" 
+  target=_top>XSL</A> (http://www.w3.org/TR/xsl)</SPAN> 
+  <DD>
+  <P>Extensible Style Language 1.0, W3C Proposed Recommendation</P>
+  <DT><A name=N2524></A><SPAN class=term><A 
+  href="http://www.w3.org/TR/1998/REC-xml" target=_top>XML</A> 
+  (http://www.w3.org/TR/1998/REC-xml)</SPAN> 
+  <DD>
+  <P>Extensible Markup Language 1.0, W3C Recommendation</P>
+  <DT><A name=N2532></A><SPAN class=term><A 
+  href="http://www.w3.org/TR/REC-xml-names" target=_top>Namespaces</A> 
+  (http://www.w3.org/TR/REC-xml-names)</SPAN> 
+  <DD>
+  <P>Namespaces in XML 1.0, W3C Recommendation</P></DD></DL></DIV>
+<DIV class=variablelist>
+<P><B>Implementations</B> </P>
+<DL>
+  <DT><A name=N2543></A><SPAN class=term><A 
+  href="http://www.jclark.com/xml/xt.htm" target=_top>XT</A> 
+  (http://www.jclark.com/xml/xt.htm)</SPAN> 
+  <DD>
+  <P>James Clark's XSLT processor</P>
+  <DT><A name=N2551></A><SPAN class=term><A 
+  href="http://www.alphaworks.ibm.com/" target=_top>Lotus XSL</A> 
+  (http://www.alphaworks.ibm.com/)</SPAN> 
+  <DD>
+  <P>Scott Boag's XSLT processor</P>
+  <DT><A name=N2559></A><SPAN class=term><A href="http://www.jtauber.com/fop/" 
+  target=_top>FOP</A> (http://www.jtauber.com/fop/)</SPAN> 
+  <DD>
+  <P>James Tauber's open source XSL formatter and renderer; see also <A 
+  href="http://xml.apache.org/" target=_top>http://xml.apache.org/</A> 
+  (http://xml.apache.org/)</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N2570><A name=N2570></A>
+<H1 class=title>Slide 84: XSLT Element Index</H1>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N2574></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-apply-imports">&lt;xsl:apply-imports&gt;</A> 
+  </P>
+  <LI><A name=N2579></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-apply-templates">&lt;xsl:apply-templates&gt;</A> 
+  </P>
+  <LI><A name=N2584></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-attribute">&lt;xsl:attribute&gt;</A> 
+  </P>
+  <LI><A name=N2589></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-attribute-set">&lt;xsl:attribute-set&gt;</A> 
+  </P>
+  <LI><A name=N2594></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-call-template">&lt;xsl:call-template&gt;</A> 
+  </P>
+  <LI><A name=N2599></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-choose">&lt;xsl:choose&gt;</A> 
+  </P>
+  <LI><A name=N2604></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-comment">&lt;xsl:comment&gt;</A> 
+  </P>
+  <LI><A name=N2609></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-copy">&lt;xsl:copy&gt;</A> 
+  </P>
+  <LI><A name=N2614></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-copy-of">&lt;xsl:copy-of&gt;</A> 
+  </P>
+  <LI><A name=N2619></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-decimal-format">&lt;xsl:decimal-format&gt;</A> 
+  </P>
+  <LI><A name=N2624></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-element">&lt;xsl:element&gt;</A> 
+  </P>
+  <LI><A name=N2629></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-fallback">&lt;xsl:fallback&gt;</A> 
+  </P>
+  <LI><A name=N2634></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-for-each">&lt;xsl:for-each&gt;</A> 
+  </P>
+  <LI><A name=N2639></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-if">&lt;xsl:if&gt;</A> 
+  </P>
+  <LI><A name=N2644></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-import">&lt;xsl:import&gt;</A> 
+  </P>
+  <LI><A name=N2649></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-include">&lt;xsl:include&gt;</A> 
+  </P>
+  <LI><A name=N2654></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-key">&lt;xsl:key&gt;</A> 
+  </P>
+  <LI><A name=N2659></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-message">&lt;xsl:message&gt;</A> 
+  </P>
+  <LI><A name=N2664></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-namespace-alias">&lt;xsl:namespace-alias&gt;</A> 
+  </P>
+  <LI><A name=N2669></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-number">&lt;xsl:number&gt;</A> 
+  </P>
+  <LI><A name=N2674></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-otherwise">&lt;xsl:otherwise&gt;</A> 
+  </P>
+  <LI><A name=N2679></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-output">&lt;xsl:output&gt;</A> 
+  </P>
+  <LI><A name=N2684></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-param">&lt;xsl:param&gt;</A> 
+  </P>
+  <LI><A name=N2689></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-preserve-space">&lt;xsl:preserve-space&gt;</A> 
+  </P>
+  <LI><A name=N2694></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-processing-instruction">&lt;xsl:processing-instruction&gt;</A> 
+  </P>
+  <LI><A name=N2699></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-sort">&lt;xsl:sort&gt;</A> 
+  </P>
+  <LI><A name=N2704></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-strip-space">&lt;xsl:strip-space&gt;</A> 
+  </P>
+  <LI><A name=N2709></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-stylesheet">&lt;xsl:stylesheet&gt;</A> 
+  </P>
+  <LI><A name=N2714></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-template">&lt;xsl:template&gt;</A> 
+  </P>
+  <LI><A name=N2719></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-text">&lt;xsl:text&gt;</A> 
+  </P>
+  <LI><A name=N2724></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-stylesheet">&lt;xsl:transform&gt;</A> 
+  </P>
+  <LI><A name=N2729></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-value-of">&lt;xsl:value-of&gt;</A> 
+  </P>
+  <LI><A name=N2734></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-variable">&lt;xsl:variable&gt;</A> 
+  </P>
+  <LI><A name=N2739></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-when">&lt;xsl:when&gt;</A> 
+  </P>
+  <LI><A name=N2744></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-with-param">&lt;xsl:with-param&gt;</A> 
+  </P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N2749><A name=N2749></A>
+<H1 class=title>Slide 85: XPath Functions</H1>
+<P>XPath defines the grammer of location paths and a set of functions:</P>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N2755></A><SPAN class=term>number last()</SPAN> 
+  <DD>
+  <P>Returns the ordinal value of the last element in the current context</P>
+  <DT><A name=N2761></A><SPAN class=term>number position()</SPAN> 
+  <DD>
+  <P>Returns the ordinal value of the current element in the current context</P>
+  <DT><A name=N2767></A><SPAN class=term>number count(node-set)</SPAN> 
+  <DD>
+  <P>Returns the number of nodes in the specified node set</P>
+  <DT><A name=N2773></A><SPAN class=term>node-set id(object)</SPAN> 
+  <DD>
+  <P>Returns the set of elements with the specified ID value</P>
+  <DT><A name=N2779></A><SPAN class=term>string local-name(node-set)</SPAN> 
+  <DD>
+  <P>Returns the local name (the name without any namespace qualifiers) of the 
+  specified node (or the first node in document order)</P>
+  <DT><A name=N2785></A><SPAN class=term>string namespace-uri(node-set)</SPAN> 
+  <DD>
+  <P>Returns the namespace URI of the specified node (or the first node in 
+  document order)</P>
+  <DT><A name=N2791></A><SPAN class=term>string name(node-set)</SPAN> 
+  <DD>
+  <P>Returns the fully qualified name of the specified node (or the first node 
+  in document order)</P>
+  <DT><A name=N2797></A><SPAN class=term>string string(object)</SPAN> 
+  <DD>
+  <P>Returns the string representation of the object</P>
+  <DT><A name=N2803></A><SPAN class=term>string concat(string1, string2, 
+  [string3, [string4], ...])</SPAN> 
+  <DD>
+  <P>Returns the concatenation of its arguments</P>
+  <DT><A name=N2809></A><SPAN class=term>boolean starts-with(string1, 
+  string2)</SPAN> 
+  <DD>
+  <P>Returns true if string1 starts with the characters in string2</P>
+  <DT><A name=N2815></A><SPAN class=term>boolean contains(string1, 
+  string2)</SPAN> 
+  <DD>
+  <P>Returns true if string1 contains string2</P>
+  <DT><A name=N2821></A><SPAN class=term>string substring-before(string1, 
+  string2)</SPAN> 
+  <DD>
+  <P>Returns the substring of string1 that occurs before the first occurance of 
+  string2, or the empty string if not(contains(string1, string2))</P>
+  <DT><A name=N2827></A><SPAN class=term>string substring-after(string, 
+  string)</SPAN> 
+  <DD>
+  <P>Returns the substring of string1 that occurs after the first occurance of 
+  string2, or the empty string if not(contains(string1, string2))</P>
+  <DT><A name=N2833></A><SPAN class=term>string substring(string, startpos, 
+  [length])</SPAN> 
+  <DD>
+  <P>Returns the substring of string starting at position startpos of length 
+  length, or the rest of the string if length is not specified</P>
+  <DT><A name=N2839></A><SPAN class=term>number string-length(string?)</SPAN> 
+  <DD>
+  <P>Returns the length of the specified string</P>
+  <DT><A name=N2845></A><SPAN class=term>string normalize-space(string?)</SPAN> 
+  <DD>
+  <P>Returns the specified string with leading and trailing whitespace removed 
+  and internal sequences of multiple whitespace characters replaced by a single 
+  space</P>
+  <DT><A name=N2851></A><SPAN class=term>string translate(string1, string2, 
+  string3)</SPAN> 
+  <DD>
+  <P>Returns string1 with the characters in string2 replaced by the characaters 
+  in string3</P>
+  <DT><A name=N2857></A><SPAN class=term>boolean boolean(object)</SPAN> 
+  <DD>
+  <P>Returns the boolean representation of the object</P>
+  <DT><A name=N2863></A><SPAN class=term>boolean not(boolean)</SPAN> 
+  <DD>
+  <P>Returns the negation of boolean</P>
+  <DT><A name=N2869></A><SPAN class=term>boolean true()</SPAN> 
+  <DD>
+  <P>Returns true</P>
+  <DT><A name=N2875></A><SPAN class=term>boolean false()</SPAN> 
+  <DD>
+  <P>Returns false (i.e., not(true())</P>
+  <DT><A name=N2881></A><SPAN class=term>boolean lang(string)</SPAN> 
+  <DD>
+  <P>Returns true if the language of the current context node (as specified by 
+  xml:lang) matches the specified language string</P>
+  <DT><A name=N2887></A><SPAN class=term>number number(object?)</SPAN> 
+  <DD>
+  <P>Returns the numeric representation of the object</P>
+  <DT><A name=N2893></A><SPAN class=term>number sum(node-set)</SPAN> 
+  <DD>
+  <P>Returns the sum of the numeric representations of the nodes in the 
+  node-set</P>
+  <DT><A name=N2899></A><SPAN class=term>number floor(number)</SPAN> 
+  <DD>
+  <P>Returns the largest integer not greater than number</P>
+  <DT><A name=N2905></A><SPAN class=term>number ceiling(number)</SPAN> 
+  <DD>
+  <P>Returns the smallest integer not less than number</P>
+  <DT><A name=N2911></A><SPAN class=term>number round(number)</SPAN> 
+  <DD>
+  <P>Returns the integer value closest to number</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N2917><A name=N2917></A>
+<H1 class=title>Slide 86: XSLT Functions</H1>
+<P>XSLT extends the set of available functions with these:</P>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N2923></A><SPAN class=term>node-set document(object, 
+  node-set?)</SPAN> 
+  <DD>
+  <P>Allows XSLT to access the nodes in another document</P>
+  <DT><A name=N2929></A><SPAN class=term>node-set key(keyname, object)</SPAN> 
+  <DD>
+  <P>Returns the nodes that match object in the specified key</P>
+  <DT><A name=N2935></A><SPAN class=term>string format-number(number, 
+  formatstring, [decimalformat])</SPAN> 
+  <DD>
+  <P>Returns the string representation of number using the formatstring 
+  specified and the decimalformat (or the default decimal format)</P>
+  <DT><A name=N2941></A><SPAN class=term>node-set current()</SPAN> 
+  <DD>
+  <P>Returns the current context node</P>
+  <DT><A name=N2947></A><SPAN class=term>string 
+  unparsed-entity-uri(string)</SPAN> 
+  <DD>
+  <P>Returns the URI of the specified unparsed entity</P>
+  <DT><A name=N2953></A><SPAN class=term>string generate-id(node-set)</SPAN> 
+  <DD>
+  <P>Returns a string which uniquely identifies the specified node, or the first 
+  node in document order</P>
+  <DT><A name=N2959></A><SPAN class=term>object system-property(string)</SPAN> 
+  <DD>
+  <P>Returns the value of the specified system property</P>
+  <DT><A name=N2965></A><SPAN class=term>boolean 
+  element-available(string)</SPAN> 
+  <DD>
+  <P>Returns true if the specified element is available in the 
+implementation</P>
+  <DT><A name=N2971></A><SPAN class=term>boolean 
+  function-available(string)</SPAN> 
+  <DD>
+  <P>Returns true if the specified function is available in the 
+  implementation</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=N2980><A name=N2980></A>
+<H1 class=title>Slide 87: Top-Level Stylesheet Elements</H1>
+<P>There are nine top-level XSLT elements:</P>
+<DIV class=itemizedlist>
+<UL>
+  <LI><A name=N2986></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#modularize">xsl:import</A> 
+  and <A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#modularize">xsl:include</A> 
+  </P>
+  <LI><A name=N2995></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#whitespace">xsl:strip-space</A> 
+  and <A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#whitespace">xsl:preserve-space</A> 
+  </P>
+  <LI><A name=N3004></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#serialize">xsl:output</A> 
+  </P>
+  <LI><A name=N3009></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#keys">xsl:key</A> 
+  </P>
+  <LI><A name=N3014></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#decformat">xsl:decimal-format</A> 
+  </P>
+  <LI><A name=N3019></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#serialize">xsl:namespace-alias</A> 
+  </P>
+  <LI><A name=N3024></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#advresulttree">xsl:attribute-set</A> 
+  </P>
+  <LI><A name=N3029></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#variables">xsl:variable</A> 
+  </P>
+  <LI><A name=N3034></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#procstyle">xsl:param</A> 
+  </P>
+  <LI><A name=N3039></A>
+  <P><A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#recstyle">xsl:template</A> 
+  </P></LI></UL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-stylesheet><A name=xsl-stylesheet></A>
+<H1 class=title>Slide 88: &lt;xsl:stylesheet&gt; or &lt;xsl:transform&gt;</H1>
+<P>The &lt;xsl:stylesheet&gt; or &lt;xsl:transform&gt; elements identify a 
+complete stylesheet. They are completely synonymous.</P><PRE class=screen>&lt;xsl:stylesheet
+  id = id 
+  extension-element-prefixes = tokens 
+  exclude-result-prefixes = tokens 
+  version = number&gt;
+  &lt;!-- Content: (xsl:import*, top-level-elements) --&gt;
+&lt;/xsl:stylesheet&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3054></A><SPAN class=term>id</SPAN> 
+  <DD>
+  <P>A unique identifier</P>
+  <DT><A name=N3060></A><SPAN class=term>extension-element-prefixes</SPAN> 
+  <DD>
+  <P>Identifies <A href="http://www.w3.org/TR/REC-xml-names" 
+  target=_top>namespace</A> (http://www.w3.org/TR/REC-xml-names) prefixes that 
+  are extension element prefixes</P>
+  <DT><A name=N3070></A><SPAN class=term>exclude-result-prefixes</SPAN> 
+  <DD>
+  <P>Lists <A href="http://www.w3.org/TR/REC-xml-names" 
+  target=_top>namespace</A> (http://www.w3.org/TR/REC-xml-names) prefixes that 
+  should not be put in the result tree</P>
+  <DT><A name=N3080></A><SPAN class=term>version</SPAN> 
+  <DD>
+  <P>The XSLT version to which this stylesheet conforms 
+(required)</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-template><A name=xsl-template></A>
+<H1 class=title>Slide 89: &lt;xsl:template&gt;</H1>
+<P>A &lt;xsl:template&gt; constructs a portion of the result tree. It can be 
+called either automatically by the XSLT processor or procedurally by other 
+template(s) in the stylesheet.</P><PRE class=screen>&lt;xsl:template
+  match = pattern 
+  name = qname 
+  priority = number 
+  mode = qname&gt;
+  &lt;!-- Content: (xsl:param*, template) --&gt;
+&lt;/xsl:template&gt;
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3096></A><SPAN class=term>match</SPAN> 
+  <DD>
+  <P>The match pattern for this template</P>
+  <DT><A name=N3102></A><SPAN class=term>name</SPAN> 
+  <DD>
+  <P>The name of this template</P>
+  <DT><A name=N3108></A><SPAN class=term>priority</SPAN> 
+  <DD>
+  <P>A priority for <A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#conflict">conflict 
+  resolution</A> </P>
+  <DT><A name=N3117></A><SPAN class=term>mode</SPAN> 
+  <DD>
+  <P>The <A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#modes">mode</A> 
+  in which this template occurs</P></DD></DL></DIV>
+<P>Either a match pattern or a name must be specified.</P></DIV>
+<HR>
+
+<DIV class=foil id=xsl-apply-templates><A name=xsl-apply-templates></A>
+<H1 class=title>Slide 90: &lt;xsl:apply-templates&gt;</H1>
+<P>The &lt;xsl:apply-templates&gt; element indicates where additional templates 
+should be used to construct a portion of the result tree. See also <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-call-template">&lt;xsl:call-template&gt;</A> 
+</P><PRE class=screen>&lt;xsl:apply-templates
+  select = node-set-expression 
+  mode = qname&gt;
+  &lt;!-- Content: (xsl:sort | xsl:with-param)* --&gt;
+&lt;/xsl:apply-templates&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3142></A><SPAN class=term>select</SPAN> 
+  <DD>
+  <P>Selects the nodes which are to be processed</P>
+  <DT><A name=N3148></A><SPAN class=term>mode</SPAN> 
+  <DD>
+  <P>Selects the mode in which processing will occur</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-for-each><A name=xsl-for-each></A>
+<H1 class=title>Slide 91: &lt;xsl:for-each&gt;</H1>
+<P>A &lt;xsl:for-each&gt; is a loop which processes each of the selected nodes 
+using the template that it contains.</P><PRE class=screen>&lt;xsl:for-each
+  select = node-set-expression&gt;
+  &lt;!-- Content: (xsl:sort*, template) --&gt;
+&lt;/xsl:for-each&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3164></A><SPAN class=term>select</SPAN> 
+  <DD>
+  <P>Selects the nodes which are to be processed</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-call-template><A name=xsl-call-template></A>
+<H1 class=title>Slide 92: &lt;xsl:call-template&gt;</H1>
+<P>A &lt;xsl:call-template&gt; allows one template to explicitly invoke another 
+template by name. See also <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-apply-templates">&lt;xsl:apply-templates&gt;</A>.</P><PRE class=screen>&lt;xsl:call-template 
+  name = qname&gt;
+  &lt;!-- Content: xsl:with-param* --&gt;
+&lt;/xsl:call-template&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3184></A><SPAN class=term>name</SPAN> 
+  <DD>
+  <P>The name of the template to be called. The stylesheet must contain an <A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-template">&lt;xsl:template&gt;</A> 
+  with the specifed name.</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-param><A name=xsl-param></A>
+<H1 class=title>Slide 93: &lt;xsl:param&gt;</H1>
+<P>A &lt;xsl:param&gt; can occur at either the top level or as the first child 
+of a <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-template">&lt;xsl:template&gt;</A>. 
+It is similar to a <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-variable">&lt;xsl:variable&gt;</A>, 
+but its value may be changed by the calling template or stylesheet 
+environment.</P>
+<P>This is analagous to the concept of subroutine parameters in a more 
+traditional programming language.</P><PRE class=screen>&lt;xsl:param 
+  name = qname 
+  select = expression&gt;
+  &lt;!-- Content: template --&gt;
+&lt;/xsl:param&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3214></A><SPAN class=term>name</SPAN> 
+  <DD>
+  <P>The name of the parameter</P>
+  <DT><A name=N3220></A><SPAN class=term>select</SPAN> 
+  <DD>
+  <P>Selects the parameter content, if present, otherwise the element content is 
+  used</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-with-param><A name=xsl-with-param></A>
+<H1 class=title>Slide 94: &lt;xsl:with-param&gt;</H1>
+<P>Used inside a <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-call-template">&lt;xsl:call-template&gt;</A>, 
+a &lt;xsl:with-param&gt; specifies the value for parameters (<A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-param">&lt;xsl:param&gt;</A>) 
+within the called template.</P><PRE class=screen>&lt;xsl:with-param 
+  name = qname 
+  select = expression&gt;
+  &lt;!-- Content: template --&gt;
+&lt;/xsl:with-param&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3244></A><SPAN class=term>name</SPAN> 
+  <DD>
+  <P>The name of the parameter</P>
+  <DT><A name=N3250></A><SPAN class=term>select</SPAN> 
+  <DD>
+  <P>Selects the parameter content, if present, otherwise the element content is 
+  used</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-text><A name=xsl-text></A>
+<H1 class=title>Slide 95: &lt;xsl:text&gt;</H1>
+<P>A &lt;xsl:text&gt; element inserts literal text into the result tree.</P><PRE class=screen>&lt;xsl:text 
+  disable-output-escaping = "yes" | "no"&gt;
+  &lt;!-- Content: #PCDATA --&gt;
+&lt;/xsl:text&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3266></A><SPAN class=term>disable-output-escaping</SPAN> 
+  <DD>
+  <P>If "yes", allows unescaped markup characters to be copied into the result 
+  tree.</P></DD></DL></DIV>
+<P>Disabling output escaping <I><FONT color=green>may create result trees that 
+are not well-formed, and are therefore not XML.</FONT></I> Your gun, your 
+bullet, your foot!</P></DIV>
+<HR>
+
+<DIV class=foil id=xsl-copy><A name=xsl-copy></A>
+<H1 class=title>Slide 96: &lt;xsl:copy&gt;</H1><PRE class=screen>&lt;xsl:copy 
+  use-attribute-sets = qnames&gt;
+  &lt;!-- Content: template --&gt;
+&lt;/xsl:copy&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3285></A><SPAN class=term>use-attribute-sets</SPAN> 
+  <DD>
+  <P>Lists the names of attribute sets (<A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-attribute-set">&lt;xsl:attribute-set&gt;</A>) 
+  to be copied into the result tree</P></DD></DL></DIV>
+<P>The actual content of the &lt;xsl:copy&gt; element is copied literally into 
+the result tree.</P></DIV>
+<HR>
+
+<DIV class=foil id=xsl-copy-of><A name=xsl-copy-of></A>
+<H1 class=title>Slide 97: &lt;xsl:copy-of&gt;</H1><PRE class=screen>&lt;xsl:copy-of 
+  select = expression /&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3305></A><SPAN class=term>select</SPAN> 
+  <DD>
+  <P>Selects the elements to be copied literally into the result 
+tree</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-value-of><A name=xsl-value-of></A>
+<H1 class=title>Slide 98: &lt;xsl:value-of&gt;</H1>
+<P>The &lt;xsl:value-of&gt; element inserts the string value of an expression 
+into the result tree.</P><PRE class=screen>&lt;xsl:value-of 
+  select = string-expression 
+  disable-output-escaping = "yes" | "no" /&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3321></A><SPAN class=term>select</SPAN> 
+  <DD>
+  <P>The expression to be evaluated; the result is converted to a string</P>
+  <DT><A name=N3327></A><SPAN class=term>disable-output-escaping</SPAN> 
+  <DD>
+  <P>If "yes", allows unescaped markup characters to be copied into the result 
+  tree.</P></DD></DL></DIV>
+<P>Some examples of &lt;xsl:value-of&gt;:</P>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3336></A><SPAN class=term>&lt;xsl:value-of 
+  select="3+4"/&gt;</SPAN> 
+  <DD>
+  <P>Inserts <TT>7</TT> </P>
+  <DT><A name=N3345></A><SPAN class=term>&lt;xsl:value-of 
+  select="{$varname}"/&gt;</SPAN> 
+  <DD>
+  <P>Inserts the value of the variable <TT>varname</TT>, as a string</P>
+  <DT><A name=N3355></A><SPAN class=term>&lt;xsl:value-of 
+  select="../title[1]"/&gt;</SPAN> 
+  <DD>
+  <P>Inserts the content of the first &lt;title&gt; child of the current context 
+  node's parent</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-element><A name=xsl-element></A>
+<H1 class=title>Slide 99: &lt;xsl:element&gt;</H1>
+<P>The &lt;xsl:element&gt; allows you to dynamically calculate an element 
+name.</P><PRE class=screen>&lt;xsl:element 
+  name = { qname }
+  namespace = { uri-reference }
+  use-attribute-sets = qnames&gt;
+  &lt;!-- Content: template --&gt;
+&lt;/xsl:element&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3371></A><SPAN class=term>name</SPAN> 
+  <DD>
+  <P>The element name</P>
+  <DT><A name=N3377></A><SPAN class=term>namespace</SPAN> 
+  <DD>
+  <P>The namespace URI reference for the element</P>
+  <DT><A name=N3383></A><SPAN class=term>use-attribute-sets</SPAN> 
+  <DD>
+  <P>Lists the names of attribute sets (<A 
+  href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-attribute-set">&lt;xsl:attribute-set&gt;</A>) 
+  to be copied into the result tree</P></DD></DL></DIV>
+<P>An example of &lt;xsl:element&gt; in use:</P><PRE class=screen>&lt;xsl:template name="process.table.cell"&gt;
+  &lt;xsl:param name="cellgi"&gt;td&lt;/xsl:param&gt;
+  &lt;xsl:element name="{$cellgi}"&gt;
+    &lt;!-- whatever processing is desired --&gt;
+  &lt;/xsl:element&gt;
+&lt;/xsl:template&gt;</PRE></DIV>
+<HR>
+
+<DIV class=foil id=xsl-attribute><A name=xsl-attribute></A>
+<H1 class=title>Slide 100: &lt;xsl:attribute&gt;</H1>
+<P>The &lt;xsl:attribute&gt; element allows you to dynamically or conditionally 
+add attributes.</P><PRE class=screen>&lt;xsl:attribute 
+  name = { qname }
+  namespace = { uri-reference }&gt;
+  &lt;!-- Content: template --&gt;
+&lt;/xsl:attribute&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3408></A><SPAN class=term>name</SPAN> 
+  <DD>
+  <P>The attribute name</P>
+  <DT><A name=N3414></A><SPAN class=term>namespace</SPAN> 
+  <DD>
+  <P>The namespace URI reference for the attribute</P></DD></DL></DIV>
+<P>An example of &lt;xsl:attribute&gt; being used conditionally:</P><PRE class=screen>&lt;xsl:template name="graphic"&gt;
+  &lt;img src="{@fileref}"&gt;
+    &lt;xsl:if test="@align"&gt;
+      &lt;xsl:attribute name="align"&gt;
+        &lt;xsl:value-of select="@align"/&gt;
+      &lt;/xsl:attribute&gt;
+    &lt;/xsl:if&gt;
+  &lt;/img&gt;
+&lt;/xsl:template&gt;</PRE>
+<P>Note that the &lt;img&gt; tag has logical content in the stylesheet. The 
+serializer is expected to render this appropriately for HTML or XML.</P></DIV>
+<HR>
+
+<DIV class=foil id=xsl-if><A name=xsl-if></A>
+<H1 class=title>Slide 101: &lt;xsl:if&gt;</H1>
+<P>The &lt;xsl:if&gt; element is a simple "if" conditional:</P><PRE class=screen>&lt;xsl:if 
+  test = boolean-expression&gt;
+  &lt;!-- Content: template --&gt;
+&lt;/xsl:if&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3437></A><SPAN class=term>test</SPAN> 
+  <DD>
+  <P>The test expression</P></DD></DL></DIV>
+<P>If the test expression returns a true value, the content of the 
+&lt;xsl:if&gt; element is evaluated and inserted into the result tree. 
+Otherwise, the &lt;xsl:if&gt; element and all of its contents are 
+ignored.</P></DIV>
+<HR>
+
+<DIV class=foil id=xsl-choose><A name=xsl-choose></A>
+<H1 class=title>Slide 102: &lt;xsl:choose&gt;</H1>
+<P>For more complex conditionals, &lt;xsl:choose&gt; is a multi-way switching 
+element.</P><PRE class=screen>&lt;xsl:choose&gt;
+  &lt;!-- Content: (xsl:when+, xsl:otherwise?) --&gt;
+&lt;/xsl:choose&gt; 
+</PRE>
+<P>The content of the first <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-when">&lt;xsl:when&gt;</A> 
+element with a test expression that evaluates to true is inserted into the 
+result tree. If none of them evaluate to true, the content of the <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-otherwise">&lt;xsl:otherwise&gt;</A> 
+element is inserted. </P></DIV>
+<HR>
+
+<DIV class=foil id=xsl-when><A name=xsl-when></A>
+<H1 class=title>Slide 103: &lt;xsl:when&gt;</H1>
+<P>A &lt;xsl:when&gt; element is part of a <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-choose">&lt;xsl:choose&gt;</A> 
+statement.</P><PRE class=screen>&lt;xsl:when 
+  test = boolean-expression&gt;
+  &lt;!-- Content: template --&gt;
+&lt;/xsl:when&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3478></A><SPAN class=term>test</SPAN> 
+  <DD>
+  <P>The test expression</P></DD></DL></DIV>
+<P>If the test expression returns a true value, the content of the 
+&lt;xsl:when&gt; element is evaluated and inserted into the result 
+tree.</P></DIV>
+<HR>
+
+<DIV class=foil id=xsl-otherwise><A name=xsl-otherwise></A>
+<H1 class=title>Slide 104: &lt;xsl:otherwise&gt;</H1>
+<P>An &lt;xsl:otherwise&gt; element is part of a <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-choose">&lt;xsl:choose&gt;</A> 
+statement.</P><PRE class=screen>&lt;xsl:otherwise&gt;
+  &lt;!-- Content: template --&gt;
+&lt;/xsl:otherwise&gt; 
+</PRE>
+<P>If none of the <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-when">&lt;xsl:when&gt;</A> 
+elements evaluate to true, the content of the <A 
+href="http://www.nwalsh.com/docs/tutorials/xsl/xsl/slides.html#xsl-otherwise">&lt;xsl:otherwise&gt;</A> 
+element is inserted into the result tree. </P></DIV>
+<HR>
+
+<DIV class=foil id=xsl-message><A name=xsl-message></A>
+<H1 class=title>Slide 105: &lt;xsl:message&gt;</H1>
+<P>A &lt;xsl:message&gt; is a mechanism for the stylesheet author to communicate 
+with the person running the stylesheet.</P><PRE class=screen>&lt;xsl:message 
+  terminate = "yes" | "no"&gt;
+  &lt;!-- Content: template --&gt;
+&lt;/xsl:message&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3519></A><SPAN class=term>terminate</SPAN> 
+  <DD>
+  <P>If "yes", the stylesheet processor is expected to stop processing after 
+  displaying the message</P></DD></DL></DIV>
+<P>The content of the &lt;xsl:message&gt; element may be presented to the user 
+in an application-dependent fashion. This could be a terminal message, a browser 
+popup, nothing more than writing it to a log file or simply terminating the 
+program without displaying the message at all (for example, in a server-side 
+environment).</P></DIV>
+<HR>
+
+<DIV class=foil id=xsl-variable><A name=xsl-variable></A>
+<H1 class=title>Slide 106: &lt;xsl:variable&gt;</H1>
+<P>A &lt;xsl:variable&gt; is a named storage location holding the results of a 
+runtime evaluation of the variable content or select expression</P><PRE class=screen>&lt;xsl:variable 
+  name = qname 
+  select = expression&gt;
+  &lt;!-- Content: template --&gt;
+&lt;/xsl:variable&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3537></A><SPAN class=term>name</SPAN> 
+  <DD>
+  <P>The variable name</P>
+  <DT><A name=N3543></A><SPAN class=term>select</SPAN> 
+  <DD>
+  <P>Selects the variable content, if present, otherwise the element content is 
+  used</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-sort><A name=xsl-sort></A>
+<H1 class=title>Slide 107: &lt;xsl:sort&gt;</H1>
+<P>The &lt;xsl:sort&gt; element sorts a set of nodes.</P><PRE class=screen>&lt;xsl:sort
+  select = string-expression 
+  lang = { nmtoken }
+  data-type = { "text" | "number" | qname-but-not-ncname }
+  order = { "ascending" | "descending" }
+  case-order = { "upper-first" | "lower-first" } /&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3559></A><SPAN class=term>select</SPAN> 
+  <DD>
+  <P>Selects the sort expression; this is evaluated for each node in the sort 
+  node set</P>
+  <DT><A name=N3565></A><SPAN class=term>lang</SPAN> 
+  <DD>
+  <P>The language to use for sorting purposes</P>
+  <DT><A name=N3571></A><SPAN class=term>data-type</SPAN> 
+  <DD>
+  <P>The sorting data-type</P>
+  <DT><A name=N3577></A><SPAN class=term>order</SPAN> 
+  <DD>
+  <P>The sort order</P>
+  <DT><A name=N3583></A><SPAN class=term>case-order</SPAN> 
+  <DD>
+  <P>Do upper-case letters sort before lower-case, or 
+vice-versa?</P></DD></DL></DIV>
+<P>The sorting data type determines how selected values are sorted; for example 
+"02" sorts before "1" if "text" is used, after if "number" is used. Specifying 
+any other value invokes a processor-dependent extension.</P></DIV>
+<HR>
+
+<DIV class=foil id=xsl-number><A name=xsl-number></A>
+<H1 class=title>Slide 108: &lt;xsl:number&gt;</H1>
+<P>The &lt;xsl:number&gt; element counts elements in the source tree (or takes a 
+numeric expression) and inserts a text representation of the resulting number 
+into the result tree.</P><PRE class=screen>&lt;xsl:number
+  level = "single" | "multiple" | "any"
+  count = pattern 
+  from = pattern 
+  value = number-expression 
+  format = { string }
+  lang = { nmtoken }
+  letter-value = { "alphabetic" | "traditional" }
+  grouping-separator = { char }
+  grouping-size = { number } /&gt;</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3601></A><SPAN class=term>level</SPAN> 
+  <DD>
+  <P>Identifies the counting level</P>
+  <DT><A name=N3607></A><SPAN class=term>count</SPAN> 
+  <DD>
+  <P>Selects the element(s) to count</P>
+  <DT><A name=N3613></A><SPAN class=term>from</SPAN> 
+  <DD>
+  <P>Selects the location where counting should begin</P>
+  <DT><A name=N3619></A><SPAN class=term>value</SPAN> 
+  <DD>
+  <P>A numeric expression to convert to a text representation</P>
+  <DT><A name=N3625></A><SPAN class=term>format</SPAN> 
+  <DD>
+  <P>The format string</P>
+  <DT><A name=N3631></A><SPAN class=term>lang</SPAN> 
+  <DD>
+  <P>The language to use for conversion</P>
+  <DT><A name=N3637></A><SPAN class=term>letter-value</SPAN> 
+  <DD>
+  <P>Selects alphabetic or traditional letter values (in English, alphabetic is 
+  the traditional sequence, but that is not true in all languages)</P>
+  <DT><A name=N3643></A><SPAN class=term>grouping-separator</SPAN> 
+  <DD>
+  <P>The grouping separator character (",")</P>
+  <DT><A name=N3649></A><SPAN class=term>grouping-size</SPAN> 
+  <DD>
+  <P>The number of digits in a group (3)</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-decimal-format><A name=xsl-decimal-format></A>
+<H1 class=title>Slide 109: &lt;xsl:decimal-format&gt;</H1>
+<P>A &lt;xsl:decimal-format&gt; element defines the default decimal format for 
+number to text conversion.</P><PRE class=screen>&lt;xsl:decimal-format
+  name = qname 
+  decimal-separator = char 
+  grouping-separator = char 
+  infinity = string 
+  minus-sign = char 
+  NaN = string 
+  percent = char 
+  per-mille = char 
+  zero-digit = char 
+  digit = char 
+  pattern-separator = char /&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3665></A><SPAN class=term>name</SPAN> 
+  <DD>
+  <P>An optional name that can be used to refer to this decimal format; if no 
+  name is given, this declaration sets the default decimal format</P>
+  <DT><A name=N3671></A><SPAN class=term>decimal-separator</SPAN> 
+  <DD>
+  <P>The decimal separator character ("." for example)</P>
+  <DT><A name=N3677></A><SPAN class=term>grouping-separator</SPAN> 
+  <DD>
+  <P>The grouping separator character (",")</P>
+  <DT><A name=N3683></A><SPAN class=term>infinity</SPAN> 
+  <DD>
+  <P>The string to use to represent infinity ("Infinity")</P>
+  <DT><A name=N3689></A><SPAN class=term>minus-sign</SPAN> 
+  <DD>
+  <P>The character to use to represent negative numbers ("-")</P>
+  <DT><A name=N3695></A><SPAN class=term>NaN</SPAN> 
+  <DD>
+  <P>The string to use to represent "not a number" ("NaN")</P>
+  <DT><A name=N3701></A><SPAN class=term>percent</SPAN> 
+  <DD>
+  <P>The percent character ("%")</P>
+  <DT><A name=N3707></A><SPAN class=term>per-mille</SPAN> 
+  <DD>
+  <P>The per-mille character ("‰")</P>
+  <DT><A name=N3713></A><SPAN class=term>zero-digit</SPAN> 
+  <DD>
+  <P>The character used in format strings to represent a digit where a missing 
+  digit will show as this character ("0")</P>
+  <DT><A name=N3719></A><SPAN class=term>digit</SPAN> 
+  <DD>
+  <P>The character used in format strings to represent a digit where a missing 
+  digit will be absent ("#")</P>
+  <DT><A name=N3725></A><SPAN class=term>pattern-separator</SPAN> 
+  <DD>
+  <P>The character used to separate format strings (";")</P></DD></DL></DIV>
+<P>All of these attributes, and the operation of the format number function, are 
+interpreted according to the Java JDK 1.1 definition of the <A 
+href="http://java.sun.com/products/jdk/1.1/docs/api/java.text.DecimalFormat.html" 
+target=_top>DecimalFormat</A> 
+(http://java.sun.com/products/jdk/1.1/docs/api/java.text.DecimalFormat.html) 
+class.</P></DIV>
+<HR>
+
+<DIV class=foil id=xsl-key><A name=xsl-key></A>
+<H1 class=title>Slide 110: &lt;xsl:key&gt;</H1>
+<P>The &lt;xsl:key&gt; element declares a key for subsequent use with the key() 
+function.</P><PRE class=screen>&lt;xsl:key 
+  name = qname 
+  match = pattern 
+  use = expression /&gt; 
+</PRE>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3747></A><SPAN class=term>name</SPAN> 
+  <DD>
+  <P>The name of this key</P>
+  <DT><A name=N3753></A><SPAN class=term>match</SPAN> 
+  <DD>
+  <P>Selects the nodes which are in this key set</P>
+  <DT><A name=N3759></A><SPAN class=term>use</SPAN> 
+  <DD>
+  <P>Selects the expression within each node that identifies the 
+key</P></DD></DL></DIV>
+<P>The &lt;xsl:key&gt; element is only useful in conjunction with the key 
+function:</P>
+<DIV class=variablelist>
+<DL>
+  <DT><A name=N3768></A><SPAN class=term>node-set key(name, object)</SPAN> 
+  <DD>
+  <P>Returns the nodes that match object in the specified 
+key</P></DD></DL></DIV></DIV>
+<HR>
+
+<DIV class=foil id=xsl-fallback><A name=xsl-fallback></A>
+<H1 class=title>Slide 111: &lt;xsl:fallback&gt;</H1>
+<P>The &lt;xsl:fallback&gt; element is evaluated if an extension element cannot 
+be interpreted.</P><PRE class=screen>&lt;xsl:fallback&gt;
+  &lt;!-- Content: template --&gt;
+&lt;/xsl:fallback&gt; 
+</PRE></DIV></BODY></HTML>
