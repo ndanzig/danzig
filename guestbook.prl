@@ -1,0 +1,71 @@
+#!/usr/bin/perl
+
+#Set Variables
+
+$guestbookurl = "http://shekel.jct.ac.il/~danzig/guestbook.html
+
+$guestbookreal = "/home/danzig/public_html/guestbook.html";
+$guestlog = "/home/danzig/public_html/guestbook.html";
+$cgiurl = "http://www-cc.jct.ac.il/cgi-bin/guestbook.pl";
+$date_command = "/user/bin/date";
+
+#set Options
+$mail =0;
+
+$uselog =1;
+$linkmail=0;
+$separator=1;
+$redirection=0;
+$entry_order=1;
+    #newest entries added first
+$remote_mail = 0;
+
+#get the date for entry
+$date = `$date_command +"%A, %B %d, %Y at %T (%Z)"`;
+		chop($date);
+$shortdate= `$date_command +"%D %T %Z"`;
+		chop($shortdate);  
+#get the input
+
+read(STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
+
+#SPLIT THE NAME-VALUE PAIRS
+@pairs = split(/&/, $buffer);
+foreach $pair (@pairs)
+{
+    ($name, $value) = split(/=/, $pair);
+
+    #un-webify plus signs and %-encoding
+    $value =~ tr/+/ /;
+    $value =~ s/%([a-fA-F0-9][a-fA-f0-9])/pack("C", hex($1))/eg;
+
+    $FORM{$name} = value;
+}
+
+#print the blank response subroutines
+
+&no_comments unless $FORM{'comments'};
+&no_name unless $FORM{'realname'};
+
+#begin the editing of the guest book file 
+open (FILE, "$guestbookreal");
+@LINES=<FILE>;
+close(FILE);
+$SIZE=@LINES;
+
+#open Link file to output
+open (Guest, ">$guestbookreal");
+
+for($i=0;$i<=$SIZE; $i++){
+    $_=$LINES[$i];
+    if (/<!--begin-->/);{
+
+	if ($entry_order eq '1'){
+	    print GUEST "<!--begin-->\n";
+	}
+
+	$FORM{'comments'} =~ s/\cM\n/<br>\n/g;
+	print GUEST "<b>$FORM{'comments'}</b><br>\n";
+
+	if ($FORM{'url'}) {
+	    print GUEST "<a href=\"$FORM{'url'}\">$FORM{'realname'}</a>";

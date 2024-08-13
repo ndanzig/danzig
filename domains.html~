@@ -1,0 +1,72 @@
+<html>
+<title>
+Setting up DNS domains at JCT
+</title>
+<body>
+<h3>Setting up DNS domains at JCT<h3>
+<ol>
+<li>On the DNS primary server (zevach) make a zone file with a name like newdomain.zone in 
+directory /var/named.
+(this file may need to have mode 644, but I am not sure)
+See an example <a href = "./example_dns_zone.txt"> file </a></li>
+<li>edit /etc/named.conf to include this domain.  Define the domain as master
+or slave, allow or deny updates, etc.
+
+<ul><LI> master when we are the origin of dns authority 
+<li>slave when we resolve domains on another server.
+
+
+</ul>
+<li> add lines like:
+<br>
+<table >
+<tr><td> acad     IN     NS      zevach.jct.ac.il. <td> </tr>
+<tr><td> &nbsp; &nbsp; &nbsp; &nbsp;     IN     NS      yad.jct.ac.il. <td></tr>
+</table>
+to /var/named/jct.zone
+<br>
+This tells the name server from where to get info
+on subdomain.  Note that we tell it to go itself; if so, why do this?
+I think it's because the name server has to look in a
+different zone file.
+
+
+
+
+<li>restart named with a kill -HUP PID command</li>
+
+
+
+</ol>
+
+<ul>On UNIX servers and on all UNIX DNS clients do the following: 
+<li>edit /etc/resolv.conf to search the new zone
+ so that users may specify the host name without its
+subdomain.  
+</li>
+<li>Note also that we're limited.  From resolv.conf(4) man page on zevach:
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp;           The search list is currently limited  to  six  domains <br>
+&nbsp; &nbsp; &nbsp; &nbsp;           and a total of 256 characters.
+
+A related parameter in /etc/resolv.conf is "ndots".  This parameter
+says: if a name has less than N dots in it, we assume it's *not* a
+FQDN, so we try appending the domains listed in the "search"
+parameter.  Here is an example from zevach's /etc/resolv.conf:
+
+<br>
+  ----------------------------------------------------
+<br>     #       Because we have subdomains, set "ndots" to "2", so it's clear
+<br>     #       that a host name is *not* considered to be a FQDN unless it
+<br>     #       has at least 2 dots.
+<br>     #
+<br>     options ndots:2
+<br>     ----------------------------------------------------
+
+</li>
+
+</ul>
+
+</body>
+</html>
+

@@ -1,0 +1,20 @@
+<html>
+<head>
+<title>Nachum's Guestbook</Title>
+</Head>
+<Body Bgcolor="#008080">
+<P Align="Center"><A Name="top"></A><Font Color="#800000" 
+Size="5"><B>Welcome To Nachum's Guestbook</B></Font></P>
+<Hr>
+Name: test<BR>
+Email: <A HREF="mailto:mail">mail</A><BR>
+Sex: Male<BR>
+Age: Under 6<BR>
+Gave us a 5 star rating!!!&nbsp;&nbsp;<IMG SRC="star.gif"></IMG><IMG SRC="star.gif"></IMG><IMG SRC="star.gif"></IMG><IMG SRC="star.gif"></IMG><IMG SRC="star.gif"></IMG><BR><HR>
+<!--NEXTDATA-->
+<P>Back <A Href="index.html">home</A>...Or sign book <A
+Href="signbook.html">here</A><BR>Back to <a href="#top">top</a>.</P>
+</Body>
+</Html>
+
+

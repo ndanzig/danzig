@@ -1,0 +1,84 @@
+<html>
+
+<head>
+
+<STYLE TYPE="text/css">  
+<!--
+b {
+
+background-color: red;
+font-family: Times;
+font-size: 14pt;
+margin-left: 1in;
+}
+
+
+p:first-letter {
+margin-left: 35px;
+}
+
+
+i 
+{
+   background-color: yellow;
+   border: 10px solid green;
+   position: absolute;   
+   left: 50px;
+   top: 150px;
+}
+
+
+
+
+-->
+</STYLE>
+
+</head>
+
+
+<body>
+
+
+
+
+<b>hello</b>
+
+
+
+<p>This text is not red.  <u>And neither is this.</u>
+
+
+This is not red either.
+</p>
+
+
+<i>This&nbsp;will&nbsp;be&nbsp;in&nbsp;a&nbsp;yellow&nbsp;box.</i>
+
+
+
+
+<script language="JavaScript"><!--
+//a comment
+alert("hello");
+
+//--></script>
+
+
+<DIV ID="DIV1">BLA BLA BLA</DIV>
+<IMG ID="img1" SRC="besad.gif">
+</BODY>
+<SCRIPT type="text/javascript" LANGUAGE="JavaScript"><!--
+  document.getElementById("DIV1").innerHTML="<B>Hey!</B>";
+  document.getElementById("img1").src = "differentpic.jpg";
+//--></SCRIPT>
+
+
+
+
+
+
+
+</body>
+
+
+</html>

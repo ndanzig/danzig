@@ -1,0 +1,27 @@
+
+<TITLE>FRIENDS</TITLE>
+
+<!--  background        text           new link       followed link   active link-->        
+<BODY BGCOLOR="#326140" TEXT="#C86400" link="#802020" vlink="#A400A0" alink="#FF0000">
+<CENTER><H1>HERE ARE THE UNFORTUNATE ONES</H1></CENTER>
+<P>
+<H1>    </H1>
+
+<!-- Horizontal Rule (Bar) -->
+<HR ALIGN=CENTER SIZE=20  WIDTH=70%>
+
+
+<CENTER>
+<!--Numbered List-->
+<NL>
+<LI><A HREF = "http://hobbes.jct.ac.il/">Dov Adler</A></LI>
+<LI><A HREF = "http://shekel.jct.ac.il/~polsky/new">Yoel Polsky</A></LI>
+<LI><A HREF = "http://shekel.jct.ac.il:80/~bonchek">Rafee Bonchek</A></LI>
+<LI><A HREF = "http://shekel.jct.ac.il:80/~buba">Alain Buba</A></LI>
+<LI><A HREF = "http://shekel.jct.ac.il:80/~kravchi">Moshe Kravchik</A></LI>
+<LI><A HREF = "http://shekel.jct.ac.il:80/~danzig/cantor_for_hire">Gideon Reich</A></LI>
+<LI><A HREF = "http://members.tripod.com/~Aigen_J">Josh Aigen</A></LI>
+
+<!-- Horizontal Rule (Bar) -->
+<HR ALIGN=CENTER  SIZE=10  WIDTH=70% >
+
