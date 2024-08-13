@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>Skiing</title>
+</head>
+<body>
+Skiing
+<ul>
+
+<li><img src="armySkier2.jpg">armySkier2.jpg
+<li><img src="armySkier.jpg">armySkier.jpg
+<li><img src="index.html">index.html
+<!-- li><img src="meAndCoolMiraim2.jpg">meAndCoolMiraim2.jpg
+<li><img src="meAndCoolMiraim.jpg">meAndCoolMiraim.jpg
+<li><img src="miriamLooking.jpg">miriamLooking.jpg
+<li><img src="miriamShowingOff.jpg">miriamShowingOff.jpg
+<li><img src="miriamTiyul2.jpg">miriamTiyul2.jpg
+<li><img src="miriamTiyul3.jpg">miriamTiyul3.jpg
+<li><img src="miriamTiyul4.jpg">miriamTiyul4.jpg
+<li><img src="miriamTiyul.jpg">miriamTiyul.jpg
+-->
+<li><img src="nachumWithScarf.jpg">nachumWithScarf.jpg
+<li><img src="skiMountains1.jpg">skiMountains1.jpg
+<li><img src="skiMountains2.jpg">skiMountains2.jpg
+<li><img src="skiMountains3.jpg">skiMountains3.jpg
+<li><img src="skiMountains4miraimInDistance2.jpg">skiMountains4miraimInDistance2.jpg
+<li><img src="skiMountains4miraimInDistance.jpg">skiMountains4miraimInDistance.jpg
+</ul>
+</body>
+</html>

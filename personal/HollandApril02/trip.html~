@@ -1,0 +1,31 @@
+<!--This appears in the title bar and if someone bookmarks it-->
+<TITLE>Trip April 2002 to Holland</TITLE>
+
+<!--  background        text           new link       followed link   active link-->  
+<FORM>      
+<BODY BGCOLOR="#ffffff" TEXT="#C86400" link="#000099" vlink="#A400A0" alink="#FF0000">
+<CENTER><H1>Choose a Section</H1></CENTER>
+<P>
+<ul>
+<li><A HREF = "dordrecht/index.html">Dordrecht and NeuwePort</a></li>
+<li><A HREF = "antwerp/index.html">Antwerpen</a></li> 
+<li><A HREF = "keukenhoff/index.html">Keukenhoff</a></li> 
+<li><A HREF = "lochem/index.html">Lochem and environment</a></li> 
+
+</CENTER>
+</FONT>
+
+<!-- Horizontal Rule (Bar) -->
+<HR ALIGN=CENTER  SIZE=5  WIDTH=70%>
+</FORM>
+
+
+
+
+
+
+
+
+
+
+
