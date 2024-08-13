@@ -1,0 +1,253 @@
+FILE: sockets/func-summary
+
+This document describes many of the functions used with sockets.  Some
+are functions that are only for sockets; others are more general
+functions, but have important uses for sockets.  
+
+The purpose of this document is to learn the functions, what they do,
+and what sort of
+data they deal with.  However, the code needed to implement them is
+often verbose, which can hinder a basic understanding.  Therefore, we:
+
+	specify the exact name of the function
+
+	specify the exact number of parameters.  
+
+	do NOT specify the exact data type or structure of each parameter
+
+For more details on these functions, see the appropriate man(1)
+pages.  You can view man pages via the web at
+http://shekel.jct.ac.il/cc-res/online-doc/man.html.
+
+In this document, "&" indicates a parameter that is modified by the
+function.  This is similar to its meaning in C.
+
+------------------------------------
+DATA
+------------------------------------
+
+Here are some terms we will commonly use to describe the data.
+Normally, words in all caps specify constants you actually write in
+the C code.
+
+addr_fam -- address family, also called a domain.  An address family
+	is a domain of possible addresses.  The most frequently used
+	values are:
+
+	AF_UNIX -- UNIX domain.  The address is a UNIX file pathname.
+		This domain is used only between processes running on
+		the same host.
+
+	AF_INET -- internet domain, for communicating between
+		processes on different hosts.  An address actually
+		consists of the triple
+		( ip_address, transport_protocol, port_number).
+		However, normally you specify only the ip_address &
+		port_number.  The transport_protocol is indicated in
+		other ways (I think, whether or not you call 'connect').
+
+bytes_read, bytes_written -- gets value returned by the read/receive
+	functions.  Set to number of bytes actuallyt read, or to -1 if
+	an error.
+
+comm_type -- also called the style of communications (pg. 259)
+
+	SOCK_STREAM -- there is a connection, which is reliable,
+		error-free, & (as in pipes) no message boundaries are
+		kept.  I believe that specifying this type in the
+		internet address family will cause it to use TCP.
+
+	SOCK_DGRAM -- datagram.  No connection.  Each message
+		addressed individually.  Not guaranteed to be
+		reliable.  Usually used when a response is required;
+		if timeout waiting for a response, assume the original
+		message was NOT received.  In the internet address
+		family, I think this will cause it to use UDP.
+
+	SOCK_RAW -- a low-level type of communications not normally
+		used by the average user.
+
+def_protocol -- default protocol.  A value meaning that the system
+	should assign the default protocol.  See the 'socket'
+	function.  (In C code, this is 0).
+
+INADR_ANY -- a special value of IP addresses that means any of the IP
+	addresses for the host.  Remember, a host has a separate IP
+	address for each network interface that it has.
+
+sd -- socket descriptor.  This is basically a file descriptor that is
+	associated with a socket.  Thus, you can use it with almost
+	any route that deals with files (e.g., read, write, close).
+
+sname -- socket name.  In AF_UNIX, this is a UNIX path name.  In
+	AF_INET, this is an IP address & IP port number.
+
+sname_len -- length of an sname.  Usually, when this is an argument to
+	a function, then it is set to the maximum length of the sname
+	BEFORE the call.  After the call, it will be set by the
+	function to the actual length of the name.
+
+undef_port -- undefined port.  The system will assign an unused port
+	to the socket.  (In C code, this is 0).
+
+------------------------------------
+SOCKET CREATION & CLOSING
+------------------------------------
+
+sd = socket ( addr_fam, comm_type, protocol )
+
+	creates the socket.  For sockets, you use this instead of
+	the 'open' function.  Unlike 'open', you do not specify the
+	name of the socket.  You can call the 'bind' function to do
+	that.  However, there will be times when you do not need to
+	specify a name.
+
+	For the protocol, you usually specify the 'def_protocol' value
+	to have the system assign the protocol.
+
+status = socketpair ( addr_fam, comm_type, &sd_pair )
+
+	returns a pair of unnamed sockets in sd_pair.  This is
+	designed to be an extension of pipes, in that it allows 2-way
+	communication.  It is designed for parent-child comm, so it's
+	only on the same host, and only for the AF_UNIX address family.
+
+status = close (sd)
+
+	The same 'close' function that is used for files.  As with
+	files, sockets should be closed.
+
+status = shutdown ( sd, how )
+
+	if there is still data on a stream socket, the system will
+	continue to try to deliver it even after the socket is
+	closed.  This stops that.  how can specify one of the following:
+
+		I no longer want to receive data
+
+		" "    "     "   "  send data
+
+		" "    "     "   "  either receive or send data
+
+status = unlink (socket_name)
+
+	In AF_UNIX, if you specify a name for the socket, an actual
+	file is created.  In addition to closing the socket, you must
+	also delete it via the 'unlink' function (or the 'rm' command).
+
+------------------------------------
+SOCKET NAMES
+------------------------------------
+
+status = bind ( sd, sname, sname_len )
+
+	binds a name to a socket.  For AF_UNIX, you specify a UNIX
+	path name.  This will create an actual file (of a special type).
+
+	For AF_INET, name consists of IP adress & IP port.  The IP
+	address is usually specified as INADR_ANY, which means any of
+	the host's IP address.  If the port is set to undef_port, then
+	the system will assign an unused IP port to the socket.
+
+	Actually, in the internet, the protocol is also part of the
+	identification, but that was set in the 'socket' function.
+
+status = getsockname ( sd, &sname, &sname_len )
+
+	Sometimes you did not set the name of the socket.  For
+	example, if you called bind where the IP address = INADR_ANY
+	and/or the port = undef_port.  This function will return the
+	name of the socket.
+
+------------------------------------
+READING (RECEIVING)
+------------------------------------
+
+bytes_read = read ( sd, &buf, max_bytes )
+
+	the normal read function.  A maximum of max_bytes is read into
+	buf.  bytes_read is set to the actual number of bytes read, or
+	to -1 if there was an error.
+
+bytes_read = readv ( sd, &buf_set, num_bufs )
+
+	like read, but reads into a set of buffers.  num_bufs = how
+	many buffers there are.
+
+bytes_read = recv ( sd, &buf, max_bytes, flags )
+
+	Like 'read', with the addtion of flags.  Flags can contain one
+	or more of the following:
+
+		MSG_OOB -- read out of band data
+
+		MSG_PEEK -- peek at the data on the socket.  But the
+			data will remain around, so the next 'recv'
+			will also get it.
+
+bytes_read = recvfrom ( sd, &buf, max_bytes, flags, &sender_sname, 
+		        &sender_sname_len )
+
+	Like recv, but also get the name of the sender.
+	the sender's name.
+
+bytes_read = recvmsg ( sd, &msg_header, flags )
+
+	msg_header is a special structure that contains the set of
+	buffers to write to, a buffer to get the access rights, plus
+	(optionally) the name of the socket to send to.
+
+------------------------------------
+WRITING (SENDING)
+------------------------------------
+
+	These functions can be understood by looking at their parallel
+	read/receive functions above.
+
+bytes_written = write ( sd, buf, buflen )
+
+bytes_written = writev ( sd, buf_set, num_bufs )
+
+bytes_written = send ( sd, buf, buflen, flags )
+
+	flags can be one or more of the following:
+
+		MSG_OOB -- send out of band data
+
+		MSG_DONTROUTE -- usually used only by diagnostic or
+			routing programs.
+
+bytes_written = sendto ( sd, buf, buflen, flags, recv_sname, recv_sname_len )
+
+bytes_written = send ( sd, msg_header, flags )
+
+-------------------------------------
+CONNECTIONS
+----------------------------------
+
+status = connect ( sd, other_sname, other_sname_len )
+
+	Associates socket sd with another socket, other_sock_name.
+	That is, data sent on this socket will be received by the
+	other socket.
+
+	In streams sockets, a socket is normally connected only once.
+	This call starts a connection.
+
+	In datagram sockets, you might call this several times to
+	change the association.  Then you can disconnect by calling
+	this, but specifying an invalid socket name.
+
+status = listen ( sd, queue_max )
+
+	Before a socket can accept connections, you must call this to
+	set up the queue of waiting connections.  queue_max specifies
+	the maximum length of the queue.  It cannot be more than 5.
+
+status = accept ( sd, &from_sname, &from_sname_len )
+
+	sock sd must have been bound to a name, and you must have
+	already run 'listen' on it.  This function extracts the first
+	waiting connection on the queue.  from_sname is the name of
+	the socket that was accepted.
+

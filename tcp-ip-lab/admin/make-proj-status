@@ -1,0 +1,52 @@
+#!/usr/bin/perl -w
+# FILE: make-proj-status
+#
+# This script converts proj-status.private to proj-status.html by
+# removing the 4th & 5th fields.  These fields contain the login &
+# real names of the students.  For the publicly accessible version, we
+# want only the ID numbers to be visible.
+#
+# When done, set the output file to be world-readable.
+#======================================================
+# INITIALIZATION
+#----------------------------------------------------------
+use English;
+
+$infile  = "proj-status.private";
+$outfile = "proj-status.html";
+
+# Backup the output file.
+if ( -e "$outfile.1") {rename ("$outfile.1", "$outfile.2");}
+if ( -e "$outfile.0") {rename ("$outfile.0", "$outfile.1");}
+if ( -e "$outfile")   {rename ("$outfile",   "$outfile.0");}
+
+# Open the files.  Abort if cannot
+open (INFILE,  "< $infile")  || die ("cannot open $infile");
+open (OUTFILE, "> $outfile") || die ("cannot open $outfile");
+
+#----------------------------------------------------------
+# CONVERT THE FILE
+#----------------------------------------------------------
+
+while ($line = <INFILE>)
+{
+    # if not one of the table rows, write as is
+    if ($line !~ /^<tr/)  {print (OUTFILE $line);}
+
+    # otherwise, delete the 4th & 5th fields (login & real names)
+    else
+    {
+	@array = split (' ', $line);
+	$array[3] = $array[4] = "";
+	print ( OUTFILE join (' ', @array) );
+    }
+}
+
+#----------------------------------------------------------
+# CLEAN-UP
+#----------------------------------------------------------
+
+close (INFILE);
+close (OUTFILE);
+
+chmod (0644, $outfile);

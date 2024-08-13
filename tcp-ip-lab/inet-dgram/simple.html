@@ -1,0 +1,69 @@
+<html><head>
+
+<!-- 
+<base href="http://shekel.jct.ac.il/~roman/tcp-ip-lab/dgram-simple.html"> 
+-->
+
+<TITLE>A Simple Internet Datagram Example (Pseudo-code)</TITLE>
+<H1><center>A Simple Internet Datagram Example (Pseudo-code)</center></H1>
+</head>
+
+<body>
+
+<p>
+<b>LAST EDIT:</b> &nbsp; 03 Kislev 5759, 23 Nov 1998
+
+<p>
+Here is an example in pseudo-code of 2 processes communicating via
+internet datagram.
+
+<H2>The receiver (server):</H2>
+
+<pre>
+	sd = socket ( PF_INET, SOCK_DGRAM, def_proto )
+
+	sname = ( INADR_ANY, undef_port )
+
+	bind ( sd, sname, sname_len )
+
+	call getsockname to get the port we are listening on, and
+	print it.
+
+	read ( sd, &buf, buflen )
+
+	close ( sd )
+</pre>
+
+<p>
+Click <a href="simple-receiver.c">here</a> to see C code for the
+receiver.
+
+<H2>The sender (client):</H2>
+
+<p>
+On the command line we'll specify which host &amp; which
+port to send to:
+	
+<pre>
+	sd = socket ( PF_INET, SOCK_DGRAM, def_proto )
+
+	other_sname = ( host & port as specified on command line )
+
+	sendto ( sd, "Hello my friend", msg_len, other_sname, other_sname_len )
+
+	close ( sd )
+</pre>
+
+<p>
+Click <a href="simple-sender.c">here</a> to see C code for the
+sender.
+
+<HR>
+This page maintained by Haim Roman 
+(<a href="mailto:roman@mail.jct.ac.il">roman@mail.jct.ac.il</a>), one
+of the lab instructors.
+
+<br>Office: room 230, Wyler Building, Sundays - Thursdays, 13:30 - 14:30.
+<br>Telephone: 02-675-1207
+</body>
+</html>

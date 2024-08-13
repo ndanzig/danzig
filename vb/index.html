@@ -1,0 +1,391 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+<LINK REL=STYLESHEET HREF="../cpp/style.css" TYPE="text/css">
+
+<title>Visual Basic </title>
+</head>
+<BODY >
+
+
+
+Hello world
+
+<pre>
+' comment  Allow easy reference to the System namespace classes.
+Imports System
+
+Public Module modmain
+   Sub Main()
+     Console.WriteLine ("Hello World using Visual Basic!")
+   End Sub
+End Module
+
+
+
+Second Example
+
+
+Module
+  Module1 
+   Sub Main() 
+' The following is a comment 
+
+'Simply print hello
+  Console.WriteLine( "hello ") 
+
+'create two variables of type string
+
+Dim line As String 
+Dim otherline 
+
+Console.WriteLine( "Enter one or more lines of text (press CTRL+Z to exit):") 
+Console.WriteLine()
+
+'Do While loop
+
+Do 
+   Console.Write(" ") 
+   line = Console.ReadLine()   'capture a line from the keyboard
+   If line IsNot Nothing Then Console.WriteLine(" " + line) 
+Loop While line IsNot Nothing 
+
+
+
+' For Next loop
+For index As Integer = 1 To 5 
+    Console.Write(index.ToString & " ") 
+Next 
+
+'Do Until loop
+
+Do Until otherline = "hello" 
+   Console.WriteLine( "Guess my phrase ") 
+   otherline = Console.ReadLine()
+   If otherline = "hello" Then 
+        Console.WriteLine("you guessed it ")
+   Else 
+        Console.WriteLine("you got it wrong ") 
+   End If 
+
+Loop 
+
+
+End Sub 
+End Module
+
+Demonstration of Loops
+Here I print "Goodbye" 10 times.  I need to increment a counter to keep track of
+how many times I have looped
+
+Sub Main()
+        Dim var As String
+        var = "Blablabla"
+        Dim counter As Integer
+        counter = 0
+
+        Do
+            Console.WriteLine("Goodbye")
+
+            counter = counter + 1
+
+        Loop While counter < 10
+
+
+'here I use my counter which is now 10 to count another 10 (up to 20)
+'and print the value of var (George) 10 times.
+
+        var = "George"
+
+        Do Until var = "Hello"
+            Console.WriteLine(var)
+            counter = counter + 1
+            If counter = 20 Then
+                var = "Hello"
+            End If
+
+        Loop
+    End Sub
+
+
+'another example but here I print "george" only once.
+
+Sub Main()
+        Dim var As String
+        var = "Blablabla"
+        Dim counter As Integer
+        counter = 0
+
+        Do
+            Console.WriteLine("Goodbye")
+            var = "George"
+            counter = counter + 1
+
+
+
+        Loop While counter < 10
+
+
+        Do Until var Is "Hello"
+            Console.WriteLine(var)
+            var = "Hello"
+
+
+        Loop
+    End Sub
+
+
+
+
+Here is a VB Simple Console Calculator:
+
+
+dim first as double
+dim second as double
+dim sign as string
+dim line as string
+console.writeline("enter number")
+mline=console.readline()
+double.TryParse(mline, first)
+Console.writeline("enter another number")
+ 
+mline=console.readline()
+double.tryparse(mline, second)
+console.writelline("enter operation sign")
+sign=console.readline()
+if sign = "+" then
+console.writeline(first+ second)
+end if
+
+'-----------------------------
+'FACTORIAL
+
+Module Module1
+
+    Sub Main()
+        
+
+        Dim result As Decimal
+        Dim inputnumber As Integer
+
+
+
+        Do
+            Console.WriteLine("Input Number, 0 to quit")
+            inputnumber = Console.ReadLine()
+            If inputnumber > 0 Then
+
+                result = 1
+
+                Do
+                    result = result * inputnumber
+                    inputnumber = inputnumber - 1
+
+                Loop While inputnumber > 1
+
+                Console.WriteLine(result)
+            End If
+        Loop Until inputnumber = 0
+
+
+        
+
+
+
+    End Sub
+
+End Module
+'------------------------------------------
+'Compute Pi
+
+        Dim howmanytimes As Integer
+        Dim var As Integer
+
+
+
+        Dim num As Integer
+        Dim den As Integer
+        Dim result As Double
+
+
+
+        Do
+            Console.WriteLine("How Many Times?, 0 to quit")
+            howmanytimes = Console.ReadLine()
+            If howmanytimes > 0 Then
+
+
+                result = 4
+                num = -4
+                den = 3
+                var = 0
+
+                Do
+                    result = result + num / den
+                    num = num * -1
+                    den = den + 2
+                    var = var + 1
+
+                Loop While var < howmanytimes
+
+                Console.WriteLine(result)
+            End If
+        Loop Until howmanytimes = 0
+
+
+
+
+'---------------------------------------------------------
+'Array of Names
+
+Sub Main()
+
+Dim Names(0 To 9) As String
+
+Dim Buffer As String
+
+Dim i As Integer
+
+Dim p As Integer
+
+ 
+
+Buffer =
+"Hello"
+
+p = 0
+
+Do
+
+Console.WriteLine("Enter name or done to finish")
+
+Buffer =
+Console.ReadLine()
+
+If Buffer <> "done" Then
+
+Names(i) = Buffer
+
+i = i + 1
+
+ 
+
+ 
+
+End If
+
+Loop Until Buffer = "done"
+
+Do While p < i
+
+Console.WriteLine(Names(p))
+
+p = p + 1
+
+ 
+
+Loop
+
+'-----------------------------------------
+    'Sort array
+
+    For lLoop = 0 To UBound(MyArray)
+
+       For lLoop2 = lLoop To UBound(MyArray)
+
+            If UCase(MyArray(lLoop2)) < UCase(MyArray(lLoop)) Then
+
+                str1 = MyArray(lLoop)
+
+                str2 = MyArray(lLoop2)
+
+                MyArray(lLoop) = str2
+
+                MyArray(lLoop2) = str1
+
+            End If
+
+        Next lLoop2
+
+    Next lLoop
+
+
+'----------------------------------------------------
+' Array of numbers
+
+Sub Main()
+
+Dim Students(50) As Integer
+
+Dim J As Integer
+
+For J = 1 To 5
+
+For index As Integer = 0 To UBound(Students)
+
+Students(index) = index * J
+
+Console.WriteLine(Students(index))
+
+Next
+
+Next J
+
+Console.WriteLine(J)
+End Sub
+
+'------------------------------------------------------
+'Sum up how many random numbers from 10 to 20 
+
+Sub Main()
+
+Dim Sum(20) As Integer  'create and array from 0 to 20 inclusive
+Dim p As Integer = 0
+
+Do Until p = 21
+Sum(p) = 0
+p = p + 1
+Loop
+
+
+Dim Students(50) As Integer
+Dim J As Integer
+
+
+For J = 1 To 5
+     For index As Integer = 0 To UBound(Students)
+
+        Students(index) = Rnd() * 10 + 10
+        Console.WriteLine(Students(index))
+        Sum(Students(index)) = Sum(Students(index)) + 1
+
+     Next
+
+Next J  'equivalent to Next
+
+'after loop, J is now 6!
+
+p = 10
+Do Until p = 21
+  Console.WriteLine(p & " " & Sum(p))
+  p = p + 1
+Loop
+
+Console.WriteLine(J)
+End Sub
+
+
+</pre>
+
+<br>
+<a href="http://patorjk.com/programming/tutorials/vbarrays.htm">arrays</a>
+<br>
+<a href="http://www.vbexplorer.com/VBExplorer/random/random_numbers_1.asp">Random Number Generator</a>
+<p>
+&copy; Nachum Danzig 2010
+</body>
+</html>
+
+
+
+

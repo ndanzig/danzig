@@ -1,0 +1,100 @@
+<!-- FILE: homework.html  -->
+<HTML>
+<HEAD>
+<TITLE>TCP/IP Lab Homework: 5763 (2003-4)</TITLE>
+<CENTER><H1>TCP/IP Lab Homework: 5763 (2003-4)</H1></CENTER>
+</HEAD>
+
+
+<BODY>
+<p> <h3>These homework assignments.
+</h3>
+
+<ol>
+<li>
+The purpose of this exercise to practice printf, unions and general c 
+programming.
+Write a program to convert decimal numbers to their  hexadecimal
+and octal equivalent.  Use fgets to input the number and printf to display the
+conversions.  Also, use a union to store the numbers.  The union should be an
+array of char's and a double  and an int (use size of to determine size of 
+double and int).
+The purpose of the union is to display the actually bytes of the double as
+ they are stored in the computer. Use printf to display this.
+<p>
+
+<li>Write two programs (one server one client) using unix tcp sockets to allow characters typed 
+on one computer to be sent to another computer.  Use tcp connection oriented communication. For a very detailed tutorial on sockets try <a href="http://www.ecst.csuchico.edu/~beej/guide/net/"> Beej's Guide </a> and if you want a Hebrew translation try<a href="http://www.geocities.com/uv1st/netguide-heb/"> here.</a>
+<br>Points of clarification for this and the 2nd exercise:
+<ul>
+<li>Do not specify port for server. Let the system choose a port for you.
+<br>i.e. <tt>server </tt>
+<br><tt>Server connected to port 3405!</tt>
+<li>Specify server name and port as argument in command line of client.
+<br>i.e. <tt>client shana31.jct.ac.il 3405</tt>
+<li>Server should be ready to accept a new client as soon as the
+ previous client disconnects.
+<li>client should be able to send several lines of text.
+<li>Handle signal control-c in server and client.  First close sockets and then exit program.
+<li>If client sends string quit or <b>disconnects</b>, server should disconnect and be ready for another client.
+</ul>
+<li>Do the same as above but using udp connectionless communication and DO
+specify the port in the server's command line.  Then have the client connect to that port.
+<br>i.e. <tt>server 3405</tt>
+
+<br>then on the client run:
+<br><tt>client shana31.jct.ac.il 3405</tt>
+
+<li>
+<ol type="a">
+
+
+Make a small protocol using udp transmission to copy files from one
+ computer to another.
+<li>Add to the above udp server the limitation that the sending and receiving 
+buffer is only 12 bytes long.  Only the last 7 bytes of which can be used to 
+put the string in, therefore a string will be sent sometimes in two or three
+send calls.  
+
+<li>The first two bytes of the 12 byte "packet" will contain the 
+number
+of the packet so that the  server can asseble them in order.  
+<li>The 3rd 4th and 5th  bytes will be a special ID number assigned by the server to make 
+sure he is  still
+talking to the same client. (Use all possible binary values for number, i.e.
+maximum number is not 999, but is 2 to the 24th power.) 
+<li>On the first 
+connection, the client  will send 0 as the packet number and the remaining
+11 bytes of the packet will be used for the file name.
+Since this is the first packet, there will be no special ID  number.
+
+
+<li>After each  packet the server will send an acknowledgement that he received
+ packet number 1, or 2 or 3 etc. and the client will check this packet and
+ know to then send the next packet in order. 
+<li>Check that packets do not
+arrive out of order. 
+<li>You can choose how the acknowledge 
+packet will be made up.
+<li>Print out the entire  packet (including all headers) on each receive.
+<li>Use the open and  write commands in UNIX to write the data of each packet to the file of the name given by the 0th packet.
+<li>The end of a file is indicated to the server when he receives a packet 
+whose size is less than 12. After receiving such a packet, the server should return to a state where he waits for a new file to be sent.
+<li>Also you must 
+indicate the end of each <strong>line</strong> with the character '@'.  
+
+
+<li>If a packet with the wrong ID number arrives, send an error packet to that client.  Similarly, if a packet with the wrong packet number arrives you may either
+send an error packet and disconnect or try to correct the packet order
+by sending an acknowledge on the previously received correct packet. 
+<li>Nothing the client does should cause the server to stop running.
+</ol>
+</li>
+
+</ol>
+
+    
+</BODY>
+</HTML>
+
+

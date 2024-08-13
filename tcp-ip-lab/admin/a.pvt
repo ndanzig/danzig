@@ -1,0 +1,312 @@
+<!-- FILE: project.html  -->
+<HTML>
+<HEAD>
+<TITLE>TCP/IP Lab Project: 5761 (2001)</TITLE>
+<CENTER><H1>TCP/IP Lab Project: 5761 (2001)</H1></CENTER>
+</HEAD>
+
+
+<BODY>
+<!------------------------------------------------------------------>
+<h2><a name="toc">TABLE OF CONTENTS</a></h2>
+<ul>
+<li><a href="#notes">NOTES</a>
+    <ol type="I">
+    <li><a href="#intro"> Introduction </a>
+    <li><a href="#gen-rules"> General Rules </a>
+    <li><a href="#req"> Server Requirements </a>
+    <li><a href="#opt"> Options and Exemptions </a>
+    <li><a href="#sugg"> Suggestions </a>
+    </ol>
+<li><a href="#history">EDIT HISTORY</a>
+</ul>
+
+<!------------------------------------------------------------------>
+<h2><a name="notes">NOTES</a></h2>
+
+<ol type="I">
+<p><li><b><a name="intro"> Introduction</a>:</b>
+Your project is to write a <a href="../tftp/">TFTP</a> server.  Your
+entire grade is based on this project.  Click <a
+href="../tftp/">here</a> for more information on the TFTP protocol and
+how to use it at JCT.  The document you are looking at describes rules
+for writing the project and how it is graded.
+
+<p>In the future, we'll post information about how many points
+different parts of the server are worth.
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>  <!-- to table of contents -->
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<p><li><b><a name="gen-rules"> General Rules</a>:</b>
+    <ol type="A">
+    <p><li><b><a name=""> Language</a>:</b>
+    write the server in C or C++.  Perl or other scripting languages
+    are not allowed.  Someone asked me about Java; we have not decided yet.
+
+    <p><li><b><a name=""> Testing</a>:</b>
+        <ol type="1">
+    	<p><li>We don't mind you writing the program as part of a team of 2-3
+    	people.  But each person will be tested by himself, and is
+    	required to understand the entire program, including what his
+    	partners wrote.
+    
+    	<p><li>The testing will be <em>oral</em>.  There will not be
+    	any written exam in this lab.
+
+	<p><li>In addition, the student will have to bring a printout
+	of his program, and demonstrate the running of his program.
+    
+    	<p>Each student will be assigned to one of the instructors for
+    	testing.  That student cannot be tested by the other instructor
+    	without the instructors' permission.
+    
+    	</ol><!-- testing -->
+		     
+    <p><li><b><a name=""> </a>Due Date:</b>
+    all students are required to complete the project and be tested
+    <em>before</em>
+    Moed Alef of the exam period starts.  By the time Moed Alef
+    starts, you'll be done with this lab.
+
+    <p>Moed Alef starts 4/7/2001.
+
+    <p><li><b><a name="gen-rules-bonus"> </a>Bonus Points:</b>
+    Some features are worth <em>bonus</em> points.  That means that if
+    you do not implement the features, you can still get 100 on your
+    project.  If you <em>do</em> implement the features, then we add
+    the specified number of points.
+
+    <p>Although JCT will not give a student more than 100 for a
+    course, bonus points can help if you lose points for other things.
+		     
+    </ol>  <!-- general rules -->
+	     
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>  <!-- to table of contents -->
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<p><li><b><a name="req"> Server Requirements</a>:</b>
+The server <em>must</em> do the following.  Information about how many
+points are in square brackets, [].
+
+    <ol type="A">
+    <p><li>Transfer files without corrupting the file's data <br>
+    [<i>if you don't do this, you'll lose about 25 points</i>]
+
+    <p><li>Be able to handle files whose size are 0 or multiples of 512. <br>
+    [<i>if you don't do this, you'll lose about 12 points</i>]
+
+    <p><li>Record each packet that it receives/sends, either on the
+    screen or in a file (do <em>not</em> use the <tt>syslog()</tt> function).
+    <br>
+    [<i>If you don't do this, you'll lose 10-50 points.  It depends on
+    how dificult it is to test what your program is doing.</i>]
+
+    <p><li>Analyze a packet via
+    <a href="../common-code/struct/">structs and/or unions</a>
+    instead of just
+    accessing elements of a char array.  Click <a
+    href="../common-code/struct/">here</a> for information on how to
+    do this. 
+
+    <p> In addition, you should use the
+    <a href="../func-summary.html#format"><tt>ntohs()</tt></a>,
+    <a href="../func-summary.html#format"><tt>htons()</tt></a>,
+    etc. functions appropriately. <br>
+    [<i>if you don't do this, you'll lose 10 points</i>]
+
+    <p><li>Must use the '<b>n</b>' versions of functions, if they exist, e.g.
+        <ul>
+	<li><tt>str<b>n</b>cpy()</tt> instead of <tt>strcpy()</tt>
+	<li><tt>s<b>n</b>printf()</tt> instead of <tt>sprintf()</tt>
+	</ul>
+
+    <p>[<i>if you don't do this, you'll lose 10 points</i>]
+
+    <p>Buffer overflows are a very common way for crackers to break
+    into UNIX systems.  Using the '<b>n</b>' version of functions minimizes
+    the chances of that happening.  If you want to read more about
+    buffer overflows, try some of the following links:
+        <ul>
+	<li><a href="http://www.cse.ogi.edu/DISC/projects/immunix/StackGuard/usenixsc98_html/">StackGuard:
+	Automatic Adaptive Detection and Prevention of Buffer-Overflow
+	Attacks</a> 
+
+	<li><a
+	href="http://www2.linuxjournal.com/lj-issues/issue61/2902.html">A
+	Look at the Buffer-Overflow Hack</a> 
+
+	<li><a href="http://www.networkmagazine.com/article/NMG20000511S0015">
+	Blocking Buffer Overflow Attacks</a>
+	</ul>
+
+    <p><li>Must be well documented.  This includes comments and using
+    <tt>#define</tt> constants instead of hard-coded numbers.
+        <blockquote>
+	NOTE: Many students program their servers using state transitions.
+	In the past, they have simply assigned each state a hard-coded
+	number.  This makes it <em>very</em> hard for someone else to
+	understand the program.
+        </blockquote>
+
+    [<i>Not doing this can cost you 10-20 points, depending on how
+    hard the program is to understand</i>]
+
+    <p><li>Must handle following errors:
+        <ol type="1">
+	<p><li>The client request to read a <b>non-existent</b> file. <br>
+	[<i>If you don't do this, lose 5 points.</i>]
+
+	<p><li>Timeout: if, in the middle of a transfer, the server does
+	not receive a packet, it will terminate the transfer after a
+	certain amount of time.  Obviously, there is <em>no</em>
+	timeout while the server waits for the next read or write
+	request. 
+
+	<p>There is an <a href="../inet-dgram/timeout/">example</a>
+	of implementing timeouts. <br>
+	[<i>If you don't do this, you lose 5 points.</i>]
+
+	<p>If the server also <a href="#opt-retry">retries</a>,
+	you get <a href="#gen-rules-bonus">bonus</a> points.
+
+	</ol><!-- handle error conditions  -->
+
+    </ol><!-- server requirements -->
+     
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>  <!-- to table of contents -->
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<p><li><b><a name="opt"> </a>Options and Exemptions</b>
+and other good news:
+    <ol type="A">
+    <p><li><b><a name=""> Multiple Clients</a>:</b>
+    If your server can handle more than one client at a time, we'll
+    add 20 <a href="#gen-rules-bonus">bonus</a> points.
+
+    <p><li><b><a name="opt-retry"> Retries</a>:</b>
+    above we mentioned that your server must handle timeouts.  If it
+    also handles retries, then we'll add 10
+    <a href="#gen-rules-bonus">bonus</a> points.
+
+    <p><li><b><a name=""> </a>Modes:</b>
+    The <a href="../tftp/rfc1350.txt">RFC</a> mentions 3 modes.  Your
+    implementation need only handle the 'octet' (binary) mode.  
+		     
+    <p><li><b><a name=""> </a>Error Packets:</b>
+    Someone asked if the server has to acknowledge error packets that
+    it receives.  According to the <a href="../tftp/rfc1350.txt">RFC</a>,
+    error packets do <em>not</em> need to be acknowledged.
+		     
+    </ol>  <!-- Options and Exemptions -->
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>  <!-- to table of contents -->
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<p><li><b><a name="sugg"> Suggestions</a>:</b>
+
+    <ol type="A">
+    <p><li><b><a name="fileio"> File I/O</a>:</b>
+    I suggest that you use <tt>open()</tt>, <tt>read()</tt>, and
+    <tt>write()</tt> for the file I/O instead of <tt>fopen()</tt>,
+    <tt>fread()</tt>, and <tt>fwrite()</tt>.  <br>
+    <tt>fprintf()</tt> and <tt>fscanf()</tt> will almost certainly the
+    corrupt the file if it contains '%' characters (this has happened!).
+
+    <p>open/read/write is the lowest level of I/O, which means that
+    there is less unseen code and less to go wrong.  Remember,
+    regarding the file, your server is just a pipe; it does not care
+    what the contents of the file are.
+
+    <p><li><b><a name="multi"> Multiple Clients</a>:</b>
+    if your server will be able to handle more than one
+    client at a time, then you'll probably want to:
+
+        <ol type="1">
+	<p><li>  use the <tt>fork()</tt>
+	and/or <tt>select()</tt> functions.  See the <a
+	href="../related-functions/">Related Functions</a> page for
+	more info.
+
+	<p><li> Use different sockets for listening to requests and
+	actually transferring files.
+	The <a href="../tftp/rfc1350.txt">RFC</a> mentions this.  This is
+	similar to the <tt>accept()</tt> function for TCP; it returns a new
+	socket descriptor for the session.  This leaves the original
+	socket free for listening to requests for connection.
+
+	</ol>
+		     
+    <p><li><b><a name=""> Related Functions</a>:</b>
+    Click <a href="../related-functions/">here</a> for info on other
+    functions that might be useful in programming this project.
+			     
+    <p><li><b><a name=""> Stages of Development</a>:</b>
+    I suggest that you develop the server a bit at a time and test
+    each part.  Here is one suggestion for stages of development:
+
+        <ol type="1">
+	<p><li> write a server that accepts requests, but does not
+	actually transfer files.  It should log the following info for
+	each request:
+	    <ul>
+	    <li>type of request (read or write)
+	    <li>file name requested
+	    <li>IP and port of the client
+	    </ul>
+
+	<p><li> Transfer files that fit into one packet:
+	    <ul>
+	    <li>first, implement read requests
+	    <li>next, implement write requests
+	    </ul>
+
+	<p><li> Transfer files that are bigger than one packet
+	    <ul>
+	    <li>first, implement read requests
+	    <li>next, implement write requests
+	    </ul>
+
+	<p><li> Make sure that you handle various errors 
+
+	<p><li> If you want to handle more than one client at a time:
+	    <ul>
+	    <li>when receiving a request, the server should create a
+	    new socket & transfer the file on that socket (leaving the
+	    first socket free to listen to new requests)
+	    <li>actually handle more than one client at a time.
+	    </ul>
+
+	</ol><!-- stages of development -->
+	     
+    </ol>  <!-- suggestions -->
+
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>  <!-- to table of contents -->
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+</ol>  <!-- NOTES -->
+
+<!------------------------------------------------------------------>
+<h2><a name="history">EDIT HISTORY</a></h2>
+<dl>
+
+<dt>2001/06/17, 23 Sivan 5761, Haim Roman
+<dd>Added link to example of impelementing time outs.
+
+<dt>2001/05/17, 24 Iyar 5761, Haim Roman
+<dd><ol>
+    <li>Specified the number of points for different parts of the
+    program and different errors.
+    <li>Updated the information and added links.
+    </ol>
+
+<dt>2001/05/15, 22 Iyar 5761, Haim Roman
+<dd>Created this file
+</dl>   
+ 
+<p><a href="#toc">[TABLE_OF_CONTENTS]</a>  <!-- to table of contents -->
+    
+</BODY>
+</HTML>
+
+

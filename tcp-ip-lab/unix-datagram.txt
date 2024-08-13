@@ -1,0 +1,34 @@
+FILE: unix-datagram
+
+Here is an example in pseudo-code of 2 processes communicating via
+UNIX datagram
+
+The receiver:
+
+	sd = socket ( AF_UNIX, SOCK_DGRAM, def_proto )
+
+	/* The sender & receiver have to agree on the name of the */
+	/* socket.  One of them must bind to that name.  In this case, */
+	/* we have the receiver bind to it. */
+
+	bind ( sd, "/tmp/our_socket", sname_len )
+
+	read ( sd, &buf, buflen )
+
+	close ( sd )
+
+	/* Because the receiver bound to the name, we have to delete */
+	/* the file that was created. */
+
+	unlink ( "/tmp/our_socket" )
+
+The sender:
+	
+	sd = socket ( AF_UNIX, SOCK_DGRAM, def_proto )
+
+	/* Because the receiver bound its socket to the agreed upon */
+	/* name, we don't have to specify a name. */
+
+	sendto ( sd, "Hello my friend", msg_len, "/tmp/our_socket", sname_len )
+
+	close ( sd )

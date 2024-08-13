@@ -1,0 +1,118 @@
+<!-- FILE: word-guess.html  -->
+<HTML>
+<HEAD>
+<!-- <base href="http://shekel.jct.ac.il/~roman/word-guess.html"> -->
+<TITLE>Word Guess: Demonstrate Second Sockets and Forks for Servers</TITLE>
+<H1>Word Guess: Demonstrate Second Sockets and Forks for Servers</H1>
+</HEAD>
+
+
+<BODY>
+   
+<b>LAST EDIT:</b> 10 Tevet 5759  (29 Dec 1998)
+
+<h2>1. The 2 Techniques</h2>
+
+<p>
+Some protocols have sessions.  That is, the interaction between them
+consist of several transactions.  Most such
+protocols are TCP (e.g., telnet and FTP), but some are UDP (e.g., 
+<a href="http:../tftp/index.html">TFTP</a>).
+
+<blockquote>
+Some protocols are very simple and short, e.g., the time and daytime
+protocols which simply return the current time in response to a
+request.  Other protocols might involve many transactions between the
+client and server, but the protocol does not group these transactions
+together into a single protocol.  One example of this is NFS, the
+Network File Service, which allows host A to mount filesystems that
+reside on host B's disks.
+</blockquote>
+
+<p>
+To handle sessions, it is common for the server to 
+<b>create a new socket</b>
+to run the session on.  The client can find out the address of the new
+socket by receiving the reply via the 
+<a href="http:../func-summary.html#recvfrom">recvfrom</a> or
+<a href="http:../func-summary.html#recvmsg">recvmsg</a> functions.
+
+<p>
+A related technique is to <b>fork a child process</b> for the session.  This
+simplifies code because it makes it easier to separate the code that
+gets the initial request from the code that handles the session.
+It also means that the session handling code needs to worry about one
+session; each session is handled by a different process.
+
+<h2>2. The Word Guess Game</b>
+
+<h3>2.1. General Description</h3>
+
+<p>
+To demonstrate these techniques for the UDP protocol, we'll program a
+game called 'word guess'.  In this game, the client tries to guess a 7
+letter word.  He guesses one letter at a time.  He loses if he gets 4
+wrong guesses; he wins if he guesses all the letters in the word
+with less than 4 wrong guesses.  The server keeps track of the
+client's guesses, tells the client whether or not his last guess was
+correct, and determines whether the client has won or lost.
+
+<p>
+The client requests a game by sending a single letter to the server at
+its 'well known port'.  The server creates a new socket which is bound
+to a new port to handle the rest of the game.  
+
+<p>
+After each guess by the client, the server sends back a message saying
+whether it was wrong or right.  In addition, it also shows the words
+with the correctly guessed letters filled in.  And it also shows the
+incorrect guesses.  And, finally it checks each time whether or not
+the game is over.
+
+<h3>2.2. Formats of the Packets</h3>
+
+<p>
+The packet sent by the client always consist of one character, which
+is a letter a-z.
+
+<p>
+The packet sent by the server has the following fields:
+<ol>
+<li>Status code (1 byte of text).  This can have one of the following
+    values:
+    <dl>
+    <dt>'y'
+    <dd>(yes) The last guess was right, but the game is not yet over.
+
+    <dt>'n'
+    <dd>(no) The last guess was wrong, but the game is not yet over.
+
+    <dt>'w'
+    <dd>(won) The client won.
+
+    <dt>'l'
+    <dd>(lost) The client lost.
+    </dl>
+
+<li>A text message, terminated by 0.  This will be no more than 80
+    characters.
+</ol>
+
+<h3>2.3. Links to the Source Code</h3>
+<a href="http:word-guess-srv.c">Server</a>
+<br>
+<a href="http:word-guess-cli.c">Client</a>
+
+<HR>
+(c) Haim [Howard] Roman  
+<A HREF="mailto:roman@mail.jct.ac.il">roman@mail.jct.ac.il</A>.
+All Rights reserved. 
+<BR>
+Permission is given to copy any or all of this document for
+NON-commerical purposes provided that this copyright notice is is included.
+        
+
+</BODY>
+</HTML>
+
+

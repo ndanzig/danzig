@@ -1,0 +1,212 @@
+/* FILE: via_select.c -- this file is part of an example of
+   implementing timeouts with sockets.  It implements the function
+   'receive_or_timeout' via the 'select' function.
+
+   Select is passed 3 sets of file/socket descriptors & an optional
+   timeout value.  It returns when one of the following happens,
+   whichever occurs first:
+
+       I/O is pending on one or more of that descriptors it was passed.
+
+       it times out
+
+   If the first happens, we call the appropriate read/recv function.
+   If the 2nd happens, we return with the appropriate status.
+
+   What seems unnatural about this use of select, is that select was
+   designed to wait for more than one descriptor, while here it waits
+   only for one descriptor.  Indeed, we call select not for its
+   ability to handle more than one descriptor, but for its timeout
+   capability. 
+
+   RETURN VALUES:
+
+       non-negative -- the number of bytes actually received
+
+       negative -- timed out, or some socket error.
+
+   This function prints any appropriate messages.  But it does NOT
+   abort the process.
+   =========================================================
+*/
+
+#include <netinet/in.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/time.h>   /* for the timeval struct, needed by select() */
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <unistd.h>     /* needed for the select() function */
+
+/* the following are functions that are called by
+   'receive_or_timeout', and that defined in a separate file, because
+   I think they'll be called by more than one version (method) of
+   'receive_or_timeout'. */
+
+extern void
+print_start_timeout (const int timeout_in_seconds);
+
+extern void
+print_recv_succeeded (const int num_bytes,
+		      const int timeout_in_seconds);
+void
+print_current_time ();
+
+/*===================================================
+  == readable_or_timeout -- given a socket descriptor & a timeout
+  ==     threshold in seconds, this function will tell you whether I/O
+  ==     is pending or if it has timed out.
+  ==
+  ==     RETURN VALUES:
+  ==
+  ==         +1 -- data arrived before the timeout (I/O pending).
+  ==          0 -- timed out
+  ==         -1 -- some error.  In this case, this function will print
+  ==		   an appropriate error message.
+  ==
+  ==     Note that this function works for both file & socket descriptors.
+  ===================================================
+*/
+
+int
+readable_or_timeout (int sd, int timeout_in_seconds)
+{
+  /*-----------------------------------------
+    --- DATA
+    -----------------------------------------
+  */
+  fd_set         read_sd_set;  /* set of socket descriptors that we 
+			          expect to read from */
+  int            status;
+  struct timeval tv;           /* select() needs the timeout in this type of
+				  structure */
+  /*-----------------------------------------
+    --- ACTION
+    -----------------------------------------
+  */
+
+  /* Set the socket descriptor set to contain only the socket
+     descriptor that this function was passed. */
+  FD_ZERO (&read_sd_set);
+  FD_SET  (sd, &read_sd_set);
+
+  /* Convert the timeout to the timeval structure.  Select uses this
+     structure because it lets you specify a timeout in microseconds
+     (however, not every system will actually check down to the
+     microsecond level).  */
+  tv.tv_sec = timeout_in_seconds;
+  tv.tv_usec = 0;  /* zero microseconds. */
+
+  /* select will return only when I/O is pending, when it has timed
+     out, or if there is an error.  Note that after this function
+     returns, the descriptor sets and the timeout are UNdefined.
+
+     The first argument of select specifies how many file/socket
+     descriptors the system should check.  If the first argument is N,
+     the system will check descriptors 0 through N-1.  Thus, this
+     argument should be set to the highest descriptor in your sets,
+     plus 1.  The reason for this argument is that a process might be
+     able to handle a very high number of descriptors.  This argument
+     allows the system to limit the number of descriptors it actually
+     checks. */
+
+  status = select (sd+1,         /* highest-numbered descriptor + 1 */
+		   &read_sd_set, /* descriptor set for reading */
+		   NULL,         /* descriptor set for writing (none) */
+		   NULL,         /* descriptor set for exceptions (none) */
+		   &tv);         /* time out */
+
+  /* if there was an error or timed out, print a message. But do NOT exit. */
+  if      (status <  0) {perror ("select error");}
+  else if (status == 0)
+    {
+      print_current_time();
+      fprintf (stderr, "timed out.  Timeout threshhold was %d secs\n",
+	      timeout_in_seconds);
+    }
+
+  return (status);
+}
+
+/*===================================================
+  == receive_or_timeout -- wait for a message.  Return either when we get
+  ==     a message or time out (or the attempt to receive the message
+  ==     otherwise failed).
+  ==
+  ==     Unlike most functions in this program, this function does NOT
+  ==     abort the program if there was an error.  However, it will
+  ==     print an error message.
+  ==
+  ==     RETURN VALUES:
+  ==
+  ==         0 or positive -- number of bytes read
+  ==         -1            -- timed out or error
+  ==         -2            -- I/O error
+  ===================================================
+*/
+
+#define RECV_FLAGS 0            /* flags for recvfrom() function */
+
+#define STATUS_TIME_OUT  -1     /* return statuses */
+#define STATUS_ERROR     -2
+
+int
+receive_or_timeout (const int           sd,        /* socket descriptor */  
+		    struct sockaddr_in *sender,    /* will set this */
+		    char               *mesg,      /* will set this */
+		    const int           mesg_max,
+		    const int           timeout)   /* in seconds */
+{
+  /*-----------------------------------------
+    --- DATA
+    -----------------------------------------
+  */
+
+  int num_bytes;    /* number of bytes actually read */
+  int sockaddr_len;  /* length of socket address */
+  int status;
+
+  /*-----------------------------------------
+    --- ACTION
+    -----------------------------------------
+  */
+
+  /* Print the current time & timeout value */
+  print_start_timeout (timeout);
+  
+  /* Determine whether or not data arrived for reading/receiving
+     before the timeout.  If there was an error or a timeout, then the
+     function will print the message.  In those cases, just return. 
+
+     We don't necessarily use the same return codes as
+     readable_or_timeout, because that returns 0 on timeout, and this
+     function returns 0 if there was no timeout, but it received a
+     packet of 0 bytes. */
+
+  status = readable_or_timeout (sd, timeout);
+  if      (status == 0) {return (STATUS_TIME_OUT);}
+  else if (status <  0) {return (STATUS_ERROR);}
+
+  /* If we get this far, there is data to receive.
+     recvfrom() requires that we initialize the length to the size of
+     the structure containing the socket address.  Then it will adjust
+     it to what it really is. */
+  sockaddr_len = sizeof (struct sockaddr_in);
+
+  /* Receive the packet.  This function returns the number of
+     bytes actually read, and sets the socket address of the sender,
+     along with the length of the socket address . */
+  num_bytes = recvfrom (sd, mesg, mesg_max, RECV_FLAGS,
+			sender, &sockaddr_len);
+
+  /* If receive error... */
+  if (num_bytes < 0)
+    {
+      perror ("Error receiving data");
+      return (STATUS_ERROR);
+    }
+
+  /* Else the receive succeeded.  Print a notice and exit. */
+  print_recv_succeeded (num_bytes, timeout);
+  return (num_bytes);
+}

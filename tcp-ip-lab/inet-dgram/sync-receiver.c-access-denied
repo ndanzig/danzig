@@ -1,0 +1,191 @@
+/* FILE: sync-receiver.c -- UDP (internet datagram) receiver to what
+   happens when you send a message to a server before it executes the
+   read/recv function.
+
+   SYNTAX: receiver
+
+   DESCRIPTION:
+
+   Prints out the port it is listening to, then repeatedly executes
+   the following:
+
+       wait for 15 seconds, printing a number per second
+
+       receive a message (76 characters or less).
+
+   The purpose is to test what happens when someone sends to this
+   process before it executes the recv function.  While the numbers are
+   printing, send a message to it.  You can use the simple sender
+   program (displayed somewhere else at this site).
+   *************************************************************
+*/
+
+#include <stdio.h>
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>   /* needed for internet sockets */
+
+#define MESG_MAX 77	 /* Maximum length of message we can receive */
+
+/******************************************************/
+/* err_exit -- call this when exiting due to an error
+/******************************************************/
+
+void err_exit ( int status, char *mesg )
+{
+
+  perror (mesg);
+  exit (status);
+}
+
+/******************************************************/
+/* bind_and_print_port -- bind the given socket to a name, and print
+/*   the port on standard output.  'sd' is the socket descriptor.
+/******************************************************/
+
+void bind_and_print_port ( int sd )
+{
+  /* local data */
+
+  int                 length;
+  u_short             port;
+  struct sockaddr_in  sockname;
+  int		      status;
+
+  /* set the name of the socket. */
+
+  sockname.sin_family = AF_INET;	 /* internet address family */
+  sockname.sin_addr.s_addr = INADDR_ANY; /* accept messages addressed
+					    to any valid IP address of
+					    this host. */
+  sockname.sin_port = 0;		 /* Let the system choose a
+					    port */
+
+  /* bind the name to this socket */
+
+  status = bind ( sd,
+		  (struct sockaddr *) &sockname,
+		  sizeof sockname
+		);
+  if (status < 0)  err_exit (3, "binding name to socket");
+
+
+  /* Print out the port we bound to.  We call ntohs to convert the
+     network byte format to that of our local host.  If these formats
+     are the same, then this will do nothing. */
+
+  length = sizeof (sockname);
+  status = getsockname ( sd,
+			 (struct sockaddr *) &sockname,
+			 &length
+		       );
+  if (status < 0)  err_exit (4, "getting socket name");
+  port = ntohs ( sockname.sin_port );
+  printf ("Listening on port # %d\n", port);
+
+  return;
+}
+
+/******************************************************/
+/* take_a_break -- wait for 15 seconds.  We print out somthing
+/*   periodically to let the user know that we are still alive.
+/******************************************************/
+
+void take_a_break ()
+{
+  int i;
+
+  for (i=0; i<15; i++)
+    {
+      sleep (1);
+      printf("%d ", i);
+      /* (void) write ( STDOUT_FILENO, ".", 1) */
+    }
+  printf ("\nNow waiting for message\n");
+
+  return;  
+}
+
+/******************************************************/
+/* recv_and_print_mesg -- wait until we receive a message from another
+/*   process.  Then print the message, as well as who it is from.
+/******************************************************/
+
+#define RECV_FLAGS 0     /* Flags for the call to recvfrom */
+
+void recv_and_print_mesg ( int sd )
+{
+  /* local data */
+
+  char                buf [MESG_MAX];  /* message buffer */
+  struct sockaddr_in  cli_sname;  /* client socket name */
+  int                 cli_sname_len;
+  unsigned char	      ip_addr [4];
+  int		      length;
+  u_short	      port;
+
+  /* receive a message, along with information about who sent it. */
+
+  cli_sname_len = sizeof ( cli_sname );
+  length = recvfrom (sd, buf, MESG_MAX, RECV_FLAGS,
+		     (struct sockaddr *) &cli_sname,
+		     &cli_sname_len );
+  if ( length < 0 ) err_exit (5, "recvfrom error");
+
+  /* print the message received */
+
+  if ( length >= MESG_MAX ) buf [MESG_MAX] = '\0';
+  else buf [length] = '\0';
+
+  printf ("Received message: %s\n", buf);
+
+  /* Find out the sender's IP port & print it */
+
+  port = ntohs (  cli_sname.sin_port );
+  printf ("    From port %u\n", port);
+
+  /* FInd out the sender's IP address & print it */
+
+  bcopy ( (char *) &cli_sname.sin_addr,
+	  ip_addr,  4);
+  printf ("    From IP address %03u.%03u.%03u.%03u\n\n",
+	  ip_addr[0], ip_addr[1], ip_addr[2], ip_addr[3]);
+
+  return;
+
+}
+
+/******************************************************/
+/* MAIN FUNCTION
+/******************************************************/
+
+#define DEF_PROTOCOL 0   /* Use the default protocol */
+
+int main ()
+{
+  int                 sd; /* socket descriptor */
+  int                 status;
+
+  /* turn off buffering of standard output */
+  setbuf ( stdout, (char *) NULL );  
+
+  /* create the socket */
+  sd = socket ( AF_INET, SOCK_DGRAM, DEF_PROTOCOL );
+  if ( sd < 0 ) {err_exit (1, "trying to create socket");}
+
+  /* bind this socket to a name, and print the port we are using on
+     standard output. */
+  bind_and_print_port ( sd );
+
+  while (1)
+    {
+      /* Wait for a while */
+      take_a_break ();
+      
+      /* Receive a message */
+      recv_and_print_mesg (sd);
+     
+    }
+ 
+}

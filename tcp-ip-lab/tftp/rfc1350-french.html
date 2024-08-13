@@ -1,0 +1,385 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<!-- $Id: $ -->
+<html>
+<head>
+   <META NAME="Generator" CONTENT="wordpad">
+   <META NAME="Author" CONTENT="yves Lescop">
+   <META http-equiv="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Classification" CONTENT="reseaux,internet,rfc,traduction,francais,french,tftp,fichiers,transfert">
+   <META NAME="Description" CONTENT="Traduction en Français du RFC 1350 TFTP">
+   <META NAME="KeyWords" CONTENT="traduction, Français, RFC, rfc, tftp, TFTP, RFC1350, transfert, fichiers">
+<title>RFC1350     TFTP</title>
+</head>
+<body BGCOLOR="#DDDDDD">
+
+<table BORDER=0 CELLSPACING=0 CELLPADDING=4 WIDTH=100% >
+<tr>
+<td VALIGN=TOP WIDTH="50%">Groupe de Travail sur les R&eacute;seaux<br>
+ Requ&ecirc;te pour Commentaires : RFC 1350 - FR <br>
+ Standard : 33 <br>
+ Remplace : RFC 783 <br>
+ Traduction : Yves LESCOP (lyc&eacute;e la croix-rouge - Brest)<br>
+ Relecteur : Fran&ccedil;ois ROPERT
+</td>
+<td VALIGN=TOP WIDTH="50%">
+<div align=right>K. Sollins <br>
+ MIT <br>
+ July 1992 <br>
+ <br> <a href="mailto:ylescop@free.fr">ylescop@free.fr</a>
+ <br> <a href="http://www.rezalfr.org">www.rezalfr.org</a>
+</div>
+</td>
+</tr>
+</table>
+
+
+<HR>
+<CENTER><H1>PROTOCOLE TFTP (REVISION 2)</H1>
+<BR></CENTER>
+<HR>
+
+<H2><FONT COLOR="#000088">Statut de ce document</FONT></H2>
+
+<P>Ce document sp&eacute;cifie un protocole standard d'Internet pour la communaut&eacute; Internet, et ne sera &eacute;prouv&eacute; qu'apr&egrave;s plusieurs discussions et suggestions. Merci de vous r&eacute;f&eacute;rer &agrave; l'&eacute;dition courante du " Internet Official Protocol Standards " (STD1) pour l'&eacute;tat de standardisation et le statut de ce protocole. La distribution de ce document est illimit&eacute;e.</P>
+
+<H2><FONT COLOR="#000088">R&eacute;sum&eacute;</FONT></H2>
+
+<P>TFTP est un protocole tr&egrave;s simple utilis&eacute; pour transf&eacute;rer des fichiers. Son appellation (Trivial File Transfer Protocol ou TFTP) vient de l&agrave;. Chaque paquet "nonterminal" est valid&eacute; s&eacute;par&eacute;ment. Ce document d&eacute;crit le protocole et ses diff&eacute;rents types de paquets. Ce document explique aussi les raisons ayant conduit &agrave; certaines d&eacute;cisions.</P>
+
+<H2><FONT COLOR="#000088">Remerciements</FONT></H2>
+
+<P>Ce protocole fut con&ccedil;u &agrave; l'origine par Noel Chiappa, et fut r&eacute;vis&eacute; par lui-m&ecirc;me, Bob Baldwin et Dave Clark, avec des commentaires de Steve Szymanski. La pr&eacute;sente r&eacute;vision de ce document inclus des modifications provenant des discussions et des suggestions de Larry Allen, Noel Chiappa, Dave Clark, Geoff Cooper, Mike Greenwald, Liza Martin, David Reed, Craig Milo Rogers (de USC-ISI), Kathy Yellick, et l'auteur.  Le sch&eacute;ma utilis&eacute; pour la reconnaissance et la retransmission s'inspire de TCP, et le m&eacute;canisme de gestion d'erreur a &eacute;t&eacute; sugg&eacute;r&eacute; par le syst&egrave;me de message d'avortement du PARC EFTP.</P>
+
+<P>La r&eacute;vision de Mai 1992, rem&eacute;diant au bug protocolaire de l' "apprenti sorcier" [4] et &agrave; d'autres probl&egrave;mes mineurs, a &eacute;t&eacute; faite par Noel Chiappa.</P>
+
+<P>Cette &eacute;tude a &eacute;t&eacute; soutenue par "The Advanced Research Projects Agency of the Department of Defense" et a &eacute;t&eacute; contr&ocirc;l&eacute;e par "The Office of Naval Research" sous le contrat num&eacute;ro N00014-75-C-0661.</P>
+
+<H2><FONT COLOR="#000088">1. Objectif</FONT></H2>
+
+<P>TFTP est un protocole basique de transfert de fichiers, et par cons&eacute;quent est appel&eacute; "Trivial File Transfer Protocol" ou TFTP. Il a &eacute;t&eacute; implant&eacute; au dessus du protocole Internet UDP ("User Datagram Protocol") [2] aussi peut il &ecirc;tre utilis&eacute; pour d&eacute;placer des fichiers entre machines sur diff&eacute;rents r&eacute;seaux implantant UDP.  (Ceci n'exclut pas la possibilit&eacute; d'impl&eacute;menter TFTP au dessus d'un autre protocole fournissant des datagrammes). Il est con&ccedil;u pour &ecirc;tre r&eacute;duit et facile &agrave; impl&eacute;menter. Il lui manque donc la plupart des fonctionnalit&eacute;s d'un FTP ordinaire. La seule chose qu'il peut r&eacute;aliser est lire et &eacute;crire des fichiers (ou du courrier) depuis ou vers un serveur distant. Il ne peut pas afficher le contenu d'un r&eacute;pertoire, et actuellement l'authentification des utilisateurs n'est pas pr&eacute;vue. Comme les autres protocoles Internet, il travaille avec des donn&eacute;es de longueur &eacute;gale &agrave; 8 bits.</P>
+
+<P>Trois modes de transferts sont actuellement soutenus : "netascii" (ASCII est d&eacute;fini dans "USA Standard Code for Information Interchange" [1] avec les modifications pr&eacute;cis&eacute;es dans "Sp&eacute;cification du protocole Telnet" [3].)  Noter qu'il s'agit d'un ASCII 8 bits. Le terme "netascii" sera utilis&eacute; tout au long de ce document pour indiquer cette version particuli&egrave;re de l'ASCII. ; Le terme "octet" (celui-ci remplace le mode "binaire" des versions pr&eacute;c&eacute;dentes de ce document) est un  octet brut de 8 bits. Le terme "mail", repr&eacute;sente des caract&egrave;res netascii envoy&eacute;s &agrave; un utilisateur plut&ocirc;t qu'un fichier  (le mode "mail" est obsol&egrave;te et ne doit pas &ecirc;tre implant&eacute; ou utilis&eacute;). Des modes suppl&eacute;mentaires peuvent &ecirc;tre d&eacute;finis par des paires de machines coop&eacute;rant entre elles.</P>
+
+<P>La r&eacute;f&eacute;rence [4] (section 4.2) devra &ecirc;tre consult&eacute;e pour de pr&eacute;cieuses directives et futures suggestions sur TFTP.</P>
+
+<H2><FONT COLOR="#000088">2. Vue d'ensemble du protocole</FONT></H2>
+
+<P>N'importe quel transfert d&eacute;marre par une demande de lecture ou d'&eacute;criture de fichier, qui aussi sert de demande de connexion. Si le serveur autorise la requ&ecirc;te, la connexion est ouverte et le fichier est envoy&eacute; par blocs d'une taille fixe de 512 octets. Chaque paquet de donn&eacute;es contient un bloc de donn&eacute;es, et doit &ecirc;tre acquitt&eacute; par un paquet "accus&eacute; de r&eacute;ception" avant que le paquet suivant ne puisse &ecirc;tre &eacute;mis. Un paquet de donn&eacute;es de moins de 512 octets signale la terminaison du transfert. Si un paquet se perd sur le r&eacute;seau, une fin d'attente se d&eacute;clenchera chez le destinataire et il pourra retransmettre son dernier paquet (qui peut &ecirc;tre de donn&eacute;es ou un accus&eacute; de r&eacute;ception), provoquant ainsi la retransmission du paquet perdu par l'&eacute;metteur. L'&eacute;metteur, depuis l'&eacute;tape garantissant que tous les anciens paquets ont bien &eacute;t&eacute; re&ccedil;us, ne doit conserver qu'un paquet en m&eacute;moire pour la retransmission. Observons que les deux machines concern&eacute;es par un transfert sont consid&eacute;r&eacute;es comme &eacute;mettrices et r&eacute;ceptrices. L'une envoie des donn&eacute;es et re&ccedil;oit des accus&eacute;s de r&eacute;ception, l'autre envoie des accus&eacute;s de r&eacute;ception et re&ccedil;oit des donn&eacute;es.</P>
+
+<P>La plupart des erreurs provoquent la rupture de la connexion. Une erreur est signal&eacute;e par l'&eacute;mission d'un paquet "erreur". Ce paquet n'est ni acquitt&eacute; ni retransmis (par exemple., un serveur TFTP ou un utilisateur peut rompre sa connexion apr&egrave;s l'envoi d'un message d'erreur), alors l'autre extr&eacute;mit&eacute; de la connexion  peut ne pas l'avoir re&ccedil;u. Par cons&eacute;quent des d&eacute;lais d'attente sont utilis&eacute;s quand le paquet "erreur" a &eacute;t&eacute; perdu pour d&eacute;tecter une telle terminaison. Les erreurs sont provoqu&eacute;es par  trois types d'&eacute;v&eacute;nements : incapacit&eacute; &agrave; satisfaire la demande (par exemple, fichier non trouv&eacute;, violation d'acc&egrave;s, ou utilisateur inexistant), r&eacute;ception d'un paquet qui ne peut s'expliquer par un d&eacute;lai ou une duplication sur le r&eacute;seau (par exemple, un paquet mal form&eacute;), ou la perte de l'acc&egrave;s &agrave; une ressource n&eacute;cessaire (par exemple, disque plein ou acc&egrave;s refus&eacute; pendant le transfert).</P>
+
+<P>TFTP ne reconna&icirc;t qu'une seule condition d'erreur qui ne provoque pas la rupture&nbsp;: le port source d'un paquet re&ccedil;u est incorrect. Dans ce cas, un paquet d'erreur est &eacute;mis vers la machine d'origine.</P>
+
+<P>Ce protocole est tr&egrave;s restrictif afin de simplifier l'impl&eacute;mentation. Par exemple, la taille fixe des blocs pr&eacute;pare franchement l'allocation future, et l'&eacute;tape d'attente d'accus&eacute; de r&eacute;ception fournit un m&eacute;canisme de contr&ocirc;le de flux et &eacute;vite le besoin de remettre dans l'ordre les paquets entrants.</P>
+
+<H2><FONT COLOR="#000088">3. Relation aux autres Protocoles</FONT></H2>
+
+<P>Comme mentionn&eacute;, TFTP est con&ccedil;u pour &ecirc;tre implant&eacute; au dessus d'un protocole datagramme (UDP). Puisque le Datagramme est implant&eacute; sur le protocole Internet, les paquets poss&egrave;dent une en-t&ecirc;te Internet, une en-t&ecirc;te de datagramme, et une en-t&ecirc;te TFTP. En plus, les paquets peuvent avoir une en-t&ecirc;te (LNI, ARPA, etc.) pour leur permettre de circuler sur le support de transmission local. Comme indiqu&eacute; dans la figure 3-1, l'ordre des contenus d'un paquet sera : en-t&ecirc;te support local, si utilis&eacute;, en-t&ecirc;te Internet, en-t&ecirc;te Datagramme, en-t&ecirc;te TFTP, suivis par le reste du paquet TFTP. Ceci peut ou non d&eacute;pendre des donn&eacute;es et du type de paquet comme indiqu&eacute; dans l'en-t&ecirc;te TFTP. TFTP ne pr&eacute;cise directement aucune valeur dans l'en-t&ecirc;te Internet. Par contre, le port source et le port destination de l'en-t&ecirc;te du Datagramme (son format est donn&eacute; dans l'appendice) sont utilis&eacute;s par TFTP et le champ longueur refl&egrave;te la taille du paquet TFTP. Les identificateurs de transfert (TID) utilis&eacute;s par TFTP sont transmis &agrave; la couche Datagramme pour &ecirc;tre utilis&eacute;s comme ports ; donc ils doivent &ecirc;tre compris entre 0 et 65535. L'initialisation des TID est discut&eacute;e dans la section sur le protocole initial de connexion.</P>
+
+<P>L'en-t&ecirc;te TFTP est constitu&eacute;e d'un champ de 2 octets qui indique le type du paquet (par exemple, DONNEE, ERREUR, etc.). Ces codes et le format des diff&eacute;rents types de paquets sont discut&eacute;s plus loin dans la section sur les paquets TFTP.</P>
+
+<P><CENTER>
+<B><TABLE BORDER CELLSPACING=1 CELLPADDING=10>
+<TR><TD><P ALIGN="CENTER"><B>Support Local</TD>
+    <TD><P ALIGN="CENTER"><B>Internet</TD>
+    <TD><P ALIGN="CENTER"><B>Datagramme</TD>
+    <TD><P ALIGN="CENTER"><B>TFTP</TD>
+</TR>
+</TABLE>
+<BR>
+Figure 3-1: Ordre des en-t&ecirc;tes</CENTER></P>
+</B>
+
+<H2><FONT COLOR="#000088">4. Protocole initial de connexion</FONT></H2>
+
+<P>Un transfert est &eacute;tabli par l'&eacute;mission d'une requ&ecirc;te (WRQ pour &eacute;crire vers un syst&egrave;me de fichier &eacute;tranger, ou RRQ pour le lire), et la r&eacute;ception d'une r&eacute;ponse positive, un accus&eacute; de r&eacute;ception pour &eacute;crire, ou le premier paquet de donn&eacute;es &agrave; lire. En g&eacute;n&eacute;ral un paquet "accus&eacute; de r&eacute;ception" doit contenir le num&eacute;ro de bloc du paquet de donn&eacute;es qui doit &ecirc;tre acquitt&eacute;. A chaque paquet de donn&eacute;es est associ&eacute; un num&eacute;ro de bloc ; les num&eacute;ros de blocs sont cons&eacute;cutifs et d&eacute;marrent &agrave; 1. Puisque la r&eacute;ponse positive &agrave; une demande d'&eacute;criture est un paquet "accus&eacute; de r&eacute;ception", dans ce cas particulier le num&eacute;ro de bloc sera z&eacute;ro. Normalement, puisqu'un paquet "accus&eacute; de r&eacute;ception" valide un paquet de donn&eacute;es, le paquet "accus&eacute; de r&eacute;ception" doit contenir le num&eacute;ro de bloc du paquet de donn&eacute;es &agrave; valider. Si la r&eacute;ponse est un paquet &quot;&nbsp;erreur&nbsp;&quot;, alors la requ&ecirc;te est rejet&eacute;e.</P>
+
+<P>Chaque extr&eacute;mit&eacute; choisit en priorit&eacute; un TID pour elle m&ecirc;me afin d'&eacute;tablir une connexion. Il sera utilis&eacute; durant cette connexion. Le TID d'une connexion sera choisit al&eacute;atoirement, ainsi la probabilit&eacute; que le m&ecirc;me nombre soit choisit deux fois de suite est tr&egrave;s faible. A chaque paquet sont associ&eacute;s les deux TID de la phase de connexion, le TID source et le TID destination. Ces TID sont remis au support UDP (ou un autre protocole datagramme) comme ports source et destination. Une machine effectuant une demande choisit son TID source comme d&eacute;crit ci-dessus, et &eacute;met sa requ&ecirc;te initiale avec le TID r&eacute;serv&eacute; 69 en d&eacute;cimal (105 en octal) pour la machine destinataire. La r&eacute;ponse &agrave; la demande, en fonctionnement normal, utilise le TID choisi par le serveur comme TID source et le TID choisi par le requ&eacute;rant dans son message pr&eacute;alable comme TID destination. Les deux TID choisis sont alors utilis&eacute;s pour le reste du transfert.</P>
+
+<P>Par exemple, la suite montre les &eacute;tapes utilis&eacute;es pour &eacute;tablir une connexion dans le but d'&eacute;crire un fichier. Noter que WRQ, ACK, et DATA sont les noms respectifs des types de paquets demande d'&eacute;criture, accus&eacute; de r&eacute;ception, et donn&eacute;es. L'appendice contient un exemple similaire pour la lecture d'un fichier.</P>
+
+<OL>
+<LI>La machine A &eacute;met un "WRQ" vers la machine  B  avec  source = TID de A, destination = 69.</LI>
+
+<LI>La machine  B  &eacute;met un "ACK" (avec num&eacute;ro de bloc = 0) vers la machine A avec source = TID de B, destination = TID de A.</LI>
+</OL>
+
+<P>A cet instant la connexion a &eacute;t&eacute; &eacute;tablie et le premier paquet de donn&eacute;es peut &ecirc;tre &eacute;mis par la machine A avec un num&eacute;ro de s&eacute;quence &agrave; 1. Dans la prochaine &eacute;tape, et dans toutes les suivantes, les machines doivent s'assurer que le TID source est &eacute;gal &agrave; la valeur convenue lors des &eacute;tapes 1 et 2. Si un TID source n'est pas le m&ecirc;me, le paquet doit &ecirc;tre consid&eacute;r&eacute; comme provenant par erreur d'un autre endroit. Un paquet "erreur" doit &ecirc;tre envoy&eacute; &agrave; la source du mauvais paquet, tandis que le transfert n'est pas perturb&eacute;. Ceci ne peut &ecirc;tre r&eacute;alis&eacute; que si le TFTP re&ccedil;oit effectivement un paquet avec un TID incorrect. Si le protocole de transport ne le permet pas, cette condition d'erreur particuli&egrave;re n'arrivera pas.</P>
+
+<P>L'exemple suivant illustre une op&eacute;ration correcte du protocole dans laquelle la situation ci-dessus peut survenir. La machine A &eacute;met une requ&ecirc;te vers la machine B. Quelque part sur le r&eacute;seau, la demande est dupliqu&eacute;e, et deux accus&eacute;s de r&eacute;ceptions sont renvoy&eacute;s vers la machine A, avec des TID diff&eacute;rents choisis par la machine B en r&eacute;ponse aux deux requ&ecirc;tes. Quand la premi&egrave;re r&eacute;ponse arrive, la machine A continue la connexion. Quand la seconde r&eacute;ponse &agrave; la demande arrive, elle doit &ecirc;tre rejet&eacute;e, mais il n'y a aucune raison de fermer la premi&egrave;re connexion. Donc, si des TID diff&eacute;rents sont choisis pour les deux connexions sur la machine B et que la machine A v&eacute;rifie le TID source des messages re&ccedil;us, la premi&egrave;re connexion peut &ecirc;tre maintenue tandis que la seconde est rejet&eacute;e par le renvoi d'un paquet "erreur".</P>
+
+<H2><FONT COLOR="#000088">5. Paquets TFTP </FONT></H2>
+
+<P>TFTP reconna&icirc;t cinq types de paquets, tous ceux-ci sont mentionn&eacute;s ci-dessous :</P>
+
+<P><CENTER>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=340>
+<TR><TD WIDTH="40%" VALIGN="TOP"> <P ALIGN="CENTER">code op&eacute;ration</TD>
+    <TD WIDTH="60%" VALIGN="TOP"> <P>op&eacute;ration</TD>
+</TR>
+<TR><TD VALIGN="TOP"> <P ALIGN="CENTER">1</TD>
+    <TD VALIGN="TOP"> <P>Demande de lecture (RRQ)</TD>
+</TR>
+<TR><TD VALIGN="TOP"> <P ALIGN="CENTER">2</TD>
+    <TD VALIGN="TOP"> <P>Demande d'&eacute;criture (WRQ)</TD>
+</TR>
+<TR><TD VALIGN="TOP"> <P ALIGN="CENTER">3</TD>
+    <TD VALIGN="TOP"> <P>Donn&eacute;es (DATA)</TD>
+</TR>
+<TR><TD VALIGN="TOP"> <P ALIGN="CENTER">4</TD>
+    <TD VALIGN="TOP"> <P>Accus&eacute; de r&eacute;ception (ACK)</TD>
+</TR>
+<TR><TD VALIGN="TOP"> <P ALIGN="CENTER">5</TD>
+    <TD VALIGN="TOP"> <P>Erreur (ERROR)</TD>
+</TR>
+</TABLE>
+</P>
+</CENTER>
+
+<P>L'en-t&ecirc;te d'un paquet TFTP contient le code op&eacute;ration associ&eacute; &agrave;
+ ce paquet.</P>
+
+<CENTER>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4 WIDTH=500>
+<TR>
+ <TD WIDTH="22%"><P ALIGN="CENTER">2 Octets</TD>
+ <TD WIDTH="29%"><P ALIGN="CENTER">cha&icirc;ne</TD>
+ <TD WIDTH="14%"><P ALIGN="CENTER">1 octet</TD>
+ <TD WIDTH="21%"><P ALIGN="CENTER">cha&icirc;ne</TD>
+ <TD WIDTH="14%"><P ALIGN="CENTER">1 octet</TD>
+</TR>
+</TABLE>
+<TABLE BORDER=1 CELLSPACING=1 CELLPADDING=4 WIDTH=500>
+<TR>
+ <TD WIDTH="22%"><P ALIGN="CENTER"><B>code op.</TD>
+ <TD WIDTH="29%"><P ALIGN="CENTER"><B>Nom de fichier</TD>
+ <TD WIDTH="14%"><P ALIGN="CENTER"><B>0</TD>
+ <TD WIDTH="21%"><P ALIGN="CENTER"><B>Mode</TD>
+ <TD WIDTH="14%"><P ALIGN="CENTER"><B>0</TD>
+</TR>
+</TABLE>
+<P><B>Figure 5-1: paquet RRQ/WRQ</B></P>
+</CENTER>
+
+<P>Les paquets RRQ et WRQ (respectivement codes op&eacute;ration 1 et 2) ont le format illustr&eacute; Figure 5-1. Le nom de fichier est une suite d'octets en "netascii" termin&eacute;e par un octet &agrave; z&eacute;ro. Le champ &quot;&nbsp;mode&nbsp;&quot; contient la cha&icirc;ne de caract&egrave;res  "netascii", "octet", ou "mail" (ou toute combinaison de majuscules et minuscules, comme "NETASCII", "NetAscii", etc.) en "netascii" indiquant l'un des trois modes d&eacute;fini par le protocole. Une machine qui re&ccedil;oit des donn&eacute;es en mode "netascii" doit traduire les donn&eacute;es dans son propre format. Le mode Octet est utilis&eacute; pour transf&eacute;rer un fichier qui est dans le format 8-bits de la machine de laquelle le fichier est en train d'&ecirc;tre transf&eacute;r&eacute;. Cela suppose que chaque type de machine poss&egrave;de un seul format 8-bit ce qui est le plus courant, et que ce format est choisi. Par exemple, sur un DEC-20, une machine 36 bits, il y a quatre octets dans un mot plus quatre bits de rupture. Si une machine re&ccedil;oit un fichier &quot;&nbsp;octets&nbsp;&quot; et le retourne, le fichier retourn&eacute; doit &ecirc;tre identique &agrave; l'original.</P>
+<P>le mode courrier (Mail)  utilise le nom d'une adresse de courrier au lieu d'un fichier, et doit commencer par un WRQ.  Sinon il est identique au mode "netascii". La cha&icirc;ne de caract&egrave;res de l'adresse de courrier doit &ecirc;tre de la forme "nom utilisateur" ou "nom@machine". Si la deuxi&egrave;me syntaxe est utilis&eacute;e, elle autorise l'option de relayage du courrier par un ordinateur faisant office de relais.</P>
+
+<P>La discussion ci-dessus pr&eacute;sume que l'&eacute;metteur et le r&eacute;cepteur fonctionnent tous deux dans le m&ecirc;me mode, mais il n'y a aucune raison pour que ce soit le cas. Par exemple, l'un peut &ecirc;tre un serveur de stockage. Il n'y a aucune raison qu'une telle machine puisse traduire le "netascii" dans son propre format de texte. L'exp&eacute;diteur peut envoyer des fichiers en "netascii", mais le serveur de stockage peut simplement l'enregistrer sans aucune translation en format 8-bits. Une autre situation comparable est un probl&egrave;me qui se produit couramment sur des syst&egrave;mes DEC-20. Ni le mode "netascii", ni le mode octet ne donnent acc&egrave;s &agrave; tous les bits d'un mot. On peut cr&eacute;er pour une telle machine un mode sp&eacute;cial qui lit tous les bits d'un mot, mais dans lequel le r&eacute;cepteur enregistre l'information dans un format 8-bits. Quand un tel fichier est r&eacute;cup&eacute;r&eacute; du site de stockage, il doit l'&ecirc;tre sous sa forme originale pour &ecirc;tre utilisable, alors le mode inverse doit aussi &ecirc;tre impl&eacute;ment&eacute;. L'utilisateur du site devra se souvenir de cette information pour r&eacute;aliser le transfert. Dans ces deux exemples, le paquet de demande devra sp&eacute;cifier le mode octet pour la machine &eacute;trang&egrave;re, mais la machine locale devra &ecirc;tre dans un autre mode. Aucune machine ou modes sp&eacute;cifiques d'application n'ont &eacute;t&eacute; sp&eacute;cifi&eacute;s dans le TFTP, mais l'un d'eux pourra &ecirc;tre compatible avec cette sp&eacute;cification.</P>
+
+<P>Il est aussi possible de concevoir d'autres modes pour des paires de machines coop&eacute;rantes, bien que cela doit &ecirc;tre r&eacute;alis&eacute; avec pr&eacute;caution. Il n'y a aucune obligation pour que d'autres machines puissent impl&eacute;menter cela. Il n'existe aucune autorit&eacute; de contr&ocirc;le pour d&eacute;finir ces modes ou d&eacute;signer leurs noms.</P>
+
+<P><CENTER>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4 WIDTH=420>
+<TR>
+ <TD WIDTH="26%"><P ALIGN="CENTER">2 octets</TD>
+ <TD WIDTH="29%"><P ALIGN="CENTER">2 octets</TD>
+ <TD WIDTH="45%"><P ALIGN="CENTER">n octets</TD>
+</TR>
+</TABLE>
+<TABLE BORDER=1 CELLSPACING=1 CELLPADDING=4 WIDTH=420>
+<TR>
+ <TD WIDTH="26%"><P ALIGN="CENTER"><B>Code op.</TD>
+ <TD WIDTH="29%"><P ALIGN="CENTER"><B>Bloc #</TD>
+ <TD WIDTH="45%"><P ALIGN="CENTER"><B>Donn&eacute;es</TD>
+</TR>
+</TABLE>
+
+<P><B>Figure 5-2: paquet DONNEES</B></P>
+</CENTER>
+
+<P>Les donn&eacute;es sont effectivement transf&eacute;r&eacute;es dans des paquets DONNEES illustr&eacute;s dans la Figure 5-2. Les paquets DONNEES (code op&eacute;ration = 3) poss&egrave;dent un num&eacute;ro de bloc et un champ de donn&eacute;es. Le num&eacute;ro de bloc du paquet de donn&eacute;es d&eacute;bute &agrave; 1 et s'incr&eacute;mente pour chaque nouveau bloc de donn&eacute;es. Cette limitation permet au programme de n'utiliser qu'un seul nombre pour discriminer les nouveaux paquets ou ceux qui sont dupliqu&eacute;s. Le champ de donn&eacute;es est long de 0 &agrave; 512 octets. S'il est long de 512 octets, le bloc n'est pas le dernier bloc de donn&eacute;es; s'il est long de 0 &agrave; 511 octets, il indique la fin du transfert. (pour plus de d&eacute;tails voir la section sur la Conclusion Normale.)</P>
+
+<P>Tous les paquets autres que les accus&eacute;s de r&eacute;ception dupliqu&eacute;s et ceux utilis&eacute;s pour la conclusion sont acquitt&eacute;s &agrave; moins qu'une fin d'attente ne survienne [4]. Emettre un paquet de donn&eacute;es est une mani&egrave;re de reconna&icirc;tre le premier paquet "accus&eacute; de r&eacute;ception" du paquet de donn&eacute;es pr&eacute;alable. Les paquets WRQ et DONNEES sont acquitt&eacute;s par les paquets ACK ou ERREUR, tandis que les paquets RRQ et ACK sont acquitt&eacute;s par les paquets DONNEES ou ERREUR.</P>
+
+<P><CENTER>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4 WIDTH=240>
+<TR>
+ <TD WIDTH="50%"><P ALIGN="CENTER">2 octets</TD>
+ <TD WIDTH="50%"><P ALIGN="CENTER">2 octets</TD>
+</TR>
+</TABLE>
+<TABLE BORDER=1 CELLSPACING=1 CELLPADDING=4 WIDTH=240>
+<TR>
+ <TD WIDTH="50%"><P ALIGN="CENTER"><B>Code op.</TD>
+ <TD WIDTH="50%"><P ALIGN="CENTER"><B>Bloc #</TD>
+</TR>
+</TABLE>
+
+<P><B>Figure 5-3: paquet ACK</B></P>
+</CENTER>
+
+<P>La Figure 5.3 d&eacute;crit un paquet ACK ; le code op&eacute;ration est 4. Le num&eacute;ro de bloc dans ACK est l'&eacute;cho du num&eacute;ro de bloc du paquet de donn&eacute;es qui doit &ecirc;tre acquitt&eacute;. Un paquet WRQ est acquitt&eacute; par un paquet ACK ayant un num&eacute;ro de bloc nul.</P>
+
+<P><CENTER>
+<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4 WIDTH=430>
+<TR>
+ <TD WIDTH="25%"><P ALIGN="CENTER">2 octets</TD>
+ <TD WIDTH="25%"><P ALIGN="CENTER">2 octets</TD>
+ <TD WIDTH="35%"><P ALIGN="CENTER">cha&icirc;ne</TD>
+ <TD WIDTH="15%"><P ALIGN="CENTER">1 octet</TD>
+</TR>
+</TABLE>
+<TABLE BORDER=1 CELLSPACING=1 CELLPADDING=4 WIDTH=430>
+<TR>
+ <TD WIDTH="25%"><P ALIGN="CENTER"><B>Code op.</TD>
+ <TD WIDTH="25%"><P ALIGN="CENTER"><B>Code erreur</TD>
+ <TD WIDTH="35%"><P ALIGN="CENTER"><B>msg Err</TD>
+ <TD WIDTH="15%"><P ALIGN="CENTER"><B>0</TD>
+</TR>
+</TABLE>
+
+<P><B>Figure 5-4: paquet ERREUR</B></P>
+</CENTER>
+
+<P>Un paquet Erreur (code op&eacute;ration 5) prend la forme d&eacute;crite dans la Figure 5-4. Un paquet erreur peut servir d'accus&eacute; de r&eacute;ception de n'importe quel autre type de paquet. Le code erreur est un entier pr&eacute;cisant la nature de l'erreur. Une table des valeurs et de leurs significations est donn&eacute;e dans l'appendice. Noter que plusieurs codes d'erreurs ont &eacute;t&eacute; ajout&eacute;s &agrave; cette version du document. Le message d'erreur est destin&eacute; &agrave; un interlocuteur humain, et doit &ecirc;tre en "netascii". Comme toutes les autres cha&icirc;nes de caract&egrave;res, il est termin&eacute; par un octet nul.</P>
+
+<H2><FONT COLOR="#000088">6. Conclusion Normale</FONT></H2>
+
+<P>La fin d'un transfert est balis&eacute;e par un paquet de donn&eacute;es qui contient entre 0 et 511 octets de donn&eacute;es (par exemple, longueur du Datagramme &lt; 516). Ce paquet est valid&eacute; par un paquet ACK comme tous les autres paquets de donn&eacute;es. La machine qui accuse r&eacute;ception du paquet de donn&eacute;es final peut terminer la connexion de son cot&eacute; en &eacute;mettant l'ACK final. D'autre part, il est recommand&eacute; de s'attarder, cela signifie que la machine &eacute;mettant l'ACK final attendra un instant avant de conclure afin de retransmettre l'ACK final s'il a &eacute;t&eacute; perdu. L'&eacute;metteur de l'accus&eacute; de r&eacute;ception saura que l'ACK a &eacute;t&eacute; perdu s'il re&ccedil;oit &agrave; nouveau le dernier paquet de donn&eacute;es. La machine &eacute;mettant le dernier paquet de donn&eacute;es doit le retransmettre jusqu'&agrave; ce qu'il soit acquitt&eacute; ou qu'une fin d'attente arrive. Si la r&eacute;ponse est un ACK, la transmission est une r&eacute;ussite compl&egrave;te. Si un d&eacute;lai d'attente s'&eacute;coule chez l'&eacute;metteur et qu'il n'est plus pr&ecirc;t &agrave; retransmettre, le transfert peut toujours &ecirc;tre un succ&egrave;s, apr&egrave;s que celui qui accuse r&eacute;ception ou le r&eacute;seau peuvent avoir rencontr&eacute; un probl&egrave;me. Il est aussi possible dans ce cas que le transfert soit un &eacute;chec. Dans tous les cas, la connexion est rompue.</P>
+
+<H2><FONT COLOR="#000088">7. Conclusion Pr&eacute;matur&eacute;e</FONT></H2>
+
+<P>Si une requ&ecirc;te ne peut &ecirc;tre accord&eacute;e, ou qu'une erreur se produit durant le transfert, alors un paquet ERREUR (code op&eacute;ration 5) est &eacute;mis. Ce n'est qu'une politesse puisqu'il ne peut &ecirc;tre retransmis ou acquitt&eacute;, ainsi il peut n'&ecirc;tre jamais re&ccedil;u. Des fins d'attente doivent aussi &ecirc;tre utilis&eacute;es pour d&eacute;tecter les erreurs.</P>
+
+
+<H2><FONT COLOR="#000088">I. Appendice</FONT></H2>
+
+<H3><FONT COLOR="#000088">Ordre des en-t&ecirc;tes</FONT></H3>
+
+<P><CENTER>
+<TABLE BORDER=2 CELLSPACING=1 CELLPADDING=4>
+ <CAPTION ALIGN="RIGHT">2 octets</CAPTION>
+<TR>
+  <TD><B>Support Local</TD>
+  <TD><B>Internet</TD>
+  <TD><B>Datagramme</TD>
+  <TD><B>Code op. TFTP</TD>
+</TR>
+</TABLE>
+</B>
+</CENTER></P>
+
+<H3><FONT COLOR="#000088">Formats TFTP</FONT></H3>
+
+<CODE><PRE>
+    Type       Op #     Format sans l'en-t&ecirc;te
+
+             2 octets   cha&icirc;ne          1 octet   cha&icirc;ne    1 octet
+             ------------------------------------------------------
+   RRQ/WRQ  | 01/02  |  Nom du fichier  |   0  |    Mode    |   0  |
+             ------------------------------------------------------<BR>
+             2 octets   2 octets      n octets
+             ----------------------------------
+   DATA     |  03    |   Bloc #    |   Donn&eacute;es  |
+             ----------------------------------<BR>
+             2 octets   2 octets
+             ----------------------
+   ACK      |  04    |   Bloc #    |
+             ----------------------<BR>
+             2 octets   2 octets      cha&icirc;ne    1 octet
+             ------------------------------------------
+   ERROR    |  05    | Code Erreur |  Msg Err   |   0  |
+             ------------------------------------------
+
+</PRE></CODE>
+
+
+
+
+<H3><FONT COLOR="#000088">Protocole Initial de Connexion pour lire un fichier</FONT></H3>
+
+<OL>
+<LI>La machine  A  &eacute;met un  "RRQ"  vers la machine  B  avec source = son TID,
+ destination = 69.</LI>
+<LI>La machine  B &eacute;met un paquet de donn&eacute;es "DATA" (avec num&eacute;ro de
+ bloc = 1) vers la machine A  avec source = TID de B, destination = TID de A.</LI>
+</OL>
+
+
+<H3><FONT COLOR="#000088">Codes des Erreurs</FONT></H3>
+
+<P>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=500>
+<TR><TD WIDTH="20%"> <P ALIGN="CENTER">Valeur</TD>
+    <TD WIDTH="80%"> <P>Signification</TD>
+</TR>
+<TR><TD WIDTH="20%"> <P ALIGN="CENTER">0</TD>
+    <TD WIDTH="80%"> <P>Non d&eacute;fini, voir le message d'erreur
+ (si pr&eacute;sent).</TD>
+</TR>
+<TR><TD WIDTH="20%"> <P ALIGN="CENTER">1</TD>
+    <TD WIDTH="80%"> <P>Fichier non trouv&eacute;.</TD>
+</TR>
+<TR><TD WIDTH="20%"> <P ALIGN="CENTER">2</TD>
+    <TD WIDTH="80%"> <P>Violation de l'acc&egrave;s.</TD>
+</TR>
+<TR><TD WIDTH="20%"> <P ALIGN="CENTER">3</TD>
+    <TD WIDTH="80%"> <P>Disque plein ou d&eacute;passement de
+ l'espace allou&eacute;.</TD>
+</TR>
+<TR><TD WIDTH="20%"> <P ALIGN="CENTER">4</TD>
+    <TD WIDTH="80%"> <P>Op&eacute;ration TFTP ill&eacute;gale.</TD>
+</TR>
+<TR><TD WIDTH="20%"> <P ALIGN="CENTER">5</TD>
+    <TD WIDTH="80%"> <P>Transfert ID inconnu.</TD>
+</TR>
+<TR><TD WIDTH="20%"> <P ALIGN="CENTER">6</TD>
+    <TD WIDTH="80%"> <P>Le fichier existe d&eacute;j&agrave;.</TD>
+</TR>
+<TR><TD WIDTH="20%"> <P ALIGN="CENTER">7</TD>
+    <TD WIDTH="80%"> <P>Utilisateur inconnu.</TD>
+</TR>
+</TABLE>
+</P>
+
+<H3><FONT COLOR="#000088">En-t&ecirc;te du datagramme Internet de l'utilisateur [2]</FONT></H3>
+
+<P>Ceci a &eacute;t&eacute; inclus uniquement par commodit&eacute;. TFTP n'est pas obligatoirement implant&eacute; au-dessus d'UDP ( User Datagram Protocol).</P>
+
+<P><CODE><PRE>
+<P>Format :<BR>
+0                   1                   2                   3
+0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Port Source          |       Port Destination        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|           Longueur            |       Somme de contr&ocirc;le       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</PRE></CODE></P>
+
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=600>
+<TR><TD COLSPAN=2 > <P>Valeurs des champs&nbsp; :</TD>
+</TR>
+<TR><TD WIDTH="28%"> <P>Port Source</TD>
+    <TD WIDTH="72%"> <P>Choisi par l'&eacute;metteur du paquet.</TD>
+</TR>
+<TR><TD WIDTH="28%"> <P>Port Destination</TD>
+    <TD WIDTH="72%"> <P>Choisi par la machine destination (69 pour RRQ ou WRQ).</TD>
+</TR>
+<TR><TD WIDTH="28%"> <P>Longueur</TD>
+    <TD WIDTH="72%"> <P>Nombre d'octets dans le paquet UDP, en-t&ecirc;te UDP inclus.</TD>
+</TR>
+<TR><TD WIDTH="28%"> <P>Somme de contr&ocirc;le</TD>
+    <TD WIDTH="72%"><P>La r&eacute;f&eacute;rence 2 d&eacute;crit les r&egrave;gles de calcul de la somme de contr&ocirc;le. L'impl&eacute;menteur doit &ecirc;tre certain d'utiliser ici l'algorithme correct. Champ contenant des z&eacute;ros si inutilis&eacute;.</TD>
+</TR>
+</TABLE>
+
+<P>Note : TFTP passe les identificateurs de transfert (TID) &agrave; UDP (User Datagram Protocol) pour qu'ils soient utilis&eacute;s comme ports source et destination.</P>
+
+
+<H2><FONT COLOR="#000088">R&eacute;f&eacute;rences</FONT></H2>
+
+<DIR>
+<P>   [1]  USA Standard Code for Information Interchange, USASI X3.4-1968.</P>
+
+<P>   [2]  Postel, J., "User Datagram  Protocol," RFC 768, USC/Information Sciences Institute,
+ 28 August 1980.</P>
+
+<P>   [3]  Postel, J., "Telnet Protocol Specification," RFC 764, USC/Information Sciences
+ Institute, June, 1980.</P>
+
+<P>   [4]  Braden, R., Editor, "Requirements for Internet Hosts -- Application and Support",
+ RFC 1123, USC/Information Sciences Institute, October 1989.</P>
+</DIR>
+
+<H2><FONT COLOR="#000088">Consid&e

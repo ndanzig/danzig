@@ -1,0 +1,91 @@
+<html><head>
+
+<!-- 
+<base href="http://shekel.jct.ac.il/~roman/tcp-ip-lab/dgram-time.html"> 
+-->
+
+<TITLE>Internet Datagram Example: Time Service (Pseudo-code)</TITLE>
+<H1><center>Internet Datagram Example: Time Service (Pseudo-code)</center></H1>
+</head>
+
+<body>
+
+<p>
+<b>LAST EDIT:</b> &nbsp; 09 Adar 5761, 2001/03/04
+
+<H2>The server:</H2>
+
+<pre>
+	sd = socket ( PF_INET, SOCK_DGRAM, def_proto )
+
+	sname = ( INADDR_ANY, let_system_choose_port )
+
+	bind ( sd, sname, sname_len )
+
+	getsockname (sd, &sname, &sname_len)
+
+	print the port (taken from sname) that we are listening on
+
+	loop forever:
+
+	        /* other_sname & other_sname_len will be set to the */
+		/* name of the socket that sent to us. */
+
+		recvfrom ( sd, &buf, buflen, flags,   
+		           &other_sname,  &other_sname_len )
+
+		reply_msg = current system time
+
+		sendto ( sd,  reply_msg, reply_msg_len,
+			 other_sname, other_sname_len )
+</pre>
+
+<a href="udp_daytime_server.c">C code of server</a>
+
+<H2>The client:</H2>
+
+<pre>
+	sd = socket ( PF_INET, SOCK_DGRAM, def_proto )
+
+	request_message  = "t"  /* doesn't matter what it is */
+
+	other_sname = ( IP_of_server, port_of_server )
+
+	sendto ( sd, request_message, request_message_len,
+		 other_sname, other_sname_len )
+
+	bytes_read = read ( sd, &time_buf, max_bytes)
+</pre>
+
+<a href="udp_daytime_client.c">C code of client</a>
+
+<H2>Further Notes:</H2>
+
+<p>
+There are in fact offical TCP/IP protocols for a time service.  They are:
+
+<dl>
+<dt>daytime
+<dd>the server sends back the current date and time as a text string.
+    This service is available in both TCP (streams) & UDP (datagrams)
+    on port 13.
+
+    <p>
+    To get the time, the client simply connects (TCP) or sends a
+    request (UDP) to port 13 on the host providing the service.  It
+    does not need to send any data.  When the server gets a
+    connection/request, it ignores whatever data is sent.  Instead, it
+    simply finds out who initiated the request & sends the current
+    time back to him. 
+
+<dt>time
+<dd>Same as daytime, except:
+    <ul>
+    <li> sends the current time as the number of seconds since
+         01.01.1900 00:00. 
+    <li>uses port 37.
+    </ul>
+</dl>
+
+</body>
+</html>

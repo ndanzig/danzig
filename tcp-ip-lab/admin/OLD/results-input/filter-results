@@ -1,0 +1,34 @@
+#!/bin/csh -f
+# FILE: filter-results
+#
+# I records the results of projects and tests in the file
+# results-private.html.  However, I do not want all the information
+# there to be publicly accessible (e.g., name of students.  Grades are
+# usually posted with teudat zehut numbers only).  This script filters
+# out the information we don't want.
+#============================================================
+
+# INITIALIZATION
+
+set infile  = results-private-main.html
+set private = ../results-private.html
+set outfile = ../results.html
+set backup  = ../OLD/${outfile}.old  # prefix to backup file names
+
+# BACK UP
+
+if ( -r ${backup}.2 )  cp ${backup}.2  ${backup}.3
+if ( -r ${backup}.1 )  cp ${backup}.1  ${backup}.2
+if ( -r ${backup}.0 )  cp ${backup}.0  ${backup}.1
+if ( -r ${outfile}  )  cp ${outfile}   ${backup}.0
+
+# REMOVE THE UNWANTED LINES FROM THE FILES
+
+m4 --prefix-builtins ${infile} > ${private}
+fgrep -v @@@-  ${private} > ${outfile}
+
+# SET THE PERMISSIONS
+
+chmod 644 ${outfile}
+chmod 600 ${infile}  ${backup}* ${private}
+chmod 700 ${0}

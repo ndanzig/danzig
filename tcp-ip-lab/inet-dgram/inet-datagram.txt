@@ -1,0 +1,70 @@
+FILE: inet-datagram
+
+Here is an example in pseudo-code of 2 processes communicating via
+internet datagram.  Assume that the receiver's IP address is
+147.161.1.15, and it is listening on port 80.
+
+The receiver:
+
+	sd = socket ( AF_INET, SOCK_DGRAM, def_proto )
+
+	sname = ( 147.161.1.15, 80 )
+
+	bind ( sd, sname, sname_len )
+
+	read ( sd, &buf, buflen )
+
+	close ( sd )
+
+The sender:
+	
+	sd = socket ( AF_INET, SOCK_DGRAM, def_proto )
+
+	other_sname = ( 147.161.1.15, 80 )
+
+	sendto ( sd, "Hello my friend", msg_len, other_sname, other_sname_len )
+
+	close ( sd )
+
+This example shows 2-way communication.  Assume that 147.161.5.100 is
+a time server.  It listens on port 770 for requests.  It then sends
+back the time.  Assume that we have decided to implement this via
+datagrams rather than connections because of efficiency reasons.
+
+Assume a request contains the IP address of requester & port it's
+listening on.
+
+The server:
+
+	sd = socket ( AF_INET, SOCK_DGRAM, def_proto )
+
+	sname = ( 147.161.5.100, 770 )
+
+	bind ( sd, sname, sname_len )
+
+	loop forever:
+
+		read ( sd, &buf, buflen )
+
+		extract the IP address & port # from buf, and put it
+		in other_sname.
+
+		reply_msg = current system time
+
+		sendto ( sd,  reply_msg, reply_msg_len,
+			 other_sname, other_sname_len )
+
+The client:
+
+	sd = socket ( AF_INET, SOCK_DGRAM, def_proto )
+
+	getsockname ( sd, &my_sname, &my_sname_len )
+
+	request_msg = my IP address & port number (extracted from my_sname)
+
+	other_sname = ( 147.161.5.100, 770 )
+
+	sendto ( sd, request_message, request_message_len,
+		 other_sname, other_sname_len )
+
+	bytes_read = read ( sd, &time_buf, max_bytes)

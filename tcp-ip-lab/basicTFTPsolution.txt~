@@ -1,0 +1,48 @@
+TFTP in PSEUDO CODE
+
+use simple server to create and bind socket
+
+while(1)//start listening
+{
+use receivefrom or read command on socket to listen for data
+	 read data into a buffer of size 516 bytes
+	 read will wait for this to occur (blocking)
+
+examine the first 4 bytes to get the opcode
+     if opcode == RRQ
+	       extract file name
+	       tries=0;//set flag
+	       while(not end of file)	
+			 {
+			 while(tries <3)
+			 {
+				fill in header (4 bytes) of buffer[516]
+				     give packet sequential number
+				read 512 bytes from file
+				     (deal with case of exactly 512 bytes)
+				insert data into end of buffer[516]
+				write buffer[516]to socket
+				listen on socket (read[516] )
+				examine the first 4 bytes to get the opcode
+				if opcode == AKN
+				   if number == sequential number
+					     break;
+			           else
+				     tries++
+				     continue;
+				else
+			            error (ignore it! or exit loop, your choice)
+				    continue;
+  			  }      			 	       
+			  }
+
+     if opcode == WRQ
+
+		  similar to above RRQ
+
+
+
+     else
+      error;	
+      continue while loop//conitiue listening for some new request
+}
