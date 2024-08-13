@@ -1,0 +1,28 @@
+h3 {
+    border:.1mm black solid !important;
+    background-color:#FFF !important;
+    color:#222 !important;
+    font-size:18px !important;
+}
+body {
+    background-color:#FFF !important;
+    color:#333 !important;
+    font-family:Georgia, "Times New Roman", Times, serif !important;
+    font-size:16px !important;
+    margin-left:25% !important;
+    margin-right:25% !important;
+}
+a {
+    color:#333 !important;
+}
+blockquote {
+    border:.1mm solid #d8d1bf ;
+    background-color:#E8E1C7;
+    padding:10px;
+}
+
+a:hover {
+    color:#000 !important;
+
+
+

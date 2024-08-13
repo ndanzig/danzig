@@ -1,0 +1,41 @@
+<!--This appears in the title bar and if someone bookmarks it-->
+<TITLE>Lilach's Art</TITLE>
+
+<!--  background        text           new link       followed link   active link-->  
+<FORM>      
+<BODY BGCOLOR="#ffffff" TEXT="#C86400" link="#000099" vlink="#A400A0" alink="#FF0000">
+<CENTER><H1>Stories by Lilach Danzig</H1></CENTER>
+<P>
+
+<IMG SRC="../boattext.jpg">
+<IMG SRC="../boatpic.jpg">      
+<IMG SRC="../crybabytext.jpg">
+<IMG SRC="../crybabypic.jpg"> 
+<br>
+<hr>
+<h2>A Picture Netanel Drew 2001</h2>
+<img src="../Netanel.jpg">  
+
+<hr>
+<h2>A Picture Yehoshua Drew January 2011</h2>
+<img src="shushi_drawing.jpg" name=yehoshua>  
+
+
+<LI><A HREF = "http://danzig.jct.ac.il">Home</A></LI>
+</CENTER>
+</FONT>
+
+<!-- Horizontal Rule (Bar) -->
+<HR ALIGN=CENTER  SIZE=5  WIDTH=70%>
+</FORM>
+
+
+
+
+
+
+
+
+
+
+
