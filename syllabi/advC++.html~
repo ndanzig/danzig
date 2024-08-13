@@ -1,0 +1,61 @@
+<html>
+<head>
+<TITLE>Advanced C++  </TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<CENTER><H2>Advanced C++</H2></CENTER>
+
+<h3>Syllabus</h3>
+
+<h3>Course Description</h3>
+<p>  Advanced C++ is a first year computer science which assumes an inroductory knowledge of C++.
+The course is intended to be taken concurrently with Data Structures but can be taken independently.
+Essentially the course covers the implementation of the algorithms discussed in Data Structures.
+These algorithms include but are not limited to:
+<ul>
+<li>Linked Lists
+<li>LIFO / FIFO
+<li>Binary Search Trees
+<li>Priority Queues
+<li>Red Black Trees
+<li>AVL Tree
+
+</ul>
+
+
+<p> The course also  covers techniques and advanced topics in C++:
+<ul>
+<li>Object oriented programming design
+<li>Inheritance
+<li>Virtual Classes
+<li>Template Classes
+<li>Standard Template Library
+<li>Exception Handling
+<Li>Operator Overloading
+<li>Advanced Sorting algorithms
+<li>Advanced Recursive Algorithms
+</ul>
+
+
+<h3>Prerequisites</h3>
+<ul>
+<li>Introduction to Computer Science in C++
+</ul>
+
+<h3>Text Books</h3>
+
+
+<ul>
+<li><a href="http://www.amazon.com/C-How-Program-5th-Edition/dp/0131857576/">
+C++ How to Program (5th Edition) (Deitel and Deitel)
+</a>
+<li><a href="http://www.amazon.com/Algorithms-Parts-1-4-Fundamentals-Structure/dp/0201350882">
+Algorithms in C++, Parts 1-4: Fundamentals, Data Structure, Sorting, Searching</a>
+
+</ul>
+
+<p> &copy Nachum Danzig
+
+</body>
+</html>
+

@@ -1,0 +1,50 @@
+<html>
+<head>
+<TITLE>Data Structures </TITLE>
+</head>
+<BODY BGCOLOR="#fafafa" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00">
+<H2>Data Structures</H2>
+
+<h3>Syllabus</h3>
+
+<h3>Course Description</h3>
+<p>  Data Structures is a first year computer science which assumes an inroductory knowledge of C++.
+The course must be taken concurrently with Advanced C++. The course goal is to provide a solid background 
+in algorithms for computer science students.
+The course also discusses principles of Object
+Oriented Programming design and what purpose each concept serves.  Algorithms are evaluated using 
+Big O and Little O notation.
+The course covers various algorithms used to sort search or otherwise structure data nodes. 
+These algorithms include but are not limited to:
+<ul>
+<li>Linked Lists
+<li>LIFO / FIFO
+<li>Binary Search Trees
+<li>Priority Queues
+<li>Red Black Trees
+<li>AVL Tree
+
+</ul>
+
+<h3>Prerequisites</h3>
+<ul>
+<li>Introduction to Computer Science in C++
+</ul>
+
+<h3>Text Books</h3>
+
+
+<ul>
+<li><a href="http://www.amazon.com/C-How-Program-5th-Edition/dp/0131857576/">
+C++ How to Program (5th Edition) (Deitel and Deitel)
+</a>
+<li><a href="http://www.amazon.com/Algorithms-Parts-1-4-Fundamentals-Structure/dp/0201350882">
+Algorithms in C++, Parts 1-4: Fundamentals, Data Structure, Sorting, Searching</a>
+
+</ul>
+
+<p> &copy Nachum Danzig
+
+</body>
+</html>
+
