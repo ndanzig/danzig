@@ -1,0 +1,196 @@
+<danzi!doctype html>
+<HTML>
+<!--This appears in the title bar and if someone bookmarks it-->
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+//change picture on mouse over
+function rs232mouseover() {
+  document.img1.src="rs232animated.gif";
+}
+function unixmouseover() {
+  document.img3.src="UNIX2.gif";
+}
+function htmlmouseover() {
+  document.img4.src="html2.gif";
+}
+function camelmouseover() {
+  document.img2.src="camel2.gif";
+}
+
+function rs232mouseout() {
+  document.img1.src="rs232.gif";
+}
+
+function unixmouseout() {
+  document.img3.src="unix.gif";
+}
+function htmlmouseout() {
+  document.img4.src="html.gif";
+}
+function camelmouseout() {
+  document.img2.src="camel.gif";
+}
+// -->
+</SCRIPT>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <LINK REL="SHORTCUT ICON" HREF="http://www.freewebs.com/shaul/favicon.ico">
+<meta name="Keywords" content="nick, nicholas, nickolas, Nick, danzig, Danzig, Maimonides, maimonides,rambam, Rambam, philosophy, rabenu, nissim, nisim">
+<TITLE>Nachum Danzig`s Home Page </TITLE>
+<meta name="google-site-verification" content="MBiFG0WmdyQJ3Dimjq8tLdVT9Fb_XZSnq_njgtEQ2gs" />
+<meta name="google-site-verification" content="MBiFG0WmdyQJ3Dimjq8tLdVT9Fb_XZSnq_njgtEQ2gs" />
+<STYLE TYPE="text/css">  
+A:visited { color:blue; }
+
+
+ul#footer {list-style-type:none; text-align:center; font-size:12pt;   }
+
+ul#footer > li {display:inline; padding-left: 5px; padding-right:5px;     }
+
+ul#footer > li > A:link {text-decoration: none; color:blue; font-style:italic; }
+ul#footer > li > A:visited {text-decoration: none; color:blue; font-style:italic;}
+ 
+
+</STYLE>
+
+</head>
+<!--  background was #fafafa        text           new link       followed link(#A400A0)   active link-->  
+
+<BODY TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00" >
+<!-- BODY background="grid.gif" TEXT="#000044" link="#000099" vlink="#990000" alink="#00ff00" -->
+<!-- div align="right"> <IMG SRC="besad.gif"> </div -->
+<img border=0 ALIGN=right src="besad.gif">
+
+<CENTER><H1>Nachum Danzig's Home Page</H1></CENTER>
+<P>
+<font size="+2">
+<center> Teaching Material</center>
+<font size="-0">
+<span style="position:absolute; left:780px"><a href="recent_edits.html">What's new!</a></span> </font>
+<!-- MAIN TABLE OF COURSE MATERIAL  -->
+<table border="0" cellspacing="20" >
+<tr>
+<td width="40%">
+
+<table border="0" >
+<tr><td>
+<a href="./os/">
+<img src="os.jpg" border="0">
+</a>
+
+<!-- a href = "./network_class/">
+<IMG onMouseover=rs232mouseover() onMouseout=rs232mouseout() SRC="rs232.gif" name="img1" border="0"></a-->
+
+</td>
+
+
+<td><font size="+2"><a href = "./os/">Operating Systems</a></td></tr>
+<tr>
+
+<td ><a href = "./ise/"><IMG SRC="tomcaticon.jpeg" border="0">
+</a></td>
+
+<td><font size="+2"><a href = "./ise/">Internet Software Engineering</a></td></tr>
+
+<tr><td ><a href = "./unix_class/"> 
+
+<IMG onMouseover=unixmouseover() onMouseout=unixmouseout() SRC="unix.gif" name="img3" border="0"></A> </td><td><font size="+2"> 
+
+<a href = "./unix_class/"> UNIX Lab</a>  </td></tr>
+
+<tr><td > <a href = "./java_class/"><IMG SRC="javalogo.gif" border="0"></a> </td><td><font size="+2"><a href = "./java_class/">Introduction to Computer Science - Java </a></td></tr>
+<tr><td><font size="+2"><a href="mips/architecture.html">Computer Architecture (MIPS)</a>  </td><td><font size="+2">  </td></tr >
+</table>
+</td>
+
+<td width="60"></td>
+
+<td width="%60">
+<table border="0" >
+<tr><td ><a href = "./tcp-ip-lab/index.html"> <IMG SRC="tcpip.gif" border="0"> </a></td><td><font size="+2"> <a href = "./tcp-ip-lab/index.html">TCP/IP Lab</a> </td></tr>
+<tr><td><a href = "./internet_class/">
+<IMG onMouseover=htmlmouseover() onMouseout=htmlmouseout() SRC="html.gif" name="img4" border="0"></A> </td><td><font size="+2"> 
+<a href = "./internet_class/">Internet Class (HTML) </a>  </td></tr>
+<tr><td><a href = "./data_structures/"> <IMG SRC="ds.gif" border="0"></a> </td><td><font size="+2"> <a href = "./data_structures/">Data Structures </a> </td></tr>
+<tr><td><a href = "./cpp/">  <IMG SRC="c++.gif" border="0"></a> </td><td><font size="+2"><a href = "./cpp/">C++ Tutorial:   Introductory  & Advanced Computer Science</a>  </td></tr>
+<tr><td><a href = "./php_course/"> <IMG SRC="php.gif" border="0"></a> </td><td><font size="+2"> <a href = "./php_course/">Programming Languages for Internet Applications </a></td></tr>
+
+</table>
+</td>
+</tr>
+</table>
+<!-- END OF MAIN TABLE OF COURSE MATERIAL  -->
+<table border="0" cellspacing="38">
+<tr>
+<!--td><font size="+2"> My <a href=""> personal </a> web page.</font> </td---><td><IMG SRC="homem.gif"></td> <td>
+<table>
+<tr><td>Search my site or the web via</td><td><img src="google3.gif" border="0">
+</td></tr>
+</table>
+
+<FORM method=GET action=http://www.google.com/custom>
+<INPUT type=hidden name=cof VALUE="L:http://danzig.jct.ac.il/;AH:left;S:www.danzig.us">
+<font face=arial,sans-serif size=-1>
+<input type=hidden name=domains value="www.danzig.us">
+
+<INPUT TYPE=text name=q size=25 maxlength=255 value="">
+<INPUT type=submit name=sa VALUE="Go">
+<input type=radio name=sitesearch value="www.danzig.us" checked></font>
+</font><font face="Comic Sans MS" size="-1">Search this site
+</font>
+
+<font face=arial,sans-serif size=-1>
+<p style="position:relative; left:234px; margin-top: 0; margin-bottom: 0">
+<input type=radio name=sitesearch value=""> Search entire Web </font>
+</p>
+</form>
+
+
+
+</td>
+
+
+<td><a href = "./perl.html">
+
+<IMG onMouseover=camelmouseover() onMouseout=camelmouseout() SRC="camel.gif" name="img2" border="0"></a>
+
+<font size="+2"><a href = "./perl.html">Perl Examples </a> </font>
+
+</td>
+
+
+</tr>
+</table>
+
+</font>
+
+<ul id="footer">
+<li><a href="http://www.funintended.com">Phillip Danzig Site </a>
+<li><a href="./personal/">Personal site</a>
+<li><a href="./vb/">Visual Basic</a>
+<li><a href="./cellular/">Cellular</a>
+<li><a href = "./network_class/">Intro to Networking (rs232)   </a>
+<!-----li><a href = "./user_authentication.pdf"> User Auth Plan</a------>
+<li>email: danzig<img src="amp_small.jpg">jct.ac.il </a>
+
+<li> &copy N  Danzig
+
+<ul>
+<P>
+<!-- Horizontal Rule (Bar) -->
+<HR ALIGN=CENTER  SIZE=5  WIDTH=70%>
+<font color="#ffffff">i return(main)</font>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
