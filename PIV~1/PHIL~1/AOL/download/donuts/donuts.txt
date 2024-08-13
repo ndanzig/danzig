@@ -1,0 +1,13 @@
+Donuts - Screen Saver
+
+This screen saver is FREEWARE. Distribute Freely.
+
+This file requires MSVBVM50.DLL (Visual Basic Runtime).  This program will not run with other versions of the VB Runtime DLL's. VBRUNTIMES can be found in the Windows Community at the Keyword: VBRUN
+
+Donuts is a interactive screen saver that fills your screen with different color donuts.
+
+To install this screen saver Sign Off AOL, then Exit AOL. Go to your AOL Download folder and copy DONUTS.SCR to your "C:\WINDOWS\SYSTEM" directory. Go to Control Panel > Display > Screen Saver to select the saver and adjust the settings to your preferences.
+
+Note: For more information and help contact AOL screen name: User350044
+
+Documentation and Distribution Notice: DONUTS.TXT
