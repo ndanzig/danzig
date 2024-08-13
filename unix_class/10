@@ -1,0 +1,64 @@
+************ 6 **********************			    
+/* there is a program called date */			    
+#include <stdio.h>					   
+							    
+main ()							    
+{							    
+int pid	, stat;						    
+							    
+if ( (pid = fork()) == 0 )				    
+  {							    
+    execl("/bin/date","date",NULL);			    
+    printf("1")	;					    
+    exit(1);						    
+    }							    
+else							    
+  {							    
+    wait(&stat);					    
+    printf("2")	;					    
+    if (stat !=	0 )					    
+      printf("3");					    
+  }							    
+}							    
+							    
+************ 7 *******************			    
+/* there is a program called stam (prints 4)*/		    
+#include <stdio.h>					    
+							    
+main ()							    
+{                                                  
+int pid , stat;                                    
+                                                   
+if ( (pid = fork()) == 0 )                         
+  {                                                
+    execl("/u/grad/sasha/stam","stam",NULL);       
+    printf("1") ;                                  
+    exit(1);                                       
+    }                                              
+else                                               
+  {                                                
+    wait(&stat);                                   
+    printf("2") ;                                  
+    if (stat != 0 )                                
+        printf("3");                               
+  }                                                
+}                                                  
+                                                   
+********************** 8 **************************
+#include <stdio.h>                                 
+                                                   
+main()                                             
+{                                                  
+  int   pid,pid1,pid2,status;                      
+                                                   
+  if ((pid1=fork())==0)                            
+     printf("in child   1\n");                     
+  else                                             
+     if ((pid2=fork())==0)                         
+           printf("in child 2\n");                 
+     else                                          
+         {                                         
+             printf("child 1 finished?\n");        
+             printf("child 2 finished?\n");        
+         }                                         
+}                                                  

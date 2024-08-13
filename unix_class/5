@@ -1,0 +1,58 @@
+wiseman 1 >touch lin1
+wiseman 2 >ls -l lin1
+-rw-------  1 wiseman         0 Jan 12 18:21 lin1
+wiseman 3 >ln -s lin1 lin2
+wiseman 4 >ls -l lin?
+-rw-------  1 wiseman         0 Jan 12 18:21 lin1
+lrwxrwxrwx  1 wiseman         4 Jan 12 18:21 lin2 -> lin1
+wiseman 5 >ln lin1 lin3
+wiseman 6 >ls -l lin?
+-rw-------  2 wiseman         0 Jan 12 18:21 lin1
+lrwxrwxrwx  1 wiseman         4 Jan 12 18:21 lin2 -> lin1
+-rw-------  2 wiseman         0 Jan 12 18:21 lin3
+wiseman 7 >cat lin4.c
+main()
+{
+	symlink ( "lin1" , "lin4l" );
+}
+wiseman 8 >lin4
+wiseman 9 >ls -l lin4l
+lrwxrwxrwx  1 wiseman         4 Jan 12 18:27 lin4l -> lin1
+wiseman 10 >cat lin5.c
+main()
+{
+	link ( "lin1" , "lin5l" );
+}
+wiseman 11 >lin5
+wiseman 12 >ls -l lin5l
+-rw-------  3 wiseman         0 Jan 12 18:21 lin5l
+wiseman 13 >cat lin6.c
+main()
+{
+	unlink ( "lin4l" );
+}
+wiseman 14 >lin6
+wiseman 15 >ls -l lin4l lin1
+lin4l not found
+-rw-------  3 wiseman         0 Jan 12 18:21 lin1
+wiseman 16 >cat lin7.c
+main()
+{
+        unlink (  "lin5l" );
+}
+
+wiseman 17 >lin7
+wiseman 18 >ls -l lin5l lin1
+lin5l not found
+-rw-------  2 wiseman         0 Jan 12 18:21 lin1
+wiseman 19 >rm lin2
+wiseman 20 >ls -l lin2 lin1
+lin2 not found
+-rw-------  2 wiseman         0 Jan 12 18:21 lin1
+wiseman 21 >rm lin3
+wiseman 22 >ls -l lin3 lin1
+lin3 not found
+-rw-------  1 wiseman         0 Jan 12 18:21 lin1
+wiseman 23 >ls -ld klum
+drwx------  2 wiseman       512 Oct 17 16:05 klum
+wiseman 24 >exit

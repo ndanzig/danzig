@@ -1,0 +1,6 @@
+#!/bin/sh
+
+passwd=hello
+crypted_passwd=`./perl1.pl ${passwd}`
+echo ${crypted_passwd}
+ 

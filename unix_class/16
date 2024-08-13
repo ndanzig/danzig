@@ -1,0 +1,68 @@
+wiseman 29 >cat sig8.c
+#include <signal.h>
+
+void father_function();
+
+main()
+{
+	int pid,s;
+
+	if ( fork() == 0 )
+	{
+	/* This is the son */
+		pid=getppid();
+		kill(pid,SIGUSR1);
+	}
+	else
+	{
+	/* This is the father */
+		signal(SIGUSR1, &father_function);
+		wait(&s);
+	}
+}
+void father_function()
+{
+	printf("I heard you my poor son\n");
+	exit(1);
+}
+wiseman 30 >gcc -o sig8 sig8.c
+wiseman 31 >repeat 10 sig8
+I heard you my poor son
+I heard you my poor son
+I heard you my poor son
+I heard you my poor son
+I heard you my poor son
+I heard you my poor son
+I heard you my poor son
+I heard you my poor son
+User signal 1
+I heard you my poor son
+wiseman 32 >cat sig9.c
+#include <signal.h>
+
+void son_function();
+
+main()
+{
+	int pid,s;
+
+	if ( ( pid=fork() ) == 0 )
+	/* This is the son */
+		signal(SIGUSR1, &son_function);
+	else
+	{
+	/* This is the father */
+		kill(pid,SIGUSR1);
+		wait(&s);
+	}
+}
+void son_function()
+{
+	printf("I heard you my poor father\n");
+	exit(1);
+}
+wiseman 33 >gcc -o sig9 sig9.c
+wiseman 34 >repeat 10 sig9
+I heard you my poor father
+I heard you my poor father
+

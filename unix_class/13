@@ -1,0 +1,78 @@
+wiseman 17 >cat example4.c
+main()
+{
+        if ( fork() == 0 );
+        else
+                while (1);
+}
+
+wiseman 18 >gcc -o example4 example4.c
+wiseman 19 >example4 &
+[1] 10477
+wiseman 20 >ps -j
+ PPID   PID  PGID   SID TT TPGID  STAT   UID  TIME COMMAND
+10257 10258 10258 10258 pe 10482   SOE    97  0:02 -h -i (tcsh)
+10258 10477 10477 10258 pe 10482    RE    97  0:08 example4
+10477 10478 10477 10258 pe 10482     Z    97  0:00 <defunct>
+10258 10482 10482 10258 pe 10482    RE    97  0:00 ps -j
+wiseman 21 >kill -KILL %1
+
+[1]    Killed                        example4
+Time taken is 1:12.54
+wiseman 22 >cat example5.c
+#include <stdio.h>
+main()
+{
+        if ( fork () == 0 )
+        {
+                execl ( "/u/opers/wiseman/tirgul/ensof" , "ensof" , NULL );
+                exit (1);
+        }
+        else
+                while (1);
+}
+wiseman 23 >gcc -o example5 example5.c
+wiseman 24 >example5 &
+[1] 10507
+wiseman 25 >ps
+  PID TT STAT  TIME COMMAND
+10258 pe S     0:02 -h -i (tcsh)
+10507 pe R     0:05 example5
+10508 pe R     0:05 ensof
+10509 pe R     0:00 ps
+wiseman 26 >kill -KILL %1
+
+[1]    Killed                        example5
+Time taken is 0:26.13
+wiseman 27 >cat example6.c
+#include <stdio.h>
+main()
+{
+        execl ( "/u/opers/wiseman/tirgul/ensof" , "ensof" , NULL );
+}
+wiseman 28 >gcc -o example6 example6.c
+wiseman 29 >example6 &
+[1] 10560
+wiseman 30 >ps
+  PID TT STAT  TIME COMMAND
+10258 pe S     0:02 -h -i (tcsh)
+10560 pe R     0:10 ensof
+10561 pe R     0:00 ps
+wiseman 31 >kill -KILL %1
+wiseman 32 >
+[1]    Killed                        example6
+Time taken is 0:48.12
+wiseman 32 >cat example7.c
+#include <stdio.h>
+main()
+{
+        int s;
+        if ( fork() == 0 )
+                execl ( "/u/opers/wiseman/tirgul/example7" , "example7" , NULL );
+        else
+                wait ( &s );
+}
+wiseman 33 >gcc -o example7 example7.c
+wiseman 34 >example7
+Time taken is 3:24.34
+wiseman 35 >

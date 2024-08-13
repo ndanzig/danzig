@@ -1,0 +1,70 @@
+wiseman 15 >cat shc8
+#!/bin/sh
+
+for i in `ls`; do
+        if [ -d $i ]; then
+                echo $i
+        fi
+done
+wiseman 16 >shc8
+klum
+klum6
+wiseman 17 >cat shc9
+#!/bin/sh
+
+for i in `ls klum`; do
+        if [ $i = klum1 -o $i = klum2 ]; then
+                echo $i
+        else
+                echo abc$i
+        fi
+done
+wiseman 18 >shc9
+klum1
+klum2
+abcklum3
+wiseman 19 >cat shc10
+#!/bin/sh
+
+for i in `ls klum`; do
+        case $i in
+        klum1)
+                echo aa$i
+                ;;
+        klum2)
+                echo bb$i
+                ;;
+        *)
+                echo cc$i
+                ;;
+        esac
+done
+wiseman 20 >shc10
+aaklum1
+bbklum2
+ccklum3
+wiseman 21 >cat shc11
+#!/bin/sh
+
+i=0
+while [ $i -lt 5 ]; do
+        echo $i
+        i=`expr $i + 1`
+done
+wiseman 22 >shc11
+0
+1
+2
+3
+4
+wiseman 23 >cat shc12
+#!/bin/sh
+
+func()
+{
+        echo abc
+}
+
+func
+wiseman 24 >shc12
+abc

@@ -1,0 +1,468 @@
+<html>
+
+  <head>
+<meta name="description" content="    CYNODE is a site mostly centered on Unix and information"/>
+    <title>Equivalence of Emacs and VIM commands</title>
+  </head>
+
+  <body><table border="0" cellpadding="14" cellspacing="2"><tr><td class="menu" valign="top">
+
+  </td><td class="content" valign="top"><p class="navigation">   &gt;&gt; unix &nbsp;&gt;&gt;&nbsp;Equivalence of VIM and Emacs commands</p>
+    <h1>Equivalence of VIM and Emacs commands</h1>
+    <p>
+      Descriptions for VIM commands are quite straightforward, there is not many choice, you have just to type the command.
+      This is not as simple in Emacs, because there is so much possibilities.
+      Here is presented the Emacs commands and their standard key bindings when there are some.
+      But many (like myself) alter the default keybindings to type faster and according to what they do with Emacs.
+    </p>
+<P><a href="http://www.emacswiki.org/cgi-bin/emacs-en/KeyboardMacros">Check this out too</a>
+    <p>
+      This heading includes contributions from David Richfield. Thanks David !
+    </p>
+
+
+    <h2>Conventions</h2>
+    <ul>
+      <li>NA<br/>
+	Not Applicable, the equivalence doesn't exist.
+      </li>
+      <li>-<br/>
+	I personnaly don't know if there is an equivalence.
+      </li>
+    </ul>
+
+
+    <h2>Commands</h2>
+
+    <h3>Help</h3>
+    <table class="visibleCells">
+      <thead>
+	<tr>
+	  <td colspan="1" rowspan="1">Action</td><td colspan="1" rowspan="1">Emacs command</td><td colspan="1" rowspan="1">VIM command</td>
+	</tr>
+      </thead>
+      <tbody>
+	<tr>
+	  <td colspan="1" rowspan="1">General</td>
+	  <td colspan="1" rowspan="1">apropos</td>
+	  <td colspan="1" rowspan="1">:help<br/>
+	    :help &lt;word&gt; then hit CTRL-D to see matching help entries for word
+	  </td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">About commands</td>
+	  <td colspan="1" rowspan="1">apropos-command : f1 a</td>
+	  <td colspan="1" rowspan="1">:help &lt;command&gt;</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Describe function</td>
+	  <td colspan="1" rowspan="1">describe-function : f1 f</td>
+	  <td colspan="1" rowspan="1">NA</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Describe variable</td>
+	  <td colspan="1" rowspan="1">describe-variable : f1 v</td>
+	  <td colspan="1" rowspan="1">:help options</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Describe key briefly</td>
+	  <td colspan="1" rowspan="1">describe-key-briefly : f1 c</td>
+	  <td colspan="1" rowspan="1">NA</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Tutorial</td>
+	  <td colspan="1" rowspan="1">help-with-tutorial : C-h t</td>
+	  <td colspan="1" rowspan="1">NA</td>
+	</tr>
+      </tbody>
+    </table>
+
+    <h3>Open/Close/Save</h3>
+    <table class="visibleCells">
+      <thead>
+	<tr>
+	  <td colspan="1" rowspan="1">Action</td><td colspan="1" rowspan="1">Emacs command</td><td colspan="1" rowspan="1">VIM command</td>
+	</tr>
+      </thead>
+      <tbody>
+	<tr>
+	  <td colspan="1" rowspan="1">Open a file</td>
+	  <td colspan="1" rowspan="1">find-file : C-x C-f</td>
+	  <td colspan="1" rowspan="1">:e file-name</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Reload a file from disk</td>
+	  <td colspan="1" rowspan="1">revert-buffer</td>
+	  <td colspan="1" rowspan="1">:e</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Close a buffer, a frame</td>
+	  <td colspan="1" rowspan="1">kill-buffer : C-x k</td>
+	  <td colspan="1" rowspan="1">:q</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Close all files</td>
+	  <td colspan="1" rowspan="1">C-x C-c</td>
+	  <td colspan="1" rowspan="1">:qall</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">List all buffers, frame</td>
+	  <td colspan="1" rowspan="1">C-x C-b</td>
+	  <td colspan="1" rowspan="1">:files</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Change to next frame</td>
+	  <td colspan="1" rowspan="1">switch-to-buffer : C-x b</td>
+	  <td colspan="1" rowspan="1">C-w C-w</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Change to next buffer</td>
+	  <td colspan="1" rowspan="1">switch-to-buffer : C-x b</td>
+	  <td colspan="1" rowspan="1">:e#&lt;n&gt;</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Save a buffer, a frame</td>
+	  <td colspan="1" rowspan="1">save-current-buffer : C-x C-s</td>
+	  <td colspan="1" rowspan="1">:w</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Save all buffers, frame</td>
+	  <td colspan="1" rowspan="1">save-some-buffer : C-x s</td>
+	  <td colspan="1" rowspan="1">:wall</td>
+	</tr>
+      </tbody>
+    </table>
+    <p>
+      In Emacs, it is better to load all the files in different buffers, but in the same instance of Emacs, if only to load the file faster.
+      Thus, open as many files as you want and then switch from one buffer to another.
+    </p>
+
+    <h3>Navigation / Search</h3>
+    <table class="visibleCells">
+      <thead>
+	<tr>
+	  <td colspan="1" rowspan="1">Action</td><td colspan="1" rowspan="1">Emacs command</td><td colspan="1" rowspan="1">VIM command</td>
+	</tr>
+      </thead>
+      <tbody>
+	<tr>
+	  <td colspan="1" rowspan="1">Go to the beginning of a buffer</td>
+	  <td colspan="1" rowspan="1">beginning-of-buffer : M-&lt;</td>
+	  <td colspan="1" rowspan="1">1G or gg</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Go to the end of a buffer</td>
+	  <td colspan="1" rowspan="1">end-of-buffer : M-&gt;</td>
+	  <td colspan="1" rowspan="1">G</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Search forward</td>
+	  <td colspan="1" rowspan="1">C-s</td>
+	  <td colspan="1" rowspan="1">/&lt;string&gt;</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Repeat last search forward</td>
+	  <td colspan="1" rowspan="1">C-s C-s</td>
+	  <td colspan="1" rowspan="1">n or /</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Search backward</td>
+	  <td colspan="1" rowspan="1">C-r</td>
+	  <td colspan="1" rowspan="1">?&lt;string&gt;</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Repeat last search backward</td>
+	  <td colspan="1" rowspan="1">C-r C-r</td>
+	  <td colspan="1" rowspan="1">N or ?</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Find the next brace, bracket, etc.</td>
+	  <td colspan="1" rowspan="1">Click on the brace, bracket, etc.</td>
+	  <td colspan="1" rowspan="1">%</td>
+	</tr>
+      </tbody>
+    </table>
+
+    <h3>Edition</h3>
+    <table class="visibleCells">
+      <thead>
+        <tr>
+          <td colspan="1" rowspan="1">Action</td><td colspan="1" rowspan="1">Emacs command</td><td colspan="1" rowspan="1">VIM command</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="1" rowspan="1">Transpose letters</td>
+          <td colspan="1" rowspan="1">C-t</td>
+          <td colspan="1" rowspan="1">xp</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Transpose words</td>
+          <td colspan="1" rowspan="1">M-t</td>
+          <td colspan="1" rowspan="1">Go to start of first word, then dwwP.  Except at the end of the line, then go to the space in between the words, and type 2dwbhP</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">downcase word</td>
+          <td colspan="1" rowspan="1">M-l</td>
+          <td colspan="1" rowspan="1">With cursor at beginning of word: veu</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Downcase region</td>
+          <td colspan="1" rowspan="1">C-x C-l</td>
+          <td colspan="1" rowspan="1">Mark region, press u.</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Upcase word</td>
+          <td colspan="1" rowspan="1">M-u</td>
+          <td colspan="1" rowspan="1">With cursor at beginning of word: veU</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Upcase region</td>
+          <td colspan="1" rowspan="1">C-x C-u</td>
+          <td colspan="1" rowspan="1">Mark region, press U.</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Syntax highlighting</td>
+          <td colspan="1" rowspan="1">M-x toggle-global-lazy-font-lock-mode</td>
+          <td colspan="1" rowspan="1">:syntax enable and then :set syntax=&gt;syntax name&lt;</td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Region indentation</td>
+          <td colspan="1" rowspan="1">M-x indent-according-to-mode</td>
+          <td colspan="1" rowspan="1">
+            == (current line)<br/>
+            &lt;n&gt;== (n, the number of lines)<br/>
+            =G (till end of file)
+          </td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1">Inserting comments</td>
+          <td colspan="1" rowspan="1">indent-for-comment : M-;</td>
+          <td colspan="1" rowspan="1"> - </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Cut &amp; Paste</h3>
+    <table class="visibleCells">
+      <thead>
+	<tr>
+	  <td colspan="1" rowspan="1">Action</td><td colspan="1" rowspan="1">Emacs command</td><td colspan="1" rowspan="1">VIM command</td>
+	</tr>
+      </thead>
+      <tbody>
+	<tr>
+	  <td colspan="1" rowspan="1">Copy a region, a selection</td>
+	  <td colspan="1" rowspan="1">copy-region-as-kill</td>
+	  <td colspan="1" rowspan="1">&lt;n&gt;yy to &quot;yank&quot; or copy n lines, or mark region in visual mode, then press y</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Set mark</td>
+	  <td colspan="1" rowspan="1">C-Space</td>
+	  <td colspan="1" rowspan="1">m{a-zA-Z}</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Copy</td>
+	  <td colspan="1" rowspan="1">M-w</td>
+	  <td colspan="1" rowspan="1">See above</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Mark the buffer</td>
+	  <td colspan="1" rowspan="1">C-x h</td>
+	  <td colspan="1" rowspan="1">ggVG</td>
+	</tr>
+      </tbody>
+    </table>
+
+    <h3>String substitution</h3>
+    <p>
+      To come, work in progress.
+    </p>
+    <p>
+      :%s/stringToReplace/newString/gc<br/>
+      :%s#stringToReplace#newString#gc<br/>
+      :%s#/home/guest/tmp/comp#/usr/local/#gc
+    </p>
+
+    <h3>Undo / Redo</h3>
+    <table class="visibleCells">
+      <thead>
+	<tr>
+	  <td colspan="1" rowspan="1">Action</td><td colspan="1" rowspan="1">Emacs command</td><td colspan="1" rowspan="1">VIM command</td>
+	</tr>
+      </thead>
+      <tbody>
+	<tr>
+	  <td colspan="1" rowspan="1">Undo</td>
+	  <td colspan="1" rowspan="1">C-_</td>
+	  <td colspan="1" rowspan="1">u</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Redo</td>
+	  <td colspan="1" rowspan="1">Space C-_</td>
+	  <td colspan="1" rowspan="1">C-r</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Repeat a command</td>
+	  <td colspan="1" rowspan="1">M-x z</td>
+	  <td colspan="1" rowspan="1">.</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Repeat a complex command</td>
+	  <td colspan="1" rowspan="1">repeat-complex-command : C-x M-:</td>
+	  <td colspan="1" rowspan="1">.</td>
+	</tr>
+      </tbody>
+    </table>
+    <p>
+      More about the undo/redo in Emacs :
+      All the actions are piled up, even the &quot;undo&quot; action.
+      Thus to perform a &quot;redo&quot;, one has to undo an &quot;undo&quot;.
+      One way to do that is after an &quot;undo&quot; to write a character, like &quot;space&quot;, and then perform an &quot;undo&quot;.
+    </p>
+
+    <h3>Spelling check</h3>
+    <table class="visibleCells">
+      <thead>
+	<tr>
+	  <td colspan="1" rowspan="1">Action</td><td colspan="1" rowspan="1">Emacs command</td><td colspan="1" rowspan="1">VIM command</td>
+	</tr>
+      </thead>
+      <tbody>
+	<tr>
+	  <td colspan="1" rowspan="1">Check spelling of a region/file</td>
+	  <td colspan="1" rowspan="1">ispell-region / ispell-buffer</td>
+	  <td colspan="1" rowspan="1">
+	    <p>
+	      :w! (hit ENTER):!ispell % (hit ENTER):e! % (hit ENTER)
+	    </p>
+	    <p>
+	      Or a bit more complex and powerful, use some macros :<br/>
+	      map &lt;F5&gt; :w!&lt;CR&gt;:!ispell -d francais %&lt;CR&gt;:e! %&lt;CR&gt;<br/>
+	      map &lt;F6&gt; :w!&lt;CR&gt;:!ispell -d american %&lt;CR&gt;:e! %&lt;CR&gt;
+	    </p>
+	  </td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Check spelling of a word</td>
+	  <td colspan="1" rowspan="1">ispell-word</td>
+	  <td colspan="1" rowspan="1">NA</td>
+	</tr>
+      </tbody>
+    </table>
+
+
+    <h2>Emacs specificities</h2>
+    <h3>Insertion</h3>
+    <table class="visibleCells">
+      <thead>
+	<tr>
+	  <td colspan="1" rowspan="1">Action</td><td colspan="1" rowspan="1">Emacs command</td>
+	</tr>
+      </thead>
+      <tbody>
+	<tr>
+	  <td colspan="1" rowspan="1">Insert special characters</td>
+	  <td colspan="1" rowspan="1">C-q</td>
+	</tr>
+      </tbody>
+    </table>
+    <p>
+      Examples :
+    </p>
+    <ul>
+      <li>
+	To insert a TAB character<br />
+	C-q TAB
+      </li>
+      <li>
+	To insert a newline in the minibuffer, for substitutions, etc.<br />
+	C-q C-j
+      </li>
+    </ul>
+
+    <h3>LISP evaluation</h3>
+    <table class="visibleCells">
+      <thead>
+	<tr>
+	  <td colspan="1" rowspan="1">Action</td><td colspan="1" rowspan="1">Emacs command</td>
+	</tr>
+      </thead>
+      <tbody>
+	<tr>
+	  <td colspan="1" rowspan="1">Evaluate a LISP expression and print the result</td>
+	  <td colspan="1" rowspan="1">eval-expression : M-:</td>
+	</tr>
+      </tbody>
+    </table>
+    <p>
+      For a function evaluation <span class="code">expression</span> is of the form <span class="code">(function)</span>
+    </p>
+    <p>
+      Examples :
+    </p>
+    <ul>
+      <li>
+	Addition<br/>
+	(+ 1 2)<br/>
+	will return 3</li>
+      <li>
+	Division<br/>
+	(/ 225 60)<br/>
+	will return 3</li>
+      <li>
+	Division<br/>
+	(/ 225.0 60)<br/>
+	will return 3.75</li>
+      <li>
+	Variable assigment<br/>
+	(setq shell-file-name &quot;bash&quot;)<br/>
+	will return &quot;bash&quot;</li>
+    </ul>
+    <p>
+      For a variable evaluation <span class="code">expression</span> is of the form <span class="code">variable</span>
+    </p>
+
+    <p>
+      Examples :
+    </p>
+    <ul>
+      <li>
+	Checking a variable value<br/>
+	M-: shell-file-name<br/>
+	might return &quot;/bin/bash&quot; or &quot;bash&quot;
+      </li>
+    </ul>
+
+    <h3>Emacs modes</h3>
+    <table class="visibleCells">
+      <thead>
+	<tr>
+	  <td colspan="1" rowspan="1">Action</td><td colspan="1" rowspan="1">Emacs command</td>
+	</tr>
+      </thead>
+      <tbody>
+	<tr>
+	  <td colspan="1" rowspan="1">Get name of current buffer major mode, eg xml-mode</td>
+	  <td colspan="1" rowspan="1">M-: major-mode</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Get pretty name of current buffer major mode</td>
+	  <td colspan="1" rowspan="1">M-: mode-name</td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">Full description of current major mode</td>
+	  <td colspan="1" rowspan="1">M-x describe-mode</td>
+	</tr>
+      </tbody>
+    </table>
+
+  <hr/><div class="footer">
+
+
+    </p>
+    
+
+
+  </div></td></tr></table></body>
+</html>

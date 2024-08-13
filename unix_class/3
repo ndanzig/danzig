@@ -1,0 +1,79 @@
+wiseman 46 >cat chm2.c
+#include <fcntl.h>
+#include <sys/stat.h>
+main()
+{
+        int fd;
+
+        fd=open("klum/klum1" , O_RDWR );
+        fchmod( fd , 04777 );
+}
+wiseman 47 >gcc -o chm2 chm2.c
+wiseman 48 >chm2
+wiseman 49 >ls -l klum/klum1
+-rwsrwxrwx  1 wiseman         0 Oct 17 15:59 klum/klum1
+wiseman 50 >cat chm3.c
+#include <sys/stat.h>
+#include <unistd.h>
+main()
+{
+        check_perm();
+        chmod ( "klum/klum1" , 077 );
+        check_perm();
+}
+check_perm() {
+        if ( access ( "klum/klum1" , W_OK ) == 0 )
+                printf ( "I can write\n" );
+        else
+                printf ( "I can't write\n" );
+}
+wiseman 51 >gcc -o chm3 chm3.c
+wiseman 52 >chm3
+I can write
+I can't write
+wiseman 53 >cat chm4.c
+#include <sys/types.h>
+#include <sys/stat.h>
+main()
+{
+        struct stat buf[1];
+
+        if ( stat ( "klum/klum1" , buf ) != 0 ) {
+                printf ("can't stat klum/klum1\n");
+		exit (1);
+	}
+        printf ( "%o\n" , buf->st_mode & 07777 );
+}
+wiseman 54 >gcc -o chm4 chm4.c
+wiseman 55 >chm4
+77
+wiseman 56 >cat chm5.c
+#include <sys/types.h>
+#include <sys/stat.h>
+main()
+{
+        struct stat buf[1];
+
+        umask ( 066 );
+        creat ( "/tmp/klum" , 0777 );
+        if ( stat ( "/tmp/klum" , buf ) != 0 ) {
+                printf ("can't stat /tmp/klum\n");
+		exit (1);
+	}
+        printf ( "%o\n" , buf->st_mode & 07777 );
+}
+wiseman 57 >gcc -o chm5 chm5.c
+wiseman 58 >chm5
+711
+wiseman 59 >umask
+77
+wiseman 60 >touch klum4
+wiseman 61 >ls -l klum4
+-rw-------  1 wiseman         0 Oct 17 16:20 klum4
+wiseman 62 >umask 222
+wiseman 63 >touch klum5
+wiseman 64 >ls -l klum5
+-r--r--r--  1 wiseman         0 Oct 17 16:21 klum5
+wiseman 65 >mkdir klum6
+wiseman 66 >ls -ld klum6
+dr-xr-xr-x  2 wiseman       512 Oct 17 16:21 klum6

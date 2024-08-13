@@ -1,0 +1,595 @@
+<html>
+<head><title>
+UNIX Lab 3
+</title></head>
+<body>
+<h2>Lab Three (3)  Open, Close, Read, Write, Pipes, dup2, dup, popen, index </h2>
+
+<xmp>
+
+open - open and possibly create a file or device
+
+SYNOPSIS
+       #include <sys/types.h>
+       #include <sys/stat.h>
+       #include <fcntl.h>
+       int open(const char *pathname, int flags);
+       int open(const char *pathname, int flags, mode_t mode);
+DESCRIPTION        
+ The  open() system call is used to convert a pathname into
+ a file descriptor (a small, non-negative integer  for  use
+ in  subsequent  I/O  as with read, write, etc.).  When the
+ call is successful, the file descriptor returned  will  be
+ the lowest file descriptor not currently open for the pro
+ cess.  This call creates a new open file, not shared  with
+ any  other  process.  (But shared open files may arise via
+ the fork(2) system call.)  The new file descriptor is  set
+ to  remain open across exec functions (see fcntl(2)).  The
+ file offset is set to the beginning of the file. 
+
+ flags is one of O_RDONLY, O_WRONLY or O_RDWR which request
+ opening  the  file  read-only,  write-only  or read/write,
+ respectively.  
+
+
+
+read - read from a file descriptor
+
+SYNOPSIS
+        #include <unistd.h>
+        ssize_t read(int fd, void *buf, size_t count);  
+
+DESCRIPTION
+       read()  attempts  to  read  up  to  count  bytes from file
+       descriptor fd into the buffer starting at buf.
+       If count is zero, read() returns zero  and  has  no  other
+       results.   If  count is greater than SSIZE_MAX, the result
+       is unspecified.
+RETURN VALUE
+       On success, the number of bytes  read  is  returned  (zero
+       indicates  end of file), and the file position is advanced
+       by this number.  It is not an  error  if  this  number  is
+       smaller  than the number of bytes requested; this may hap
+       pen for example because fewer bytes are actually available
+       right  now (maybe because we were close to end-of-file, or
+       because we are reading from a pipe, or from  a  terminal),
+       or  because read() was interrupted by a signal.  On error,
+       -1 is returned, and errno is set  appropriately.  In  this
+       case  it is left unspecified whether the file position (if
+       any) changes.  
+
+
+Here is an example which demonstrates the read system call.
+We will open a file and attempt to read its contents into a buffer
+Then we will print this buffer.
+We also print the number of characters read in.
+
+//by Nachum Danzig
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+void main()
+{
+  int fd, number_read_in;
+  char buffer[256];
+  fd= open("./file.txt", O_RDONLY);//open file for read only
+  if(fd<0)//if we fail to open the file
+    {
+      printf("file not opened");
+      exit( 1);
+    }
+//now we will read the contents of the file
+  number_read_in = read(fd,buffer,255); //size of buffer is 256
+  close(fd);
+  buffer[number_read_in]=NULL;//so the printf will work
+  printf("%d \n", number_read_in);
+  printf("%s\n", buffer);
+}
+
+
+Here is an example to write from the standard input
+into a file.
+
+//by Nachum Danzig
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>//defines the O_WRONLY constant, et al.
+
+void main()
+{
+  int fd, number;
+  char buffer[256];
+  fd= open("./file.txt", O_WRONLY);//open file for write (this will
+                                   // potentially overwrite its contents)
+  if(fd<0)
+    {
+      printf("file not opened");
+      exit( 1);
+    }
+//now we open stdin for reading
+  number = read(0,buffer,256); //std input is zero (0)
+  printf("%d \n", number);
+  write(fd,buffer,number);//write to our file
+  write(1,buffer,number);//write to stdout (i.e. screen)
+  close(fd);
+  printf("\nVia printf: %s\n\n", buffer);
+}
+</xmp>
+<a href="fopen.txt"> fopen and fread example</a>
+
+<xmp>
+       pipe - create pipe
+
+SYNOPSIS
+       #include <unistd.h>
+
+       int pipe(int filedes[2]);
+
+DESCRIPTION
+       pipe  creates  a  pair  of file descriptors, pointing to a
+       pipe inode, and places them in the  array  pointed  to  by
+       filedes.   filedes[0]  is  for  reading, filedes[1] is for
+       writing.
+
+RETURN VALUE
+       On success, zero is returned.  On error, -1  is  returned,
+       and errno is set appropriately.
+
+NOTE: 
+       Always write to filedes[1] and read from fildes[0]
+
+ This example demonstrates creating a pipe and using inter process
+ communication known as  IPC.  In order to create a set of pipe file 
+ descripters we will call the pipe function.  In our example we put
+ a simple string into the pipe and then read it out character by
+ character.
+ 
+ IMPORTANT NOTE:  When one writes to a pipe it may be open for read as well,
+ but when reading from the pipe, we must remember to close the write side
+ in BOTH processes. 
+
+#include <sys/types.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+void main()
+{
+  int fd[2];//make 2 fd's
+  char str[]="hello friend\n";
+  char ch;
+  pipe(fd);              //create pipe (pipe takes an array
+	                 // of 2 int's)
+  write(fd[1],str,strlen(str));     //write the string into pipe
+  close(fd[1]);           //close the write side of the pipe
+  while(read(fd[0],&ch,1))      //read from the pipe 1 character
+          printf("%c",ch);
+  printf("\n");
+  close(fd[0]);
+ }  
+
+This next example creates a child process which writes via a pipe to
+the father.
+
+//by Nachum Danzig and Ari Cirota
+#include <sys/types.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>    
+
+void main()
+{
+     int fd[2];
+     pid_t pid;
+     char ch;
+     pipe(fd);
+     switch(pid=fork())
+       {
+       case 0://child
+	 close (fd[0]);               //close read side, child only writes to pipe
+	 write(fd[1],"hello father\n",13); //write 13 letters to pipe
+	 close(fd[1]);
+	 break;
+       default:         //father
+	 close (fd[1]); //if we don't do close the write side, the father will never
+	                //die because he will wait around waiting to write
+	 while(0!=read(fd[0],&ch,1)) //read one letter at a time from pipe 
+	       {
+	       printf("%c",ch); //print letter
+	       fflush(stdout); 
+	       }
+	 close(fd[0]);//we're done
+       }
+}
+
+
+
+       dup2 - duplicate an open file descriptor
+
+SYNOPSIS
+     #include <unistd.h>
+
+     int dup2(int fildes, int fildes2);
+
+DESCRIPTION
+     The dup2() function causes the file  descriptor  fildes2  to
+     refer  to  the same file as fildes. The fildes argument is a
+     file descriptor referring to an open file, and fildes2 is  a
+     non-negative  integer  less  than  the current value for the
+     maximum number of open file descriptors  allowed the calling
+     process.   See getrlimit(2). If fildes2 already refers to an
+     open file, not fildes, it is closed first. If fildes2 refers
+     to fildes, or if fildes is not a valid open file descriptor,
+     fildes2 will not be closed first.     
+
+
+ This example demonstrates diverting standard output to a file descriptor.
+ stdout of the child process is diverted to fd[1], and stdin of the parent
+ process is changed to fd[0].  This is carried out by calling the dup2() 
+ function:
+
+//by Nachum Danzig and Ari Cirota 
+#include <sys/types.h>
+#include <stdio.h>
+#include <iostream.h>
+int main()
+{
+	int pd[2];
+	pid_t pid;
+	int status;
+	char str[20];
+	pipe(pd); //create pipe with two sides, [0] refering to one end [1] to the other
+	switch(fork())
+	{
+	case -1:
+		printf("fork error\n");
+		break;
+	case 0:                    //child
+		close(pd[0]);       //child only writes to pipe
+		dup2(pd[1],1);       //write std out to pipe p[1]
+		printf("Hello my father.\n");  //print to stdout will really 
+		                                   //go into the pipe.
+		close(pd[1]);
+		break;
+	default:                         //father
+		close(pd[1]);		//parent proccess only reads
+		dup2(pd[0],0);		//read std input from pipe p[0] 
+		while(gets(str))    //get from pipe
+		   {
+                   printf("I am the father process.\n");
+		   printf("%s\n",str);   //print to std out (the screen this time)
+		   }
+		close(pd[0]);
+	}
+}
+
+
+
+//another example of diverting stdout and stdin
+
+#include <sys/types.h>
+#include <stdio.h>
+
+int main()
+{
+	int pd[2];
+	pid_t pid;
+	int status;
+	char ch;
+	pipe(pd);
+	switch(fork())
+	{
+	case -1:
+		printf("fork error\n");
+		break;
+	case 0://child
+		close(pd[0]);       //child only writes to pipe
+		dup2(pd[1],1);     //stdout -> pipe's write
+		printf("hello user\n");
+		close(pd[1]);
+		break;
+	default:
+		close(pd[1]);		//parent proccess only reads
+		dup2(pd[0],0);           //stdin -> pipe's read
+	        while(read(pd[0],&ch,1))//read from pipe
+		{
+			putchar(ch);
+			putchar('\n');
+		}
+		close(pd[0]);
+	}
+}
+
+Here is a program to lose and regain stdout
+			
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <stdio.h>
+#include <errno.h>
+#include <string.h>
+//Nachum Danzig
+//program to lose and regain stdout
+int main (){
+  int   fd = open("file1.txt", O_CREAT | O_WRONLY | O_APPEND);
+  if (fd == -1 ) return -1;
+  int a =  dup2(fd,1);
+  
+  printf("Hello File!!\n %s",strerror(errno));  //  print to file message and success status
+  fflush(stdout);//make sure I finished writing
+  close (1); //now 1 is available
+  fd = open("/dev/tty", O_WRONLY );//open file for write only , open will get fd = 1
+  printf("%d \n ",fd); //print to screen now
+  printf("Hello World !!\n ");
+  return 0;
+}
+
+			
+dup
+
+dup is different from dup2, what dup does is to creates a new file descriptor that duplicates
+the file descriptor (fd) given as an argument:
+int dup(int fd);
+The returned file descriptor is the next lowest number available. For instance,
+you program has stdin (fd=0) stdout (fd=1) and stderr (fd=2).
+If you write 
+newfd = dup(2);
+Then, now  newfd = 4 but has all the attributes of fd=2 (stderr).
+
+
+//Same as previous example except that I use dup instead of dup2.
+//Notice that I have to close stdin and stdout in order for dup to return me the low
+//fd (either 1=stdout or 0 =stdin).  Otherwise dup would return me 4.
+
+#include <sys/types.h>
+#include <stdio.h>
+
+int main()
+{
+  int pd[2];
+  pid_t pid;
+  int status;
+  char ch;
+  pipe(pd);
+  switch(fork())
+    {
+    case -1:
+      printf("fork error\n");
+      break;
+    case 0://child
+      close(pd[0]);       //child only writes to pipe
+      close(1);
+      dup(pd[1]);     //stdout -> pipe's write
+      printf("hello user\n");
+      close(pd[1]);
+      break;
+    default:
+      close(pd[1]);//parent proccess only reads
+      close(0);
+      dup(pd[0]);           //stdin -> pipe's read
+      while(read(pd[0],&ch,1))//read from pipe
+        {
+          putchar(ch);
+          putchar('\n');
+        }
+      close(pd[0]);
+    }
+}
+
+
+       popen - Essentially popen combines several other system calls.  It creates a pipe and forks
+             a child process to run a command.  the output of that command is then returned via the pipe and
+             is pointed to by the pointer returned by the call to popen.
+    
+       pclose - waits for poepne to finish executing.
+
+
+SYNOPSIS
+       #include <stdio.h>
+       FILE *popen(const char *command, const char *type);
+       int pclose(FILE *stream);
+
+DESCRIPTION
+       The  popen()  function opens a process by creating a pipe, forking, and invoking the shell.  Since a pipe
+       is by definition unidirectional, the type argument may specify only reading or  writing,  not  both;  the
+       resulting stream is correspondingly read-only or write-only.
+
+       The command argument is a pointer to a null-terminated string containing a shell command line. 
+
+       The return value from popen() is a normal standard I/O stream in all respects save that it must be closed
+       with  pclose()  rather  than fclose().  Writing to such a stream writes to the standard input of the com-
+       mand; the commandbs standard output is the same as that of the process that called popen(),  unless  this
+       is  altered  by  the  command  itself. 
+
+       The  pclose()  function  waits for the associated process to terminate and returns the exit status of the
+       command as returned by wait4().
+
+RETURN VALUE
+       The popen() function returns NULL if the fork(2) or pipe(2) calls fail, or if it cannot allocate  memory.
+       The pclose() function returns -1 if wait4() returns an error, or some other error is detected.
+
+Example 1:
+
+#include <stdio.h>
+#include <stdlib.h>
+#define BUFSIZE 200
+int main()
+{
+  FILE *pfp;
+  char buf[BUFSIZE];
+  int c=1;
+
+  if ( ( pfp=popen ( "ls -l popen1.c temp.c" , "r" ) ) == NULL )
+    {
+      fprintf ( stderr, "The ls command failed\n" );
+      exit ( 1 );
+    }
+  else
+    {
+      while ( fgets ( buf , BUFSIZE , pfp ) != NULL )
+     {
+     printf ( "File %d  in current directory is: %s", c++, buf );
+     }
+      pclose ( pfp );
+    }
+
+  return 0;
+}
+Output:
+[root@v-yp /usr/u/jctstaff/danzig/public_html/unix_class]$ ./a.out 
+File 1  in current directory is: -rw-r--r-- 1 root   root     442 Dec 11 11:42 popen1.c
+File 2  in current directory is: -rw------- 1 danzig jctstaff 969 Oct 23  2002 temp.c
+
+Example 2:
+
+  pfp=popen( "sed -e 's/a/A/g'" , "w" );
+  fprintf ( pfp , "Apples are tasty.\n" );
+  pclose ( pfp );
+
+Output:
+Apples Are tAsty
+
+
+
+   index, rindex - locate character in string
+
+  SYNOPSIS
+   #include <string.h>
+
+    char *index(const char *s, int c);
+    char *rindex(const char *s, int c);
+
+ DESCRIPTION
+    The  index() function returns a pointer to the first occurrence of the
+    character c in the string s.
+    The rindex() function returns a pointer to the last occurrence of the
+    character c in the string s.
+    The terminating NULL character is considered to be a part of the strings.
+RETURN VALUE
+    The index() and rindex() functions return a pointer to the matched character
+    or NULL if the character is not found.  
+
+
+  In this example we will use the index function to get a pointer
+  to the letter in the array we want, and then we will print the array
+  from that point on. Note that index is similar to substr() and strstr().
+
+#include <string.h>
+#include <stdio.h>
+int main(void)
+{
+  char str[]="ABCDEFJHIJKLMNOP";
+  char *ptr;
+  printf("The string is %s \nFrom the first 'I' to the end the string is ",str); 
+  ptr=index(str,'I');
+  printf("%s\n", ptr);
+  return 0;
+}
+
+[root@v-yp /home/localzig]$ ./a.out 
+The string is ABCDEFJHIJKLMNOP 
+From the first 'I' to the end the string is IJKLMNOP
+
+
+
+  getcwd,  get_current_dir_name, getwd - Get current working
+              directory
+SYNOPSIS
+    #include <unistd.h>
+    char *getcwd(char *buf, size_t size);
+    char *get_current_dir_name(void);
+    char *getwd(char *buf);
+DESCRIPTION
+	The getcwd() function copies the absolute pathname of  the
+	current  working directory to the array pointed to by buf,
+	which is of length size.
+        If the current absolute path name would require  a  buffer
+        longer  than size elements, NULL is returned, and errno is
+        set to ERANGE; an application should check for this error,
+        and allocate a larger buffer if necessary.
+        As  an  extension  to the POSIX.1 standard, getcwd() allo
+        cates the buffer dynamically using malloc() if buf is NULL
+        on  call.   In  this  case,  the  allocated buffer has the
+        length size unless size is zero, when buf is allocated  as
+        big as necessary.  It is possible (and, indeed, advisable)
+        to free() the buffers if they have been obtained this way.
+	
+ get_current_dir_name,   which   is   only   prototyped  if
+        __USE_GNU is defined, will malloc(3) an array  big  enough
+      to  hold  the  current directory name.  If the environment
+      variable PWD is set, and its value is correct,  then  that
+      value will be returned.
+      getwd,  which  is only prototyped if __USE_BSD is defined,
+      will not malloc(3) any memory. The buf argument should  be
+      a pointer to an array at least PATH_MAX bytes long.  getwd
+      does only return the first PATH_MAX bytes  of  the  actual
+      pathname.
+RETURN VALUE
+      NULL  on failure (for example, if the current directory is
+      not readable), with errno set accordingly, and buf on success.           
+
+
+
+
+NAME
+       chdir, fchdir - change working directory
+
+SYNOPSIS
+      #include <unistd.h>
+      int chdir(const char *path);
+      int fchdir(int fd);
+DESCRIPTION
+      chdir  changes  the current directory to that specified in path.
+      fchdir is identical to chdir, only that the  directory  is
+      given as an open file descriptor.
+RETURN VALUE
+      On  success,  zero is returned.  On error, -1 is returned,
+      and errno is set appropriately. 
+
+
+
+Exercise 
+
+A. 
+
+Write a C program to create 3 child processes which read from 3 
+different files and write to the same pipe in the parent process.
+Each child should wait a random amount of time (3 -10 seconds) between 
+writing each 50 characters.  The father should read from the pipe and 
+write everything he gets (from all 3 files) into one new file.
+
+
+
+B. Expand Lab 2 B. so that the shell you made accepts the command cd.  It should 
+also write a prompt which is the current working directory instead of simply 
+writing >.  If the user uses the command cd to change the current working
+directory, then the prompt must be updated to reflect this.
+
+The shell should also accept any number of pipes.  For example, the following command 
+should be possible:   ls | wc | wc
+
+The shell that you will write will run the two commands (ls, wc) such that the 
+ls will be the side which writes to the pipe and wc will be the side that reads.
+
+In order to do this exercise you must change the stdin of the side which reads
+and the stdout of the side which writes such that they relate to a pipe.
+This change can be accomplished by using the command dup2 (see man dup2).
+The file descriptor (fd) of stdin is 0 and the fd of stdout is 1 (stderr is 2).
+Note: A child process inherits the stdin and the stdout of its father.
+
+Do not use the popen function in this exercise.
+
+C. Write a shell as described above but use the popen function instead of pipe and dup.
+</xmp>
+&copy; Nachum Danzig 
+</body>
+</html>
+
+
+

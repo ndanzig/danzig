@@ -1,0 +1,76 @@
+wiseman 1 >cat shsig1
+#!/bin/sh
+
+kill -BUS $$
+echo abc
+wiseman 2 >shsig1
+wiseman 3 >cat shsig2
+#!/bin/sh
+
+funct()
+{
+        echo haha
+        exit
+}
+trap funct 10
+kill -BUS $$
+wiseman 4 >shsig2
+haha
+wiseman 5 >cat shsig3
+#!/bin/sh
+
+funct()
+{
+        echo haha
+        exit
+}
+trap funct 10
+while true; do
+        sleep 1
+done
+wiseman 6 >shsig3 &
+[1] 20074
+wiseman 7 >kill -BUS 20074
+wiseman 8 >haha
+
+[1]    Done                          shsig3
+wiseman 8 >cat shsig4
+#!/bin/sh
+
+trap "" 10
+while true; do
+        sleep 1
+done
+wiseman 9 >shsig4 &
+[1] 20107
+wiseman 10 >kill -BUS 20107
+wiseman 11 >kill -KILL 20107
+
+[1]    Killed                        shsig4
+wiseman 12 >cat shsig5
+#!/bin/sh
+
+funct()
+{
+        echo haha
+        exit
+}
+trap funct 10
+trap 10
+kill -BUS $$
+wiseman 13 >shsig5
+wiseman 14 >cat shsig6
+#!/bin/sh
+
+trap "echo haha" 10
+kill -BUS $$
+wiseman 15 >shsig6
+haha
+wiseman 16 >cat shsig7
+#!/bin/sh
+
+trap "echo haha" 10
+trap
+wiseman 17 >shsig7
+10: echo haha
+wiseman 18 >exit

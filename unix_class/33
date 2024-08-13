@@ -1,0 +1,40 @@
+wiseman 14 >cat nic5.c
+#include <sys/time.h>
+#include <sys/resource.h>
+
+main()
+{
+	int pri;
+
+	pri=getpriority ( PRIO_USER , getuid() );
+	printf ( "%d\n" , pri );
+}
+
+wiseman 15 >gcc -o nic5{,.c}
+wiseman 16 >nic5
+1
+wiseman 17 >su
+Password:
+root 1 : /usr/etc/renice 0 -u wiseman
+97: old priority 1, new priority 0
+root 2 : /usr/etc/renice -20 6229
+6229: old priority 0, new priority -20
+root 3 : ps -l 6229
+       F UID   PID  PPID CP PRI NI  SZ  RSS WCHAN    STAT TT  TIME COMMAND
+20008001  97  6229  6173201  30-20  16  172          R <  p8  0:14 nic1
+root 4 : kill -9 6229
+root 5 : 
+[1]    Killed                 nic1
+Time taken is 10:40.92
+
+root 6 : exit
+exit
+wiseman 18 >/usr/bin/nice -10 ps -l
+       F UID   PID  PPID CP PRI NI  SZ  RSS WCHAN    STAT TT  TIME COMMAND
+20488201  97  6173  6172  2  15  0 296  528 kernelma S    p8  0:01 -h -i (tcsh)
+20000001  97  6538  6173 21  50 10 272  532          R N  p8  0:00 ps -l
+wiseman 19 >/usr/bin/nice -10 nic2
+10
+19
+wiseman 20 >/usr/bin/nice --1 ps -l
+nice: setpriority: Permission denied

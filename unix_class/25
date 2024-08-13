@@ -1,0 +1,61 @@
+wiseman 4 >cat ipc2.c
+#include <string.h>
+
+char str[]="shalom";
+
+main()
+{
+        int s;
+
+        if ( fork()==0 )
+                strcpy ( str , "hello" );
+        else
+        {
+                wait ( &s );
+                printf ( "%s\n" , str );
+        }
+}
+wiseman 5 >gcc -o ipc2{,.c}
+wiseman 6 >ipc2
+shalom
+wiseman 7 >cat ipc3.c
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <string.h>
+#include <signal.h>
+
+void cleanup();
+char str[]="shalom";
+char *sharestr;
+int shmid;
+
+main()
+{
+        int s,i;
+
+        shmid=shmget ( IPC_PRIVATE , strlen ( str ) , 0600 );
+        sharestr=(char *)shmat ( shmid , 0 , 0600 );
+        for ( i=1 ; i < 19 ; i++ )
+                signal ( i , &cleanup );
+        strcpy ( sharestr , str );
+        if ( fork()==0 )
+                strcpy ( sharestr , "hello" );
+        else
+        {
+                wait ( &s );
+                printf ( "%s\n" , sharestr );
+                shmdt ( sharestr );
+                shmctl ( shmid , IPC_RMID , 0 );
+        }
+}
+
+void cleanup()
+{
+        shmdt ( sharestr );
+        shmctl ( shmid , IPC_RMID , 0 );
+        exit ( 1 );
+}
+wiseman 8 >gcc -o ipc3{,.c}
+wiseman 9 >ipc3
+hello

@@ -1,0 +1,72 @@
+wiseman 13 >cat sig4.c
+#include <signal.h>
+
+void funct();
+
+main()
+{
+	int pid,sig=SIGSEGV;
+
+	signal(sig, &funct);
+	pid=getpid();
+	kill(pid,sig);
+}
+
+void funct()
+{
+	printf("haha\n");
+	exit(1);
+}
+
+wiseman 14 >gcc -o sig4 sig4.c
+wiseman 15 >sig4
+haha
+wiseman 16 >cat sig5.c
+#include <signal.h>
+main()
+{
+	sigblock(sigmask(SIGSEGV));
+	while(1);
+}
+wiseman 17 >gcc -o sig5 sig5.c
+wiseman 18 >sig5 &
+[1] 19998
+wiseman 19 >kill -SEGV 19998
+wiseman 20 >kill -11 19998
+wiseman 21 >kill -KILL 19998
+wiseman 22 >
+[1]    Killed                 sig5
+Time taken is 0:31.15
+wiseman 22 >cat sig6.c
+main()
+{
+	1/0;
+}
+wiseman 23 >gcc -o sig6 sig6.c
+wiseman 24 >sig6
+Floating exception (core dumped)
+wiseman 25 >cat sig7.c
+#include <signal.h>
+
+void funct();
+
+main()
+{
+	int sig=SIGFPE;
+
+	signal(sig, &funct);
+	1/0;
+}
+
+void funct()
+{
+	printf("haha\n");
+	exit(1);
+}
+
+wiseman 26 >gcc -o sig7 sig7.c
+wiseman 27 >sig7
+haha
+wiseman 28 >kill -l
+HUP INT QUIT ILL TRAP ABRT EMT FPE KILL BUS SEGV SYS PIPE ALRM TERM URG STOP 
+TSTP CONT CHLD TTIN TTOU POLL XCPU XFSZ VTALRM PROF WINCH LOST USR1 USR2 

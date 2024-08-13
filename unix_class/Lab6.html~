@@ -1,0 +1,928 @@
+<html>
+<head><title>
+UNIX Lab 6
+</title></head>
+<body>
+<h2>Lab Six (6) - socket, bind, recevfrom, sendto, ip, select  </h2>
+<xmp>
+
+
+SOCKETS
+
+Pipes enable IPC.  But what if the other process you want to communicate with
+is on a different machine?  For this, UNIX provides a special pipe called a socket.
+</xmp>
+<p>
+For a very detailed tutorial on sockets try <a href="http://sushantshome.tripod.com/pen/net/index.html"> here </a> or the <a href="http://www.ecst.csuchico.edu/~beej/guide/net/"> official site </a> and if you want a Hebrew translation try <a href="http://www.geocities.com/uv1st/netguide-heb/"> here.</a>
+<xmp>
+There are actually more than one kind of sockets.  There are UNIX sockets
+which can be used like pipes for communication within one system.  There are
+also Internet Protocol (or IP) sockets which are used for transfering packets
+of information over the internet.  Because of this, the built in functions
+designed to handle sockets use a simple address which can be "cast" as an IP 
+address.  IP sockets are of two types: UDP and TCP.
+
+These examples will use UDP (or SOCK_DGRAM).
+
+The following man pages are crucial.  
+See also accept(2),   connect(2),  listen(2), socket(7), getsockname(2)
+
+
+
+
+NAME
+       socket - create an endpoint for communication
+
+SYNOPSIS
+       #include <sys/types.h>
+       #include <sys/socket.h>
+
+       int socket(int domain, int type, int protocol);
+
+DESCRIPTION
+       Socket creates an endpoint for communication and returns a
+       descriptor.
+
+       The domain parameter  specifies  a  communication  domain;
+       this  selects  the  protocol family which will be used for
+       communication.    These   families    are    defined    in
+       <sys/socket.h>.  The currently understood formats include:
+
+       Name               Purpose                          Man page
+       PF_UNIX,PF_LOCAL   Local communication              unix(7)
+       PF_INET            IPv4 Internet protocols          ip(7)
+
+
+       The protocol specifies a particular protocol  to  be  used
+       with  the  socket.  Normally only a single protocol exists
+       to support a particular socket type within a given  proto-
+       col  family.   However, it is possible that many protocols
+       may exist, in which case a  particular  protocol  must  be
+       specified  in  this manner.  The protocol number to use is
+       specific to the "communication domain" in which communica-
+       tion  is  to  take  place;  see protocols(5).  See getpro-
+       toent(3) on how to map protocol name strings  to  protocol
+       numbers.
+
+       Sockets  of type SOCK_STREAM are full-duplex byte streams,
+       similar to pipes.  They do not preserve record boundaries.
+       A  stream  socket  must be in a connected state before any
+       data may be sent or  received  on  it.   A  connection  to
+       another  socket  is  created with a connect(2) call.  Once
+       connected, data  may  be  transferred  using  read(2)  and
+       write(2)  calls or some variant of the send(2) and recv(2)
+       calls.  When a session has been completed a  close(2)  may
+       be performed.  Out-of-band data may also be transmitted as
+       described in send(2) and received as described in recv(2).
+
+      SOCK_DGRAM and SOCK_RAW sockets allow sending of datagrams
+       to correspondents named in send(2) calls.   Datagrams  are
+       generally  received  with  recvfrom(2),  which returns the
+       next datagram with its return address.
+
+
+ The  socket  has  the  indicated type, which specifies the
+       communication semantics.  Currently defined types are:
+
+       SOCK_STREAM
+              Provides sequenced, reliable, two-way,  connection-
+              based  byte streams.  An out-of-band data transmis-
+              sion mechanism may be supported.
+
+       SOCK_DGRAM
+              Supports datagrams (connectionless, unreliable mes-
+              sages of a fixed maximum length).
+
+       SOCK_SEQPACKET
+              Provides a sequenced, reliable, two-way connection-
+              based data transmission path for datagrams of fixed
+              maximum  length;  a consumer is required to read an
+              entire packet with each read system call.
+
+       SOCK_RAW
+              Provides raw network protocol access.
+
+RETURN VALUE
+       -1 is returned if an error occurs;  otherwise  the  return
+       value is a descriptor referencing the socket.
+
+
+
+NAME
+       bind - bind a name to a socket
+
+SYNOPSIS
+       #include <sys/types.h>
+       #include <sys/socket.h>
+
+       int  bind(int  sockfd, struct sockaddr *my_addr, socklen_t
+       addrlen);
+
+DESCRIPTION
+       bind gives the socket sockfd the  local  address  my_addr.
+       my_addr  is  addrlen  bytes  long.  Traditionally, this is
+       called "assigning a name to a socket."  When a  socket  is
+       created with socket(2), it exists in a name space (address
+       family) but has no name assigned.
+
+       It is normally necessary to assign a local  address  using
+       bind  before  a SOCK_STREAM socket may receive connections
+       (see accept(2)).
+
+       The rules used in name binding vary between address  fami-
+       lies.   Consult  the  manual  entries  in  Section  7  for
+       detailed information. For AF_INET see ip(7),  for  AF_UNIX
+       see  unix(7),  for  AF_APPLETALK see ddp(7), for AF_PACKET
+       see packet(7), for AF_X25 see x25(7)  and  for  AF_NETLINK
+       see netlink(7).
+
+RETURN VALUE
+       On  success,  zero is returned.  On error, -1 is returned,
+       and errno is set appropriately.
+
+
+
+NAME
+       recv, recvfrom - receive a message from a socket
+
+SYNOPSIS
+       #include <sys/types.h>
+       #include <sys/socket.h>
+
+       int recv(int s, void *buf, size_t len, int flags);
+
+       int  recvfrom(int  s,  void  *buf,  size_t len, int flags,
+       struct sockaddr *from, socklen_t *fromlen);
+
+DESCRIPTION
+       The recvfrom call is used  to  receive  messages  from a 
+       socket, and may be used to receive data on a
+       socket whether or not it is connection-oriented.
+
+       If from is not NULL, and the socket is not connection-ori-
+       ented,  the  source  address  of the message is filled in.
+       The argument fromlen is a value-result parameter, initial-
+       ized  to  the size of the buffer associated with from, and
+       modified on return to indicate  the  actual  size  of  the
+       address stored there.
+
+       The  recv call is normally used only on a connected socket
+       (see connect(2)) and is identical to recvfrom with a  NULL
+       from parameter.
+
+       All  three  routines  return  the length of the message on
+       successful completion.  If a message is too long to fit in
+       the supplied buffer, excess bytes may be discarded depend-
+       ing on the type of socket the  message  is  received  from
+       (see socket(2)).
+
+
+       If  no  messages  are available at the socket, the receive
+       calls wait for a message to arrive, unless the  socket  is
+       nonblocking  (see  fcntl(2)) in which case the value -1 is
+       returned and the external variable errno  set  to  EAGAIN.
+       The  receive  calls normally return any data available, up
+       to the requested amount, rather than waiting  for  receipt
+       of the full amount requested.
+
+       The  select(2)  or  poll(2)  call may be used to determine
+       when more data arrives.
+
+
+RETURN VALUE
+       These calls return the number of bytes received, or -1  if
+       an error occurred.
+
+
+
+NAME
+       send, sendto, sendmsg - send a message from a socket
+
+SYNOPSIS
+       #include <sys/types.h>
+       #include <sys/socket.h>
+
+       int send(int s, const void *msg, size_t len, int flags);
+       int  sendto(int s, const void *msg, size_t len, int flags,
+       const struct sockaddr *to, socklen_t tolen);
+       int sendmsg(int s, const struct msghdr *msg, int flags);
+
+DESCRIPTION
+       Send, sendto, and sendmsg are used to transmit  a  message
+       to  another socket.  Send may be used only when the socket
+       is in a connected state, while sendto and sendmsg  may  be
+       used at any time.
+
+       The address of the target is given by to with tolen speci-
+       fying its size.  The length of the  message  is  given  by
+       len.   If  the  message  is  too  long  to pass atomically
+       through the underlying protocol,  the  error  EMSGSIZE  is
+       returned, and the message is not transmitted.
+
+       No indication of failure to deliver is implicit in a send.
+       Locally detected errors are indicated by a return value of
+       -1.
+
+       When  the message does not fit into the send buffer of the
+       socket, send normally blocks, unless the socket  has  been
+       placed  in non-blocking I/O mode.  In non-blocking mode it
+       would return EAGAIN in this case.  The select(2) call  may
+       be  used  to  determine  when  it is possible to send more
+       data.
+
+
+RETURN VALUE
+       The  calls  return the number of characters sent, or -1 if
+       an error occurred.
+
+NAME
+       ip - Linux IPv4 protocol implementation
+
+SYNOPSIS
+       #include <sys/socket.h>
+       #include <netinet/in.h>
+
+       tcp_socket = socket(PF_INET, SOCK_STREAM, 0);
+       raw_socket = socket(PF_INET, SOCK_RAW, protocol);
+       udp_socket = socket(PF_INET, SOCK_DGRAM, protocol);
+
+DESCRIPTION
+       Linux   implements   the  Internet  Protocol,  version  4,
+       described in RFC791 and RFC1122.  ip contains  a  level  2
+       multicasting  implementation  conforming  to  RFC1112.  It
+       also contains an IP router including a packet filter.
+
+
+       The programmer's interface is BSD sockets compatible.  For
+       more information on sockets, see socket(7).
+
+       An  IP socket is created by calling the socket(2) function
+       as socket(PF_INET, socket_type, protocol).   Valid  socket
+       types  are SOCK_STREAM to open a tcp(7) socket, SOCK_DGRAM
+       to open a udp(7) socket, or  SOCK_RAW  to  open  a  raw(7)
+       socket  to  access  the IP protocol directly.  protocol is
+       the IP protocol in the IP header to be received  or  sent.
+       The  only  valid values for protocol are 0 and IPPROTO_TCP
+       for TCP sockets and 0 and  IPPROTO_UDP  for  UDP  sockets.
+       For  SOCK_RAW  you  may  specify  a valid IANA IP protocol
+       defined in RFC1700 assigned numbers.
+
+       When a process wants to receive new  incoming  packets  or
+       connections,  it should bind a socket to a local interface
+       address using bind(2).  Only one IP socket may be bound to
+       any  given local (address, port) pair.  When INADDR_ANY is
+       specified in the bind call the socket will be bound to all
+       local  interfaces. When listen(2) or connect(2) are called
+       on a unbound socket the socket is automatically bound to a
+       random free port with the local address set to INADDR_ANY.
+
+       A TCP local socket address that has been bound is unavail-
+       able  for some time after closing, unless the SO_REUSEADDR
+       flag has been set.  Care should be taken when  using  this
+       flag as it makes TCP less reliable.
+
+ADDRESS FORMAT
+       An  IP socket address is defined as a combination of an IP
+       interface address and a port number. The basic IP protocol
+       does  not  supply  port  numbers,  they are implemented by
+       higher level protocols like udp(7)  and  tcp(7).   On  raw
+       sockets sin_port is set to the IP protocol.
+
+           struct sockaddr_in {
+                  sa_family_t    sin_family; /* address family: AF_INET */
+                  u_int16_t      sin_port;   /* port in network byte order */
+                  struct in_addr  sin_addr;  /* internet address */
+              };
+
+              /* Internet address. */
+              struct in_addr {
+                  u_int32_t      s_addr;     /* address in network byte order */
+              };
+
+       sin_family is always set to AF_INET.  This is required; in
+       Linux 2.2 most networking  functions  return  EINVAL  when
+       this  setting  is  missing.  sin_port contains the port in
+       network byte order. The port numbers below 1024 are called
+       reserved  ports.   Only processes with effective user id 0
+       or the  CAP_NET_BIND_SERVICE  capability  may  bind(2)  to
+       these sockets. Note that the raw IPv4 protocol as such has
+       no concept of a port, they are only implemented by  higher
+       protocols like tcp(7) and udp(7).
+
+       sin_addr  is  the  IP  host  address.   The addr member of
+       struct in_addr contains the host interface address in net-
+       work  order.   in_addr  should  be only accessed using the
+       inet_aton(3), inet_addr(3), inet_makeaddr(3) library func-
+       tions  or  directly with the name resolver (see gethostby-
+       name(3)).  IPv4 addresses are divided into unicast, broad-
+       cast  and multicast addresses. Unicast addresses specify a
+       single interface of a host,  broadcast  addresses  specify
+       all hosts on a network and multicast addresses address all
+       hosts  in  a  multicast  group.  Datagrams  to   broadcast
+       addresses  can be only sent or received when the SO_BROAD-
+       CAST socket flag is set.  In  the  current  implementation
+       connection  oriented  sockets are only allowed to use uni-
+       cast addresses.
+
+       Note that the address and the port are  always  stored  in
+       network order.  In particular, this means that you need to
+       call htons(3) on the number that is assigned  to  a  port.
+       All  address/port  manipulation  functions in the standard
+       library work in network order.
+
+    There  are  several  special  addresses:   INADDR_LOOPBACK
+       (127.0.0.1)  always refers to the local host via the loop-
+       back device; INADDR_ANY (0.0.0.0) means  any  address  for
+       binding; INADDR_BROADCAST (255.255.255.255) means any host
+       and has the same effect on bind as INADDR_ANY for histori-
+       cal reasons.
+
+
+
+
+
+
+
+/* FILE: sockserver.c -- simple receiver to illustrate programming an
+   internet datagram application with sockets.
+
+   SYNTAX: sockserver
+
+   DESCRIPTION:
+
+   Prints out the port it is listening to, then waits for a text
+   message.  After receiving the message, it prints it and then
+   exits.  The message cannot be more than 76 characters.
+*/
+
+#include <stdio.h>
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>   /* needed for internet sockets */
+
+void err_exit ( int status, char *mesg )
+{
+  perror (mesg);
+  exit (status);
+}
+
+/******************************************************/
+/* bind_socket -- bind a socket name to the socket.
+/******************************************************/
+
+#define CHOOSE_A_PORT 0  /* System will choose an internet port for us */
+
+void bind_socket ( int sd )
+{
+  struct sockaddr_in  sockname;
+  int status;
+  sockname.sin_family = AF_INET; /* use the internet address family */
+
+  /* Specify that we'll accept messages sent to ANY of the local
+     host's valid IP addresses.  This is important if the host has
+     more than one network connection. */
+  sockname.sin_addr.s_addr = INADDR_ANY;
+  sockname.sin_port = CHOOSE_A_PORT;  /* Let the system choose a port */
+
+  /* Now bind the socket "name" that we have defined to the socket.
+     Abort if there is an error. */
+  status = bind ( sd,  (struct sockaddr *) &sockname,  sizeof sockname );
+  if (status < 0)  err_exit (3, "binding name to socket");
+  return; 
+}
+
+/******************************************************/
+/* print_port -- print on standard output which port we are listening
+/*    to.  This is needed so that we can tell the sending program to
+/*    which port to send.
+/*
+/*    When we bind the socket to a "name" (or address), we don't have
+/*    to specify EVERYTHING.  For example, we can tell the system to
+/*    choose a port for us.  So we need this routine to tell us which
+/*    port we are actually bound to.
+/******************************************************/
+
+void print_port ( int sd )
+{
+  /* local data */
+  int                length;
+  u_short            port;     /* internet port number */
+  struct sockaddr_in sockname; /* socket name (i.e., address( */
+  int                status;
+
+  /* getsockname (& some other socket functions) require that you pass
+     it the amount of data pointed to by the socket name structure.
+     getsockname will then change this variable to reflect the true
+     length of the data. */
+  length = sizeof (sockname);
+
+  /* get the actual socket name. */
+  status = getsockname ( sd,  (struct sockaddr *) &sockname,  &length);
+  if (status < 0)  err_exit (4, "getting socket name");
+
+  /* Extract the port from the socket name structure.  We also have to
+     convert the data from network format to host format.  Network
+     format is the format used when sending to another host via
+     TCP/IP.  Host format is the format used on our local host.  You
+     should always use ntohs or related functions, even if the local
+     host's format = the network format. */
+  port = ntohs ( sockname.sin_port );
+
+  printf ("Listening on socket #%u\n", port);
+
+  return;
+}
+
+/******************************************************/
+/* read_and_print_message
+/******************************************************/
+
+#define MESG_MAX 76
+
+void read_and_print_message ( int sd )
+{
+  /* local data */
+  char mesg [MESG_MAX+1];
+  int length;
+
+  /* Read a maximum of MESG_MAX characters.  When we get here, the
+     read will "block" (i.e., wait) until some other process sends us
+     a message. */
+  length = read (sd, mesg, MESG_MAX);
+  if ( length < 0 ) err_exit (5, "read error");
+
+  /* Make sure that the message ends in a null character.  The printf
+     function will require this. */
+  mesg[length] = '\0';
+
+  /* print the message */
+  printf ("Read %d bytes.  The message is:\n     %s\n", length, mesg);
+
+  return;
+}
+
+/******************************************************/
+/* MAIN FUNCTION
+/******************************************************/
+
+#define DEF_PROTOCOL 0   /* Use the default protocol */
+
+int main (int argc, char **argv)
+{
+  /* local data */
+  int                 sd; /* socket descriptor */
+
+  /* create the socket */
+  sd = socket ( PF_INET, SOCK_DGRAM, DEF_PROTOCOL );
+  if ( sd < 0 ) {err_exit (1, "trying to create socket");}
+
+  /* Bind this socket to a name */
+  bind_socket (sd);
+
+  /* Print out the port we bound to */
+  print_port (sd);
+
+  /* Read & print a message */
+  read_and_print_message (sd);
+
+  close (sd);  
+ 
+}
+
+
+
+
+/* FILE: sockclient.c -- simple sender to illustrate programming an
+   internet datagram application with sockets.
+
+   SYNTAX: sockclient  hostname  port  message
+
+   DESCRIPTION:
+
+   Sends a simple text message to the specified IP host and port.  We
+   assume that the message is one word.  If you want it to be more
+   than one word, you must quote it.
+*/
+
+#include <stdio.h>
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>   /* needed for internet sockets */
+#include <netdb.h>	  /* needed for gethostbyname */
+
+void err_exit ( int status, char *mesg )
+{
+
+  perror (mesg);
+  exit (status);
+}
+
+/******************************************************/
+/* parse_cmd_line -- parse the command line & extract the hostname,
+/* port, and message.
+/*
+/*   argc (IN) -- number of words in argv.
+/*   argv (IN) -- the command line.
+/*   port (OUT) -- gets the value of the port.
+/*   hostname (OUT) -- gets the value of the host name.
+/*   hostname_max (IN) -- maximum allowed length of hostname.
+/*   mesg (OUT) -- set to the message to send.
+/*   mesg_max (IN) -- maximum allowed length of mesg.  
+/******************************************************/
+
+void parse_cmd_line (int argc,   char **argv,  int *port,  
+		     char *hostname,  int hostname_max,
+		     char *mesg,  int mesg_max )
+{
+  int   amount_left;
+  int   i;
+
+  if (argc < 4)  err_exit (1, "Need  3 arguments");
+  else if (argc > 4)  fprintf (stderr, "Ignoring extra arguments\n");
+
+  /* Get the host name.  We might have to truncate it */
+
+  (void) strncpy (hostname, argv[1], hostname_max);
+  if (strlen (hostname) >= hostname_max)
+    hostname[hostname_max-1] = '\0';
+
+  /* Get the port.  If the user did not specify a number for the port,
+     then atoi will return 0.
+  */	
+  *port = atoi (argv[2]);
+  if (*port <= 0)   err_exit (1, "Invalid port");
+
+  /* Get the message to send.  We might have to truncate it. */
+
+  (void) strncpy (mesg, argv[3], mesg_max);
+  if (strlen (mesg) >= mesg_max)
+    mesg[mesg_max-1] = '\0';
+
+  return;
+}
+
+/******************************************************/
+/* format_socket_name
+/******************************************************/
+
+void format_socket_name (char *hostname, int port,
+			 struct sockaddr_in *sockname)
+{
+  struct hostent *host;
+  u_short         temp_us;
+
+  /* convert the host name to an IP address.  The IP address will be
+     referenced by host->h_addr, & its legnth by host->h_length */
+
+  host = gethostbyname (hostname);
+  if (host == 0)  err_exit (2, "gethostbyname call");
+
+  /* Copy the IP address to the sockname structure.  We use bcopy
+     instead of strncpy because we don't want a null character
+     appended to the end.
+  */
+
+  bcopy ( (char *) host->h_addr,
+	  (char *) &sockname->sin_addr,
+	  host->h_length
+	);
+
+  /* Copy the port to the sockname structure.  htons converts from
+     host byte-order to network byte-order.  This is to provide
+     portability between platforms.  On some platforms, htons does
+     absolutely nothing.
+  */
+
+  sockname->sin_port = htons ( (u_short) port );
+
+  /* Set the address family (i.e., address domain) */
+
+  sockname->sin_family = AF_INET;
+
+  return;
+}
+
+/******************************************************/
+/* MAIN FUNCTION
+/******************************************************/
+
+#define BUF_MAX 1024
+#define DEF_PROTOCOL 0   /* Use the default protocol */
+#define SEND_FLAGS 0     /* Flags for the call to sendto */
+
+int main (int argc, char **argv)
+{
+  char                buf [BUF_MAX+1];  /* message buffer */
+  char                hostname [MAXHOSTNAMELEN+1];
+  int	              port;
+  int                 sd; /* socket descriptor */
+  struct sockaddr_in  to_sockname;
+  int                 status;
+
+  /* parse the command line.  Exit with a message if there is a syntax
+     error
+  */
+  parse_cmd_line ( argc, argv, &port, hostname, MAXHOSTNAMELEN+1,
+		   buf, BUF_MAX+1 );
+
+  /* create the socket.  We do not need to set a name.  The receiver
+     DOES; we'll send to him.  The sendto call will automatically
+     generate a name for our socket */ 
+
+  sd = socket ( PF_INET, SOCK_DGRAM, DEF_PROTOCOL );
+  if ( sd < 0 ) {err_exit (1, "trying to create socket");}
+
+  /* Format the name of the receiving socket & store in to_sockname */
+
+  format_socket_name ( hostname, port,  &to_sockname);
+
+  /* Send the message to the other process.  Because buf contains a
+     null-terminated string, we compute the length via 'strlen'.  */
+
+  status = sendto ( sd, buf, strlen(buf), SEND_FLAGS,
+		    (struct sockaddr *) &to_sockname,
+		    sizeof (to_sockname)
+		  );
+  if (status < 0)  err_exit (4, "sendto call");
+  close (sd);  
+}
+
+</xmp>
+<h2>SELECT</h2>
+<xmp>
+
+A read on a pipe in a parent process will cause that process to stop
+all other activities until there is data to be read on the pipe.
+This parent process is said to be "blocked" as long as it is waiting.
+What if the parent process wishes to listen to several child processes
+and which ever one is ready first to read from him?  This could be implemented 
+via "polling" but polling is CPU intensive.  Therefore, there is a system 
+resource which allows a process to discover which resource is ready to 
+be read.  Thus, CPU time is not used until one resource is really ready.
+At this point the parent process has only to check which resource is the
+ready one and can then read from it.  This implementation is not as CPU
+intensive as pure polling, but not quite as direct as true interupts.
+The resources checked can be a mixture of pipes, files, and sockets.
+
+NAME
+       select,  pselect, FD_CLR, FD_ISSET, FD_SET, FD_ZERO - syn-
+       chronous I/O multiplexing
+
+SYNOPSIS
+       /* According to POSIX 1003.1-2001 */
+       #include <sys/select.h>
+
+       /* According to earlier standards */
+       #include <sys/time.h>
+       #include <sys/types.h>
+       #include <unistd.h>
+
+       int  select(int  n,  fd_set  *readfds,  fd_set  *writefds,
+       fd_set *exceptfds, struct timeval *timeout);
+
+      int  pselect(int  n,  fd_set  *readfds,  fd_set *writefds,
+       fd_set *exceptfds, const struct timespec  *timeout,  const
+       sigset_t *sigmask);
+
+       FD_CLR(int fd, fd_set *set);
+       FD_ISSET(int fd, fd_set *set);
+       FD_SET(int fd, fd_set *set);
+       FD_ZERO(fd_set *set);
+
+DESCRIPTION
+       The functions select and pselect wait for a number of file
+       descriptors to change status.
+
+
+       Their function is identical, with three differences:
+
+       (i)    The select function uses a timeout that is a struct
+              timeval (with seconds and microseconds), while pse-
+              lect uses  a  struct  timespec  (with  seconds  and
+              nanoseconds).
+
+       (ii)   The  select function may update the timeout parame-
+              ter to indicate how much time was left. The pselect
+              function does not change this parameter.
+
+       (iii)  The  select  function has no sigmask parameter, and
+              behaves as pselect called with NULL sigmask.
+
+       Three independent sets of descriptors are watched.   Those
+       listed  in  readfds  will  be watched to see if characters
+       become available for reading (more precisely, to see if  a
+       read  will not block - in particular, a file descriptor is
+       also ready on end-of-file),  those  in  writefds  will  be
+       watched  to  see  if  a write will not block, and those in
+       exceptfds will be watched for exceptions.   On  exit,  the
+       sets  are  modified in place to indicate which descriptors
+       actually changed status.
+
+       Four macros are provided to manipulate the sets.   FD_ZERO
+       will clear a set.  FD_SET and FD_CLR add or remove a given
+       descriptor from  a  set.   FD_ISSET  tests  to  see  if  a
+       descriptor is part of the set; this is useful after select
+       returns.
+
+       n is the highest-numbered descriptor in any of  the  three
+       sets, plus 1.
+
+
+       timeout  is  an  upper bound on the amount of time elapsed
+       before select returns. It may be zero, causing  select  to
+       return immediately. (This is useful for polling.) If time-
+       out is NULL (no timeout), select can block indefinitely.
+
+       sigmask is a  pointer  to  a  signal  mask  (see  sigproc-
+       mask(2));  if  it is not NULL, then pselect first replaces
+       the current signal mask by the one pointed to by  sigmask,
+       then  does  the  `select'  function, and then restores the
+       original signal mask again.
+
+       The idea of pselect is that if one wants to  wait  for  an
+       event,  either a signal or something on a file descriptor,
+       an atomic test is needed to prevent race conditions. (Sup-
+       pose  the  signal  handler sets a global flag and returns.
+       Then a test of this global flag  followed  by  a  call  of
+       select()  could  hang  indefinitely  if the signal arrived
+       just after the test but just before the call. On the other
+       hand,  pselect  allows  one to first block signals, handle
+       the signals that have come in, then  call  pselect()  with
+       the  desired  sigmask,  avoiding  the  race.)  Since Linux
+       today does not have a pselect() system call,  the  current
+       glibc2 routine still contains this race.
+
+   The timeout
+       The  time  structures involved are defined in <sys/time.h>
+       and look like
+
+              struct timeval {
+                  long    tv_sec;         /* seconds */
+                  long    tv_usec;        /* microseconds */
+              };
+
+       and
+
+              struct timespec {
+                  long    tv_sec;         /* seconds */
+                  long    tv_nsec;        /* nanoseconds */
+              };
+
+       Some code calls select with all three sets empty, n  zero,
+       and  a  non-null timeout as a fairly portable way to sleep
+       with subsecond precision.
+
+       On Linux, the function select modifies timeout to  reflect
+       the  amount  of time not slept; most other implementations
+       do not do this.  This causes problems both when Linux code
+       which  reads timeout is ported to other operating systems,
+       and when code is ported to  Linux  that  reuses  a  struct
+       timeval  for multiple selects in a loop without reinitial-
+       izing it.  Consider timeout to be undefined  after  select
+       returns.
+
+
+RETURN VALUE
+       On  success,  select  and  pselect  return  the  number of
+       descriptors contained in the descriptor sets, which may be
+       zero  if  the  timeout expires before anything interesting
+       happens.  On error, -1  is  returned,  and  errno  is  set
+       appropriately;  the  sets and timeout become undefined, so
+       do not rely on their contents after an error.
+
+
+
+
+//by Nachum Danzig
+//see man 2 select
+#include <sys/types.h>//fd_set data type
+#include <sys/time.h> // struct timeval
+#include <unistd.h>// function prototype 
+#include <string.h>
+#define TRUE 1
+
+
+int main(void) {
+  fd_set rfds;
+  struct timeval tv;
+  int retval;
+
+  /* Watch stdin (fd 0) to see when it has input. */
+  FD_ZERO(&rfds);
+  FD_SET(0, &rfds);
+  /* Wait up to five seconds. */
+  tv.tv_sec = 5;
+  tv.tv_usec = 0;
+
+  retval = select(1, &rfds, NULL, NULL, &tv);
+  /* Don't rely on the value of tv now! */
+
+  if (retval)
+    printf("Data is available now.\n");
+  /* FD_ISSET(0, &rfds) will be true. */
+  else
+    printf("No data within five seconds.\n");
+
+  return 0;
+}
+
+
+example 2
+//by Nachum Danzig
+//see man 2 select
+#include <sys/types.h>//fd_set data type
+#include <sys/time.h> // struct timeval
+#include <unistd.h>// function prototype 
+#include <string.h>
+#define TRUE 1
+
+int main(void)
+{
+  fd_set readset;
+  struct timeval timeout;
+
+  char buffer[100];
+  char str[99];
+  int size_read;
+  int c;  //counter
+  int son1[2];
+  int son2[2];
+  pipe(son1);
+  pipe(son2);
+  
+  if (0==fork())//son
+    {
+      strcpy(str, "I am son 1");
+      close(son1[0]);//close read
+       while(TRUE)
+	{
+	  for(c=0;c<20000000;c++);//delay
+	  write(son1[1],str,strlen(str));
+	}
+    }
+  else//father
+    {
+      if (0==fork())//son 2
+	{
+	  strcpy(str, "I am son 2");
+	  close(son2[0]);//close read
+	   while(TRUE)
+	    {
+	      for(c=0;c<50000000;c++);//delay more time
+	      write(son2[1],str,strlen(str));
+	    }
+	}
+      else//father
+	{
+	  //read from which ever son is ready
+	  close(son1[1]);//close write
+	  close(son2[1]);
+
+	  timeout.tv_sec=10;//10 seconds
+	  timeout.tv_usec=50;//50 micro seconds
+	  FD_SET(son1[0],&readset);//add the read descriptors to the readset
+	  FD_SET(son2[0],&readset);
+
+	  while(TRUE)
+	    {//nonblocking wait for next available read resource
+	      select(son2[0]+1, &readset,NULL,NULL ,&timeout); 
+	      if(FD_ISSET(son1[0], &readset))//is son1 read ready?
+		{
+		  size_read=read(son1[0],&buffer,99);//read from the pipe into buffer
+		  buffer[size_read]='\0'; //insert NULL
+		  printf("%s \n\n",buffer);
+		}
+	      if(FD_ISSET(son2[0], &readset))//is son2 read ready?
+		{
+		  size_read=read(son2[0],&buffer,99);//read from the pipe into buffer
+		  buffer[size_read]='\0';
+		  printf("%s \n",buffer);
+		}
+		timeout.tv_sec=10;//10 seconds
+		timeout.tv_usec=50;//50 micro seconds
+		FD_SET(son1[0],&readset);//add the read descriptors to the readset
+		FD_SET(son2[0],&readset);
+	    }
+	}
+    }//end father
+}//end main
+
+
+Exercise:
+
+Write a server which handles two clients on two different remote machines.
+The server will wait to receive text messages from either client.
+Use recvfrom not read and sendto not send, and print out who the message 
+is from.  Use select to prevent blocking.
+Do not use forks, thus you will have only one server process but it will 
+contain two sockets.
+
+</xmp>
+<br>
+&copy Nachum Danzig 02 Jan 2003
+
+</body>
+</html>
+

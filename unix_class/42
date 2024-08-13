@@ -1,0 +1,78 @@
+wiseman 1 >sed -e '2d' pw
+root:auwiXbD1wUUOQ:0:1:System PRIVILEGED Account,,,:/:/bin/tcsh
+yedidya:pHPjDyQjc3d9A:100:100:& Israel,CS 115,035318953,:/u/opers/yedidya:/bin/tcsh
+muskat:WsaBZtMsglNj2:112:101:Prof. J. B. &,,,,:/u/segel/muskat:/bin/tcsh
+aradtzvi:p08lRq9NOKYz6:139:101:Prof. Arad Tzvi,,,,:/u/segel/aradtzvi:/bin/tcsh
+rafi:NF7jkxnxQvbc.:254:101:Dr. & Yechezkel:/u/segel/rafi:/bin/tcsh
+wiseman 2 >sed -e '2,4d' pw
+root:auwiXbD1wUUOQ:0:1:System PRIVILEGED Account,,,:/:/bin/tcsh
+aradtzvi:p08lRq9NOKYz6:139:101:Prof. Arad Tzvi,,,,:/u/segel/aradtzvi:/bin/tcsh
+rafi:NF7jkxnxQvbc.:254:101:Dr. & Yechezkel:/u/segel/rafi:/bin/tcsh
+wiseman 3 >sed -e '/Awk/d' pw
+root:auwiXbD1wUUOQ:0:1:System PRIVILEGED Account,,,:/:/bin/tcsh
+yedidya:pHPjDyQjc3d9A:100:100:& Israel,CS 115,035318953,:/u/opers/yedidya:/bin/tcsh
+muskat:WsaBZtMsglNj2:112:101:Prof. J. B. &,,,,:/u/segel/muskat:/bin/tcsh
+aradtzvi:p08lRq9NOKYz6:139:101:Prof. Arad Tzvi,,,,:/u/segel/aradtzvi:/bin/tcsh
+rafi:NF7jkxnxQvbc.:254:101:Dr. & Yechezkel:/u/segel/rafi:/bin/tcsh
+wiseman 4 >sed -e '/Awk/,4d' pw
+root:auwiXbD1wUUOQ:0:1:System PRIVILEGED Account,,,:/:/bin/tcsh
+aradtzvi:p08lRq9NOKYz6:139:101:Prof. Arad Tzvi,,,,:/u/segel/aradtzvi:/bin/tcsh
+rafi:NF7jkxnxQvbc.:254:101:Dr. & Yechezkel:/u/segel/rafi:/bin/tcsh
+wiseman 5 >sed -e '/Awk/,$d' pw
+root:auwiXbD1wUUOQ:0:1:System PRIVILEGED Account,,,:/:/bin/tcsh
+wiseman 6 >sed -e '/Awk/i\
+> abc' pw
+root:auwiXbD1wUUOQ:0:1:System PRIVILEGED Account,,,:/:/bin/tcsh
+abc
+wiseman:Wp1fAwkvjueqo:97:100:Yair Wiseman,,,:/u/opers/wiseman:/bin/tcsh
+yedidya:pHPjDyQjc3d9A:100:100:& Israel,CS 115,035318953,:/u/opers/yedidya:/bin/tcsh
+muskat:WsaBZtMsglNj2:112:101:Prof. J. B. &,,,,:/u/segel/muskat:/bin/tcsh
+aradtzvi:p08lRq9NOKYz6:139:101:Prof. Arad Tzvi,,,,:/u/segel/aradtzvi:/bin/tcsh
+rafi:NF7jkxnxQvbc.:254:101:Dr. & Yechezkel:/u/segel/rafi:/bin/tcsh
+wiseman 7 >sed -e '/Awk/a\
+> abc' pw
+root:auwiXbD1wUUOQ:0:1:System PRIVILEGED Account,,,:/:/bin/tcsh
+wiseman:Wp1fAwkvjueqo:97:100:Yair Wiseman,,,:/u/opers/wiseman:/bin/tcsh
+abc
+yedidya:pHPjDyQjc3d9A:100:100:& Israel,CS 115,035318953,:/u/opers/yedidya:/bin/tcsh
+muskat:WsaBZtMsglNj2:112:101:Prof. J. B. &,,,,:/u/segel/muskat:/bin/tcsh
+aradtzvi:p08lRq9NOKYz6:139:101:Prof. Arad Tzvi,,,,:/u/segel/aradtzvi:/bin/tcsh
+rafi:NF7jkxnxQvbc.:254:101:Dr. & Yechezkel:/u/segel/rafi:/bin/tcsh
+wiseman 8 >sed -n -e '2,4p' pw
+wiseman:Wp1fAwkvjueqo:97:100:Yair Wiseman,,,:/u/opers/wiseman:/bin/tcsh
+yedidya:pHPjDyQjc3d9A:100:100:& Israel,CS 115,035318953,:/u/opers/yedidya:/bin/tcsh
+muskat:WsaBZtMsglNj2:112:101:Prof. J. B. &,,,,:/u/segel/muskat:/bin/tcsh
+wiseman 9 >sed -e '1,2s/:/+/' pw
+root+auwiXbD1wUUOQ:0:1:System PRIVILEGED Account,,,:/:/bin/tcsh
+wiseman+Wp1fAwkvjueqo:97:100:Yair Wiseman,,,:/u/opers/wiseman:/bin/tcsh
+yedidya:pHPjDyQjc3d9A:100:100:& Israel,CS 115,035318953,:/u/opers/yedidya:/bin/tcsh
+muskat:WsaBZtMsglNj2:112:101:Prof. J. B. &,,,,:/u/segel/muskat:/bin/tcsh
+aradtzvi:p08lRq9NOKYz6:139:101:Prof. Arad Tzvi,,,,:/u/segel/aradtzvi:/bin/tcsh
+rafi:NF7jkxnxQvbc.:254:101:Dr. & Yechezkel:/u/segel/rafi:/bin/tcsh
+wiseman 10 >sed -n -e '1,2s/:/+/p' pw
+root+auwiXbD1wUUOQ:0:1:System PRIVILEGED Account,,,:/:/bin/tcsh
+wiseman+Wp1fAwkvjueqo:97:100:Yair Wiseman,,,:/u/opers/wiseman:/bin/tcsh
+wiseman 11 >sed -n -e '1,2s/:/+/pg' pw
+root+auwiXbD1wUUOQ+0+1+System PRIVILEGED Account,,,+/+/bin/tcsh
+wiseman+Wp1fAwkvjueqo+97+100+Yair Wiseman,,,+/u/opers/wiseman+/bin/tcsh
+wiseman 12 >sed -e '1,2s/:/+/g' pw
+root+auwiXbD1wUUOQ+0+1+System PRIVILEGED Account,,,+/+/bin/tcsh
+wiseman+Wp1fAwkvjueqo+97+100+Yair Wiseman,,,+/u/opers/wiseman+/bin/tcsh
+yedidya:pHPjDyQjc3d9A:100:100:& Israel,CS 115,035318953,:/u/opers/yedidya:/bin/tcsh
+muskat:WsaBZtMsglNj2:112:101:Prof. J. B. &,,,,:/u/segel/muskat:/bin/tcsh
+aradtzvi:p08lRq9NOKYz6:139:101:Prof. Arad Tzvi,,,,:/u/segel/aradtzvi:/bin/tcsh
+rafi:NF7jkxnxQvbc.:254:101:Dr. & Yechezkel:/u/segel/rafi:/bin/tcsh
+wiseman 13 >sed -e '1,$sx/ux/usr/uxg' pw
+root:auwiXbD1wUUOQ:0:1:System PRIVILEGED Account,,,:/:/bin/tcsh
+wiseman:Wp1fAwkvjueqo:97:100:Yair Wiseman,,,:/usr/u/opers/wiseman:/bin/tcsh
+yedidya:pHPjDyQjc3d9A:100:100:& Israel,CS 115,035318953,:/usr/u/opers/yedidya:/bin/tcsh
+muskat:WsaBZtMsglNj2:112:101:Prof. J. B. &,,,,:/usr/u/segel/muskat:/bin/tcsh
+aradtzvi:p08lRq9NOKYz6:139:101:Prof. Arad Tzvi,,,,:/usr/u/segel/aradtzvi:/bin/tcsh
+rafi:NF7jkxnxQvbc.:254:101:Dr. & Yechezkel:/usr/u/segel/rafi:/bin/tcsh
+wiseman 14 >sed -e '2y/ae1o/bac8/' pw
+root:auwiXbD1wUUOQ:0:1:System PRIVILEGED Account,,,:/:/bin/tcsh
+wisambn:WpcfAwkvjuaq8:97:c00:Ybir Wisambn,,,:/u/8pars/wisambn:/bin/tcsh
+yedidya:pHPjDyQjc3d9A:100:100:& Israel,CS 115,035318953,:/u/opers/yedidya:/bin/tcsh
+muskat:WsaBZtMsglNj2:112:101:Prof. J. B. &,,,,:/u/segel/muskat:/bin/tcsh
+aradtzvi:p08lRq9NOKYz6:139:101:Prof. Arad Tzvi,,,,:/u/segel/aradtzvi:/bin/tcsh
+rafi:NF7jkxnxQvbc.:254:101:Dr. & Yechezkel:/u/segel/rafi:/bin/tcsh

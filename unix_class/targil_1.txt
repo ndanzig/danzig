@@ -1,0 +1,42 @@
+Air Traffic Controllers use software to determine if 
+two planes are on a collision course.  If they are, the operator
+in the tower will radio the pilots and tell them to change course.
+The software that calculates this gets input from a RADAR 
+machine (mak"am) which tells the location of the planes
+at various times. This information is stored in shared memory.
+A semaphore is needed in such cases in order to make sure
+that the calculation of one plane's trajectory is based on 
+data generated at the same time as the other plane's data.
+Only once the RADAR recording process has finished with
+shared memory for both planes can the collision calculating 
+software access the memory.  Furthermore, as long the collision
+calculating process is calculating, the RADAR should not be
+allowed to change the shared memory.  
+
+Write a program to simulate this.  Have two processes simulating 
+planes.  They will each run 2 for loops with x_counter and y_counter
+for the x,y coordinates.  The counters of the 2 planes  will run at 
+different rates to simulate different speeds. Plane_1 will write its 
+x,y coordinates to shared_memory_1 and plane_2 will write to 
+shared_memory_2.
+
+RADAR will read  data from shared_memory_1 and shared_memory_2 when 
+it is passed the semaphore and write it to shared_memory_3 then will
+release semaphore.  Then Collision software will read shared_memory_3
+when he gets the semaphore.  He will then release the semaphore to 
+RADAR.
+
+Collisions can be calculated as follows: 
+
+	   (Y2(plane1)-Y2(plane2))		  (X2(plane1)-X2(plane2))
+	---------------------------      =?=    ---------------------------
+plane1((Y2-Y1)/time)- plane2((Y2-Y1)/time)   plane1((X2-X1)/time)-plane2((X2-X1)/time)
+
+Note:  You will need to store 2 sets of x,y coordinates for each plane.
+       You may assume any units of time you wish.
+
+If there is a collision, print "Collision! Radio planes."
+This should be run in an infinite loop.
+Handle Ctrl-C interrupt.
+ 
+tisa n'ima.

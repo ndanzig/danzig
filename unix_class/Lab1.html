@@ -1,0 +1,927 @@
+<html>
+<head><title>
+UNIX Lab 1
+</title></head>
+<body>
+<h2>Lab One (1) -  sh (shell) scripts and awk scripts<h2>
+<xmp>
+
+SHELL
+
+see man bash
+
+NAME
+       sh -  also called Bourne shell, is a Unix command shell written
+       by Stephen Bourne and distributed in 1978
+       bash - is a version of the Bourne shell distributed around 1987.  
+       Its name is derived from the acronym of Bourne Again SHell.
+       Since bash is a superset of sh, in Linux, it is the same as bash. 
+SYNOPSIS
+       bash [options] [file]
+
+DESCRIPTION
+       Bash  is  an  sh-compatible  command language interpreter that executes
+       commands read from the standard input or from a file.  Although Bash 
+       incorporates useful features from the Korn and C shells (ksh and csh),
+       it should be distinguished from them.  Bourne, Bash, and sh form one
+       family or style of shell, whereas csh and tcsh should be considered a
+       a different family.
+
+       Nevertheless, Bash  is  intended  to be a conformant implementation 
+       of the IEEE POSIX Shell and Tools specification (IEEE Working Group
+       1003.2).
+
+       
+Read the man for more details.
+Here are some sample bash (sh) programs.
+First I list each program's content, then I run the program and show the output.
+
+prompt#>cat shell1
+#!/bin/bash
+
+for i in a b c; do
+        echo $i   #refer to variable i as $i
+done
+prompt#>shell1
+a
+b
+c
+prompt#>cat shell2
+#!/bin/bash
+
+for i in `ls klum`; do  #klum is a directory with 3 files in it, klum1,
+        echo $i            # klum2, klum3
+done
+
+prompt#>shell2
+klum1
+klum2
+klum3
+prompt#>cat shell3
+#!/bin/bash
+
+for i in `ls klum`; do
+        echo nothing$i   #string "nothing"
+done
+prompt#>shell3
+nothingklum1
+nothingklum2
+nothingklum3
+prompt#>cat shell4
+#!/bin/bash
+
+a=nothing
+for i in `ls klum`; do
+        echo $a$i
+done
+prompt#>shell4
+nothingklum1
+nothingklum2
+nothingklum3
+
+SEE "man test" for if tests
+
+prompt#>cat shell5
+#!/bin/bash
+
+for i in `ls klum`; do
+        if [ $i != klum1 ]; then
+                echo $i
+        fi
+done
+prompt#>shell5
+klum2
+klum3
+prompt#>cat shell6
+#!/bin/bash
+
+for i in `ls klum`; do
+        if [ -r klum/$i ]; then  #if readable
+                echo $i
+        fi
+done
+prompt#>shell6
+klum2
+prompt#>cat shell7
+#!/bin/bash
+
+for i in `ls klum`; do
+        if [ ! -r klum/$i ]; then  #if not readable
+                echo $i
+        fi
+done
+prompt#>shell7
+klum1
+klum3
+prompt#>cat shell8
+#!/bin/bash
+
+for i in `ls`; do
+        if [ -d $i ]; then
+                echo $i
+        fi
+done
+prompt#>shell8
+klum
+klum6
+prompt#>cat shell9
+#!/bin/bash
+
+for i in `ls klum`; do
+        if [ $i = klum1 -o $i = klum2 ]; then
+                echo $i
+        else
+                echo abc$i
+        fi
+done
+</xmp>
+
+See <a href="http://mywiki.wooledge.org/BashFAQ/031">this</a> explanation of special bash new test [[
+<xmp>
+prompt#>shell9
+klum1
+klum2
+abcklum3
+prompt#>cat shell10
+#!/bin/bash
+
+for i in `ls klum`; do
+        case $i in
+        klum1)
+                echo aa$i
+                ;;
+        klum2)
+                echo bb$i
+                ;;
+        *)
+                echo cc$i
+                ;;
+        esac
+done
+prompt#>shell10
+aaklum1
+bbklum2
+ccklum3
+prompt#>cat shell11
+#!/bin/bash
+
+i=0
+while [ $i -lt 5 ]; do  #less than
+        echo $i
+        i=`expr $i + 1`  #i++
+done
+prompt#>shell11
+0
+1
+2
+3
+4
+prompt#>cat shell12
+#!/bin/bash
+
+func()
+{
+        echo abc
+}
+
+func           #function call to  "func"
+prompt#>shell12
+abc
+
+
+-------------------------------------------------------
+The following is from man test.
+These expressions are all the options for inside the [ ]
+
+NOTE:      "[" is a link to the command "test", therefore there must be 
+            whitespace before and after the "[".
+
+
+NAME
+       test - check file types and compare values
+
+SYNOPSIS
+       test EXPRESSION
+       [ EXPRESSION ]
+       test OPTION
+
+DESCRIPTION
+       Exit with the status determined by EXPRESSION.
+
+       --help display this help and exit
+
+       --version
+              output version information and exit
+
+       EXPRESSION is true or false and sets exit status.  It is one of:
+
+       ( EXPRESSION )
+              EXPRESSION is true
+
+       ! EXPRESSION
+                 EXPRESSION is false
+
+       EXPRESSION1 -a EXPRESSION2
+              both EXPRESSION1 and EXPRESSION2 are true
+
+       EXPRESSION1 -o EXPRESSION2
+              either EXPRESSION1 or EXPRESSION2 is true
+
+       [nz] STRING
+              the length of STRING is nonzero
+
+       -z STRING
+              the length of STRING is zero
+
+       STRING1 = STRING2
+              the strings are equal
+
+       STRING1 != STRING2
+              the strings are not equal
+
+       INTEGER1 -eq INTEGER2
+              INTEGER1 is equal to INTEGER2
+
+       INTEGER1 -ge INTEGER2
+
+             INTEGER1 is greater than or equal to INTEGER2
+
+       INTEGER1 -gt INTEGER2
+              INTEGER1 is greater than INTEGER2
+
+       INTEGER1 -le INTEGER2
+              INTEGER1 is less than or equal to INTEGER2
+
+       INTEGER1 -lt INTEGER2
+              INTEGER1 is less than INTEGER2
+
+       INTEGER1 -ne INTEGER2
+              INTEGER1 is not equal to INTEGER2
+
+       FILE1 -ef FILE2
+              FILE1 and FILE2 have the same device and inode numbers
+
+       FILE1 -nt FILE2
+              FILE1 is newer (modification date) than FILE2
+
+       FILE1 -ot FILE2
+              FILE1 is older than FILE2
+
+       -d FILE
+              FILE exists and is a directory
+
+       -e FILE
+              FILE exists
+
+       -f FILE
+              FILE exists and is a regular file
+       -r FILE
+              FILE exists and is readable
+
+       -s FILE
+              FILE exists and has a size greater than zero
+
+       -S FILE
+              FILE exists and is a socket
+
+       -w FILE
+              FILE exists and is writable
+
+       -x FILE
+              FILE exists and is executable
+	etc.
+
+prompt#>cat shell13
+#!/bin/bash
+ 
+i=0
+while [ $i -lt 5 ]; do
+        i=`expr $i + 1`
+        if [ $i -eq 3 ]; then  #numerical equals
+                continue
+        else
+                echo $i
+        fi
+done
+prompt#>shell13
+1
+2
+4
+5
+prompt#>cat shell14
+#!/bin/bash
+ 
+i=0
+while [ $i -lt 5 ]; do
+        i=`expr $i + 1`
+        if [ $i -eq 3 ]; then
+                break
+        else
+                echo $i
+        fi
+done
+prompt#>shell14
+1
+2
+prompt#>cat shell15
+#!/bin/bash
+ 
+i=0
+while [ $i -lt 5 ]; do
+        i=`expr $i + 1`
+        if [ $i -eq 3 ]; then
+                exit
+        else
+                echo $i
+        fi
+done
+prompt#>shell15
+1
+2
+
+-------------------------------------------
+Here is an example to demonstrate calling a program 
+(in this case a perl program) from within shell.
+Here is the program file.
+
+prompt#> cat perl1.pl
+#!/usr/bin/perl -w
+#
+print crypt($ARGV[0],"salt")
+
+Here I call the program from my home directory.
+
+prompt#> cat shell16
+#!/bin/bash
+passwd=hello
+crypted_passwd=`~danzig/perl1.pl ${passwd}` #run the program "perl1.pl"
+echo ${crypted_passwd}
+
+prompt#>shell16
+saPPmoXIbs91M
+
+
+--------------------------------------------------------------------------
+Using shell variables.
+
+prompt#>cat var1
+#!/bin/bash
+
+x=ab
+y=${x}cd
+echo $y
+prompt#>var1
+abcd
+
+This will display the pid, number of arguments, the first argument,
+the 0th argument, all the arguments except the 0th.
+
+prompt#>cat var2
+#!/bin/bash
+
+echo $$ $# $1 $0 $*
+
+prompt#>var2 a b c
+12702 3 a var2 a b c
+prompt#>cat var3
+#!/bin/bash
+
+echo $x
+echo ${x:-a}  #if x is not defined, then a
+echo $x
+echo ${x:=a}
+echo $x
+echo ${x:+b}  #if x is defined, then b
+x=
+echo ${x:+b}
+prompt#>var3
+
+a
+
+a
+a
+b
+
+prompt#>cat var4
+#!/bin/bash
+
+echo $HOME
+echo $PATH
+echo $MAIL
+prompt#>var4
+/u/staff/danzig
+/usr/local/bin:/usr/hosts:/u/staff/danzig/bin:/usr/ucb:/usr/bin:/usr/5bin:/usr/etc:.
+/usr/spool/mail/danzig
+prompt#>cat var5
+#!/bin/bash
+
+while [ $# -ne 0 ]; do #make sure not zero arguments
+        /usr/bin/echo -n "$# "    # echo the current number of arguments
+	                          # -n do not output the trailing newline
+        echo $1                   # echo the current 1st argument
+        shift                     # shift off one argument  
+done
+prompt#>var5 a b c
+3 a
+2 b
+1 c
+
+-----------------------------------------------
+Redirection
+
+prompt#>cat red1
+#!/bin/bash
+
+echo abc > red.out     #create a file called red.out
+cat red.out
+prompt#>red1
+abc
+prompt#>cat red2
+#!/bin/bash
+
+echo abc >> red.out      #append to a file called red.out
+cat red.out
+prompt#>red2
+abc
+abc
+prompt#>cat red3
+#!/bin/bash
+
+cat < red.out              #redirect red.out into `cat`
+prompt#>red3
+abc
+abc
+prompt#>cat red4
+#!/bin/bash
+
+cat abc > red.out           #there is no file abc!!
+prompt#>red4
+cat: abc: No such file or directory
+prompt#>cat red.out         #red.out got over-written with nothing!
+prompt#>cat red5
+#!/bin/bash
+
+cat abc 2>&1 | cat > red.out #redirect stderr to stdout, pipe it into red.out
+prompt#>red5
+prompt#>cat red.out
+cat: abc: No such file or directory   #our error message
+
+----------------------------------------------------------------
+A shell script to add a line to an already existing file.
+
+p-danzig-2.jct.ac.il:~/unix_programming/lab5 % cat ./example1
+#!/bin/bash
+
+##DIR=/usr/u/jctstaff/danzig/unix_programming/lab5
+DIR=${DIR:-/usr/u/jctstaff/danzig/unix_programming/lab5}
+echo ${DIR}
+
+# no spaces allowed!!
+FILE=${DIR}/temp
+
+echo "This was an empty file" >>${FILE}
+
+
+p-danzig-2.jct.ac.il:~/unix_programming/lab5 % touch temp
+p-danzig-2.jct.ac.il:~/unix_programming/lab5 % cat temp
+p-danzig-2.jct.ac.il:~/unix_programming/lab5 % ./example1
+/usr/u/jctstaff/danzig/unix_programming/lab5
+p-danzig-2.jct.ac.il:~/unix_programming/lab5 % cat temp
+This was an empty file
+
+----------------------------------------------------------------
+A shell script which demonstrates parsing a command line for
+flags in any order using the shift command.
+
+
+p-danzig-2.jct.ac.il:~/unix_programming/lab5 %cat myshell00
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+        #echo will now send to stderr instead of stdout
+	#use >& instead of > to indicate 1 and 2 are not variables
+	echo 1>&2 "Takes at least 2  arguments"
+	exit 1
+elif [ `/usr/ucb/whoami` != danzig ]; then
+	echo "must run this as danzig"
+	exit 1
+fi
+
+while [ $# -ge 1 ]; do
+        case "$1" in
+
+                -p)     echo  $2
+                        shift 2
+                        ;;
+
+		-pp)    echo hello $2
+                        shift 2
+                        ;;
+			
+		*)      exit 1
+       	esac
+done
+
+zevach:~/unix_programming/lab5 % ./myshell00
+Takes at least 2  arguments
+zevach:~/unix_programming/lab5 % ./myshell00 -p
+Takes at least 2  arguments
+zevach:~/unix_programming/lab5 % ./myshell00 -p fkg
+must run this as danzig
+zevach:~/unix_programming/lab5 % su danzig
+zevach:~/unix_programming/lab5 % ./myshell00 -p mary
+mary
+zevach:~/unix_programming/lab5 % ./myshell00 -pp mary
+hello mary
+zevach:~/unix_programming/lab5 % ./myshell00 -p help -pp mary
+help
+hello mary
+zevach:~/unix_programming/lab5 % ./myshell00  -pp mary -p help
+hello mary
+help
+zevach:~/unix_programming/lab5 % ./myshell00 -x xx
+zevach:~/unix_programming/lab5 % 
+
+--------------------------------------------------------------------------
+
+AWK
+
+NAME
+     awk - pattern scanning and processing language
+
+SYNOPSIS
+     /usr/bin/awk [-f progfile] [-F c] [ ' prog  ']  [parameters]
+     [filename...]
+
+     /usr/xpg4/bin/awk  [-F ERE]   [-v assignment...]   'program'
+     -f progfile... [argument...]
+
+DESCRIPTION
+     The /usr/xpg4/bin/awk utility is described  on  the  nawk(1)
+     manual page.
+
+     The /usr/bin/awk utility scans each input filename for lines
+     that  match  any of a set of patterns specified in prog. The
+     prog string must be enclosed in single quotes ( ')  to  pro-
+     tect  it  from the shell. For each pattern in prog there may
+     be an associated action performed when a line of a  filename
+     matches  the  pattern.  The set of pattern-action statements
+     may appear literally as prog or in a file specified with the
+     -f  progfile option. Input files are read in order; if there
+     are no files, the standard input is read. The file name  '-'
+     means the standard input.
+
+OPTIONS
+     The following options are supported:
+
+     -Fc   Uses the character c as the field separator (FS) char-
+           acter.  See the discussion of FS below.
+  Input Lines
+     Each input line is matched against the  pattern  portion  of
+     every  pattern-action  statement;  the  associated action is
+     performed for each matched pattern. Any filename of the form
+     var=value  is  treated as an assignment, not a filename, and
+     is executed at the time it would have been opened if it were
+     a filename. Variables assigned in this manner are not avail-
+     able inside a BEGIN rule, and are assigned after  previously
+     specified files have been read.
+
+     An input line is normally made up  of  fields  separated  by
+     white  spaces.  (This default can be changed by using the FS
+     built-in variable or the -Fc  option.)  The  default  is  to
+     ignore  leading  blanks  and  to  separate  fields by blanks
+     and/or tab characters. However, if FS is  assigned  a  value
+     that  does not include any of the white spaces, then leading
+     blanks are not ignored. The fields are denoted $1, $2,  ...;
+     $0 refers to the entire line.
+
+  Pattern-action Statements
+     A pattern-action statement has the form:
+
+     pattern { action }
+
+     Either pattern or action may be  omitted.  If  there  is  no
+     action,  the  matching  line is printed. If there is no pat-
+     tern, the action is performed on every input line.  Pattern-
+     action statements are separated by newlines or semicolons.
+
+     Patterns are arbitrary Boolean combinations ( !, ||, &&, and
+     parentheses)  of  relational expressions and regular expres-	
+     sions. 
+
+     NF    number of fields in the current record
+
+     NR    ordinal number of the current record
+
+
+prompt#>cat pw
+root:auwiXbDxWxUOQ:0:1:System:/:/bin/tcsh
+danzig:Wp1fDXXXueqo:97:100:Nachum Danzig:/u/staff/danzig:/bin/tcsh
+charlie:pHPjDyQjZZZ9A:100:101:Charlie Brown:/u/staff/charlie:/bin/tcsh
+sally:WsaBZtMsglNj2:112:101:Sally Klien:/u/staff/sally:/bin/tcsh
+snoopy:p08ZXZXOKYz6:139:101:Snoopy Brown:/u/staff/snoopy:/bin/tcsh
+linus:NZZbbnxQvbc.:254:101:Linus Smith :/u/staff/linus:/bin/tcsh
+
+prompt#>cat awk1
+#!/bin/awk -f
+BEGIN{
+FS=":"
+}
+{
+        print $3
+}
+prompt#>awk1 < pw
+0
+97
+100
+112
+139
+254
+prompt#>cat awk2
+#!/bin/awk -f
+
+{
+        FS=":"
+        if ( $3 == 97 )
+                print $5
+}
+prompt#>awk2 < pw
+Nachum Danzig
+prompt#>cat awk3
+#!/bin/awk -f
+
+{
+        FS=":"
+        if ( $3 == 97 )
+                for ( i=0 ; i<2 ; i++ )
+                        print $5 i
+}
+prompt#>awk3 < pw
+Nachum Danzig0
+Nachum Danzig1
+
+prompt#>cat awk5
+#!/bin/awk -f
+
+{
+        FS=":"
+        if ( $3 == 97 ) {
+                i=0
+                while ( i<2 ) {
+                        printf "%s %d\n" , $5 , i
+                        i++
+                }
+        }
+}
+prompt#>awk5 < pw
+Nachum Danzig 0
+Nachum Danzig 1
+
+-----------------------------------------
+AWK on the command line
+
+prompt#>awk '{ FS=":" ; print $3 }' pw
+0
+97
+100
+112
+139
+254
+prompt#>awk -F: '{ print $3 }' pw
+0
+97
+100
+112
+139
+254
+
+----if 3rd field is greater than 100, print it.
+
+prompt#>awk -F: '$3 > 100 { print $3 }' pw
+112
+139
+254
+prompt#>cat pw
+root:auwiXbDxWxUOQ:0:1:System:/:/bin/tcsh
+danzig:Wp1fDXXXueqo:97:100:Nachum Danzig:/u/staff/danzig:/bin/tcsh
+charlie:pHPjDyQjZZZ9A:100:101:Charlie Brown:/u/staff/charlie:/bin/tcsh
+sally:WsaBZtMsglNj2:112:101:Sally Klien:/u/staff/sally:/bin/tcsh
+snoopy:p08ZXZXOKYz6:139:101:Snoopy Brown:/u/staff/snoopy:/bin/tcsh
+linus:NZZbbnxQvbc.:254:101:Linus Smith :/u/staff/linus:/bin/tcsh
+
+The ~ means contains, !~ means does not contain.  This awk command
+will print the 3rd field of all lines NOT containing the string
+"Charlie".
+
+prompt#>awk -F: '$5 !~ "Charlie" { print $3 }' pw
+0
+97
+112
+139
+254
+
+
+The  commands inside the { } immediately following BEGIN will only occur once,
+and not for each line in the file.
+
+prompt#>awk 'BEGIN { FS=":" } $5 !~ "Brown" { print $3 }' pw
+0
+97
+112
+254
+
+Similar to BEGIN, END signifies commands which occur only once, 
+at the end of the program. This awk command will find the average
+of the uid's.
+
+prompt#>awk -F: 'BEGIN { s=0 } { s+=$3 } END { print s/NR }' pw
+117
+------print the last field
+prompt#>awk -F: '{ print $NF }' pw
+/bin/tcsh
+/bin/tcsh
+/bin/tcsh
+/bin/tcsh
+/bin/tcsh
+/bin/tcsh
+-----print the length of the 5th field
+prompt#>awk -F: '{ print length($5) }' pw
+6
+13
+16
+11
+12
+12
+-starts with dan , print 3rd field
+prompt#>awk -F: '/^dan/ { print $3 }' pw
+97
+
+-------------------------------------
+Grep  - extract lines containing expressions from files.
+
+prompt#>grep danz pw
+danzig:Wp1fAXXXeqo:97:100:Nachum Danzig:/u/staff/danzig:/bin/tcsh
+
+----case insensitive
+prompt#>grep -i brown pw
+charlie:pHPjDyQjZZZ9A:100:Charlie Brown:/u/staff/charlie:/bin/tcsh
+-----not containing staff
+prompt#>grep -v staff pw
+root:auwiXbD1wUUOQ:0:1:System:/:/bin/tcsh
+-----count of lines with 100 in them 
+prompt#>grep -c 100 pw
+2
+prompt#>grep -vc 100 pw
+4
+-------with line numbers
+prompt#>grep -n 100 pw
+2:danzig:Wp1fAwkvjueqo:97:100:Nachum Danzig:/u/staff/danzig:/bin/tcsh
+3:charlie:pHPjDyQjZZZ9A:100:Charlie Brown:/u/staff/charlie:/bin/tcsh
+prompt#>grep -v staff pw | awk -F: '{ print $3 }'
+0
+
+egrep is better at handling regular expressions
+
+You want to search using a fancy expression. For example parenthesis () 
+can be used to indicate groups with | used as an OR operator. You could 
+run this search using -E (equivalent to egrep):
+
+grep -E '^no(fork|group)' /etc/group
+
+...to return lines that start with either "nofork" or "nogroup". Without 
+the -E switch you would have to escape the special characters involved 
+because with normal pattern matching they would just search for that
+ exact pattern;
+
+grep '^no\(fork\|group\)' /etc/group
+
+more examples
+
+danzig@linapp-1:~/klum$ grep "b[^io]{2,}g" stamfile
+danzig@linapp-1:~/klum$ grep "b[io]{1,}g" stamfile
+danzig@linapp-1:~/klum$ egrep "b[io]{1,}g" stamfile
+big
+bog
+danzig@linapp-1:~/klum$ egrep "b[^io]{1,}g" stamfile
+bag
+baag
+danzig@linapp-1:~/klum$ egrep "b[^io]{2,}g" stamfile
+baag
+danzig@linapp-1:~/klum$ egrep "b[^io]{2,}g" stamfile
+
+
+-------------------------------------------------------------
+Some helpful examples:
+
+A file named pw
+p-danzig-2.jct.ac.il:~/unix_programming/lab5 % cat pw
+first:fa:fb
+second:sa:sb
+
+A program to read-in the file to a variable and print it out line by line
+p-danzig-2.jct.ac.il:~/unix_programming/lab5 % cat ./shell.awk
+#!/bin/bash
+string=`cat ./pw`
+for i in $string; do
+          echo $i
+done
+p-danzig-2.jct.ac.il:~/unix_programming/lab5 % ./shell.awk
+first:fa:fb
+second:sa:sb
+
+An awk file to see if 1st (not 0th) element in a line equals "variable"
+p-danzig-2.jct.ac.il:~/unix_programming/lab5 % cat awk1
+#!/bin/awk -f
+BEGIN{
+  FS=":"
+  variable="fa"
+          }
+{
+  if (variable ==  $2)
+    {print $3}
+
+}
+p-danzig-2.jct.ac.il:~/unix_programming/lab5 % ./awk1 < pw
+fb
+
+A shell script which captures the result of sending a file through the awk script 
+p-danzig-2.jct.ac.il:~/unix_programming/lab5 % cat ./shell.awk2
+#!/bin/bash
+string=`./awk1 <pw`
+echo $string
+
+
+p-danzig-2.jct.ac.il:~/unix_programming/lab5 % ./shell.awk2
+fb
+
+A shell script which declares an array and then traverses it
+to print out its 3rd element
+p-danzig-2.jct.ac.il:~/unix_programming/lab5 % cat ./shell.awk3
+#!/bin/bash
+string="mary sally fred martha"
+count=0
+for i in $string; do
+    count=`expr $count + 1`
+      if [ $count -eq 3 ]; then
+          echo $i
+      fi
+done
+p-danzig-2.jct.ac.il:~/unix_programming/lab5 % ./shell.awk3
+fred
+</xmp>
+For "sed" see <a href="http://www.grymoire.com/Unix/Sed.html">
+http://www.grymoire.com/Unix/Sed.html </a>
+<p>
+For "AWK" see <a href="http://www.grymoire.com/Unix/Awk.html">
+http://www.grymoire.com/Unix/Awk.html</a>
+
+<p>
+For "find" see <a href="http://www.lowfatlinux.com/linux-find-files.html">
+http://www.lowfatlinux.com/linux-find-files.html </a>
+<p>
+See also <a href="http://www.tldp.org/LDP/gs/node5.html"> 
+http://www.tldp.org/LDP/gs/node5.html </a>
+<p>
+see also <a href="http://www.thegeekstuff.com/tag/bash-tutorial/">
+http://www.thegeekstuff.com/tag/bash-tutorial/</a>
+<p>
+See for "cut" <a href="http://www.softpanorama.org/Tools/cut.shtml">
+www.softpanorama.org/Tools/cut.shtml </a>
+
+ 
+<xmp>
+Exercise
+
+Ex. A
+Write a bash shell script which reads a file containing user names
+and creates home directories for the users (in a directory "home"
+in your home directory) according to their names. If any name 
+appears more than one, change one name so each name is unique.
+If the name is longer than 8 letters, truncate it.   It should also 
+create the appropriate password file entry in a file called passwd 
+(also in your home directory). The program should take one parameter, 
+the file name. Only you should be able to run this program, use
+environment variables to make sure who is running the program.
+
+
+Ex. B
+Write a shell script which adds users to the password file.
+Make your own password file.
+The script should make sure that the new account being made does not already 
+exist. It should check what is the next free uid and assign it to the new
+account. If a password is not supplied in the command line, then take one 
+from an internal array.  Encrypt the password by using shell16 above. 
+
+Also, handle errors, e.g. make sure only you can run the program.
+Usage should be like this:
+adduser [-p password] account_name
+or also 
+adduser account_name [-p password] 
+where the [-p password] is an option.
+
+</xmp>
+<br>
+&copy Nachum Danzig 17 Dec 2002
+
+</body>
+</html>

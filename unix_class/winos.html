@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>The Windows<sup>&copy;</sup>  (Longhorn<sup>&copy;</sup>) Operating System</title>
+</head>
+<body bgcolor="white" >
+<h1>The Windows<sup>&copy;</sup>  (Longhorn<sup>&copy;</sup>) Operating System</h1>
+<pre>
+First we have our new system calls:
+
+int fopen()
+{
+  if(is_nfs())
+    { crash(); }
+  if(is_unix_file())
+    { crash(); }
+   if(is_virus())
+    {
+       delete_virus();
+       ddos(linux_providers[rand(0,3)]);
+       msg_box("a linux computer is trying to infect you with a virus");
+     }
+}
+
+int tcp_connect(destination,port)
+{
+    char os[255]=os_detect(destination);
+    if(strcmp(os, "Windows XP")&&
+        strcmp(os, "Windows 2003 Server")&&
+        strcmp(os, "Longhorn"))
+    {
+       if(is_not_msOS(os))
+       {
+          int link=tcp_call_home();
+          addNotMSList(link,os)
+          crash();
+       }
+       else
+       {
+          crash(); //so they have to upgrade
+       }
+   }
+}
+
+
+All the extra instructions and network use explains the need for two 
+network connections and the extra ghz of CPU speed.
+
+The second processor is to do this:
+
+while(connect=tcp_listen_home())
+{
+   if(connect)
+    {
+       orders=getOrdersFromBill();
+       disableCrash();      
+       doOrders(orders);
+       enableCrash();
+    }
+}
+
+</pre>
+</body>
+</html>

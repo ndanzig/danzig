@@ -1,0 +1,43 @@
+wiseman 1 >cat ipc1.c
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <signal.h>
+#include <string.h>
+
+int msgqid;
+
+main()
+{
+        int i;
+        char str[]="shalom" , *text;
+        struct msgbuf msgp , msgp1;
+        void cleanup();
+
+        msgqid=msgget ( IPC_PRIVATE , 0600 );
+        for ( i=1 ; i < 19 ; i++ )
+                signal ( i , &cleanup );
+        if ( fork()!=0 )
+        {
+                text=msgp.mtext;
+                strcpy ( text , str );
+                msgp.mtype=7;
+                msgsnd ( msgqid , &msgp , strlen ( str ) , 0 );
+        }
+        else
+        {
+                msgrcv ( msgqid , &msgp1 , strlen ( str ) , 7 , 0 );
+                printf ( "type=%d\ntext=%s\n" , msgp1.mtype , msgp1.mtext );
+                msgctl ( msgqid , IPC_RMID , 0 );
+        }
+}
+
+void cleanup()
+{
+        msgctl ( msgqid , IPC_RMID , 0 );
+        exit ( 1 );
+}
+wiseman 2 >gcc -o ipc1{,.c}
+wiseman 3 >ipc1
+type=7
+text=shalom

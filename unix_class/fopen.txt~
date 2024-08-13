@@ -1,0 +1,78 @@
+//Program to demostrate use of fopen and fread using file stam.txt
+//
+//by Nachum Danzig
+#include <sys/types.h>  
+#include <unistd.h>  
+#include <stdio.h>  
+
+int main(void)
+{
+  FILE * fp;
+  char buffer[35];
+  char bigBuffer[350];
+  int sizeRead;
+  fp = fopen("stam.txt","r" );
+  if (fp == NULL) {
+       printf("The file didn't open.\n");
+       return 0;
+   }
+  // size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
+  fread(buffer,sizeof(char),35,fp);
+  printf(buffer);
+  printf("junk\n");
+  fread(buffer,sizeof(char),35,fp);
+  printf(buffer);
+  printf("\nNow I rewind the file.\n");
+  rewind(fp);
+  fread(buffer,sizeof(char),35,fp);
+  printf(buffer);
+  printf("\nNow I jump ahead 23 characters.\n");
+  fseek(fp,23,SEEK_CUR);
+  fread(buffer,sizeof(char),35,fp);
+  printf(buffer);
+  printf("junk\n");
+  printf("\nNow I rewind again.\n");
+  rewind(fp);
+  fread(bigBuffer,sizeof(char),350,fp);
+  printf(bigBuffer);
+  printf("\nRewind again.\n");
+  rewind(fp);
+  sizeRead=fread(bigBuffer,sizeof(char),350,fp);
+  bigBuffer[sizeRead]=0;
+  printf(bigBuffer);
+  fclose(fp);
+
+
+
+}
+
+//stam.txt
+////////////////////////////////////
+
+this is the first line
+this line has 34 characters in it.
+this has only 17.
+so does this line
+12345678901234567
+
+
+//Output of program
+////////////////////////////////////
+this is the first line
+this line hajunk
+s 34 characters in it.
+this has onl
+Now I rewind the file.
+this is the first line
+this line ha
+Now I jump ahead 23 characters.
+this has only 17.
+so does this linejunk
+
+Now I rewind again.
+this is the first line
+this line has 34 characters in it.
+this has only 17.
+so does this line
+12345678901234567
+Rewind again.

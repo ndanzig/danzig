@@ -1,0 +1,50 @@
+wiseman 15 >ls /usr/spool/mail | less &
+[1] 8392 8393
+wiseman 16 >
+[1]  + Suspended (tty output)        ls /usr/spool/mail | less
+wiseman 16 >kill -KILL 8392
+wiseman 17 >kill -CONT 8393
+
+[1]  + Killed                        ls /usr/spool/mail |
+       Suspended (tty output)        less
+wiseman 18 >jobs
+[1]  + Killed                        ls /usr/spool/mail |
+       Suspended (tty output)        less
+wiseman 19 >fg
+ls /usr/spool/mail | less
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+Killed 
+wiseman 20 >exit

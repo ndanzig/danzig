@@ -1,0 +1,69 @@
+wiseman 1 >cat example1.c
+main()
+{
+        if ( fork() == 0 )
+                while (1);
+        else
+                while (1);
+}
+wiseman 2 >gcc -o example1 example1.c
+wiseman 3 >example1 &
+[1] 10319
+wiseman 4 >ps -j
+ PPID   PID  PGID   SID TT TPGID  STAT   UID  TIME COMMAND
+10257 10258 10258 10258 pe 10321   SOE    97  0:01 -h -i (tcsh)
+10258 10319 10319 10258 pe 10321    RE    97  0:01 example1
+10319 10320 10319 10258 pe 10321     R    97  0:01 example1
+10258 10321 10321 10258 pe 10321    RE    97  0:00 ps -j
+wiseman 5 >kill -KILL %1
+
+[1]    Killed                        example1
+wiseman 6 >cat example2.c
+main()
+{
+        int i,s;
+
+        for ( i=1 ; i<=3 ; i++ )
+                if ( fork() == 0 )
+                        while (1);
+                else
+                        if ( i == 3 )
+                                wait (&s);
+}
+wiseman 7 >gcc -o example2 example2.c
+wiseman 8 >example2 &
+[1] 10389
+wiseman 9 >ps -j
+ PPID   PID  PGID   SID TT TPGID  STAT   UID  TIME COMMAND
+10257 10258 10258 10258 pe 10394   SOE    97  0:01 -h -i (tcsh)
+10258 10389 10389 10258 pe 10394    SE    97  0:00 example2
+10389 10390 10389 10258 pe 10394     R    97  0:02 example2
+10389 10391 10389 10258 pe 10394     R    97  0:02 example2
+10389 10392 10389 10258 pe 10394     R    97  0:05 example2
+10258 10394 10394 10258 pe 10394    RE    97  0:00 ps -j
+wiseman 10 >kill -KILL %1
+
+[1]    Killed                        example2
+wiseman 11 >cat example3.c
+main()
+{
+        int i;
+
+        for ( i=0 ; i<3 ; i++ )
+                if ( fork() == 0 )
+                        while (1);
+}
+wiseman 12 >gcc -o example3 example3.c
+wiseman 13 >example3
+wiseman 14 >ps -j
+ PPID   PID  PGID   SID TT TPGID  STAT   UID  TIME COMMAND
+10257 10258 10258 10258 pe 10425   SOE    97  0:01 -h -i (tcsh)
+10258 10425 10425 10258 pe 10425    RE    97  0:00 ps -j
+wiseman 15 >ps -jx
+ PPID   PID  PGID   SID TT TPGID  STAT   UID  TIME COMMAND
+10257 10258 10258 10258 pe 10426   SOE    97  0:01 -h -i (tcsh)
+    1 10420 10419 10258 pe 10426    RO    97  0:06 example3
+    1 10421 10419 10258 pe 10426    RO    97  0:05 example3
+    1 10422 10419 10258 pe 10426    RO    97  0:06 example3
+10258 10426 10426 10258 pe 10426    RE    97  0:00 ps -jx
+wiseman 16 >kill -KILL 10420 10421 10422

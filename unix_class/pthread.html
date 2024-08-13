@@ -1,0 +1,142 @@
+<html>
+<body>
+
+<p> Here is a simple program using pthreads and controlling access to a
+common global array (string).
+
+<p>Without the mutex, the threads would alter the string at the same time and create undesired results. 
+
+
+<pre>
+<xmp>
+
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;  // create a global initializer
+char GlobalString[] = "Hello World";
+
+
+void* ThreadFunc (void *num)
+{
+int j;
+int i= *(int*)num;  // function accepts a pointer to any type 
+                    //  but we need to cast it to an int
+for (j = 1; j<i; j++)
+{
+sleep (rand() % 3); // wait 0 to 2 seconds
+pthread_mutex_lock (&mutex); // lock the mutex
+if (i == 10)
+{
+GlobalString[0]='a';  // change some letters in the string
+//sleep(2);
+GlobalString[1]='a';
+}
+else
+{
+GlobalString[0]='b'; // change letters to something else.
+//sleep(1);
+GlobalString[1]='b';
+}
+printf ("%s\n", GlobalString);
+pthread_mutex_unlock (&mutex);  // release variable
+}
+}
+
+int main ()
+{
+int i = 10;
+pthread_t tid1, tid2;
+pthread_mutex_init (&mutex, NULL); // use the global initializer to start to create a thread
+pthread_create (&tid1, NULL, ThreadFunc, &i); // create a thread to run our thread function, pass it the value 10
+//sleep(5);
+int j = 13;
+pthread_create (&tid2, NULL, ThreadFunc, &j); // create a nother thread with value 13
+
+// if(tid1) pthread_join (tid1, NULL);  // wait for thread to finish before continuing, not nec.
+// if(tid2) pthread_join (tid2, NULL);
+pthread_exit(NULL);
+
+return 0;
+}
+
+Second Example:
+		 
+#include <stdlib.h>
+#include <stdio.h>
+#include <pthread.h>
+
+		 //A bad idea
+		 //void *thread(void *vargp) {
+		// printf("First Thread No' %ld\n",pthread_self());
+		// int *ptr = (int*)vargp;
+		 //int i= *ptr;
+		 //printf("in the thread  %d\n",i );
+
+		 //pthread_exit((void*)ptr);
+		// }
+		 
+
+		 
+void *thread(void *vargp) {
+  printf("First Thread No' %ld\n",pthread_self());
+  //  int *ptr = (int*)vargp;
+  // int i= *ptr;
+  //printf("in the thread  %d\n",i ); 
+
+  pthread_exit((void*)vargp);
+}
+void *thread2(void *vargp) {
+  printf("Second Thread No' %ld\n",pthread_self());
+  vargp  = (int*) malloc(sizeof(int));
+  *((int*)vargp) = 31;
+  //printf("in the second thread  %d\n",*((int*)vargp) );
+  pthread_exit(vargp);
+}
+int main() {
+  int i = 42;
+  int * m;
+  int * n = &i;
+  
+  pthread_t tid, tid2;
+  pthread_create(&tid, NULL, thread, n);
+  pthread_create(&tid2, NULL, thread2, m);
+
+
+  pthread_join(tid, (void**)&n);
+  pthread_join(tid2, (void**)&m);
+  printf("tid = %d\n",*n);
+  printf("tid2 = %d\n",*m);
+
+ }
+
+		 Also bad
+
+		 #include <stdlib.h>
+		 #include <pthread.h>
+		 void *thread(void *vargp) {
+		 printf("First Thread No' %ld\n",pthread_self());
+		 int *ptr = (int*)vargp;
+		 pthread_exit((void*)*ptr);
+		 }
+		 void *thread2(void *vargp) {
+		 printf("Second Thread No' %ld\n",pthread_self());
+		 int *ptr = (int*)vargp;
+		 *ptr = 0;
+		 pthread_exit((void*)31);
+		 }
+		 int main() {
+		 int j,i = 42;
+		 pthread_t tid, tid2;
+		 pthread_create(&tid, NULL, thread, (void*)&i);
+		 pthread_create(&tid2, NULL, thread2, (void*)&i);
+		 pthread_join(tid, (void**)&i);
+		 pthread_join(tid2, (void**)&j);
+		 printf("tid = %d\n",i);
+		 printf("tid2 = %d\n",j);}
+
+		 
+</xmp>
+</pre>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<html>
+<head><title >sed< /title>
+</head>
+<body>
+
+<h2>Sed </h2>
+<p>
+Sed (stream editor) is a Unix utility that parses text and implements a programming language 
+which can apply transformations to such text. It reads input line by line (sequentially),
+ applying the operation which has been specified via the command line (or a sed script), 
+and then outputs the line.  See also <a href="http://www.grymoire.com/Unix/Sed.html">
+http://www.grymoire.com/Unix/Sed.html </a>
+
+
+<p> Here are some examples of commands with short explanations.
+
+<xmp>
+Here is my file
+zevach:~/public_html/unix_class/shed % cat passwd
+amram:24.Aug.2005-0918-disable_user.pl##amram:20320:210:yonathan amram:/usr/u/37stud/amram:/sbin/noshell
+amsili:##amsili:21760:210:yair amsili:/usr/u/37stud/amsili:/bin/tcsh
+anaki:##anaki:21550:210:orel anaki:/usr/u/37stud/anaki:/bin/tcsh
+anapolsk:##anapolsk:20182:210:zorah anapolske:/usr/u/37stud/anapolsk:/bin/tcsh
+arasheve:##arasheve:20186:210:maor arasheven:/usr/u/37stud/arasheve:/bin/tcsh
+arbeli:##arbeli:20859:210:yosef yisrael  arbeli:/usr/u/37stud/arbeli:/bin/tcsh
+arbook:##arbook:21545:210:adi arbook:/usr/u/37stud/arbook:/bin/tcsh
+arielc:##arielc:21119:211:ariel chen:/usr/u/37stud/arielc:/bin/tcsh
+arield:##arield:20392:211:ariel deil:/usr/u/37stud/arield:/bin/tcsh
+arkadi:##arkadi:20444:212:arkadi wolpe:/usr/u/37stud/arkadi:/bin/tcsh
+
+Substitution:
+Replace "ariel" with "paul" in file passwd.  Notice it only replaces first ariel in each line.
+
+zevach:~/public_html/unix_class/shed % sed s/ariel/paul/ passwd
+amram:24.Aug.2005-0918-disable_user.pl##amram:20320:210:yonathan amram:/usr/u/37stud/amram:/sbin/noshell
+amsili:##amsili:21760:210:yair amsili:/usr/u/37stud/amsili:/bin/tcsh
+anaki:##anaki:21550:210:orel anaki:/usr/u/37stud/anaki:/bin/tcsh
+anapolsk:##anapolsk:20182:210:zorah anapolske:/usr/u/37stud/anapolsk:/bin/tcsh
+arasheve:##arasheve:20186:210:maor arasheven:/usr/u/37stud/arasheve:/bin/tcsh
+arbeli:##arbeli:20859:210:yosef yisrael  arbeli:/usr/u/37stud/arbeli:/bin/tcsh
+arbook:##arbook:21545:210:adi arbook:/usr/u/37stud/arbook:/bin/tcsh
+paulc:##arielc:21119:211:ariel chen:/usr/u/37stud/arielc:/bin/tcsh
+pauld:##arield:20392:211:ariel deil:/usr/u/37stud/arield:/bin/tcsh
+arkadi:##arkadi:20444:212:arkadi wolpe:/usr/u/37stud/arkadi:/bin/tcsh
+
+Replace all "ariels"s
+zevach:~/public_html/unix_class/shed % sed s/ariel/paul/g passwd
+amram:24.Aug.2005-0918-disable_user.pl##amram:20320:210:yonathan amram:/usr/u/37stud/amram:/sbin/noshell
+amsili:##amsili:21760:210:yair amsili:/usr/u/37stud/amsili:/bin/tcsh
+anaki:##anaki:21550:210:orel anaki:/usr/u/37stud/anaki:/bin/tcsh
+anapolsk:##anapolsk:20182:210:zorah anapolske:/usr/u/37stud/anapolsk:/bin/tcsh
+arasheve:##arasheve:20186:210:maor arasheven:/usr/u/37stud/arasheve:/bin/tcsh
+arbeli:##arbeli:20859:210:yosef yisrael  arbeli:/usr/u/37stud/arbeli:/bin/tcsh
+arbook:##arbook:21545:210:adi arbook:/usr/u/37stud/arbook:/bin/tcsh
+paulc:##paulc:21119:211:paul chen:/usr/u/37stud/paulc:/bin/tcsh
+pauld:##pauld:20392:211:paul deil:/usr/u/37stud/pauld:/bin/tcsh
+arkadi:##arkadi:20444:212:arkadi wolpe:/usr/u/37stud/arkadi:/bin/tcsh
+
+Redirect output to a file in several different ways:
+zevach:~/public_html/unix_class/shed % sed s/ariel/paul/g passwd >newpasswd
+zevach:~/public_html/unix_class/shed % sed s/ariel/paul/g <passwd >newpasswd
+newpasswd: File exists
+zevach:~/public_html/unix_class/shed % sed s/ariel/paul/g <passwd >> newpasswd
+
+Show that newpasswd in twice the size of passwd.
+zevach:~/public_html/unix_class/shed % wc passwd
+      10      21     749 passwd
+zevach:~/public_html/unix_class/shed % wc newpasswd
+      20      42    1482 newpasswd
+
+Sed with echo. Catch first numbers and print it along with rest of line
+zevach:~/public_html/unix_class/shed %  echo "123 abc" | sed 's/[0-9]*/&/'
+123 abc
+Catch first numbers and print it various numbers of times, along with rest of line
+zevach:~/public_html/unix_class/shed % echo "123 abc" | sed 's/[0-9]*/& &/'
+123 123 abc
+zevach:~/public_html/unix_class/shed %  echo "123 abc" | sed 's/[0-9]*/& & some text &/'
+123 123 some text 123 abc
+
+zevach:~/public_html/unix_class/shed %  echo "123 abc" | sed 's/[0-9]*/(&) /'
+(123)  abc
+
+
+Repeat first Ariel per line
+zevach:~/public_html/unix_class/shed %  cat passwd | sed 's/ariel/&&/'
+amram:24.Aug.2005-0918-disable_user.pl##amram:20320:210:yonathan amram:/usr/u/37stud/amram:/sbin/noshell
+amsili:##amsili:21760:210:yair amsili:/usr/u/37stud/amsili:/bin/tcsh
+anaki:##anaki:21550:210:orel anaki:/usr/u/37stud/anaki:/bin/tcsh
+anapolsk:##anapolsk:20182:210:zorah anapolske:/usr/u/37stud/anapolsk:/bin/tcsh
+arasheve:##arasheve:20186:210:maor arasheven:/usr/u/37stud/arasheve:/bin/tcsh
+arbeli:##arbeli:20859:210:yosef yisrael  arbeli:/usr/u/37stud/arbeli:/bin/tcsh
+arbook:##arbook:21545:210:adi arbook:/usr/u/37stud/arbook:/bin/tcsh
+arielarielc:##arielc:21119:211:ariel chen:/usr/u/37stud/arielc:/bin/tcsh
+arielarield:##arield:20392:211:ariel deil:/usr/u/37stud/arield:/bin/tcsh
+arkadi:##arkadi:20444:212:arkadi wolpe:/usr/u/37stud/arkadi:/bin/tcsh
+
+Repeat all Ariels in line using global flag
+zevach:~/public_html/unix_class/shed % cat passwd | sed 's/ariel/&&/g'
+amram:24.Aug.2005-0918-disable_user.pl##amram:20320:210:yonathan amram:/usr/u/37stud/amram:/sbin/noshell
+amsili:##amsili:21760:210:yair amsili:/usr/u/37stud/amsili:/bin/tcsh
+anaki:##anaki:21550:210:orel anaki:/usr/u/37stud/anaki:/bin/tcsh
+anapolsk:##anapolsk:20182:210:zorah anapolske:/usr/u/37stud/anapolsk:/bin/tcsh
+arasheve:##arasheve:20186:210:maor arasheven:/usr/u/37stud/arasheve:/bin/tcsh
+arbeli:##arbeli:20859:210:yosef yisrael  arbeli:/usr/u/37stud/arbeli:/bin/tcsh
+arbook:##arbook:21545:210:adi arbook:/usr/u/37stud/arbook:/bin/tcsh
+arielarielc:##arielarielc:21119:211:arielariel chen:/usr/u/37stud/arielarielc:/bin/tcsh
+arielarield:##arielarield:20392:211:arielariel deil:/usr/u/37stud/arielarield:/bin/tcsh
+arkadi:##arkadi:20444:212:arkadi wolpe:/usr/u/37stud/arkadi:/bin/tcsh
+
+Repeat ariel and one following letter, globally (space is not a letter).
+zevach:~/public_html/unix_class/shed % cat passwd | sed 's/ariel[a-z]/&&/g'
+amram:24.Aug.2005-0918-disable_user.pl##amram:20320:210:yonathan amram:/usr/u/37stud/amram:/sbin/noshell
+amsili:##amsili:21760:210:yair amsili:/usr/u/37stud/amsili:/bin/tcsh
+anaki:##anaki:21550:210:orel anaki:/usr/u/37stud/anaki:/bin/tcsh
+anapolsk:##anapolsk:20182:210:zorah anapolske:/usr/u/37stud/anapolsk:/bin/tcsh
+arasheve:##arasheve:20186:210:maor arasheven:/usr/u/37stud/arasheve:/bin/tcsh
+arbeli:##arbeli:20859:210:yosef yisrael  arbeli:/usr/u/37stud/arbeli:/bin/tcsh
+arbook:##arbook:21545:210:adi arbook:/usr/u/37stud/arbook:/bin/tcsh
+arielcarielc:##arielcarielc:21119:211:ariel chen:/usr/u/37stud/arielcarielc:/bin/tcsh
+arieldarield:##arieldarield:20392:211:ariel deil:/usr/u/37stud/arieldarield:/bin/tcsh
+arkadi:##arkadi:20444:212:arkadi wolpe:/usr/u/37stud/arkadi:/bin/tcsh
+
+Repeat ariel and one following anything, globally (including spaces).
+zevach:~/public_html/unix_class/shed %  cat passwd | sed 's/ariel./&&/g'
+amram:24.Aug.2005-0918-disable_user.pl##amram:20320:210:yonathan amram:/usr/u/37stud/amram:/sbin/noshell
+amsili:##amsili:21760:210:yair amsili:/usr/u/37stud/amsili:/bin/tcsh
+anaki:##anaki:21550:210:orel anaki:/usr/u/37stud/anaki:/bin/tcsh
+anapolsk:##anapolsk:20182:210:zorah anapolske:/usr/u/37stud/anapolsk:/bin/tcsh
+arasheve:##arasheve:20186:210:maor arasheven:/usr/u/37stud/arasheve:/bin/tcsh
+arbeli:##arbeli:20859:210:yosef yisrael  arbeli:/usr/u/37stud/arbeli:/bin/tcsh
+arbook:##arbook:21545:210:adi arbook:/usr/u/37stud/arbook:/bin/tcsh
+arielcarielc:##arielcarielc:21119:211:ariel ariel chen:/usr/u/37stud/arielcarielc:/bin/tcsh
+arieldarield:##arieldarield:20392:211:ariel ariel deil:/usr/u/37stud/arieldarield:/bin/tcsh
+arkadi:##arkadi:20444:212:arkadi wolpe:/usr/u/37stud/arkadi:/bin/tcsh
+
+
+Restrict printing with "-n", force printing of matched line with "p".
+zevach:~/public_html/unix_class/shed % cat passwd | sed -n  's/ariel./&&/gp'
+arielcarielc:##arielcarielc:21119:211:ariel ariel chen:/usr/u/37stud/arielcarielc:/bin/tcsh
+arieldarield:##arieldarield:20392:211:ariel ariel deil:/usr/u/37stud/arieldarield:/bin/tcsh
+
+Use sed to make a grep like command.
+zevach:~/public_html/unix_class/shed % cat passwd | sed -n  's/ariel./&/p'
+arielc:##arielc:21119:211:ariel chen:/usr/u/37stud/arielc:/bin/tcsh
+arield:##arield:20392:211:ariel deil:/usr/u/37stud/arield:/bin/tcsh
+
+
+Range of letters:
+zevach:~/public_html/unix_class/shed % cat passwd | sed -n  's/ariel[a-c]/&/p'
+arielc:##arielc:21119:211:ariel chen:/usr/u/37stud/arielc:/bin/tcsh
+
+Same as above.
+zevach:~/public_html/unix_class/shed % cat passwd | sed -n  's/ariel[abc]/&/p'
+arielc:##arielc:21119:211:ariel chen:/usr/u/37stud/arielc:/bin/tcsh
+
+Look for a following space.
+zevach:~/public_html/unix_class/shed % cat passwd | sed -n  's/ariel /&/p'
+arielc:##arielc:21119:211:ariel chen:/usr/u/37stud/arielc:/bin/tcsh
+arield:##arield:20392:211:ariel deil:/usr/u/37stud/arield:/bin/tcsh
+
+4 letter range
+zevach:~/public_html/unix_class/shed % cat passwd | sed -n  's/ariel[abcd]./&/p'
+arielc:##arielc:21119:211:ariel chen:/usr/u/37stud/arielc:/bin/tcsh
+arield:##arield:20392:211:ariel deil:/usr/u/37stud/arield:/bin/tcsh
+
+Replace only on the 9th line
+zevach:~/public_html/unix_class/shed % cat passwd | sed -n  '9  s/ariel[abcd]/&/p'
+arield:##arield:20392:211:ariel deil:/usr/u/37stud/arield:/bin/tcsh
+
+Delete one occurance on 9th line
+zevach:~/public_html/unix_class/shed % cat passwd | sed -n  '9  s/ariel[abcd]//p'
+:##arield:20392:211:ariel deil:/usr/u/37stud/arield:/bin/tcsh
+
+Substitute the first "ariel" followed by anything with "XXX" and what was matched but only on the 8th line
+zevach:~/public_html/unix_class/shed %  sed '8 s/ariel./XXX&/' passwd
+amram:24.Aug.2005-0918-disable_user.pl##amram:20320:210:yonathan amram:/usr/u/37stud/amram:/sbin/noshell
+amsili:##amsili:21760:210:yair amsili:/usr/u/37stud/amsili:/bin/tcsh
+anaki:##anaki:21550:210:orel anaki:/usr/u/37stud/anaki:/bin/tcsh
+anapolsk:##anapolsk:20182:210:zorah anapolske:/usr/u/37stud/anapolsk:/bin/tcsh
+arasheve:##arasheve:20186:210:maor arasheven:/usr/u/37stud/arasheve:/bin/tcsh
+arbeli:##arbeli:20859:210:yosef yisrael  arbeli:/usr/u/37stud/arbeli:/bin/tcsh
+arbook:##arbook:21545:210:adi arbook:/usr/u/37stud/arbook:/bin/tcsh
+XXXarielc:##arielc:21119:211:ariel chen:/usr/u/37stud/arielc:/bin/tcsh
+arield:##arield:20392:211:ariel deil:/usr/u/37stud/arield:/bin/tcsh
+arkadi:##arkadi:20444:212:arkadi wolpe:/usr/u/37stud/arkadi:/bin/tcsh
+
+
+
+Replace any word starting "az" followed by any number of letters in the range lines 6 though 9
+zevach:~/public_html/unix_class/shed % sed '6,9 s/ar[a-z]*/XXX&XXX/g' passwd
+amram:24.Aug.2005-0918-disable_user.pl##amram:20320:210:yonathan amram:/usr/u/37stud/amram:/sbin/noshell
+amsili:##amsili:21760:210:yair amsili:/usr/u/37stud/amsili:/bin/tcsh
+anaki:##anaki:21550:210:orel anaki:/usr/u/37stud/anaki:/bin/tcsh
+anapolsk:##anapolsk:20182:210:zorah anapolske:/usr/u/37stud/anapolsk:/bin/tcsh
+arasheve:##arasheve:20186:210:maor arasheven:/usr/u/37stud/arasheve:/bin/tcsh
+XXXarbeliXXX:##XXXarbeliXXX:20859:210:yosef yisrael  XXXarbeliXXX:/usr/u/37stud/XXXarbeliXXX:/bin/tcsh
+XXXarbookXXX:##XXXarbookXXX:21545:210:adi XXXarbookXXX:/usr/u/37stud/XXXarbookXXX:/bin/tcsh
+XXXarielcXXX:##XXXarielcXXX:21119:211:XXXarielXXX chen:/usr/u/37stud/XXXarielcXXX:/bin/tcsh
+XXXarieldXXX:##XXXarieldXXX:20392:211:XXXarielXXX deil:/usr/u/37stud/XXXarieldXXX:/bin/tcsh
+arkadi:##arkadi:20444:212:arkadi wolpe:/usr/u/37stud/arkadi:/bin/tcsh
+
+Replace any word starting "az" and followed by any number of letters or colons.  The range is from line 6 to end of file.
+zevach:~/public_html/unix_class/shed % sed '6,$ s/ar[a-z:]*/XXX&XXX/g' passwd
+amram:24.Aug.2005-0918-disable_user.pl##amram:20320:210:yonathan amram:/usr/u/37stud/amram:/sbin/noshell
+amsili:##amsili:21760:210:yair amsili:/usr/u/37stud/amsili:/bin/tcsh
+anaki:##anaki:21550:210:orel anaki:/usr/u/37stud/anaki:/bin/tcsh
+anapolsk:##anapolsk:20182:210:zorah anapolske:/usr/u/37stud/anapolsk:/bin/tcsh
+arasheve:##arasheve:20186:210:maor arasheven:/usr/u/37stud/arasheve:/bin/tcsh
+XXXarbeli:XXX##XXXarbeli:XXX20859:210:yosef yisrael  XXXarbeli:XXX/usr/u/37stud/XXXarbeli:XXX/bin/tcsh
+XXXarbook:XXX##XXXarbook:XXX21545:210:adi XXXarbook:XXX/usr/u/37stud/XXXarbook:XXX/bin/tcsh
+XXXarielc:XXX##XXXarielc:XXX21119:211:XXXarielXXX chen:/usr/u/37stud/XXXarielc:XXX/bin/tcsh
+XXXarield:XXX##XXXarield:XXX20392:211:XXXarielXXX deil:/usr/u/37stud/XXXarield:XXX/bin/tcsh
+XXXarkadi:XXX##XXXarkadi:XXX20444:212:XXXarkadiXXX wolpe:/usr/u/37stud/XXXarkadi:XXX/bin/tcsh
+
+Drop (or Delete) any line that ends noshell 
+zevach:~/public_html/unix_class/shed % sed '/noshell$/ d' passwd
+amsili:##amsili:21760:210:yair amsili:/usr/u/37stud/amsili:/bin/tcsh
+anaki:##anaki:21550:210:orel anaki:/usr/u/37stud/anaki:/bin/tcsh
+anapolsk:##anapolsk:20182:210:zorah anapolske:/usr/u/37stud/anapolsk:/bin/tcsh
+arasheve:##arasheve:20186:210:maor arasheven:/usr/u/37stud/arasheve:/bin/tcsh
+arbeli:##arbeli:20859:210:yosef yisrael  arbeli:/usr/u/37stud/arbeli:/bin/tcsh
+arbook:##arbook:21545:210:adi arbook:/usr/u/37stud/arbook:/bin/tcsh
+arielc:##arielc:21119:211:ariel chen:/usr/u/37stud/arielc:/bin/tcsh
+arield:##arield:20392:211:ariel deil:/usr/u/37stud/arield:/bin/tcsh
+arkadi:##arkadi:20444:212:arkadi wolpe:/usr/u/37stud/arkadi:/bin/tcsh
+
+Delete lines 1 to 4.
+zevach:~/public_html/unix_class/shed % sed '1,4 d' < passwd
+arasheve:##arasheve:20186:210:maor arasheven:/usr/u/37stud/arasheve:/bin/tcsh
+arbeli:##arbeli:20859:210:yosef yisrael  arbeli:/usr/u/37stud/arbeli:/bin/tcsh
+arbook:##arbook:21545:210:adi arbook:/usr/u/37stud/arbook:/bin/tcsh
+arielc:##arielc:21119:211:ariel chen:/usr/u/37stud/arielc:/bin/tcsh
+arield:##arield:20392:211:ariel deil:/usr/u/37stud/arield:/bin/tcsh
+arkadi:##arkadi:20444:212:arkadi wolpe:/usr/u/37stud/arkadi:/bin/tcsh
+
+Delete  from the third line to the end of the file. ( same as head -2 < passwd )
+zevach:~/public_html/unix_class/shed % sed '3,$ d' < passwd
+amram:24.Aug.2005-0918-disable_user.pl##amram:20320:210:yonathan amram:/usr/u/37stud/amram:/sbin/noshell
+amsili:##amsili:21760:210:yair amsili:/usr/u/37stud/amsili:/bin/tcsh
+
+
+Delete any line ending noshell and then substitute away everything after the colon.
+zevach:~/public_html/unix_class/shed % sed -e  '/noshell$/ d' -e 's/:.*//' passwd
+amsili
+anaki
+anapolsk
+arasheve
+arbeli
+arbook
+arielc
+arield
+arkadi
+
+
+
+Sed is greedy such that it will use the dot to match up to the last : in the line.
+zevach:~/public_html/unix_class/shed % sed -e 's/.*:.*://' passwd
+/sbin/noshell
+/bin/tcsh
+/bin/tcsh
+/bin/tcsh
+/bin/tcsh
+/bin/tcsh
+/bin/tcsh
+/bin/tcsh
+/bin/tcsh
+/bin/tcsh
+
+Just print the real name ( 5th field) in the passwd file.
+zevach:~/public_html/unix_class/shed % sed -e 's/.*:.*:[0-9]*://' -e 's/:.*//' passwd
+yonathan amram
+yair amsili
+orel anaki
+zorah anapolske
+maor arasheven
+yosef yisrael  arbeli
+adi arbook
+ariel chen
+ariel deil
+arkadi wolpe
+</xmp>
+
+
+
+
+</body>
+</html>
+

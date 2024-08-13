@@ -1,0 +1,72 @@
+wiseman 1 >cat pip1.c
+#include <stdio.h>
+
+main()
+{
+        FILE *fp;
+
+        fp=popen("od -x","w");
+        fprintf(fp,"abcd");
+        pclose(fp);
+}
+wiseman 2 >gcc -o pip1{,.c}
+wiseman 3 >pip1
+0000000  6162 6364
+0000004
+wiseman 4 >cat pip2.c
+#include <stdio.h>
+
+main()
+{
+        FILE *fp;
+
+        fp=popen("od -x","w");
+        fprintf(fp,"abcd");
+        system("kill -KILL `ps | grep od | grep -v grep | awk '{ print $1 }'`");
+        pclose(fp);
+}
+wiseman 5 >gcc -o pip2{,.c}
+wiseman 6 >pip2
+Broken pipe
+wiseman 7 >cat pip3.c
+#include <signal.h>
+#include <stdio.h>
+
+void funct();
+
+main()
+{
+        FILE *fp;
+
+        signal(SIGPIPE,&funct);
+        fp=popen("od -x","w");
+        fprintf(fp,"abcd");
+        system("kill -KILL `ps | grep od | grep -v grep | awk '{ print $1 }'`");
+        pclose(fp);
+}
+
+void funct()
+{
+        printf("haha\n");
+        exit(1);
+}
+wiseman 8 >gcc -o pip3{,.c}
+wiseman 9 >pip3
+haha
+wiseman 10 >ls /usr/spool/mail | less &
+[1] 8094 8095
+wiseman 11 >
+[1]  + Suspended (tty output)        ls /usr/spool/mail | less
+wiseman 11 >ps
+  PID TT STAT  TIME COMMAND
+ 7617 q0 S     0:04 -tcsh (tcsh)
+ 8094 q0 T     0:00 ls /usr/spool/mail
+ 8095 q0 T     0:00 less
+ 8111 q0 R     0:00 ps
+wiseman 12 >kill -KILL 8095
+wiseman 13 >kill -CONT 8094
+wiseman 14 >
+[1]    Broken pipe                   ls /usr/spool/mail |
+       Killed                        less
+wiseman 14 >jobs
+wiseman 15 >

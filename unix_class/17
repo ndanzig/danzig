@@ -1,0 +1,78 @@
+wiseman 35 >cat sig10.c
+#include <signal.h>
+
+void father_function();
+
+main()
+{
+        int pid,s;
+
+        signal( SIGUSR1 , &father_function);
+        if ( fork() == 0 )
+        {
+        /* This is the son */
+                pid=getppid();
+                kill(pid,SIGUSR1);
+        }
+        else
+        {
+        /* This is the father */
+                wait(&s);
+        }
+}
+void father_function()
+{
+        printf("I heard you my poor son\n");
+        exit(1);
+}
+wiseman 36 >gcc -o sig10 sig10.c
+wiseman 37 >sig10
+I heard you my poor son
+wiseman 38 >cat sig11.c
+#include <signal.h>
+
+void funct();
+
+main()
+{
+        int sig=SIGSEGV;
+        char *a;
+
+        signal(sig, &funct);
+        signal(sig, SIG_DFL );
+        *a=0;
+}
+void funct()
+{
+        printf("haha\n");
+        exit(1);
+}
+wiseman 39 >gcc -o sig11 sig11.c
+wiseman 40 >sig11
+Segmentation fault (core dumped)
+wiseman 41 >cat sig12.c
+#include <signal.h>
+
+void funct();
+
+main()
+{
+        int sig=SIGSEGV;
+
+        signal(sig, SIG_IGN );
+        while(1);
+}
+void funct()
+{
+        printf("haha\n");
+        exit(1);
+}
+wiseman 42 >gcc -o sig12 sig12.c
+wiseman 43 >sig12 &
+[1] 20355
+wiseman 44 >kill -SEGV 20355
+wiseman 45 >kill -KILL 20355
+
+[1]    Killed                        sig12
+Time taken is 0:21.56
+wiseman 46 >

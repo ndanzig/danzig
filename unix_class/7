@@ -1,0 +1,71 @@
+wiseman 1 >cat err1.c
+#include <errno.h>
+main()
+{
+        int s;
+
+        wait(&s);
+        printf ("%d\n",errno);
+        perror("The problem is");
+}
+wiseman 2 >err1
+10
+The problem is: no children
+wiseman 3 >cat err2.c
+#include <errno.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <signal.h>
+
+main()
+{
+        FILE *fp;
+
+        unlink ("/etc/passwd");
+        perror ("1: This won't work since");
+
+        unlink ("/a/b/c");
+        perror ("2: This won't work since");
+
+        kill (40000,11);
+        perror ("3: This won't work since");
+
+        execl ("/usr/spool/mail/wiseman","wiseman",NULL);
+        perror ("4: This won't work since");
+
+        chdir ("/etc/passwd");
+        perror ("5: This won't work since");
+
+        open ("/tmp",O_RDWR);
+        perror ("6: This won't work since");
+
+        symlink ("a","a");
+        open ("a",O_RDWR);
+        perror ("7: This won't work since");
+
+        signal(SIGPIPE,SIG_IGN);
+        fp=popen("od -x","w");
+        fprintf(fp,"abcd");
+        system("kill -KILL `ps | grep od | grep -v grep | awk '{ print $1}'`");
+        pclose(fp);
+        perror ("8: This won't work since");
+}
+wiseman 4 >err2
+1: This won't work since: Permission denied
+2: This won't work since: No such file or directory
+3: This won't work since: No such process
+4: This won't work since: Exec format error
+5: This won't work since: Not a directory
+6: This won't work since: Is a directory
+7: This won't work since: Too many levels of symbolic links
+8: This won't work since: Broken pipe
+wiseman 5 >cat err3.c
+#include <errno.h>
+main()
+{
+        printf ("%d\n",errno);
+        perror("No error so I print");
+}
+wiseman 6 >err3
+0
+No error so I print: Error 0

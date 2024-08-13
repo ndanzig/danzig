@@ -1,0 +1,66 @@
+vovik 52 : cat tpipe.c
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+main ()
+{
+  char  *message = " This is message from the tpipe.c program .\n";
+  FILE  *f_pnt;
+
+  mknod("/tmp/pipe_file",S_IFIFO | S_IRWXU, 0);
+  f_pnt = fopen("/tmp/pipe_file","w");
+  fprintf(f_pnt,message);
+  fclose(f_pnt);
+  unlink("/tmp/pipe_file");
+}
+
+vovik 53 : tpipe&
+[1] 14187
+vovik 54 : cat tpipe1.c
+#include <stdio.h>
+
+main ()
+{
+  char  buf[BUFSIZ];
+  FILE  *f_pnt;
+
+  f_pnt = fopen("/tmp/pipe_file","r");
+  fgets(buf,BUFSIZ,f_pnt);
+  printf(buf);
+  fclose(f_pnt);
+}
+
+vovik 55 : tpipe1
+ This is message from the tpipe.c program .
+
+[1]    Exit 1                 tpipe
+vovik 56 : tpipe&
+[1] 14239
+vovik 57 : cat /tmp/pipe_file 
+ This is message from the tpipe.c program .
+
+[1]    Exit 1                 tpipe
+vovik 58 : /usr/sbin/mknod /tmp/pipe_file p
+vovik 59 : echo "This is message from the shell." > /tmp/pipe_file &
+[1] 14286
+/tmp/pipe_file: File exists.
+
+[1]    Exit 1                 echo This is message from the shell. > /tmp/pipe_file
+vovik 60 : echo "This is message from the shell." >! /tmp/pipe_file &
+[1] 14308
+vovik 61 : tpipe1
+This is message from the shell.
+
+[1]    Done                   echo This is message from the shell. > /tmp/pipe_file
+vovik 62 : rm /tmp/pipe_file
+vovik 63 : /usr/sbin/mknod /tmp/pipe_file p
+vovik 64 : echo "This is message from the shell." >! /tmp/pipe_file &
+[1] 14345
+vovik 65 : cat /tmp/pipe_file 
+This is message from the shell.
+
+[1]    Done                   echo This is message from the shell. > /tmp/pipe_file
+vovik 66 : ls -l /tmp/pipe_file
+prw-------  1 vovik           0 Jul 12 18:39 /tmp/pipe_file
+vovik 67 : rm /tmp/pipe_file
